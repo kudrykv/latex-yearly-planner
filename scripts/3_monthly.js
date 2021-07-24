@@ -1,5 +1,6 @@
 const moment = require('moment');
 const m = require('./month');
+const ls = require('./latexsnips');
 
 const monthly = (year, month) => {
   let calendar = m
@@ -16,14 +17,7 @@ const monthly = (year, month) => {
   calendar = calendar.map(row => row.join(' &\n')).join(' \\\\ \\hline\n') + '\\\\ \\hline';
   const weekdays = getWeekdays().map(day => `\\hfil ${day}`).join(' & ');
 
-  return `{%
-    \\noindent\\LARGE%
-    \\renewcommand{\\arraystretch}{1.5}%
-    \\begin{tabular}{l | l | l}
-        ${year} & Q${Math.floor(month / 3)+1} & ${date.toLocaleString('default', {month: 'long'})} 
-    \\end{tabular}%
-}
-\\myHfillThick\\medskip
+  return `${ls.header([year, `Q${Math.floor(month / 3)+1}`, date.toLocaleString('default', {month: 'long'})])}
 
 \\noindent\\begin{tabularx}{\\textwidth}{@{}l!{\\vrule width 1pt}*{7}{@{}X@{}|}}
 \\noalign{\\hrule height 1pt}

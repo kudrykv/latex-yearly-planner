@@ -1,5 +1,6 @@
 const moment = require('moment');
 const funcs = require('./funcs');
+const ls = require('./latexsnips');
 
 const weekly = (year, weekNumber) => {
   const weekStart = moment().day('Monday').week(weekNumber).year(year).subtract(1, 'day');
@@ -12,16 +13,8 @@ const weekly = (year, weekNumber) => {
     monthName += ' / ' + lastDay;
   }
 
-  return `{%
-    \\noindent\\LARGE%
-    \\renewcommand{\\arraystretch}{1.5}%
-    \\begin{tabular}{ l | l | l | l}
-        ${year} & Q${Math.floor(weekStart.month() / 3)+1} & ${monthName} & Week ${weekStart.week()}
-    \\end{tabular}
-    \\hfill%
-}
-\\myHfillThick\\medskip
-  
+  return `${ls.header([year, `Q${Math.floor(weekStart.month() / 3)+1}`, monthName, `Week ${weekStart.week()}`])}
+
 \\begin{tabularx}{\\textwidth}{@{}XX@{}}
 \\myUnderline{${dates[0]} Monday}\\vskip5mm\\myRepeat{\\myWeeklyLines}{\\myLineOrd} &
 \\myUnderline{${dates[1]} Tuesday}\\vskip5mm\\myRepeat{\\myWeeklyLines}{\\myLineOrd}
