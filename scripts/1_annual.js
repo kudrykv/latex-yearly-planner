@@ -7,7 +7,7 @@ const rowOfMonths = (year, qrtr, weeks) =>
   funcs.range(qrtr * 3, qrtr * 3 + 3).map(mth => monthTabular(year, mth, weeks)).join(' & ');
 
 const tabularify = (cols, content) =>
-  `\\begin{tabularx}{\\linewidth}{@{}${new Array(cols).fill('X')}@{}}\n${content}\n\\end{tabularx}`
+  `\\begin{tabularx}{\\linewidth}{@{}${new Array(cols).fill('X').join('')}@{}}\n${content}\n\\end{tabularx}`
 
 const annualTable = (year, weeks) => {
   const tabulars = funcs.range(0, 4)
