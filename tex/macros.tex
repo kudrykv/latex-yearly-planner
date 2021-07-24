@@ -1,0 +1,27 @@
+\def\myRepeat#1#2{
+    \newcount\foo
+    \foo=#1
+    \loop
+    #2
+    \advance\foo-1
+    \ifnum\foo>0
+    \repeat%
+
+}
+
+\ExplSyntaxOn
+\cs_new_eq:NN \Repeat \prg_replicate:nn
+\ExplSyntaxOff
+
+\newcommand{\myHfillThick}{\hrule width \linewidth height .8pt}
+\newcommand{\myUnderline}[1]{#1\vskip1mm\myHfillThick\par}
+\newcommand{\myLine}{\hrulefill\vskip 0pt}
+\newcommand{\myLineOrd}{\hrule width \linewidth height .4pt\vskip 5mm}
+
+\newcommand{\myQuarterlyLines}{11}
+
+\newcommand{\myWeeklyLines}{10}
+\newcommand{\myWeeklyLinesSaturday}{4}
+\newcommand{\myWeeklyLinesSunday}{4}
+
+\newcommand{\myTodo}[1]{$\square$ #1\vskip2pt\hrule width \linewidth\vskip2pt{}}

@@ -1,0 +1,66 @@
+\documentclass[9pt]{extarticle}
+
+\usepackage{geometry}
+\usepackage[table]{xcolor}
+%\usepackage{showframe}
+\usepackage{calc}
+\usepackage{dashrule}
+\usepackage{setspace}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{varwidth}
+\usepackage{blindtext}
+\usepackage{tabularx}
+\usepackage{wrapfig}
+\usepackage{makecell}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{expl3}
+
+\newlength\mypagewidth
+\newlength\myleftmargin
+\newlength\myrightmargin
+\newlength\mybodywidth
+\newlength\mytablewidth
+\setlength{\mypagewidth}{15.6cm}
+\setlength{\myleftmargin}{0.5cm}
+\setlength{\myrightmargin}{0.5cm}
+\setlength{\mybodywidth}{\dimexpr \mypagewidth - \myleftmargin - \myrightmargin}
+\geometry{paperwidth=15.6cm,paperheight=20.9cm}
+\geometry{top=1.5cm, bottom=0.7cm, left=0.5cm, right=0.5cm}
+
+\pagestyle{empty}
+
+\parindent=0pt
+
+
+\input{macros}
+
+\begin{document}
+
+{%
+    \noindent\LARGE%
+    \renewcommand{\arraystretch}{1.5}%
+    \begin{tabular}{ l | l | l | l | l}
+        2021 & Q3 & July & Week 30 & Friday, 23
+    \end{tabular}
+    \hfill%
+}
+\myHfillThick
+\medskip
+
+\noindent\begin{tabularx}{\textwidth}{@{}XX@{}}
+\myUnderline{To-Do list}\Repeat{16}{\myTodo{}}\vskip5pt
+
+\myUnderline{Notes}\vskip6pt\Repeat{5}{\myLine}
+& 
+\myLineOrd\myLineOrd\myLineOrd\myLineOrd\myLineOrd\myLineOrd\myLineOrd\myLineOrd
+\end{tabularx}
+
+\include{year}
+\include{quarterlies}
+\include{monthlies}
+\include{weeklies}
+
+\end{document}
