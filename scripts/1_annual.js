@@ -3,23 +3,19 @@ const m = require('./month');
 const funcs = require('./funcs');
 const ls = require('./latexsnips');
 
+const rowOfMonths = (year, qrtr, weeks) =>
+  funcs.range(qrtr * 3, qrtr * 3 + 3).map(mth => monthTabular(year, mth, weeks)).join(' & ');
+
+const tabularify = (cols, content) =>
+  `\\begin{tabularx}{\\linewidth}{@{}${new Array(cols).fill('X')}@{}}\n${content}\n\\end{tabularx}`
+
 const annualTable = (year, weeks) => {
-  const tabulars = funcs.range(0, 4).map(
-    q => funcs.range(q * 3, q * 3 + 3)
-      .map(month => monthTabular(year, month, weeks))
-      .join('\n&\n')
-  )
-    .map(row => {
-      return `\\noindent\\begin{tabularx}{\\textwidth}{@{}XXX@{}}
-${row}
-\\end{tabularx}
-      `
-    }).join('\n\\vfill\n');
+  const tabulars = funcs.range(0, 4)
+    .map(q => rowOfMonths(year, q, weeks))
+    .map(row => tabularify(3, row))
+    .join('\n\\vfill\n');
 
-  return `${ls.header([year, 'Q1\\quad{}Q2\\quad{}Q3\\quad{}Q4'])}
-
-${tabulars}
-\\smallskip`
+  return `${ls.header([year, 'Q1\\quad{}Q2\\quad{}Q3\\quad{}Q4'])}\n${tabulars}`
 }
 
 const monthTabular = (year, month, weeks = false) => {
@@ -36,9 +32,7 @@ const monthTabular = (year, month, weeks = false) => {
     })
   }
 
-  calendar = calendar
-    .map(joinWeekDays)
-    .join(' \\\\\n')
+  calendar = calendar.map(joinWeekDays).join(' \\\\\n');
 
   const date = new Date(year, month, 1);
 
