@@ -25,7 +25,8 @@ const dayTemplate = hh => {
     \\myRepeat{16}{\\myLineHBL$\\square$\\myLinePlain}
     \\vskip \\dimexpr7mm-1.6pt
     \\myUnderline{Notes}
-    \\myRepeat{17}{\\myLineOrd}
+    \\myLineHBL\\par
+    \\myRepeat{16}{\\myLineOrd}
 }
 \\hspace{0.5em}
 \\parbox[t]{\\dimexpr0.5\\linewidth-0.5em}{%

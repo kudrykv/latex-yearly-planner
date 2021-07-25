@@ -25,10 +25,12 @@ const monthTabular = (year, month, weeks = false) => {
   const columns = weeks ? 8 : 7;
 
   if (weeks) {
-    let startingWeek = moment(new Date(year, month, 1)).week()
+    let daynum = 1;
+    let startingWeek = moment(new Date(year, month, daynum)).isoWeek();
     calendar.forEach(row => {
       row.unshift(startingWeek);
-      startingWeek++;
+      daynum+=7;
+      startingWeek = moment(new Date(year, month, daynum)).isoWeek();
     })
   }
 
@@ -49,3 +51,5 @@ const joinWeekDays = row => row.join(' & ')
 
 module.exports.annualTable = annualTable;
 module.exports.monthTabular = monthTabular;
+
+console.log(monthTabular(2021, 7, true))

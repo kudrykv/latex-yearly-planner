@@ -18,8 +18,7 @@ const monthly = (year, month) => {
   const weekdays = getWeekdays().map(day => `\\hfil ${day}`).join(' & ');
 
   return `${ls.header([year, `Q${Math.floor(month / 3)+1}`, date.toLocaleString('default', {month: 'long'})])}
-
-\\noindent\\begin{tabularx}{\\textwidth}{@{}l!{\\vrule width 1pt}*{7}{@{}X@{}|}}
+\\begin{tabularx}{\\textwidth}{@{}l!{\\vrule width 1pt}*{7}{@{}X@{}|}}
 \\noalign{\\hrule height 1pt}
  & ${weekdays} \\\\ \\noalign{\\hrule height 1pt}
 ${calendar}
@@ -27,10 +26,9 @@ ${calendar}
 \\medskip
 
 {Notes\\hfil{}\\quad{}Notes}\\par\\vskip-5pt
-\\leavevmode\\leaders\\hrule height 1pt\\hfill\\kern0pt%
+\\leavevmode\\leaders\\hrule height .8pt\\hfill\\kern0pt%
 \\quad%
-\\leavevmode\\leaders\\hrule height 1pt\\hfill\\kern0pt\\par
-\\ \\par
+\\leavevmode\\leaders\\hrule height .8pt\\hfill\\kern0pt\\vskip\\myHBL
 \\leaders\\hbox{\\parbox{\\textwidth}{%
 \\hrulefill%
 \\quad%
