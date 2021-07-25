@@ -2,18 +2,17 @@ const moment = require('moment');
 const funcs = require('./funcs');
 const ls = require('./latexsnips');
 
-const weekly = (year, weekNumber) => {
-  const weekStart = moment().day('Monday').week(weekNumber).year(year).subtract(1, 'day');
-  const curr = moment(weekStart);
+const weekly = (curr) => {
+  const weekStart = curr.clone().subtract(1, 'day');
   const dates = funcs.range(0, 7).map(() => curr.add(1, 'day').date());
 
   let monthName = weekStart.add(1, 'day').format('MMMM');
   const lastDay = curr.format('MMMM');
-  if (monthName !== lastDay) {
+  if (monthName !== lastDay && curr.month() > 0) {
     monthName += ' / ' + lastDay;
   }
 
-  return `${ls.header([year, `Q${Math.floor(weekStart.month() / 3)+1}`, monthName, `Week ${weekStart.week()}`])}
+  return `${ls.header([curr.year(), `Q${Math.floor(weekStart.month() / 3)+1}`, monthName, `Week ${weekStart.isoWeek()}`])}
 
 \\begin{tabularx}{\\textwidth}{@{}XX@{}}
 \\myUnderline{${dates[0]} Monday}\\vskip5mm\\myRepeat{\\myWeeklyLines}{\\myLineOrd} &
@@ -34,9 +33,14 @@ const weekly = (year, weekNumber) => {
 }
 
 const weeklies = year => {
-  const lastWeek = moment().year(year+1).week(1).subtract(1, 'week').week();
+  const arr = [];
 
-  return funcs.range(1, lastWeek+1).map(week => weekly(year, week)).join('\\pagebreak\n\n');
+  for (let i = 1; i < 366; i += 7) {
+    const curr = moment().year(year).dayOfYear(i);
+    arr.push(weekly(curr));
+  }
+
+  return arr.join('\\pagebreak\n\n')
 };
 
 module.exports.weekly = weekly;

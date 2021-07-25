@@ -51,5 +51,3 @@ const joinWeekDays = row => row.join(' & ')
 
 module.exports.annualTable = annualTable;
 module.exports.monthTabular = monthTabular;
-
-console.log(monthTabular(2021, 7, true))
