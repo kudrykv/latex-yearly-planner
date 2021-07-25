@@ -10,7 +10,7 @@ const monthMonday = (year, month) => {
   let ss = [s];
   let p = 8 - day;
 
-  for (let i = 0; i < Math.floor(days / 7); i++) {
+  for (let i = p; i < days; i+=7) {
     s = []
 
     if (p > days) break;

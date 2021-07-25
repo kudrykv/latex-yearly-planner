@@ -1,8 +1,8 @@
-\documentclass[9pt,draft]{extarticle}
+\documentclass[9pt]{extarticle}
 
 \usepackage{geometry}
 \usepackage[table]{xcolor}
-\usepackage{showframe}
+%\usepackage{showframe}
 \usepackage{calc}
 \usepackage{dashrule}
 \usepackage{setspace}
@@ -39,31 +39,11 @@
 \input{macros}
 
 \begin{document}
-{%
-    \noindent\LARGE%
-    \renewcommand{\arraystretch}{1.5}%
-    \begin{tabular}{l | l | l | l | l}
-        2021 & Q1 & January & Week 2 & Tuesday, 14
-    \end{tabular}
-    \hfill%
-}\myHfillThick\medskip
-\parbox[t]{\dimexpr0.5\linewidth-0.5em}{%
-    \myUnderline{To Do}
-    \myRepeat{16}{\parbox{0pt}{\vskip5mm}$\square$ \hrule width \linewidth height .4pt}
-    \vskip \dimexpr7mm-.8pt
-    \myUnderline{Notes}
-    \myRepeat{15}{\myLineOrd}
-}
-\hspace{0.5em}
-\parbox[t]{\dimexpr0.5\linewidth-0.5em}{%
-    \myUnderline{Schedule}\vskip-0.4pt
-    \Repeat{16}{\myLinePlain\parbox{0pt}{\vskip5mm}6\par\myLinePlain\vskip5mm}
-    \myLinePlain
-}
 
 \include{year}
 \include{quarterlies}
 \include{monthlies}
 \include{weeklies}
+\include{dailies}
 
 \end{document}

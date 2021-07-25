@@ -13,11 +13,17 @@
 \cs_new_eq:NN \Repeat \prg_replicate:nn
 \ExplSyntaxOff
 
+\newlength{\myHBL}
+\setlength{\myHBL}{\dimexpr5mm-.4pt}
+
+\newcommand{\myMinLineHeight}[1]{\parbox{0pt}{\vskip#1}}
+\newcommand{\myLineHBL}{\myMinLineHeight{\myHBL}}
+
 \newcommand{\myLinePlain}{\hrule width \linewidth height .4pt}
 \newcommand{\myHfillThick}{\hrule width \linewidth height .8pt}
 \newcommand{\myUnderline}[1]{#1\vskip1mm\myHfillThick\par}
 \newcommand{\myLine}{\hrulefill\vskip 0pt}
-\newcommand{\myLineOrd}{\hrule width \linewidth height .4pt\vskip 5mm}
+\newcommand{\myLineOrd}{\myLinePlain\vskip \myHBL}
 
 \newcommand{\myQuarterlyLines}{11}
 

@@ -49,3 +49,5 @@ const corner = (num) => {
 }
 
 module.exports.monthly = monthly;
+
+console.log(monthly(2021, 7))
