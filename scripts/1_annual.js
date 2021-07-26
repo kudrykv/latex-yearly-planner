@@ -3,20 +3,24 @@ const m = require('./month');
 const funcs = require('./funcs');
 const ls = require('./latexsnips');
 
-const rowOfMonths = (year, qrtr, weeks) =>
-  funcs.range(qrtr * 3, qrtr * 3 + 3).map(mth => monthTabular(year, mth, weeks)).join(' & ');
-
-const tabularify = (cols, content) =>
-  `\\begin{tabularx}{\\linewidth}{@{}${new Array(cols).fill('X').join('')}@{}}\n${content}\n\\end{tabularx}`
-
 const annualTable = (year, weeks) => {
   const tabulars = funcs.range(0, 4)
     .map(q => rowOfMonths(year, q, weeks))
     .map(row => tabularify(3, row))
     .join('\n\\vfill\n');
 
-  return `${ls.header([year, 'Q1\\quad{}Q2\\quad{}Q3\\quad{}Q4'])}\n${tabulars}`
+  const quarters = funcs.range(1, 5).map(n => `Q${n}`).join('\\quad{}');
+
+  return `${ls.header([year, quarters])}\n${tabulars}`
 }
+
+const rowOfMonths = (year, qrtr, weeks) =>
+  funcs
+    .range(qrtr * 3, qrtr * 3 + 3)
+    .map(mth => monthTabular(year, mth, weeks))
+    .join(' & ');
+
+const tabularify = (columns, content) => funcs.interpolateTpl('calRow', {columns, content});
 
 const monthTabular = (year, month, weeks = false) => {
   let calendar = m.monthMonday(year, month)
@@ -29,7 +33,7 @@ const monthTabular = (year, month, weeks = false) => {
     let startingWeek = moment(new Date(year, month, daynum)).isoWeek();
     calendar.forEach(row => {
       row.unshift(startingWeek);
-      daynum+=7;
+      daynum += 7;
       startingWeek = moment(new Date(year, month, daynum)).isoWeek();
     })
   }
@@ -38,12 +42,13 @@ const monthTabular = (year, month, weeks = false) => {
 
   const date = new Date(year, month, 1);
 
-  return `{\\renewcommand{\\arraystretch}{1.5}\\setlength{\\tabcolsep}{3.5pt}%
-    \\begin{tabular}[t]{${weeks ? 'c |' : ''} c c c c c c >{\\bf}c}
-    \\multicolumn{${columns}}{c}{${date.toLocaleString('default', {month: 'long'})}} \\\\
-    ${weeks ? 'W & ' : ''}M & T & W & T & F & S & S \\\\
-${funcs.indent(calendar)}
-\\end{tabular}}`
+  return funcs.interpolateTpl('calendar', {
+    weekColumn: weeks ? 'c |' : '',
+    weekTag: weeks ? 'W & ' : '',
+    columns: columns,
+    monthName: date.toLocaleString('default', {month: 'long'}),
+    calendar: funcs.indent(calendar)
+  })
 }
 
 const stringifyWeekNumbers = row => row.map(item => item > 0 ? '' + item : '')
