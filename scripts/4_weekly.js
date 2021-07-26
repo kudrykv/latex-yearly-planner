@@ -6,8 +6,8 @@ const weekly = (curr) => {
   const weekStart = curr.clone().subtract(1, 'day');
   const dates = funcs.range(0, 7).map(() => curr.add(1, 'day').date());
 
-  let monthName = weekStart.add(1, 'day').format('MMMM');
-  const lastDay = curr.format('MMMM');
+  let monthName = ls.slink(weekStart.add(1, 'day').format('MMMM'));
+  const lastDay = ls.slink(curr.format('MMMM'));
   if (monthName !== lastDay) {
     monthName +=' / ' + lastDay;
   }
@@ -15,7 +15,7 @@ const weekly = (curr) => {
   const isoWeek = weekStart.isoWeek();
   const quarter = isoWeek === 53 ? 1 : Math.floor(weekStart.month() / 3)+1
   const dm = dates.map((v, i) => ({[i+1]: v})).reduce((acc, val) => Object.assign(acc, val));
-  return `${ls.header([curr.year(), `Q${quarter}`, monthName, `Week ${isoWeek}`])}
+  return `${ls.header([ls.slink(curr.year()), ls.slink(`Q${quarter}`), monthName, ls.starget(`Week ${isoWeek}`)])}
 
 ${funcs.interpolateTpl('weekly', dm)}`
 }

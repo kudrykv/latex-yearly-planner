@@ -32,7 +32,7 @@ const monthTabular = (year, month, weeks = false) => {
     let daynum = 1;
     let startingWeek = moment(new Date(year, month, daynum)).isoWeek();
     calendar.forEach(row => {
-      row.unshift(startingWeek);
+      row.unshift(ls.link('Week ' + startingWeek, startingWeek));
       daynum += 7;
       startingWeek = moment(new Date(year, month, daynum)).isoWeek();
     })

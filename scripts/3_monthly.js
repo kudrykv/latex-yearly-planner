@@ -26,7 +26,7 @@ const monthly = (year, month) => {
   return `${ls.header(header)}\n${funcs.interpolateTpl('monthly', {weekdays, calendar})}\n`;
 }
 
-const rotateWeek = weekNum => funcs.interpolateTpl('rotatedWeekNum', {weekNum})
+const rotateWeek = weekNum => funcs.interpolateTpl('rotatedWeekNum', {weekNum: ls.slink('Week ' + weekNum)})
 
 const getWeekdays = () => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
