@@ -9,7 +9,7 @@ const monthly = (year, month) => {
     .map(row => row.map(corner))
 
   const date = new Date(year, month, 1);
-  let startingWeek = moment(date).week()
+  let startingWeek = moment(date).isoWeek();
   calendar.forEach(row => {
     row.unshift(rotateWeek(startingWeek));
     startingWeek++;

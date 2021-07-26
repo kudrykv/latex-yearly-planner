@@ -8,7 +8,13 @@ const dailySchedule = (year) => {
 
   return funcs
     .range(1, last)
-    .map(() => ptr.add(1, 'day') && [ptr.year(), 'Q'+Math.floor((ptr.month() / 3)+1), ptr.format('MMMM'), ptr.format('dddd, D')])
+    .map(() => ptr.add(1, 'day') && [
+      ls.slink(ptr.year()),
+      ls.slink('Q'+Math.floor((ptr.month() / 3)+1)),
+      ls.slink(ptr.format('MMMM')),
+      ls.slink('Week ' + ptr.isoWeek()),
+      ls.target(ptr.format('yyyyMMDD'), ptr.format('dddd, D')),
+    ])
     .map(hh => dayTemplate(hh))
     .join('\n');
 };
