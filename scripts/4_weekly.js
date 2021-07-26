@@ -16,7 +16,7 @@ const weekly = (curr) => {
   const isoWeek = weekStart.isoWeek();
   const quarter = isoWeek === 53 ? 1 : Math.floor(weekStart.month() / 3)+1
   const dm = dates
-    .map((v, i) => ({[i+1]: ls.link(curr.format('yyyyMMDD'), weekDays[i] + ' ' + v.date())}))
+    .map((v, i) => ({[i+1]: ls.link(curr.format('yyyyMMDD'), v.date() + ' ' + weekDays[i])}))
     .reduce((acc, val) => Object.assign(acc, val));
   return `${ls.header([ls.slink(curr.year()), ls.slink(`Q${quarter}`), monthName, ls.starget(`Week ${isoWeek}`)])}
 
