@@ -8,39 +8,51 @@ const weekly = (curr) => {
 
   let monthName = weekStart.add(1, 'day').format('MMMM');
   const lastDay = curr.format('MMMM');
-  if (monthName !== lastDay && curr.month() > 0) {
-    monthName += ' / ' + lastDay;
+  if (monthName !== lastDay) {
+    monthName +=' / ' + lastDay;
   }
 
-  return `${ls.header([curr.year(), `Q${Math.floor(weekStart.month() / 3)+1}`, monthName, `Week ${weekStart.isoWeek()}`])}
+  const isoWeek = weekStart.isoWeek();
+  const quarter = isoWeek === 53 ? 1 : Math.floor(weekStart.month() / 3)+1
+  return `${ls.header([curr.year(), `Q${quarter}`, monthName, `Week ${isoWeek}`])}
 
-\\begin{tabularx}{\\textwidth}{@{}XX@{}}
-\\myUnderline{${dates[0]} Monday}\\vskip5mm\\myRepeat{\\myWeeklyLines}{\\myLineOrd} &
-\\myUnderline{${dates[1]} Tuesday}\\vskip5mm\\myRepeat{\\myWeeklyLines}{\\myLineOrd}
-\\end{tabularx}
+\\parbox{\\dimexpr.5\\linewidth-.5em}{%
+\\myUnderline{${dates[0]} Monday}\\vskip\\myHBL\\myRepeat{\\myWeeklyLines}{\\myLineOrd}%
+}
+\\hspace{0.5em}
+\\parbox{\\dimexpr.5\\linewidth-.5em}{%
+\\myUnderline{${dates[1]} Tuesday}\\vskip\\myHBL\\myRepeat{\\myWeeklyLines}{\\myLineOrd}%
+}
 \\vfill
-\\begin{tabularx}{\\textwidth}{@{}XX@{}}
-\\myUnderline{${dates[2]} Wednesday}\\vskip5mm\\myRepeat{\\myWeeklyLines}{\\myLineOrd} &
-\\myUnderline{${dates[3]} Thursday}\\vskip5mm\\myRepeat{\\myWeeklyLines}{\\myLineOrd}
-\\end{tabularx}
+\\parbox{\\dimexpr.5\\linewidth-.5em}{%
+\\myUnderline{${dates[2]} Wednesday}\\vskip\\myHBL\\myRepeat{\\myWeeklyLines}{\\myLineOrd}%
+}
+\\hspace{0.5em}
+\\parbox{\\dimexpr.5\\linewidth-.5em}{%
+\\myUnderline{${dates[3]} Thursday}\\vskip\\myHBL\\myRepeat{\\myWeeklyLines}{\\myLineOrd}%
+}
 \\vfill
-\\begin{tabularx}{\\textwidth}{@{}XX@{}}
-\\myUnderline{${dates[4]} Friday}\\vskip5mm\\myRepeat{\\myWeeklyLines}{\\myLineOrd} &
-  \\myUnderline{${dates[5]} Saturday}\\vskip5mm\\myRepeat{\\myWeeklyLinesSaturday}{\\myLineOrd}\\vskip3.5pt
-  \\myUnderline{${dates[6]} Sunday}\\vskip5mm\\myRepeat{\\myWeeklyLinesSunday}{\\myLineOrd}
-\\end{tabularx}
-`
+\\parbox{\\dimexpr.5\\linewidth-.5em}{%
+\\myUnderline{${dates[4]} Friday}\\vskip\\myHBL\\myRepeat{\\myWeeklyLines}{\\myLineOrd}%
+}
+\\hspace{0.5em}
+\\parbox{\\dimexpr.5\\linewidth-.5em}{%
+\\myUnderline{${dates[5]} Saturday}\\vskip\\myHBL\\myRepeat{\\myWeeklyLinesSaturday}{\\myLineOrd}\\vskip3pt
+\\myUnderline{${dates[6]} Sunday}\\vskip\\myHBL\\myRepeat{\\myWeeklyLinesSunday}{\\myLineOrd}
+}
+\\pagebreak`
 }
 
 const weeklies = year => {
   const arr = [];
 
+  const curr = moment().year(year).month(0).week(1);
   for (let i = 1; i < 366; i += 7) {
-    const curr = moment().year(year).dayOfYear(i);
-    arr.push(weekly(curr));
+    arr.push(weekly(curr.clone()));
+    curr.add(1, 'week');
   }
 
-  return arr.join('\\pagebreak\n\n')
+  return arr.join('\n\n')
 };
 
 module.exports.weekly = weekly;
