@@ -9,9 +9,9 @@ const annualTable = (year, weeks) => {
     .map(row => tabularify(3, row))
     .join('\n\\vfill\n');
 
-  const quarters = funcs.range(1, 5).map(n => ls.link(`Q${n}`, `Q${n}`)).join('\\quad{}');
+  const quarters = funcs.range(1, 5).map(n => ls.slink(`Q${n}`)).join('\\quad{}');
 
-  return `${ls.header([ls.target(year, year), quarters])}\n${tabulars}`
+  return `${ls.header([ls.starget(year), quarters])}\n${tabulars}`
 }
 
 const rowOfMonths = (year, qrtr, weeks) =>
@@ -46,7 +46,7 @@ const monthTabular = (year, month, weeks = false) => {
     weekColumn: weeks ? 'c |' : '',
     weekTag: weeks ? 'W & ' : '',
     columns: columns,
-    monthName: date.toLocaleString('default', {month: 'long'}),
+    monthName: ls.slink(date.toLocaleString('default', {month: 'long'})),
     calendar: funcs.indent(calendar)
   })
 }

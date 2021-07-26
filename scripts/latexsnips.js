@@ -10,4 +10,6 @@ module.exports.header = list =>
 \\myHfillThick\\medskip`;
 
 module.exports.link = (ref, text) => `\\hyperlink{${ref}}{${text}}`;
+module.exports.slink = (reftext) => `\\hyperlink{${reftext}}{${reftext}}`;
 module.exports.target = (ref, text) => `\\hypertarget{${ref}}{${text}}`;
+module.exports.starget = (reftext) => `\\hypertarget{${reftext}}{${reftext}}`;
