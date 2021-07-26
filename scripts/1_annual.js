@@ -9,7 +9,7 @@ const annualTable = (year, weeks) => {
     .map(row => tabularify(3, row))
     .join('\n\\vfill\n');
 
-  const quarters = funcs.range(1, 5).map(n => `Q${n}`).join('\\quad{}');
+  const quarters = funcs.range(1, 5).map(n => ls.link(`Q${n}`, `Q${n}`)).join('\\quad{}');
 
   return `${ls.header([year, quarters])}\n${tabulars}`
 }
