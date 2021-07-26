@@ -1,6 +1,7 @@
 const moment = require('moment');
 const m = require('./month');
 const ls = require('./latexsnips');
+const funcs = require('./funcs');
 
 const monthly = (year, month) => {
   let calendar = m
@@ -18,32 +19,18 @@ const monthly = (year, month) => {
   const weekdays = getWeekdays().map(day => `\\hfil ${day}`).join(' & ');
 
   return `${ls.header([year, `Q${Math.floor(month / 3)+1}`, date.toLocaleString('default', {month: 'long'})])}
-\\begin{tabularx}{\\textwidth}{@{}l!{\\vrule width 1pt}*{7}{@{}X@{}|}}
-\\noalign{\\hrule height 1pt}
- & ${weekdays} \\\\ \\noalign{\\hrule height 1pt}
-${calendar}
-\\end{tabularx}
-\\medskip
-
-{Notes\\hfil{}\\quad{}Notes}\\par\\vskip-5pt
-\\leavevmode\\leaders\\hrule height .8pt\\hfill\\kern0pt%
-\\quad%
-\\leavevmode\\leaders\\hrule height .8pt\\hfill\\kern0pt\\vskip\\myHBL
-\\leaders\\hbox{\\parbox{\\textwidth}{%
-\\hrulefill%
-\\quad%
-\\hrulefill\\vskip 5mm}} \\vfill
+${funcs.interpolateTpl('monthly', {weekdays, calendar})}
 `;
 }
 
-const rotateWeek = weekNum => `\\rotatebox[origin=tr]{90}{\\makebox[55pt][c]{Week ${weekNum}}}`
+const rotateWeek = weekNum => funcs.interpolateTpl('rotatedWeekNum', {weekNum})
 
 const getWeekdays = () => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 const corner = (num) => {
   if (!num && num !== 0) return '';
 
-  return `\\begin{tabular}{@{}p{5mm}@{}|}\\hfil${num}\\\\\\hline\\end{tabular}`;
+  return funcs.interpolateTpl('rotatedWeekNum', {num});
 }
 
 module.exports.monthly = monthly;
