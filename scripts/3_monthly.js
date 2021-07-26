@@ -27,10 +27,10 @@ const rotateWeek = weekNum => funcs.interpolateTpl('rotatedWeekNum', {weekNum})
 
 const getWeekdays = () => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const corner = (num) => {
-  if (!num && num !== 0) return '';
+const corner = (date) => {
+  if (!date && date !== 0) return '';
 
-  return funcs.interpolateTpl('rotatedWeekNum', {num});
+  return funcs.interpolateTpl('monthlyCornerDate', {date});
 }
 
 module.exports.monthly = monthly;
