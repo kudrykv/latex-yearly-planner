@@ -16,7 +16,7 @@ const quarter = (year, q) => {
     return funcs.interpolateTpl('qrtrRow', {calendar});
   })
 
-  return `${ls.header([year, qtabular(q)])}
+  return `${ls.header([ls.link(year, year), qtabular(q)])}
 
 ${tabulars.join('\\vfill')}
 \\pagebreak
