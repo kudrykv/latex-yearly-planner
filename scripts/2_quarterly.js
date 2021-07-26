@@ -13,11 +13,7 @@ const quarter = (year, q) => {
   const tabulars = funcs.range(q * 3, q * 3 + 3).map(qq => {
     const calendar = act.monthTabular(year, qq, true);
 
-    return `{\\noindent\\renewcommand{\\arraystretch}{0}%
-\\begin{tabularx}{\\textwidth}{@{}l X@{}}
-${calendar} &
-\\Repeat{\\myQuarterlyLines}{\\myLineOrd}
-\\end{tabularx}}`
+    return funcs.interpolateTpl('qrtrRow', {calendar});
   })
 
   return `${ls.header([year, qtabular(q)])}
