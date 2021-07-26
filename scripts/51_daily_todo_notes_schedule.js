@@ -14,26 +14,13 @@ const dailySchedule = (year) => {
 };
 
 const dayTemplate = hh => {
-  const shedule = funcs
+  const schedule = funcs
     .range(6, 23)
     .map(h => `\\myLinePlain\\myLineHBL${h}\\par\\myLinePlain\\vskip\\myHBL`)
     .join('');
 
   return `${ls.header(hh)}
-\\parbox[t]{\\dimexpr0.5\\linewidth-0.5em}{%
-    \\myUnderline{To Do}
-    \\myRepeat{16}{\\myLineHBL$\\square$\\myLinePlain}
-    \\vskip \\dimexpr7mm-1.6pt
-    \\myUnderline{Notes}
-    \\myLineHBL\\par
-    \\myRepeat{16}{\\myLineOrd}
-}
-\\hspace{0.5em}
-\\parbox[t]{\\dimexpr0.5\\linewidth-0.5em}{%
-    \\myUnderline{Schedule}\\vskip-0.4pt
-    ${shedule}
-    \\myLinePlain
-}`;
+${funcs.interpolateTpl('daily', {schedule})}`;
 }
 
 module.exports.dailySchedule = dailySchedule;
