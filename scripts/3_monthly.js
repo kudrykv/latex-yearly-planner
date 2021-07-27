@@ -20,7 +20,7 @@ const monthly = (year, month) => {
   const header = [
     ls.slink(year),
     ls.slink(`Q${Math.floor(month / 3)+1}`),
-    ls.starget(date.toLocaleString('default', {month: 'long'}))
+    ls.starget(moment(date).format('MMMM'))
   ];
 
   return `${ls.header(header)}\n${funcs.interpolateTpl('monthly', {weekdays, calendar})}\n`;
@@ -33,7 +33,7 @@ const getWeekdays = () => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday
 const corner = (year, month, date) => {
   if (!date && date !== 0) return '';
 
-  const link = ls.link(`${year}${(''+(month+1)).padStart(2, '0')}${(''+date).padStart(2, '0')}`, date)
+  const link = ls.link(funcs.formatDate(year, month, date), date)
 
   return funcs.interpolateTpl('monthlyCornerDate', {date: link});
 }
