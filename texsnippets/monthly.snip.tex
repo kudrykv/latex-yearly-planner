@@ -5,11 +5,16 @@
 \end{tabularx}
 \medskip
 
-{Notes\hfil{}\quad{}Notes}\par\vskip-5pt
-\leavevmode\leaders\hrule height .8pt\hfill\kern0pt%
-\quad%
-\leavevmode\leaders\hrule height .8pt\hfill\kern0pt\vskip\myHBL
-\leaders\hbox{\parbox{\textwidth}{%
-    \hrulefill%
-    \quad%
-    \hrulefill\vskip 5mm}} \vfill
+\parbox{\dimexpr.5\linewidth-.5em}{
+    \myUnderline{Notes}
+    \vbox to \dimexpr\textheight-\pagetotal-\myHBL\relax {%
+        \leaders\hbox to \linewidth{\rule{0pt}{\myHBL}\hrulefill}\vfil
+    }%
+}
+\hspace{.5em}
+\parbox{\dimexpr.5\linewidth-.5em}{
+    \myUnderline{Notes}
+    \vbox to \dimexpr\textheight-\pagetotal-\myHBL\relax {%
+        \leaders\hbox to \linewidth{\rule{0pt}{\myHBL}\hrulefill}\vfil
+    }%
+}
