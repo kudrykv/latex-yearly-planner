@@ -24,7 +24,8 @@ const tabularify = (columns, content) => funcs.interpolateTpl('calRow', {columns
 
 const monthTabular = (year, month, weeks = false) => {
   let calendar = m.monthMonday(year, month)
-    .map(stringifyWeekNumbers);
+    .map(stringifyWeekNumbers)
+    .map(row => row.map(item => !item ? '' : ls.link(`${year}${(''+(month+1)).padStart(2, '0')}${item.padStart(2, '0')}`, item)));
 
   const columns = weeks ? 8 : 7;
 

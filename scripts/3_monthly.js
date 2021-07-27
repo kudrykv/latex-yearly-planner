@@ -6,13 +6,13 @@ const funcs = require('./funcs');
 const monthly = (year, month) => {
   let calendar = m
     .monthMonday(year, month)
-    .map(row => row.map(corner))
+    .map(row => row.map(date => corner(year, month, date)))
 
   const date = new Date(year, month, 1);
-  let startingWeek = moment(date).isoWeek();
+  let startingWeek = moment(date);
   calendar.forEach(row => {
-    row.unshift(rotateWeek(startingWeek));
-    startingWeek++;
+    row.unshift(rotateWeek(startingWeek.isoWeek()));
+    startingWeek.add(1, 'week');
   })
 
   calendar = calendar.map(row => row.join(' &\n')).join(' \\\\ \\hline\n') + '\\\\ \\hline';
@@ -30,10 +30,12 @@ const rotateWeek = weekNum => funcs.interpolateTpl('rotatedWeekNum', {weekNum: l
 
 const getWeekdays = () => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const corner = (date) => {
+const corner = (year, month, date) => {
   if (!date && date !== 0) return '';
 
-  return funcs.interpolateTpl('monthlyCornerDate', {date});
+  const link = ls.link(`${year}${(''+(month+1)).padStart(2, '0')}${(''+date).padStart(2, '0')}`, date)
+
+  return funcs.interpolateTpl('monthlyCornerDate', {date: link});
 }
 
 module.exports.monthly = monthly;
