@@ -6,7 +6,8 @@ const qtabular = (selected) => {
   selected++;
 
   return funcs.range(1, 5)
-    .map(num => num === selected ? ls.target('Q' + num, '\\textbf{Q' + num + '}') : ls.slink('Q' + num)).join('\\quad{}');
+    .map(num => num === selected ? ls.target('Q' + num, '\\textbf{Q' + num + '}') : ls.slink('Q' + num))
+    .join('\\quad{}');
 }
 
 const quarter = (year, q) => {
