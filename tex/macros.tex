@@ -15,6 +15,13 @@
 
 \newlength{\myHBL}
 \setlength{\myHBL}{\dimexpr5mm-.4pt}
+\newlength{\myLenTwoCol}
+\setlength{\myLenTwoCol}{\dimexpr.5\linewidth-.5em}
+\newlength{\myLenTwoColSep}
+\setlength{\myLenTwoColSep}{.5em}
+
+% number of to-do entries in a to-do block on to-do pages
+\newcommand{\myNumTodoLinesInTodoPage}{10}
 
 \newcommand{\myMinLineHeight}[1]{\parbox{0pt}{\vskip#1}}
 \newcommand{\myLineHBL}{\myMinLineHeight{\myHBL}}
@@ -32,4 +39,4 @@
 \newcommand{\myWeeklyLinesSaturday}{4}
 \newcommand{\myWeeklyLinesSunday}{4}
 
-\newcommand{\myTodo}[1]{$\square$ #1\vskip2pt\hrule width \linewidth\vskip2pt{}}
+\newcommand{\myTodo}{\myLineHBL$\square$\myLinePlain}
