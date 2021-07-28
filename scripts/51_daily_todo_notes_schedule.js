@@ -29,13 +29,16 @@ const dayTemplate = (hh, today) => {
   const textFormat = today.format('dddd, D');
   const dailySchedule = funcs.interpolateTpl('daily', {
     schedule,
-    dailyNotes: ls.link(refFormat+'note', 'Daily note')
+    dailyNotes: ls.link(refFormat+'note', 'Daily note'),
+    dailyDiary: ls.link(refFormat+'diary', 'Diary')
   });
 
   return `${ls.header([...hh, ls.target(refFormat, textFormat)])}
 ${dailySchedule}\\pagebreak
 ${ls.header([...hh, ls.link(refFormat, textFormat), ls.target(refFormat+'note', 'Notes')])}
-${funcs.interpolateTpl('dailyNotes', {})}\\pagebreak`;
+${funcs.interpolateTpl('dailyNotes', {})}\\pagebreak
+${ls.header([...hh, ls.link(refFormat, textFormat), ls.target(refFormat+'diary', 'Diary')])}
+${funcs.interpolateTpl('dailyDiary', {})}\\pagebreak`;
 }
 
 module.exports.dailySchedule = dailySchedule;
