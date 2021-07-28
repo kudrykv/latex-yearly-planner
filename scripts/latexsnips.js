@@ -1,6 +1,6 @@
 module.exports.header = list =>
   `{%
-    \\noindent\\LARGE%
+    \\noindent\\Large%
     \\renewcommand{\\arraystretch}{1.5}%
     \\begin{tabular}{|${new Array(list.length).fill('l').join(' | ')}}
         ${list.join(' & ')}

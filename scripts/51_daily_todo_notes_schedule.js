@@ -13,20 +13,29 @@ const dailySchedule = (year) => {
       ls.slink('Q'+Math.floor((ptr.month() / 3)+1)),
       ls.slink(ptr.format('MMMM')),
       ls.slink('Week ' + ptr.isoWeek()),
-      ls.target(ptr.format('yyyyMMDD'), ptr.format('dddd, D')),
+      ptr.clone(),
     ])
-    .map(hh => dayTemplate(hh))
+    .map(hh => dayTemplate(hh.slice(0, 4), hh.pop()))
     .join('\n');
 };
 
-const dayTemplate = hh => {
+const dayTemplate = (hh, today) => {
   const schedule = funcs
     .range(6, 23)
     .map(h => `\\myLinePlain\\myLineHBL${h}\\par\\myLinePlain\\vskip\\myHBL`)
     .join('');
 
-  return `${ls.header(hh)}
-${funcs.interpolateTpl('daily', {schedule})}`;
+  const refFormat = today.format('yyyyMMDD');
+  const textFormat = today.format('dddd, D');
+  const dailySchedule = funcs.interpolateTpl('daily', {
+    schedule,
+    dailyNotes: ls.link(refFormat+'note', 'Daily note')
+  });
+
+  return `${ls.header([...hh, ls.target(refFormat, textFormat)])}
+${dailySchedule}\\pagebreak
+${ls.header([...hh, ls.link(refFormat, textFormat), ls.target(refFormat+'note', 'Notes')])}
+${funcs.interpolateTpl('dailyNotes', {})}\\pagebreak`;
 }
 
 module.exports.dailySchedule = dailySchedule;
