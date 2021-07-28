@@ -1,7 +1,7 @@
 module.exports.header = list =>
   `{%
     \\noindent\\Large%
-    \\renewcommand{\\arraystretch}{1.5}%
+    \\renewcommand{\\arraystretch}{\\myNumArrayStretch}%
     \\begin{tabular}{|${new Array(list.length).fill('l').join(' | ')}}
         ${list.join(' & ')}
     \\end{tabular}
