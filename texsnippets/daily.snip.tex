@@ -1,15 +1,15 @@
 \parbox[t]{\myLenTwoCol}{%
     \myUnderline{To Do\textcolor{white}{g}}
-    \myRepeat{16}{\myLineHBL$\square$\myLinePlain}
+    \myRepeat{\myNumDailyTodos}{\myLineHBL$\square$\myLinePlain}
     \vskip \dimexpr7mm-3.3pt
     \myUnderline{Notes\hfill{}<dailyNotes>\hfill{}<dailyDiary>}
     \myLineHBL\par
-    \myRepeat{16}{\myLineOrd}
+    \myRepeat{\myNumDailyNotes}{\myLineOrd}
     \myLinePlain
 }
 \hspace{\myLenTwoColSep}
 \parbox[t]{\myLenTwoCol}{%
-    \myUnderline{Schedule\textcolor{white}{g}}\vskip-0.4pt
+    \myUnderline{Schedule\textcolor{white}{g}}\vskip-\myLenLineThicknessDefault
     <schedule>
     \myLineOrd\myLinePlain
 }

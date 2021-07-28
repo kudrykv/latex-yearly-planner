@@ -1,14 +1,14 @@
-\parbox[t]{\dimexpr.5\linewidth-.5em}{%
+\parbox[t]{\myLenTwoCol}{%
 \myUnderline{Goals{}\textcolor{white}{g}}
-\myLineHBL\Repeat{10}{\myLineOrd}\vspace{3pt}
+\myLineHBL\Repeat{\myNumDailyDiaryGoals}{\myLineOrd}\vspace{3pt}
 \myUnderline{Things I'm grateful for}
-\myLineHBL\Repeat{10}{\myLineOrd}\vspace{3pt}
+\myLineHBL\Repeat{\myNumDailyDiaryGrateful}{\myLineOrd}\vspace{3pt}
 \myUnderline{The best thing that happened today}
-\Repeat{11}{\myLineBottomLine}
+\Repeat{\myNumDailyDiaryBest}{\myLineBottomLine}
 }
-\hspace{.5em}
-\parbox[t]{\dimexpr.5\linewidth-.5em}{%
+\hspace{\myLenTwoColSep}
+\parbox[t]{\myLenTwoCol}{%
 \myUnderline{Daily log}
-\Repeat{35}{\myLineBottomLine}
+\Repeat{\myNumDailyDiaryLog}{\myLineBottomLine}
 }
 \par

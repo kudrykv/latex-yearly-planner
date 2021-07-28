@@ -21,16 +21,26 @@
 \setlength{\myLenTwoColSep}{.5em}
 \newlength{\myLenTabColSep}
 \setlength{\myLenTabColSep}{3.5pt}
+\newlength{\myLenLineThicknessDefault}
+\setlength{\myLenLineThicknessDefault}{.4pt}
+\newlength{\myLenLineThicknessThick}
+\setlength{\myLenLineThicknessThick}{.8pt}
 
 % number of to-do entries in a to-do block on to-do pages
 \newcommand{\myNumTodoLinesInTodoPage}{10}
 \newcommand{\myNumArrayStretch}{1.5}
+\newcommand{\myNumDailyTodos}{16}
+\newcommand{\myNumDailyNotes}{16}
+\newcommand{\myNumDailyDiaryGoals}{10}
+\newcommand{\myNumDailyDiaryGrateful}{10}
+\newcommand{\myNumDailyDiaryBest}{11}
+\newcommand{\myNumDailyDiaryLog}{35}
 
 \newcommand{\myMinLineHeight}[1]{\parbox{0pt}{\vskip#1}}
 \newcommand{\myLineHBL}{\myMinLineHeight{\myHBL}}
 
-\newcommand{\myLinePlain}{\hrule width \linewidth height .4pt}
-\newcommand{\myHfillThick}{\hrule width \linewidth height .8pt}
+\newcommand{\myLinePlain}{\hrule width \linewidth height \myLenLineThicknessDefault}
+\newcommand{\myHfillThick}{\hrule width \linewidth height \myLenLineThicknessThick}
 \newcommand{\myUnderline}[1]{#1\vskip1mm\myHfillThick\par}
 \newcommand{\myLine}{\hrulefill\vskip 0pt}
 \newcommand{\myLineOrd}{\myLinePlain\vskip \myHBL}
