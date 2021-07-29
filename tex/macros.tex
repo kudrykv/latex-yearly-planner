@@ -35,6 +35,7 @@
 \newcommand{\myNumDailyDiaryGrateful}{10}
 \newcommand{\myNumDailyDiaryBest}{11}
 \newcommand{\myNumDailyDiaryLog}{35}
+\newcommand{\myNumQuarterlyLines}{12}
 
 \newcommand{\myMinLineHeight}[1]{\parbox{0pt}{\vskip#1}}
 \newcommand{\myLineHBL}{\myMinLineHeight{\myHBL}}
@@ -45,8 +46,11 @@
 \newcommand{\myLine}{\hrulefill\vskip 0pt}
 \newcommand{\myLineOrd}{\myLinePlain\vskip \myHBL}
 \newcommand{\myLineBottomLine}{\myLineHBL\myLinePlain}
+\newcommand{\myLineOfColor}[1]{\textcolor{#1}{\myLinePlain}}
+\newcommand{\myLineOfColorGray}{\myLineOfColor{gray}}
+\newcommand{\myLineGrayVskipTop}{\vskip\myHBL\myLineOfColorGray}
+\newcommand{\myLineGrayVskipBottom}{\myLineOfColorGray\vskip\myHBL}
 
-\newcommand{\myQuarterlyLines}{12}
 
 \newcommand{\myWeeklyLines}{10}
 \newcommand{\myWeeklyLinesSaturday}{4}
