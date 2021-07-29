@@ -17,13 +17,24 @@ const monthly = (year, month) => {
 
   calendar = calendar.map(row => row.join(' &\n')).join(' \\\\ \\hline\n') + '\\\\ \\hline';
   const weekdays = getWeekdays().map(day => `\\hfil ${day}`).join(' & ');
-  const header = [
+  const leftList = [
     ls.slink(year),
     ls.slink(`Q${Math.floor(month / 3)+1}`),
     ls.starget(moment(date).format('MMMM'))
   ];
 
-  return `${ls.header(header)}\n${funcs.interpolateTpl('monthly', {weekdays, calendar})}\n`;
+  const rightList = [];
+  if (month > 0) {
+    const prevMonth = moment(new Date(year, month-1, 1)).format('MMMM');
+    rightList.push(ls.slink(prevMonth))
+  }
+
+  if (month < 11) {
+    const nextMonth = moment(new Date(year, month+1, 1)).format('MMMM');
+    rightList.push(ls.slink(nextMonth))
+  }
+
+  return `${ls.header(leftList, rightList)}\n${funcs.interpolateTpl('monthly', {weekdays, calendar})}\n`;
 }
 
 const rotateWeek = weekNum => funcs.interpolateTpl('rotatedWeekNum', {weekNum: ls.slink('Week ' + weekNum)})
