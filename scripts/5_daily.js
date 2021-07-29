@@ -8,18 +8,39 @@ const dailySchedule = (year) => {
 
   return funcs
     .range(1, last)
-    .map(() => ptr.add(1, 'day') && [
-      ls.slink(ptr.year()),
-      ls.slink('Q'+Math.floor((ptr.month() / 3)+1)),
-      ls.slink(ptr.format('MMMM')),
-      ls.slink('Week ' + ptr.isoWeek()),
-      ptr.clone(),
-    ])
-    .map(hh => dayTemplate(hh.slice(0, 4), hh.pop()))
+    .map(n => {
+      ptr.add(1, 'day');
+
+      const llist = [
+        ls.slink(ptr.year()),
+        ls.slink('Q'+Math.floor((ptr.month() / 3)+1)),
+        ls.slink(ptr.format('MMMM')),
+        ls.slink('Week ' + ptr.isoWeek()),
+        ptr.clone(),
+      ];
+
+      const rlist = [];
+      if (n > 1) {
+        const prevDay = ptr.clone().subtract(1, 'day');
+        const prevDayRef = prevDay.format('yyyyMMDD');
+        const prevDayFmt = prevDay.format('ddd, DD');
+        rlist.push(ls.link(prevDayRef, prevDayFmt));
+      }
+
+      if (n + 1 < last) {
+        const nextDay = ptr.clone().add(1, 'day');
+        const nextDayRef = nextDay.format('yyyyMMDD');
+        const nextDayFmt = nextDay.format('ddd, DD');
+        rlist.push(ls.link(nextDayRef, nextDayFmt));
+      }
+
+      return [llist, rlist];
+    })
+    .map(([hh, rlist]) => dayTemplate(hh.slice(0, 4), hh.pop(), rlist))
     .join('\n');
 };
 
-const dayTemplate = (hh, today) => {
+const dayTemplate = (hh, today, rlist) => {
   const schedule = funcs
     .range(6, 23)
     .map(h => `\\myLineOfColorGray\\myLineHBL${h}\\myLineOfColorLightGray\\vskip\\myHBL`)
@@ -35,7 +56,7 @@ const dayTemplate = (hh, today) => {
     allTodos: ls.link('To Do Index', 'All todos')
   });
 
-  return `${ls.header([...hh, ls.target(refFormat, textFormat)])}
+  return `${ls.header([...hh, ls.target(refFormat, textFormat)], rlist)}
 ${dailySchedule}\\pagebreak
 ${ls.header([...hh, ls.link(refFormat, textFormat), ls.target(refFormat+'note', 'Notes')])}
 ${funcs.interpolateTpl('dailyNotes', {})}\\pagebreak
