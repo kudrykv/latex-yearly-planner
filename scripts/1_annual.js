@@ -11,7 +11,9 @@ const annualTable = (year, weeks) => {
 
   const quarters = funcs.range(1, 5).map(n => ls.slink(`Q${n}`)).join('\\quad{}');
 
-  return `${ls.header([ls.starget(year), quarters])}\n${tabulars}`
+  const leftList = [ls.starget(year), quarters];
+  const rightList = [ls.link('To Do Index', 'Todos'), ls.link('Notes Index', 'Notes')];
+  return `${ls.header(leftList, rightList)}\n${tabulars}`
 }
 
 const rowOfMonths = (year, qrtr, weeks) =>

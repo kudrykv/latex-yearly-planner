@@ -1,4 +1,4 @@
-module.exports.header = list =>
+module.exports.header = (list, list2) =>
   `{%
     \\noindent\\Large%
     \\renewcommand{\\arraystretch}{\\myNumArrayStretch}%
@@ -6,6 +6,10 @@ module.exports.header = list =>
         ${list.join(' & ')}
     \\end{tabular}
     \\hfill%
+    ${!list2 ? '' : `\\begin{tabular}{${new Array(list2.length).fill('r').join(' | ')}@{}}
+      ${list2.join(' & ')}
+      \\end{tabular}
+    `}
 }
 \\myHfillThick\\medskip`;
 

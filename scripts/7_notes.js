@@ -20,15 +20,18 @@ const notes = (year) => {
   })
 
   const refText = 'Notes Index';
+  const rightList = [ls.link('To Do Index', 'Todos')];
+
   const notesPages = funcs
     .range(0, 100)
     .map(num => {
       const page = funcs.interpolateTpl('notePage', {});
 
-      return `${ls.header([ls.slink(year), ls.slink(refText), ls.starget(`Note ${num+1}`)])}${page}`;
+      const leftList = [ls.slink(year), ls.slink(refText), ls.starget(`Note ${num+1}`)];
+      return `${ls.header(leftList, rightList)}${page}`;
     }).join('\\pagebreak\n')
 
-  return `${ls.header([ls.slink(year), ls.starget(refText)])}
+  return `${ls.header([ls.slink(year), ls.starget(refText)], rightList)}
 ${funcs.interpolateTpl('notesIndex', {table})}
 \\pagebreak
 ${notesPages}`;
