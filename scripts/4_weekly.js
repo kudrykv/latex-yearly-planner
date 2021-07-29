@@ -2,7 +2,7 @@ const moment = require('moment');
 const funcs = require('./funcs');
 const ls = require('./latexsnips');
 
-const weekly = (curr) => {
+const weekly = (curr, prevnext) => {
   const weekStart = curr.clone();
   curr.subtract(1, 'day');
   const dates = funcs.range(0, 7).map(() => curr.add(1, 'day').clone());
@@ -18,7 +18,11 @@ const weekly = (curr) => {
   const dm = dates
     .map((v, i) => ({[i+1]: ls.link(dates[i].format('yyyyMMDD'), v.date() + ' ' + weekDays[i])}))
     .reduce((acc, val) => Object.assign(acc, val));
-  return `${ls.header([ls.slink(curr.year()), ls.slink(`Q${quarter}`), monthName, ls.starget(`Week ${isoWeek}`)])}
+
+  const leftList = [ls.slink(curr.year()), ls.slink(`Q${quarter}`), monthName, ls.starget(`Week ${isoWeek}`)];
+  const rightList = prevnext.map(d => ls.slink(`Week ${d.isoWeek()}`))
+
+  return `${ls.header(leftList, rightList)}
 
 ${funcs.interpolateTpl('weekly', dm)}`
 }
@@ -29,8 +33,17 @@ const weeklies = year => {
   const arr = [];
 
   const curr = moment().year(year).month(0).date(1).startOf('isoWeek');
-  for (let i = 1; i < 366; i += 7) {
-    arr.push(weekly(curr.clone()));
+  for (let i = 1; i <= 366; i += 7) {
+    const prevAndNext = [];
+    if (i > 1) {
+      prevAndNext.push(curr.clone().subtract(1, 'week'));
+    }
+
+    if (i + 7 <= 366) {
+      prevAndNext.push(curr.clone().add(1, 'week'));
+    }
+
+    arr.push(weekly(curr.clone(), prevAndNext));
     curr.add(1, 'week');
   }
 
