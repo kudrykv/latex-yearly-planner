@@ -27,7 +27,7 @@ const tabularify = (columns, content) => funcs.interpolateTpl('calRow', {columns
 const monthTabular = (year, month, weeks = false) => {
   let calendar = m.monthMonday(year, month)
     .map(stringifyWeekNumbers)
-    .map(row => row.map(item => !item ? '' : ls.link(`${year}${(''+(month+1)).padStart(2, '0')}${item.padStart(2, '0')}`, item)));
+    .map(row => row.map(item => !item ? '' : ls.link(`${year}${('' + (month + 1)).padStart(2, '0')}${item.padStart(2, '0')}`, item)));
 
   const columns = weeks ? 8 : 7;
 
@@ -35,7 +35,9 @@ const monthTabular = (year, month, weeks = false) => {
     let daynum = 1;
     let startingWeek = moment(new Date(year, month, daynum)).isoWeek();
     calendar.forEach(row => {
-      row.unshift(ls.link('Week ' + startingWeek, startingWeek));
+      month === 0 && startingWeek > 50
+        ? row.unshift(ls.link('fwWeek ' + startingWeek, startingWeek))
+        : row.unshift(ls.link('Week ' + startingWeek, startingWeek));
       daynum += 7;
       startingWeek = moment(new Date(year, month, daynum)).isoWeek();
     })
