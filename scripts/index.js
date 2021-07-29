@@ -8,7 +8,7 @@ const d = require('./5_daily');
 const td = require('./6_todo');
 const nt = require('./7_notes');
 
-const year = 2021;
+const year = 2022;
 
 fs.writeFileSync('tex/year.tex', act.annualTable(year, true))
 

@@ -2,7 +2,8 @@ const moment = require('moment');
 const funcs = require('./funcs');
 const ls = require('./latexsnips');
 
-const weekly = (curr, prevnext) => {
+const weekly = (curr, prevnext, ddd) => {
+  const fw = ddd === 1 ? 'fw' : '';
   const weekStart = curr.clone();
   curr.subtract(1, 'day');
   const dates = funcs.range(0, 7).map(() => curr.add(1, 'day').clone());
@@ -10,17 +11,25 @@ const weekly = (curr, prevnext) => {
   let monthName = ls.slink(weekStart.add(1, 'day').format('MMMM'));
   const lastDay = ls.slink(curr.format('MMMM'));
   if (monthName !== lastDay) {
-    monthName +=' / ' + lastDay;
+    monthName += ' / ' + lastDay;
   }
 
   const isoWeek = weekStart.isoWeek();
-  const quarter = isoWeek === 53 ? 1 : Math.floor(weekStart.month() / 3)+1
+  const quarter = isoWeek === 53 ? 1 : Math.floor(weekStart.month() / 3) + 1
   const dm = dates
-    .map((v, i) => ({[i+1]: ls.link(dates[i].format('yyyyMMDD'), v.date() + ' ' + weekDays[i])}))
+    .map((v, i) => ({[i + 1]: ls.link(dates[i].format('yyyyMMDD'), v.date() + ' ' + weekDays[i])}))
     .reduce((acc, val) => Object.assign(acc, val));
 
-  const leftList = [ls.slink(curr.year()), ls.slink(`Q${quarter}`), monthName, ls.starget(`Week ${isoWeek}`)];
-  const rightList = prevnext.map(d => ls.slink(`Week ${d.isoWeek()}`))
+
+  const ref = `${fw}Week ${isoWeek}`
+  const name = `Week ${isoWeek}`
+  const leftList = [ls.slink(curr.year()), ls.slink(`Q${quarter}`), monthName, ls.target(ref, name)];
+  const rightList = ddd !== 8
+    ? prevnext.map(d => ls.slink(`Week ${d.isoWeek()}`))
+    : [
+      ls.link(`fwWeek ${prevnext[0].isoWeek()}`, `Week ${prevnext[0].isoWeek()}`),
+      ls.slink(`Week ${prevnext[1].isoWeek()}`)
+    ];
 
   return `${ls.header(leftList, rightList)}
 
@@ -43,7 +52,7 @@ const weeklies = year => {
       prevAndNext.push(curr.clone().add(1, 'week'));
     }
 
-    arr.push(weekly(curr.clone(), prevAndNext));
+    arr.push(weekly(curr.clone(), prevAndNext, i));
     curr.add(1, 'week');
   }
 
