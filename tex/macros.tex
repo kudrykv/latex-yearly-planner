@@ -40,6 +40,8 @@
 \newcommand{\myMinLineHeight}[1]{\parbox{0pt}{\vskip#1}}
 \newcommand{\myLineHBL}{\myMinLineHeight{\myHBL}}
 
+\newcommand{\myColorGray}{gray}
+
 \newcommand{\myLinePlain}{\hrule width \linewidth height \myLenLineThicknessDefault}
 \newcommand{\myHfillThick}{\hrule width \linewidth height \myLenLineThicknessThick}
 \newcommand{\myUnderline}[1]{#1\vskip1mm\myHfillThick\par}
@@ -47,7 +49,7 @@
 \newcommand{\myLineOrd}{\myLinePlain\vskip \myHBL}
 \newcommand{\myLineBottomLine}{\myLineHBL\myLinePlain}
 \newcommand{\myLineOfColor}[1]{\textcolor{#1}{\myLinePlain}}
-\newcommand{\myLineOfColorGray}{\myLineOfColor{gray}}
+\newcommand{\myLineOfColorGray}{\myLineOfColor{\myColorGray}}
 \newcommand{\myLineGrayVskipTop}{\vskip\myHBL\myLineOfColorGray}
 \newcommand{\myLineGrayVskipBottom}{\myLineOfColorGray\vskip\myHBL}
 
