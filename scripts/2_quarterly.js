@@ -17,7 +17,8 @@ const quarter = (year, q) => {
     return funcs.interpolateTpl('qrtrRow', {calendar});
   })
 
-  return `${ls.header([ls.slink(year), qtabular(q)])}
+  const rightList = [ls.link('To Do Index', 'Todos'), ls.link('Notes Index', 'Notes')];
+  return `${ls.header([ls.slink(year), qtabular(q)], rightList)}
 
 ${tabulars.join('\\vfill')}
 \\pagebreak
