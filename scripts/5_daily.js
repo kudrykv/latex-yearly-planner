@@ -31,7 +31,7 @@ const dayTemplate = (hh, today) => {
     schedule,
     dailyNotes: ls.link(refFormat+'note', 'Daily'),
     dailyDiary: ls.link(refFormat+'diary', 'Diary'),
-    allNotes: 'All notes',
+    allNotes: ls.link('Notes Index', 'All notes'),
     allTodos: ls.link('To Do Index', 'All todos')
   });
 

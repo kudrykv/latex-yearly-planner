@@ -6,6 +6,7 @@ const m = require('./3_monthly');
 const w = require('./4_weekly');
 const d = require('./5_daily');
 const td = require('./6_todo');
+const nt = require('./7_notes');
 
 const year = 2021;
 
@@ -20,3 +21,5 @@ fs.writeFileSync('tex/weeklies.tex', w.weeklies(year));
 fs.writeFileSync('tex/dailies.tex', d.dailySchedule(year));
 
 fs.writeFileSync('tex/todos.tex', td.todos(year));
+
+fs.writeFileSync('tex/notes.tex', nt.notes(year));
