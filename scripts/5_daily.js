@@ -22,7 +22,7 @@ const dailySchedule = (year) => {
 const dayTemplate = (hh, today) => {
   const schedule = funcs
     .range(6, 23)
-    .map(h => `\\myLinePlain\\myLineHBL${h}\\par\\myLinePlain\\vskip\\myHBL`)
+    .map(h => `\\myLineOfColorGray\\myLineHBL${h}\\myLineOfColorLightGray\\vskip\\myHBL`)
     .join('');
 
   const refFormat = today.format('yyyyMMDD');
