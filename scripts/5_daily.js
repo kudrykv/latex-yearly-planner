@@ -11,11 +11,16 @@ const dailySchedule = (year) => {
     .map(n => {
       ptr.add(1, 'day');
 
+      const weekText = 'Week ' + ptr.isoWeek();
+      const weekRef = n <= 7 && ptr.isoWeek() > 50
+        ? 'fwWeek ' + ptr.isoWeek()
+        : weekText;
+
       const llist = [
         ls.slink(ptr.year()),
-        ls.slink('Q'+Math.floor((ptr.month() / 3)+1)),
+        ls.slink('Q' + Math.floor((ptr.month() / 3) + 1)),
         ls.slink(ptr.format('MMMM')),
-        ls.slink('Week ' + ptr.isoWeek()),
+        ls.link(weekRef, weekText),
         ptr.clone(),
       ];
 
@@ -50,17 +55,17 @@ const dayTemplate = (hh, today, rlist) => {
   const textFormat = today.format('dddd, D');
   const dailySchedule = funcs.interpolateTpl('daily', {
     schedule,
-    dailyNotes: ls.link(refFormat+'note', 'Daily'),
-    dailyDiary: ls.link(refFormat+'diary', 'Diary'),
+    dailyNotes: ls.link(refFormat + 'note', 'Daily'),
+    dailyDiary: ls.link(refFormat + 'diary', 'Diary'),
     allNotes: ls.link('Notes Index', 'All notes'),
     allTodos: ls.link('To Do Index', 'All todos')
   });
 
   return `${ls.header([...hh, ls.target(refFormat, textFormat)], rlist)}
 ${dailySchedule}\\pagebreak
-${ls.header([...hh, ls.link(refFormat, textFormat), ls.target(refFormat+'note', 'Notes')])}
+${ls.header([...hh, ls.link(refFormat, textFormat), ls.target(refFormat + 'note', 'Notes')])}
 ${funcs.interpolateTpl('dailyNotes', {})}\\pagebreak
-${ls.header([...hh, ls.link(refFormat, textFormat), ls.target(refFormat+'diary', 'Diary')])}
+${ls.header([...hh, ls.link(refFormat, textFormat), ls.target(refFormat + 'diary', 'Diary')])}
 ${funcs.interpolateTpl('dailyDiary', {})}\\pagebreak`;
 }
 
