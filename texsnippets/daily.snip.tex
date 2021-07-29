@@ -1,11 +1,9 @@
 \parbox[t]{\myLenTwoCol}{%
     \myUnderline{To Do\textcolor{white}{g}\hfill{}<allTodos>}
-    \myRepeat{\myNumDailyTodos}{\myLineHBL$\square$\myLinePlain}
+    \myRepeat{\myNumDailyTodos}{\myLineTodoGray}
     \vskip \dimexpr7mm-3.3pt
     \myUnderline{Notes\hfill{}<dailyNotes>\hfill{}<dailyDiary>\hfill{}<allNotes>}
-    \myLineHBL\par
-    \myRepeat{\myNumDailyNotes}{\myLineOrd}
-    \myLinePlain
+    \myRepeat{\myNumDailyNotes}{\myLineGrayVskipTop}
 }
 \hspace{\myLenTwoColSep}
 \parbox[t]{\myLenTwoCol}{%
