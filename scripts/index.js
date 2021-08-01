@@ -14,18 +14,15 @@ if (!year) {
   throw new Error('PLANNER_YEAR must exist and define a year');
 }
 
-fs.writeFileSync('tex/title.tex', t.title(year));
+['planner_supernote_a5x', 'macros', 'macros_supernote_a5x'].forEach(name => {
+  fs.copyFileSync(`textpl/${name}.tex`, `out/${name}.tex`);
+})
 
-fs.writeFileSync('tex/year.tex', act.annualTable(year, true))
-
-fs.writeFileSync('tex/quarterlies.tex', funcs.range(0, 4).map(qn => q.quarter(year, qn)).join('\n'));
-
-fs.writeFileSync('tex/monthlies.tex', funcs.range(0, 12).map(mn => m.monthly(year, mn)).join('\n\\pagebreak\n'))
-
-fs.writeFileSync('tex/weeklies.tex', w.weeklies(year));
-
-fs.writeFileSync('tex/dailies.tex', d.dailySchedule(year));
-
-fs.writeFileSync('tex/todos.tex', td.todos(year));
-
-fs.writeFileSync('tex/notes.tex', nt.notes(year));
+fs.writeFileSync('out/title.tex', t.title(year));
+fs.writeFileSync('out/year.tex', act.annualTable(year, true))
+fs.writeFileSync('out/quarterlies.tex', funcs.range(0, 4).map(qn => q.quarter(year, qn)).join('\n'));
+fs.writeFileSync('out/monthlies.tex', funcs.range(0, 12).map(mn => m.monthly(year, mn)).join('\n\\pagebreak\n'))
+fs.writeFileSync('out/weeklies.tex', w.weeklies(year));
+fs.writeFileSync('out/dailies.tex', d.dailySchedule(year));
+fs.writeFileSync('out/todos.tex', td.todos(year));
+fs.writeFileSync('out/notes.tex', nt.notes(year));

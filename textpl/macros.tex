@@ -1,0 +1,14 @@
+\def\myRepeat#1#2{
+    \newcount\foo
+    \foo=#1
+    \loop
+    #2
+    \advance\foo-1
+    \ifnum\foo>0
+    \repeat%
+
+}
+
+\ExplSyntaxOn
+\cs_new_eq:NN \Repeat \prg_replicate:nn
+\ExplSyntaxOff
