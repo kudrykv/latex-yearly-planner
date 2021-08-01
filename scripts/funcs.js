@@ -1,5 +1,10 @@
 const fs = require('fs');
 
+const makeRow = row => row.join(' & ');
+
+const fmtDay = (year, month, date) =>
+  `${year}${(''+(month+1)).padStart(2, '0')}${(''+date).padStart(2, '0')}`;
+
 module.exports.indent = (str, numSpaces = 4) =>
   str.split('\n').map(line => ' '.repeat(numSpaces) + line).join('\n');
 
@@ -20,3 +25,6 @@ module.exports.interpolateTpl = (tplName, dict) => {
 
 module.exports.formatDate = (year, month, date) =>
   `${year}${(''+(month+1)).padStart(2, '0')}${(''+date).padStart(2, '0')}`;
+
+module.exports.makeRow = makeRow;
+module.exports.fmtDay = fmtDay;

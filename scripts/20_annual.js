@@ -1,15 +1,15 @@
 const moment = require('moment');
 const m = require('./month');
-const funcs = require('./funcs');
+const {range, interpolateTpl, indent, makeRow, fmtDay} = require('./funcs');
 const ls = require('./latexsnips');
 
 const annualTable = (year, weeks) => {
-  const tabulars = funcs.range(0, 4)
+  const tabulars = range(0, 4)
     .map(q => rowOfMonths(year, q, weeks))
     .map(row => tabularify(3, row))
     .join('\n\\vfill\n');
 
-  const quarters = funcs.range(1, 5).map(n => ls.slink(`Q${n}`)).join('\\quad{}');
+  const quarters = range(1, 5).map(n => ls.slink(`Q${n}`)).join('\\quad{}');
 
   const leftList = [ls.starget(year), quarters];
   const rightList = [ls.link('To Do Index', 'Todos'), ls.link('Notes Index', 'Notes')];
@@ -17,17 +17,16 @@ const annualTable = (year, weeks) => {
 }
 
 const rowOfMonths = (year, qrtr, weeks) =>
-  funcs
-    .range(qrtr * 3, qrtr * 3 + 3)
+  range(qrtr * 3, qrtr * 3 + 3)
     .map(mth => monthTabular(year, mth, weeks))
     .join(' & ');
 
-const tabularify = (columns, content) => funcs.interpolateTpl('calRow', {columns, content});
+const tabularify = (columns, content) => interpolateTpl('calRow', {columns, content});
 
 const monthTabular = (year, month, weeks = false) => {
   let calendar = m.monthMonday(year, month)
     .map(stringifyWeekNumbers)
-    .map(row => row.map(item => !item ? '' : ls.link(`${year}${('' + (month + 1)).padStart(2, '0')}${item.padStart(2, '0')}`, item)));
+    .map(row => row.map(date => !date ? '' : ls.link(fmtDay(year, month, date), date)));
 
   const columns = weeks ? 8 : 7;
 
@@ -43,21 +42,20 @@ const monthTabular = (year, month, weeks = false) => {
     })
   }
 
-  calendar = calendar.map(joinWeekDays).join(' \\\\\n');
+  calendar = calendar.map(makeRow).join(' \\\\\n');
 
   const date = new Date(year, month, 1);
 
-  return funcs.interpolateTpl('calendar', {
+  return interpolateTpl('calendar', {
     weekColumn: weeks ? 'c |' : '',
     weekTag: weeks ? 'W & ' : '',
     columns: columns,
     monthName: ls.slink(date.toLocaleString('default', {month: 'long'})),
-    calendar: funcs.indent(calendar)
+    calendar: indent(calendar)
   })
 }
 
 const stringifyWeekNumbers = row => row.map(item => item > 0 ? '' + item : '')
-const joinWeekDays = row => row.join(' & ')
 
 module.exports.annualTable = annualTable;
 module.exports.monthTabular = monthTabular;

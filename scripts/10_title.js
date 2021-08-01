@@ -1,5 +1,5 @@
-const funcs = require('./funcs');
+const {interpolateTpl} = require('./funcs');
 
-const title = (year) => funcs.interpolateTpl('title', {year});
+const title = (year) => interpolateTpl('title', {year});
 
 module.exports.title = title;
