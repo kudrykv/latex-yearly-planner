@@ -12,7 +12,7 @@ const qtabular = (selected) => {
 
 const quarter = (year, q) => {
   const tabulars = funcs.range(q * 3, q * 3 + 3).map(qq => {
-    const calendar = act.monthTabular(year, qq, true);
+    const calendar = act.monthTabular(year, qq);
 
     return funcs.interpolateTpl('qrtrRow', {calendar});
   })
