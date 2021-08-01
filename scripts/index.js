@@ -1,5 +1,6 @@
 const fs = require('fs');
 const funcs = require('./funcs');
+const t = require('./10_title');
 const act = require('./1_annual');
 const q = require('./2_quarterly');
 const m = require('./3_monthly');
@@ -8,7 +9,12 @@ const d = require('./5_daily');
 const td = require('./6_todo');
 const nt = require('./7_notes');
 
-const year = 2022;
+const year = Number(process.env.PLANNER_YEAR);
+if (!year) {
+  throw new Error('PLANNER_YEAR must exist and define a year');
+}
+
+fs.writeFileSync('tex/title.tex', t.title(year));
 
 fs.writeFileSync('tex/year.tex', act.annualTable(year, true))
 
