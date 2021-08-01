@@ -1,13 +1,13 @@
 const fs = require('fs');
 const funcs = require('./funcs');
 const t = require('./10_title');
-const act = require('./1_annual');
-const q = require('./2_quarterly');
-const m = require('./3_monthly');
-const w = require('./4_weekly');
-const d = require('./5_daily');
-const td = require('./6_todo');
-const nt = require('./7_notes');
+const act = require('./20_annual');
+const q = require('./30_quarterly');
+const m = require('./40_monthly');
+const w = require('./50_weekly');
+const d = require('./60_daily');
+const td = require('./70_todo');
+const nt = require('./80_notes');
 
 const year = Number(process.env.PLANNER_YEAR);
 if (!year) {
