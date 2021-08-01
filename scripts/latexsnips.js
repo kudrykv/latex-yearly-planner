@@ -1,13 +1,13 @@
-module.exports.header = (list, list2) =>
+module.exports.header = (llist, rlist) =>
   `{%
     \\noindent\\Large%
     \\renewcommand{\\arraystretch}{\\myNumArrayStretch}%
-    \\begin{tabular}{|${new Array(list.length).fill('l').join(' | ')}}
-        ${list.join(' & ')}
+    \\begin{tabular}{|${new Array(llist.length).fill('l').join(' | ')}}
+        ${llist.join(' & ')}
     \\end{tabular}
     \\hfill%
-    ${!list2 ? '' : `\\begin{tabular}{${new Array(list2.length).fill('r').join(' | ')}@{}}
-      ${list2.join(' & ')}
+    ${!rlist ? '' : `\\begin{tabular}{${new Array(rlist.length).fill('r').join(' | ')}@{}}
+      ${rlist.join(' & ')}
       \\end{tabular}
     `}
 }
