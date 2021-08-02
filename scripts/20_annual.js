@@ -28,9 +28,8 @@ const monthTabular = (year, month) => {
     .map(stringifyWeekNumbers)
     .map(row => row.map(date => !date ? '' : ls.link(fmtDay(year, month, date), date)));
 
-  const columns = 8;
-
   let daynum = 1;
+
   let startingWeek = moment(new Date(year, month, daynum)).isoWeek();
   calendar.forEach(row => {
     month === 0 && startingWeek > 50
@@ -39,16 +38,16 @@ const monthTabular = (year, month) => {
     daynum += 7;
     startingWeek = moment(new Date(year, month, daynum)).isoWeek();
   })
-
   calendar = calendar.map(makeRow).join(' \\\\\n');
 
-  const date = new Date(year, month, 1);
+  const columns = 8;
+  const date = moment(new Date(year, month, 1));
 
   return interpolateTpl('calendar', {
     weekColumn: 'c |',
     weekTag: 'W & ',
-    columns: columns,
-    monthName: ls.slink(date.toLocaleString('default', {month: 'long'})),
+    columns,
+    monthName: ls.slink(date.format('MMMM')),
     calendar: indent(calendar)
   })
 }
