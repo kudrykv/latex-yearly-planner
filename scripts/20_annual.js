@@ -24,35 +24,33 @@ const rowOfMonths = (year, qrtr) =>
 const tabularify = (columns, content) => interpolateTpl('calRow', {columns, content});
 
 const monthTabular = (year, month) => {
-  let calendar = m.monthMonday(year, month)
-    .map(stringifyWeekNumbers)
-    .map(row => row.map(date => !date ? '' : ls.link(fmtDay(year, month, date), date)));
+  const monthStart = new Date(year, month, 1);
+  const week = moment(monthStart).subtract(1, 'week');
+  const date = moment(monthStart);
 
-  let daynum = 1;
-
-  let startingWeek = moment(new Date(year, month, daynum)).isoWeek();
-  calendar.forEach(row => {
-    month === 0 && startingWeek > 50
-      ? row.unshift(ls.link('fwWeek ' + startingWeek, startingWeek))
-      : row.unshift(ls.link('Week ' + startingWeek, startingWeek));
-    daynum += 7;
-    startingWeek = moment(new Date(year, month, daynum)).isoWeek();
-  })
-  calendar = calendar.map(makeRow).join(' \\\\\n');
-
-  const columns = 8;
-  const date = moment(new Date(year, month, 1));
+  const calendar = m.monthMonday(year, month)
+    .map(row => [week.add(1, 'week').isoWeek(), ...row])
+    .map(row => [linkifyWeekNumbers(month, row[0]), ...row.slice(1)])
+    .map(row => [row[0], ...linkifyDays(year, month, row.slice(1))])
+    .map(makeRow)
+    .join(' \\\\\n');
 
   return interpolateTpl('calendar', {
     weekColumn: 'c |',
     weekTag: 'W & ',
-    columns,
+    columns: 8,
     monthName: ls.slink(date.format('MMMM')),
     calendar: indent(calendar)
   })
 }
 
-const stringifyWeekNumbers = row => row.map(item => item > 0 ? '' + item : '')
+const linkifyWeekNumbers = (month, item) =>
+  month === 0 && item > 50
+    ? ls.link('fwWeek ' + item, item)
+    : ls.link('Week ' + item, item);
+
+const linkifyDays = (year, month, row) =>
+  row.map(date => !date ? '' : ls.link(fmtDay(year, month, date), date));
 
 module.exports.annualTable = annualTable;
 module.exports.monthTabular = monthTabular;
