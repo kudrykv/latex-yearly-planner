@@ -55,8 +55,8 @@ const dayTemplate = (hh, today, rlist) => {
   const textFormat = today.format('dddd, D');
   const dailySchedule = funcs.interpolateTpl('daily', {
     schedule,
-    dailyNotes: ls.link(refFormat + 'note', 'Daily'),
-    dailyDiary: ls.link(refFormat + 'diary', 'Diary'),
+    dailyNotes: ls.link(refFormat + 'note', 'More'),
+    dailyDiary: ls.link(refFormat + 'diary', 'Reflect'),
     allNotes: ls.link('Notes Index', 'All notes'),
     allTodos: ls.link('To Do Index', 'All todos')
   });
@@ -65,7 +65,7 @@ const dayTemplate = (hh, today, rlist) => {
 ${dailySchedule}\\pagebreak
 ${ls.header([...hh, ls.link(refFormat, textFormat), ls.target(refFormat + 'note', 'Notes')])}
 ${funcs.interpolateTpl('dailyNotes', {})}\\pagebreak
-${ls.header([...hh, ls.link(refFormat, textFormat), ls.target(refFormat + 'diary', 'Diary')])}
+${ls.header([...hh, ls.link(refFormat, textFormat), ls.target(refFormat + 'diary', 'Reflect')])}
 ${funcs.interpolateTpl('dailyDiary', {})}\\pagebreak`;
 }
 
