@@ -1,4 +1,4 @@
-const funcs = require('./funcs');
+const funcs = require('../common/funcs');
 const ls = require('./latexsnips');
 
 const todos = (year) => {

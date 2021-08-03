@@ -1,5 +1,5 @@
 const fs = require('fs');
-const funcs = require('./funcs');
+const funcs = require('../common/funcs');
 const t = require('./10_title');
 const act = require('./20_annual');
 const q = require('./30_quarterly');

@@ -1,5 +1,5 @@
 const moment = require('moment');
-const funcs = require('./funcs');
+const funcs = require('../common/funcs');
 const ls = require('./latexsnips');
 
 const weekly = (year, curr, prevnext, ddd) => {

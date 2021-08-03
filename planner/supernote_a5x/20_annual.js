@@ -1,6 +1,6 @@
 const moment = require('moment');
 const m = require('./month');
-const {range, interpolateTpl, indent, makeRow, fmtDay} = require('./funcs');
+const {range, interpolateTpl, indent, makeRow, fmtDay} = require('../common/funcs');
 const ls = require('./latexsnips');
 
 const annualTable = (year) => {

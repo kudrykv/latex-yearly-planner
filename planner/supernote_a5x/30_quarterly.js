@@ -1,4 +1,4 @@
-const funcs = require('./funcs');
+const funcs = require('../common/funcs');
 const act = require('./20_annual');
 const ls = require('./latexsnips');
 

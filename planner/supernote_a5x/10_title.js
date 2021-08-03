@@ -1,4 +1,4 @@
-const {interpolateTpl} = require('./funcs');
+const {interpolateTpl} = require('../common/funcs');
 
 const title = (year) => interpolateTpl('title', {year});
 

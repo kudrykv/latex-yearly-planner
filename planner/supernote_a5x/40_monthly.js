@@ -1,7 +1,7 @@
 const moment = require('moment');
 const m = require('./month');
 const ls = require('./latexsnips');
-const funcs = require('./funcs');
+const funcs = require('../common/funcs');
 
 const monthly = (year, month) => {
   let calendar = m
