@@ -1,5 +1,5 @@
 const funcs = require('../common/funcs');
-const ls = require('./latexsnips');
+const ls = require('../common/latexsnips');
 
 const notes = (year) => {
   const table = ls.tabularx({

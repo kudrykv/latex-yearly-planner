@@ -1,6 +1,6 @@
 const funcs = require('../common/funcs');
 const act = require('./20_annual');
-const ls = require('./latexsnips');
+const ls = require('../common/latexsnips');
 
 const qtabular = (selected) =>
   funcs.range(1, 5)

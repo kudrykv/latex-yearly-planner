@@ -1,6 +1,6 @@
 const moment = require('moment');
 const funcs = require('../common/funcs');
-const ls = require('./latexsnips');
+const ls = require('../common/latexsnips');
 
 const weekly = (year, curr, prevnext, ddd) => {
   const fw = ddd === 1 ? 'fw' : '';

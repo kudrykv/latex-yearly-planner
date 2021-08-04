@@ -1,6 +1,7 @@
 const fs = require('fs');
 const funcs = require('../common/funcs');
 const t = require('../common/10_title');
+const a = require('./20_annual');
 
 const year = Number(process.env.PLANNER_YEAR);
 if (!year) {
@@ -12,3 +13,4 @@ if (!year) {
 })
 
 fs.writeFileSync('out/title.tex', t.title(year));
+fs.writeFileSync('out/year.tex', a.annualTable(year));
