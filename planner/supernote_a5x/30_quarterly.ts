@@ -9,14 +9,14 @@ export const qtabular = (selected) =>
 
 
 export const quarter = (year, q) => {
-  const tabulars = funcs
-    .range(q * 3, q * 3 + 3)
-    .map(qq => funcs.interpolateTpl('qrtrRow', {calendar: act.monthTabular(year, qq)}));
+  // const tabulars = funcs
+  //   .range(q * 3, q * 3 + 3)
+  //   .map(qq => funcs.interpolateTpl('qrtrRow', {calendar: act.monthTabular(year, qq)}));
 
   const rightList = [ls.link('To Do Index', 'Todos'), ls.link('Notes Index', 'Notes')];
   return `${ls.header([ls.slink(year), qtabular(q)], rightList)}
 
-${tabulars.join('\\vfill')}
+tbd
 \\pagebreak
 `
 }

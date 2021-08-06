@@ -1,11 +1,9 @@
-const moment = require('moment');
-const m = require('../common/month');
-const {range, interpolateTpl, indent, makeRow, fmtDay} = require('../common/funcs');
+const {range, interpolateTpl} = require('../common/funcs');
 const ls = require('../common/latexsnips');
 
 export const annualTable = (year) => {
   const tabulars = range(0, 4)
-    .map(q => rowOfMonths(year, q))
+    .map(qrtr => rowOfMonths({year, qrtr}))
     .map(row => tabularify(3, row))
     .join('\n\\vfill\n');
 
@@ -16,38 +14,14 @@ export const annualTable = (year) => {
   return `${ls.header(leftList, rightList)}\n${tabulars}`
 }
 
-const rowOfMonths = (year, qrtr) =>
+const rowOfMonths = ({
+  year,
+  qrtr,
+  weeks = true,
+  weekStart = 1
+}: { year: number, qrtr: number, weeks?: boolean, weekStart?: 1 | 7 }) =>
   range(qrtr * 3, qrtr * 3 + 3)
-    .map(mth => monthTabular(year, mth))
+    .map(mth => ls.monthlyTabular({year, month: mth + 1, weeks, weekStart}))
     .join(' & ');
 
 const tabularify = (columns, content) => interpolateTpl('calRow', {columns, content});
-
-export const monthTabular = (year, month) => {
-  const monthStart = new Date(year, month, 1);
-  const week = moment(monthStart).subtract(1, 'week');
-  const date = moment(monthStart);
-
-  const calendar = m.monthMonday(year, month)
-    .map(row => [week.add(1, 'week').isoWeek(), ...row])
-    .map(row => [linkifyWeekNumbers(month, row[0]), ...row.slice(1)])
-    .map(row => [row[0], ...linkifyDays(year, month, row.slice(1))])
-    .map(makeRow)
-    .join(' \\\\\n');
-
-  return interpolateTpl('calendar', {
-    weekColumn: 'c |',
-    weekTag: 'W & ',
-    columns: 8,
-    monthName: ls.slink(date.format('MMMM')),
-    calendar: indent(calendar)
-  })
-}
-
-const linkifyWeekNumbers = (month, item) =>
-  month === 0 && item > 50
-    ? ls.link('fwWeek ' + item, item)
-    : ls.link('Week ' + item, item);
-
-const linkifyDays = (year, month, row) =>
-  row.map(date => !date ? '' : ls.link(fmtDay(year, month, date), date));

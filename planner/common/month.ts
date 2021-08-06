@@ -39,7 +39,7 @@ export const monthMonday = (year: number, month: number): Array<Array<number | u
 export const month = (year: number, month: number, weekStart = 1): Array<Array<number | null>> => {
   const monthInfo = DateTime.local(year, month, 1);
   const daysInWeek = 7;
-  const emptyDaysInFirstWeek = monthInfo.weekday - 1 + ((8 - weekStart) % daysInWeek);
+  const emptyDaysInFirstWeek = (monthInfo.weekday - 1 + ((8 - weekStart) % daysInWeek)) % daysInWeek;
   const daysInFirstWeek = daysInWeek - emptyDaysInFirstWeek;
   const remainingWeeks = Math.ceil((monthInfo.daysInMonth - daysInFirstWeek) / daysInWeek);
 
