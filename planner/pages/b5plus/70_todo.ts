@@ -1,7 +1,7 @@
-const funcs = require('../common/funcs');
-const ls = require('../common/latexsnips');
+const funcs = require('../../common/funcs');
+const ls = require('../../common/latexsnips');
 
-const todos = (year) => {
+export const todos = (year) => {
   const table = ls.tabularx({
     hlines: true,
     colSetup: '|@{}' + (new Array(10).fill('X').join('@{}|@{}')) + '@{}|',
@@ -27,7 +27,7 @@ const todos = (year) => {
     .map(num => {
       const page = funcs.interpolateTpl('todoPage', {});
 
-      const leftList = [ls.slink(year), ls.slink(refText), ls.starget(`To Do ${num+1}`)];
+      const leftList = [ls.slink(year), ls.slink(refText), ls.starget(`To Do ${num + 1}`)];
       return `${ls.header(leftList, rightList)}${page}`;
     }).join('\\pagebreak\n')
 
@@ -37,5 +37,3 @@ ${funcs.interpolateTpl('todoIndex', {table})}
 ${todoPages}
 `;
 };
-
-module.exports.todos = todos;

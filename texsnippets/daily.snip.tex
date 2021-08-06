@@ -8,7 +8,8 @@
 \hspace{\myLenTwoColSep}
 \parbox[t]{\myLenTwoCol}{%
     \myUnderline{Schedule\textcolor{white}{g}}\vskip-\myLenLineThicknessDefault
-    <schedule>
+    \foreach \x in {\myNumBottomHour,...,\myNumTopHour}
+        {\myLineOfColorGray\myLineHBL\x\myLineOfColorLightGray\vskip\myHBL}
     \myLineGrayVskipBottom\myLineOfColorLightGray
 }
 \par

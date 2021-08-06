@@ -1,8 +1,8 @@
 const moment = require('moment');
-const funcs = require('../common/funcs');
-const ls = require('../common/latexsnips');
+const funcs = require('../../common/funcs');
+const ls = require('../../common/latexsnips');
 
-const weekly = (year, curr, prevnext, ddd) => {
+export const weekly = (year, curr, prevnext, ddd) => {
   const fw = ddd === 1 ? 'fw' : '';
   const weekStart = curr.clone();
   curr.subtract(1, 'day');
@@ -38,8 +38,8 @@ ${funcs.interpolateTpl('weekly', dm)}`
 
 const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const weeklies = year => {
-  const arr = [];
+export const weeklies = (year: number): string => {
+  const arr = [] as string[];
 
   const curr = moment().year(year).month(0).date(1).startOf('isoWeek');
   for (let i = 1; i <= 366; i += 7) {
@@ -58,6 +58,3 @@ const weeklies = year => {
 
   return arr.join('\n\n')
 };
-
-module.exports.weekly = weekly;
-module.exports.weeklies = weeklies;
