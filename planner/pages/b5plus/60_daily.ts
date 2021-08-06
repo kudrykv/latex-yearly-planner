@@ -46,15 +46,10 @@ export const dailySchedule = (year) => {
 };
 
 const dayTemplate = (hh, today, rlist) => {
-  const schedule = funcs
-    .range(6, 23)
-    .map(h => `\\myLineOfColorGray\\myLineHBL${h}\\myLineOfColorLightGray\\vskip\\myHBL`)
-    .join('');
-
   const refFormat = today.format('yyyyMMDD');
   const textFormat = today.format('dddd, D');
+
   const dailySchedule = funcs.interpolateTpl('daily', {
-    schedule,
     dailyNotes: ls.link(refFormat + 'note', 'More'),
     dailyDiary: ls.link(refFormat + 'diary', 'Reflect'),
     allNotes: ls.link('Notes Index', 'All notes'),

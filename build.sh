@@ -48,7 +48,11 @@ done
 
 export VENDOR PLANNER_YEAR WEEK_START_DAY DISABLE_WEEKS
 
-mkdir -p out
+if ! mkdir -p out; then
+  echo 'Could not create "out" dir'
+  exit 1
+fi
+
 npm i
 ./node_modules/.bin/tsc
 node planner/index.js
@@ -61,3 +65,6 @@ if ! cd out; then
 fi
 
 pdflatex "${VENDOR}.tex"
+mv "${VENDOR}.pdf" "../planner.${PLANNER_YEAR}.${VENDOR}.pdf"
+
+echo -e "\n\nCreated file planner.${PLANNER_YEAR}.${VENDOR}.pdf"
