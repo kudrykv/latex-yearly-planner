@@ -1,6 +1,5 @@
-const moment = require('moment');
-const ls = require('../../common/latexsnips');
-const funcs = require('../../common/funcs');
+import {fancyHeader, monthlyCalContents} from '../../common/latexsnips';
+import {interpolateTpl} from '../../common/funcs';
 
 export const monthlyPage = ({
   year,
@@ -8,32 +7,16 @@ export const monthlyPage = ({
   weeks = true,
   weekStart = 1
 }: { year: number, month: number, weeks?: boolean, weekStart?: 1 | 7 }) => {
-  const date = new Date(year, month, 1);
+  const fh = fancyHeader(
+    {year, quarter: Math.floor(month / 3) + 1, month: month + 1},
+    {level: 'month', left: month > 0, right: month < 11}
+  )
 
-  const calendar = ls.monthlyCalContents({year, month: month + 1, weeks, weekStart});
-  const weekdays = getWeekdays(weekStart).map(day => `\\hfil ${day}`).join(' & ');
-  const leftList = [
-    ls.slink(year),
-    ls.slink(`Q${Math.floor(month / 3) + 1}`),
-    ls.starget(moment(date).format('MMMM'))
-  ];
-
-  const rightList = [];
-  if (month > 0) {
-    const prevMonth = moment(new Date(year, month - 1, 1)).format('MMMM');
-    rightList.push(ls.slink(prevMonth))
-  }
-
-  if (month < 11) {
-    const nextMonth = moment(new Date(year, month + 1, 1)).format('MMMM');
-    rightList.push(ls.slink(nextMonth))
-  }
-
-  return `${ls.header(leftList, rightList)}\n${funcs.interpolateTpl('monthly', {
+  return `${fh}\n${interpolateTpl('monthly', {
     weekCols: weeks ? 'l!{\\vrule width \\myLenLineThicknessThick}' : '|',
     weekCol: weeks ? '&' : '',
-    weekdays,
-    calendar
+    weekdays: getWeekdays(weekStart).map(day => `\\hfil ${day}`).join(' & '),
+    calendar: monthlyCalContents({year, month: month + 1, weeks, weekStart})
   })}\n`;
 }
 
