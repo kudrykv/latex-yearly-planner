@@ -131,8 +131,9 @@ const corner = (date: string): string => {
 interface LeftStackConfig {
   year: number;
   quarter?: number;
-  nextMonthOverlap?: boolean;
+  nextQuarterOverlap?: boolean;
   month?: number;
+  nextMonthOverlap?: boolean;
   week?: number;
   date?: number;
   dateSubPage?: string;
@@ -147,7 +148,7 @@ interface RightStackConfig {
 }
 
 export const fancyHeader = (ls: LeftStackConfig, rs: RightStackConfig): string => {
-  const {year, quarter, nextMonthOverlap, month, week, date, dateSubPage} = ls;
+  const {year, quarter, nextQuarterOverlap, month, nextMonthOverlap, week, date, dateSubPage} = ls;
   const llist = [];
   const rlist = [];
   let targetSet = false;
@@ -173,14 +174,16 @@ export const fancyHeader = (ls: LeftStackConfig, rs: RightStackConfig): string =
   if (month) {
     const f = targetSet ? slink : starget;
     let monthToken = f(DateTime.local(year, month, 1).toFormat('MMMM'));
-    nextMonthOverlap && (monthToken += ' / ' + DateTime.local(year, month + 1, 1).toFormat('MMMM'));
+    nextMonthOverlap && (monthToken += ' / ' + f(DateTime.local(year, month + 1, 1).toFormat('MMMM')));
     llist.unshift(monthToken);
     targetSet = true;
   }
 
   if (quarter) {
     const f = targetSet ? slink : starget;
-    llist.unshift(f('Q' + quarter));
+    let quarterToken = f('Q' + quarter);
+    nextQuarterOverlap && (quarterToken += ' / ' + f('Q' + (quarter + 1)))
+    llist.unshift(quarterToken);
     targetSet = true;
   }
 
@@ -195,6 +198,15 @@ export const fancyHeader = (ls: LeftStackConfig, rs: RightStackConfig): string =
     case "month":
       rs.left && rlist.push(slink(DateTime.local(year, month - 1, 1).toFormat('MMMM')));
       rs.right && rlist.push(slink(DateTime.local(year, month + 1, 1).toFormat('MMMM')));
+      break;
+
+    case 'week':
+      const prefix = rs.left && week === 1 ? 'fw' : '';
+      const prevWeek = week - 1 <= 0 ? DateTime.local(year - 1, 12, 31).weekNumber : week - 1;
+      const nextWeek = month === 1 && week > 50 ? 1 : week + 1;
+      rs.left && rlist.push(link(prefix + 'Week ' + prevWeek, 'Week ' + prevWeek));
+      rs.right && rlist.push(slink('Week ' + nextWeek))
+      break;
   }
 
   return `{%

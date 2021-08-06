@@ -3,37 +3,29 @@ const funcs = require('../../common/funcs');
 const ls = require('../../common/latexsnips');
 
 export const weekly = (year, curr, prevnext, ddd) => {
-  const fw = ddd === 1 ? 'fw' : '';
   const weekStart = curr.clone();
+
   curr.subtract(1, 'day');
   const dates = funcs.range(0, 7).map(() => curr.add(1, 'day').clone());
 
-  let monthName = ls.slink(weekStart.add(1, 'day').format('MMMM'));
-  const lastDay = ls.slink(curr.format('MMMM'));
-  if (monthName !== lastDay) {
-    monthName += ' / ' + lastDay;
-  }
+  const month = weekStart.year() + 1 === year ? 1 : weekStart.month() + 1;
+  const nextMonth = curr.month() + 1;
+  const nextMonthOverlap = nextMonth > month && month !== nextMonth;
+  const quarter = weekStart.year() + 1 === year ? 1 : weekStart.quarter();
+  const nextQuarter = curr.quarter();
+  const nextQuarterOverlap = nextQuarter > quarter && quarter !== nextQuarter;
 
-  const isoWeek = weekStart.isoWeek();
-  const quarter = isoWeek > 50 && ddd < 8 ? 1 : Math.floor(weekStart.month() / 3) + 1
+  const week = weekStart.isoWeek();
   const dm = dates
     .map((v, i) => ({[i + 1]: ls.link(dates[i].format('yyyyMMDD'), v.date() + ' ' + weekDays[i])}))
     .reduce((acc, val) => Object.assign(acc, val));
 
+  const hhh = ls.fancyHeader(
+    {year, quarter, month, week, nextQuarterOverlap, nextMonthOverlap},
+    {level: 'week', left: ddd !== 1, right: curr.year() === year}
+  )
 
-  const ref = `${fw}Week ${isoWeek}`
-  const name = `Week ${isoWeek}`
-  const leftList = [ls.slink(year), ls.slink(`Q${quarter}`), monthName, ls.target(ref, name)];
-  const rightList = ddd !== 8
-    ? prevnext.map(d => ls.slink(`Week ${d.isoWeek()}`))
-    : [
-      ls.link(`fwWeek ${prevnext[0].isoWeek()}`, `Week ${prevnext[0].isoWeek()}`),
-      ls.slink(`Week ${prevnext[1].isoWeek()}`)
-    ];
-
-  return `${ls.header(leftList, rightList)}
-
-${funcs.interpolateTpl('weekly', dm)}`
+  return `${hhh}\n\n${funcs.interpolateTpl('weekly', dm)}`
 }
 
 const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
