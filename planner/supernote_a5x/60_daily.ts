@@ -2,7 +2,7 @@ const moment = require('moment');
 const funcs = require('../common/funcs');
 const ls = require('../common/latexsnips');
 
-const dailySchedule = (year) => {
+export const dailySchedule = (year) => {
   let ptr = moment().year(year).month(0).date(0);
   let last = moment().year(year + 1).month(0).date(0).dayOfYear() + 1;
 
@@ -68,5 +68,3 @@ ${funcs.interpolateTpl('dailyNotes', {})}\\pagebreak
 ${ls.header([...hh, ls.link(refFormat, textFormat), ls.target(refFormat + 'diary', 'Reflect')])}
 ${funcs.interpolateTpl('dailyDiary', {})}\\pagebreak`;
 }
-
-module.exports.dailySchedule = dailySchedule;

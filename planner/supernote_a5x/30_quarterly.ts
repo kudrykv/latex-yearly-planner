@@ -2,13 +2,13 @@ const funcs = require('../common/funcs');
 const act = require('./20_annual');
 const ls = require('../common/latexsnips');
 
-const qtabular = (selected) =>
+export const qtabular = (selected) =>
   funcs.range(1, 5)
     .map(num => num === selected + 1 ? ls.target('Q' + num, '\\textbf{Q' + num + '}') : ls.slink('Q' + num))
     .join('\\quad{}');
 
 
-const quarter = (year, q) => {
+export const quarter = (year, q) => {
   const tabulars = funcs
     .range(q * 3, q * 3 + 3)
     .map(qq => funcs.interpolateTpl('qrtrRow', {calendar: act.monthTabular(year, qq)}));
@@ -20,6 +20,3 @@ ${tabulars.join('\\vfill')}
 \\pagebreak
 `
 }
-
-module.exports.quarter = quarter;
-module.exports.qtabular = qtabular;

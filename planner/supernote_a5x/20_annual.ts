@@ -3,7 +3,7 @@ const m = require('../common/month');
 const {range, interpolateTpl, indent, makeRow, fmtDay} = require('../common/funcs');
 const ls = require('../common/latexsnips');
 
-const annualTable = (year) => {
+export const annualTable = (year) => {
   const tabulars = range(0, 4)
     .map(q => rowOfMonths(year, q))
     .map(row => tabularify(3, row))
@@ -23,7 +23,7 @@ const rowOfMonths = (year, qrtr) =>
 
 const tabularify = (columns, content) => interpolateTpl('calRow', {columns, content});
 
-const monthTabular = (year, month) => {
+export const monthTabular = (year, month) => {
   const monthStart = new Date(year, month, 1);
   const week = moment(monthStart).subtract(1, 'week');
   const date = moment(monthStart);
@@ -51,6 +51,3 @@ const linkifyWeekNumbers = (month, item) =>
 
 const linkifyDays = (year, month, row) =>
   row.map(date => !date ? '' : ls.link(fmtDay(year, month, date), date));
-
-module.exports.annualTable = annualTable;
-module.exports.monthTabular = monthTabular;

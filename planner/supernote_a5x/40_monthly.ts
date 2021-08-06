@@ -3,7 +3,7 @@ const m = require('../common/month');
 const ls = require('../common/latexsnips');
 const funcs = require('../common/funcs');
 
-const monthly = (year, month) => {
+export const monthly = (year, month) => {
   let calendar = m
     .monthMonday(year, month)
     .map(row => row.map(date => corner(year, month, date)))
@@ -54,5 +54,3 @@ const corner = (year, month, date) => {
 
   return funcs.interpolateTpl('monthlyCornerDate', {date: link});
 }
-
-module.exports.monthly = monthly;

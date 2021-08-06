@@ -1,4 +1,4 @@
-module.exports.header = (llist, rlist) =>
+export const header = (llist: Array<any>, rlist: Array<any>): string =>
   `{%
     \\noindent\\Large%
     \\renewcommand{\\arraystretch}{\\myNumArrayStretch}%
@@ -13,12 +13,23 @@ module.exports.header = (llist, rlist) =>
 }
 \\myHfillThick\\medskip`;
 
-module.exports.link = (ref, text) => `\\hyperlink{${ref}}{${text}}`;
-module.exports.slink = (reftext) => `\\hyperlink{${reftext}}{${reftext}}`;
-module.exports.target = (ref, text) => `\\hypertarget{${ref}}{${text}}`;
-module.exports.starget = (reftext) => `\\hypertarget{${reftext}}{${reftext}}`;
+export const link = (ref: string, text: string): string =>
+  `\\hyperlink{${ref}}{${text}}`;
 
-module.exports.tabularx = ({colSetup, hlines, matrix}) => {
+export const slink = (reftext: string): string =>
+  `\\hyperlink{${reftext}}{${reftext}}`;
+
+export const target = (ref: string, text: string): string =>
+  `\\hypertarget{${ref}}{${text}}`;
+
+export const starget = (reftext: string): string =>
+  `\\hypertarget{${reftext}}{${reftext}}`;
+
+export const tabularx = ({
+  colSetup,
+  hlines,
+  matrix
+}: { colSetup: string, hlines: boolean, matrix: Array<Array<string>> }): string => {
   const hline = hlines ? '\\hline' : '';
 
   return `\\begin{tabularx}{\\linewidth}{${colSetup}}

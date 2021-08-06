@@ -1,7 +1,7 @@
 const funcs = require('../common/funcs');
 const ls = require('../common/latexsnips');
 
-const notes = (year) => {
+export const notes = (year) => {
   const table = ls.tabularx({
     hlines: true,
     colSetup: '|@{}' + (new Array(10).fill('X').join('@{}|@{}')) + '@{}|',
@@ -36,5 +36,3 @@ ${funcs.interpolateTpl('notesIndex', {table})}
 \\pagebreak
 ${notesPages}`;
 };
-
-module.exports.notes = notes;

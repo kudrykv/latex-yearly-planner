@@ -1,4 +1,4 @@
-const monthMonday = (year, month) => {
+export const monthMonday = (year: number, month: number): Array<Array<number | undefined | null>> => {
   const anchor = new Date(year, month + 1, 0);
   const days = anchor.getDate();
   let day = new Date(year, month, 1).getDay() - 1;
@@ -25,5 +25,3 @@ const monthMonday = (year, month) => {
 
   return ss;
 }
-
-module.exports.monthMonday = monthMonday;
