@@ -30,7 +30,7 @@ export const monthlyPage = ({
   }
 
   return `${ls.header(leftList, rightList)}\n${funcs.interpolateTpl('monthly', {
-    weekCols: weeks ? 'l!{\\vrule width \\myLenLineThicknessThick}' : '',
+    weekCols: weeks ? 'l!{\\vrule width \\myLenLineThicknessThick}' : '|',
     weekCol: weeks ? '&' : '',
     weekdays,
     calendar
