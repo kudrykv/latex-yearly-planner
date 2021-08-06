@@ -76,7 +76,7 @@ export const monthlyTabular = ({
     .join('\\\\ \n')
 
   return interpolateTpl('calendar', {
-    monthName: DateTime.local(year, month).monthLong,
+    monthName: slink(DateTime.local(year, month).monthLong),
     colWeek: weeks ? 'c|' : '',
     colSetup: weekStart === 1 ? 'c'.repeat(6) + '>{\\bf}c' : '>{\\bf}c' + 'c'.repeat(6),
     weekColumn: weeks ? 'c | ' : '',
