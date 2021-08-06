@@ -123,5 +123,5 @@ const rotateWeek = (month, weekNum) => {
 }
 
 const corner = (date) => {
-  return date ? funcs.interpolateTpl('monthlyCornerDate', {date}) : '';
+  return date ? interpolateTpl('monthlyCornerDate', {date}) : '';
 }
