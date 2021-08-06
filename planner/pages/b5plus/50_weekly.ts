@@ -1,28 +1,27 @@
-const moment = require('moment');
+import {DateTime} from "luxon";
+
 const funcs = require('../../common/funcs');
 const ls = require('../../common/latexsnips');
 
-export const weekly = (year, curr, prevnext, ddd) => {
-  const weekStart = curr.clone();
+export const weekly = (year: number, curr: DateTime, leftmostDay) => {
+  const dates = funcs.range(0, 7).map(i => curr.plus({day: i})) as DateTime[];
+  const last = dates[dates.length - 1];
 
-  curr.subtract(1, 'day');
-  const dates = funcs.range(0, 7).map(() => curr.add(1, 'day').clone());
-
-  const month = weekStart.year() + 1 === year ? 1 : weekStart.month() + 1;
-  const nextMonth = curr.month() + 1;
+  const month = curr.year + 1 === year ? 1 : curr.month;
+  const nextMonth = last.month;
   const nextMonthOverlap = nextMonth > month && month !== nextMonth;
-  const quarter = weekStart.year() + 1 === year ? 1 : weekStart.quarter();
-  const nextQuarter = curr.quarter();
+  const quarter = curr.year + 1 === year ? 1 : curr.quarter;
+  const nextQuarter = last.quarter;
   const nextQuarterOverlap = nextQuarter > quarter && quarter !== nextQuarter;
 
-  const week = weekStart.isoWeek();
+  const week = curr.weekNumber;
   const dm = dates
-    .map((v, i) => ({[i + 1]: ls.link(dates[i].format('yyyyMMDD'), v.date() + ' ' + weekDays[i])}))
+    .map((v, i) => ({[i + 1]: ls.link(dates[i].toFormat('yyyyMMdd'), v.day + ' ' + weekDays[i])}))
     .reduce((acc, val) => Object.assign(acc, val));
 
   const hhh = ls.fancyHeader(
     {year, quarter, month, week, nextQuarterOverlap, nextMonthOverlap},
-    {level: 'week', left: ddd !== 1, right: curr.year() === year}
+    {level: 'week', left: leftmostDay !== 1, right: last.year === year}
   )
 
   return `${hhh}\n\n${funcs.interpolateTpl('weekly', dm)}`
@@ -33,19 +32,10 @@ const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Satur
 export const weeklies = (year: number): string => {
   const arr = [] as string[];
 
-  const curr = moment().year(year).month(0).date(1).startOf('isoWeek');
+  let curr = DateTime.local(year, 1, 1).startOf('week');
   for (let i = 1; i <= 366; i += 7) {
-    const prevAndNext = [];
-    if (i > 1) {
-      prevAndNext.push(curr.clone().subtract(1, 'week'));
-    }
-
-    if (i + 7 <= 366) {
-      prevAndNext.push(curr.clone().add(1, 'week'));
-    }
-
-    arr.push(weekly(year, curr.clone(), prevAndNext, i));
-    curr.add(1, 'week');
+    arr.push(weekly(year, curr, i));
+    curr = curr.plus({week: 1});
   }
 
   return arr.join('\n\n')
