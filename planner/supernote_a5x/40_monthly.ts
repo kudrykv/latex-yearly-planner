@@ -19,11 +19,16 @@ export const mth = ({
     .map(row => row.join(' &\n')).join(' \\\\ \\hline \n') + '\\\\ \\hline';
 };
 
-export const monthly = (year, month) => {
+export const monthly = ({
+  year,
+  month,
+  weeks = true,
+  weekStart = 1
+}: { year: number, month: number, weeks?: boolean, weekStart?: 1 | 7 }) => {
   const date = new Date(year, month, 1);
 
-  const calendar = mth({year, month: month + 1});
-  const weekdays = getWeekdays(1).map(day => `\\hfil ${day}`).join(' & ');
+  const calendar = mth({year, month: month + 1, weeks, weekStart});
+  const weekdays = getWeekdays(weekStart).map(day => `\\hfil ${day}`).join(' & ');
   const leftList = [
     ls.slink(year),
     ls.slink(`Q${Math.floor(month / 3) + 1}`),

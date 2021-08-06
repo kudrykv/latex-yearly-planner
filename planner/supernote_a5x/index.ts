@@ -21,7 +21,7 @@ if (!year) {
 fs.writeFileSync('out/title.tex', t.title(year));
 fs.writeFileSync('out/year.tex', act.annualTable({year}))
 fs.writeFileSync('out/quarterlies.tex', funcs.range(1, 5).map(qn => q.quarter({year, q: qn})).join('\n'));
-fs.writeFileSync('out/monthlies.tex', funcs.range(0, 12).map(mn => m.monthly(year, mn)).join('\n\\pagebreak\n'))
+fs.writeFileSync('out/monthlies.tex', funcs.range(0, 12).map(mn => m.monthly({year, month: mn, weekStart: 7})).join('\n\\pagebreak\n'))
 fs.writeFileSync('out/weeklies.tex', w.weeklies(year));
 fs.writeFileSync('out/dailies.tex', d.dailySchedule(year));
 fs.writeFileSync('out/todos.tex', td.todos(year));
