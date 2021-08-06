@@ -13,7 +13,7 @@ const nt = require('../pages/b5plus/80_notes');
 
 export const buildFiles = (cfg: EnvConfig): void => {
   const {year, weekStart, disableWeeks} = cfg;
-  ['preamble', 'supernote_a5x', 'macros', 'macros_supernote_a5x'].forEach(name => {
+  ['preamble', 'rm2_ddvk', 'macros', 'macros_rm2_ddvk'].forEach(name => {
     fs.copyFileSync(`textpl/${name}.tex`, `out/${name}.tex`);
   })
 
