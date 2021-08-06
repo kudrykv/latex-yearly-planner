@@ -42,13 +42,13 @@ ${matrix.map(row => row.join(' & ')).join(`\\\\ ${hline} \n`)} ${hlines ? '\\\\ 
 \\end{tabularx}`
 }
 
-const linkifyWeekNumbers = (month, item) =>
+const linkifyWeekNumbers = (month: number, item: number): string =>
   month === 0 && item > 50
-    ? link('fwWeek ' + item, item)
-    : link('Week ' + item, item);
+    ? link('fwWeek ' + item, String(item))
+    : link('Week ' + item, String(item));
 
-const linkifyDays = (year, month, row) =>
-  row.map(date => !date ? '' : link(fmtDay(year, month, date), date));
+const linkifyDays = (year: number, month: number, row: number[]): string[] =>
+  row.map(date => !date ? '' : link(fmtDay(year, month, date), String(date)));
 
 export const monthlySemiFinished = ({
   year,
@@ -66,9 +66,9 @@ export const monthlySemiFinished = ({
   }
 
   return cal
-    .map(row => row.map(item => item ? item.toString() : ''))
     .map(row => {
-      const linkifiedDays = linkifyDays(year, month, weeks ? row.slice(1) : row);
+      const daysRow = weeks ? row.slice(1) : row;
+      const linkifiedDays = linkifyDays(year, month, daysRow);
       return weeks ? [row[0], ...linkifiedDays] : linkifiedDays;
     });
 }
@@ -101,7 +101,7 @@ export const monthlyCalContents = ({
   month,
   weeks = true,
   weekStart = 1
-}: { year: number, month: number, weeks?: boolean, weekStart?: 1 | 7 }) => {
+}: { year: number, month: number, weeks?: boolean, weekStart?: 1 | 7 }): string => {
   let cal = monthlySemiFinished({year, month, weeks, weekStart});
 
   if (weeks) {
@@ -114,14 +114,14 @@ export const monthlyCalContents = ({
     .map(row => row.join(' &\n')).join(' \\\\ \\hline \n') + '\\\\ \\hline';
 };
 
-const rotateWeek = (month, weekNum) => {
+const rotateWeek = (month: number, weekNum: number): string => {
   const wn = month === 0 && weekNum > 50
     ? link('fwWeek ' + weekNum, 'Week ' + weekNum)
     : slink('Week ' + weekNum);
 
-  return funcs.interpolateTpl('rotatedWeekNum', {weekNum: wn})
+  return interpolateTpl('rotatedWeekNum', {weekNum: wn})
 }
 
-const corner = (date) => {
+const corner = (date: string): string => {
   return date ? interpolateTpl('monthlyCornerDate', {date}) : '';
 }

@@ -8,7 +8,7 @@ const {DateTime} = require('luxon');
  * @param month
  * @param weekStart what should be the first day of the week. 1 is Monday, 7 is Sunday
  */
-export const month = (year: number, month: number, weekStart = 1): Array<Array<number | null>> => {
+export const month = (year: number, month: number, weekStart = 1): (number | null)[][] => {
   const monthInfo = DateTime.local(year, month, 1);
   const daysInWeek = 7;
   const emptyDaysInFirstWeek = (monthInfo.weekday - 1 + ((8 - weekStart) % daysInWeek)) % daysInWeek;
@@ -24,7 +24,7 @@ export const month = (year: number, month: number, weekStart = 1): Array<Array<n
     mth.push(range(0, daysInWeek).map((_, idx) => daysInFirstWeek + week * daysInWeek + idx + 1));
   });
 
-  const lastWeek = mth.length-1;
+  const lastWeek = mth.length - 1;
   mth[lastWeek] = mth[lastWeek]
     .map(day => day > monthInfo.daysInMonth ? null : day);
 

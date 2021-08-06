@@ -15,5 +15,5 @@ export const interpolateTpl = (tplName: string, dict: Record<string, any>): stri
   return snip;
 };
 
-export const range = (start: number, end: number) =>
+export const range = (start: number, end: number): number[] =>
   new Array(end - start).fill(undefined).map((_, i) => start + i);
