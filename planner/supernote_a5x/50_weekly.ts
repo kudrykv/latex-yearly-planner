@@ -38,8 +38,8 @@ ${funcs.interpolateTpl('weekly', dm)}`
 
 const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-export const weeklies = year => {
-  const arr = [];
+export const weeklies = (year: number): string => {
+  const arr = [] as string[];
 
   const curr = moment().year(year).month(0).date(1).startOf('isoWeek');
   for (let i = 1; i <= 366; i += 7) {
