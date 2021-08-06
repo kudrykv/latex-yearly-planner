@@ -1,23 +1,28 @@
-import {fmtDay} from "../common/funcs";
-
 const moment = require('moment');
-const m = require('../common/month');
 const ls = require('../common/latexsnips');
 const funcs = require('../common/funcs');
 
+export const mth = ({
+  year,
+  month,
+  weeks = true,
+  weekStart = 1
+}: { year: number, month: number, weeks?: boolean, weekStart?: 1 | 7 }) => {
+  let cal = ls.monthlySemiFinished({year, month, weeks, weekStart});
+
+  if (weeks) {
+    cal = cal.map(row => [rotateWeek(month, row[0]), ...row.slice(1)]);
+  }
+
+  return cal
+    .map(row => weeks ? [row[0], ...row.slice(1).map(corner)] : row.map(corner))
+    .map(row => row.join(' &\n')).join(' \\\\ \\hline \n') + '\\\\ \\hline';
+};
+
 export const monthly = (year, month) => {
-  let calendar = m
-    .monthMonday(year, month)
-    .map(row => row.map(date => corner(year, month, date)))
-
   const date = new Date(year, month, 1);
-  let startingWeek = moment(date);
-  calendar.forEach(row => {
-    row.unshift(rotateWeek(month, startingWeek.isoWeek()));
-    startingWeek.add(1, 'week');
-  })
 
-  calendar = calendar.map(row => row.join(' &\n')).join(' \\\\ \\hline\n') + '\\\\ \\hline';
+  const calendar = mth({year, month: month + 1});
   const weekdays = getWeekdays().map(day => `\\hfil ${day}`).join(' & ');
   const leftList = [
     ls.slink(year),
@@ -49,10 +54,6 @@ const rotateWeek = (month, weekNum) => {
 
 const getWeekdays = () => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
-const corner = (year, month, date) => {
-  if (!date && date !== 0) return '';
-
-  const link = ls.link(fmtDay(year, month, date), date)
-
-  return funcs.interpolateTpl('monthlyCornerDate', {date: link});
+const corner = (date) => {
+  return date ? funcs.interpolateTpl('monthlyCornerDate', {date}) : '';
 }

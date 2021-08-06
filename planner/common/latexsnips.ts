@@ -50,28 +50,37 @@ const linkifyWeekNumbers = (month, item) =>
 const linkifyDays = (year, month, row) =>
   row.map(date => !date ? '' : link(fmtDay(year, month, date), date));
 
+export const monthlySemiFinished = ({
+  year,
+  month,
+  weeks = true,
+  weekStart = 1
+}: { year: number, month: number, weeks?: boolean, weekStart?: 1 | 7 }) => {
+  let cal = m.month(year, month, weekStart);
+
+  if (weeks) {
+    cal.forEach(row => {
+      const day = row.find(day => day && DateTime.local(year, month, day).weekday === 1) || row.find(item => item);
+      row.unshift(DateTime.local(year, month, day).weekNumber)
+    });
+  }
+
+  return cal
+    .map(row => row.map(item => item ? item.toString() : ''))
+    .map(row => {
+      const linkifiedDays = linkifyDays(year, month, weeks ? row.slice(1) : row);
+      return weeks ? [row[0], ...linkifiedDays] : linkifiedDays;
+    });
+}
+
 export const monthlyTabular = ({
   year,
   month,
   weeks = true,
   weekStart = 1
 }: { year: number, month: number, weeks?: boolean, weekStart?: 1 | 7 }): string => {
-  let calendar = m.month(year, month, weekStart);
-
-  if (weeks) {
-    calendar.forEach(row => {
-      const day = row.find(day => day && DateTime.local(year, month, day).weekday === 1) || row.find(item => item);
-      row.unshift(DateTime.local(year, month, day).weekNumber)
-    });
-    calendar = calendar.map(row => [linkifyWeekNumbers(month, row[0]), ...row.slice(1)])
-  }
-
-  calendar = calendar
-    .map(row => row.map(item => item ? item.toString() : ''))
-    .map(row => {
-      const linkifiedDays = linkifyDays(year, month, weeks ? row.slice(1) : row);
-      return weeks ? [row[0], ...linkifiedDays] : linkifiedDays;
-    })
+  const calendar = monthlySemiFinished({year, month, weeks, weekStart})
+    .map(row => weeks ? [linkifyWeekNumbers(month, row[0]), ...row.slice(1)] : row)
     .map(makeRow)
     .join('\\\\ \n')
 
