@@ -23,7 +23,7 @@ export const monthly = (year, month) => {
   const date = new Date(year, month, 1);
 
   const calendar = mth({year, month: month + 1});
-  const weekdays = getWeekdays().map(day => `\\hfil ${day}`).join(' & ');
+  const weekdays = getWeekdays(1).map(day => `\\hfil ${day}`).join(' & ');
   const leftList = [
     ls.slink(year),
     ls.slink(`Q${Math.floor(month / 3) + 1}`),
@@ -52,7 +52,12 @@ const rotateWeek = (month, weekNum) => {
   return funcs.interpolateTpl('rotatedWeekNum', {weekNum: link})
 }
 
-const getWeekdays = () => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const getWeekdays = (weekStart: 1 | 7) => {
+  const base = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  weekStart === 1 ? base.push('Sunday') : base.unshift('Sunday');
+
+  return base;
+}
 
 const corner = (date) => {
   return date ? funcs.interpolateTpl('monthlyCornerDate', {date}) : '';
