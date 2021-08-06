@@ -1,5 +1,5 @@
-const {range, interpolateTpl} = require('../common/funcs');
-const ls = require('../common/latexsnips');
+const {range, interpolateTpl} = require('../../common/funcs');
+const ls = require('../../common/latexsnips');
 
 interface AnnualTableConfig {
   year: number;

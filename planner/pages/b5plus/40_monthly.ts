@@ -1,6 +1,6 @@
 const moment = require('moment');
-const ls = require('../common/latexsnips');
-const funcs = require('../common/funcs');
+const ls = require('../../common/latexsnips');
+const funcs = require('../../common/funcs');
 
 export const monthlyPage = ({
   year,
