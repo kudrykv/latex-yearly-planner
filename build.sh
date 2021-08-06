@@ -54,10 +54,9 @@ if ! mkdir -p out; then
 fi
 
 npm i
+rm tsconfig.tsbuildinfo || true
 ./node_modules/.bin/tsc
 node planner/index.js
-
-pushd .
 
 if ! cd out; then
   echo 'Could not cd into "out" dir'
