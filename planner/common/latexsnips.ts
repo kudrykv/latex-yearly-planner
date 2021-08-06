@@ -95,3 +95,33 @@ export const monthlyTabular = ({
     calendar
   });
 };
+
+export const monthlyCalContents = ({
+  year,
+  month,
+  weeks = true,
+  weekStart = 1
+}: { year: number, month: number, weeks?: boolean, weekStart?: 1 | 7 }) => {
+  let cal = monthlySemiFinished({year, month, weeks, weekStart});
+
+  if (weeks) {
+    cal = cal.map(row => [rotateWeek(month, row[0]), ...row.slice(1)]);
+  }
+
+  return cal
+    .map(row => weeks ? [row[0], ...row.slice(1).map(corner)] : row.map(corner))
+    .map(row => weeks ? row : row.map(item => item && item + '\\vspace{\\dimexpr\\myLenMonthlyCellHeight-\\baselineskip}'))
+    .map(row => row.join(' &\n')).join(' \\\\ \\hline \n') + '\\\\ \\hline';
+};
+
+const rotateWeek = (month, weekNum) => {
+  const wn = month === 0 && weekNum > 50
+    ? link('fwWeek ' + weekNum, 'Week ' + weekNum)
+    : slink('Week ' + weekNum);
+
+  return funcs.interpolateTpl('rotatedWeekNum', {weekNum: wn})
+}
+
+const corner = (date) => {
+  return date ? funcs.interpolateTpl('monthlyCornerDate', {date}) : '';
+}
