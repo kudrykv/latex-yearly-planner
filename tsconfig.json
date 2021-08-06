@@ -2,7 +2,6 @@
   "compilerOptions": {
     "module": "CommonJS",
     "target": "ES6",
-    "rootDir": "planner",
-    "outDir": "ts-built"
+    "rootDir": "planner"
   }
 }
