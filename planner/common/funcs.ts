@@ -15,8 +15,5 @@ export const interpolateTpl = (tplName: string, dict: Record<string, any>): stri
   return snip;
 };
 
-export const indent = (str: string, numSpaces = 4): string =>
-  str.split('\n').map(line => ' '.repeat(numSpaces) + line).join('\n');
-
 export const range = (start: number, end: number) =>
   new Array(end - start).fill(undefined).map((_, i) => start + i);
