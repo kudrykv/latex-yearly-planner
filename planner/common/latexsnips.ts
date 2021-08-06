@@ -45,7 +45,7 @@ ${matrix.map(row => row.join(' & ')).join(`\\\\ ${hline} \n`)} ${hlines ? '\\\\ 
 }
 
 const linkifyWeekNumbers = (month: number, item: number): string =>
-  month === 0 && item > 50
+  month === 1 && item > 50
     ? link('fwWeek ' + item, String(item))
     : link('Week ' + item, String(item));
 
