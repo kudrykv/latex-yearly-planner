@@ -16,10 +16,11 @@ export const mth = ({
 
   return cal
     .map(row => weeks ? [row[0], ...row.slice(1).map(corner)] : row.map(corner))
+    .map(row => weeks ? row : row.map(item => item && item + '\\vspace{\\dimexpr\\myLenMonthlyCellHeight-\\baselineskip}'))
     .map(row => row.join(' &\n')).join(' \\\\ \\hline \n') + '\\\\ \\hline';
 };
 
-export const monthly = ({
+export const monthlyPage = ({
   year,
   month,
   weeks = true,
@@ -46,7 +47,12 @@ export const monthly = ({
     rightList.push(ls.slink(nextMonth))
   }
 
-  return `${ls.header(leftList, rightList)}\n${funcs.interpolateTpl('monthly', {weekdays, calendar})}\n`;
+  return `${ls.header(leftList, rightList)}\n${funcs.interpolateTpl('monthly', {
+    weekCols: weeks ? 'l!{\\vrule width \\myLenLineThicknessThick}' : '',
+    weekCol: weeks ? '&' : '',
+    weekdays,
+    calendar
+  })}\n`;
 }
 
 const rotateWeek = (month, weekNum) => {
