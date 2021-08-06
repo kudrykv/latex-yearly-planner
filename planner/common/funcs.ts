@@ -20,8 +20,3 @@ export const indent = (str: string, numSpaces = 4): string =>
 
 export const range = (start: number, end: number) =>
   new Array(end - start).fill(undefined).map((_, i) => start + i);
-
-export const stringifyRow = (row: Array<number>): Array<string> =>
-  row.map(item => item > 0 ? '' + item : '');
-
-export const formatDate = fmtDay;

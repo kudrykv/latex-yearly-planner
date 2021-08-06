@@ -1,3 +1,5 @@
+import {fmtDay} from "../common/funcs";
+
 const moment = require('moment');
 const m = require('../common/month');
 const ls = require('../common/latexsnips');
@@ -50,7 +52,7 @@ const getWeekdays = () => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday
 const corner = (year, month, date) => {
   if (!date && date !== 0) return '';
 
-  const link = ls.link(funcs.formatDate(year, month, date), date)
+  const link = ls.link(fmtDay(year, month, date), date)
 
   return funcs.interpolateTpl('monthlyCornerDate', {date: link});
 }
