@@ -1,4 +1,5 @@
 import {DateTime} from "luxon";
+import {fancyHeader} from "../../common/fancyHeader";
 
 const funcs = require('../../common/funcs');
 const ls = require('../../common/latexsnips');
@@ -19,7 +20,7 @@ export const weekly = (year: number, curr: DateTime, leftmostDay) => {
     .map((v, i) => ({[i + 1]: ls.link(dates[i].toFormat('yyyyMMdd'), v.day + ' ' + weekDays[i])}))
     .reduce((acc, val) => Object.assign(acc, val));
 
-  const hhh = ls.fancyHeader(
+  const hhh = fancyHeader(
     {year, quarter, month, week, nextQuarterOverlap, nextMonthOverlap},
     {level: 'week', left: leftmostDay !== 1, right: last.year === year}
   )

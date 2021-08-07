@@ -1,5 +1,6 @@
-import {fancyHeader, monthlyCalContents} from '../../common/latexsnips';
+import {monthlyCalContents} from '../../common/latexsnips';
 import {interpolateTpl} from '../../common/funcs';
+import {fancyHeader} from "../../common/fancyHeader";
 
 export const monthlyPage = ({
   year,
