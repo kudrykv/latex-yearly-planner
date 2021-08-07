@@ -13,7 +13,8 @@ interface LeftStackConfig {
   dateSubPage?: string;
 }
 
-type Level = 'month' | 'week' | 'date';
+type Level = 'month' | 'week' | 'date' | SubLevel;
+type SubLevel = 'Note' | 'Reflect';
 
 interface RightStackConfig {
   left?: boolean;
@@ -34,11 +35,11 @@ export const fancyHeader = (ls: LeftStackConfig, rs: RightStackConfig): string =
 
   if (date) {
     const f = targetSet ? link : target;
-    llist.unshift(f(fmtDay(year, month, date), DateTime.local(year, month, date).toFormat('EEEE, dd')));
+    llist.unshift(f(fmtDay(year, month, date), DateTime.local(year, month, date).toFormat('EEEE, d')));
     targetSet = true;
   }
 
-  if (week) {
+  if (process.env.DISABLE_WEEKS !== 'true' && week) {
     const f = targetSet ? link : target;
     const prefix = month === 1 && week > 50 ? 'fw' : '';
     llist.unshift(f(prefix + 'Week ' + week, 'Week ' + week));
@@ -80,6 +81,25 @@ export const fancyHeader = (ls: LeftStackConfig, rs: RightStackConfig): string =
       const nextWeek = month === 1 && week > 50 ? 1 : week + 1;
       rs.left && rlist.push(link(prefix + 'Week ' + prevWeek, 'Week ' + prevWeek));
       rs.right && rlist.push(slink('Week ' + nextWeek))
+      break;
+
+    case 'date':
+      const moment = DateTime.local(year, month, date);
+      const left = moment.minus({day: 1});
+      const right = moment.plus({day: 1});
+
+      rs.left && rlist.push(link(left.toFormat('yyyyMMdd'), left.toFormat('EEE, d')));
+      rs.right && rlist.push(link(right.toFormat('yyyyMMdd'), right.toFormat('EEE, d')));
+      break;
+
+    case 'Note':
+    case 'Reflect':
+      const submoment = DateTime.local(year, month, date);
+      const subleft = submoment.minus({day: 1});
+      const subright = submoment.plus({day: 1});
+
+      rs.left && rlist.push(link(subleft.toFormat('yyyyMMdd') + rs.level, subleft.toFormat('EEE, d')));
+      rs.right && rlist.push(link(subright.toFormat('yyyyMMdd') + rs.level, subright.toFormat('EEE, d')));
       break;
   }
 

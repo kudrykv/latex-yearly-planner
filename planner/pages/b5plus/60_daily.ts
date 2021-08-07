@@ -1,65 +1,49 @@
-const moment = require('moment');
-const funcs = require('../../common/blocks/funcs');
-const ls = require('../../common/texblocks/latexsnips');
+import {DateTime} from "luxon";
+import {fancyHeader} from "../../common/texblocks/fancyHeader";
+import {link} from "../../common/texblocks/latexsnips";
 
-export const dailySchedule = (year) => {
-  let ptr = moment().year(year).month(0).date(0);
-  let last = moment().year(year + 1).month(0).date(0).dayOfYear() + 1;
+const funcs = require('../../common/blocks/funcs');
+
+export const dailySchedule = (year: number) => {
+  let ptr = DateTime.local(year, 1, 1).minus({day: 1});
+  const last = ptr.daysInYear + 1;
 
   return funcs
     .range(1, last)
-    .map(n => {
-      ptr.add(1, 'day');
+    .map(() => {
+      ptr = ptr.plus({day: 1});
+      const {quarter, month, weekNumber, day} = ptr;
 
-      const weekText = 'Week ' + ptr.isoWeek();
-      const weekRef = n <= 7 && ptr.isoWeek() > 50
-        ? 'fwWeek ' + ptr.isoWeek()
-        : weekText;
-
-      const llist = [
-        ls.slink(ptr.year()),
-        ls.slink('Q' + Math.floor((ptr.month() / 3) + 1)),
-        ls.slink(ptr.format('MMMM')),
-        ls.link(weekRef, weekText),
-        ptr.clone(),
+      return [
+        {year, quarter, month, week: weekNumber, date: day},
+        {level: 'date', left: month > 1 || (month === 1 && day > 1), right: month < 12 || (month === 12 && day < 31)},
+        ptr
       ];
-
-      const rlist = [];
-      if (n > 1) {
-        const prevDay = ptr.clone().subtract(1, 'day');
-        const prevDayRef = prevDay.format('yyyyMMDD');
-        const prevDayFmt = prevDay.format('ddd, DD');
-        rlist.push(ls.link(prevDayRef, prevDayFmt));
-      }
-
-      if (n + 1 < last) {
-        const nextDay = ptr.clone().add(1, 'day');
-        const nextDayRef = nextDay.format('yyyyMMDD');
-        const nextDayFmt = nextDay.format('ddd, DD');
-        rlist.push(ls.link(nextDayRef, nextDayFmt));
-      }
-
-      return [llist, rlist];
     })
-    .map(([hh, rlist]) => dayTemplate(hh.slice(0, 4), hh.pop(), rlist))
+    .map(([ls, rs, ptr]) => dayTemplate(ls, rs, ptr))
     .join('\n');
 };
 
-const dayTemplate = (hh, today, rlist) => {
-  const refFormat = today.format('yyyyMMDD');
-  const textFormat = today.format('dddd, D');
+const dayTemplate = (ls, rs, ptr) => {
+  const refFormat = ptr.toFormat('yyyyMMdd');
+
+  const lsNote = {...ls, dateSubPage: 'Note'}
+  const rsNote = {...rs, level: 'Note'}
+
+  const lsDiary = {...ls, dateSubPage: 'Reflect'}
+  const rsDiary = {...rs, level: 'Reflect'}
 
   const dailySchedule = funcs.interpolateTpl('daily', {
-    dailyNotes: ls.link(refFormat + 'note', 'More'),
-    dailyDiary: ls.link(refFormat + 'diary', 'Reflect'),
-    allNotes: ls.link('Notes Index', 'All notes'),
-    allTodos: ls.link('To Do Index', 'All todos')
+    dailyNotes: link(refFormat + 'Note', 'More'),
+    dailyDiary: link(refFormat + 'Reflect', 'Reflect'),
+    allNotes: link('Notes Index', 'All notes'),
+    allTodos: link('To Do Index', 'All todos')
   });
 
-  return `${ls.header([...hh, ls.target(refFormat, textFormat)], rlist)}
+  return `${fancyHeader(ls, rs)}
 ${dailySchedule}\\pagebreak
-${ls.header([...hh, ls.link(refFormat, textFormat), ls.target(refFormat + 'note', 'Notes')])}
+${fancyHeader(lsNote, rsNote)}
 ${funcs.interpolateTpl('dailyNotes', {})}\\pagebreak
-${ls.header([...hh, ls.link(refFormat, textFormat), ls.target(refFormat + 'diary', 'Reflect')])}
+${fancyHeader(lsDiary, rsDiary)}
 ${funcs.interpolateTpl('dailyDiary', {})}\\pagebreak`;
 }
