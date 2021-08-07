@@ -30,6 +30,6 @@ export type {EnvConfig};
 export const envConfig = {
   vendor: VENDOR,
   year: Number(PLANNER_YEAR),
-  weekStart: WEEK_START_DAY === 'Monday' ? 1 : 7,
+  weekStart: WEEK_START_DAY === 'Sunday' ? 7 : 1,
   disableWeeks: DISABLE_WEEKS === 'true'
 } as EnvConfig;
