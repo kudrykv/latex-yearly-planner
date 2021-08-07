@@ -1,8 +1,8 @@
 import {DateTime} from "luxon";
-import {fancyHeader} from "../../common/fancyHeader";
+import {fancyHeader} from "../../common/texblocks/fancyHeader";
 
-const funcs = require('../../common/funcs');
-const ls = require('../../common/latexsnips');
+const funcs = require('../../common/blocks/funcs');
+const ls = require('../../common/texblocks/latexsnips');
 
 export const weekly = (year: number, curr: DateTime, leftmostDay) => {
   const dates = funcs.range(0, 7).map(i => curr.plus({day: i})) as DateTime[];

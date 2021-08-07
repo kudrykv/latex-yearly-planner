@@ -1,5 +1,5 @@
 import {DateTime} from "luxon";
-import {fmtDay, range} from "./funcs";
+import {fmtDay, range} from "../blocks/funcs";
 import {link, slink, starget, target} from "./latexsnips";
 
 interface LeftStackConfig {

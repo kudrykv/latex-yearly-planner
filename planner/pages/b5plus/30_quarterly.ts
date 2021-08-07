@@ -1,5 +1,5 @@
-const {range, interpolateTpl} = require('../../common/funcs');
-const {monthlyTabular, link, header, slink, target} = require('../../common/latexsnips');
+const {range, interpolateTpl} = require('../../common/blocks/funcs');
+const {monthlyTabular, link, header, slink, target} = require('../../common/texblocks/latexsnips');
 
 interface QuarterConfig {
   year: number;

@@ -1,8 +1,8 @@
-import {EnvConfig} from "../../common/envConfig";
+import {EnvConfig} from "../../common/blocks/envConfig";
 
 const fs = require('fs');
-const funcs = require('../../common/funcs');
-const t = require('../../common/10_title');
+const funcs = require('../../common/blocks/funcs');
+const t = require('../../common/texblocks/10_title');
 const act = require('../../pages/b5plus/20_annual');
 const q = require('../../pages/b5plus/30_quarterly');
 const m = require('../../pages/b5plus/40_monthly');

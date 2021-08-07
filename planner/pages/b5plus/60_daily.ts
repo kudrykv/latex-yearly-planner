@@ -1,6 +1,6 @@
 const moment = require('moment');
-const funcs = require('../../common/funcs');
-const ls = require('../../common/latexsnips');
+const funcs = require('../../common/blocks/funcs');
+const ls = require('../../common/texblocks/latexsnips');
 
 export const dailySchedule = (year) => {
   let ptr = moment().year(year).month(0).date(0);

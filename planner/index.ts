@@ -1,6 +1,6 @@
-import {EnvConfig} from './common/envConfig';
+import {EnvConfig} from './common/blocks/envConfig';
 
-const {envConfig} = require('./common/envConfig');
+const {envConfig} = require('./common/blocks/envConfig');
 
 interface Vendor {
   buildFiles(envConfig: EnvConfig)

@@ -1,6 +1,6 @@
 const {DateTime} = require('luxon');
-const {fmtDay, interpolateTpl, makeRow} = require('./funcs');
-const m = require('./month');
+const {fmtDay, interpolateTpl, makeRow} = require('../blocks/funcs');
+const m = require('../blocks/month');
 
 export const header = (llist: Array<any>, rlist: Array<any>): string =>
   `{%
