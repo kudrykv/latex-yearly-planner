@@ -3,6 +3,10 @@
     "module": "CommonJS",
     "target": "ES6",
     "rootDir": "planner",
-    "incremental": true
+    "incremental": true,
+    "lib": [
+      "ESNext.String",
+      "ESNext.Array"
+    ]
   }
 }
