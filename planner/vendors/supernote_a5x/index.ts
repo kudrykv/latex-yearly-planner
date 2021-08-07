@@ -1,15 +1,15 @@
-import {EnvConfig} from "../common/envConfig";
+import {EnvConfig} from "../../common/envConfig";
 
 const fs = require('fs');
-const funcs = require('../common/funcs');
-const t = require('../common/10_title');
-const act = require('../pages/b5plus/20_annual');
-const q = require('../pages/b5plus/30_quarterly');
-const m = require('../pages/b5plus/40_monthly');
-const w = require('../pages/b5plus/50_weekly');
-const d = require('../pages/b5plus/60_daily');
-const td = require('../pages/b5plus/70_todo');
-const nt = require('../pages/b5plus/80_notes');
+const funcs = require('../../common/funcs');
+const t = require('../../common/10_title');
+const act = require('../../pages/b5plus/20_annual');
+const q = require('../../pages/b5plus/30_quarterly');
+const m = require('../../pages/b5plus/40_monthly');
+const w = require('../../pages/b5plus/50_weekly');
+const d = require('../../pages/b5plus/60_daily');
+const td = require('../../pages/b5plus/70_todo');
+const nt = require('../../pages/b5plus/80_notes');
 
 export const buildFiles = (cfg: EnvConfig): void => {
   const {year, weekStart, disableWeeks} = cfg;

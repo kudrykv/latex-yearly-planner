@@ -8,7 +8,7 @@ interface Vendor {
 
 let vendor: Vendor;
 try {
-  vendor = require('./'+envConfig.vendor);
+  vendor = require('./vendors/'+envConfig.vendor);
 } catch (e) {
   throw new Error('Cannot load vendor: ' + e);
 }
