@@ -63,6 +63,10 @@ export const monthlySemiFinished = ({
       const day = row.find(day => day && DateTime.local(year, month, day).weekday === 1) || row.find(item => item);
       row.unshift(DateTime.local(year, month, day).weekNumber)
     });
+
+    if (cal[cal.length-2][0] === cal[cal.length-1][0]) {
+      cal[cal.length-1][0]++
+    }
   }
 
   return cal
