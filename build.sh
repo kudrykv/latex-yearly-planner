@@ -11,7 +11,7 @@ function testCommandExists() {
 }
 
 testCommandExists npm node pdflatex
-
+LEFT_HANDED=false
 while [[ $# -gt 0 ]]; do
   key="$1"
 
@@ -40,17 +40,30 @@ while [[ $# -gt 0 ]]; do
     shift
     ;;
 
+  --left-handed)
+    LEFT_HANDED="$2"
+    shift
+    shift
+    ;;    
   -h | --help)
     echo
     ;;
   esac
 done
 
-export VENDOR PLANNER_YEAR WEEK_START_DAY DISABLE_WEEKS
+export VENDOR PLANNER_YEAR WEEK_START_DAY DISABLE_WEEKS LEFT_HANDED
 
 if ! mkdir -p out; then
   echo 'Could not create "out" dir'
   exit 1
+fi
+
+if [ ${LEFT_HANDED} == "true" ]; then
+  sed -i '/\%right-handed/s/^\\/\%\\/' ./textpl/rm2_ddvk.tex
+  sed -i '/\%left-handed/s/^\%//' ./textpl/rm2_ddvk.tex
+else
+  sed -i '/\%right-handed/s/^\%//' ./textpl/rm2_ddvk.tex
+  sed -i '/\%left-handed/s/^\\/\%\\/' ./textpl/rm2_ddvk.tex
 fi
 
 npm i
