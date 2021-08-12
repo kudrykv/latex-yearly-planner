@@ -11,40 +11,51 @@ function testCommandExists() {
 }
 
 testCommandExists npm node pdflatex
+
 LEFT_HANDED=false
+EXT=
+
 while [[ $# -gt 0 ]]; do
   key="$1"
 
   case $key in
-  --vendor)
-    VENDOR="$2"
+  --planner-year)
+    PLANNER_YEAR="$2"
+    EXT="${EXT}.${PLANNER_YEAR}"
     shift
     shift
     ;;
 
-  --planner-year)
-    PLANNER_YEAR="$2"
+  --vendor)
+    VENDOR="$2"
+    EXT="${EXT}.${VENDOR}"
     shift
     shift
     ;;
 
   --week-start-day)
     WEEK_START_DAY="$2"
+    if [[ "${WEEK_START_DAY}" == "Sunday" ]]; then
+      EXT="${EXT}.sunday"
+    fi
     shift
     shift
     ;;
 
   --disable-weeks)
     DISABLE_WEEKS="$2"
+    EXT="${EXT}.no_weeks"
     shift
     shift
     ;;
 
   --left-handed)
     LEFT_HANDED="$2"
+    EXT="${EXT}.left_handed"
     shift
     shift
-    ;;    
+    ;;
+
   -h | --help)
     echo
     ;;
@@ -58,7 +69,7 @@ if ! mkdir -p out; then
   exit 1
 fi
 
-if [ ${LEFT_HANDED} == "true" ]; then
+if [ "${LEFT_HANDED}" == "true" ]; then
   sed -i '/\%right-handed/s/^\\/\%\\/' ./textpl/rm2_ddvk.tex
   sed -i '/\%left-handed/s/^\%//' ./textpl/rm2_ddvk.tex
 else
@@ -77,6 +88,6 @@ if ! cd out; then
 fi
 
 pdflatex "${VENDOR}.tex"
-mv "${VENDOR}.pdf" "../planner.${PLANNER_YEAR}.${VENDOR}.pdf"
+mv "${VENDOR}.pdf" "../planner${EXT}.pdf"
 
-echo -e "\n\nCreated file planner.${PLANNER_YEAR}.${VENDOR}.pdf"
+echo -e "\n\nCreated file planner${EXT}.pdf"
