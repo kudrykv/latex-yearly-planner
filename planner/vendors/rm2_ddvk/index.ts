@@ -11,11 +11,12 @@ const d = require('../../pages/b5plus/60_daily');
 const td = require('../../pages/b5plus/70_todo');
 const nt = require('../../pages/b5plus/80_notes');
 
+['preamble', 'rm2_ddvk', 'macros', 'macros_rm2_ddvk'].forEach(name => {
+  copyFileSync(`textpl/${name}.tex`, `out/${name}.tex`);
+})
+
 export const buildFiles = (cfg: EnvConfig): void => {
   const {year, weekStart, disableWeeks} = cfg;
-  ['preamble', 'rm2_ddvk', 'macros', 'macros_rm2_ddvk'].forEach(name => {
-    copyFileSync(`textpl/${name}.tex`, `out/${name}.tex`);
-  })
 
   writeFileSync('out/title.tex', t.title(year));
   writeFileSync('out/year.tex', act.annualTable({year, weekStart, weeks: !disableWeeks}))

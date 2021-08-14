@@ -1,3 +1,5 @@
+import {fancyHeader} from "../../common/texblocks/fancyHeader";
+
 const {range, interpolateTpl} = require('../../common/blocks/funcs');
 const ls = require('../../common/texblocks/latexsnips');
 
@@ -13,11 +15,7 @@ export const annualTable = ({year, weeks = true, weekStart = 1}: AnnualTableConf
     .map(row => tabularify(3, row))
     .join('\n\\vfill\n');
 
-  const quarters = range(1, 5).map(n => ls.slink(`Q${n}`)).join('\\quad{}');
-  const leftList = [ls.starget(year), quarters];
-  const rightList = [ls.link('To Do Index', 'Todos'), ls.link('Notes Index', 'Notes')];
-
-  return `${ls.header(leftList, rightList)}\n${tabulars}`
+  return `${fancyHeader({year}, {level: 'none'})}\n${tabulars}`
 }
 
 interface RowOfMonthsConfig extends AnnualTableConfig {

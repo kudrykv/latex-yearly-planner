@@ -62,7 +62,12 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-export VENDOR PLANNER_YEAR WEEK_START_DAY DISABLE_WEEKS LEFT_HANDED
+if [ "${VENDOR}" = "rm2_vanilla" ]; then
+  RM2_VANILLA=true
+  ALLOW_SHORTER_BREADCRUMB=true
+fi
+
+export VENDOR PLANNER_YEAR WEEK_START_DAY DISABLE_WEEKS LEFT_HANDED RM2_VANILLA ALLOW_SHORTER_BREADCRUMB
 
 if ! mkdir -p out; then
   echo 'Could not create "out" dir'

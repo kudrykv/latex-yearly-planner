@@ -5,6 +5,7 @@ import {link, slink, starget, target} from "./latexsnips";
 interface LeftStackConfig {
   year: number;
   quarter?: number;
+  allQuarters?: boolean;
   nextQuarterOverlap?: boolean;
   month?: number;
   nextMonthOverlap?: boolean;
@@ -13,7 +14,7 @@ interface LeftStackConfig {
   dateSubPage?: string;
 }
 
-type Level = 'month' | 'week' | 'date' | SubLevel;
+type Level = 'none' | 'month' | 'week' | 'date' | SubLevel;
 type SubLevel = 'Note' | 'Reflect';
 
 interface RightStackConfig {
@@ -23,19 +24,24 @@ interface RightStackConfig {
 }
 
 export const fancyHeader = (ls: LeftStackConfig, rs: RightStackConfig): string => {
-  const {year, quarter, nextQuarterOverlap, month, nextMonthOverlap, week, date, dateSubPage} = ls;
+  const {year, quarter, allQuarters, nextQuarterOverlap, month, nextMonthOverlap, week, date, dateSubPage} = ls;
   const llist = [];
   const rlist = [];
   let targetSet = false;
+  let shorter = false;
 
   if (dateSubPage) {
     llist.unshift(target(fmtDay(year, month, date) + dateSubPage, dateSubPage))
     targetSet = true;
+    shorter = process.env.ALLOW_SHORTER_BREADCRUMB === 'true';
   }
 
   if (date) {
     const f = targetSet ? link : target;
-    llist.unshift(f(fmtDay(year, month, date), DateTime.local(year, month, date).toFormat('EEEE, d')));
+    const refDate = fmtDay(year, month, date);
+    const dateTimeDate = DateTime.local(year, month, date);
+    const dateFormat = shorter ? 'EEE, d' : 'EEEE, d';
+    llist.unshift(f(refDate, dateTimeDate.toFormat(dateFormat)));
     targetSet = true;
   }
 
@@ -48,17 +54,30 @@ export const fancyHeader = (ls: LeftStackConfig, rs: RightStackConfig): string =
 
   if (month) {
     const f = targetSet ? slink : starget;
-    let monthToken = f(DateTime.local(year, month, 1).toFormat('MMMM'));
-    nextMonthOverlap && (monthToken += ' / ' + f(DateTime.local(year, month + 1, 1).toFormat('MMMM')));
+    const formatMonth = shorter ? 'MMM' : 'MMMM';
+    let monthToken = f(DateTime.local(year, month, 1).toFormat(formatMonth));
+    nextMonthOverlap && (monthToken += ' / ' + f(DateTime.local(year, month + 1, 1).toFormat(formatMonth)));
     llist.unshift(monthToken);
     targetSet = true;
   }
 
   if (quarter) {
-    const f = targetSet ? slink : starget;
-    let quarterToken = f('Q' + quarter);
-    nextQuarterOverlap && (quarterToken += ' / ' + f('Q' + (quarter + 1)))
-    llist.unshift(quarterToken);
+    if (allQuarters) {
+      const token = range(1, 5)
+        .map(
+          i =>
+            i === quarter
+              ? target('Q' + i, '\\textbf{Q' + i + '}')
+              : slink('Q' + i))
+        .join('\\quad{}');
+      llist.unshift(token);
+    } else {
+      const f = targetSet ? slink : starget;
+      let quarterToken = f('Q' + quarter);
+      nextQuarterOverlap && (quarterToken += ' / ' + f('Q' + (quarter + 1)))
+      llist.unshift(quarterToken);
+    }
+
     targetSet = true;
   }
 
@@ -101,6 +120,13 @@ export const fancyHeader = (ls: LeftStackConfig, rs: RightStackConfig): string =
       rs.left && rlist.push(link(subleft.toFormat('yyyyMMdd') + rs.level, subleft.toFormat('EEE, d')));
       rs.right && rlist.push(link(subright.toFormat('yyyyMMdd') + rs.level, subright.toFormat('EEE, d')));
       break;
+
+    case 'none':
+      rlist.push(link('To Do Index', 'Todos'), link('Notes Index', 'Notes'));
+  }
+
+  if (process.env.RM2_VANILLA === 'true') {
+    rlist.push('\\hspace*{7mm}');
   }
 
   return `{%
