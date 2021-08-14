@@ -53,10 +53,11 @@ export const fancyHeader = (ls: LeftStackConfig, rs: RightStackConfig): string =
   }
 
   if (month) {
-    const f = targetSet ? slink : starget;
+    const f = targetSet ? link : target;
     const formatMonth = shorter ? 'MMM' : 'MMMM';
-    let monthToken = f(DateTime.local(year, month, 1).toFormat(formatMonth));
-    nextMonthOverlap && (monthToken += ' / ' + f(DateTime.local(year, month + 1, 1).toFormat(formatMonth)));
+    const dateTimeMonth = DateTime.local(year, month, 1);
+    let monthToken = f(dateTimeMonth.toFormat('MMMM'), dateTimeMonth.toFormat(formatMonth));
+    nextMonthOverlap && (monthToken += ' / ' + f(dateTimeMonth.toFormat('MMMM'), DateTime.local(year, month + 1, 1).toFormat(formatMonth)));
     llist.unshift(monthToken);
     targetSet = true;
   }
