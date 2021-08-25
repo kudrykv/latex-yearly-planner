@@ -25,7 +25,11 @@ export const weekly = (year: number, curr: DateTime, leftmostDay) => {
     {level: 'week', left: leftmostDay !== 1, right: last.year === year}
   )
 
-  return `${hhh}\n\n${funcs.interpolateTpl('weekly', dm)}`
+  if (process.env.WEEKLY_EQUAL_TPL === 'true' && Number(process.env.WEEKLY_EQUAL_TPL_FROM_WEEK) <= curr.weekNumber) {
+    return `${hhh}\n\n${funcs.interpolateTpl('weeklyEqual', dm)}`
+  } else {
+    return `${hhh}\n\n${funcs.interpolateTpl('weekly', dm)}`
+  }
 }
 
 const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
