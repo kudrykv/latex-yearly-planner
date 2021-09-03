@@ -12,9 +12,17 @@ import (
 type Config struct {
 	Year      int `env:"PLANNER_YEAR"`
 	WeekStart time.Weekday
-	WithWeeks bool `env:"PLANNER_WITH_WEEKS"`
 
 	Layout Layout
+	Blocks Blocks
+}
+
+type Blocks struct {
+	Weekly Weekly
+}
+
+type Weekly struct {
+	Enabled bool
 }
 
 type Layout struct {

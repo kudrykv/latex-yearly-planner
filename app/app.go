@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/kudrykv/latex-yearly-planner/app/calendar"
+	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 	"github.com/kudrykv/latex-yearly-planner/app/tex"

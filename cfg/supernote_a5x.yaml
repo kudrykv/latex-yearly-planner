@@ -1,5 +1,4 @@
 weekstart: 1
-withweeks: true
 
 layout:
   paper:
@@ -19,3 +18,7 @@ layout:
     tabcolsep: 3.5pt
     linethicknessdefault: .4pt
     linethicknessthick: .8pt
+
+blocks:
+  weekly:
+    enabled: true
