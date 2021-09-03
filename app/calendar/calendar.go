@@ -81,12 +81,12 @@ type Calendar struct {
 }
 
 func (c Calendar) WeekLayout(weekNum bool) string {
-	num := 7
-	if weekNum {
-		num = 8
+	line := strings.Repeat("c", 7)
+	if !weekNum {
+		return line
 	}
 
-	return strings.Repeat("c", num)
+	return "c|" + line
 }
 
 func (c Calendar) WeekHeader(weekNum bool) string {
