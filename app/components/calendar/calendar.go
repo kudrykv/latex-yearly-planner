@@ -155,3 +155,34 @@ func (c Calendar) DaysMatrix(weekNum bool) string {
 
 	return strings.Join(lines, " \\\\ \n")
 }
+
+func (c Calendar) Matrix(withWeeks, short bool) [][]string {
+	rows := make([][]string, 0, len(c.weeks))
+
+	for _, week := range c.weeks {
+		row := make([]string, 0, len(week))
+
+		if withWeeks {
+			weeknumStr := strconv.Itoa(week[0])
+			if !short {
+				weeknumStr = "Week " + weeknumStr
+			}
+
+			row = append(row, weeknumStr)
+		}
+
+		for _, item := range week[1:] {
+			if item == 0 {
+				row = append(row, "")
+
+				continue
+			}
+
+			row = append(row, strconv.Itoa(item))
+		}
+
+		rows = append(rows, row)
+	}
+
+	return rows
+}

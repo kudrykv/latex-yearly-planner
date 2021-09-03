@@ -9,6 +9,12 @@
 \noalign{\hrule height \myLenLineThicknessThick}
 {{$page.Body.WeekHeaderFull $.Cfg.Blocks.Weekly.Enabled}} \\ \noalign{\hrule height \myLenLineThicknessThick}
 
+{{- range $row := $page.Body.Matrix $.Cfg.Blocks.Weekly.Enabled false}}
+  {{range $j, $item := . -}}
+    {{$item}}
+    {{- if ne $j (dec (len $row)) }} & {{else}} \\ {{end -}}
+  {{- end -}}
+{{end}}
 \end{tabularx}
 \medskip
 
@@ -26,5 +32,5 @@
     }%
 }
 
-{{- if ne $i (len $.Pages)}} \pagebreak {{end}}
+{{- if ne $i (dec (len $.Pages))}} \pagebreak {{end}}
 {{end}}
