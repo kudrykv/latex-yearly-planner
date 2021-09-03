@@ -1,0 +1,19 @@
+weekstart: 1
+withweeks: true
+
+layout:
+  paper:
+    width: 15.6cm
+    height: 20.9cm
+
+    margin:
+      top: 1.2cm
+      bottom: 0.7cm
+      left: 0.5cm
+      right: 0.5cm
+
+  numbers:
+    arraystretch: 1.5
+
+  lengths:
+    tabcolsep: 3.5pt
