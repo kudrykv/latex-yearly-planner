@@ -1,8 +1,10 @@
-{{range .Qrtr}}
+{{template "header.tpl" .}}
 \begin{tabularx}{\linewidth}{@{}*{3}{X}@{}}
-{{range $i, $element := .}}
-  {{template "monthTabular.tpl" dict "Cfg" $.Cfg "Month" $element}}
-  {{- if or (eq $i 2) (eq $i 5) (eq $i 8) (eq $i 11) }} \\ {{else}} & {{end}}
-{{end}}
+{{range $i, $qrtr := .Body}}
+  {{- range $j, $month := $qrtr}}
+    {{- template "monthTabular.tpl" dict "Cfg" $.Cfg "Month" $month}}
+    {{- if ne $j 2 }} & {{end}}
+  {{- end }}
+  {{- if ne $i 3}} \\ {{- end -}}
+{{- end -}}
 \end{tabularx}
-{{end}}

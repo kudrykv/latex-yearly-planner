@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/kudrykv/latex-yearly-planner/app/calendar"
+	"github.com/kudrykv/latex-yearly-planner/app/components/header"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 	"github.com/kudrykv/latex-yearly-planner/app/tex"
 	"github.com/urfave/cli/v2"
@@ -33,10 +34,18 @@ func New() *cli.App {
 	}
 }
 
+type PageTpl struct {
+	Cfg    config.Config
+	Header header.Header
+
+	Body interface{}
+}
+
 func action(c *cli.Context) error {
 	var (
-		cfg config.Config
-		err error
+		data PageTpl
+		cfg  config.Config
+		err  error
 	)
 
 	pathConfig := c.Path(fConfig)
@@ -46,9 +55,9 @@ func action(c *cli.Context) error {
 
 	wr := &bytes.Buffer{}
 
-	files := []string{"title", "year"}
-
 	t := tex.New()
+	files := []string{"title", "year"}
+	data.Cfg = cfg
 
 	if err = t.Document(wr, cfg, files); err != nil {
 		return fmt.Errorf("tex document: %w", err)
@@ -63,22 +72,16 @@ func action(c *cli.Context) error {
 
 		var (
 			tplName string
-			data    interface{}
 		)
 
 		switch file {
 		case "title":
 			tplName = "title.tpl"
-			data = cfg
 
 		case "year":
-			type dat struct {
-				Cfg  config.Config
-				Qrtr [][]calendar.Calendar
-			}
+			var quarters [][]calendar.Calendar
 
 			tplName = "year.tpl"
-			pack := dat{Cfg: cfg}
 
 			for quarter := time.January; quarter <= time.December; quarter += 3 {
 				weeks := make([]calendar.Calendar, 0, 3)
@@ -87,10 +90,14 @@ func action(c *cli.Context) error {
 					weeks = append(weeks, calendar.NewYearMonth(cfg.Year, month).Calendar(cfg.WeekStart))
 				}
 
-				pack.Qrtr = append(pack.Qrtr, weeks)
+				quarters = append(quarters, weeks)
 			}
 
-			data = pack
+			data.Body = quarters
+			data.Header = header.Header{
+				Left:  header.Items{header.NewTextItem("2021")},
+				Right: header.Items{header.NewTextItem("Notes"), header.NewTextItem("Todos")},
+			}
 		}
 
 		if err = t.Execute(wr, tplName, data); err != nil {

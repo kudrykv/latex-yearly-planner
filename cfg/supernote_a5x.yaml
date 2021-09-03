@@ -17,3 +17,5 @@ layout:
 
   lengths:
     tabcolsep: 3.5pt
+    linethicknessdefault: .4pt
+    linethicknessthick: .8pt

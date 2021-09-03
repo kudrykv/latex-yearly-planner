@@ -29,7 +29,9 @@ type Numbers struct {
 }
 
 type Lengths struct {
-	TabColSep string
+	TabColSep            string
+	LineThicknessDefault string
+	LineThicknessThick   string
 }
 
 type Paper struct {
