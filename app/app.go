@@ -95,7 +95,15 @@ func action(c *cli.Context) error {
 
 			data.Body = quarters
 			data.Header = header.Header{
-				Left:  header.Items{header.NewTextItem("2021")},
+				Left: header.Items{
+					header.NewTextItem("2021"),
+					header.NewItemsGroup(
+						header.NewTextItem("Q1"),
+						header.NewTextItem("Q2"),
+						header.NewTextItem("Q3"),
+						header.NewTextItem("Q4"),
+					),
+				},
 				Right: header.Items{header.NewTextItem("Notes"), header.NewTextItem("Todos")},
 			}
 		}

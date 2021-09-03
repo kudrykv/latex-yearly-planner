@@ -45,3 +45,21 @@ func NewTextItem(name string) TextItem {
 func (t TextItem) Display() string {
 	return t.Name
 }
+
+type ItemsGroup struct {
+	Items Items
+}
+
+func NewItemsGroup(items ...Item) ItemsGroup {
+	return ItemsGroup{Items: items}
+}
+
+func (i ItemsGroup) Display() string {
+	list := make([]string, 0, len(i.Items))
+
+	for _, item := range i.Items {
+		list = append(list, item.Display())
+	}
+
+	return strings.Join(list, "\\quad{}")
+}
