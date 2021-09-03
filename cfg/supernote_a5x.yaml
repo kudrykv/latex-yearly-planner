@@ -13,11 +13,16 @@ layout:
 
   numbers:
     arraystretch: 1.5
+    quarterlylines: 12
 
   lengths:
     tabcolsep: 3.5pt
     linethicknessdefault: .4pt
     linethicknessthick: .8pt
+    lineheightbutline: \dimexpr5mm-.4pt
+
+  colors:
+    gray: gray
 
 blocks:
   weekly:

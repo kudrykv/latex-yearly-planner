@@ -6,10 +6,9 @@ import (
 	"io/ioutil"
 	"os"
 	"strings"
-	"time"
 
-	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
-	"github.com/kudrykv/latex-yearly-planner/app/components/header"
+	"github.com/kudrykv/latex-yearly-planner/app/components/page"
+	"github.com/kudrykv/latex-yearly-planner/app/compose"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 	"github.com/kudrykv/latex-yearly-planner/app/tex"
 	"github.com/urfave/cli/v2"
@@ -34,16 +33,9 @@ func New() *cli.App {
 	}
 }
 
-type PageTpl struct {
-	Cfg    config.Config
-	Header header.Header
-
-	Body interface{}
-}
-
 func action(c *cli.Context) error {
 	var (
-		data PageTpl
+		data page.PageTpl
 		cfg  config.Config
 		err  error
 	)
@@ -56,7 +48,7 @@ func action(c *cli.Context) error {
 	wr := &bytes.Buffer{}
 
 	t := tex.New()
-	files := []string{"title", "year"}
+	files := []string{"title", "year", "quarter"}
 	data.Cfg = cfg
 
 	if err = t.Document(wr, cfg, files); err != nil {
@@ -79,7 +71,13 @@ func action(c *cli.Context) error {
 			tplName = "title.tpl"
 
 		case "year":
-			tplName, data.Body, data.Header = ComposeYear(cfg)
+			tplName, data.Pages = compose.Year(cfg)
+
+		case "quarter":
+			tplName, data.Pages = compose.Quarter(cfg)
+
+		default:
+			continue
 		}
 
 		if err = t.Execute(wr, tplName, data); err != nil {
@@ -92,33 +90,6 @@ func action(c *cli.Context) error {
 	}
 
 	return nil
-}
-
-func ComposeYear(cfg config.Config) (string, interface{}, header.Header) {
-	var quarters [][]calendar.Calendar
-
-	for quarter := time.January; quarter <= time.December; quarter += 3 {
-		weeks := make([]calendar.Calendar, 0, 3)
-
-		for month := quarter; month < quarter+3; month++ {
-			weeks = append(weeks, calendar.NewYearMonth(cfg.Year, month).Calendar(cfg.WeekStart))
-		}
-
-		quarters = append(quarters, weeks)
-	}
-
-	return "year.tpl", quarters, header.Header{
-		Left: header.Items{
-			header.NewTextItem("2021"),
-			header.NewItemsGroup(
-				header.NewTextItem("Q1"),
-				header.NewTextItem("Q2"),
-				header.NewTextItem("Q3"),
-				header.NewTextItem("Q4"),
-			),
-		},
-		Right: header.Items{header.NewTextItem("Notes"), header.NewTextItem("Todos")},
-	}
 }
 
 func RootFilename(pathconfig string) string {

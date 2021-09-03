@@ -25,21 +25,28 @@ type Weekly struct {
 	Enabled bool
 }
 
+type Colors struct {
+	Gray string
+}
+
 type Layout struct {
 	Paper Paper
 
 	Numbers Numbers
 	Lengths Lengths
+	Colors  Colors
 }
 
 type Numbers struct {
-	ArrayStretch float64
+	ArrayStretch   float64
+	QuarterlyLines int
 }
 
 type Lengths struct {
 	TabColSep            string
 	LineThicknessDefault string
 	LineThicknessThick   string
+	LineHeightButLine    string
 }
 
 type Paper struct {

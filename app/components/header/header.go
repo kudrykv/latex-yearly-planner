@@ -34,6 +34,7 @@ type TextItem struct {
 	Name string
 	Link string
 	Ref  string
+	bold bool
 }
 
 func NewTextItem(name string) TextItem {
@@ -43,7 +44,16 @@ func NewTextItem(name string) TextItem {
 }
 
 func (t TextItem) Display() string {
+	if t.bold {
+		return "\\textbf{" + t.Name + "}"
+	}
+
 	return t.Name
+}
+
+func (t TextItem) Bold(f bool) Item {
+	t.bold = f
+	return t
 }
 
 type ItemsGroup struct {
