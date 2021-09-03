@@ -79,33 +79,7 @@ func action(c *cli.Context) error {
 			tplName = "title.tpl"
 
 		case "year":
-			var quarters [][]calendar.Calendar
-
-			tplName = "year.tpl"
-
-			for quarter := time.January; quarter <= time.December; quarter += 3 {
-				weeks := make([]calendar.Calendar, 0, 3)
-
-				for month := quarter; month < quarter+3; month++ {
-					weeks = append(weeks, calendar.NewYearMonth(cfg.Year, month).Calendar(cfg.WeekStart))
-				}
-
-				quarters = append(quarters, weeks)
-			}
-
-			data.Body = quarters
-			data.Header = header.Header{
-				Left: header.Items{
-					header.NewTextItem("2021"),
-					header.NewItemsGroup(
-						header.NewTextItem("Q1"),
-						header.NewTextItem("Q2"),
-						header.NewTextItem("Q3"),
-						header.NewTextItem("Q4"),
-					),
-				},
-				Right: header.Items{header.NewTextItem("Notes"), header.NewTextItem("Todos")},
-			}
+			tplName, data.Body, data.Header = ComposeYear(cfg)
 		}
 
 		if err = t.Execute(wr, tplName, data); err != nil {
@@ -118,6 +92,33 @@ func action(c *cli.Context) error {
 	}
 
 	return nil
+}
+
+func ComposeYear(cfg config.Config) (string, interface{}, header.Header) {
+	var quarters [][]calendar.Calendar
+
+	for quarter := time.January; quarter <= time.December; quarter += 3 {
+		weeks := make([]calendar.Calendar, 0, 3)
+
+		for month := quarter; month < quarter+3; month++ {
+			weeks = append(weeks, calendar.NewYearMonth(cfg.Year, month).Calendar(cfg.WeekStart))
+		}
+
+		quarters = append(quarters, weeks)
+	}
+
+	return "year.tpl", quarters, header.Header{
+		Left: header.Items{
+			header.NewTextItem("2021"),
+			header.NewItemsGroup(
+				header.NewTextItem("Q1"),
+				header.NewTextItem("Q2"),
+				header.NewTextItem("Q3"),
+				header.NewTextItem("Q4"),
+			),
+		},
+		Right: header.Items{header.NewTextItem("Notes"), header.NewTextItem("Todos")},
+	}
 }
 
 func RootFilename(pathconfig string) string {
