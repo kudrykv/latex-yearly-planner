@@ -20,6 +20,7 @@ layout:
     linethicknessdefault: .4pt
     linethicknessthick: .8pt
     lineheightbutline: \dimexpr5mm-.4pt
+    twocolsep: .5pt
 
   colors:
     gray: gray

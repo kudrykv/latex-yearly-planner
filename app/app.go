@@ -48,7 +48,7 @@ func action(c *cli.Context) error {
 	wr := &bytes.Buffer{}
 
 	t := tex.New()
-	files := []string{"title", "year", "quarter"}
+	files := []string{"title", "year", "quarter", "month"}
 	data.Cfg = cfg
 
 	if err = t.Document(wr, cfg, files); err != nil {
@@ -75,6 +75,9 @@ func action(c *cli.Context) error {
 
 		case "quarter":
 			tplName, data.Pages = compose.Quarter(cfg)
+
+		case "month":
+			tplName, data.Pages = compose.Month(cfg)
 
 		default:
 			continue

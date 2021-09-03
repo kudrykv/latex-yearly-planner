@@ -47,6 +47,7 @@ type Lengths struct {
 	LineThicknessDefault string
 	LineThicknessThick   string
 	LineHeightButLine    string
+	TwoColSep            string
 }
 
 type Paper struct {
