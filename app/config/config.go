@@ -59,6 +59,7 @@ type Layout struct {
 type Numbers struct {
 	ArrayStretch   float64
 	QuarterlyLines int
+	WeeklyLines    int
 }
 
 type Lengths struct {
@@ -67,6 +68,7 @@ type Lengths struct {
 	LineThicknessThick   string
 	LineHeightButLine    string
 	TwoColSep            string
+	TriColSep            string
 	MonthlyCellHeight    string
 }
 

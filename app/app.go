@@ -35,9 +35,10 @@ func New() *cli.App {
 
 func action(c *cli.Context) error {
 	var (
-		data page.PageTpl
-		cfg  config.Config
-		err  error
+		data    page.PageTpl
+		tplName string
+		cfg     config.Config
+		err     error
 	)
 
 	pathConfig := c.Path(fConfig)
@@ -48,7 +49,8 @@ func action(c *cli.Context) error {
 	wr := &bytes.Buffer{}
 
 	t := tex.New()
-	files := []string{"title", "year", "quarter", "month"}
+	//files := []string{"title", "year", "quarter", "month", "weekly"}
+	files := []string{"weekly"}
 	data.Cfg = cfg
 
 	if err = t.Document(wr, cfg, files); err != nil {
@@ -62,10 +64,6 @@ func action(c *cli.Context) error {
 	for _, file := range files {
 		wr.Reset()
 
-		var (
-			tplName string
-		)
-
 		switch file {
 		case "title":
 			tplName = "title.tpl"
@@ -78,6 +76,9 @@ func action(c *cli.Context) error {
 
 		case "month":
 			tplName, data.Pages = compose.Monthly(cfg)
+
+		case "weekly":
+			tplName, data.Pages = compose.Weekly(cfg)
 
 		default:
 			continue

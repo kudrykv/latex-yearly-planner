@@ -4,6 +4,7 @@
 
 \newcommand{\myNumArrayStretch}{ {{- .Cfg.Layout.Numbers.ArrayStretch -}} }
 \newcommand{\myNumQuarterlyLines}{ {{- .Cfg.Layout.Numbers.QuarterlyLines -}} }
+\newcommand{\myNumWeeklyLines}{ {{- .Cfg.Layout.Numbers.WeeklyLines -}} }
 
 \newlength{\myLenTabColSep}
 \newlength{\myLenLineThicknessDefault}
@@ -11,6 +12,8 @@
 \newlength{\myLenLineHeightButLine}
 \newlength{\myLenTwoColSep}
 \newlength{\myLenTwoCol}
+\newlength{\myLenTriColSep}
+\newlength{\myLenTriCol}
 \newlength{\myLenMonthlyCellHeight}
 
 \setlength{\myLenTabColSep}{ {{- .Cfg.Layout.Lengths.TabColSep -}} }
@@ -20,6 +23,8 @@
 \setlength{\myLenTwoColSep}{ {{- .Cfg.Layout.Lengths.TwoColSep -}} }
 \setlength{\myLenTwoCol}{\dimexpr.5\linewidth-.5\myLenTwoColSep}
 \setlength{\myLenMonthlyCellHeight}{ {{- .Cfg.Layout.Lengths.MonthlyCellHeight -}} }
+\setlength{\myLenTriColSep}{ {{- .Cfg.Layout.Lengths.TriColSep -}} }
+\setlength{\myLenTriCol}{\dimexpr.333\linewidth-.667\myLenTriColSep}
 
 \newcommand{\myColorGray}{ {{- .Cfg.Layout.Colors.Gray -}} }
 
@@ -30,3 +35,4 @@
 \newcommand{\myLineColor}[1]{\textcolor{#1}{\myLinePlain}}
 \newcommand{\myLineGray}{\myLineColor{\myColorGray}}
 \newcommand{\myLineGrayVskipBottom}{\myLineGray\vskip\myLenLineHeightButLine}
+\newcommand{\myLineGrayVskipTop}{\vskip\myLenLineHeightButLine\myLineGray}

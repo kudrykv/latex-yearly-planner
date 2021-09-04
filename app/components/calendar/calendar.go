@@ -1,6 +1,7 @@
 package calendar
 
 import (
+	"math"
 	"strconv"
 	"strings"
 	"time"
@@ -8,6 +9,72 @@ import (
 
 type Weeks []Week
 type Week [8]int
+
+type Weeklies []Weekly
+type Weekly [7]time.Time
+
+func (w Weekly) FillYear() Weeklies {
+	year := w[6].Year()
+	ptr := w[6].AddDate(0, 0, 1)
+	ww := append(make(Weeklies, 0, 53), w)
+
+	for ptr.Year() == year {
+		ww = append(ww, FillWeekly(ptr))
+		ptr = ptr.AddDate(0, 0, 7)
+	}
+
+	return ww
+}
+
+func (w Weekly) WeekNumber() int {
+	_, wn := w[0].ISOWeek()
+
+	for _, t := range w {
+		if _, cwn := t.ISOWeek(); cwn > wn {
+			return cwn
+		}
+	}
+
+	return wn
+}
+
+func (w Weekly) Quarters(year int) []int {
+	bottom := int(math.Ceil(float64(w[0].Month()) / 3.))
+	top := int(math.Ceil(float64(w[6].Month()) / 3.))
+
+	if w[0].Year() != year {
+		return []int{top}
+	}
+
+	if w[6].Year() != year {
+		return []int{bottom}
+	}
+
+	if top == bottom {
+		return []int{top}
+	}
+
+	return []int{bottom, top}
+}
+
+func (w Weekly) Months(year int) []time.Month {
+	bottom := w[0].Month()
+	top := w[6].Month()
+
+	if w[0].Year() != year {
+		return []time.Month{top}
+	}
+
+	if w[6].Year() != year {
+		return []time.Month{bottom}
+	}
+
+	if top == bottom {
+		return []time.Month{top}
+	}
+
+	return []time.Month{bottom, top}
+}
 
 func (w Week) Start(wd time.Weekday, ptr time.Time) Week {
 	_, weekNum := ptr.ISOWeek()
@@ -46,6 +113,33 @@ func (w Week) Fill(year int, month time.Month) Weeks {
 	}
 
 	return weeks
+}
+
+func FillWeekly(ptr time.Time) Weekly {
+	w := Weekly{}
+
+	for i := 0; i < 7; i++ {
+		w[i] = ptr
+		ptr = ptr.AddDate(0, 0, 1)
+	}
+
+	return w
+}
+
+func (w Week) FillWeek(ptr time.Time) Week {
+	_, w[0] = ptr.ISOWeek()
+
+	for i := 1; i <= 7; i++ {
+		w[i] = ptr.Day()
+
+		if _, wn := ptr.ISOWeek(); wn > w[0] {
+			w[0] = wn
+		}
+
+		ptr = ptr.AddDate(0, 0, 1)
+	}
+
+	return w
 }
 
 func (w Weeks) FigureOut(year int, month time.Month, wd time.Weekday) Weeks {
