@@ -1,7 +1,6 @@
 package compose
 
 import (
-	"strconv"
 	"time"
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
@@ -22,10 +21,10 @@ func Quarterly(cfg config.Config) (string, []page.Page) {
 	for quarter := time.January; quarter <= time.December; quarter += 3 {
 		body := QuarterBody{Quarter: make([]calendar.Calendar, 0, 3)}
 		hQrtrs := header.NewItemsGroup(
-			header.NewTextItem("Q1").Bold(q == 1),
-			header.NewTextItem("Q2").Bold(q == 2),
-			header.NewTextItem("Q3").Bold(q == 3),
-			header.NewTextItem("Q4").Bold(q == 4),
+			header.NewTextItem("Q1").Bold(q == 1).Ref(q == 1),
+			header.NewTextItem("Q2").Bold(q == 2).Ref(q == 2),
+			header.NewTextItem("Q3").Bold(q == 3).Ref(q == 3),
+			header.NewTextItem("Q4").Bold(q == 4).Ref(q == 4),
 		)
 
 		for month := quarter; month < quarter+3; month++ {
@@ -36,7 +35,7 @@ func Quarterly(cfg config.Config) (string, []page.Page) {
 		pages = append(pages, page.Page{
 			Header: header.Header{
 				Left: header.Items{
-					header.TextItem{Name: strconv.Itoa(cfg.Year)},
+					header.NewIntItem(cfg.Year),
 					hQrtrs,
 				},
 				Right: hRight,

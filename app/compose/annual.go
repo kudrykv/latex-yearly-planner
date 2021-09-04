@@ -1,7 +1,6 @@
 package compose
 
 import (
-	"strconv"
 	"time"
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
@@ -27,7 +26,7 @@ func Annual(cfg config.Config) (string, []page.Page) {
 		Body: quarters,
 		Header: header.Header{
 			Left: header.Items{
-				header.NewTextItem(strconv.Itoa(cfg.Year)),
+				header.NewIntItem(cfg.Year).Ref(),
 				header.NewItemsGroup(
 					header.NewTextItem("Q1"),
 					header.NewTextItem("Q2"),

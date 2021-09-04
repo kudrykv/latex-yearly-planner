@@ -4,6 +4,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/kudrykv/latex-yearly-planner/app/components/hyper"
 )
 
 type Header struct {
@@ -36,9 +38,8 @@ func (i Items) Row() string {
 
 type TextItem struct {
 	Name string
-	Link string
-	Ref  string
 	bold bool
+	ref  bool
 }
 
 func NewTextItem(name string) TextItem {
@@ -48,15 +49,29 @@ func NewTextItem(name string) TextItem {
 }
 
 func (t TextItem) Display() string {
+	var out string
 	if t.bold {
-		return "\\textbf{" + t.Name + "}"
+		out = "\\textbf{" + t.Name + "}"
+	} else {
+		out = t.Name
 	}
 
-	return t.Name
+	if t.ref {
+		return hyper.Target(t.Name, out)
+	}
+
+	return hyper.Link(out, out)
 }
 
-func (t TextItem) Bold(f bool) Item {
+func (t TextItem) Ref(ref bool) TextItem {
+	t.ref = ref
+
+	return t
+}
+
+func (t TextItem) Bold(f bool) TextItem {
 	t.bold = f
+
 	return t
 }
 
@@ -90,10 +105,26 @@ func (i ItemsGroup) Delim(delim string) ItemsGroup {
 
 type IntItem struct {
 	Val int
+	ref bool
 }
 
 func (i IntItem) Display() string {
-	return strconv.Itoa(i.Val)
+	var out string
+	s := strconv.Itoa(i.Val)
+
+	if i.ref {
+		out = hyper.Target(s, s)
+	} else {
+		out = hyper.Link(s, s)
+	}
+
+	return out
+}
+
+func (i IntItem) Ref() IntItem {
+	i.ref = true
+
+	return i
 }
 
 func NewIntItem(val int) IntItem {

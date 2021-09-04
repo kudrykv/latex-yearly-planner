@@ -49,8 +49,8 @@ func action(c *cli.Context) error {
 	wr := &bytes.Buffer{}
 
 	t := tex.New()
-	//files := []string{"title", "year", "quarter", "month", "weekly", "daily"}
-	files := []string{"title", "year", "quarter", "month", "weekly", "daily"}
+	// files := []string{"title", "year", "quarter", "month", "weekly", "daily"}
+	files := []string{"title", "year", "quarter"}
 	data.Cfg = cfg
 
 	if err = t.Document(wr, cfg, files); err != nil {

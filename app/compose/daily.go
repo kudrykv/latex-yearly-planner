@@ -20,7 +20,7 @@ func Daily(cfg config.Config) (string, []page.Page) {
 		_, weekNum := day.ISOWeek()
 		left := header.Items{
 			header.NewIntItem(cfg.Year),
-			header.NewTextItem("Q" + strconv.Itoa(int(math.Ceil((float64(day.Month())/3.)+1)))),
+			header.NewTextItem("Q" + strconv.Itoa(int(math.Ceil(float64(day.Month())/3.)))),
 			header.NewMonthItem(day.Month()),
 			header.NewTextItem("Week " + strconv.Itoa(weekNum)),
 			header.NewTimeItem(day).SetLayout("Monday, 2"),
