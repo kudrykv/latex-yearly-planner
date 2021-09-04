@@ -28,9 +28,9 @@ func Monthly(cfg config.Config) (string, []page.Page) {
 		pages = append(pages, page.Page{
 			Header: header.Header{
 				Left: header.Items{
-					header.NewTextItem(strconv.Itoa(cfg.Year)),
+					header.NewIntItem(cfg.Year),
 					header.NewTextItem("Q" + strconv.Itoa(qrtr)),
-					header.NewTextItem(month.String()),
+					header.NewTextItem(month.String()).Ref(true),
 				},
 				Right: right,
 			},
