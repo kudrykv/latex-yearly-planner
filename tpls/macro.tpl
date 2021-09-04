@@ -11,13 +11,15 @@
 \newlength{\myLenLineHeightButLine}
 \newlength{\myLenTwoColSep}
 \newlength{\myLenTwoCol}
+\newlength{\myLenMonthlyCellHeight}
 
 \setlength{\myLenTabColSep}{ {{- .Cfg.Layout.Lengths.TabColSep -}} }
 \setlength{\myLenLineThicknessDefault}{ {{- .Cfg.Layout.Lengths.LineThicknessDefault -}} }
 \setlength{\myLenLineThicknessThick}{ {{- .Cfg.Layout.Lengths.LineThicknessThick -}} }
 \setlength{\myLenLineHeightButLine}{ {{- .Cfg.Layout.Lengths.LineHeightButLine -}} }
 \setlength{\myLenTwoColSep}{ {{- .Cfg.Layout.Lengths.TwoColSep -}} }
-\setlength{\myLenTwoCol}{\dimexpr.5\linewidth-\myLenTwoCol}
+\setlength{\myLenTwoCol}{\dimexpr.5\linewidth-.5\myLenTwoColSep}
+\setlength{\myLenMonthlyCellHeight}{ {{- .Cfg.Layout.Lengths.MonthlyCellHeight -}} }
 
 \newcommand{\myColorGray}{ {{- .Cfg.Layout.Colors.Gray -}} }
 

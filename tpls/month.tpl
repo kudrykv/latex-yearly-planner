@@ -11,8 +11,14 @@
 
 {{- range $row := $page.Body.Matrix $.Cfg.Blocks.Weekly.Enabled false}}
   {{range $j, $item := . -}}
-    {{$item}}
-    {{- if ne $j (dec (len $row)) }} & {{else}} \\ {{end -}}
+    {{- if eq $j 0 -}}
+      \rotatebox[origin=tr]{90}{\makebox[\myLenMonthlyCellHeight][c]{ {{- $item -}} }}
+    {{- else -}}
+      {{- if gt (len $item) 0 -}}
+        \begin{tabular}{@{}p{5mm}@{}|}\hfil{}{{- $item -}}\\ \hline\end{tabular}
+      {{- end -}}
+    {{- end -}}
+    {{- if ne $j (dec (len $row)) }} & {{else}} \\ \hline {{end -}}
   {{- end -}}
 {{end}}
 \end{tabularx}
@@ -23,8 +29,8 @@
   \vbox to \dimexpr\textheight-\pagetotal-\myLenLineHeightButLine\relax {%
     \leaders\hbox to \linewidth{\textcolor{\myColorGray}{\rule{0pt}{\myLenLineHeightButLine}\hrulefill}}\vfil
   }%
-}
-\hspace{\myLenTwoColSep}
+}%
+\hspace{\myLenTwoColSep}%
 \parbox{\myLenTwoCol}{
     \myUnderline{Notes}
     \vbox to \dimexpr\textheight-\pagetotal-\myLenLineHeightButLine\relax {%

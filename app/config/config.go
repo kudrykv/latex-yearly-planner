@@ -48,6 +48,7 @@ type Lengths struct {
 	LineThicknessThick   string
 	LineHeightButLine    string
 	TwoColSep            string
+	MonthlyCellHeight    string
 }
 
 type Paper struct {
