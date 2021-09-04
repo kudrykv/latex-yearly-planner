@@ -18,7 +18,13 @@ func Weekly(cfg config.Config) (string, []page.Page) {
 	for i, weekly := range yearInWeeks {
 		right := header.Items{}
 		if i > 0 {
-			right = append(right, header.NewTextItem("Week "+strconv.Itoa(yearInWeeks[i-1].WeekNumber())))
+			item := header.NewTextItem("Week " + strconv.Itoa(yearInWeeks[i-1].WeekNumber()))
+
+			if i-1 == 0 {
+				item = item.RefPrefix("fw")
+			}
+
+			right = append(right, item)
 		}
 
 		if i+1 < len(yearInWeeks) {
@@ -35,6 +41,11 @@ func Weekly(cfg config.Config) (string, []page.Page) {
 			monthItems = append(monthItems, header.NewMonthItem(month))
 		}
 
+		curr := header.NewTextItem("Week " + strconv.Itoa(weekly.WeekNumber())).Ref(true)
+		if i == 0 {
+			curr = curr.RefPrefix("fw")
+		}
+
 		pag := page.Page{
 			Header: header.Header{
 				Right: right,
@@ -42,7 +53,7 @@ func Weekly(cfg config.Config) (string, []page.Page) {
 					header.NewIntItem(cfg.Year),
 					header.NewItemsGroup(qrtrItems...).Delim(" / "),
 					header.NewItemsGroup(monthItems...).Delim(" / "),
-					header.NewTextItem("Week " + strconv.Itoa(weekly.WeekNumber())).Ref(true),
+					curr,
 				},
 			},
 			Body: weekly,

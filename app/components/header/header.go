@@ -37,9 +37,10 @@ func (i Items) Row() string {
 }
 
 type TextItem struct {
-	Name string
-	bold bool
-	ref  bool
+	Name      string
+	bold      bool
+	ref       bool
+	refPrefix string
 }
 
 func NewTextItem(name string) TextItem {
@@ -57,10 +58,10 @@ func (t TextItem) Display() string {
 	}
 
 	if t.ref {
-		return hyper.Target(t.Name, out)
+		return hyper.Target(t.refPrefix+t.Name, out)
 	}
 
-	return hyper.Link(out, out)
+	return hyper.Link(t.refPrefix+t.Name, out)
 }
 
 func (t TextItem) Ref(ref bool) TextItem {
@@ -71,6 +72,12 @@ func (t TextItem) Ref(ref bool) TextItem {
 
 func (t TextItem) Bold(f bool) TextItem {
 	t.bold = f
+
+	return t
+}
+
+func (t TextItem) RefPrefix(refPrefix string) TextItem {
+	t.refPrefix = refPrefix
 
 	return t
 }
