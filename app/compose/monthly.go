@@ -30,7 +30,7 @@ func Monthly(cfg config.Config) (string, []page.Page) {
 				Left: header.Items{
 					header.NewIntItem(cfg.Year),
 					header.NewTextItem("Q" + strconv.Itoa(qrtr)),
-					header.NewTextItem(month.String()).Ref(true),
+					header.NewMonthItem(month).Ref(),
 				},
 				Right: right,
 			},

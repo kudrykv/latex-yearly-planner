@@ -133,10 +133,21 @@ func NewIntItem(val int) IntItem {
 
 type MonthItem struct {
 	Val time.Month
+	ref bool
 }
 
 func (m MonthItem) Display() string {
-	return m.Val.String()
+	if m.ref {
+		return hyper.Target(m.Val.String(), m.Val.String())
+	}
+
+	return hyper.Link(m.Val.String(), m.Val.String())
+}
+
+func (m MonthItem) Ref() MonthItem {
+	m.ref = true
+
+	return m
 }
 
 func NewMonthItem(m time.Month) MonthItem {
@@ -146,14 +157,25 @@ func NewMonthItem(m time.Month) MonthItem {
 type TimeItem struct {
 	Val    time.Time
 	Layout string
+	ref    bool
 }
 
 func (t TimeItem) Display() string {
-	return t.Val.Format(t.Layout)
+	if t.ref {
+		return hyper.Target(t.Val.Format(time.RFC3339), t.Val.Format(t.Layout))
+	}
+
+	return hyper.Link(t.Val.Format(time.RFC3339), t.Val.Format(t.Layout))
 }
 
 func (t TimeItem) SetLayout(layout string) TimeItem {
 	t.Layout = layout
+
+	return t
+}
+
+func (t TimeItem) Ref() TimeItem {
+	t.ref = true
 
 	return t
 }

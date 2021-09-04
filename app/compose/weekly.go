@@ -32,17 +32,17 @@ func Weekly(cfg config.Config) (string, []page.Page) {
 
 		monthItems := make([]header.Item, 0, 2)
 		for _, month := range weekly.Months(cfg.Year) {
-			monthItems = append(monthItems, header.NewTextItem(month.String()))
+			monthItems = append(monthItems, header.NewMonthItem(month))
 		}
 
 		pag := page.Page{
 			Header: header.Header{
 				Right: right,
 				Left: header.Items{
-					header.NewTextItem(strconv.Itoa(cfg.Year)),
+					header.NewIntItem(cfg.Year),
 					header.NewItemsGroup(qrtrItems...).Delim(" / "),
 					header.NewItemsGroup(monthItems...).Delim(" / "),
-					header.NewTextItem("Week " + strconv.Itoa(weekly.WeekNumber())),
+					header.NewTextItem("Week " + strconv.Itoa(weekly.WeekNumber())).Ref(true),
 				},
 			},
 			Body: weekly,
