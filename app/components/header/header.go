@@ -1,6 +1,10 @@
 package header
 
-import "strings"
+import (
+	"strconv"
+	"strings"
+	"time"
+)
 
 type Header struct {
 	Left  Items
@@ -82,4 +86,50 @@ func (i ItemsGroup) Delim(delim string) ItemsGroup {
 	i.delim = delim
 
 	return i
+}
+
+type IntItem struct {
+	Val int
+}
+
+func (i IntItem) Display() string {
+	return strconv.Itoa(i.Val)
+}
+
+func NewIntItem(val int) IntItem {
+	return IntItem{Val: val}
+}
+
+type MonthItem struct {
+	Val time.Month
+}
+
+func (m MonthItem) Display() string {
+	return m.Val.String()
+}
+
+func NewMonthItem(m time.Month) MonthItem {
+	return MonthItem{Val: m}
+}
+
+type TimeItem struct {
+	Val    time.Time
+	Layout string
+}
+
+func (t TimeItem) Display() string {
+	return t.Val.Format(t.Layout)
+}
+
+func (t TimeItem) SetLayout(layout string) TimeItem {
+	t.Layout = layout
+
+	return t
+}
+
+func NewTimeItem(val time.Time) TimeItem {
+	return TimeItem{
+		Val:    val,
+		Layout: time.RFC3339,
+	}
 }

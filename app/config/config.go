@@ -22,6 +22,7 @@ type Blocks struct {
 	Quarterly Quarterly
 	Monthly   Monthly
 	Weekly    Weekly
+	Daily     Daily
 }
 
 type Annual struct {
@@ -44,8 +45,14 @@ type Weekly struct {
 	Tpl     string
 }
 
+type Daily struct {
+	Enabled bool
+	Tpl     string
+}
+
 type Colors struct {
-	Gray string
+	Gray      string
+	LightGray string
 }
 
 type Layout struct {
@@ -57,9 +64,13 @@ type Layout struct {
 }
 
 type Numbers struct {
-	ArrayStretch   float64
-	QuarterlyLines int
-	WeeklyLines    int
+	ArrayStretch    float64
+	QuarterlyLines  int
+	WeeklyLines     int
+	DailyTodos      int
+	DailyNotes      int
+	DailyBottomHour int
+	DailyTopHour    int
 }
 
 type Lengths struct {

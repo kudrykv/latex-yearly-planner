@@ -15,6 +15,10 @@ layout:
     arraystretch: 1.5
     quarterlylines: 12
     weeklylines: 11
+    dailytodos: 15
+    dailynotes: 18
+    dailybottomhour: 6
+    dailytophour: 22
 
   lengths:
     tabcolsep: 3.5pt
@@ -27,6 +31,7 @@ layout:
 
   colors:
     gray: gray
+    lightgray: gray!50
 
 blocks:
   annual:
@@ -44,3 +49,7 @@ blocks:
   weekly:
     enabled: true
     tpl: weekly.tpl
+
+  daily:
+    enabled: true
+    tpl: daily.tpl
