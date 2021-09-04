@@ -10,7 +10,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-func Year(cfg config.Config) (string, []page.Page) {
+func Annual(cfg config.Config) (string, []page.Page) {
 	var quarters [][]calendar.Calendar
 
 	for quarter := time.January; quarter <= time.December; quarter += 3 {

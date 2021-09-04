@@ -14,7 +14,7 @@ type QuarterBody struct {
 	Quarter []calendar.Calendar
 }
 
-func Quarter(cfg config.Config) (string, []page.Page) {
+func Quarterly(cfg config.Config) (string, []page.Page) {
 	pages := make([]page.Page, 0, 4)
 	q := 1
 	hRight := header.Items{header.NewTextItem("Notes"), header.NewTextItem("Todos")}

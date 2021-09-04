@@ -71,13 +71,13 @@ func action(c *cli.Context) error {
 			tplName = "title.tpl"
 
 		case "year":
-			tplName, data.Pages = compose.Year(cfg)
+			tplName, data.Pages = compose.Annual(cfg)
 
 		case "quarter":
-			tplName, data.Pages = compose.Quarter(cfg)
+			tplName, data.Pages = compose.Quarterly(cfg)
 
 		case "month":
-			tplName, data.Pages = compose.Month(cfg)
+			tplName, data.Pages = compose.Monthly(cfg)
 
 		default:
 			continue

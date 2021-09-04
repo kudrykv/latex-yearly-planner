@@ -11,7 +11,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-func Month(cfg config.Config) (string, []page.Page) {
+func Monthly(cfg config.Config) (string, []page.Page) {
 	pages := make([]page.Page, 0, 12)
 
 	for month := time.January; month <= time.December; month++ {

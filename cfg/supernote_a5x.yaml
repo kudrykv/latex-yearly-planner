@@ -29,15 +29,15 @@ layout:
 blocks:
   annual:
     enabled: true
-    tpl: year.tpl
+    tpl: annual.tpl
 
   quarterly:
     enabled: true
-    tpl: quarter.tpl
+    tpl: quarterly.tpl
 
   monthly:
     enabled: true
-    tpl: month.tpl
+    tpl: monthly.tpl
 
   weekly:
     enabled: true
