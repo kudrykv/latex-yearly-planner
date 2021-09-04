@@ -37,6 +37,7 @@
         \leaders\hbox to \linewidth{\textcolor{\myColorGray}{\rule{0pt}{\myLenLineHeightButLine}\hrulefill}}\vfil
     }%
 }
-
-{{- if ne $i (dec (len $.Pages))}} \pagebreak {{end}}
+{{- if ne $i (dec (len $.Pages)) -}}
+  \pagebreak
+{{end}}
 {{end}}
