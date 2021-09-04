@@ -18,11 +18,30 @@ type Config struct {
 }
 
 type Blocks struct {
-	Weekly Weekly
+	Annual    Annual
+	Quarterly Quarterly
+	Monthly   Monthly
+	Weekly    Weekly
+}
+
+type Annual struct {
+	Enabled bool
+	Tpl     string
+}
+
+type Quarterly struct {
+	Enabled bool
+	Tpl     string
+}
+
+type Monthly struct {
+	Enabled bool
+	Tpl     string
 }
 
 type Weekly struct {
 	Enabled bool
+	Tpl     string
 }
 
 type Colors struct {

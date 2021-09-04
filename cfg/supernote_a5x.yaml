@@ -27,5 +27,17 @@ layout:
     gray: gray
 
 blocks:
+  annual:
+    enabled: true
+    tpl: year.tpl
+
+  quarterly:
+    enabled: true
+    tpl: quarter.tpl
+
+  monthly:
+    enabled: true
+    tpl: month.tpl
+
   weekly:
     enabled: true

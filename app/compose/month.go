@@ -38,5 +38,5 @@ func Month(cfg config.Config) (string, []page.Page) {
 		})
 	}
 
-	return "month.tpl", pages
+	return cfg.Blocks.Monthly.Tpl, pages
 }

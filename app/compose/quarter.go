@@ -46,5 +46,5 @@ func Quarter(cfg config.Config) (string, []page.Page) {
 		q++
 	}
 
-	return "quarter.tpl", pages
+	return cfg.Blocks.Quarterly.Tpl, pages
 }

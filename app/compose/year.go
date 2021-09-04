@@ -23,7 +23,7 @@ func Year(cfg config.Config) (string, []page.Page) {
 		quarters = append(quarters, weeks)
 	}
 
-	return "year.tpl", []page.Page{{
+	return cfg.Blocks.Annual.Tpl, []page.Page{{
 		Body: quarters,
 		Header: header.Header{
 			Left: header.Items{
