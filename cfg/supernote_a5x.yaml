@@ -58,6 +58,10 @@ blocks:
     enabled: true
     tpl: daily.tpl
 
-  reflectdaily:
+  dailyreflect:
     enabled: true
-    tpl: reflect_daily.tpl
+    tpl: daily_reflect.tpl
+
+  dailynotes:
+    enabled: true
+    tpl: daily_notes.tpl

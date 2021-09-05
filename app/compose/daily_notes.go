@@ -1,0 +1,51 @@
+package compose
+
+import (
+	"math"
+	"strconv"
+	"time"
+
+	"github.com/kudrykv/latex-yearly-planner/app/components/header"
+	"github.com/kudrykv/latex-yearly-planner/app/components/page"
+	"github.com/kudrykv/latex-yearly-planner/app/config"
+)
+
+func DailyNotes(cfg config.Config) (string, []page.Page) {
+	pages := make([]page.Page, 0, 366)
+	day := time.Date(cfg.Year, time.January, 1, 0, 0, 0, 0, time.Local)
+
+	for day.Year() == cfg.Year {
+		right := header.Items{}
+		_, weekNum := day.ISOWeek()
+		left := header.Items{
+			header.NewIntItem(cfg.Year),
+			header.NewTextItem("Q" + strconv.Itoa(int(math.Ceil(float64(day.Month())/3.)))),
+			header.NewMonthItem(day.Month()),
+			header.NewTextItem("Week " + strconv.Itoa(weekNum)),
+			header.NewTimeItem(day).SetLayout("Monday, 2"),
+			header.NewTimeItem(day).SetLayout("Notes").Ref().RefPrefix("notes"),
+		}
+
+		if day.Month() != time.January || day.Day() != 1 {
+			yesterday := day.AddDate(0, 0, -1)
+			right = append(right, header.NewTimeItem(yesterday).SetLayout("Mon, 2").RefPrefix("notes"))
+		}
+
+		if day.Month() != time.December || day.Day() != 31 {
+			tomorrow := day.AddDate(0, 0, 1)
+			right = append(right, header.NewTimeItem(tomorrow).SetLayout("Mon, 2").RefPrefix("notes"))
+		}
+
+		pages = append(pages, page.Page{
+			Header: header.Header{
+				Left:  left,
+				Right: right,
+			},
+			Body: day,
+		})
+
+		day = day.AddDate(0, 0, 1)
+	}
+
+	return cfg.Blocks.DailyNotes.Tpl, pages
+}

@@ -10,7 +10,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-func ReflectDaily(cfg config.Config) (string, []page.Page) {
+func DailyReflect(cfg config.Config) (string, []page.Page) {
 	pages := make([]page.Page, 0, 366)
 	day := time.Date(cfg.Year, time.January, 1, 0, 0, 0, 0, time.Local)
 
@@ -47,5 +47,5 @@ func ReflectDaily(cfg config.Config) (string, []page.Page) {
 		day = day.AddDate(0, 0, 1)
 	}
 
-	return cfg.Blocks.ReflectDaily.Tpl, pages
+	return cfg.Blocks.DailyReflect.Tpl, pages
 }

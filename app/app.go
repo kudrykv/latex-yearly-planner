@@ -49,8 +49,8 @@ func action(c *cli.Context) error {
 	wr := &bytes.Buffer{}
 
 	t := tex.New()
-	// files := []string{"title", "year", "quarter", "month", "weekly", "daily"}
-	files := []string{"reflect_daily"}
+	// files := []string{"title", "year", "quarter", "month", "weekly", "daily", "daily_reflect", "daily_notes"}
+	files := []string{"year", "quarter", "month", "weekly"}
 	data.Cfg = cfg
 
 	if err = t.Document(wr, cfg, files); err != nil {
@@ -83,8 +83,11 @@ func action(c *cli.Context) error {
 		case "daily":
 			tplName, data.Pages = compose.Daily(cfg)
 
-		case "reflect_daily":
-			tplName, data.Pages = compose.ReflectDaily(cfg)
+		case "daily_reflect":
+			tplName, data.Pages = compose.DailyReflect(cfg)
+
+		case "daily_notes":
+			tplName, data.Pages = compose.DailyNotes(cfg)
 
 		default:
 			continue
