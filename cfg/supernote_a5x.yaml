@@ -19,6 +19,10 @@ layout:
     dailynotes: 18
     dailybottomhour: 6
     dailytophour: 22
+    dailydiarygoals: 10
+    dailydiarygrateful: 10
+    dailydiarybest: 11
+    dailydiarylog: 35
 
   lengths:
     tabcolsep: 3.5pt
@@ -53,3 +57,7 @@ blocks:
   daily:
     enabled: true
     tpl: daily.tpl
+
+  reflectdaily:
+    enabled: true
+    tpl: reflect_daily.tpl

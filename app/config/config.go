@@ -18,11 +18,12 @@ type Config struct {
 }
 
 type Blocks struct {
-	Annual    Annual
-	Quarterly Quarterly
-	Monthly   Monthly
-	Weekly    Weekly
-	Daily     Daily
+	Annual       Annual
+	Quarterly    Quarterly
+	Monthly      Monthly
+	Weekly       Weekly
+	Daily        Daily
+	ReflectDaily ReflectDaily
 }
 
 type Annual struct {
@@ -50,6 +51,11 @@ type Daily struct {
 	Tpl     string
 }
 
+type ReflectDaily struct {
+	Enabled bool
+	Tpl     string
+}
+
 type Colors struct {
 	Gray      string
 	LightGray string
@@ -64,13 +70,17 @@ type Layout struct {
 }
 
 type Numbers struct {
-	ArrayStretch    float64
-	QuarterlyLines  int
-	WeeklyLines     int
-	DailyTodos      int
-	DailyNotes      int
-	DailyBottomHour int
-	DailyTopHour    int
+	ArrayStretch       float64
+	QuarterlyLines     int
+	WeeklyLines        int
+	DailyTodos         int
+	DailyNotes         int
+	DailyBottomHour    int
+	DailyTopHour       int
+	DailyDiaryGoals    int
+	DailyDiaryGrateful int
+	DailyDiaryBest     int
+	DailyDiaryLog      int
 }
 
 type Lengths struct {

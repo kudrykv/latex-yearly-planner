@@ -11,6 +11,10 @@
 \newcommand{\myNumDailyNotes}{ {{- .Cfg.Layout.Numbers.DailyNotes -}} }
 \newcommand{\myNumDailyBottomHour}{ {{- .Cfg.Layout.Numbers.DailyBottomHour -}} }
 \newcommand{\myNumDailyTopHour}{ {{- .Cfg.Layout.Numbers.DailyTopHour -}} }
+\newcommand{\myNumDailyDiaryGoals}{ {{- .Cfg.Layout.Numbers.DailyDiaryGoals -}} }
+\newcommand{\myNumDailyDiaryGrateful}{ {{- .Cfg.Layout.Numbers.DailyDiaryGrateful -}} }
+\newcommand{\myNumDailyDiaryBest}{ {{- .Cfg.Layout.Numbers.DailyDiaryBest -}} }
+\newcommand{\myNumDailyDiaryLog}{ {{- .Cfg.Layout.Numbers.DailyDiaryLog -}} }
 
 \newlength{\myLenTabColSep}
 \newlength{\myLenLineThicknessDefault}
