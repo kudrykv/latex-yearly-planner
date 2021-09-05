@@ -6,7 +6,7 @@
     \myUnderline{To Do\textcolor{white}{g}\hfill{}All todos}
     \Repeat{\myNumDailyTodos}{\myTodoLineGray}
     \vskip\dimexpr7mm-4pt
-    \myUnderline{Notes $\vert$ More\hfill{}Reflect\hfill{}All notes}
+    \myUnderline{Notes $\vert$ \hyperlink{notes {{- $today.RefText -}} }{More}\hfill{}\hyperlink{reflect {{- $today.RefText -}} }{Reflect}\hfill{}All notes}
     \Repeat{\myNumDailyNotes}{\myLineGrayVskipTop}
 }%
 \hspace{\myLenTwoColSep}%

@@ -22,9 +22,9 @@
 \usepackage{pgffor}
 \usepackage{hyperref}
 
-\hypersetup{
-  hidelinks=true
-}
+%\hypersetup{
+%  hidelinks=true
+%}
 
 
 \geometry{paperwidth={{.Cfg.Layout.Paper.Width}}, paperheight={{.Cfg.Layout.Paper.Height}}}

@@ -65,7 +65,7 @@ func Weekly(cfg config.Config) (string, []page.Page) {
 	return cfg.Blocks.Weekly.Tpl, pages
 }
 
-func pickUpStartWeekForTheYear(year int, weekStart time.Weekday) time.Time {
+func pickUpStartWeekForTheYear(year int, weekStart time.Weekday) calendar.DayTime {
 	soy := time.Date(year, time.January, 1, 0, 0, 0, 0, time.Local)
 	sow := soy
 
@@ -77,5 +77,5 @@ func pickUpStartWeekForTheYear(year int, weekStart time.Weekday) time.Time {
 		sow = sow.AddDate(0, 0, -7)
 	}
 
-	return sow
+	return calendar.DayTime{Time: sow}
 }

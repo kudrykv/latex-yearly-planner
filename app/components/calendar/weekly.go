@@ -96,11 +96,11 @@ func (w Weekly) Text(long bool) string {
 	return wn
 }
 
-func FillWeekly(ptr time.Time) Weekly {
+func FillWeekly(ptr DayTime) Weekly {
 	w := Weekly{}
 
 	for i := 0; i < 7; i++ {
-		w[i] = DayTime{ptr}
+		w[i] = ptr
 		ptr = ptr.AddDate(0, 0, 1)
 	}
 

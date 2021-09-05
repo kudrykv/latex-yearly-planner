@@ -5,6 +5,7 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
@@ -12,7 +13,7 @@ import (
 
 func DailyReflect(cfg config.Config) (string, []page.Page) {
 	pages := make([]page.Page, 0, 366)
-	day := time.Date(cfg.Year, time.January, 1, 0, 0, 0, 0, time.Local)
+	day := calendar.DayTime{Time: time.Date(cfg.Year, time.January, 1, 0, 0, 0, 0, time.Local)}
 
 	for day.Year() == cfg.Year {
 		right := header.Items{}

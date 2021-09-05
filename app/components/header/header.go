@@ -5,6 +5,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
 	"github.com/kudrykv/latex-yearly-planner/app/components/hyper"
 )
 
@@ -162,7 +163,7 @@ func NewMonthItem(m time.Month) MonthItem {
 }
 
 type TimeItem struct {
-	Val       time.Time
+	Val       calendar.DayTime
 	Layout    string
 	ref       bool
 	refPrefix string
@@ -194,7 +195,7 @@ func (t TimeItem) RefPrefix(refPrefix string) TimeItem {
 	return t
 }
 
-func NewTimeItem(val time.Time) TimeItem {
+func NewTimeItem(val calendar.DayTime) TimeItem {
 	return TimeItem{
 		Val:    val,
 		Layout: time.RFC3339,
