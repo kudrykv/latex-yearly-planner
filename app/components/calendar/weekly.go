@@ -2,7 +2,10 @@ package calendar
 
 import (
 	"math"
+	"strconv"
 	"time"
+
+	"github.com/kudrykv/latex-yearly-planner/app/components/hyper"
 )
 
 type Weeklies []Weekly
@@ -69,6 +72,15 @@ func (w Weekly) Months(year int) []time.Month {
 	}
 
 	return []time.Month{bottom, top}
+}
+
+func (w Weekly) LinkWeek(prefix string, long bool) string {
+	wn := strconv.Itoa(w.WeekNumber())
+	if long {
+		wn = "Week " + wn
+	}
+
+	return hyper.Link(prefix+"Week "+strconv.Itoa(w.WeekNumber()), wn)
 }
 
 func FillWeekly(ptr time.Time) Weekly {
