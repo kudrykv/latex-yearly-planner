@@ -1,80 +1,12 @@
 package calendar
 
 import (
-	"math"
-	"strconv"
 	"strings"
 	"time"
 )
 
 type Weeks []Week
 type Week [8]int
-
-type Weeklies []Weekly
-type Weekly [7]time.Time
-
-func (w Weekly) FillYear() Weeklies {
-	year := w[6].Year()
-	ptr := w[6].AddDate(0, 0, 1)
-	ww := append(make(Weeklies, 0, 53), w)
-
-	for ptr.Year() == year {
-		ww = append(ww, FillWeekly(ptr))
-		ptr = ptr.AddDate(0, 0, 7)
-	}
-
-	return ww
-}
-
-func (w Weekly) WeekNumber() int {
-	_, wn := w[0].ISOWeek()
-
-	for _, t := range w {
-		if _, cwn := t.ISOWeek(); cwn > wn {
-			return cwn
-		}
-	}
-
-	return wn
-}
-
-func (w Weekly) Quarters(year int) []int {
-	bottom := int(math.Ceil(float64(w[0].Month()) / 3.))
-	top := int(math.Ceil(float64(w[6].Month()) / 3.))
-
-	if w[0].Year() != year {
-		return []int{top}
-	}
-
-	if w[6].Year() != year {
-		return []int{bottom}
-	}
-
-	if top == bottom {
-		return []int{top}
-	}
-
-	return []int{bottom, top}
-}
-
-func (w Weekly) Months(year int) []time.Month {
-	bottom := w[0].Month()
-	top := w[6].Month()
-
-	if w[0].Year() != year {
-		return []time.Month{top}
-	}
-
-	if w[6].Year() != year {
-		return []time.Month{bottom}
-	}
-
-	if top == bottom {
-		return []time.Month{top}
-	}
-
-	return []time.Month{bottom, top}
-}
 
 func (w Week) Start(wd time.Weekday, ptr time.Time) Week {
 	_, weekNum := ptr.ISOWeek()
@@ -115,17 +47,6 @@ func (w Week) Fill(year int, month time.Month) Weeks {
 	return weeks
 }
 
-func FillWeekly(ptr time.Time) Weekly {
-	w := Weekly{}
-
-	for i := 0; i < 7; i++ {
-		w[i] = ptr
-		ptr = ptr.AddDate(0, 0, 1)
-	}
-
-	return w
-}
-
 func (w Week) FillWeek(ptr time.Time) Week {
 	_, w[0] = ptr.ISOWeek()
 
@@ -164,13 +85,13 @@ func (m YearMonth) Calendar(wd time.Weekday) Calendar {
 	return Calendar{
 		month: m.month,
 		wd:    wd,
-		weeks: Weeks{}.FigureOut(m.year, m.month, wd),
+		weeks: MonthWeeklies(wd, m.year, m.month),
 	}
 }
 
 type Calendar struct {
 	wd    time.Weekday
-	weeks Weeks
+	weeks Weeklies
 	month time.Month
 }
 
@@ -224,59 +145,6 @@ func (c Calendar) MonthName() time.Month {
 	return c.month
 }
 
-func (c Calendar) DaysMatrix(weekNum bool) string {
-	lines := make([]string, 0, 4)
-
-	for _, week := range c.weeks {
-		line := make([]string, 0, 8)
-
-		if weekNum {
-			line = append(line, strconv.Itoa(week[0]))
-		}
-
-		for _, day := range week[1:] {
-			if day == 0 {
-				line = append(line, "")
-
-				continue
-			}
-
-			line = append(line, strconv.Itoa(day))
-		}
-
-		lines = append(lines, strings.Join(line, " & "))
-	}
-
-	return strings.Join(lines, " \\\\ \n")
-}
-
-func (c Calendar) Matrix(withWeeks, short bool) [][]string {
-	rows := make([][]string, 0, len(c.weeks))
-
-	for _, week := range c.weeks {
-		row := make([]string, 0, len(week))
-
-		if withWeeks {
-			weeknumStr := strconv.Itoa(week[0])
-			if !short {
-				weeknumStr = "Week " + weeknumStr
-			}
-
-			row = append(row, weeknumStr)
-		}
-
-		for _, item := range week[1:] {
-			if item == 0 {
-				row = append(row, "")
-
-				continue
-			}
-
-			row = append(row, strconv.Itoa(item))
-		}
-
-		rows = append(rows, row)
-	}
-
-	return rows
+func (c Calendar) Matrix() Weeklies {
+	return c.weeks
 }

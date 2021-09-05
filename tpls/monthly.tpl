@@ -9,15 +9,16 @@
 \noalign{\hrule height \myLenLineThicknessThick}
 {{$page.Body.WeekHeaderFull $.Cfg.Blocks.Weekly.Enabled}} \\ \noalign{\hrule height \myLenLineThicknessThick}
 
-{{- range $row := $page.Body.Matrix $.Cfg.Blocks.Weekly.Enabled false}}
+{{- range $row := $page.Body.Matrix}}
+  {{if $.Cfg.Blocks.Weekly.Enabled -}}
+    \rotatebox[origin=tr]{90}{\makebox[\myLenMonthlyCellHeight][c]{Week {{$row.WeekNumber -}} }} &
+  {{end -}}
+
   {{range $j, $item := . -}}
-    {{- if eq $j 0 -}}
-      \rotatebox[origin=tr]{90}{\makebox[\myLenMonthlyCellHeight][c]{ {{- $item -}} }}
-    {{- else -}}
-      {{- if gt (len $item) 0 -}}
-        \begin{tabular}{@{}p{5mm}@{}|}\hfil{}{{- $item -}}\\ \hline\end{tabular}
-      {{- end -}}
+    {{- if not $item.IsZero -}}
+      \begin{tabular}{@{}p{5mm}@{}|}\hfil{}{{- $item.Day -}}\\ \hline\end{tabular}
     {{- end -}}
+
     {{- if ne $j (dec (len $row)) }} & {{else}} \\ \hline {{end -}}
   {{- end -}}
 {{end}}

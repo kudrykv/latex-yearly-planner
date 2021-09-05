@@ -13,13 +13,13 @@ func Annual(cfg config.Config) (string, []page.Page) {
 	var quarters [][]calendar.Calendar
 
 	for quarter := time.January; quarter <= time.December; quarter += 3 {
-		weeks := make([]calendar.Calendar, 0, 3)
+		cals := make([]calendar.Calendar, 0, 3)
 
 		for month := quarter; month < quarter+3; month++ {
-			weeks = append(weeks, calendar.NewYearMonth(cfg.Year, month).Calendar(cfg.WeekStart))
+			cals = append(cals, calendar.NewYearMonth(cfg.Year, month).Calendar(cfg.WeekStart))
 		}
 
-		quarters = append(quarters, weeks)
+		quarters = append(quarters, cals)
 	}
 
 	return cfg.Blocks.Annual.Tpl, []page.Page{{

@@ -50,7 +50,7 @@ func action(c *cli.Context) error {
 
 	t := tex.New()
 	// files := []string{"title", "year", "quarter", "month", "weekly", "daily"}
-	files := []string{"title", "year", "quarter", "month", "weekly"}
+	files := []string{"title", "year", "quarter", "month"}
 	data.Cfg = cfg
 
 	if err = t.Document(wr, cfg, files); err != nil {
