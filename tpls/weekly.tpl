@@ -37,7 +37,7 @@
     \myUnderline{ {{- $day7.Day}} {{$day7.Weekday -}} }\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
 }%
 \hspace{\myLenTriColSep}%
-\parbox{\dimexpr2\myLenTriCol+2\myLenTriColSep}{%
+\parbox{\dimexpr2\myLenTriCol+\myLenTriColSep}{%
     \myUnderline{Notes\textcolor{white}{g}}\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
 }
 
