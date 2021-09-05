@@ -11,7 +11,13 @@
 
 {{- range $row := $page.Body.Matrix}}
   {{if $.Cfg.Blocks.Weekly.Enabled -}}
-    \rotatebox[origin=tr]{90}{\makebox[\myLenMonthlyCellHeight][c]{Week {{$row.WeekNumber -}} }} &
+    \rotatebox[origin=tr]{90}{\makebox[\myLenMonthlyCellHeight][c]{
+      {{- if and (eq ($page.Body.MonthName.String) "January") (gt $row.WeekNumber 50) -}}
+        {{- $row.LinkWeek "fw" true -}}
+      {{- else -}}
+        {{- $row.LinkWeek "" true -}}
+      {{- end -}}
+    }} &
   {{end -}}
 
   {{range $j, $item := . -}}
