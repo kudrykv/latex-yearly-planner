@@ -11,18 +11,18 @@
 
 {{- range $row := $page.Body.Matrix}}
   {{if $.Cfg.Blocks.Weekly.Enabled -}}
-    \rotatebox[origin=tr]{90}{\makebox[\myLenMonthlyCellHeight][c]{
+    \hyperlink{
       {{- if and (eq ($page.Body.MonthName.String) "January") (gt $row.WeekNumber 50) -}}
-        {{- $row.LinkWeek "fw" true -}}
+        {{- $row.RefText "fw" -}}
       {{- else -}}
-        {{- $row.LinkWeek "" true -}}
+        {{- $row.RefText "" -}}
       {{- end -}}
-    }} &
+    }{\rotatebox[origin=tr]{90}{\makebox[\myLenMonthlyCellHeight][c]{ {{- $row.Text true -}} }}} &
   {{end -}}
 
   {{range $j, $item := . -}}
     {{- if not $item.IsZero -}}
-      \begin{tabular}{@{}p{5mm}@{}|}\hfil{}{{- $item.Day -}}\\ \hline\end{tabular}
+      \hyperlink{ {{- $page.Body.RFC3339 $item -}} }{\begin{tabular}{@{}p{5mm}@{}|}\hfil{}{{- $item.Day -}}\\ \hline\end{tabular}}
     {{- end -}}
 
     {{- if ne $j (dec (len $row)) }} & {{else}} \\ \hline {{end -}}

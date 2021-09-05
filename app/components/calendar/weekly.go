@@ -83,6 +83,19 @@ func (w Weekly) LinkWeek(prefix string, long bool) string {
 	return hyper.Link(prefix+"Week "+strconv.Itoa(w.WeekNumber()), wn)
 }
 
+func (w Weekly) RefText(prefix string) string {
+	return prefix + "Week " + strconv.Itoa(w.WeekNumber())
+}
+
+func (w Weekly) Text(long bool) string {
+	wn := strconv.Itoa(w.WeekNumber())
+	if long {
+		return "Week " + wn
+	}
+
+	return wn
+}
+
 func FillWeekly(ptr time.Time) Weekly {
 	w := Weekly{}
 

@@ -71,3 +71,7 @@ func (c Calendar) Matrix() Weeklies {
 func (c Calendar) LinkDate(ptr time.Time) string {
 	return hyper.Link(ptr.Format(time.RFC3339), strconv.Itoa(ptr.Day()))
 }
+
+func (c Calendar) RFC3339(ptr time.Time) string {
+	return ptr.Format(time.RFC3339)
+}
