@@ -13,7 +13,7 @@ type QuarterBody struct {
 	Quarter []calendar.Calendar
 }
 
-func Quarterly(cfg config.Config) (string, []page.Page) {
+func Quarterly(cfg config.Config) []page.Page {
 	pages := make([]page.Page, 0, 4)
 	q := 1
 	hRight := header.Items{header.NewTextItem("Notes"), header.NewTextItem("Todos")}
@@ -33,6 +33,7 @@ func Quarterly(cfg config.Config) (string, []page.Page) {
 		}
 
 		pages = append(pages, page.Page{
+			Tpl: cfg.Blocks.Quarterly.Tpl,
 			Header: header.Header{
 				Left: header.Items{
 					header.NewIntItem(cfg.Year),
@@ -45,5 +46,5 @@ func Quarterly(cfg config.Config) (string, []page.Page) {
 		q++
 	}
 
-	return cfg.Blocks.Quarterly.Tpl, pages
+	return pages
 }

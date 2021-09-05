@@ -11,7 +11,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-func Monthly(cfg config.Config) (string, []page.Page) {
+func Monthly(cfg config.Config) []page.Page {
 	pages := make([]page.Page, 0, 12)
 
 	for month := time.January; month <= time.December; month++ {
@@ -26,6 +26,7 @@ func Monthly(cfg config.Config) (string, []page.Page) {
 
 		qrtr := int(math.Ceil(float64(month) / 3.))
 		pages = append(pages, page.Page{
+			Tpl: cfg.Blocks.Monthly.Tpl,
 			Header: header.Header{
 				Left: header.Items{
 					header.NewIntItem(cfg.Year),
@@ -38,5 +39,5 @@ func Monthly(cfg config.Config) (string, []page.Page) {
 		})
 	}
 
-	return cfg.Blocks.Monthly.Tpl, pages
+	return pages
 }

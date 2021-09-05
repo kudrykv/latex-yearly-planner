@@ -9,7 +9,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-func Annual(cfg config.Config) (string, []page.Page) {
+func Annual(cfg config.Config) []page.Page {
 	var quarters [][]calendar.Calendar
 
 	for quarter := time.January; quarter <= time.December; quarter += 3 {
@@ -22,7 +22,8 @@ func Annual(cfg config.Config) (string, []page.Page) {
 		quarters = append(quarters, cals)
 	}
 
-	return cfg.Blocks.Annual.Tpl, []page.Page{{
+	return []page.Page{{
+		Tpl:  cfg.Blocks.Annual.Tpl,
 		Body: quarters,
 		Header: header.Header{
 			Left: header.Items{

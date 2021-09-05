@@ -11,7 +11,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-func Daily(cfg config.Config) (string, []page.Page) {
+func Daily(cfg config.Config) []page.Page {
 	pages := make([]page.Page, 0, 366)
 	day := calendar.DayTime{Time: time.Date(cfg.Year, time.January, 1, 0, 0, 0, 0, time.Local)}
 
@@ -35,6 +35,7 @@ func Daily(cfg config.Config) (string, []page.Page) {
 		}
 
 		pages = append(pages, page.Page{
+			Tpl: cfg.Blocks.Daily.Tpl,
 			Header: header.Header{
 				Left:  left,
 				Right: right,
@@ -45,5 +46,5 @@ func Daily(cfg config.Config) (string, []page.Page) {
 		day = day.AddDate(0, 0, 1)
 	}
 
-	return cfg.Blocks.Daily.Tpl, pages
+	return pages
 }

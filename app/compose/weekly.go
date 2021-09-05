@@ -10,7 +10,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-func Weekly(cfg config.Config) (string, []page.Page) {
+func Weekly(cfg config.Config) []page.Page {
 	sow := pickUpStartWeekForTheYear(cfg.Year, cfg.WeekStart)
 	pages := make([]page.Page, 0, 53)
 
@@ -47,6 +47,7 @@ func Weekly(cfg config.Config) (string, []page.Page) {
 		}
 
 		pag := page.Page{
+			Tpl: cfg.Blocks.Weekly.Tpl,
 			Header: header.Header{
 				Right: right,
 				Left: header.Items{
@@ -62,7 +63,7 @@ func Weekly(cfg config.Config) (string, []page.Page) {
 		pages = append(pages, pag)
 	}
 
-	return cfg.Blocks.Weekly.Tpl, pages
+	return pages
 }
 
 func pickUpStartWeekForTheYear(year int, weekStart time.Weekday) calendar.DayTime {

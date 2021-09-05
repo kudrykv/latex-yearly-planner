@@ -35,10 +35,9 @@ func New() *cli.App {
 
 func action(c *cli.Context) error {
 	var (
-		data    page.PageTpl
-		tplName string
-		cfg     config.Config
-		err     error
+		data page.PageTpl
+		cfg  config.Config
+		err  error
 	)
 
 	pathConfig := c.Path(fConfig)
@@ -66,28 +65,28 @@ func action(c *cli.Context) error {
 
 		switch file {
 		case "title":
-			tplName = "title.tpl"
+			data.Pages = []page.Page{{Tpl: "title.tpl"}}
 
 		case "year":
-			tplName, data.Pages = compose.Annual(cfg)
+			data.Pages = compose.Annual(cfg)
 
 		case "quarter":
-			tplName, data.Pages = compose.Quarterly(cfg)
+			data.Pages = compose.Quarterly(cfg)
 
 		case "month":
-			tplName, data.Pages = compose.Monthly(cfg)
+			data.Pages = compose.Monthly(cfg)
 
 		case "weekly":
-			tplName, data.Pages = compose.Weekly(cfg)
+			data.Pages = compose.Weekly(cfg)
 
 		case "daily":
-			tplName, data.Pages = compose.Daily(cfg)
+			data.Pages = compose.Daily(cfg)
 
 		case "daily_reflect":
-			tplName, data.Pages = compose.DailyReflect(cfg)
+			data.Pages = compose.DailyReflect(cfg)
 
 		case "daily_notes":
-			tplName, data.Pages = compose.DailyNotes(cfg)
+			data.Pages = compose.DailyNotes(cfg)
 
 		default:
 			continue
@@ -95,17 +94,8 @@ func action(c *cli.Context) error {
 
 		for _, pag := range data.Pages {
 			pag.Cfg = data.Cfg
-			if len(tplName) == 0 {
-				tplName = pag.Tpl
-			}
 
-			if err = t.Execute(wr, tplName, pag); err != nil {
-				return fmt.Errorf("tex execute: %w", err)
-			}
-		}
-
-		if len(data.Pages) == 0 {
-			if err = t.Execute(wr, tplName, data); err != nil {
+			if err = t.Execute(wr, pag.Tpl, pag); err != nil {
 				return fmt.Errorf("tex execute: %w", err)
 			}
 		}
