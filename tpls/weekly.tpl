@@ -1,5 +1,4 @@
-{{range $i, $page := .Pages -}}
-{{- template "header.tpl" dict "Cfg" $.Cfg "Header" $page.Header -}}
+{{- template "header.tpl" dict "Cfg" $.Cfg "Header" .Header -}}
 {{- $week := .Body -}}
 {{- $day1 := index $week 0 -}}
 {{- $day2 := index $week 1 -}}
@@ -41,7 +40,4 @@
     \myUnderline{Notes\textcolor{white}{g}}\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
 }
 
-{{- if ne $i (dec (len $.Pages)) -}}
-  \pagebreak
-{{end}}
-{{end}}
+\pagebreak

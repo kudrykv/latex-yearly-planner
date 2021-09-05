@@ -25,6 +25,7 @@ type Blocks struct {
 	Daily        Daily
 	DailyReflect DailyReflect
 	DailyNotes   DailyNotes
+	Notes        Notes
 }
 
 type Annual struct {
@@ -60,6 +61,12 @@ type DailyReflect struct {
 type DailyNotes struct {
 	Enabled bool
 	Tpl     string
+}
+
+type Notes struct {
+	Enabled  bool
+	TplIndex string
+	TplPage  string
 }
 
 type Colors struct {

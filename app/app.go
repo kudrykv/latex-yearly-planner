@@ -50,7 +50,7 @@ func action(c *cli.Context) error {
 
 	t := tex.New()
 	// files := []string{"title", "year", "quarter", "month", "weekly", "daily", "daily_reflect", "daily_notes"}
-	files := []string{"year", "quarter", "month", "weekly", "daily", "daily_reflect", "daily_notes"}
+	files := []string{"title", "year", "quarter", "month", "weekly", "daily", "daily_reflect", "daily_notes"}
 	data.Cfg = cfg
 
 	if err = t.Document(wr, cfg, files); err != nil {
@@ -93,8 +93,21 @@ func action(c *cli.Context) error {
 			continue
 		}
 
-		if err = t.Execute(wr, tplName, data); err != nil {
-			return fmt.Errorf("tex execute: %w", err)
+		for _, pag := range data.Pages {
+			pag.Cfg = data.Cfg
+			if len(tplName) == 0 {
+				tplName = pag.Tpl
+			}
+
+			if err = t.Execute(wr, tplName, pag); err != nil {
+				return fmt.Errorf("tex execute: %w", err)
+			}
+		}
+
+		if len(data.Pages) == 0 {
+			if err = t.Execute(wr, tplName, data); err != nil {
+				return fmt.Errorf("tex execute: %w", err)
+			}
 		}
 
 		if err = ioutil.WriteFile("out/"+file+".tex", wr.Bytes(), 0600); err != nil {

@@ -1,5 +1,4 @@
-{{range $i, $page := .Pages -}}
-{{- template "header.tpl" dict "Cfg" $.Cfg "Header" $page.Header -}}
+{{- template "header.tpl" dict "Cfg" $.Cfg "Header" .Header -}}
 
 \parbox[t]{\myLenTwoCol}{%
   \myUnderline{Goals{}\textcolor{white}{g}}
@@ -16,7 +15,4 @@
 }
 \par
 
-{{- if ne $i (dec (len $.Pages)) -}}
-  \pagebreak
-{{end}}
-{{end}}
+\pagebreak

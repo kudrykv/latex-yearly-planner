@@ -12,6 +12,8 @@ type PageTpl struct {
 }
 
 type Page struct {
+	Cfg    config.Config
+	Tpl    string
 	Header header.Header
 	Body   interface{}
 }

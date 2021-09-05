@@ -1,5 +1,4 @@
-{{range $i, $page := .Pages -}}
-{{- template "header.tpl" dict "Cfg" $.Cfg "Header" $page.Header -}}
+{{- template "header.tpl" dict "Cfg" $.Cfg "Header" .Header -}}
 
 \begin{tabularx}{\textwidth}{@{}
   {{- if $.Cfg.Blocks.Weekly.Enabled -}}
@@ -7,12 +6,12 @@
   {{- else -}} | {{- end -}}
   *{7}{@{}X@{}|}}
 \noalign{\hrule height \myLenLineThicknessThick}
-{{$page.Body.WeekHeaderFull $.Cfg.Blocks.Weekly.Enabled}} \\ \noalign{\hrule height \myLenLineThicknessThick}
+{{.Body.WeekHeaderFull $.Cfg.Blocks.Weekly.Enabled}} \\ \noalign{\hrule height \myLenLineThicknessThick}
 
-{{- range $row := $page.Body.Matrix}}
+{{- range $row := .Body.Matrix}}
   {{if $.Cfg.Blocks.Weekly.Enabled -}}
     \hyperlink{
-      {{- if and (eq ($page.Body.MonthName.String) "January") (gt $row.WeekNumber 50) -}}
+      {{- if and (eq ($.Body.MonthName.String) "January") (gt $row.WeekNumber 50) -}}
         {{- $row.RefText "fw" -}}
       {{- else -}}
         {{- $row.RefText "" -}}
@@ -44,7 +43,5 @@
         \leaders\hbox to \linewidth{\textcolor{\myColorGray}{\rule{0pt}{\myLenLineHeightButLine}\hrulefill}}\vfil
     }%
 }
-{{- if ne $i (dec (len $.Pages)) -}}
-  \pagebreak
-{{end}}
-{{end}}
+
+\pagebreak

@@ -1,6 +1,5 @@
-{{range $i, $page := .Pages -}}
-{{- template "header.tpl" dict "Cfg" $.Cfg "Header" $page.Header -}}
-{{- $today := $page.Body -}}
+{{- template "header.tpl" dict "Cfg" $.Cfg "Header" .Header -}}
+{{- $today := .Body -}}
 
 \parbox[t]{\myLenTwoCol}{%
     \myUnderline{To Do\textcolor{white}{g}\hfill{}All todos}
@@ -18,7 +17,4 @@
 }
 \par
 
-{{- if ne $i (dec (len $.Pages)) -}}
-  \pagebreak
-{{end}}
-{{end}}
+\pagebreak
