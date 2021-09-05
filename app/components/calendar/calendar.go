@@ -1,11 +1,8 @@
 package calendar
 
 import (
-	"strconv"
 	"strings"
 	"time"
-
-	"github.com/kudrykv/latex-yearly-planner/app/components/hyper"
 )
 
 type Calendar struct {
@@ -66,12 +63,4 @@ func (c Calendar) MonthName() time.Month {
 
 func (c Calendar) Matrix() Weeklies {
 	return c.weeks
-}
-
-func (c Calendar) LinkDate(ptr time.Time) string {
-	return hyper.Link(ptr.Format(time.RFC3339), strconv.Itoa(ptr.Day()))
-}
-
-func (c Calendar) RFC3339(ptr time.Time) string {
-	return ptr.Format(time.RFC3339)
 }

@@ -22,7 +22,7 @@
 
   {{range $j, $item := . -}}
     {{- if not $item.IsZero -}}
-      \hyperlink{ {{- $page.Body.RFC3339 $item -}} }{\begin{tabular}{@{}p{5mm}@{}|}\hfil{}{{- $item.Day -}}\\ \hline\end{tabular}}
+      \hyperlink{ {{- $item.RefText -}} }{\begin{tabular}{@{}p{5mm}@{}|}\hfil{}{{- $item.Day -}}\\ \hline\end{tabular}}
     {{- end -}}
 
     {{- if ne $j (dec (len $row)) }} & {{else}} \\ \hline {{end -}}

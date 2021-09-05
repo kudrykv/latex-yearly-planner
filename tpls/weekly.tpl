@@ -10,31 +10,31 @@
 {{- $day7 := index $week 6 -}}
 
 \parbox{\myLenTriCol}{%
-    \myUnderline{ {{- $day1.Day}} {{$day1.Weekday -}} }\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
+    \myUnderline{\hyperlink{ {{- $day1.RefText -}} }{ {{- $day1.Day}} {{$day1.Weekday -}} }}\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
 }%
 \hspace{\myLenTriColSep}%
 \parbox{\myLenTriCol}{%
-    \myUnderline{ {{- $day2.Day}} {{$day2.Weekday -}} }\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
+    \myUnderline{\hyperlink{ {{- $day2.RefText -}} }{ {{- $day2.Day}} {{$day2.Weekday -}} }}\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
 }%
 \hspace{\myLenTriColSep}%
 \parbox{\myLenTriCol}{%
-    \myUnderline{ {{- $day3.Day}} {{$day3.Weekday -}} }\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
+    \myUnderline{\hyperlink{ {{- $day3.RefText -}} }{ {{- $day3.Day}} {{$day3.Weekday -}} }}\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
 }
 \vfill
 \parbox{\myLenTriCol}{%
-    \myUnderline{ {{- $day4.Day}} {{$day4.Weekday -}} }\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
+    \myUnderline{\hyperlink{ {{- $day4.RefText -}} }{ {{- $day4.Day}} {{$day4.Weekday -}} }}\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
 }%
 \hspace{\myLenTriColSep}%
 \parbox{\myLenTriCol}{%
-    \myUnderline{ {{- $day5.Day}} {{$day5.Weekday -}} }\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
+    \myUnderline{\hyperlink{ {{- $day5.RefText -}} }{ {{- $day5.Day}} {{$day5.Weekday -}} }}\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
 }%
 \hspace{\myLenTriColSep}%
 \parbox{\myLenTriCol}{%
-    \myUnderline{ {{- $day6.Day}} {{$day6.Weekday -}} }\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
+    \myUnderline{\hyperlink{ {{- $day6.RefText -}} }{ {{- $day6.Day}} {{$day6.Weekday -}} }}\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
 }
 \vfill
 \parbox{\myLenTriCol}{%
-    \myUnderline{ {{- $day7.Day}} {{$day7.Weekday -}} }\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
+    \myUnderline{\hyperlink{ {{- $day7.RefText -}} }{ {{- $day7.Day}} {{$day7.Weekday -}} }}\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
 }%
 \hspace{\myLenTriColSep}%
 \parbox{\dimexpr2\myLenTriCol+\myLenTriColSep}{%

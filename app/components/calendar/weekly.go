@@ -9,7 +9,7 @@ import (
 )
 
 type Weeklies []Weekly
-type Weekly [7]time.Time
+type Weekly [7]DayTime
 
 func (w Weekly) FillYear() Weeklies {
 	year := w[6].Year()
@@ -100,7 +100,7 @@ func FillWeekly(ptr time.Time) Weekly {
 	w := Weekly{}
 
 	for i := 0; i < 7; i++ {
-		w[i] = ptr
+		w[i] = DayTime{ptr}
 		ptr = ptr.AddDate(0, 0, 1)
 	}
 
@@ -116,7 +116,7 @@ func MonthWeeklies(wd time.Weekday, year int, month time.Month) Weeklies {
 	shift := (7 + weekday - wd) % 7
 
 	for i := shift; i < 7; i++ {
-		weekly[i] = ptr
+		weekly[i] = DayTime{ptr}
 		ptr = ptr.AddDate(0, 0, 1)
 	}
 
@@ -130,7 +130,7 @@ func MonthWeeklies(wd time.Weekday, year int, month time.Month) Weeklies {
 				break
 			}
 
-			weekly[i] = ptr
+			weekly[i] = DayTime{ptr}
 			ptr = ptr.AddDate(0, 0, 1)
 		}
 

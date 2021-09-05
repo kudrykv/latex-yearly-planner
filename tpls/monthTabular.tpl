@@ -16,7 +16,7 @@
     {{- end -}}
   {{end -}}
   {{range $j, $item := .}}
-    {{if not $item.IsZero}} {{ $.Month.LinkDate $item}} {{end}}
+    {{if not $item.IsZero}} {{ $item.Link }} {{end}}
     {{- if ne $j (dec (len $row)) }} & {{else}} \\ {{end -}}
   {{- end -}}
 {{end}}
