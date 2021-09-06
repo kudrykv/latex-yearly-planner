@@ -1,15 +1,15 @@
 {{- template "header.tpl" dict "Cfg" $.Cfg "Header" .Header -}}
 
 \begin{tabularx}{\textwidth}{@{}
-  {{- if $.Cfg.Blocks.Weekly.Enabled -}}
+  {{- if $.Cfg.RenderBlocks.WeeklyEnabled -}}
     l!{\vrule width \myLenLineThicknessThick}
   {{- else -}} | {{- end -}}
   *{7}{@{}X@{}|}}
 \noalign{\hrule height \myLenLineThicknessThick}
-{{.Body.WeekHeaderFull $.Cfg.Blocks.Weekly.Enabled}} \\ \noalign{\hrule height \myLenLineThicknessThick}
+{{.Body.WeekHeaderFull $.Cfg.RenderBlocks.WeeklyEnabled}} \\ \noalign{\hrule height \myLenLineThicknessThick}
 
 {{- range $row := .Body.Matrix}}
-  {{if $.Cfg.Blocks.Weekly.Enabled -}}
+  {{if $.Cfg.RenderBlocks.WeeklyEnabled -}}
     \hyperlink{
       {{- if and (eq ($.Body.MonthName.String) "January") (gt $row.WeekNumber 50) -}}
         {{- $row.RefText "fw" -}}

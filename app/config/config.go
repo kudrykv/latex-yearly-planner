@@ -13,10 +13,22 @@ type Config struct {
 	Year      int `env:"PLANNER_YEAR"`
 	WeekStart time.Weekday
 
-	RenderBlocks []string
+	RenderBlocks RenderBlocks
 
 	Layout Layout
 	Blocks Blocks
+}
+
+type RenderBlocks []string
+
+func (r RenderBlocks) WeeklyEnabled() bool {
+	for _, s := range r {
+		if s == "weekly" {
+			return true
+		}
+	}
+
+	return false
 }
 
 type Blocks struct {
@@ -37,48 +49,39 @@ type Title struct {
 }
 
 type Annual struct {
-	Enabled bool
-	Tpl     string
+	Tpl string
 }
 
 type Quarterly struct {
-	Enabled bool
-	Tpl     string
+	Tpl string
 }
 
 type Monthly struct {
-	Enabled bool
-	Tpl     string
+	Tpl string
 }
 
 type Weekly struct {
-	Enabled bool
-	Tpl     string
+	Tpl string
 }
 
 type Daily struct {
-	Enabled bool
-	Tpl     string
+	Tpl string
 }
 
 type DailyReflect struct {
-	Enabled bool
-	Tpl     string
+	Tpl string
 }
 
 type DailyNotes struct {
-	Enabled bool
-	Tpl     string
+	Tpl string
 }
 
 type NotesIndexed struct {
-	Enabled  bool
 	TplIndex string
 	TplPage  string
 }
 
 type TodosIndexed struct {
-	Enabled  bool
 	TplIndex string
 	TplPage  string
 }

@@ -1,14 +1,14 @@
 {%
 \renewcommand{\arraystretch}{\myNumArrayStretch}%
 \setlength{\tabcolsep}{\myLenTabColSep}%
-\begin{tabular}[t]{ {{- .Month.WeekLayout .Cfg.Blocks.Weekly.Enabled -}} }
+\begin{tabular}[t]{ {{- .Month.WeekLayout .Cfg.RenderBlocks.WeeklyEnabled -}} }
 \multicolumn%
-  { {{- .Month.WeekHeaderLen .Cfg.Blocks.Weekly.Enabled -}} }%
+  { {{- .Month.WeekHeaderLen .Cfg.RenderBlocks.WeeklyEnabled -}} }%
   {c}%
   { {{- template "slink.tpl" .Month.MonthName -}} } \\ \hline
-{{.Month.WeekHeader .Cfg.Blocks.Weekly.Enabled}} \\ \hline
+{{.Month.WeekHeader .Cfg.RenderBlocks.WeeklyEnabled}} \\ \hline
 {{- range $row := .Month.Matrix}}
-  {{if $.Cfg.Blocks.Weekly.Enabled -}}
+  {{if $.Cfg.RenderBlocks.WeeklyEnabled -}}
     {{if and (eq ($.Month.MonthName.String) "January") (gt $row.WeekNumber 50)}}
       {{- $row.LinkWeek "fw" false}} &
     {{- else -}}

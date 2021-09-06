@@ -56,31 +56,24 @@ blocks:
     tpl: title.tpl
 
   annual:
-    enabled: true
     tpl: annual.tpl
 
   quarterly:
-    enabled: true
     tpl: quarterly.tpl
 
   monthly:
-    enabled: true
     tpl: monthly.tpl
 
   weekly:
-    enabled: true
     tpl: weekly.tpl
 
   daily:
-    enabled: true
     tpl: daily.tpl
 
   dailyreflect:
-    enabled: true
     tpl: daily_reflect.tpl
 
   dailynotes:
-    enabled: true
     tpl: daily_notes.tpl
 
   notesindexed:
