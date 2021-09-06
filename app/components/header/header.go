@@ -42,6 +42,7 @@ type TextItem struct {
 	bold      bool
 	ref       bool
 	refPrefix string
+	refText   string
 }
 
 func NewTextItem(name string) TextItem {
@@ -51,18 +52,27 @@ func NewTextItem(name string) TextItem {
 }
 
 func (t TextItem) Display() string {
-	var out string
+	var (
+		out string
+		ref string
+	)
 	if t.bold {
 		out = "\\textbf{" + t.Name + "}"
 	} else {
 		out = t.Name
 	}
 
-	if t.ref {
-		return hyper.Target(t.refPrefix+t.Name, out)
+	if len(t.refText) > 0 {
+		ref = t.refText
+	} else {
+		ref = t.refPrefix + t.Name
 	}
 
-	return hyper.Link(t.refPrefix+t.Name, out)
+	if t.ref {
+		return hyper.Target(ref, out)
+	}
+
+	return hyper.Link(ref, out)
 }
 
 func (t TextItem) Ref(ref bool) TextItem {
@@ -79,6 +89,12 @@ func (t TextItem) Bold(f bool) TextItem {
 
 func (t TextItem) RefPrefix(refPrefix string) TextItem {
 	t.refPrefix = refPrefix
+
+	return t
+}
+
+func (t TextItem) RefText(refText string) TextItem {
+	t.refText = refText
 
 	return t
 }

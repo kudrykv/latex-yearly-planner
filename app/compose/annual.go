@@ -35,7 +35,10 @@ func Annual(cfg config.Config) []page.Page {
 					header.NewTextItem("Q4"),
 				),
 			},
-			Right: header.Items{header.NewTextItem("Notes"), header.NewTextItem("Todos")},
+			Right: header.Items{
+				header.NewTextItem("Notes").RefText("Notes Index"),
+				header.NewTextItem("Todos").RefText("Todos Index"),
+			},
 		},
 	}}
 }

@@ -43,8 +43,16 @@ func notesIndexPage(cfg config.Config) page.Page {
 	}
 
 	return page.Page{
-		Tpl:    cfg.Blocks.NotesIndexed.TplIndex,
-		Header: header.Header{},
-		Body:   notesMatrix,
+		Tpl: cfg.Blocks.NotesIndexed.TplIndex,
+		Header: header.Header{
+			Left: header.Items{
+				header.NewIntItem(cfg.Year),
+				header.NewTextItem("Notes Index").Ref(true),
+			},
+			Right: header.Items{
+				header.NewTextItem("Todos").RefText("Todos Index"),
+			},
+		},
+		Body: notesMatrix,
 	}
 }

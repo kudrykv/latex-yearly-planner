@@ -43,8 +43,16 @@ func todosIndexPage(cfg config.Config) page.Page {
 	}
 
 	return page.Page{
-		Tpl:    cfg.Blocks.TodosIndexed.TplIndex,
-		Header: header.Header{},
-		Body:   notesMatrix,
+		Tpl: cfg.Blocks.TodosIndexed.TplIndex,
+		Header: header.Header{
+			Left: header.Items{
+				header.NewIntItem(cfg.Year),
+				header.NewTextItem("Todos Index").Ref(true),
+			},
+			Right: header.Items{
+				header.NewTextItem("Notes").RefText("Notes Index"),
+			},
+		},
+		Body: notesMatrix,
 	}
 }
