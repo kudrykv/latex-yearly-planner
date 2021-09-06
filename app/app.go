@@ -35,9 +35,10 @@ func New() *cli.App {
 
 func action(c *cli.Context) error {
 	var (
-		data page.PageTpl
-		cfg  config.Config
-		err  error
+		fn  Composer
+		ok  bool
+		cfg config.Config
+		err error
 	)
 
 	pathConfig := c.Path(fConfig)
@@ -48,11 +49,8 @@ func action(c *cli.Context) error {
 	wr := &bytes.Buffer{}
 
 	t := tex.New()
-	files := []string{"title", "year", "quarter", "month", "weekly", "daily", "daily_reflect", "daily_notes", "todos_indexed", "notes_indexed"}
-	//files := []string{"todos_indexed"}
-	data.Cfg = cfg
 
-	if err = t.Document(wr, cfg, files); err != nil {
+	if err = t.Document(wr, cfg); err != nil {
 		return fmt.Errorf("tex document: %w", err)
 	}
 
@@ -60,46 +58,15 @@ func action(c *cli.Context) error {
 		return fmt.Errorf("ioutil write file: %w", err)
 	}
 
-	for _, file := range files {
+	for _, file := range cfg.RenderBlocks {
 		wr.Reset()
 
-		switch file {
-		case "title":
-			data.Pages = []page.Page{{Tpl: "title.tpl"}}
-
-		case "year":
-			data.Pages = compose.Annual(cfg)
-
-		case "quarter":
-			data.Pages = compose.Quarterly(cfg)
-
-		case "month":
-			data.Pages = compose.Monthly(cfg)
-
-		case "weekly":
-			data.Pages = compose.Weekly(cfg)
-
-		case "daily":
-			data.Pages = compose.Daily(cfg)
-
-		case "daily_reflect":
-			data.Pages = compose.DailyReflect(cfg)
-
-		case "daily_notes":
-			data.Pages = compose.DailyNotes(cfg)
-
-		case "notes_indexed":
-			data.Pages = compose.NotesIndexed(cfg)
-
-		case "todos_indexed":
-			data.Pages = compose.TodosIndexed(cfg)
-
-		default:
+		if fn, ok = ComposerMap[file]; !ok {
 			continue
 		}
 
-		for _, pag := range data.Pages {
-			pag.Cfg = data.Cfg
+		for _, pag := range fn(cfg) {
+			pag.Cfg = cfg
 
 			if err = t.Execute(wr, pag.Tpl, pag); err != nil {
 				return fmt.Errorf("tex execute: %w", err)
@@ -128,4 +95,19 @@ func RootFilename(pathconfig string) string {
 	}
 
 	return pathconfig + ".tex"
+}
+
+type Composer func(config.Config) []page.Page
+
+var ComposerMap = map[string]Composer{
+	"title":        compose.Title,
+	"annual":       compose.Annual,
+	"quarterly":    compose.Quarterly,
+	"monthly":      compose.Monthly,
+	"weekly":       compose.Weekly,
+	"daily":        compose.Daily,
+	"dailyreflect": compose.DailyReflect,
+	"dailynotes":   compose.DailyNotes,
+	"notesindexed": compose.NotesIndexed,
+	"todosindexed": compose.TodosIndexed,
 }

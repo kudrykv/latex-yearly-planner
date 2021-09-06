@@ -39,7 +39,22 @@ layout:
     gray: gray
     lightgray: gray!50
 
+renderblocks:
+  - title
+  - annual
+  - quarterly
+  - monthly
+  - weekly
+  - daily
+  - dailyreflect
+  - dailynotes
+  - notesindexed
+  - todosindexed
+
 blocks:
+  title:
+    tpl: title.tpl
+
   annual:
     enabled: true
     tpl: annual.tpl

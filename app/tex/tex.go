@@ -41,13 +41,13 @@ func New() Tex {
 	}
 }
 
-func (t Tex) Document(wr io.Writer, cfg config.Config, files []string) error {
+func (t Tex) Document(wr io.Writer, cfg config.Config) error {
 	type pack struct {
 		Cfg   config.Config
 		Files []string
 	}
 
-	data := pack{Cfg: cfg, Files: files}
+	data := pack{Cfg: cfg, Files: cfg.RenderBlocks}
 	if err := t.tpl.ExecuteTemplate(wr, "document.tpl", data); err != nil {
 		return fmt.Errorf("execute template: %w", err)
 	}

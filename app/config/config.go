@@ -13,11 +13,14 @@ type Config struct {
 	Year      int `env:"PLANNER_YEAR"`
 	WeekStart time.Weekday
 
+	RenderBlocks []string
+
 	Layout Layout
 	Blocks Blocks
 }
 
 type Blocks struct {
+	Title        Title
 	Annual       Annual
 	Quarterly    Quarterly
 	Monthly      Monthly
@@ -27,6 +30,10 @@ type Blocks struct {
 	DailyNotes   DailyNotes
 	NotesIndexed NotesIndexed
 	TodosIndexed TodosIndexed
+}
+
+type Title struct {
+	Tpl string
 }
 
 type Annual struct {
