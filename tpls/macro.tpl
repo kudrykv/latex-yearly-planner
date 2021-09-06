@@ -25,6 +25,7 @@
 \newlength{\myLenTriColSep}
 \newlength{\myLenTriCol}
 \newlength{\myLenMonthlyCellHeight}
+\newlength{\myLenNotesIndexCellHeight}
 
 \setlength{\myLenTabColSep}{ {{- .Cfg.Layout.Lengths.TabColSep -}} }
 \setlength{\myLenLineThicknessDefault}{ {{- .Cfg.Layout.Lengths.LineThicknessDefault -}} }
@@ -35,6 +36,7 @@
 \setlength{\myLenMonthlyCellHeight}{ {{- .Cfg.Layout.Lengths.MonthlyCellHeight -}} }
 \setlength{\myLenTriColSep}{ {{- .Cfg.Layout.Lengths.TriColSep -}} }
 \setlength{\myLenTriCol}{\dimexpr.333\linewidth-.667\myLenTriColSep}
+\setlength{\myLenNotesIndexCellHeight}{ {{- .Cfg.Layout.Lengths.NotesIndexCellHeight -}} }
 
 \newcommand{\myColorGray}{ {{- .Cfg.Layout.Colors.Gray -}} }
 \newcommand{\myColorLightGray}{ {{- .Cfg.Layout.Colors.LightGray -}} }

@@ -25,7 +25,7 @@ type Blocks struct {
 	Daily        Daily
 	DailyReflect DailyReflect
 	DailyNotes   DailyNotes
-	Notes        Notes
+	NotesIndexed NotesIndexed
 }
 
 type Annual struct {
@@ -63,7 +63,7 @@ type DailyNotes struct {
 	Tpl     string
 }
 
-type Notes struct {
+type NotesIndexed struct {
 	Enabled  bool
 	TplIndex string
 	TplPage  string
@@ -104,6 +104,7 @@ type Lengths struct {
 	TwoColSep            string
 	TriColSep            string
 	MonthlyCellHeight    string
+	NotesIndexCellHeight string
 }
 
 type Paper struct {

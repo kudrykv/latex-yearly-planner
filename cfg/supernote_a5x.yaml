@@ -32,6 +32,7 @@ layout:
     twocolsep: 5pt
     tricolsep: 5pt
     monthlycellheight: 55pt
+    notesindexcellheight: 1.37cm
 
   colors:
     gray: gray
@@ -65,3 +66,7 @@ blocks:
   dailynotes:
     enabled: true
     tpl: daily_notes.tpl
+
+  notesindexed:
+    tplindex: notes_index.tpl
+    tplpage: daily_notes.tpl
