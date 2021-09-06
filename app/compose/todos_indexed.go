@@ -14,6 +14,16 @@ func TodosIndexed(cfg config.Config) []page.Page {
 	pages = append(pages, todosIndexPage(cfg))
 
 	for i := 1; i <= 100; i++ {
+		right := header.Items{}
+
+		if i > 2 {
+			right = append(right, header.NewTextItem("Todo "+strconv.Itoa(i-1)))
+		}
+
+		if i < 100 {
+			right = append(right, header.NewTextItem("Todo "+strconv.Itoa(i+1)))
+		}
+
 		pages = append(pages, page.Page{
 			Tpl: cfg.Blocks.TodosIndexed.TplPage,
 			Header: header.Header{
@@ -22,6 +32,7 @@ func TodosIndexed(cfg config.Config) []page.Page {
 					header.NewTextItem("Todos Index"),
 					header.NewTextItem("Todo " + strconv.Itoa(i)).Ref(true),
 				},
+				Right: right,
 			},
 		})
 	}

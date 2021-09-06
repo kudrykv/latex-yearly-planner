@@ -14,6 +14,16 @@ func NotesIndexed(cfg config.Config) []page.Page {
 	pages = append(pages, notesIndexPage(cfg))
 
 	for i := 1; i <= 100; i++ {
+		right := header.Items{}
+
+		if i > 2 {
+			right = append(right, header.NewTextItem("Note "+strconv.Itoa(i-1)))
+		}
+
+		if i < 100 {
+			right = append(right, header.NewTextItem("Note "+strconv.Itoa(i+1)))
+		}
+
 		pages = append(pages, page.Page{
 			Tpl: cfg.Blocks.NotesIndexed.TplPage,
 			Header: header.Header{
@@ -22,6 +32,7 @@ func NotesIndexed(cfg config.Config) []page.Page {
 					header.NewTextItem("Notes Index"),
 					header.NewTextItem("Note " + strconv.Itoa(i)).Ref(true),
 				},
+				Right: right,
 			},
 		})
 	}
