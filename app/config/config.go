@@ -26,6 +26,7 @@ type Blocks struct {
 	DailyReflect DailyReflect
 	DailyNotes   DailyNotes
 	NotesIndexed NotesIndexed
+	TodosIndexed TodosIndexed
 }
 
 type Annual struct {
@@ -69,6 +70,12 @@ type NotesIndexed struct {
 	TplPage  string
 }
 
+type TodosIndexed struct {
+	Enabled  bool
+	TplIndex string
+	TplPage  string
+}
+
 type Colors struct {
 	Gray      string
 	LightGray string
@@ -83,17 +90,18 @@ type Layout struct {
 }
 
 type Numbers struct {
-	ArrayStretch       float64
-	QuarterlyLines     int
-	WeeklyLines        int
-	DailyTodos         int
-	DailyNotes         int
-	DailyBottomHour    int
-	DailyTopHour       int
-	DailyDiaryGoals    int
-	DailyDiaryGrateful int
-	DailyDiaryBest     int
-	DailyDiaryLog      int
+	ArrayStretch        float64
+	QuarterlyLines      int
+	WeeklyLines         int
+	DailyTodos          int
+	DailyNotes          int
+	DailyBottomHour     int
+	DailyTopHour        int
+	DailyDiaryGoals     int
+	DailyDiaryGrateful  int
+	DailyDiaryBest      int
+	DailyDiaryLog       int
+	TodoLinesInTodoPage int
 }
 
 type Lengths struct {
