@@ -5,6 +5,9 @@ layout:
     width: 15.6cm
     height: 20.9cm
 
+    marginparwidth: 1cm
+    marginparsep: 0cm
+
     margin:
       top: 1.2cm
       bottom: 0.7cm

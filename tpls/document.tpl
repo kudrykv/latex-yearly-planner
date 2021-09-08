@@ -2,7 +2,7 @@
 
 \usepackage{geometry}
 \usepackage[table]{xcolor}
-%\usepackage{showframe}
+{{if $.Cfg.Debug.ShowFrame}}\usepackage{showframe}{{end}}
 \usepackage{calc}
 \usepackage{dashrule}
 \usepackage{setspace}
@@ -21,10 +21,11 @@
 \usepackage{adjustbox}
 \usepackage{pgffor}
 \usepackage{hyperref}
+\usepackage{marginnote}
 
-%\hypersetup{
-%  hidelinks=true
-%}
+\hypersetup{
+    {{- if not .Cfg.Debug.ShowLinks}}hidelinks=true{{end -}}
+}
 
 
 \geometry{paperwidth={{.Cfg.Layout.Paper.Width}}, paperheight={{.Cfg.Layout.Paper.Height}}}
@@ -32,11 +33,14 @@
   top={{.Cfg.Layout.Paper.Margin.Top}},
   bottom={{.Cfg.Layout.Paper.Margin.Bottom}},
   left={{.Cfg.Layout.Paper.Margin.Left}},
-  right={{.Cfg.Layout.Paper.Margin.Right}}
+  right={{.Cfg.Layout.Paper.Margin.Right}},
+  marginparwidth={{.Cfg.Layout.Paper.MarginParWidth}},
+  marginparsep={{.Cfg.Layout.Paper.MarginParSep}}
 }
 
 \pagestyle{empty}
-
+{{if $.Cfg.Layout.Paper.ReverseMargins}}\reversemarginpar{{end}}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
 \parindent=0pt
 
 \begin{document}

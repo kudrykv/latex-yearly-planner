@@ -10,6 +10,8 @@ import (
 )
 
 type Config struct {
+	Debug Debug
+
 	Year      int `env:"PLANNER_YEAR"`
 	WeekStart time.Weekday
 
@@ -17,6 +19,11 @@ type Config struct {
 
 	Layout Layout
 	Blocks Blocks
+}
+
+type Debug struct {
+	ShowFrame bool
+	ShowLinks bool
 }
 
 type RenderBlocks []string
@@ -130,6 +137,10 @@ type Paper struct {
 	Height string `env:"PLANNER_LAYOUT_PAPER_HEIGHT"`
 
 	Margin Margin
+
+	ReverseMargins bool
+	MarginParWidth string
+	MarginParSep   string
 }
 
 type Margin struct {
