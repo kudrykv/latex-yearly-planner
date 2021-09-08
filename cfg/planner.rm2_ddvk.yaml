@@ -19,14 +19,14 @@ layout:
     quarterlylines: 12
     weeklylines: 11
     dailytodos: 15
-    dailynotes: 18
+    dailynotes: 20
     dailybottomhour: 6
-    dailytophour: 22
+    dailytophour: 23
     dailydiarygoals: 10
-    dailydiarygrateful: 10
-    dailydiarybest: 11
-    dailydiarylog: 35
-    todolinesintodopage: 10
+    dailydiarygrateful: 11
+    dailydiarybest: 12
+    dailydiarylog: 37
+    todolinesintodopage: 11
 
   lengths:
     tabcolsep: 3.5pt
@@ -36,7 +36,7 @@ layout:
     twocolsep: 5pt
     tricolsep: 5pt
     monthlycellheight: 55pt
-    notesindexcellheight: 1.37cm
+    notesindexcellheight: 1.45cm
 
   colors:
     gray: gray
