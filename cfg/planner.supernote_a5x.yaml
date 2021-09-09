@@ -1,0 +1,88 @@
+weekstart: 1
+
+layout:
+  paper:
+    width: 15.6cm
+    height: 20.9cm
+
+    marginparwidth: 1cm
+    marginparsep: 0cm
+
+    margin:
+      top: 1.2cm
+      bottom: 0.7cm
+      left: 0.5cm
+      right: 0.5cm
+
+  numbers:
+    arraystretch: 1.5
+    quarterlylines: 12
+    weeklylines: 11
+    dailytodos: 15
+    dailynotes: 18
+    dailybottomhour: 6
+    dailytophour: 22
+    dailydiarygoals: 10
+    dailydiarygrateful: 10
+    dailydiarybest: 11
+    dailydiarylog: 35
+    todolinesintodopage: 10
+
+  lengths:
+    tabcolsep: 3.5pt
+    linethicknessdefault: .4pt
+    linethicknessthick: .8pt
+    lineheightbutline: \dimexpr5mm-.4pt
+    twocolsep: 5pt
+    tricolsep: 5pt
+    monthlycellheight: 55pt
+    notesindexcellheight: 1.37cm
+
+  colors:
+    gray: gray
+    lightgray: gray!50
+
+renderblocks:
+  - title
+  - annual
+  - quarterly
+  - monthly
+  - weekly
+  - daily
+  - dailyreflect
+  - dailynotes
+  - notesindexed
+  - todosindexed
+
+blocks:
+  title:
+    tpl: title.tpl
+
+  annual:
+    tpl: annual.tpl
+
+  quarterly:
+    tpl: quarterly.tpl
+
+  monthly:
+    tpl: monthly.tpl
+
+  weekly:
+    tpl: weekly.tpl
+
+  daily:
+    tpl: daily.tpl
+
+  dailyreflect:
+    tpl: daily_reflect.tpl
+
+  dailynotes:
+    tpl: daily_notes.tpl
+
+  notesindexed:
+    tplindex: notes_index.tpl
+    tplpage: daily_notes.tpl
+
+  todosindexed:
+    tplindex: todos_index.tpl
+    tplpage: todos_note.tpl
