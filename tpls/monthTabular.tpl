@@ -1,11 +1,18 @@
 {%
 \renewcommand{\arraystretch}{\myNumArrayStretch}%
 \setlength{\tabcolsep}{\myLenTabColSep}%
-\begin{tabular}[t]{ {{- .Month.WeekLayout .Cfg.RenderBlocks.WeeklyEnabled -}} }
+
+{{- if is .UseTabularx}}
+\begin{tabularx}{\linewidth}{ {{- if .Cfg.RenderBlocks.WeeklyEnabled -}} Y| {{- end -}} *{7}{Y}}
+{{- else}}
+\begin{tabular}[t]{ {{- if .Cfg.RenderBlocks.WeeklyEnabled -}} c| {{- end -}} *{7}{c}}
+{{- end}}
+{{- if not (is .HideName) -}}
 \multicolumn%
   { {{- .Month.WeekHeaderLen .Cfg.RenderBlocks.WeeklyEnabled -}} }%
   {c}%
   { {{- template "slink.tpl" .Month.MonthName -}} } \\ \hline
+{{- end}}
 {{.Month.WeekHeader .Cfg.RenderBlocks.WeeklyEnabled}} \\ \hline
 {{- range $row := .Month.Matrix}}
   {{if $.Cfg.RenderBlocks.WeeklyEnabled -}}
@@ -19,5 +26,10 @@
     {{if not $item.IsZero}} {{ $item.Link }} {{end}}
     {{- if ne $j (dec (len $row)) }} & {{else}} \\ {{end -}}
   {{- end -}}
-{{end}}
-\end{tabular}}
+{{- end}}
+{{if is .UseTabularx}}
+\end{tabularx}
+{{- else -}}
+\end{tabular}
+{{- end -}}
+}

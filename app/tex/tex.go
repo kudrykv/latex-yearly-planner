@@ -29,6 +29,12 @@ var tpl = template.Must(template.New("").Funcs(template.FuncMap{
 	"dec": func(i int) int {
 		return i - 1
 	},
+
+	"is": func(i interface{}) bool {
+		value, _ := i.(bool)
+
+		return value
+	},
 }).ParseGlob(`./tpls/*`))
 
 type Tex struct {

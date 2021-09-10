@@ -42,6 +42,7 @@
 {{if $.Cfg.Layout.Paper.ReverseMargins}}\reversemarginpar{{end}}
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 \parindent=0pt
+\fboxsep0pt
 
 \begin{document}
 

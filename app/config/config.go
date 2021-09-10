@@ -45,6 +45,7 @@ type Blocks struct {
 	Monthly      Monthly
 	Weekly       Weekly
 	Daily        Daily
+	DailyWMonth  DailyWMonth
 	DailyReflect DailyReflect
 	DailyNotes   DailyNotes
 	NotesIndexed NotesIndexed
@@ -72,6 +73,10 @@ type Weekly struct {
 }
 
 type Daily struct {
+	Tpl string
+}
+
+type DailyWMonth struct {
 	Tpl string
 }
 

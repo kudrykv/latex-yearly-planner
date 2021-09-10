@@ -5,13 +5,14 @@ layout:
     width: 15.6cm
     height: 20.9cm
 
-    marginparwidth: 1cm
-    marginparsep: 0cm
+    reversemargins: true
+    marginparwidth: .8cm
+    marginparsep: 3mm
 
     margin:
       top: 1.2cm
       bottom: 0.7cm
-      left: 0.5cm
+      left: 1cm
       right: 0.5cm
 
   numbers:
@@ -20,8 +21,8 @@ layout:
     weeklylines: 11
     dailytodos: 15
     dailynotes: 18
-    dailybottomhour: 6
-    dailytophour: 22
+    dailybottomhour: 8
+    dailytophour: 20
     dailydiarygoals: 10
     dailydiarygrateful: 10
     dailydiarybest: 11
@@ -43,16 +44,7 @@ layout:
     lightgray: gray!50
 
 renderblocks:
-  - title
-  - annual
-  - quarterly
-  - monthly
-  - weekly
-  - daily
-  - dailyreflect
-  - dailynotes
-  - notesindexed
-  - todosindexed
+  - dailywmonth
 
 blocks:
   title:
