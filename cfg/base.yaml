@@ -47,7 +47,7 @@ blocks:
     tpl: title.tpl
 
   annual:
-    tpl: annual.tpl
+    tpl: annual_header.tpl
 
   quarterly:
     tpl: quarterly.tpl

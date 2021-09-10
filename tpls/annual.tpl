@@ -1,5 +1,4 @@
-{{template "header.tpl" dict "Cfg" $.Cfg "Header" .Header}}
-{{range $i, $qrtr := .Body}}
+{{range $i, $qrtr := .Quarters}}
   \begin{tabularx}{\linewidth}{@{}*{3}{X}@{}}
   {{- range $j, $month := $qrtr}}
     {{- template "monthTabular.tpl" dict "Cfg" $.Cfg "Month" $month}}
