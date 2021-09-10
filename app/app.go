@@ -41,8 +41,8 @@ func action(c *cli.Context) error {
 		err error
 	)
 
-	pathConfig := c.Path(fConfig)
-	if cfg, err = config.New(pathConfig); err != nil {
+	pathConfigs := strings.Split(c.Path(fConfig), ",")
+	if cfg, err = config.New(pathConfigs...); err != nil {
 		return fmt.Errorf("config new: %w", err)
 	}
 
@@ -54,7 +54,7 @@ func action(c *cli.Context) error {
 		return fmt.Errorf("tex document: %w", err)
 	}
 
-	if err = ioutil.WriteFile("out/"+RootFilename(pathConfig), wr.Bytes(), 0600); err != nil {
+	if err = ioutil.WriteFile("out/"+RootFilename(pathConfigs[len(pathConfigs)-1]), wr.Bytes(), 0600); err != nil {
 		return fmt.Errorf("ioutil write file: %w", err)
 	}
 

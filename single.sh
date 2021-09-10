@@ -4,7 +4,7 @@ set -eo pipefail
 
 go run cmd/plannergen/plannergen.go --config "${CFG}"
 
-nakedname=$(echo "${CFG}" | cut -d'/' -f 2-99 | rev | cut -d'.' -f 2-99 | rev)
+nakedname=$(echo "${CFG}" | rev | cut -d, -f1 | cut -d'/' -f 1 | cut -d'.' -f 2-99 | rev)
 
 pdflatex \
   -file-line-error \

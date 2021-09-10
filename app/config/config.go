@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"io/ioutil"
+	"strings"
 	"time"
 
 	"github.com/caarlos0/env/v6"
@@ -155,19 +156,21 @@ type Margin struct {
 	Right  string `env:"PLANNER_LAYOUT_PAPER_MARGIN_RIGHT"`
 }
 
-func New(filepath string) (Config, error) {
+func New(pathConfigs ...string) (Config, error) {
 	var (
 		bts []byte
 		err error
 		cfg Config
 	)
 
-	if bts, err = ioutil.ReadFile(filepath); err != nil {
-		return cfg, fmt.Errorf("ioutil read file: %w", err)
-	}
+	for _, filepath := range pathConfigs {
+		if bts, err = ioutil.ReadFile(strings.ToLower(filepath)); err != nil {
+			return cfg, fmt.Errorf("ioutil read file: %w", err)
+		}
 
-	if err = yaml.Unmarshal(bts, &cfg); err != nil {
-		return cfg, fmt.Errorf("yaml unmarshal: %w", err)
+		if err = yaml.Unmarshal(bts, &cfg); err != nil {
+			return cfg, fmt.Errorf("yaml unmarshal: %w", err)
+		}
 	}
 
 	if err = env.Parse(&cfg); err != nil {
