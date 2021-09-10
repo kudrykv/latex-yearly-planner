@@ -14,10 +14,19 @@ type DailyWithMonthBody struct {
 }
 
 func DailyWMonth(cfg config.Config) []page.Page {
-	body := DailyWithMonthBody{
-		Today: calendar.DayTime{Time: time.Now()},
-		Month: calendar.NewYearMonth(cfg.Year, time.August).Calendar(cfg.WeekStart),
+	pages := make([]page.Page, 0, 366)
+	soy := time.Date(cfg.Year, time.January, 1, 0, 0, 0, 0, time.Local)
+	eoy := soy.AddDate(1, 0, 0)
+
+	for today := soy; today.Before(eoy); today = today.AddDate(0, 0, 1) {
+		pages = append(pages, page.Page{
+			Tpl: cfg.Blocks.DailyWMonth.Tpl,
+			Body: DailyWithMonthBody{
+				Today: calendar.DayTime{Time: today},
+				Month: calendar.NewYearMonth(cfg.Year, today.Month()).Calendar(cfg.WeekStart),
+			},
+		})
 	}
 
-	return []page.Page{{Tpl: cfg.Blocks.DailyWMonth.Tpl, Body: body}}
+	return pages[:2]
 }

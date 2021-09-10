@@ -15,4 +15,5 @@ layout:
     dailytophour: 20
 
 renderblocks:
+  - annual
   - dailywmonth

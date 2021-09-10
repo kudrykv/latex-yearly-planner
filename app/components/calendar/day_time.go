@@ -16,7 +16,7 @@ func (d DayTime) AddDate(years, months, days int) DayTime {
 }
 
 func (t DayTime) Link() string {
-	return hyper.Link(t.Format(time.RFC3339), strconv.Itoa(t.Day()))
+	return hyper.Link(t.RefText(), strconv.Itoa(t.Day()))
 }
 
 func (t DayTime) RefText() string {
