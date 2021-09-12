@@ -53,3 +53,31 @@ func Quarterly(cfg config.Config, tpls []string) ([]page.Page, error) {
 
 	return pages, nil
 }
+
+func Quarters2(cfg config.Config, tpls []string) ([]page.Page, error) {
+	if len(tpls) != 1 {
+		return nil, fmt.Errorf("exppected one tpl, got %d %v", len(tpls), tpls)
+	}
+
+	pages := make([]page.Page, 0, 4)
+	q := 1
+
+	for quarter := time.January; quarter <= time.December; quarter += 3 {
+		qrtr := make([]calendar.Calendar, 0, 3)
+		for month := quarter; month < quarter+3; month++ {
+			qrtr = append(qrtr, calendar.NewYearMonth(cfg.Year, month).Calendar(cfg.WeekStart))
+		}
+
+		pages = append(pages, page.Page{
+			Tpl: tpls[0],
+			Header: map[string]interface{}{
+				"Quarter": q,
+			},
+			Body: qrtr,
+		})
+
+		q++
+	}
+
+	return pages, nil
+}

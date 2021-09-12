@@ -1,13 +1,18 @@
+{{ if is .Year}}
+\begin{tabular}{@{}l}
+  \resizebox{!}{.5cm}{\hypertarget{ {{- .Year -}} }{ {{- .Year -}} }}
+\end{tabular}
+{{- end -}}
+{{ if is .Quarter}}
+\begin{tabular}{@{}l}
+  \resizebox{!}{.5cm}{\hypertarget{Q {{- .Quarter -}} }{Q {{- .Quarter -}} }}
+\end{tabular}
+{{- end -}}
 {{ if is .Today}}
 \hypertarget{ {{- .Today.RefText -}} }{}%
 \begin{tabular}{@{}l|l}
-  \multirow{2}{*}{\scalebox{4}{ {{- .Today.Day -}} }} & \textbf{ {{- .Today.Weekday -}} } \\
+  \multirow{2}{*}{\resizebox{!}{.5cm}{ {{- .Today.Day -}} }} & \textbf{ {{- .Today.Weekday -}} } \\
   & {{- .Today.Month -}}
-\end{tabular}
-{{- end -}}
-{{ if is .Year}}
-\begin{tabular}{@{}l}
-  \scalebox{4}{\hypertarget{ {{- .Year -}} }{ {{- .Year -}} }}
 \end{tabular}
 {{- end -}}
 \hfill
@@ -39,7 +44,14 @@
     \end{tabularx}%
     \quad
     \begin{tabularx}{4cm}{*{3}{Y|}Y}
+    {{ if is .Quarter}}
+      {{if eq .Quarter 4 }}\cellcolor{black}{\textcolor{white}{Q4}}{{else}}Q4{{end}} &
+      {{if eq .Quarter 3 }}\cellcolor{black}{\textcolor{white}{Q3}}{{else}}Q3{{end}} &
+      {{if eq .Quarter 2 }}\cellcolor{black}{\textcolor{white}{Q2}}{{else}}Q2{{end}} &
+      {{if eq .Quarter 1 }}\cellcolor{black}{\textcolor{white}{Q1}}{{else}}Q1{{end}} \\ \hline
+    {{else}}
       Q4 & Q3 & Q2 & Q1 \\ \hline
+    {{end}}
     \end{tabularx}%
   }%
 }%

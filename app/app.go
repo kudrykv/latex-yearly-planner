@@ -108,6 +108,7 @@ var ComposerMap = map[string]Composer{
 	"title":        compose.Title,
 	"annual":       compose.Annual,
 	"quarterly":    compose.Quarterly,
+	"quarterly2":   compose.Quarters2,
 	"monthly":      compose.Monthly,
 	"weekly":       compose.Weekly,
 	"daily":        compose.Daily,
