@@ -1,6 +1,7 @@
 package compose
 
 import (
+	"fmt"
 	"math"
 	"strconv"
 	"time"
@@ -11,7 +12,11 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-func Monthly(cfg config.Config) []page.Page {
+func Monthly(cfg config.Config, tpls []string) ([]page.Page, error) {
+	if len(tpls) != 1 {
+		return nil, fmt.Errorf("exppected one tpl, got %d %v", len(tpls), tpls)
+	}
+
 	pages := make([]page.Page, 0, 12)
 
 	for month := time.January; month <= time.December; month++ {
@@ -26,7 +31,7 @@ func Monthly(cfg config.Config) []page.Page {
 
 		qrtr := int(math.Ceil(float64(month) / 3.))
 		pages = append(pages, page.Page{
-			Tpl: cfg.Blocks.Monthly.Tpl,
+			Tpl: tpls[0],
 			Header: header.Header{
 				Left: header.Items{
 					header.NewIntItem(cfg.Year),
@@ -39,5 +44,5 @@ func Monthly(cfg config.Config) []page.Page {
 		})
 	}
 
-	return pages
+	return pages, nil
 }

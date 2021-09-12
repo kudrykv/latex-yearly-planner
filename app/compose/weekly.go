@@ -1,6 +1,7 @@
 package compose
 
 import (
+	"fmt"
 	"strconv"
 	"time"
 
@@ -10,7 +11,11 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-func Weekly(cfg config.Config) []page.Page {
+func Weekly(cfg config.Config, tpls []string) ([]page.Page, error) {
+	if len(tpls) != 1 {
+		return nil, fmt.Errorf("exppected one tpl, got %d %v", len(tpls), tpls)
+	}
+
 	sow := pickUpStartWeekForTheYear(cfg.Year, cfg.WeekStart)
 	pages := make([]page.Page, 0, 53)
 
@@ -47,7 +52,7 @@ func Weekly(cfg config.Config) []page.Page {
 		}
 
 		pag := page.Page{
-			Tpl: cfg.Blocks.Weekly.Tpl,
+			Tpl: tpls[0],
 			Header: header.Header{
 				Right: right,
 				Left: header.Items{
@@ -63,7 +68,7 @@ func Weekly(cfg config.Config) []page.Page {
 		pages = append(pages, pag)
 	}
 
-	return pages
+	return pages, nil
 }
 
 func pickUpStartWeekForTheYear(year int, weekStart time.Weekday) calendar.DayTime {

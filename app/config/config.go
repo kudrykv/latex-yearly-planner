@@ -27,16 +27,21 @@ type Debug struct {
 	ShowLinks bool
 }
 
-type RenderBlocks []string
+type RenderBlocks []RenderBlock
 
 func (r RenderBlocks) WeeklyEnabled() bool {
 	for _, s := range r {
-		if s == "weekly" {
+		if s.FuncName == "weekly" {
 			return true
 		}
 	}
 
 	return false
+}
+
+type RenderBlock struct {
+	FuncName string
+	Tpls     []string
 }
 
 type Colors struct {

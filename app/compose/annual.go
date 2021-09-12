@@ -1,6 +1,7 @@
 package compose
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
@@ -9,7 +10,11 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-func Annual(cfg config.Config) []page.Page {
+func Annual(cfg config.Config, tpls []string) ([]page.Page, error) {
+	if len(tpls) != 1 {
+		return nil, fmt.Errorf("exppected one tpl, got %d %v", len(tpls), tpls)
+	}
+
 	var quarters [][]calendar.Calendar
 
 	for quarter := time.January; quarter <= time.December; quarter += 3 {
@@ -23,7 +28,7 @@ func Annual(cfg config.Config) []page.Page {
 	}
 
 	return []page.Page{{
-		Tpl:  cfg.Blocks.Annual.Tpl,
+		Tpl:  tpls[0],
 		Body: quarters,
 		Header: header.Header{
 			Left: header.Items{
@@ -40,5 +45,5 @@ func Annual(cfg config.Config) []page.Page {
 				header.NewTextItem("Todos").RefText("Todos Index"),
 			},
 		},
-	}}
+	}}, nil
 }

@@ -49,11 +49,11 @@ func New() Tex {
 
 func (t Tex) Document(wr io.Writer, cfg config.Config) error {
 	type pack struct {
-		Cfg   config.Config
-		Files []string
+		Cfg          config.Config
+		RenderBlocks config.RenderBlocks
 	}
 
-	data := pack{Cfg: cfg, Files: cfg.RenderBlocks}
+	data := pack{Cfg: cfg, RenderBlocks: cfg.RenderBlocks}
 	if err := t.tpl.ExecuteTemplate(wr, "document.tpl", data); err != nil {
 		return fmt.Errorf("execute template: %w", err)
 	}

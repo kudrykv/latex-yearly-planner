@@ -1,6 +1,7 @@
 package compose
 
 import (
+	"fmt"
 	"math"
 	"strconv"
 	"time"
@@ -11,7 +12,11 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-func DailyNotes(cfg config.Config) []page.Page {
+func DailyNotes(cfg config.Config, tpls []string) ([]page.Page, error) {
+	if len(tpls) != 1 {
+		return nil, fmt.Errorf("exppected one tpl, got %d %v", len(tpls), tpls)
+	}
+
 	pages := make([]page.Page, 0, 366)
 	day := calendar.DayTime{Time: time.Date(cfg.Year, time.January, 1, 0, 0, 0, 0, time.Local)}
 
@@ -38,7 +43,7 @@ func DailyNotes(cfg config.Config) []page.Page {
 		}
 
 		pages = append(pages, page.Page{
-			Tpl: cfg.Blocks.DailyNotes.Tpl,
+			Tpl: tpls[0],
 			Header: header.Header{
 				Left:  left,
 				Right: right,
@@ -49,5 +54,5 @@ func DailyNotes(cfg config.Config) []page.Page {
 		day = day.AddDate(0, 0, 1)
 	}
 
-	return pages
+	return pages, nil
 }

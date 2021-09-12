@@ -48,7 +48,7 @@
 
 {{template "macro.tpl" .}}
 
-  {{range .Files -}}
-    \include{ {{- . -}} }
+  {{range .RenderBlocks -}}
+    \include{ {{- .FuncName -}} }
   {{end}}
 \end{document}

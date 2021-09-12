@@ -41,39 +41,3 @@ layout:
   colors:
     gray: gray
     lightgray: gray!50
-
-blocks:
-  title:
-    tpl: title.tpl
-
-  annual:
-    tpl: annual_header.tpl
-
-  quarterly:
-    tpl: quarterly.tpl
-
-  monthly:
-    tpl: monthly.tpl
-
-  weekly:
-    tpl: weekly.tpl
-
-  daily:
-    tpl: daily.tpl
-
-  dailywmonth:
-    tpl: daily_with_month.tpl
-
-  dailyreflect:
-    tpl: daily_reflect.tpl
-
-  dailynotes:
-    tpl: daily_notes.tpl
-
-  notesindexed:
-    tplindex: notes_index.tpl
-    tplpage: daily_notes.tpl
-
-  todosindexed:
-    tplindex: todos_index.tpl
-    tplpage: todos_note.tpl

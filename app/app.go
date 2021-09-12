@@ -61,11 +61,16 @@ func action(c *cli.Context) error {
 	for _, file := range cfg.RenderBlocks {
 		wr.Reset()
 
-		if fn, ok = ComposerMap[file]; !ok {
+		if fn, ok = ComposerMap[file.FuncName]; !ok {
 			continue
 		}
 
-		for _, pag := range fn(cfg) {
+		pages, err := fn(cfg, file.Tpls)
+		if err != nil {
+			return fmt.Errorf("%s: %w", file.FuncName, err)
+		}
+
+		for _, pag := range pages {
 			pag.Cfg = cfg
 
 			if err = t.Execute(wr, pag.Tpl, pag); err != nil {
@@ -73,7 +78,7 @@ func action(c *cli.Context) error {
 			}
 		}
 
-		if err = ioutil.WriteFile("out/"+file+".tex", wr.Bytes(), 0600); err != nil {
+		if err = ioutil.WriteFile("out/"+file.FuncName+".tex", wr.Bytes(), 0600); err != nil {
 			return fmt.Errorf("ioutil write file: %w", err)
 		}
 	}
@@ -97,7 +102,7 @@ func RootFilename(pathconfig string) string {
 	return pathconfig + ".tex"
 }
 
-type Composer func(config.Config) []page.Page
+type Composer func(cfg config.Config, tpls []string) ([]page.Page, error)
 
 var ComposerMap = map[string]Composer{
 	"title":        compose.Title,

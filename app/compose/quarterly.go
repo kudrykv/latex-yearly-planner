@@ -1,6 +1,7 @@
 package compose
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
@@ -13,7 +14,11 @@ type QuarterBody struct {
 	Quarter []calendar.Calendar
 }
 
-func Quarterly(cfg config.Config) []page.Page {
+func Quarterly(cfg config.Config, tpls []string) ([]page.Page, error) {
+	if len(tpls) != 1 {
+		return nil, fmt.Errorf("exppected one tpl, got %d %v", len(tpls), tpls)
+	}
+
 	pages := make([]page.Page, 0, 4)
 	q := 1
 	hRight := header.Items{header.NewTextItem("Notes"), header.NewTextItem("Todos")}
@@ -33,7 +38,7 @@ func Quarterly(cfg config.Config) []page.Page {
 		}
 
 		pages = append(pages, page.Page{
-			Tpl: cfg.Blocks.Quarterly.Tpl,
+			Tpl: tpls[0],
 			Header: header.Header{
 				Left: header.Items{
 					header.NewIntItem(cfg.Year),
@@ -46,5 +51,5 @@ func Quarterly(cfg config.Config) []page.Page {
 		q++
 	}
 
-	return pages
+	return pages, nil
 }

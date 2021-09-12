@@ -1,6 +1,7 @@
 package compose
 
 import (
+	"fmt"
 	"strconv"
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
@@ -8,10 +9,14 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-func NotesIndexed(cfg config.Config) []page.Page {
+func NotesIndexed(cfg config.Config, tpls []string) ([]page.Page, error) {
+	if len(tpls) != 2 {
+		return nil, fmt.Errorf("exppected two tpls, got %d %v", len(tpls), tpls)
+	}
+
 	pages := make([]page.Page, 0, 101)
 
-	pages = append(pages, notesIndexPage(cfg))
+	pages = append(pages, notesIndexPage(cfg, tpls[0]))
 
 	for i := 1; i <= 100; i++ {
 		right := header.Items{}
@@ -25,7 +30,7 @@ func NotesIndexed(cfg config.Config) []page.Page {
 		}
 
 		pages = append(pages, page.Page{
-			Tpl: cfg.Blocks.NotesIndexed.TplPage,
+			Tpl: tpls[1],
 			Header: header.Header{
 				Left: header.Items{
 					header.NewIntItem(cfg.Year),
@@ -37,10 +42,10 @@ func NotesIndexed(cfg config.Config) []page.Page {
 		})
 	}
 
-	return pages
+	return pages, nil
 }
 
-func notesIndexPage(cfg config.Config) page.Page {
+func notesIndexPage(cfg config.Config, tpl string) page.Page {
 	notesMatrix := make([][]int, 0, 10)
 
 	for i := 1; i <= 10; i++ {
@@ -54,7 +59,7 @@ func notesIndexPage(cfg config.Config) page.Page {
 	}
 
 	return page.Page{
-		Tpl: cfg.Blocks.NotesIndexed.TplIndex,
+		Tpl: tpl,
 		Header: header.Header{
 			Left: header.Items{
 				header.NewIntItem(cfg.Year),

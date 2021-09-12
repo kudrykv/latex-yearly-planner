@@ -7,13 +7,38 @@ layout:
       right: 0.5cm
 
 renderblocks:
-  - title
-  - annual
-  - quarterly
-  - monthly
-  - weekly
-  - daily
-  - dailyreflect
-  - dailynotes
-  - notesindexed
-  - todosindexed
+  - funcname: title
+    tpls:
+      - title.tpl
+  - funcname: annual
+    tpls:
+      - annual_header.tpl
+  - funcname: quarterly
+    tpls:
+      - quarterly.tpl
+  - funcname: monthly
+    tpls:
+      - monthly.tpl
+  - funcname: weekly
+    tpls:
+      - weekly.tpl
+  - funcname: daily
+    tpls:
+      - daily.tpl
+  - funcname: dailywmonth
+    tpls:
+      - daily_with_month.tpl
+  - funcname: dailyreflect
+    tpls:
+      - daily_reflect.tpl
+  - funcname: dailynotes
+    tpls:
+      - daily_notes.tpl
+  - funcname: notesindexed
+    tpls:
+      - notes_index.tpl
+      - daily_notes.tpl
+  - funcname: todosindexed
+    tpls:
+      - todos_index.tpl
+      - todos_note.tpl
