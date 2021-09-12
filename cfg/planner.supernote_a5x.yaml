@@ -15,7 +15,7 @@ renderblocks:
       - annual_header.tpl
   - funcname: quarterly
     tpls:
-      - quarterly.tpl
+      - quarterly_with_header.tpl
   - funcname: monthly
     tpls:
       - monthly.tpl
