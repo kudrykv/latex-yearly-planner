@@ -31,9 +31,11 @@ var tpl = template.Must(template.New("").Funcs(template.FuncMap{
 	},
 
 	"is": func(i interface{}) bool {
-		value, _ := i.(bool)
+		if value, ok := i.(bool); ok {
+			return value
+		}
 
-		return value
+		return i != nil
 	},
 }).ParseGlob(`./tpls/*`))
 

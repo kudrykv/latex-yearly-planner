@@ -1,7 +1,15 @@
-\hypertarget{ {{- .Today.RefText -}} }{}\begin{tabular}{l|l}
+{{ if is .Today}}
+\hypertarget{ {{- .Today.RefText -}} }{}%
+\begin{tabular}{@{}l|l}
   \multirow{2}{*}{\scalebox{4}{ {{- .Today.Day -}} }} & \textbf{ {{- .Today.Weekday -}} } \\
   & {{- .Today.Month -}}
 \end{tabular}
+{{- end -}}
+{{ if is .Year}}
+\begin{tabular}{@{}l}
+  \scalebox{4}{\hypertarget{ {{- .Year -}} }{ {{- .Year -}} }}
+\end{tabular}
+{{- end -}}
 \hfill
 \begin{tabular}{*{5}{c|}@{}}
   Calendar & To Do & Meetings & Lists & Notes
@@ -12,6 +20,7 @@
   \rotatebox[origin=tr]{90}{%
     \renewcommand{\arraystretch}{2}%
     \begin{tabularx}{14.35cm}{*{11}{Y|}Y}
+    {{if is .Today}}
       {{if eq .Today.Month.String "December" }}\cellcolor{black}{\textcolor{white}{Dec}}{{else}}Dec{{end}} &
       {{if eq .Today.Month.String "November" }}\cellcolor{black}{\textcolor{white}{Nov}}{{else}}Nov{{end}} &
       {{if eq .Today.Month.String "October" }}\cellcolor{black}{\textcolor{white}{Oct}}{{else}}Oct{{end}} &
@@ -24,6 +33,9 @@
       {{if eq .Today.Month.String "March" }}\cellcolor{black}{\textcolor{white}{Mar}}{{else}}Mar{{end}} &
       {{if eq .Today.Month.String "February" }}\cellcolor{black}{\textcolor{white}{Feb}}{{else}}Feb{{end}} &
       {{if eq .Today.Month.String "January" }}\cellcolor{black}{\textcolor{white}{Jan}}{{else}}Jan{{end}} \\ \hline
+    {{else}}
+      Dec & Nov & Oct & Sep & Aug & Jul & Jun & May & Apr & Mar & Feb & Jan \\ \hline
+    {{end}}
     \end{tabularx}%
     \quad
     \begin{tabularx}{4cm}{*{3}{Y|}Y}

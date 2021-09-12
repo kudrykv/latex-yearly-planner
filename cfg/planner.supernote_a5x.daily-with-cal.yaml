@@ -15,5 +15,9 @@ layout:
     dailytophour: 20
 
 renderblocks:
-  - annual
-  - dailywmonth
+  - funcname: annual
+    tpls:
+      - annual_header2.tpl
+  - funcname: dailywmonth
+    tpls:
+      - daily_with_month.tpl

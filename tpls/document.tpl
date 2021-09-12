@@ -22,6 +22,7 @@
 \usepackage{pgffor}
 \usepackage{hyperref}
 \usepackage{marginnote}
+\usepackage{adjustbox}
 
 \hypersetup{
     {{- if not .Cfg.Debug.ShowLinks}}hidelinks=true{{end -}}

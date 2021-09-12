@@ -15,17 +15,7 @@ func Annual(cfg config.Config, tpls []string) ([]page.Page, error) {
 		return nil, fmt.Errorf("exppected one tpl, got %d %v", len(tpls), tpls)
 	}
 
-	var quarters [][]calendar.Calendar
-
-	for quarter := time.January; quarter <= time.December; quarter += 3 {
-		cals := make([]calendar.Calendar, 0, 3)
-
-		for month := quarter; month < quarter+3; month++ {
-			cals = append(cals, calendar.NewYearMonth(cfg.Year, month).Calendar(cfg.WeekStart))
-		}
-
-		quarters = append(quarters, cals)
-	}
+	quarters := buildQuarters(cfg)
 
 	return []page.Page{{
 		Tpl:  tpls[0],
@@ -46,4 +36,19 @@ func Annual(cfg config.Config, tpls []string) ([]page.Page, error) {
 			},
 		},
 	}}, nil
+}
+
+func buildQuarters(cfg config.Config) [][]calendar.Calendar {
+	var quarters [][]calendar.Calendar
+
+	for quarter := time.January; quarter <= time.December; quarter += 3 {
+		cals := make([]calendar.Calendar, 0, 3)
+
+		for month := quarter; month < quarter+3; month++ {
+			cals = append(cals, calendar.NewYearMonth(cfg.Year, month).Calendar(cfg.WeekStart))
+		}
+
+		quarters = append(quarters, cals)
+	}
+	return quarters
 }
