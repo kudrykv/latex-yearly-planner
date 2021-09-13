@@ -50,3 +50,12 @@ pages:
       - funcname: weekly
         tpls:
           - weekly.tpl
+
+  - name: daily
+    renderblocks:
+      - funcname: header_daily2
+        tpls:
+          - header_margin_quarters_months.tpl
+      - funcname: daily2
+        tpls:
+          - daily_with_month.tpl

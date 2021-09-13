@@ -9,11 +9,6 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-type DailyWithMonthBody struct {
-	Today calendar.DayTime
-	Month calendar.Calendar
-}
-
 func DailyWMonth(cfg config.Config, tpls []string) (page.Modules, error) {
 	if len(tpls) != 1 {
 		return nil, fmt.Errorf("exppected one tpl, got %d %v", len(tpls), tpls)
@@ -27,12 +22,12 @@ func DailyWMonth(cfg config.Config, tpls []string) (page.Modules, error) {
 		modules = append(modules, page.Module{
 			Cfg: cfg,
 			Tpl: tpls[0],
-			Body: DailyWithMonthBody{
-				Today: calendar.DayTime{Time: today},
-				Month: calendar.NewYearMonth(cfg.Year, today.Month()).Calendar(cfg.WeekStart),
+			Body: map[string]interface{}{
+				"Today": calendar.DayTime{Time: today},
+				"Month": calendar.NewYearMonth(cfg.Year, today.Month()).Calendar(cfg.WeekStart),
 			},
 		})
 	}
 
-	return modules[:2], nil
+	return modules, nil
 }

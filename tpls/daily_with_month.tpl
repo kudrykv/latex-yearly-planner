@@ -1,12 +1,10 @@
-{{template "header_margin_quarters_months.tpl" dict "Today" .Body.Today}}
-
 \begin{minipage}[t]{\myLenTriCol}
   \myUnderline{Schedule\textcolor{white}{g}}
   \foreach \x in {\myNumDailyBottomHour,...,\myNumDailyTopHour}
     {\myLineHeightButLine\x\myLineLightGray\vskip\myLenLineHeightButLine\myLineGray}
   \vspace{\dimexpr4mm+.3pt}
 
-  {{template "monthTabular.tpl" dict "Cfg" .Cfg "Month" .Body.Month "HideName" true "UseTabularx" true }}
+  {{template "monthTabular.tpl" dict "Cfg" .Cfg "Month" .Body.Month "HideName" true "UseTabularx" true "Today" .Body.Today }}
 \end{minipage}%
 \hspace{\myLenTriColSep}%
 \begin{minipage}[t]{\dimexpr2\myLenTriCol+\myLenTriColSep}
