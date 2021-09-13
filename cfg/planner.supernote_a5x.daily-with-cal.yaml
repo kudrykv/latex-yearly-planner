@@ -33,13 +33,11 @@ pages:
         tpls:
           - quarterly.tpl
 
-renderblocks:
-  - funcname: annual
-    tpls:
-      - annual_header2.tpl
-  - funcname: quarterly2
-    tpls:
-      - quarterly_with_header2.tpl
-  - funcname: dailywmonth
-    tpls:
-      - daily_with_month.tpl
+  - name: monthly
+    renderblocks:
+      - funcname: header_monthly2
+        tpls:
+          - header_margin_quarters_months.tpl
+      - funcname: monthly
+        tpls:
+          - monthly.tpl

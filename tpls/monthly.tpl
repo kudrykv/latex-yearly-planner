@@ -22,7 +22,7 @@
       \hyperlink{ {{- $item.RefText -}} }{\begin{tabular}{@{}p{5mm}@{}|}\hfil{}{{- $item.Day -}}\\ \hline\end{tabular}}
     {{- end -}}
 
-    {{- if ne $j (dec (len $row)) }} & {{else}} \\ \hline {{end -}}
+    {{- if ne $j (dec (len $row)) }} & {{else}} \rotatebox[origin=tr]{90}{\makebox[\myLenMonthlyCellHeight][c]{}} \\ \hline {{end -}}
   {{- end -}}
 {{end}}
 \end{tabularx}
