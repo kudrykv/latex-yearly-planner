@@ -67,3 +67,36 @@ func HeaderWeekly(cfg config.Config, tpls []string) (page.Modules, error) {
 
 	return modules, nil
 }
+
+func HeaderWeekly2(cfg config.Config, tpls []string) (page.Modules, error) {
+	if len(tpls) != 1 {
+		return nil, fmt.Errorf("exppected one tpl, got %d %v", len(tpls), tpls)
+	}
+
+	modules := make(page.Modules, 0, 53)
+	sow := pickUpStartWeekForTheYear(cfg.Year, cfg.WeekStart)
+	yearInWeeks := calendar.FillWeekly(sow).FillYear()
+
+	for _, week := range yearInWeeks {
+		var day calendar.DayTime
+
+		for _, moment := range week {
+			if moment.Year() == cfg.Year {
+				day = moment
+
+				break
+			}
+		}
+
+		modules = append(modules, page.Module{
+			Cfg: cfg,
+			Tpl: tpls[0],
+			Body: map[string]interface{}{
+				"Week": week,
+				"Date": day,
+			},
+		})
+	}
+
+	return modules, nil
+}

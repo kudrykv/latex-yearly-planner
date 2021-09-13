@@ -13,6 +13,11 @@
   \resizebox{!}{.5cm}{\hypertarget{ {{- .Body.Month.Month -}} }{ {{- .Body.Month.Month -}} }}
 \end{tabular}
 {{- end -}}
+{{if is .Body.Week}}
+\begin{tabular}{@{}l}
+  \resizebox{!}{.5cm}{\hypertarget{ {{- .Body.Week.RefText "" -}} }{Week {{.Body.Week.WeekNumber -}} }}
+\end{tabular}
+{{- end -}}
 {{ if is .Body.Today}}
 \hypertarget{ {{- .Body.Today.RefText -}} }{}%
 \begin{tabular}{@{}l|l}

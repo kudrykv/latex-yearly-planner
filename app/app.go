@@ -140,6 +140,7 @@ var ComposerMap = map[string]Composer{
 	"header_monthly":       compose.HeaderMonthly,
 	"header_monthly2":      compose.HeaderMonthly2,
 	"header_weekly":        compose.HeaderWeekly,
+	"header_weekly2":       compose.HeaderWeekly2,
 	"header_daily":         compose.HeaderDaily,
 	"header_daily_notes":   compose.HeaderDailyNotes,
 	"header_daily_reflect": compose.HeaderDailyReflect,
