@@ -33,3 +33,17 @@ func HeaderAnnual(cfg config.Config, tpls []string) (page.Modules, error) {
 		},
 	}}, nil
 }
+
+func HeaderAnnual2(cfg config.Config, tpls []string) (page.Modules, error) {
+	if len(tpls) != 1 {
+		return nil, fmt.Errorf("exppected one tpl, got %d %v", len(tpls), tpls)
+	}
+
+	return page.Modules{{
+		Cfg: cfg,
+		Tpl: tpls[0],
+		Body: map[string]interface{}{
+			"Year": cfg.Year,
+		},
+	}}, nil
+}

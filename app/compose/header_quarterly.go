@@ -36,3 +36,23 @@ func HeaderQuarterly(cfg config.Config, tpls []string) (page.Modules, error) {
 
 	return modules, nil
 }
+
+func HeaderQuarterly2(cfg config.Config, tpls []string) (page.Modules, error) {
+	if len(tpls) != 1 {
+		return nil, fmt.Errorf("exppected one tpl, got %d %v", len(tpls), tpls)
+	}
+
+	modules := make(page.Modules, 0, 4)
+
+	for i := 1; i <= 4; i++ {
+		modules = append(modules, page.Module{
+			Cfg: cfg,
+			Tpl: tpls[0],
+			Body: map[string]interface{}{
+				"Quarter": i,
+			},
+		})
+	}
+
+	return modules, nil
+}
