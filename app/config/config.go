@@ -16,7 +16,7 @@ type Config struct {
 	Year      int `env:"PLANNER_YEAR"`
 	WeekStart time.Weekday
 
-	RenderBlocks RenderBlocks
+	Pages Pages
 
 	Layout Layout
 	Blocks Blocks
@@ -27,12 +27,20 @@ type Debug struct {
 	ShowLinks bool
 }
 
+type Pages []Page
+type Page struct {
+	Name         string
+	RenderBlocks RenderBlocks
+}
+
 type RenderBlocks []RenderBlock
 
-func (r RenderBlocks) WeeklyEnabled() bool {
+func (r Pages) WeeklyEnabled() bool {
 	for _, s := range r {
-		if s.FuncName == "weekly" {
-			return true
+		for _, block := range s.RenderBlocks {
+			if block.FuncName == "weekly" {
+				return true
+			}
 		}
 	}
 

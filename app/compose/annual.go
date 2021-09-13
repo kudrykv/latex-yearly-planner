@@ -5,37 +5,16 @@ import (
 	"time"
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
-	"github.com/kudrykv/latex-yearly-planner/app/components/header"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-func Annual(cfg config.Config, tpls []string) ([]page.Page, error) {
+func Annual(cfg config.Config, tpls []string) (page.Modules, error) {
 	if len(tpls) != 1 {
 		return nil, fmt.Errorf("exppected one tpl, got %d %v", len(tpls), tpls)
 	}
 
-	quarters := buildQuarters(cfg)
-
-	return []page.Page{{
-		Tpl:  tpls[0],
-		Body: quarters,
-		Header: header.Header{
-			Left: header.Items{
-				header.NewIntItem(cfg.Year).Ref(),
-				header.NewItemsGroup(
-					header.NewTextItem("Q1"),
-					header.NewTextItem("Q2"),
-					header.NewTextItem("Q3"),
-					header.NewTextItem("Q4"),
-				),
-			},
-			Right: header.Items{
-				header.NewTextItem("Notes").RefText("Notes Index"),
-				header.NewTextItem("Todos").RefText("Todos Index"),
-			},
-		},
-	}}, nil
+	return page.Modules{{Cfg: cfg, Tpl: tpls[0], Body: buildQuarters(cfg)}}, nil
 }
 
 func buildQuarters(cfg config.Config) [][]calendar.Calendar {
@@ -50,5 +29,6 @@ func buildQuarters(cfg config.Config) [][]calendar.Calendar {
 
 		quarters = append(quarters, cals)
 	}
+
 	return quarters
 }

@@ -1,4 +1,4 @@
-{{range $i, $qrtr := .Quarters}}
+{{range $i, $qrtr := .Body}}
   \begin{tabularx}{\linewidth}{@{}*{3}{X}@{}}
   {{- range $j, $month := $qrtr}}
     \adjustbox{valign=t}{ {{- template "monthTabular.tpl" dict "Cfg" $.Cfg "Month" $month "UseTabularx" true -}} }

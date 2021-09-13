@@ -3,19 +3,19 @@
 \setlength{\tabcolsep}{\myLenTabColSep}%
 
 {{- if is .UseTabularx}}
-\begin{tabularx}{\linewidth}{ {{- if .Cfg.RenderBlocks.WeeklyEnabled -}} Y| {{- end -}} *{7}{Y}}
+\begin{tabularx}{\linewidth}{ {{- if .Cfg.Pages.WeeklyEnabled -}} Y| {{- end -}} *{7}{Y}}
 {{- else}}
-\begin{tabular}[t]{ {{- if .Cfg.RenderBlocks.WeeklyEnabled -}} c| {{- end -}} *{7}{c}}
+\begin{tabular}[t]{ {{- if .Cfg.Pages.WeeklyEnabled -}} c| {{- end -}} *{7}{c}}
 {{- end}}
 {{- if not (is .HideName) -}}
 \multicolumn%
-  { {{- .Month.WeekHeaderLen .Cfg.RenderBlocks.WeeklyEnabled -}} }%
+  { {{- .Month.WeekHeaderLen .Cfg.Pages.WeeklyEnabled -}} }%
   {c}%
   { {{- template "slink.tpl" .Month.MonthName -}} } \\ \hline
 {{- end}}
-{{.Month.WeekHeader .Cfg.RenderBlocks.WeeklyEnabled}} \\ \hline
+{{.Month.WeekHeader .Cfg.Pages.WeeklyEnabled}} \\ \hline
 {{- range $row := .Month.Matrix}}
-  {{if $.Cfg.RenderBlocks.WeeklyEnabled -}}
+  {{if $.Cfg.Pages.WeeklyEnabled -}}
     {{if and (eq ($.Month.MonthName.String) "January") (gt $row.WeekNumber 50)}}
       {{- $row.LinkWeek "fw" false}} &
     {{- else -}}

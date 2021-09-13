@@ -2,6 +2,7 @@ package app
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -58,27 +59,43 @@ func action(c *cli.Context) error {
 		return fmt.Errorf("ioutil write file: %w", err)
 	}
 
-	for _, file := range cfg.RenderBlocks {
+	for _, file := range cfg.Pages {
 		wr.Reset()
 
-		if fn, ok = ComposerMap[file.FuncName]; !ok {
-			continue
+		var mom []page.Modules
+		for _, block := range file.RenderBlocks {
+			if fn, ok = ComposerMap[block.FuncName]; !ok {
+				return fmt.Errorf("unknown func " + block.FuncName)
+			}
+
+			modules, err := fn(cfg, block.Tpls)
+			if err != nil {
+				return fmt.Errorf("%s: %w", block.FuncName, err)
+			}
+
+			mom = append(mom, modules)
 		}
 
-		pages, err := fn(cfg, file.Tpls)
-		if err != nil {
-			return fmt.Errorf("%s: %w", file.FuncName, err)
+		if len(mom) == 0 {
+			return fmt.Errorf("modules of modules must have some modules")
 		}
 
-		for _, pag := range pages {
-			pag.Cfg = cfg
-
-			if err = t.Execute(wr, pag.Tpl, pag); err != nil {
-				return fmt.Errorf("tex execute: %w", err)
+		allLen := len(mom[0])
+		for _, mods := range mom {
+			if len(mods) != allLen {
+				return errors.New("some modules are not aligned")
 			}
 		}
 
-		if err = ioutil.WriteFile("out/"+file.FuncName+".tex", wr.Bytes(), 0600); err != nil {
+		for i := 0; i < allLen; i++ {
+			for _, mod := range mom {
+				if err = t.Execute(wr, mod[i].Tpl, mod[i]); err != nil {
+					return fmt.Errorf("execute: %w", err)
+				}
+			}
+		}
+
+		if err = ioutil.WriteFile("out/"+file.Name+".tex", wr.Bytes(), 0600); err != nil {
 			return fmt.Errorf("ioutil write file: %w", err)
 		}
 	}
@@ -102,19 +119,27 @@ func RootFilename(pathconfig string) string {
 	return pathconfig + ".tex"
 }
 
-type Composer func(cfg config.Config, tpls []string) ([]page.Page, error)
+type Composer func(cfg config.Config, tpls []string) (page.Modules, error)
 
 var ComposerMap = map[string]Composer{
-	"title":        compose.Title,
-	"annual":       compose.Annual,
-	"quarterly":    compose.Quarterly,
-	"quarterly2":   compose.Quarters2,
-	"monthly":      compose.Monthly,
-	"weekly":       compose.Weekly,
-	"daily":        compose.Daily,
-	"dailywmonth":  compose.DailyWMonth,
-	"dailyreflect": compose.DailyReflect,
-	"dailynotes":   compose.DailyNotes,
-	"notesindexed": compose.NotesIndexed,
-	"todosindexed": compose.TodosIndexed,
+	"title":                compose.Title,
+	"annual":               compose.Annual,
+	"quarterly":            compose.Quarterly,
+	"monthly":              compose.Monthly,
+	"weekly":               compose.Weekly,
+	"daily":                compose.Daily,
+	"dailywmonth":          compose.DailyWMonth,
+	"daily_reflect":        compose.DailyReflect,
+	"daily_notes":          compose.DailyNotes,
+	"notes_indexed":        compose.NotesIndexed,
+	"todos_indexed":        compose.TodosIndexed,
+	"header_annual":        compose.HeaderAnnual,
+	"header_quarterly":     compose.HeaderQuarterly,
+	"header_monthly":       compose.HeaderMonthly,
+	"header_weekly":        compose.HeaderWeekly,
+	"header_daily":         compose.HeaderDaily,
+	"header_daily_notes":   compose.HeaderDailyNotes,
+	"header_daily_reflect": compose.HeaderDailyReflect,
+	"header_notes_indexed": compose.HeaderNotesIndexed,
+	"header_todos_indexed": compose.HeaderTodosIndexed,
 }

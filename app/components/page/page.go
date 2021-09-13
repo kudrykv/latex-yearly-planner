@@ -4,15 +4,14 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-type PageTpl struct {
-	Cfg config.Config
-
-	Pages []Page
+type Page struct {
+	Cfg     config.Config
+	Modules Modules
 }
 
-type Page struct {
-	Cfg    config.Config
-	Tpl    string
-	Header interface{}
-	Body   interface{}
+type Modules []Module
+type Module struct {
+	Cfg  config.Config
+	Tpl  string
+	Body interface{}
 }

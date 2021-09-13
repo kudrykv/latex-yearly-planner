@@ -49,7 +49,7 @@
 
 {{template "macro.tpl" .}}
 
-  {{range .RenderBlocks -}}
-    \include{ {{- .FuncName -}} }
+  {{range .Pages -}}
+    \include{ {{- .Name -}} }
   {{end}}
 \end{document}

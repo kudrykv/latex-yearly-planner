@@ -1,4 +1,3 @@
-{{- template "header.tpl" dict "Cfg" $.Cfg "Header" .Header -}}
 {{- $week := .Body -}}
 {{- $day1 := index $week 0 -}}
 {{- $day2 := index $week 1 -}}
