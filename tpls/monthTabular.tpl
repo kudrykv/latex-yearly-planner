@@ -23,7 +23,17 @@
     {{- end -}}
   {{end -}}
   {{range $j, $item := .}}
-    {{if not $item.IsZero}} {{ $item.Link }} {{end}}
+    {{if not $item.IsZero -}}
+  {{- if is $.Today}}
+    {{- if $.Today.Equal $item.Time}}
+      \cellcolor{black}{\textcolor{white}{ {{- $item.Day -}} }}
+    {{- else -}}
+      {{$item.Link}}
+    {{- end -}}
+  {{- else -}}
+    {{ $item.Link }}
+  {{- end -}}
+    {{- end}}
     {{- if ne $j (dec (len $row)) }} & {{else}} \\ {{end -}}
   {{- end -}}
 {{- end}}
