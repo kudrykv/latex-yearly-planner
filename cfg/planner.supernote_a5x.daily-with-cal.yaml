@@ -59,3 +59,12 @@ pages:
       - funcname: daily2
         tpls:
           - daily_with_month.tpl
+
+  - name: daily_notes
+    renderblocks:
+      - funcname: header_daily_notes2
+        tpls:
+          - header_margin_quarters_months.tpl
+      - funcname: daily_notes
+        tpls:
+          - daily_notes.tpl

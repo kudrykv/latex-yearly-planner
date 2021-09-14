@@ -11,7 +11,7 @@
   \myUnderline{Top priorities\textcolor{white}{g}}
   \Repeat{5}{\myTodoLineGray}
   \vskip\dimexpr7mm-1.4pt
-  \myUnderline{Notes}
+  \myUnderline{Notes\hfill\hyperlink{Notes {{- .Body.Today.RefText -}} }{More}}
   \Repeat{16}{\myLineGrayVskipTop}
   \vskip\dimexpr7mm-1.2pt
   \myUnderline{Personal}
