@@ -34,6 +34,15 @@
 \end{tabular}%
 }
 {{- end -}}
+{{if is .Body.TodayReflect}}
+\hypertarget{Reflect {{- .Body.TodayReflect.RefText -}} }{}%
+\hyperlink{ {{- .Body.TodayReflect.RefText -}} }{%
+  \begin{tabular}{@{}l|l}
+    \multirow{2}{*}{\resizebox{!}{.5cm}{ {{- .Body.TodayReflect.Day -}} }} & \textbf{ {{- .Body.TodayReflect.Weekday -}} } \\
+    & {{- .Body.TodayReflect.Month -}}
+  \end{tabular}%
+}
+{{- end -}}
 \hfill
 \begin{tabular}{*{5}{c|}@{}}
   Calendar & To Do & Meetings & Lists & Notes

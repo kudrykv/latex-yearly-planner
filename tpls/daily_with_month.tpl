@@ -14,7 +14,7 @@
   \myUnderline{Notes\hfill\hyperlink{Notes {{- .Body.Today.RefText -}} }{More}}
   \Repeat{16}{\myLineGrayVskipTop}
   \vskip\dimexpr7mm-1.2pt
-  \myUnderline{Personal}
+  \myUnderline{Personal\hfill\hyperlink{Reflect {{- .Body.Today.RefText -}} }{Reflect}}
   \Repeat{9}{\myLineGrayVskipTop}
 \end{minipage}
 \par\pagebreak
