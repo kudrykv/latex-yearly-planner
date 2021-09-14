@@ -43,12 +43,22 @@
   \end{tabular}%
 }
 {{- end -}}
+{{if is .Body.Notes}}
+\hypertarget{ {{- .Body.Notes -}} }{}%
+  \resizebox{!}{.5cm}{ {{- .Body.Notes -}} }
+{{- end -}}
 \hfill
 {\renewcommand{\arraystretch}{\myNumArrayStretch}
 \begin{tabular}{*{3}{c|}@{}}
   {{if is .Body.Year}}\cellcolor{black}{\color{white}{Calendar}}{{else}}\hyperlink{ {{- .Body.Year -}} }{Calendar}{{end}} &
   To Do &
-  Notes
+  {{if is .Body.Notes -}}
+    {{- if eq .Body.Notes "Notes Index" -}}
+      \cellcolor{black}{\color{white}{Notes}}
+    {{- else -}}
+      \hyperlink{Notes Index}{Notes}
+    {{- end -}}
+  {{- else -}}\hyperlink{Notes Index}{Notes}{{end}}
 \end{tabular}}%
 \medskip
 \myLineThick
