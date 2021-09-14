@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
@@ -50,6 +51,37 @@ func HeaderTodosIndexed(cfg config.Config, tpls []string) (page.Modules, error) 
 					header.NewTextItem("Todo " + strconv.Itoa(i)).Ref(true),
 				},
 				Right: right,
+			},
+		})
+	}
+
+	return modules, nil
+}
+
+func HeaderTodosIndexed2(cfg config.Config, tpls []string) (page.Modules, error) {
+	if len(tpls) != 1 {
+		return nil, fmt.Errorf("exppected two tpls, got %d %v", len(tpls), tpls)
+	}
+
+	modules := make(page.Modules, 0, 101)
+	modules = append(modules, page.Module{
+		Cfg: cfg,
+		Tpl: tpls[0],
+		Body: map[string]interface{}{
+			"Todos":    "Todos Index",
+			"Months":   calendar.NewYearInMonths(cfg.Year).Reverse(),
+			"Quarters": calendar.NewYearInQuarters(cfg.Year).Reverse(),
+		},
+	})
+
+	for i := 1; i <= 100; i++ {
+		modules = append(modules, page.Module{
+			Cfg: cfg,
+			Tpl: tpls[0],
+			Body: map[string]interface{}{
+				"Todos":    "Todo " + strconv.Itoa(i),
+				"Months":   calendar.NewYearInMonths(cfg.Year).Reverse(),
+				"Quarters": calendar.NewYearInQuarters(cfg.Year).Reverse(),
 			},
 		})
 	}

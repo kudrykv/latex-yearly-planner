@@ -47,11 +47,23 @@
 \hypertarget{ {{- .Body.Notes -}} }{}%
   \resizebox{!}{.5cm}{ {{- .Body.Notes -}} }
 {{- end -}}
+{{if is .Body.Todos}}
+\hypertarget{ {{- .Body.Todos -}} }{}%
+\resizebox{!}{.5cm}{ {{- .Body.Todos -}} }
+{{- end -}}
 \hfill
 {\renewcommand{\arraystretch}{\myNumArrayStretch}
 \begin{tabular}{*{3}{c|}@{}}
-  {{if is .Body.Year}}\cellcolor{black}{\color{white}{Calendar}}{{else}}\hyperlink{ {{- .Body.Year -}} }{Calendar}{{end}} &
-  To Do &
+  {{if is .Body.Year}}\cellcolor{black}{\color{white}{Calendar}}{{else}}\hyperlink{ {{- .Body.Year -}} }{Calendar}{{end}}
+  &
+  {{if is .Body.Todos -}}
+  {{- if eq .Body.Todos "Todos Index" -}}
+  \cellcolor{black}{\color{white}{To Do}}
+  {{- else -}}
+  \hyperlink{Todos Index}{To Do}
+  {{- end -}}
+  {{- else -}}\hyperlink{Todos Index}{To Do}{{end}}
+  &
   {{if is .Body.Notes -}}
     {{- if eq .Body.Notes "Notes Index" -}}
       \cellcolor{black}{\color{white}{Notes}}
