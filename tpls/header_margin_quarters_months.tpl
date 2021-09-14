@@ -44,9 +44,12 @@
 }
 {{- end -}}
 \hfill
-\begin{tabular}{*{5}{c|}@{}}
-  Calendar & To Do & Meetings & Lists & Notes
-\end{tabular}%
+{\renewcommand{\arraystretch}{\myNumArrayStretch}
+\begin{tabular}{*{3}{c|}@{}}
+  {{if is .Body.Year}}\cellcolor{black}{\color{white}{Calendar}}{{else}}\hyperlink{ {{- .Body.Year -}} }{Calendar}{{end}} &
+  To Do &
+  Notes
+\end{tabular}}%
 \medskip
 \myLineThick
 \marginnote{%
