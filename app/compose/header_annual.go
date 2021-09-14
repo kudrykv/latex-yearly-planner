@@ -3,6 +3,7 @@ package compose
 import (
 	"fmt"
 
+	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
@@ -43,7 +44,9 @@ func HeaderAnnual2(cfg config.Config, tpls []string) (page.Modules, error) {
 		Cfg: cfg,
 		Tpl: tpls[0],
 		Body: map[string]interface{}{
-			"Year": cfg.Year,
+			"Year":     cfg.Year,
+			"Months":   calendar.NewYearInMonths(cfg.Year).Reverse(),
+			"Quarters": calendar.NewYearInQuarters(cfg.Year).Reverse(),
 		},
 	}}, nil
 }

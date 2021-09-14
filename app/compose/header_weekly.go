@@ -92,8 +92,10 @@ func HeaderWeekly2(cfg config.Config, tpls []string) (page.Modules, error) {
 			Cfg: cfg,
 			Tpl: tpls[0],
 			Body: map[string]interface{}{
-				"Week": week,
-				"Date": day,
+				"Week":     week,
+				"Date":     day,
+				"Months":   calendar.NewYearInMonths(cfg.Year).Selected(day).Reverse(),
+				"Quarters": calendar.NewYearInQuarters(cfg.Year).Reverse(),
 			},
 		})
 	}
