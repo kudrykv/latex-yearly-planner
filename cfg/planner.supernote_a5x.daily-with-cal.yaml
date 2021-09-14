@@ -77,3 +77,23 @@ pages:
       - funcname: daily_reflect
         tpls:
           - daily_reflect.tpl
+
+  - name: notes_indexed
+    renderblocks:
+      - funcname: header_notes_indexed2
+        tpls:
+          - header_margin_quarters_months.tpl
+      - funcname: notes_indexed
+        tpls:
+          - notes_index.tpl
+          - daily_notes.tpl
+
+  - name: todos_indexed
+    renderblocks:
+      - funcname: header_todos_indexed2
+        tpls:
+          - header_margin_quarters_months.tpl
+      - funcname: todos_indexed
+        tpls:
+          - todos_index.tpl
+          - todos_note.tpl

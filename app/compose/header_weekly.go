@@ -77,8 +77,9 @@ func HeaderWeekly2(cfg config.Config, tpls []string) (page.Modules, error) {
 	sow := pickUpStartWeekForTheYear(cfg.Year, cfg.WeekStart)
 	yearInWeeks := calendar.FillWeekly(sow).FillYear()
 
-	for _, week := range yearInWeeks {
+	for i, week := range yearInWeeks {
 		var day calendar.DayTime
+		var weekPrefix string
 
 		for _, moment := range week {
 			if moment.Year() == cfg.Year {
@@ -88,14 +89,19 @@ func HeaderWeekly2(cfg config.Config, tpls []string) (page.Modules, error) {
 			}
 		}
 
+		if i == 0 {
+			weekPrefix = "fw"
+		}
+
 		modules = append(modules, page.Module{
 			Cfg: cfg,
 			Tpl: tpls[0],
 			Body: map[string]interface{}{
-				"Week":     week,
-				"Date":     day,
-				"Months":   calendar.NewYearInMonths(cfg.Year).Selected(day).Reverse(),
-				"Quarters": calendar.NewYearInQuarters(cfg.Year).Reverse(),
+				"Week":       week,
+				"WeekPrefix": weekPrefix,
+				"Date":       day,
+				"Months":     calendar.NewYearInMonths(cfg.Year).Selected(day).Reverse(),
+				"Quarters":   calendar.NewYearInQuarters(cfg.Year).Reverse(),
 			},
 		})
 	}

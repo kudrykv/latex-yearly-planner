@@ -1,21 +1,21 @@
 {{if is .Body.Year}}
 \begin{tabular}{@{}l}
-  \resizebox{!}{.5cm}{\hypertarget{ {{- .Body.Year -}} }{ {{- .Body.Year -}} }}
+  \resizebox{!}{.6cm}{\hypertarget{ {{- .Body.Year -}} }{ {{- .Body.Year -}} }}
 \end{tabular}
 {{- end -}}
 {{if is .Body.Quarter}}
 \begin{tabular}{@{}l}
-  \resizebox{!}{.5cm}{\hypertarget{Q {{- .Body.Quarter -}} }{Q {{- .Body.Quarter -}} }}
+  \resizebox{!}{.6cm}{\hypertarget{Q {{- .Body.Quarter -}} }{Q {{- .Body.Quarter -}} }}
 \end{tabular}
 {{- end -}}
 {{if is .Body.Month}}
 \begin{tabular}{@{}l}
-  \resizebox{!}{.5cm}{\hypertarget{ {{- .Body.Month.Month -}} }{ {{- .Body.Month.Month -}} }}
+  \resizebox{!}{.6cm}{\hypertarget{ {{- .Body.Month.Month -}} }{ {{- .Body.Month.Month -}} }}
 \end{tabular}
 {{- end -}}
 {{if is .Body.Week}}
 \begin{tabular}{@{}l}
-  \resizebox{!}{.5cm}{\hypertarget{ {{- .Body.Week.RefText "" -}} }{Week {{.Body.Week.WeekNumber -}} }}
+  \resizebox{!}{.6cm}{\hypertarget{ {{- .Body.Week.RefText .Body.WeekPrefix -}} }{Week {{.Body.Week.WeekNumber -}} }}
 \end{tabular}
 {{- end -}}
 {{ if is .Body.Today}}
