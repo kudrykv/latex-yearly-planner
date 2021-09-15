@@ -3,6 +3,7 @@
 \ExplSyntaxOff
 
 \newcommand{\myMinLineHeight}[1]{\parbox{0pt}{\vskip#1}}
+\newcommand{\myDummyQ}{\textcolor{white}{Q}}
 
 \newcommand{\myNumArrayStretch}{ {{- .Cfg.Layout.Numbers.ArrayStretch -}} }
 \newcommand{\myNumQuarterlyLines}{ {{- .Cfg.Layout.Numbers.QuarterlyLines -}} }
@@ -27,17 +28,20 @@
 \newlength{\myLenTriCol}
 \newlength{\myLenMonthlyCellHeight}
 \newlength{\myLenNotesIndexCellHeight}
+\newlength{\myLenHeaderResizeBox}
 
-\setlength{\myLenTabColSep}{ {{- .Cfg.Layout.Lengths.TabColSep -}} }
-\setlength{\myLenLineThicknessDefault}{ {{- .Cfg.Layout.Lengths.LineThicknessDefault -}} }
-\setlength{\myLenLineThicknessThick}{ {{- .Cfg.Layout.Lengths.LineThicknessThick -}} }
-\setlength{\myLenLineHeightButLine}{ {{- .Cfg.Layout.Lengths.LineHeightButLine -}} }
-\setlength{\myLenTwoColSep}{ {{- .Cfg.Layout.Lengths.TwoColSep -}} }
+{{- $lengths := .Cfg.Layout.Lengths -}}
+\setlength{\myLenTabColSep}{ {{- $lengths.TabColSep -}} }
+\setlength{\myLenLineThicknessDefault}{ {{- $lengths.LineThicknessDefault -}} }
+\setlength{\myLenLineThicknessThick}{ {{- $lengths.LineThicknessThick -}} }
+\setlength{\myLenLineHeightButLine}{ {{- $lengths.LineHeightButLine -}} }
+\setlength{\myLenTwoColSep}{ {{- $lengths.TwoColSep -}} }
 \setlength{\myLenTwoCol}{\dimexpr.5\linewidth-.5\myLenTwoColSep}
-\setlength{\myLenMonthlyCellHeight}{ {{- .Cfg.Layout.Lengths.MonthlyCellHeight -}} }
-\setlength{\myLenTriColSep}{ {{- .Cfg.Layout.Lengths.TriColSep -}} }
+\setlength{\myLenMonthlyCellHeight}{ {{- $lengths.MonthlyCellHeight -}} }
+\setlength{\myLenTriColSep}{ {{- $lengths.TriColSep -}} }
 \setlength{\myLenTriCol}{\dimexpr.333\linewidth-.667\myLenTriColSep}
-\setlength{\myLenNotesIndexCellHeight}{ {{- .Cfg.Layout.Lengths.NotesIndexCellHeight -}} }
+\setlength{\myLenNotesIndexCellHeight}{ {{- $lengths.NotesIndexCellHeight -}} }
+\setlength{\myLenHeaderResizeBox}{ {{- $lengths.HeaderResizeBox -}} }
 
 \newcommand{\myColorGray}{ {{- .Cfg.Layout.Colors.Gray -}} }
 \newcommand{\myColorLightGray}{ {{- .Cfg.Layout.Colors.LightGray -}} }

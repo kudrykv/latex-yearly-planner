@@ -37,6 +37,7 @@ layout:
     tricolsep: 5pt
     monthlycellheight: 55pt
     notesindexcellheight: 1.37cm
+    headerresizebox: 6mm
 
   colors:
     gray: gray

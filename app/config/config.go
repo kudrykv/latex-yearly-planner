@@ -79,17 +79,6 @@ type Numbers struct {
 	TodoLinesInTodoPage int
 }
 
-type Lengths struct {
-	TabColSep            string
-	LineThicknessDefault string
-	LineThicknessThick   string
-	LineHeightButLine    string
-	TwoColSep            string
-	TriColSep            string
-	MonthlyCellHeight    string
-	NotesIndexCellHeight string
-}
-
 type Paper struct {
 	Width  string `env:"PLANNER_LAYOUT_PAPER_WIDTH"`
 	Height string `env:"PLANNER_LAYOUT_PAPER_HEIGHT"`
