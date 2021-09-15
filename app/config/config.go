@@ -19,7 +19,6 @@ type Config struct {
 	Pages Pages
 
 	Layout Layout
-	Blocks Blocks
 }
 
 type Debug struct {
