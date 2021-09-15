@@ -1,8 +1,4 @@
 layout:
-  paper:
-    margin:
-      left: 1cm
-
   numbers:
     dailybottomhour: 8
     dailytophour: 20
