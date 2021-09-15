@@ -68,12 +68,14 @@ func HeaderTodosIndexed2(cfg config.Config, tpls []string) (page.Modules, error)
 		Cfg: cfg,
 		Tpl: tpls[0],
 		Body: map[string]interface{}{
-			"Todos":        "Todos Index",
-			"CalendarCell": header.NewCellItem("Calendar").Refer(strconv.Itoa(cfg.Year)),
-			"ToDoCell":     header.NewCellItem("To Do").Refer("Todos Index").Select(),
-			"NotesCell":    header.NewCellItem("Notes").Refer("Notes Index"),
-			"Months":       MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Reverse()),
-			"Quarters":     QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Reverse()),
+			"Todos": "Todos Index",
+			"Cells": header.Items{
+				header.NewCellItem("Calendar"),
+				header.NewCellItem("To Do").Refer("Todos Index").Select(),
+				header.NewCellItem("Notes").Refer("Notes Index"),
+			},
+			"Months":   MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Reverse()),
+			"Quarters": QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Reverse()),
 		},
 	})
 
@@ -82,12 +84,14 @@ func HeaderTodosIndexed2(cfg config.Config, tpls []string) (page.Modules, error)
 			Cfg: cfg,
 			Tpl: tpls[0],
 			Body: map[string]interface{}{
-				"Todos":        "Todo " + strconv.Itoa(i),
-				"CalendarCell": header.NewCellItem("Calendar").Refer(strconv.Itoa(cfg.Year)),
-				"ToDoCell":     header.NewCellItem("To Do").Refer("Todos Index"),
-				"NotesCell":    header.NewCellItem("Notes").Refer("Notes Index"),
-				"Months":       MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Reverse()),
-				"Quarters":     QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Reverse()),
+				"Todos": "Todo " + strconv.Itoa(i),
+				"Cells": header.Items{
+					header.NewCellItem("Calendar"),
+					header.NewCellItem("To Do").Refer("Todos Index"),
+					header.NewCellItem("Notes").Refer("Notes Index"),
+				},
+				"Months":   MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Reverse()),
+				"Quarters": QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Reverse()),
 			},
 		})
 	}

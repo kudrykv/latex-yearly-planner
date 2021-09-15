@@ -48,7 +48,6 @@ func HeaderAnnual2(cfg config.Config, tpls []string) (page.Modules, error) {
 			"Year": cfg.Year,
 			"Cells": header.Items{
 				header.NewCellItem("Calendar").Select(),
-				header.NewCellItem("Meetings").Refer("Meetings Index"),
 				header.NewCellItem("To Do").Refer("Todos Index"),
 				header.NewCellItem("Notes").Refer("Notes Index"),
 			},

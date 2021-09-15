@@ -23,7 +23,6 @@ func HeaderMeetingsIndexed2(cfg config.Config, tpls []string) (page.Modules, err
 			"Meetings": "Meetings Index",
 			"Cells": header.Items{
 				header.NewCellItem("Calendar"),
-				header.NewCellItem("Meetings").Refer("Meetings Index").Select(),
 				header.NewCellItem("To Do").Refer("Todos Index"),
 				header.NewCellItem("Notes").Refer("Notes Index"),
 			},
@@ -40,7 +39,6 @@ func HeaderMeetingsIndexed2(cfg config.Config, tpls []string) (page.Modules, err
 				"Meetings": `M\#` + strconv.Itoa(i),
 				"Cells": header.Items{
 					header.NewCellItem("Calendar"),
-					header.NewCellItem("Meetings").Refer("Meetings Index"),
 					header.NewCellItem("To Do").Refer("Todos Index"),
 					header.NewCellItem("Notes").Refer("Notes Index"),
 				},

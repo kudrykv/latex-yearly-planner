@@ -1,6 +1,6 @@
 {{if is .Body.Year}}
 \begin{tabular}{@{}l}
-  \resizebox{!}{\myLenHeaderResizeBox}{\hypertarget{ {{- .Body.Year -}} }{ {{- .Body.Year -}} \myDummyQ}}
+  \resizebox{!}{\myLenHeaderResizeBox}{\hypertarget{Calendar}{ {{- .Body.Year -}} \myDummyQ}}
 \end{tabular}
 {{- end -}}
 {{if is .Body.Quarter}}
