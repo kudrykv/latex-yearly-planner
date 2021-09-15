@@ -27,6 +27,7 @@ layout:
     dailydiarybest: 11
     dailydiarylog: 35
     todolinesintodopage: 10
+    indexmeetingnotes: 36
 
   lengths:
     tabcolsep: 3.5pt

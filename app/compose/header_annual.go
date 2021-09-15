@@ -45,12 +45,15 @@ func HeaderAnnual2(cfg config.Config, tpls []string) (page.Modules, error) {
 		Cfg: cfg,
 		Tpl: tpls[0],
 		Body: map[string]interface{}{
-			"Year":         cfg.Year,
-			"CalendarCell": header.NewCellItem("Calendar").Select(),
-			"ToDoCell":     header.NewCellItem("To Do").Refer("Todos Index"),
-			"NotesCell":    header.NewCellItem("Notes").Refer("Notes Index"),
-			"Months":       MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Reverse()),
-			"Quarters":     QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Reverse()),
+			"Year": cfg.Year,
+			"Cells": header.Items{
+				header.NewCellItem("Calendar").Select(),
+				header.NewCellItem("Meetings").Refer("Meetings Index"),
+				header.NewCellItem("To Do").Refer("Todos Index"),
+				header.NewCellItem("Notes").Refer("Notes Index"),
+			},
+			"Months":   MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Reverse()),
+			"Quarters": QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Reverse()),
 		},
 	}}, nil
 }

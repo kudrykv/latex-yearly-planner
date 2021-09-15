@@ -44,15 +44,26 @@
 }
 {{- end -}}
 {{if is .Body.Notes}}
-\hypertarget{ {{- .Body.Notes -}} }{}\resizebox{!}{\myLenHeaderResizeBox}{ {{- .Body.Notes -}} }
+\begin{tabular}{@{}l}
+  \hypertarget{ {{- .Body.Notes -}} }{}\resizebox{!}{\myLenHeaderResizeBox}{ {{- .Body.Notes -}} \myDummyQ}
+\end{tabular}
 {{- end -}}
 {{if is .Body.Todos}}
-\hypertarget{ {{- .Body.Todos -}} }{}\resizebox{!}{\myLenHeaderResizeBox}{ {{- .Body.Todos -}} }
+\begin{tabular}{@{}l}
+  \hypertarget{ {{- .Body.Todos -}} }{}\resizebox{!}{\myLenHeaderResizeBox}{ {{- .Body.Todos -}} \myDummyQ}
+\end{tabular}
+{{- end -}}
+{{if is .Body.Meetings}}
+\begin{tabular}{@{}l}
+  \hypertarget{ {{- .Body.Meetings -}} }{}\resizebox{!}{\myLenHeaderResizeBox}{ {{- .Body.Meetings -}} \myDummyQ}
+\end{tabular}
 {{- end -}}
 \hfill%
 {\renewcommand{\arraystretch}{\myNumArrayStretch}%
-  \begin{tabular}{*{3}{c|}@{}}
-  {{.Body.CalendarCell.Display}} & {{.Body.ToDoCell.Display}} & {{.Body.NotesCell.Display}}
+  \begin{tabular}{*{ {{- len .Body.Cells -}} }{c|}@{}}
+  {{range $i, $cell := .Body.Cells}}
+    {{$cell.Display}} {{ if not (eq (incr $i) (len $.Body.Cells)) }} &{{end}}
+  {{end}}
   \end{tabular}}%
 \medskip
 \myLineThick

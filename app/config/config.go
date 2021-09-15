@@ -77,6 +77,7 @@ type Numbers struct {
 	DailyDiaryBest      int
 	DailyDiaryLog       int
 	TodoLinesInTodoPage int
+	IndexMeetingNotes   int
 }
 
 type Paper struct {

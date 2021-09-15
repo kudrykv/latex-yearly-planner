@@ -26,6 +26,11 @@ var tpl = template.Must(template.New("").Funcs(template.FuncMap{
 
 		return dict, nil
 	},
+
+	"incr": func(i int) int {
+		return i + 1
+	},
+
 	"dec": func(i int) int {
 		return i - 1
 	},
