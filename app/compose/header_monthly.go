@@ -63,8 +63,8 @@ func HeaderMonthly2(cfg config.Config, tpls []string) (page.Modules, error) {
 			Body: map[string]interface{}{
 				"Month":    fdom,
 				"Date":     fdom,
-				"Months":   calendar.NewYearInMonths(cfg.Year).Selected(fdom).Reverse(),
-				"Quarters": calendar.NewYearInQuarters(cfg.Year).Reverse(),
+				"Months":   MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Selected(fdom).Reverse()),
+				"Quarters": QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Reverse()),
 			},
 		})
 	}

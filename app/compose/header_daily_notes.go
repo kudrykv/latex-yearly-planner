@@ -68,8 +68,8 @@ func HeaderDailyNotes2(cfg config.Config, tpls []string) (page.Modules, error) {
 			Tpl: tpls[0],
 			Body: map[string]interface{}{
 				"TodayNote": day,
-				"Months":    calendar.NewYearInMonths(cfg.Year).Selected(day).Reverse(),
-				"Quarters":  calendar.NewYearInQuarters(cfg.Year).Reverse(),
+				"Months":    MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Selected(day).Reverse()),
+				"Quarters":  QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Reverse()),
 			},
 		})
 

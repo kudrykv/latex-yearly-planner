@@ -66,8 +66,8 @@ func HeaderDaily2(cfg config.Config, tpls []string) (page.Modules, error) {
 			Body: map[string]interface{}{
 				"Today":    day,
 				"Date":     day,
-				"Months":   calendar.NewYearInMonths(cfg.Year).Selected(day).Reverse(),
-				"Quarters": calendar.NewYearInQuarters(cfg.Year).Reverse(),
+				"Months":   MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Selected(day).Reverse()),
+				"Quarters": QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Reverse()),
 			},
 		})
 

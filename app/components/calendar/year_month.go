@@ -1,6 +1,8 @@
 package calendar
 
-import "time"
+import (
+	"time"
+)
 
 type YearMonths []YearMonth
 type YearMonth struct {

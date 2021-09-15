@@ -51,8 +51,8 @@ func HeaderQuarterly2(cfg config.Config, tpls []string) (page.Modules, error) {
 			Tpl: tpls[0],
 			Body: map[string]interface{}{
 				"Quarter":  i,
-				"Months":   calendar.NewYearInMonths(cfg.Year).Reverse(),
-				"Quarters": calendar.NewYearInQuarters(cfg.Year).Selected(i).Reverse(),
+				"Months":   MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Reverse()),
+				"Quarters": QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Selected(i).Reverse()),
 			},
 		})
 	}

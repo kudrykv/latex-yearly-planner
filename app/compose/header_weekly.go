@@ -100,8 +100,8 @@ func HeaderWeekly2(cfg config.Config, tpls []string) (page.Modules, error) {
 				"Week":       week,
 				"WeekPrefix": weekPrefix,
 				"Date":       day,
-				"Months":     calendar.NewYearInMonths(cfg.Year).Selected(day).Reverse(),
-				"Quarters":   calendar.NewYearInQuarters(cfg.Year).Reverse(),
+				"Months":     MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Selected(day).Reverse()),
+				"Quarters":   QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Reverse()),
 			},
 		})
 	}

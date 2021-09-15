@@ -65,13 +65,13 @@
     \renewcommand{\arraystretch}{2}%
     \begin{tabularx}{14.35cm}{*{11}{Y|}Y}
       {{range $i, $month := .Body.Months -}}
-        {{$month.Hyper}} {{if ne $i 11}} & {{else}} \\ \hline {{end}}
+        {{$month.Display}} {{if ne $i 11}} & {{else}} \\ \hline {{end}}
       {{end}}
     \end{tabularx}%
     \quad
     \begin{tabularx}{4cm}{*{3}{Y|}Y}
     {{range $i, $quarter := .Body.Quarters -}}
-      {{$quarter.Hyper}} {{if ne $i 3}} & {{else}} \\ \hline {{end}}
+      {{$quarter.Display}} {{if ne $i 3}} & {{else}} \\ \hline {{end}}
     {{end}}
     \end{tabularx}%
   }%

@@ -2,6 +2,7 @@ package compose
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
@@ -48,8 +49,29 @@ func HeaderAnnual2(cfg config.Config, tpls []string) (page.Modules, error) {
 			"CalendarCell": header.NewCellItem("Calendar").Select(),
 			"ToDoCell":     header.NewCellItem("To Do").Refer("Todos Index"),
 			"NotesCell":    header.NewCellItem("Notes").Refer("Notes Index"),
-			"Months":       calendar.NewYearInMonths(cfg.Year).Reverse(),
-			"Quarters":     calendar.NewYearInQuarters(cfg.Year).Reverse(),
+			"Months":       MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Reverse()),
+			"Quarters":     QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Reverse()),
 		},
 	}}, nil
+}
+
+func MonthsToCellItems(wd time.Weekday, months calendar.YearMonths) []header.CellItem {
+	out := make([]header.CellItem, 0, len(months))
+
+	for _, month := range months {
+		name := month.Calendar(wd).MonthName().String()
+		out = append(out, header.NewCellItem(name[:3]).Refer(name).Selected(month.Selected))
+	}
+
+	return out
+}
+
+func QuartersToCellItems(quarters calendar.Quarters) []header.CellItem {
+	out := make([]header.CellItem, 0, len(quarters))
+
+	for _, quarter := range quarters {
+		out = append(out, header.NewCellItem(quarter.Name()).Selected(quarter.Selected))
+	}
+
+	return out
 }

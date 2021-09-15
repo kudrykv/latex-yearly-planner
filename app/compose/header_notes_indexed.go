@@ -69,8 +69,8 @@ func HeaderNotesIndexed2(cfg config.Config, tpls []string) (page.Modules, error)
 		Tpl: tpls[0],
 		Body: map[string]interface{}{
 			"Notes":    "Notes Index",
-			"Months":   calendar.NewYearInMonths(cfg.Year).Reverse(),
-			"Quarters": calendar.NewYearInQuarters(cfg.Year).Reverse(),
+			"Months":   MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Reverse()),
+			"Quarters": QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Reverse()),
 		},
 	})
 
@@ -80,8 +80,8 @@ func HeaderNotesIndexed2(cfg config.Config, tpls []string) (page.Modules, error)
 			Tpl: tpls[0],
 			Body: map[string]interface{}{
 				"Notes":    "Note " + strconv.Itoa(i),
-				"Months":   calendar.NewYearInMonths(cfg.Year).Reverse(),
-				"Quarters": calendar.NewYearInQuarters(cfg.Year).Reverse(),
+				"Months":   MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Reverse()),
+				"Quarters": QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Reverse()),
 			},
 		})
 	}

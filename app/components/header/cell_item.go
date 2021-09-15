@@ -3,7 +3,7 @@ package header
 type CellItem struct {
 	Text     string
 	Ref      string
-	Selected bool
+	selected bool
 }
 
 func NewCellItem(text string) CellItem {
@@ -11,7 +11,13 @@ func NewCellItem(text string) CellItem {
 }
 
 func (c CellItem) Select() CellItem {
-	c.Selected = true
+	c.selected = true
+
+	return c
+}
+
+func (c CellItem) Selected(selected bool) CellItem {
+	c.selected = selected
 
 	return c
 }
@@ -23,8 +29,8 @@ func (c CellItem) Refer(ref string) CellItem {
 }
 
 func (c CellItem) Display() string {
-	if c.Selected {
-		return `\cellcolor{black}{\color{white}{` + c.Text + `}}`
+	if c.selected {
+		return `\cellcolor{black}{\textcolor{white}{` + c.Text + `}}`
 	}
 
 	if len(c.Ref) == 0 {
