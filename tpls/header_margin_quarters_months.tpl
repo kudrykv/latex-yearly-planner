@@ -44,19 +44,15 @@
 }
 {{- end -}}
 {{if is .Body.Notes}}
-\hypertarget{ {{- .Body.Notes -}} }{}%
-  \resizebox{!}{.5cm}{ {{- .Body.Notes -}} }
+  \hypertarget{ {{- .Body.Notes -}} }{}\resizebox{!}{.5cm}{ {{- .Body.Notes -}} }
 {{- end -}}
 {{if is .Body.Todos}}
-\hypertarget{ {{- .Body.Todos -}} }{}%
-\resizebox{!}{.5cm}{ {{- .Body.Todos -}} }
+  \hypertarget{ {{- .Body.Todos -}} }{}\resizebox{!}{.5cm}{ {{- .Body.Todos -}} }
 {{- end -}}
 \hfill
 {\renewcommand{\arraystretch}{\myNumArrayStretch}
 \begin{tabular}{*{3}{c|}@{}}
-  {{.Body.CalendarCell.Display}} &
-  {{.Body.ToDoCell.Display}} &
-  {{.Body.NotesCell.Display}}
+  {{.Body.CalendarCell.Display}} & {{.Body.ToDoCell.Display}} & {{.Body.NotesCell.Display}}
 \end{tabular}}%
 \medskip
 \myLineThick
