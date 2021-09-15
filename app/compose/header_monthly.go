@@ -61,10 +61,13 @@ func HeaderMonthly2(cfg config.Config, tpls []string) (page.Modules, error) {
 			Cfg: cfg,
 			Tpl: tpls[0],
 			Body: map[string]interface{}{
-				"Month":    fdom,
-				"Date":     fdom,
-				"Months":   MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Selected(fdom).Reverse()),
-				"Quarters": QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Reverse()),
+				"Month":        fdom,
+				"Date":         fdom,
+				"CalendarCell": header.NewCellItem("Calendar").Refer(strconv.Itoa(cfg.Year)),
+				"ToDoCell":     header.NewCellItem("To Do").Refer("Todos Index"),
+				"NotesCell":    header.NewCellItem("Notes").Refer("Notes Index"),
+				"Months":       MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Selected(fdom).Reverse()),
+				"Quarters":     QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Reverse()),
 			},
 		})
 	}

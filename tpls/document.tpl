@@ -18,7 +18,6 @@
 \usepackage{amssymb}
 \usepackage{expl3}
 \usepackage{leading}
-\usepackage{adjustbox}
 \usepackage{pgffor}
 \usepackage{hyperref}
 \usepackage{marginnote}

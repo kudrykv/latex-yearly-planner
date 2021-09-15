@@ -2,6 +2,7 @@ package compose
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
@@ -50,9 +51,12 @@ func HeaderQuarterly2(cfg config.Config, tpls []string) (page.Modules, error) {
 			Cfg: cfg,
 			Tpl: tpls[0],
 			Body: map[string]interface{}{
-				"Quarter":  i,
-				"Months":   MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Reverse()),
-				"Quarters": QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Selected(i).Reverse()),
+				"Quarter":      i,
+				"CalendarCell": header.NewCellItem("Calendar").Refer(strconv.Itoa(cfg.Year)),
+				"ToDoCell":     header.NewCellItem("To Do").Refer("Todos Index"),
+				"NotesCell":    header.NewCellItem("Notes").Refer("Notes Index"),
+				"Months":       MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Reverse()),
+				"Quarters":     QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Selected(i).Reverse()),
 			},
 		})
 	}

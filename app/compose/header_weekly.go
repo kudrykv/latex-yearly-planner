@@ -97,11 +97,14 @@ func HeaderWeekly2(cfg config.Config, tpls []string) (page.Modules, error) {
 			Cfg: cfg,
 			Tpl: tpls[0],
 			Body: map[string]interface{}{
-				"Week":       week,
-				"WeekPrefix": weekPrefix,
-				"Date":       day,
-				"Months":     MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Selected(day).Reverse()),
-				"Quarters":   QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Reverse()),
+				"Week":         week,
+				"WeekPrefix":   weekPrefix,
+				"Date":         day,
+				"CalendarCell": header.NewCellItem("Calendar").Refer(strconv.Itoa(cfg.Year)),
+				"ToDoCell":     header.NewCellItem("To Do").Refer("Todos Index"),
+				"NotesCell":    header.NewCellItem("Notes").Refer("Notes Index"),
+				"Months":       MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Selected(day).Reverse()),
+				"Quarters":     QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Reverse()),
 			},
 		})
 	}
