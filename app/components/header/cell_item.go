@@ -29,13 +29,15 @@ func (c CellItem) Refer(ref string) CellItem {
 }
 
 func (c CellItem) Display() string {
-	if c.selected {
-		return `\cellcolor{black}{\textcolor{white}{` + c.Text + `}}`
-	}
-
 	if len(c.Ref) == 0 {
 		c.Ref = c.Text
 	}
 
-	return `\hyperlink{` + c.Ref + `}{` + c.Text + `}`
+	link := `\hyperlink{` + c.Ref + `}{` + c.Text + `}`
+
+	if c.selected {
+		return `\cellcolor{black}{\textcolor{white}{` + link + `}}`
+	}
+
+	return link
 }
