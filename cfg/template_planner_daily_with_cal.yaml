@@ -1,4 +1,10 @@
 pages:
+  - name: title
+    renderblocks:
+      - funcname: title
+        tpls:
+          - title.tpl
+
   - name: annual
     renderblocks:
       - funcname: header_annual2
