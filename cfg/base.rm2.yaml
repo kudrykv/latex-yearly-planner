@@ -4,8 +4,8 @@ layout:
     height: 20.9cm
 
     reversemargins: true
-    marginparwidth: .9cm
-    marginparsep: 5mm
+    marginparwidth: 1cm
+    marginparsep: 4mm
 
     margin:
       top: .3cm

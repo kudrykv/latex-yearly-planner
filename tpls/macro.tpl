@@ -29,6 +29,8 @@
 \newlength{\myLenMonthlyCellHeight}
 \newlength{\myLenNotesIndexCellHeight}
 \newlength{\myLenHeaderResizeBox}
+\newlength{\myLenHeaderSideQuartersWidth}
+\newlength{\myLenHeaderSideMonthsWidth}
 
 {{- $lengths := .Cfg.Layout.Lengths -}}
 \setlength{\myLenTabColSep}{ {{- $lengths.TabColSep -}} }
@@ -42,6 +44,8 @@
 \setlength{\myLenTriCol}{\dimexpr.333\linewidth-.667\myLenTriColSep}
 \setlength{\myLenNotesIndexCellHeight}{ {{- $lengths.NotesIndexCellHeight -}} }
 \setlength{\myLenHeaderResizeBox}{ {{- $lengths.HeaderResizeBox -}} }
+\setlength{\myLenHeaderSideQuartersWidth}{ {{- $lengths.HeaderSideQuartersWidth -}} }
+\setlength{\myLenHeaderSideMonthsWidth}{ {{- $lengths.HeaderSideMonthsWidth -}} }
 
 \newcommand{\myColorGray}{ {{- .Cfg.Layout.Colors.Gray -}} }
 \newcommand{\myColorLightGray}{ {{- .Cfg.Layout.Colors.LightGray -}} }

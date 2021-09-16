@@ -65,22 +65,22 @@
     {{$cell.Display}} {{ if not (eq (incr $i) (len $.Body.Cells)) }} &{{end}}
   {{end}}
   \end{tabular}}%
-\medskip
-\myLineThick
+\medskip%
+\myLineThick%
 \marginnote{%
   \rotatebox[origin=tr]{90}{%
     \renewcommand{\arraystretch}{2}%
-    \begin{tabularx}{14.35cm}{*{11}{Y|}Y}
+    \begin{tabularx}{\myLenHeaderSideMonthsWidth}{*{11}{Y|}Y}
     {{range $i, $month := .Body.Months -}}
     {{$month.Display}} {{if ne $i 11}}
-      & {{else}} \\[1ex] \hline {{end}}
+      & {{else}} \\{{- $.Cfg.Layout.Lengths.HeaderSideCellHeight -}} \hline {{end}}
     {{end}}
     \end{tabularx}%
-    \quad
-    \begin{tabularx}{4cm}{*{3}{Y|}Y}
+    \quad%
+    \begin{tabularx}{\myLenHeaderSideQuartersWidth}{*{3}{Y|}Y}
     {{range $i, $quarter := .Body.Quarters -}}
     {{$quarter.Display}} {{if ne $i 3}}
-      & {{else}} \\[1ex] \hline {{end}}
+      & {{else}} \\{{- $.Cfg.Layout.Lengths.HeaderSideCellHeight -}} \hline {{end}}
     {{end}}
     \end{tabularx}%
   }%

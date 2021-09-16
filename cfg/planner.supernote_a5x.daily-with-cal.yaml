@@ -6,3 +6,7 @@ layout:
   numbers:
     dailybottomhour: 8
     dailytophour: 20
+
+  lengths:
+    headersidequarterswidth: 4cm
+    headersidemonthswidth: 14.35cm

@@ -2,3 +2,8 @@ layout:
   numbers:
     dailybottomhour: 8
     dailytophour: 21
+
+  lengths:
+    headersidecellheight: "[1.35ex]"
+    headersidequarterswidth: 4cm
+    headersidemonthswidth: 15.25cm
