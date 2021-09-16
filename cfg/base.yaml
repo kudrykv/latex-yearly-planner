@@ -40,6 +40,8 @@ layout:
     monthlycellheight: 55pt
     notesindexcellheight: 1.37cm
     headerresizebox: 6mm
+    headersidequarterswidth: 4cm
+    headersidemonthswidth: 14.5cm
 
   colors:
     gray: gray
