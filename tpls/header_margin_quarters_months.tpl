@@ -71,6 +71,7 @@
   \rotatebox[origin=tr]{90}{%
     \renewcommand{\arraystretch}{2}%
     \begin{tabularx}{\myLenHeaderSideMonthsWidth}{*{11}{Y|}Y}
+      \hline
     {{range $i, $month := .Body.Months -}}
     {{$month.Display}} {{if ne $i 11}}
       & {{else}} \\{{- $.Cfg.Layout.Lengths.HeaderSideCellHeight -}} \hline {{end}}
@@ -78,6 +79,7 @@
     \end{tabularx}%
     \quad%
     \begin{tabularx}{\myLenHeaderSideQuartersWidth}{*{3}{Y|}Y}
+      \hline
     {{range $i, $quarter := .Body.Quarters -}}
     {{$quarter.Display}} {{if ne $i 3}}
       & {{else}} \\{{- $.Cfg.Layout.Lengths.HeaderSideCellHeight -}} \hline {{end}}
