@@ -1,5 +1,8 @@
 layout:
   numbers:
+    dailytodos: 5
+    dailynotes: 18
+    dailypersonal: 10
     dailybottomhour: 8
     dailytophour: 21
 

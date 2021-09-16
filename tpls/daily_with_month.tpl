@@ -9,12 +9,12 @@
 \hspace{\myLenTriColSep}%
 \begin{minipage}[t]{\dimexpr2\myLenTriCol+\myLenTriColSep}
   \myUnderline{Top priorities\textcolor{white}{g}}
-  \Repeat{5}{\myTodoLineGray}
+  \Repeat{\myNumDailyTodos}{\myTodoLineGray}
   \vskip\dimexpr7mm-1.4pt
   \myUnderline{Notes\hfill\hyperlink{Notes {{- .Body.Today.RefText -}} }{More}}
-  \Repeat{16}{\myLineGrayVskipTop}
+  \Repeat{\myNumDailyNotes}{\myLineGrayVskipTop}
   \vskip\dimexpr7mm-1.2pt
   \myUnderline{Personal\hfill\hyperlink{Reflect {{- .Body.Today.RefText -}} }{Reflect}}
-  \Repeat{9}{\myLineGrayVskipTop}
+  \Repeat{\myNumDailyPersonal}{\myLineGrayVskipTop}
 \end{minipage}
 \par\pagebreak

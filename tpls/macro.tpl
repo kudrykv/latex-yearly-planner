@@ -5,18 +5,20 @@
 \newcommand{\myMinLineHeight}[1]{\parbox{0pt}{\vskip#1}}
 \newcommand{\myDummyQ}{\textcolor{white}{Q}}
 
-\newcommand{\myNumArrayStretch}{ {{- .Cfg.Layout.Numbers.ArrayStretch -}} }
-\newcommand{\myNumQuarterlyLines}{ {{- .Cfg.Layout.Numbers.QuarterlyLines -}} }
-\newcommand{\myNumWeeklyLines}{ {{- .Cfg.Layout.Numbers.WeeklyLines -}} }
-\newcommand{\myNumDailyTodos}{ {{- .Cfg.Layout.Numbers.DailyTodos -}} }
-\newcommand{\myNumDailyNotes}{ {{- .Cfg.Layout.Numbers.DailyNotes -}} }
-\newcommand{\myNumDailyBottomHour}{ {{- .Cfg.Layout.Numbers.DailyBottomHour -}} }
-\newcommand{\myNumDailyTopHour}{ {{- .Cfg.Layout.Numbers.DailyTopHour -}} }
-\newcommand{\myNumDailyDiaryGoals}{ {{- .Cfg.Layout.Numbers.DailyDiaryGoals -}} }
-\newcommand{\myNumDailyDiaryGrateful}{ {{- .Cfg.Layout.Numbers.DailyDiaryGrateful -}} }
-\newcommand{\myNumDailyDiaryBest}{ {{- .Cfg.Layout.Numbers.DailyDiaryBest -}} }
-\newcommand{\myNumDailyDiaryLog}{ {{- .Cfg.Layout.Numbers.DailyDiaryLog -}} }
-\newcommand{\myNumTodoLinesInTodoPage}{ {{- .Cfg.Layout.Numbers.TodoLinesInTodoPage -}} }
+{{- $numbers := .Cfg.Layout.Numbers -}}
+\newcommand{\myNumArrayStretch}{ {{- $numbers.ArrayStretch -}} }
+\newcommand{\myNumQuarterlyLines}{ {{- $numbers.QuarterlyLines -}} }
+\newcommand{\myNumWeeklyLines}{ {{- $numbers.WeeklyLines -}} }
+\newcommand{\myNumDailyTodos}{ {{- $numbers.DailyTodos -}} }
+\newcommand{\myNumDailyNotes}{ {{- $numbers.DailyNotes -}} }
+\newcommand{\myNumDailyBottomHour}{ {{- $numbers.DailyBottomHour -}} }
+\newcommand{\myNumDailyTopHour}{ {{- $numbers.DailyTopHour -}} }
+\newcommand{\myNumDailyDiaryGoals}{ {{- $numbers.DailyDiaryGoals -}} }
+\newcommand{\myNumDailyDiaryGrateful}{ {{- $numbers.DailyDiaryGrateful -}} }
+\newcommand{\myNumDailyDiaryBest}{ {{- $numbers.DailyDiaryBest -}} }
+\newcommand{\myNumDailyDiaryLog}{ {{- $numbers.DailyDiaryLog -}} }
+\newcommand{\myNumDailyPersonal}{ {{- $numbers.DailyPersonal -}} }
+\newcommand{\myNumTodoLinesInTodoPage}{ {{- $numbers.TodoLinesInTodoPage -}} }
 
 \newlength{\myLenTabColSep}
 \newlength{\myLenLineThicknessDefault}

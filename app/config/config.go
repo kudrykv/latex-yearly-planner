@@ -70,6 +70,7 @@ type Numbers struct {
 	WeeklyLines         int
 	DailyTodos          int
 	DailyNotes          int
+	DailyPersonal       int
 	DailyBottomHour     int
 	DailyTopHour        int
 	DailyDiaryGoals     int

@@ -20,6 +20,7 @@ layout:
     weeklylines: 11
     dailytodos: 15
     dailynotes: 18
+    dailypersonal: 6
     dailybottomhour: 6
     dailytophour: 22
     dailydiarygoals: 10
