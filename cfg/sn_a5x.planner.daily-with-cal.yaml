@@ -6,6 +6,9 @@ layout:
   numbers:
     dailybottomhour: 8
     dailytophour: 20
+    dailytodos: 5
+    dailynotes: 18
+    dailypersonal: 8
 
   lengths:
     headersidequarterswidth: 4cm
