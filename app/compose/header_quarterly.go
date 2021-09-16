@@ -15,7 +15,10 @@ func HeaderQuarterly(cfg config.Config, tpls []string) (page.Modules, error) {
 	}
 
 	modules := make(page.Modules, 0, 4)
-	hRight := header.Items{header.NewTextItem("Notes"), header.NewTextItem("Todos")}
+	hRight := header.Items{
+		header.NewTextItem("Notes").RefText("Notes Index"),
+		header.NewTextItem("Todos").RefText("Todos Index"),
+	}
 
 	for quarter := 1; quarter <= 4; quarter++ {
 		hQrtrs := header.NewItemsGroup(
