@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"io/ioutil"
+	"strings"
 	"time"
 
 	"github.com/caarlos0/env/v6"
@@ -15,10 +16,9 @@ type Config struct {
 	Year      int `env:"PLANNER_YEAR"`
 	WeekStart time.Weekday
 
-	RenderBlocks RenderBlocks
+	Pages Pages
 
 	Layout Layout
-	Blocks Blocks
 }
 
 type Debug struct {
@@ -26,71 +26,29 @@ type Debug struct {
 	ShowLinks bool
 }
 
-type RenderBlocks []string
+type Pages []Page
+type Page struct {
+	Name         string
+	RenderBlocks RenderBlocks
+}
 
-func (r RenderBlocks) WeeklyEnabled() bool {
+type RenderBlocks []RenderBlock
+
+func (r Pages) WeeklyEnabled() bool {
 	for _, s := range r {
-		if s == "weekly" {
-			return true
+		for _, block := range s.RenderBlocks {
+			if block.FuncName == "weekly" {
+				return true
+			}
 		}
 	}
 
 	return false
 }
 
-type Blocks struct {
-	Title        Title
-	Annual       Annual
-	Quarterly    Quarterly
-	Monthly      Monthly
-	Weekly       Weekly
-	Daily        Daily
-	DailyReflect DailyReflect
-	DailyNotes   DailyNotes
-	NotesIndexed NotesIndexed
-	TodosIndexed TodosIndexed
-}
-
-type Title struct {
-	Tpl string
-}
-
-type Annual struct {
-	Tpl string
-}
-
-type Quarterly struct {
-	Tpl string
-}
-
-type Monthly struct {
-	Tpl string
-}
-
-type Weekly struct {
-	Tpl string
-}
-
-type Daily struct {
-	Tpl string
-}
-
-type DailyReflect struct {
-	Tpl string
-}
-
-type DailyNotes struct {
-	Tpl string
-}
-
-type NotesIndexed struct {
-	TplIndex string
-	TplPage  string
-}
-
-type TodosIndexed struct {
-	TplIndex string
-	TplPage  string
+type RenderBlock struct {
+	FuncName string
+	Tpls     []string
 }
 
 type Colors struct {
@@ -112,6 +70,7 @@ type Numbers struct {
 	WeeklyLines         int
 	DailyTodos          int
 	DailyNotes          int
+	DailyPersonal       int
 	DailyBottomHour     int
 	DailyTopHour        int
 	DailyDiaryGoals     int
@@ -119,17 +78,7 @@ type Numbers struct {
 	DailyDiaryBest      int
 	DailyDiaryLog       int
 	TodoLinesInTodoPage int
-}
-
-type Lengths struct {
-	TabColSep            string
-	LineThicknessDefault string
-	LineThicknessThick   string
-	LineHeightButLine    string
-	TwoColSep            string
-	TriColSep            string
-	MonthlyCellHeight    string
-	NotesIndexCellHeight string
+	IndexMeetingNotes   int
 }
 
 type Paper struct {
@@ -150,19 +99,21 @@ type Margin struct {
 	Right  string `env:"PLANNER_LAYOUT_PAPER_MARGIN_RIGHT"`
 }
 
-func New(filepath string) (Config, error) {
+func New(pathConfigs ...string) (Config, error) {
 	var (
 		bts []byte
 		err error
 		cfg Config
 	)
 
-	if bts, err = ioutil.ReadFile(filepath); err != nil {
-		return cfg, fmt.Errorf("ioutil read file: %w", err)
-	}
+	for _, filepath := range pathConfigs {
+		if bts, err = ioutil.ReadFile(strings.ToLower(filepath)); err != nil {
+			return cfg, fmt.Errorf("ioutil read file: %w", err)
+		}
 
-	if err = yaml.Unmarshal(bts, &cfg); err != nil {
-		return cfg, fmt.Errorf("yaml unmarshal: %w", err)
+		if err = yaml.Unmarshal(bts, &cfg); err != nil {
+			return cfg, fmt.Errorf("yaml unmarshal: %w", err)
+		}
 	}
 
 	if err = env.Parse(&cfg); err != nil {

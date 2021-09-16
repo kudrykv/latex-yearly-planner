@@ -3,19 +3,22 @@
 \ExplSyntaxOff
 
 \newcommand{\myMinLineHeight}[1]{\parbox{0pt}{\vskip#1}}
+\newcommand{\myDummyQ}{\textcolor{white}{Q}}
 
-\newcommand{\myNumArrayStretch}{ {{- .Cfg.Layout.Numbers.ArrayStretch -}} }
-\newcommand{\myNumQuarterlyLines}{ {{- .Cfg.Layout.Numbers.QuarterlyLines -}} }
-\newcommand{\myNumWeeklyLines}{ {{- .Cfg.Layout.Numbers.WeeklyLines -}} }
-\newcommand{\myNumDailyTodos}{ {{- .Cfg.Layout.Numbers.DailyTodos -}} }
-\newcommand{\myNumDailyNotes}{ {{- .Cfg.Layout.Numbers.DailyNotes -}} }
-\newcommand{\myNumDailyBottomHour}{ {{- .Cfg.Layout.Numbers.DailyBottomHour -}} }
-\newcommand{\myNumDailyTopHour}{ {{- .Cfg.Layout.Numbers.DailyTopHour -}} }
-\newcommand{\myNumDailyDiaryGoals}{ {{- .Cfg.Layout.Numbers.DailyDiaryGoals -}} }
-\newcommand{\myNumDailyDiaryGrateful}{ {{- .Cfg.Layout.Numbers.DailyDiaryGrateful -}} }
-\newcommand{\myNumDailyDiaryBest}{ {{- .Cfg.Layout.Numbers.DailyDiaryBest -}} }
-\newcommand{\myNumDailyDiaryLog}{ {{- .Cfg.Layout.Numbers.DailyDiaryLog -}} }
-\newcommand{\myNumTodoLinesInTodoPage}{ {{- .Cfg.Layout.Numbers.TodoLinesInTodoPage -}} }
+{{- $numbers := .Cfg.Layout.Numbers -}}
+\newcommand{\myNumArrayStretch}{ {{- $numbers.ArrayStretch -}} }
+\newcommand{\myNumQuarterlyLines}{ {{- $numbers.QuarterlyLines -}} }
+\newcommand{\myNumWeeklyLines}{ {{- $numbers.WeeklyLines -}} }
+\newcommand{\myNumDailyTodos}{ {{- $numbers.DailyTodos -}} }
+\newcommand{\myNumDailyNotes}{ {{- $numbers.DailyNotes -}} }
+\newcommand{\myNumDailyBottomHour}{ {{- $numbers.DailyBottomHour -}} }
+\newcommand{\myNumDailyTopHour}{ {{- $numbers.DailyTopHour -}} }
+\newcommand{\myNumDailyDiaryGoals}{ {{- $numbers.DailyDiaryGoals -}} }
+\newcommand{\myNumDailyDiaryGrateful}{ {{- $numbers.DailyDiaryGrateful -}} }
+\newcommand{\myNumDailyDiaryBest}{ {{- $numbers.DailyDiaryBest -}} }
+\newcommand{\myNumDailyDiaryLog}{ {{- $numbers.DailyDiaryLog -}} }
+\newcommand{\myNumDailyPersonal}{ {{- $numbers.DailyPersonal -}} }
+\newcommand{\myNumTodoLinesInTodoPage}{ {{- $numbers.TodoLinesInTodoPage -}} }
 
 \newlength{\myLenTabColSep}
 \newlength{\myLenLineThicknessDefault}
@@ -27,17 +30,24 @@
 \newlength{\myLenTriCol}
 \newlength{\myLenMonthlyCellHeight}
 \newlength{\myLenNotesIndexCellHeight}
+\newlength{\myLenHeaderResizeBox}
+\newlength{\myLenHeaderSideQuartersWidth}
+\newlength{\myLenHeaderSideMonthsWidth}
 
-\setlength{\myLenTabColSep}{ {{- .Cfg.Layout.Lengths.TabColSep -}} }
-\setlength{\myLenLineThicknessDefault}{ {{- .Cfg.Layout.Lengths.LineThicknessDefault -}} }
-\setlength{\myLenLineThicknessThick}{ {{- .Cfg.Layout.Lengths.LineThicknessThick -}} }
-\setlength{\myLenLineHeightButLine}{ {{- .Cfg.Layout.Lengths.LineHeightButLine -}} }
-\setlength{\myLenTwoColSep}{ {{- .Cfg.Layout.Lengths.TwoColSep -}} }
+{{- $lengths := .Cfg.Layout.Lengths -}}
+\setlength{\myLenTabColSep}{ {{- $lengths.TabColSep -}} }
+\setlength{\myLenLineThicknessDefault}{ {{- $lengths.LineThicknessDefault -}} }
+\setlength{\myLenLineThicknessThick}{ {{- $lengths.LineThicknessThick -}} }
+\setlength{\myLenLineHeightButLine}{ {{- $lengths.LineHeightButLine -}} }
+\setlength{\myLenTwoColSep}{ {{- $lengths.TwoColSep -}} }
 \setlength{\myLenTwoCol}{\dimexpr.5\linewidth-.5\myLenTwoColSep}
-\setlength{\myLenMonthlyCellHeight}{ {{- .Cfg.Layout.Lengths.MonthlyCellHeight -}} }
-\setlength{\myLenTriColSep}{ {{- .Cfg.Layout.Lengths.TriColSep -}} }
+\setlength{\myLenMonthlyCellHeight}{ {{- $lengths.MonthlyCellHeight -}} }
+\setlength{\myLenTriColSep}{ {{- $lengths.TriColSep -}} }
 \setlength{\myLenTriCol}{\dimexpr.333\linewidth-.667\myLenTriColSep}
-\setlength{\myLenNotesIndexCellHeight}{ {{- .Cfg.Layout.Lengths.NotesIndexCellHeight -}} }
+\setlength{\myLenNotesIndexCellHeight}{ {{- $lengths.NotesIndexCellHeight -}} }
+\setlength{\myLenHeaderResizeBox}{ {{- $lengths.HeaderResizeBox -}} }
+\setlength{\myLenHeaderSideQuartersWidth}{ {{- $lengths.HeaderSideQuartersWidth -}} }
+\setlength{\myLenHeaderSideMonthsWidth}{ {{- $lengths.HeaderSideMonthsWidth -}} }
 
 \newcommand{\myColorGray}{ {{- .Cfg.Layout.Colors.Gray -}} }
 \newcommand{\myColorLightGray}{ {{- .Cfg.Layout.Colors.LightGray -}} }

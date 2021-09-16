@@ -1,15 +1,15 @@
 {%
 \noindent\Large%
 \renewcommand{\arraystretch}{\myNumArrayStretch}%
-{{if gt (len .Header.Left) 0 -}}
-\begin{tabular}{ {{- .Header.Left.ColSetup true -}} }
-{{.Header.Left.Row}}
+{{if gt (len .Body.Left) 0 -}}
+\begin{tabular}{ {{- .Body.Left.ColSetup true -}} }
+{{.Body.Left.Row}}
 \end{tabular}
 {{- end -}}
 \hfill%
-{{if gt (len .Header.Right) 0 -}}
-\begin{tabular}{ {{- .Header.Right.ColSetup false -}} }
-{{.Header.Right.Row}}
+{{if gt (len .Body.Right) 0 -}}
+\begin{tabular}{ {{- .Body.Right.ColSetup false -}} }
+{{.Body.Right.Row}}
 \end{tabular}
 {{- end -}}
 }

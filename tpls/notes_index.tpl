@@ -1,5 +1,3 @@
-{{- template "header.tpl" dict "Cfg" $.Cfg "Header" .Header -}}
-
 \begin{tabularx}{\textwidth}{|*{ {{- len .Body -}} }{@{}X@{}|}}
   \hline
   {{- range $row := .Body}}

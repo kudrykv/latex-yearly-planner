@@ -1,14 +1,21 @@
 {%
 \renewcommand{\arraystretch}{\myNumArrayStretch}%
 \setlength{\tabcolsep}{\myLenTabColSep}%
-\begin{tabular}[t]{ {{- .Month.WeekLayout .Cfg.RenderBlocks.WeeklyEnabled -}} }
+
+{{- if is .UseTabularx}}
+\begin{tabularx}{\linewidth}{ {{- if .Cfg.Pages.WeeklyEnabled -}} Y| {{- end -}} *{7}{Y}}
+{{- else}}
+\begin{tabular}[t]{ {{- if .Cfg.Pages.WeeklyEnabled -}} c| {{- end -}} *{7}{c}}
+{{- end}}
+{{- if not (is .HideName) -}}
 \multicolumn%
-  { {{- .Month.WeekHeaderLen .Cfg.RenderBlocks.WeeklyEnabled -}} }%
+  { {{- .Month.WeekHeaderLen .Cfg.Pages.WeeklyEnabled -}} }%
   {c}%
   { {{- template "slink.tpl" .Month.MonthName -}} } \\ \hline
-{{.Month.WeekHeader .Cfg.RenderBlocks.WeeklyEnabled}} \\ \hline
+{{- end}}
+{{.Month.WeekHeader .Cfg.Pages.WeeklyEnabled}} \\ \hline
 {{- range $row := .Month.Matrix}}
-  {{if $.Cfg.RenderBlocks.WeeklyEnabled -}}
+  {{if $.Cfg.Pages.WeeklyEnabled -}}
     {{if and (eq ($.Month.MonthName.String) "January") (gt $row.WeekNumber 50)}}
       {{- $row.LinkWeek "fw" false}} &
     {{- else -}}
@@ -16,8 +23,23 @@
     {{- end -}}
   {{end -}}
   {{range $j, $item := .}}
-    {{if not $item.IsZero}} {{ $item.Link }} {{end}}
+    {{if not $item.IsZero -}}
+  {{- if is $.Today}}
+    {{- if $.Today.Equal $item.Time}}
+      \cellcolor{black}{\textcolor{white}{ {{- $item.Day -}} }}
+    {{- else -}}
+      {{$item.Link}}
+    {{- end -}}
+  {{- else -}}
+    {{ $item.Link }}
+  {{- end -}}
+    {{- end}}
     {{- if ne $j (dec (len $row)) }} & {{else}} \\ {{end -}}
   {{- end -}}
-{{end}}
-\end{tabular}}
+{{- end}}
+{{if is .UseTabularx}}
+\end{tabularx}
+{{- else -}}
+\end{tabular}
+{{- end -}}
+}

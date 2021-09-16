@@ -20,6 +20,7 @@ layout:
     weeklylines: 11
     dailytodos: 15
     dailynotes: 18
+    dailypersonal: 6
     dailybottomhour: 6
     dailytophour: 22
     dailydiarygoals: 10
@@ -27,6 +28,7 @@ layout:
     dailydiarybest: 11
     dailydiarylog: 35
     todolinesintodopage: 10
+    indexmeetingnotes: 36
 
   lengths:
     tabcolsep: 3.5pt
@@ -37,52 +39,10 @@ layout:
     tricolsep: 5pt
     monthlycellheight: 55pt
     notesindexcellheight: 1.37cm
+    headerresizebox: 6mm
+    headersidequarterswidth: 4cm
+    headersidemonthswidth: 14.5cm
 
   colors:
     gray: gray
     lightgray: gray!50
-
-renderblocks:
-  - title
-  - annual
-  - quarterly
-  - monthly
-  - weekly
-  - daily
-  - dailyreflect
-  - dailynotes
-  - notesindexed
-  - todosindexed
-
-blocks:
-  title:
-    tpl: title.tpl
-
-  annual:
-    tpl: annual.tpl
-
-  quarterly:
-    tpl: quarterly.tpl
-
-  monthly:
-    tpl: monthly.tpl
-
-  weekly:
-    tpl: weekly.tpl
-
-  daily:
-    tpl: daily.tpl
-
-  dailyreflect:
-    tpl: daily_reflect.tpl
-
-  dailynotes:
-    tpl: daily_notes.tpl
-
-  notesindexed:
-    tplindex: notes_index.tpl
-    tplpage: daily_notes.tpl
-
-  todosindexed:
-    tplindex: todos_index.tpl
-    tplpage: todos_note.tpl

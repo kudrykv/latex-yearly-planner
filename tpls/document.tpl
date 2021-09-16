@@ -18,10 +18,10 @@
 \usepackage{amssymb}
 \usepackage{expl3}
 \usepackage{leading}
-\usepackage{adjustbox}
 \usepackage{pgffor}
 \usepackage{hyperref}
 \usepackage{marginnote}
+\usepackage{adjustbox}
 
 \hypersetup{
     {{- if not .Cfg.Debug.ShowLinks}}hidelinks=true{{end -}}
@@ -42,12 +42,13 @@
 {{if $.Cfg.Layout.Paper.ReverseMargins}}\reversemarginpar{{end}}
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 \parindent=0pt
+\fboxsep0pt
 
 \begin{document}
 
 {{template "macro.tpl" .}}
 
-  {{range .Files -}}
-    \include{ {{- . -}} }
+  {{range .Pages -}}
+    \include{ {{- .Name -}} }
   {{end}}
 \end{document}

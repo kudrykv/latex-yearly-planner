@@ -1,69 +1,28 @@
 package compose
 
 import (
-	"strconv"
+	"fmt"
 	"time"
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
-	"github.com/kudrykv/latex-yearly-planner/app/components/header"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-func Weekly(cfg config.Config) []page.Page {
-	sow := pickUpStartWeekForTheYear(cfg.Year, cfg.WeekStart)
-	pages := make([]page.Page, 0, 53)
-
-	yearInWeeks := calendar.FillWeekly(sow).FillYear()
-	for i, weekly := range yearInWeeks {
-		right := header.Items{}
-		if i > 0 {
-			item := header.NewTextItem("Week " + strconv.Itoa(yearInWeeks[i-1].WeekNumber()))
-
-			if i-1 == 0 {
-				item = item.RefPrefix("fw")
-			}
-
-			right = append(right, item)
-		}
-
-		if i+1 < len(yearInWeeks) {
-			right = append(right, header.NewTextItem("Week "+strconv.Itoa(yearInWeeks[i+1].WeekNumber())))
-		}
-
-		qrtrItems := make([]header.Item, 0, 2)
-		for _, qrtr := range weekly.Quarters(cfg.Year) {
-			qrtrItems = append(qrtrItems, header.NewTextItem("Q"+strconv.Itoa(qrtr)))
-		}
-
-		monthItems := make([]header.Item, 0, 2)
-		for _, month := range weekly.Months(cfg.Year) {
-			monthItems = append(monthItems, header.NewMonthItem(month))
-		}
-
-		curr := header.NewTextItem("Week " + strconv.Itoa(weekly.WeekNumber())).Ref(true)
-		if i == 0 {
-			curr = curr.RefPrefix("fw")
-		}
-
-		pag := page.Page{
-			Tpl: cfg.Blocks.Weekly.Tpl,
-			Header: header.Header{
-				Right: right,
-				Left: header.Items{
-					header.NewIntItem(cfg.Year),
-					header.NewItemsGroup(qrtrItems...).Delim(" / "),
-					header.NewItemsGroup(monthItems...).Delim(" / "),
-					curr,
-				},
-			},
-			Body: weekly,
-		}
-
-		pages = append(pages, pag)
+func Weekly(cfg config.Config, tpls []string) (page.Modules, error) {
+	if len(tpls) != 1 {
+		return nil, fmt.Errorf("exppected one tpl, got %d %v", len(tpls), tpls)
 	}
 
-	return pages
+	sow := pickUpStartWeekForTheYear(cfg.Year, cfg.WeekStart)
+	modules := make(page.Modules, 0, 53)
+
+	yearInWeeks := calendar.FillWeekly(sow).FillYear()
+	for _, weekly := range yearInWeeks {
+		modules = append(modules, page.Module{Cfg: cfg, Tpl: tpls[0], Body: weekly})
+	}
+
+	return modules, nil
 }
 
 func pickUpStartWeekForTheYear(year int, weekStart time.Weekday) calendar.DayTime {

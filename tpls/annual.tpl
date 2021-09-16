@@ -1,8 +1,7 @@
-{{template "header.tpl" dict "Cfg" $.Cfg "Header" .Header}}
 {{range $i, $qrtr := .Body}}
   \begin{tabularx}{\linewidth}{@{}*{3}{X}@{}}
   {{- range $j, $month := $qrtr}}
-    {{- template "monthTabular.tpl" dict "Cfg" $.Cfg "Month" $month}}
+    \adjustbox{valign=t}{ {{- template "monthTabular.tpl" dict "Cfg" $.Cfg "Month" $month "UseTabularx" true -}} }
     {{- if ne $j 2 }} & {{end}}
   {{- end }}
   \end{tabularx}

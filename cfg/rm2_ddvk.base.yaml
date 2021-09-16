@@ -1,0 +1,14 @@
+layout:
+  paper:
+    width: 15.6cm
+    height: 20.9cm
+
+    reversemargins: true
+    marginparwidth: 1cm
+    marginparsep: 4.5mm
+
+    margin:
+      top: .3cm
+      bottom: 0.7cm
+      left: 1.4cm
+      right: 0.3cm

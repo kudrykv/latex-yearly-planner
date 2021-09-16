@@ -1,0 +1,15 @@
+layout:
+  paper:
+    margin:
+      left: 1cm
+
+  numbers:
+    dailybottomhour: 8
+    dailytophour: 20
+    dailytodos: 5
+    dailynotes: 18
+    dailypersonal: 8
+
+  lengths:
+    headersidequarterswidth: 4cm
+    headersidemonthswidth: 14.35cm

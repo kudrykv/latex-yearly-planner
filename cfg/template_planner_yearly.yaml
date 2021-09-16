@@ -1,0 +1,89 @@
+pages:
+  - name: title
+    renderblocks:
+      - funcname: title
+        tpls:
+          - title.tpl
+
+  - name: annual
+    renderblocks:
+      - funcname: header_annual
+        tpls:
+          - header.tpl
+      - funcname: annual
+        tpls:
+          - annual.tpl
+
+  - name: quarterly
+    renderblocks:
+      - funcname: header_quarterly
+        tpls:
+          - header.tpl
+      - funcname: quarterly
+        tpls:
+          - quarterly.tpl
+
+  - name: monthly
+    renderblocks:
+      - funcname: header_monthly
+        tpls:
+          - header.tpl
+      - funcname: monthly
+        tpls:
+          - monthly.tpl
+
+  - name: weekly
+    renderblocks:
+      - funcname: header_weekly
+        tpls:
+          - header.tpl
+      - funcname: weekly
+        tpls:
+          - weekly.tpl
+
+  - name: daily
+    renderblocks:
+      - funcname: header_daily
+        tpls:
+          - header.tpl
+      - funcname: daily
+        tpls:
+          - daily.tpl
+
+  - name: daily_reflect
+    renderblocks:
+      - funcname: header_daily_reflect
+        tpls:
+          - header.tpl
+      - funcname: daily_reflect
+        tpls:
+          - daily_reflect.tpl
+
+  - name: daily_notes
+    renderblocks:
+      - funcname: header_daily_notes
+        tpls:
+          - header.tpl
+      - funcname: daily_notes
+        tpls:
+          - daily_notes.tpl
+
+  - name: notes_indexed
+    renderblocks:
+      - funcname: header_notes_indexed
+        tpls:
+          - header.tpl
+      - funcname: notes_indexed
+        tpls:
+          - notes_index.tpl
+          - daily_notes.tpl
+
+  - name: todos_indexed
+    renderblocks:
+      - funcname: header_todos_indexed
+        tpls:
+          - header.tpl
+      - funcname: todos_indexed
+        tpls:
+          - todos_index.tpl
+          - todos_note.tpl

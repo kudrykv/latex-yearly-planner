@@ -26,8 +26,21 @@ var tpl = template.Must(template.New("").Funcs(template.FuncMap{
 
 		return dict, nil
 	},
+
+	"incr": func(i int) int {
+		return i + 1
+	},
+
 	"dec": func(i int) int {
 		return i - 1
+	},
+
+	"is": func(i interface{}) bool {
+		if value, ok := i.(bool); ok {
+			return value
+		}
+
+		return i != nil
 	},
 }).ParseGlob(`./tpls/*`))
 
@@ -44,10 +57,10 @@ func New() Tex {
 func (t Tex) Document(wr io.Writer, cfg config.Config) error {
 	type pack struct {
 		Cfg   config.Config
-		Files []string
+		Pages []config.Page
 	}
 
-	data := pack{Cfg: cfg, Files: cfg.RenderBlocks}
+	data := pack{Cfg: cfg, Pages: cfg.Pages}
 	if err := t.tpl.ExecuteTemplate(wr, "document.tpl", data); err != nil {
 		return fmt.Errorf("execute template: %w", err)
 	}

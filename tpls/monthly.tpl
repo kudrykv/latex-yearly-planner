@@ -1,15 +1,13 @@
-{{- template "header.tpl" dict "Cfg" $.Cfg "Header" .Header -}}
-
 \begin{tabularx}{\textwidth}{@{}
-  {{- if $.Cfg.RenderBlocks.WeeklyEnabled -}}
+  {{- if $.Cfg.Pages.WeeklyEnabled -}}
     l!{\vrule width \myLenLineThicknessThick}
   {{- else -}} | {{- end -}}
   *{7}{@{}X@{}|}}
 \noalign{\hrule height \myLenLineThicknessThick}
-{{.Body.WeekHeaderFull $.Cfg.RenderBlocks.WeeklyEnabled}} \\ \noalign{\hrule height \myLenLineThicknessThick}
+{{.Body.WeekHeaderFull $.Cfg.Pages.WeeklyEnabled}} \\ \noalign{\hrule height \myLenLineThicknessThick}
 
 {{- range $row := .Body.Matrix}}
-  {{if $.Cfg.RenderBlocks.WeeklyEnabled -}}
+  {{if $.Cfg.Pages.WeeklyEnabled -}}
     \hyperlink{
       {{- if and (eq ($.Body.MonthName.String) "January") (gt $row.WeekNumber 50) -}}
         {{- $row.RefText "fw" -}}
@@ -24,7 +22,7 @@
       \hyperlink{ {{- $item.RefText -}} }{\begin{tabular}{@{}p{5mm}@{}|}\hfil{}{{- $item.Day -}}\\ \hline\end{tabular}}
     {{- end -}}
 
-    {{- if ne $j (dec (len $row)) }} & {{else}} \\ \hline {{end -}}
+    {{- if ne $j (dec (len $row)) }} & {{else}} \rotatebox[origin=tr]{90}{\makebox[\myLenMonthlyCellHeight][c]{}} \\ \hline {{end -}}
   {{- end -}}
 {{end}}
 \end{tabularx}

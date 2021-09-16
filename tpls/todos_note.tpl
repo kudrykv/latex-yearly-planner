@@ -1,5 +1,3 @@
-{{- template "header.tpl" dict "Cfg" $.Cfg "Header" .Header -}}
-
 \Repeat{2}{
   \parbox{\myLenTwoCol}{%
     \myUnderline{\myLineHeightButLine}

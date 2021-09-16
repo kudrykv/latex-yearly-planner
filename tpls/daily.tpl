@@ -1,4 +1,3 @@
-{{- template "header.tpl" dict "Cfg" $.Cfg "Header" .Header -}}
 {{- $today := .Body -}}
 
 \parbox[t]{\myLenTwoCol}{%

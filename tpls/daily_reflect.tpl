@@ -1,5 +1,3 @@
-{{- template "header.tpl" dict "Cfg" $.Cfg "Header" .Header -}}
-
 \parbox[t]{\myLenTwoCol}{%
   \myUnderline{Goals{}\textcolor{white}{g}}
   \myLineHeightButLine\Repeat{\myNumDailyDiaryGoals}{\myLineGrayVskipBottom}\vspace{3pt}

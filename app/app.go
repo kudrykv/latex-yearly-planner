@@ -2,6 +2,7 @@ package app
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -41,8 +42,8 @@ func action(c *cli.Context) error {
 		err error
 	)
 
-	pathConfig := c.Path(fConfig)
-	if cfg, err = config.New(pathConfig); err != nil {
+	pathConfigs := strings.Split(c.Path(fConfig), ",")
+	if cfg, err = config.New(pathConfigs...); err != nil {
 		return fmt.Errorf("config new: %w", err)
 	}
 
@@ -54,26 +55,47 @@ func action(c *cli.Context) error {
 		return fmt.Errorf("tex document: %w", err)
 	}
 
-	if err = ioutil.WriteFile("out/"+RootFilename(pathConfig), wr.Bytes(), 0600); err != nil {
+	if err = ioutil.WriteFile("out/"+RootFilename(pathConfigs[len(pathConfigs)-1]), wr.Bytes(), 0600); err != nil {
 		return fmt.Errorf("ioutil write file: %w", err)
 	}
 
-	for _, file := range cfg.RenderBlocks {
+	for _, file := range cfg.Pages {
 		wr.Reset()
 
-		if fn, ok = ComposerMap[file]; !ok {
-			continue
+		var mom []page.Modules
+		for _, block := range file.RenderBlocks {
+			if fn, ok = ComposerMap[block.FuncName]; !ok {
+				return fmt.Errorf("unknown func " + block.FuncName)
+			}
+
+			modules, err := fn(cfg, block.Tpls)
+			if err != nil {
+				return fmt.Errorf("%s: %w", block.FuncName, err)
+			}
+
+			mom = append(mom, modules)
 		}
 
-		for _, pag := range fn(cfg) {
-			pag.Cfg = cfg
+		if len(mom) == 0 {
+			return fmt.Errorf("modules of modules must have some modules")
+		}
 
-			if err = t.Execute(wr, pag.Tpl, pag); err != nil {
-				return fmt.Errorf("tex execute: %w", err)
+		allLen := len(mom[0])
+		for _, mods := range mom {
+			if len(mods) != allLen {
+				return errors.New("some modules are not aligned")
 			}
 		}
 
-		if err = ioutil.WriteFile("out/"+file+".tex", wr.Bytes(), 0600); err != nil {
+		for i := 0; i < allLen; i++ {
+			for j, mod := range mom {
+				if err = t.Execute(wr, mod[i].Tpl, mod[i]); err != nil {
+					return fmt.Errorf("execute %s on %s: %w", file.RenderBlocks[i].FuncName, file.RenderBlocks[i].Tpls[j], err)
+				}
+			}
+		}
+
+		if err = ioutil.WriteFile("out/"+file.Name+".tex", wr.Bytes(), 0600); err != nil {
 			return fmt.Errorf("ioutil write file: %w", err)
 		}
 	}
@@ -97,17 +119,38 @@ func RootFilename(pathconfig string) string {
 	return pathconfig + ".tex"
 }
 
-type Composer func(config.Config) []page.Page
+type Composer func(cfg config.Config, tpls []string) (page.Modules, error)
 
 var ComposerMap = map[string]Composer{
-	"title":        compose.Title,
-	"annual":       compose.Annual,
-	"quarterly":    compose.Quarterly,
-	"monthly":      compose.Monthly,
-	"weekly":       compose.Weekly,
-	"daily":        compose.Daily,
-	"dailyreflect": compose.DailyReflect,
-	"dailynotes":   compose.DailyNotes,
-	"notesindexed": compose.NotesIndexed,
-	"todosindexed": compose.TodosIndexed,
+	"title":                    compose.Title,
+	"annual":                   compose.Annual,
+	"quarterly":                compose.Quarterly,
+	"monthly":                  compose.Monthly,
+	"weekly":                   compose.Weekly,
+	"daily":                    compose.Daily,
+	"daily2":                   compose.DailyWMonth,
+	"daily_reflect":            compose.DailyReflect,
+	"daily_notes":              compose.DailyNotes,
+	"notes_indexed":            compose.NotesIndexed,
+	"todos_indexed":            compose.TodosIndexed,
+	"meetings_indexed":         compose.MeetingsIndexed,
+	"header_annual":            compose.HeaderAnnual,
+	"header_annual2":           compose.HeaderAnnual2,
+	"header_quarterly":         compose.HeaderQuarterly,
+	"header_quarterly2":        compose.HeaderQuarterly2,
+	"header_monthly":           compose.HeaderMonthly,
+	"header_monthly2":          compose.HeaderMonthly2,
+	"header_weekly":            compose.HeaderWeekly,
+	"header_weekly2":           compose.HeaderWeekly2,
+	"header_daily":             compose.HeaderDaily,
+	"header_daily2":            compose.HeaderDaily2,
+	"header_daily_notes":       compose.HeaderDailyNotes,
+	"header_daily_notes2":      compose.HeaderDailyNotes2,
+	"header_daily_reflect":     compose.HeaderDailyReflect,
+	"header_daily_reflect2":    compose.HeaderDailyReflect2,
+	"header_notes_indexed":     compose.HeaderNotesIndexed,
+	"header_notes_indexed2":    compose.HeaderNotesIndexed2,
+	"header_todos_indexed":     compose.HeaderTodosIndexed,
+	"header_todos_indexed2":    compose.HeaderTodosIndexed2,
+	"header_meetings_indexed2": compose.HeaderMeetingsIndexed2,
 }
