@@ -13,8 +13,9 @@ import (
 type Config struct {
 	Debug Debug
 
-	Year      int `env:"PLANNER_YEAR"`
-	WeekStart time.Weekday
+	Year                int `env:"PLANNER_YEAR"`
+	WeekStart           time.Weekday
+	ClearTopRightCorner bool
 
 	Pages Pages
 

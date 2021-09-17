@@ -8,8 +8,8 @@
 {{- end -}}
 \hfill%
 {{if gt (len .Body.Right) 0 -}}
-\begin{tabular}{ {{- .Body.Right.ColSetup false -}} }
-{{.Body.Right.Row}}
+\begin{tabular}{ {{- .Body.Right.ColSetup false -}}{{if .Cfg.ClearTopRightCorner}}@{\hspace{\tabcolsep}}|c@{}{{end}} }
+{{.Body.Right.Row}}{{if .Cfg.ClearTopRightCorner}}& \hspace{7mm}{{end}}
 \end{tabular}
 {{- end -}}
 }
