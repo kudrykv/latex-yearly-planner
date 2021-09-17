@@ -60,10 +60,11 @@
 {{- end -}}
 \hfill%
 {\renewcommand{\arraystretch}{\myNumArrayStretch}%
-  \begin{tabular}{*{ {{- len .Body.Cells -}} }{c|}@{}}
+  \begin{tabular}{*{ {{- len .Body.Cells -}} }{c|}@{}{{if .Cfg.ClearTopRightCorner}}c@{}{{end}}}
   {{range $i, $cell := .Body.Cells}}
     {{$cell.Display}} {{ if not (eq (incr $i) (len $.Body.Cells)) }} &{{end}}
   {{end}}
+  {{- if .Cfg.ClearTopRightCorner}}& \hspace{7mm}{{end}}
   \end{tabular}}%
 \medskip%
 \myLineThick%
