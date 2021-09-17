@@ -19,6 +19,10 @@ func HeaderDailyReflect(cfg config.Config, tpls []string) (page.Modules, error) 
 
 	modules := make(page.Modules, 0, 366)
 	day := calendar.DayTime{Time: time.Date(cfg.Year, time.January, 1, 0, 0, 0, 0, time.Local)}
+	dayLayout := "Monday, 2"
+	if cfg.ClearTopRightCorner {
+		dayLayout = "Mon, 2"
+	}
 
 	for day.Year() == cfg.Year {
 		right := header.Items{}
@@ -26,9 +30,9 @@ func HeaderDailyReflect(cfg config.Config, tpls []string) (page.Modules, error) 
 		left := header.Items{
 			header.NewIntItem(cfg.Year),
 			header.NewTextItem("Q" + strconv.Itoa(int(math.Ceil(float64(day.Month())/3.)))),
-			header.NewMonthItem(day.Month()),
+			header.NewMonthItem(day.Month()).Shorten(cfg.ClearTopRightCorner),
 			header.NewTextItem("Week " + strconv.Itoa(weekNum)),
-			header.NewTimeItem(day).SetLayout("Monday, 2"),
+			header.NewTimeItem(day).SetLayout(dayLayout),
 			header.NewTimeItem(day).SetLayout("Reflect").Ref().RefPrefix("reflect"),
 		}
 

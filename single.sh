@@ -19,3 +19,4 @@ for _ in 1 2; do
 done
 
 cp "out/${nakedname}.pdf" "${PLANNER_YEAR}.${nakedname}.pdf"
+echo "created ${PLANNER_YEAR}.${nakedname}.pdf"

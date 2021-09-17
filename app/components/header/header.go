@@ -156,20 +156,34 @@ func NewIntItem(val int) IntItem {
 }
 
 type MonthItem struct {
-	Val time.Month
-	ref bool
+	Val     time.Month
+	ref     bool
+	shorten bool
 }
 
 func (m MonthItem) Display() string {
-	if m.ref {
-		return hyper.Target(m.Val.String(), m.Val.String())
+	ref := m.Val.String()
+	text := ref
+
+	if m.shorten {
+		text = text[:3]
 	}
 
-	return hyper.Link(m.Val.String(), m.Val.String())
+	if m.ref {
+		return hyper.Target(ref, text)
+	}
+
+	return hyper.Link(ref, text)
 }
 
 func (m MonthItem) Ref() MonthItem {
 	m.ref = true
+
+	return m
+}
+
+func (m MonthItem) Shorten(f bool) MonthItem {
+	m.shorten = f
 
 	return m
 }
