@@ -1,7 +1,5 @@
 \begin{minipage}[t]{\myLenTriCol}
-  \myUnderline{Schedule\textcolor{white}{g}}
-  \foreach \x in {\myNumDailyBottomHour,...,\myNumDailyTopHour}
-    {\myLineHeightButLine\x\myLineLightGray\vskip\myLenLineHeightButLine\myLineGray}
+  {{template "hours.tpl" dict "Cfg" .Cfg "Hours" .Body.Hours}}
   \vspace{\dimexpr4mm+.3pt}
 
   {{template "monthTabular.tpl" dict "Cfg" .Cfg "Month" .Body.Month "HideName" true "UseTabularx" true "Today" .Body.Today }}

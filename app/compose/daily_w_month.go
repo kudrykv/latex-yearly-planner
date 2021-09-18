@@ -25,6 +25,7 @@ func DailyWMonth(cfg config.Config, tpls []string) (page.Modules, error) {
 			Body: map[string]interface{}{
 				"Today": calendar.DayTime{Time: today},
 				"Month": calendar.NewYearMonth(cfg.Year, today.Month()).Calendar(cfg.WeekStart),
+				"Hours": Hours(cfg.Layout.Numbers.DailyBottomHour, cfg.Layout.Numbers.DailyTopHour),
 			},
 		})
 	}

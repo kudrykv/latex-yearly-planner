@@ -9,7 +9,7 @@
 }%
 \hspace{\myLenTwoColSep}%
 \parbox[t]{\myLenTwoCol}{%
-  {{template "hours.tpl" dict "Cfg" .Cfg "Hours" .Body.Hours}}
+  {{template "hours.tpl" dict "Cfg" .Cfg "Hours" .Body.Hours "AddLastHalfHour" true}}
 }
 \par
 
