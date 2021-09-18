@@ -1,4 +1,5 @@
 weekstart: 1
+ampmtime: false
 
 layout:
   paper:

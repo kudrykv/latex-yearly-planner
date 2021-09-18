@@ -22,3 +22,11 @@ func (d DayTime) Link() string {
 func (d DayTime) RefText() string {
 	return d.Format(time.RFC3339)
 }
+
+func (d DayTime) FormatHour(ampm bool) string {
+	if ampm {
+		return d.Format("3 PM")
+	}
+
+	return d.Format("15")
+}
