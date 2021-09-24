@@ -14,29 +14,7 @@
   { {{- template "slink.tpl" .Month.MonthName -}} } \\ \hline
 {{- end}}
 {{.Month.WeekHeader .Cfg.Pages.WeeklyEnabled}} \\ \hline
-{{- range $row := .Month.Matrix}}
-  {{if $.Cfg.Pages.WeeklyEnabled -}}
-    {{if and (eq ($.Month.MonthName.String) "January") (gt $row.WeekNumber 50)}}
-      {{- $row.LinkWeek "fw" false}} &
-    {{- else -}}
-      {{- $row.LinkWeek "" false}} &
-    {{- end -}}
-  {{end -}}
-  {{range $j, $item := .}}
-    {{if not $item.IsZero -}}
-  {{- if is $.Today}}
-    {{- if $.Today.Equal $item.Time}}
-      \cellcolor{black}{\textcolor{white}{ {{- $item.Day -}} }}
-    {{- else -}}
-      {{$item.Link}}
-    {{- end -}}
-  {{- else -}}
-    {{ $item.Link }}
-  {{- end -}}
-    {{- end}}
-    {{- if ne $j (dec (len $row)) }} & {{else}} \\ {{end -}}
-  {{- end -}}
-{{- end}}
+{{ .Month.MatrixTexed .Cfg.Pages.WeeklyEnabled false false .Today -}}
 {{if is .UseTabularx}}
 \end{tabularx}
 {{- else -}}

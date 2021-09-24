@@ -90,7 +90,7 @@ func action(c *cli.Context) error {
 		for i := 0; i < allLen; i++ {
 			for j, mod := range mom {
 				if err = t.Execute(wr, mod[i].Tpl, mod[i]); err != nil {
-					return fmt.Errorf("execute %s on %s: %w", file.RenderBlocks[i].FuncName, file.RenderBlocks[i].Tpls[j], err)
+					return fmt.Errorf("execute %s on %s: %w", file.RenderBlocks[j].FuncName, file.RenderBlocks[j].Tpls[i], err)
 				}
 			}
 		}
