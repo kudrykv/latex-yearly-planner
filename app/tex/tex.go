@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"strings"
 	"text/template"
 
 	"github.com/kudrykv/latex-yearly-planner/app/config"
@@ -74,4 +75,14 @@ func (t Tex) Execute(wr io.Writer, name string, data interface{}) error {
 	}
 
 	return nil
+}
+
+func Execute(name string, data interface{}) string {
+	builder := &strings.Builder{}
+
+	if err := tpl.ExecuteTemplate(builder, name, data); err != nil {
+		panic(err)
+	}
+
+	return builder.String()
 }
