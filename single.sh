@@ -6,9 +6,14 @@ go run cmd/plannergen/plannergen.go --config "${CFG}"
 
 nakedname=$(echo "${CFG}" | rev | cut -d, -f1 | cut -d'/' -f 1 | cut -d'.' -f 2-99 | rev)
 
-# Even with pdflatex, it requires even more passes.
-# Two should be enough
-for _ in 1 2; do
+_passes=(1)
+
+if [[ -n "${PASSES}" ]]; then
+  # shellcheck disable=SC2207
+  _passes=($(seq 1 "${PASSES}"))
+fi
+
+for _ in "${_passes[@]}"; do
   pdflatex \
     -file-line-error \
     -interaction=nonstopmode \

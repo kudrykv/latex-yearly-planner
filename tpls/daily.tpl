@@ -1,4 +1,4 @@
-{{- $today := .Body -}}
+{{- $today := .Body.Day -}}
 
 \parbox[t]{\myLenTwoCol}{%
   \myUnderline{To Do\textcolor{white}{g}\hfill{}\hyperlink{Todos Index}{All todos}}
