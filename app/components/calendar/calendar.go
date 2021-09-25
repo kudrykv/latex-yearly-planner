@@ -73,6 +73,70 @@ func (c Calendar) MatrixTexed(withWeeks, weeksLong, squareDays bool, today inter
 
 	out := make([]string, 0, len(mx))
 
+	weeks := c.weeksInMonth(mx)
+
+	for i, weekly := range mx {
+		row := make([]string, 0, 8)
+
+		if withWeeks {
+			row = append(row, c.week(weeks, weeksLong, i))
+		}
+
+		row = append(row, c.daysRow(weekly, squareDays, today)...)
+		out = append(out, strings.Join(row, " & "))
+	}
+
+	if squareDays {
+		return strings.Join(out, "\\\\ \\hline\n") + "\\\\ \\hline"
+	}
+
+	return strings.Join(out, " \\\\\n")
+}
+
+func (c Calendar) daysRow(weekly Weekly, squareDays bool, today interface{}) []string {
+	row := make([]string, 0, 7)
+
+	for _, dayTime := range weekly {
+		switch td, ok := today.(DayTime); {
+		case dayTime.IsZero():
+			row = append(row, "")
+
+		case squareDays:
+			row = append(row, dayTime.SquareLink())
+
+		case ok && dayTime.Equal(td.Time):
+			row = append(row, td.SelectedCell())
+
+		default:
+			row = append(row, dayTime.Link())
+		}
+	}
+
+	return row
+}
+
+func (c Calendar) week(weeks []int, weeksLong bool, i int) string {
+	prefix := ""
+	text := ""
+
+	if c.MonthName() == time.January && weeks[i] > 50 {
+		prefix = "fw"
+	}
+
+	if weeksLong {
+		text = "Week "
+	}
+
+	text += strconv.Itoa(weeks[i])
+
+	if weeksLong {
+		text = `\rotatebox[origin=tr]{90}{\makebox[\myLenMonthlyCellHeight][c]{` + text + `}}`
+	}
+
+	return hyper.Link(prefix+"Week "+strconv.Itoa(weeks[i]), text)
+}
+
+func (c Calendar) weeksInMonth(mx Weeklies) []int {
 	weeks := make([]int, 0, len(mx))
 	weeks = append(weeks, mx[0].WeekNumber())
 
@@ -85,59 +149,5 @@ func (c Calendar) MatrixTexed(withWeeks, weeksLong, squareDays bool, today inter
 
 		weeks = append(weeks, wn)
 	}
-
-	for i, weekly := range mx {
-		row := make([]string, 0, len(weekly))
-
-		if withWeeks {
-			prefix := ""
-			text := ""
-
-			if c.MonthName() == time.January && weekly.WeekNumber() > 50 {
-				prefix = "fw"
-			}
-
-			if weeksLong {
-				text = "Week "
-			}
-
-			text += strconv.Itoa(weeks[i])
-
-			if weeksLong {
-				text = `\rotatebox[origin=tr]{90}{\makebox[\myLenMonthlyCellHeight][c]{` + text + `}}`
-			}
-
-			row = append(row, hyper.Link(prefix+"Week "+strconv.Itoa(weeks[i]), text))
-		}
-
-		for _, dayTime := range weekly {
-			if dayTime.IsZero() {
-				row = append(row, "")
-
-				continue
-			}
-
-			if squareDays {
-				row = append(row, `\hyperlink{`+dayTime.RefText()+`}{\begin{tabular}{@{}p{5mm}@{}|}\hfil{}`+strconv.Itoa(dayTime.Day())+`\\ \hline\end{tabular}}`)
-
-				continue
-			}
-
-			if td, ok := today.(DayTime); ok && dayTime.Equal(td.Time) {
-				row = append(row, `\cellcolor{black}{\textcolor{white}{`+strconv.Itoa(td.Day())+`}}`)
-
-				continue
-			}
-
-			row = append(row, dayTime.Link())
-		}
-
-		out = append(out, strings.Join(row, " & "))
-	}
-
-	if squareDays {
-		return strings.Join(out, "\\\\ \\hline\n") + "\\\\ \\hline"
-	}
-
-	return strings.Join(out, " \\\\\n")
+	return weeks
 }

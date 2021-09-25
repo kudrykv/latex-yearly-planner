@@ -19,6 +19,17 @@ func (d DayTime) Link() string {
 	return hyper.Link(d.RefText(), strconv.Itoa(d.Day()))
 }
 
+func (d DayTime) SquareLink() string {
+	ref := d.RefText()
+	day := strconv.Itoa(d.Day())
+
+	return `\hyperlink{` + ref + `}{\begin{tabular}{@{}p{5mm}@{}|}\hfil{}` + day + `\\ \hline\end{tabular}}`
+}
+
+func (d DayTime) SelectedCell() string {
+	return `\cellcolor{black}{\textcolor{white}{` + strconv.Itoa(d.Day()) + `}}`
+}
+
 func (d DayTime) RefText() string {
 	return d.Format(time.RFC3339)
 }
