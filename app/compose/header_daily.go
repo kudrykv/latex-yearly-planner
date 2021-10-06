@@ -22,12 +22,18 @@ func HeaderDaily(cfg config.Config, tpls []string) (page.Modules, error) {
 
 	for day.Year() == cfg.Year {
 		right := header.Items{}
+		prefix := ""
 		_, weekNum := day.ISOWeek()
+
+		if weekNum > 50 && day.Month() == time.January {
+			prefix = "fw"
+		}
+
 		left := header.Items{
 			header.NewIntItem(cfg.Year),
 			header.NewTextItem("Q" + strconv.Itoa(int(math.Ceil(float64(day.Month())/3.)))),
 			header.NewMonthItem(day.Month()),
-			header.NewTextItem("Week " + strconv.Itoa(weekNum)),
+			header.NewTextItem("Week " + strconv.Itoa(weekNum)).RefPrefix(prefix),
 			header.NewTimeItem(day).SetLayout("Monday, 2").Ref(),
 		}
 
