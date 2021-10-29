@@ -9,6 +9,39 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
+func QuarterlyV2(cfg config.Config, tpls []string) (page.Modules, error) {
+	modules := make(page.Modules, 0, 4)
+	hRight := header.Items{
+		header.NewTextItem("Notes").RefText("Notes Index"),
+		header.NewTextItem("Todos").RefText("Todos Index"),
+	}
+
+	for quarter := 1; quarter <= 4; quarter++ {
+		hQrtrs := header.NewItemsGroup(
+			header.NewTextItem("Q1").Bold(quarter == 1).Ref(quarter == 1),
+			header.NewTextItem("Q2").Bold(quarter == 2).Ref(quarter == 2),
+			header.NewTextItem("Q3").Bold(quarter == 3).Ref(quarter == 3),
+			header.NewTextItem("Q4").Bold(quarter == 4).Ref(quarter == 4),
+		)
+
+		modules = append(modules, page.Module{
+			Cfg: cfg,
+			Tpl: tpls[0],
+			Body: map[string]interface{}{
+				"Breadcrumb":    header.Items{header.NewIntItem(cfg.Year), hQrtrs},
+				"Extra":         hRight,
+				"Extras2":       extra2(),
+				"SideMonths":    sideMonths(cfg),
+				"SideQuarters":  sideQuarters(cfg),
+				"QuarterNumber": quarter,
+				"Quarter":       makeQuarter(cfg, quarter),
+			},
+		})
+	}
+
+	return modules, nil
+}
+
 func HeaderQuarterly(cfg config.Config, tpls []string) (page.Modules, error) {
 	if len(tpls) != 1 {
 		return nil, fmt.Errorf("exppected one tpl, got %d %v", len(tpls), tpls)

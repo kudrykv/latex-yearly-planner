@@ -19,6 +19,10 @@ type Item interface {
 	Display() string
 }
 
+func (i Items) Length() int {
+	return len(i)
+}
+
 func (i Items) ColSetup(left bool) string {
 	if left {
 		return "|" + strings.Join(strings.Split(strings.Repeat("l", len(i)), ""), "|")

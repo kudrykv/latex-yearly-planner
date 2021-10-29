@@ -28,3 +28,13 @@ func Quarterly(cfg config.Config, tpls []string) (page.Modules, error) {
 
 	return modules, nil
 }
+
+func makeQuarter(cfg config.Config, quarter int) []calendar.Calendar {
+	qrtr := make([]calendar.Calendar, 0, 3)
+
+	for month := time.Month(quarter*3 - 2); month < time.Month(quarter*3+1); month++ {
+		qrtr = append(qrtr, calendar.NewYearMonth(cfg.Year, month).Calendar(cfg.WeekStart))
+	}
+
+	return qrtr
+}
