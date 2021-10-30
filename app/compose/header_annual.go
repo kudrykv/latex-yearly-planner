@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/kudrykv/latex-yearly-planner/app/components/cal2"
 	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
@@ -11,28 +12,19 @@ import (
 )
 
 func AnnualV2(cfg config.Config, tpls []string) (page.Modules, error) {
+	year := cal2.NewYear(cfg.WeekStart, cfg.Year)
+
 	return page.Modules{{
 		Cfg: cfg,
 		Tpl: tpls[0],
 		Body: map[string]interface{}{
-			"Year": cfg.Year,
-			"Breadcrumb": header.Items{
-				header.NewIntItem(cfg.Year).Ref(),
-				header.NewItemsGroup(
-					header.NewTextItem("Q1"),
-					header.NewTextItem("Q2"),
-					header.NewTextItem("Q3"),
-					header.NewTextItem("Q4"),
-				),
-			},
+			"Year":       year,
+			"Breadcrumb": year.Breadcrumb(),
 			"Extra": header.Items{
 				header.NewTextItem("Notes").RefText("Notes Index"),
 				header.NewTextItem("Todos").RefText("Todos Index"),
 			},
-			"Extras2":      extra2(),
-			"SideMonths":   sideMonths(cfg),
-			"SideQuarters": sideQuarters(cfg),
-			"Quarters":     buildQuarters(cfg),
+			"Quarters": buildQuarters(cfg),
 		},
 	}}, nil
 }

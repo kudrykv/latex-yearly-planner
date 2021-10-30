@@ -8,18 +8,18 @@ type Week struct {
 }
 
 func NewWeeksForMonth(wd time.Weekday, year int, month time.Month) Weeks {
-	weeks := Weeks{}
-	week := &Week{}
-
 	ptr := time.Date(year, month, 1, 0, 0, 0, 0, time.Local)
 	weekday := ptr.Weekday()
 	shift := (7 + weekday - wd) % 7
+
+	week := &Week{}
 
 	for i := shift; i < 7; i++ {
 		week.Days[i] = Day{Time: ptr}
 		ptr = ptr.AddDate(0, 0, 1)
 	}
 
+	weeks := Weeks{}
 	weeks = append(weeks, week)
 
 	for ptr.Month() == month {
@@ -38,4 +38,16 @@ func NewWeeksForMonth(wd time.Weekday, year int, month time.Month) Weeks {
 	}
 
 	return weeks
+}
+
+func (w *Week) WeekNumber() int {
+	_, wn := w.Days[0].Time.ISOWeek()
+
+	for _, t := range w.Days {
+		if _, cwn := t.Time.ISOWeek(); !t.Time.IsZero() && cwn != wn {
+			return cwn
+		}
+	}
+
+	return wn
 }

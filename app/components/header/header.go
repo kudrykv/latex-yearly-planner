@@ -41,6 +41,16 @@ func (i Items) Row() string {
 	return strings.Join(out, " & ")
 }
 
+func (i Items) Table(left bool) string {
+	if len(i) == 0 {
+		return ""
+	}
+
+	return `\begin{tabular}{` + i.ColSetup(left) + `}
+` + i.Row() + `
+\end{tabular}`
+}
+
 type TextItem struct {
 	Name      string
 	bold      bool
