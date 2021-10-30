@@ -39,3 +39,21 @@ func (m *Month) WeekHeader() string {
 
 	return strings.Join(names, " & ")
 }
+
+func (m *Month) DefineTable(typ interface{}) string {
+	typStr, ok := typ.(string)
+	if !ok || typStr == "tabularx" {
+		return `\begin{tabularx}{\linewidth}{Y|*{7}{Y}}`
+	}
+
+	return `\begin{tabular}[t]{c|*{7}{c}}`
+}
+
+func (m *Month) EndTable(typ interface{}) string {
+	typStr, ok := typ.(string)
+	if !ok || typStr == "tabularx" {
+		return `\end{tabularx}`
+	}
+
+	return `\end{tabular}`
+}

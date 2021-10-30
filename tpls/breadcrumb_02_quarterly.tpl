@@ -1,10 +1,11 @@
 {{ template "header_v2.tpl" dict "Cfg" .Cfg "Body" .Body }}
 
-{{- range $j, $month := .Body.Quarter -}}
+{{- range $j, $month := .Body.Quarter.Months -}}
   {\noindent\renewcommand{\arraystretch}{0}%
 \begin{tabularx}{\textwidth}{@{}l X@{}}
-{{- template "monthTabular.tpl" dict "Cfg" $.Cfg "Month" $month}} &
-\Repeat{\myNumQuarterlyLines}{\myLineGrayVskipBottom}
+{{- template "monthTabularV2.tpl" dict "Month" $month "TableType" "tabular" -}}
+  &
+  \Repeat{\myNumQuarterlyLines}{\myLineGrayVskipBottom}
 \end{tabularx}}
 {{if ne $j (len $.Body)}} \vfill {{end}}
 {{end -}}

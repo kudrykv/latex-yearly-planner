@@ -11,11 +11,11 @@ pages:
         tpls:
           - breadcrumb_01_annual.tpl
 
-#  - name: quarterly
-#    renderblocks:
-#      - funcname: quarterlyV2
-#        tpls:
-#          - breadcrumb_02_quarterly.tpl
+  - name: quarterly
+    renderblocks:
+      - funcname: quarterlyV2
+        tpls:
+          - breadcrumb_02_quarterly.tpl
 #
 #  - name: monthly
 #    renderblocks:

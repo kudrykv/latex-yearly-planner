@@ -3,6 +3,7 @@ package compose
 import (
 	"fmt"
 
+	"github.com/kudrykv/latex-yearly-planner/app/components/cal2"
 	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
@@ -11,30 +12,22 @@ import (
 
 func QuarterlyV2(cfg config.Config, tpls []string) (page.Modules, error) {
 	modules := make(page.Modules, 0, 4)
+	year := cal2.NewYear(cfg.WeekStart, cfg.Year)
+
 	hRight := header.Items{
 		header.NewTextItem("Notes").RefText("Notes Index"),
 		header.NewTextItem("Todos").RefText("Todos Index"),
 	}
 
-	for quarter := 1; quarter <= 4; quarter++ {
-		hQrtrs := header.NewItemsGroup(
-			header.NewTextItem("Q1").Bold(quarter == 1).Ref(quarter == 1),
-			header.NewTextItem("Q2").Bold(quarter == 2).Ref(quarter == 2),
-			header.NewTextItem("Q3").Bold(quarter == 3).Ref(quarter == 3),
-			header.NewTextItem("Q4").Bold(quarter == 4).Ref(quarter == 4),
-		)
-
+	for _, quarter := range year.Quarters {
 		modules = append(modules, page.Module{
 			Cfg: cfg,
 			Tpl: tpls[0],
 			Body: map[string]interface{}{
-				"Breadcrumb":    header.Items{header.NewIntItem(cfg.Year), hQrtrs},
-				"Extra":         hRight,
-				"Extras2":       extra2(),
-				"SideMonths":    sideMonths(cfg),
-				"SideQuarters":  sideQuarters(cfg),
-				"QuarterNumber": quarter,
-				"Quarter":       makeQuarter(cfg, quarter),
+				"Year":       year,
+				"Quarter":    quarter,
+				"Breadcrumb": quarter.Breadcrumb(),
+				"Extra":      hRight,
 			},
 		})
 	}
