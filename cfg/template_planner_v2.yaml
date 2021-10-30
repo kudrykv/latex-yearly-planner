@@ -16,15 +16,12 @@ pages:
       - funcname: quarterlyV2
         tpls:
           - breadcrumb_02_quarterly.tpl
-#
-#  - name: monthly
-#    renderblocks:
-#      - funcname: header_monthly
-#        tpls:
-#          - header.tpl
-#      - funcname: monthly
-#        tpls:
-#          - monthly.tpl
+
+  - name: monthly
+    renderblocks:
+      - funcname: monthlyV2
+        tpls:
+          - breadcrumb_03_monthly.tpl
 #
 #  - name: weekly
 #    renderblocks:

@@ -1,15 +1,19 @@
 {%
-\renewcommand{\arraystretch}{\myNumArrayStretch}%
+{{ if not .Large -}} \renewcommand{\arraystretch}{\myNumArrayStretch}% {{- end}}
 \setlength{\tabcolsep}{\myLenTabColSep}%
 %
-{{ .Month.DefineTable .TableType }}
-  \multicolumn{8}{c}{ {{- .Month.Link -}} } \\ \hline
-  {{.Month.WeekHeader}} \\ \hline
+{{ .Month.DefineTable .TableType .Large }}
+  {{ .Month.MaybeName .Large }}
+  {{ if $.Large -}} \hline {{- end }}
+  {{ .Month.WeekHeader .Large }} \\ {{ if .Large -}} \noalign{\hrule height \myLenLineThicknessThick} {{- else -}} \hline {{- end}}
   {{- range $i, $week := .Month.Weeks }}
-  {{$week.WeekNumber}} &
-    {{- range $j, $day := $week.Days }}
-      {{- $day.Day -}} {{ if eq $j 6 }} \\ {{- else }} & {{ end -}}
-    {{ end -}}
+  {{$week.WeekNumber $.Large}} &
+    {{- range $j, $day := $week.Days -}}
+      {{- $day.Day $.Large -}}
+      {{- if eq $j 6 -}}
+        \\ {{ if $.Large -}} \hline {{- end -}}
+      {{- else -}} & {{- end -}}
+    {{- end -}}
   {{ end }}
   {{ .Month.EndTable .TableType }}
 }

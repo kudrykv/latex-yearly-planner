@@ -1,6 +1,11 @@
 package cal2
 
-import "time"
+import (
+	"strconv"
+	"time"
+
+	"github.com/kudrykv/latex-yearly-planner/app/components/hyper"
+)
 
 type Weeks []*Week
 type Week struct {
@@ -40,7 +45,22 @@ func NewWeeksForMonth(wd time.Weekday, year int, month time.Month) Weeks {
 	return weeks
 }
 
-func (w *Week) WeekNumber() int {
+func (w *Week) WeekNumber(large interface{}) string {
+	wn := w.weekNumber()
+	larg, _ := large.(bool)
+
+	itoa := strconv.Itoa(wn)
+	ref := "Week " + itoa
+	if !larg {
+		return hyper.Link(ref, itoa)
+	}
+
+	text := `\rotatebox[origin=tr]{90}{\makebox[\myLenMonthlyCellHeight][c]{Week ` + itoa + `}}`
+
+	return hyper.Link(ref, text)
+}
+
+func (w *Week) weekNumber() int {
 	_, wn := w.Days[0].Time.ISOWeek()
 
 	for _, t := range w.Days {
