@@ -23,7 +23,6 @@ func AnnualV2(cfg config.Config, tpls []string) (page.Modules, error) {
 			"Extra": header.Items{
 				header.NewTextItem("Notes").RefText("Notes Index"),
 			},
-			"Quarters": buildQuarters(cfg),
 		},
 	}}, nil
 }

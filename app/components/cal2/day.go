@@ -41,14 +41,18 @@ func (d Day) WeekLink() string {
 }
 
 func (d Day) Breadcrumb(prefix string, leaf string) string {
+	wpref := ""
 	_, wn := d.Time.ISOWeek()
+	if wn > 50 && d.Time.Month() == time.January {
+		wpref = "fw"
+	}
 
 	dayItem := header.NewTextItem(d.Time.Format("Monday, 2")).RefText(d.Time.Format(time.RFC3339))
 	items := header.Items{
 		header.NewIntItem(d.Time.Year()),
 		header.NewTextItem("Q" + strconv.Itoa(int(math.Ceil(float64(d.Time.Month())/3.)))),
 		header.NewMonthItem(d.Time.Month()),
-		header.NewTextItem("Week " + strconv.Itoa(wn)),
+		header.NewTextItem(wpref + "Week " + strconv.Itoa(wn)),
 	}
 
 	if len(leaf) > 0 {

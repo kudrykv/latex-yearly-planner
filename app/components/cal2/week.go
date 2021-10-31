@@ -122,7 +122,7 @@ func (w *Week) WeekNumber(large interface{}) string {
 	larg, _ := large.(bool)
 
 	itoa := strconv.Itoa(wn)
-	ref := "Week " + itoa
+	ref := w.ref()
 	if !larg {
 		return hyper.Link(ref, itoa)
 	}
@@ -149,7 +149,7 @@ func (w *Week) Breadcrumb() string {
 		header.NewIntItem(w.Year.Number),
 		w.QuartersBreadcrumb(),
 		w.MonthsBreadcrumb(),
-		header.NewTextItem("Week " + strconv.Itoa(w.weekNumber())).Ref(true),
+		header.NewTextItem("Week " + strconv.Itoa(w.weekNumber())).RefText(w.ref()).Ref(true),
 	}.Table(true)
 }
 
@@ -170,7 +170,15 @@ func (w *Week) rightQuarter() int {
 }
 
 func (w *Week) rightMonth() time.Month {
-	return w.Days[6].Time.Month()
+	for i := 6; i >= 0; i-- {
+		if w.Days[i].Time.IsZero() {
+			continue
+		}
+
+		return w.Days[i].Time.Month()
+	}
+
+	return -1
 }
 
 func (w *Week) PrevNext() header.Items {
@@ -227,4 +235,41 @@ func (w *Week) MonthsBreadcrumb() header.ItemsGroup {
 	}
 
 	return group
+}
+
+func (w *Week) ref() string {
+	prefix := ""
+	wn := w.weekNumber()
+	rm := w.rightMonth()
+	ry := w.rightYear()
+
+	if wn > 50 && rm == time.January && ry == w.Year.Number {
+		prefix = "fw"
+	}
+
+	return prefix + "Week " + strconv.Itoa(wn)
+}
+
+func (w *Week) leftMonth() time.Month {
+	for _, day := range w.Days {
+		if day.Time.IsZero() {
+			continue
+		}
+
+		return day.Time.Month()
+	}
+
+	return -1
+}
+
+func (w *Week) rightYear() int {
+	for i := 6; i >= 0; i-- {
+		if w.Days[i].Time.IsZero() {
+			continue
+		}
+
+		return w.Days[i].Time.Year()
+	}
+
+	return -1
 }
