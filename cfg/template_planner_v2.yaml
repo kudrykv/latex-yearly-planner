@@ -28,15 +28,12 @@ pages:
       - funcname: weeklyV2
         tpls:
           - breadcrumb_04_weekly.tpl
-#
-#  - name: daily
-#    renderblocks:
-#      - funcname: header_daily
-#        tpls:
-#          - header.tpl
-#      - funcname: daily
-#        tpls:
-#          - daily.tpl
+
+  - name: daily
+    renderblocks:
+      - funcname: dailyV2
+        tpls:
+          - breadcrumb_05_daily.tpl
 #
 #  - name: daily_reflect
 #    renderblocks:

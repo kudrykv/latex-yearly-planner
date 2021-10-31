@@ -128,6 +128,7 @@ var ComposerMap = map[string]Composer{
 	"quarterlyV2":              compose.QuarterlyV2,
 	"monthlyV2":                compose.MonthlyV2,
 	"weeklyV2":                 compose.WeeklyV2,
+	"dailyV2":                  compose.DailyV2,
 	"quarterly":                compose.Quarterly,
 	"monthly":                  compose.Monthly,
 	"weekly":                   compose.Weekly,

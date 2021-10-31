@@ -6,11 +6,45 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/kudrykv/latex-yearly-planner/app/components/cal2"
 	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
+
+func DailyV2(cfg config.Config, tpls []string) (page.Modules, error) {
+	year := cal2.NewYear(cfg.WeekStart, cfg.Year)
+	modules := make(page.Modules, 0, 366)
+
+	for _, quarter := range year.Quarters {
+		for _, month := range quarter.Months {
+			for _, week := range month.Weeks {
+				for _, day := range week.Days {
+					if day.Time.IsZero() {
+						continue
+					}
+
+					modules = append(modules, page.Module{
+						Cfg: cfg,
+						Tpl: tpls[0],
+						Body: map[string]interface{}{
+							"Year":       year,
+							"Quarter":    quarter,
+							"Month":      month,
+							"Week":       week,
+							"Day":        day,
+							"Breadcrumb": day.Breadcrumb(),
+							"Extra":      day.Extra(),
+						},
+					})
+				}
+			}
+		}
+	}
+
+	return modules, nil
+}
 
 func HeaderDaily(cfg config.Config, tpls []string) (page.Modules, error) {
 	if len(tpls) != 1 {
