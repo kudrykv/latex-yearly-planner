@@ -23,5 +23,10 @@ for _ in "${_passes[@]}"; do
     "out/${nakedname}.tex"
 done
 
-cp "out/${nakedname}.pdf" "${PLANNER_YEAR}.${nakedname}.pdf"
-echo "created ${PLANNER_YEAR}.${nakedname}.pdf"
+if [ -n "${NAME}" ]; then
+  cp "out/${nakedname}.pdf" "${NAME}.pdf"
+  echo "created ${NAME}.pdf"
+else
+  cp "out/${nakedname}.pdf" "${nakedname}.pdf"
+  echo "created ${nakedname}.pdf"
+fi
