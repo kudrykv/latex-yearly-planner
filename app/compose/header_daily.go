@@ -35,7 +35,7 @@ func DailyV2(cfg config.Config, tpls []string) (page.Modules, error) {
 							"Week":       week,
 							"Day":        day,
 							"Breadcrumb": day.Breadcrumb(),
-							"Extra":      day.Extra(),
+							"Extra":      day.PrevNext(),
 						},
 					})
 				}

@@ -52,8 +52,20 @@ func (d Day) Breadcrumb() string {
 	}.Table(true)
 }
 
-func (d Day) Extra() header.Items {
-	return header.Items{}
+func (d Day) PrevNext() header.Items {
+	items := header.Items{}
+
+	if d.Time.Month() > time.January || d.Time.Day() > 1 {
+		prev := d.Next(-1)
+		items = append(items, header.NewTextItem(prev.Time.Format("Mon, 2")).RefText(prev.ref()))
+	}
+
+	if d.Time.Month() < time.December || d.Time.Day() < 31 {
+		next := d.Next(1)
+		items = append(items, header.NewTextItem(next.Time.Format("Mon, 2")).RefText(next.ref()))
+	}
+
+	return items
 }
 
 func (d Day) Hours(bottom, top int) Days {
