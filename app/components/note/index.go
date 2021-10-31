@@ -12,14 +12,14 @@ type Index struct {
 	Pages Pages
 }
 
-func NewIndex(notesOnPage, pages int) *Index {
+func NewIndex(year, notesOnPage, pages int) *Index {
 	pgs := make(Pages, 0, pages)
 
 	for pageNum := 0; pageNum < pages; pageNum++ {
 		pg := make(Notes, 0, notesOnPage)
 
 		for noteNum := 1; noteNum <= notesOnPage; noteNum++ {
-			pg = append(pg, NewNote(pageNum*notesOnPage+noteNum))
+			pg = append(pg, NewNote(year, pageNum*notesOnPage+noteNum))
 		}
 
 		pgs = append(pgs, pg)

@@ -52,7 +52,7 @@ pages:
       - funcname: notes_indexedV2
         tpls:
           - breadcrumb_08_notes_index.tpl
-#          - daily_notes.tpl
+          - breadcrumb_09_notes.tpl
 #
 #  - name: todos_indexed
 #    renderblocks:
