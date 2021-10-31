@@ -46,15 +46,12 @@ pages:
       - funcname: daily_notesV2
         tpls:
           - breadcrumb_07_daily_notes.tpl
-#
-#  - name: notes_indexed
-#    renderblocks:
-#      - funcname: header_notes_indexed
-#        tpls:
-#          - header.tpl
-#      - funcname: notes_indexed
-#        tpls:
-#          - notes_index.tpl
+
+  - name: notes_indexed
+    renderblocks:
+      - funcname: notes_indexedV2
+        tpls:
+          - breadcrumb_08_notes_index.tpl
 #          - daily_notes.tpl
 #
 #  - name: todos_indexed

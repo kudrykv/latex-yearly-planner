@@ -6,9 +6,29 @@ import (
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
+	"github.com/kudrykv/latex-yearly-planner/app/components/note"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
+
+func NotesIndexedV2(cfg config.Config, tpls []string) (page.Modules, error) {
+	index := note.NewIndex(35, 2)
+	modules := make(page.Modules, 0, 1)
+
+	for idx, indexPage := range index.Pages {
+		modules = append(modules, page.Module{
+			Cfg: cfg,
+			Tpl: tpls[0],
+			Body: map[string]interface{}{
+				"Notes":      indexPage,
+				"Breadcrumb": indexPage.Breadcrumb(cfg.Year, idx),
+				"Extra":      index.PrevNext(idx),
+			},
+		})
+	}
+
+	return modules, nil
+}
 
 func HeaderNotesIndexed(cfg config.Config, tpls []string) (page.Modules, error) {
 	if len(tpls) != 1 {
