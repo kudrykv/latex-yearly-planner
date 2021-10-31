@@ -22,7 +22,6 @@ func AnnualV2(cfg config.Config, tpls []string) (page.Modules, error) {
 			"Breadcrumb": year.Breadcrumb(),
 			"Extra": header.Items{
 				header.NewTextItem("Notes").RefText("Notes Index"),
-				header.NewTextItem("Todos").RefText("Todos Index"),
 			},
 			"Quarters": buildQuarters(cfg),
 		},

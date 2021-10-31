@@ -16,7 +16,6 @@ func QuarterlyV2(cfg config.Config, tpls []string) (page.Modules, error) {
 
 	hRight := header.Items{
 		header.NewTextItem("Notes").RefText("Notes Index"),
-		header.NewTextItem("Todos").RefText("Todos Index"),
 	}
 
 	for _, quarter := range year.Quarters {
