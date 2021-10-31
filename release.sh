@@ -13,7 +13,10 @@ _configurations=(
 #  1 "${_sn_a5x},cfg/template_planner_yearly.yaml,cfg/sn_a5x.planner.yaml"
 #  2 "${_sn_a5x},cfg/template_planner_daily_with_cal.yaml,cfg/sn_a5x.planner.daily-with-cal.yaml"
 #  2 "${_sn_a5x_lh},cfg/template_planner_daily_with_cal.yaml,cfg/sn_a5x_lh.planner.daily-with-cal.yaml"
-  1 "cfg/base.yaml,cfg/template_planner_v2.yaml,cfg/sn_a5x.breadcrumb.default.yaml" "sn_a5x.breadcrumb.default"
+
+  # new
+#  1 "cfg/base.yaml,cfg/template_breadcrumb.yaml,cfg/sn_a5x.breadcrumb.default.yaml" "sn_a5x.breadcrumb.default"
+  1 "cfg/base.yaml,cfg/rm2.base.yaml,cfg/template_breadcrumb.yaml,cfg/rm2.breadcrumb.default.yaml" "rm2.breadcrumb.default"
 )
 
 _configurations_len=${#_configurations[@]}

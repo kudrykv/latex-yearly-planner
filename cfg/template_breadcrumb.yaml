@@ -53,13 +53,3 @@ pages:
         tpls:
           - breadcrumb_08_notes_index.tpl
           - breadcrumb_09_notes.tpl
-#
-#  - name: todos_indexed
-#    renderblocks:
-#      - funcname: header_todos_indexed
-#        tpls:
-#          - header.tpl
-#      - funcname: todos_indexed
-#        tpls:
-#          - todos_index.tpl
-#          - todos_note.tpl
