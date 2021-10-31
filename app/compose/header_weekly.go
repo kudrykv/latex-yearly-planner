@@ -4,11 +4,32 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/kudrykv/latex-yearly-planner/app/components/cal2"
 	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
+
+func WeeklyV2(cfg config.Config, tpls []string) (page.Modules, error) {
+	modules := make(page.Modules, 0, 53)
+	year := cal2.NewYear(cfg.WeekStart, cfg.Year)
+
+	for _, week := range year.Weeks {
+		modules = append(modules, page.Module{
+			Cfg: cfg,
+			Tpl: tpls[0],
+			Body: map[string]interface{}{
+				"Year":       year,
+				"Week":       week,
+				"Breadcrumb": week.Breadcrumb(),
+				"Extra":      week.PrevNext(),
+			},
+		})
+	}
+
+	return modules, nil
+}
 
 func HeaderWeekly(cfg config.Config, tpls []string) (page.Modules, error) {
 	if len(tpls) != 1 {

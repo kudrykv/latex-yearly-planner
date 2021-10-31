@@ -22,15 +22,12 @@ pages:
       - funcname: monthlyV2
         tpls:
           - breadcrumb_03_monthly.tpl
-#
-#  - name: weekly
-#    renderblocks:
-#      - funcname: header_weekly
-#        tpls:
-#          - header.tpl
-#      - funcname: weekly
-#        tpls:
-#          - weekly.tpl
+
+  - name: weekly
+    renderblocks:
+      - funcname: weeklyV2
+        tpls:
+          - breadcrumb_04_weekly.tpl
 #
 #  - name: daily
 #    renderblocks:

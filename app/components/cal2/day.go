@@ -17,12 +17,23 @@ func (d Day) Day(large interface{}) string {
 		return ""
 	}
 
-	ref := d.Time.Format(time.RFC3339)
 	day := strconv.Itoa(d.Time.Day())
 
 	if larg, _ := large.(bool); larg {
-		return `\hyperlink{` + ref + `}{\begin{tabular}{@{}p{5mm}@{}|}\hfil{}` + day + `\\ \hline\end{tabular}}`
+		return `\hyperlink{` + d.ref() + `}{\begin{tabular}{@{}p{5mm}@{}|}\hfil{}` + day + `\\ \hline\end{tabular}}`
 	}
 
-	return hyper.Link(ref, day)
+	return hyper.Link(d.ref(), day)
+}
+
+func (d Day) ref() string {
+	return d.Time.Format(time.RFC3339)
+}
+
+func (d Day) Next(days int) Day {
+	return Day{Time: d.Time.AddDate(0, 0, days)}
+}
+
+func (d Day) WeekLink() string {
+	return hyper.Link(d.ref(), strconv.Itoa(d.Time.Day())+", "+d.Time.Weekday().String())
 }

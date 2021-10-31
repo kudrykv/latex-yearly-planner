@@ -1,12 +1,15 @@
-package cal2
+package cal2_test
 
 import (
 	"fmt"
 	"testing"
 	"time"
+
+	"github.com/kudrykv/latex-yearly-planner/app/components/cal2"
 )
 
 func TestTest(t *testing.T) {
-	year := NewYear(time.Monday, 2021)
-	fmt.Println(year)
+	year := cal2.NewYear(time.Monday, 2021)
+	weeks := cal2.NewWeeksForYear(time.Monday, year)
+	fmt.Println(weeks)
 }

@@ -19,13 +19,16 @@ type Month struct {
 }
 
 func NewMonth(wd time.Weekday, year *Year, qrtr *Quarter, month time.Month) *Month {
-	return &Month{
+	m := &Month{
 		Year:    year,
 		Quarter: qrtr,
 		Month:   month,
 		Weekday: wd,
-		Weeks:   NewWeeksForMonth(wd, year.Number, month),
 	}
+
+	m.Weeks = NewWeeksForMonth(wd, year, qrtr, m)
+
+	return m
 }
 
 func (m *Month) MaybeName(large interface{}) string {
