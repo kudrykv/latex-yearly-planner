@@ -6,7 +6,7 @@
   \myUnderline{To Do\textcolor{white}{g}\hfill{}\hyperlink{Todos Index}{All todos}}
   \Repeat{\myNumDailyTodos}{\myTodoLineGray}
   \vskip\dimexpr7mm-4pt
-  \myUnderline{Notes $\vert$ More\hfill{}Reflect\hfill{}\hyperlink{Notes Index}{All notes}}
+  \myUnderline{Notes $\vert$ {{ $today.LinkLeaf "More" "More Notes" }}\hfill{}{{ $today.LinkLeaf "Reflect" "Reflect" }}\hfill{}\hyperlink{Notes Index}{All notes}}
   \Repeat{\myNumDailyNotes}{\myLineGrayVskipTop}
 }%
 \hspace{\myLenTwoColSep}%

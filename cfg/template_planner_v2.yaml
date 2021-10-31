@@ -34,24 +34,18 @@ pages:
       - funcname: dailyV2
         tpls:
           - breadcrumb_05_daily.tpl
-#
-#  - name: daily_reflect
-#    renderblocks:
-#      - funcname: header_daily_reflect
-#        tpls:
-#          - header.tpl
-#      - funcname: daily_reflect
-#        tpls:
-#          - daily_reflect.tpl
-#
-#  - name: daily_notes
-#    renderblocks:
-#      - funcname: header_daily_notes
-#        tpls:
-#          - header.tpl
-#      - funcname: daily_notes
-#        tpls:
-#          - daily_notes.tpl
+
+  - name: daily_reflect
+    renderblocks:
+      - funcname: daily_reflectV2
+        tpls:
+          - breadcrumb_06_daily_reflect.tpl
+
+  - name: daily_notes
+    renderblocks:
+      - funcname: daily_notesV2
+        tpls:
+          - breadcrumb_07_daily_notes.tpl
 #
 #  - name: notes_indexed
 #    renderblocks:

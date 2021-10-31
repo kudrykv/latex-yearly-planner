@@ -13,37 +13,43 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-func DailyV2(cfg config.Config, tpls []string) (page.Modules, error) {
-	year := cal2.NewYear(cfg.WeekStart, cfg.Year)
-	modules := make(page.Modules, 0, 366)
+var DailyV2 = DailyStuff("", "")
+var DailyReflectV2 = DailyStuff("Reflect", "Reflect")
+var DailyNotesV2 = DailyStuff("More", "Notes")
 
-	for _, quarter := range year.Quarters {
-		for _, month := range quarter.Months {
-			for _, week := range month.Weeks {
-				for _, day := range week.Days {
-					if day.Time.IsZero() {
-						continue
+func DailyStuff(prefix, leaf string) func(cfg config.Config, tpls []string) (page.Modules, error) {
+	return func(cfg config.Config, tpls []string) (page.Modules, error) {
+		year := cal2.NewYear(cfg.WeekStart, cfg.Year)
+		modules := make(page.Modules, 0, 366)
+
+		for _, quarter := range year.Quarters {
+			for _, month := range quarter.Months {
+				for _, week := range month.Weeks {
+					for _, day := range week.Days {
+						if day.Time.IsZero() {
+							continue
+						}
+
+						modules = append(modules, page.Module{
+							Cfg: cfg,
+							Tpl: tpls[0],
+							Body: map[string]interface{}{
+								"Year":       year,
+								"Quarter":    quarter,
+								"Month":      month,
+								"Week":       week,
+								"Day":        day,
+								"Breadcrumb": day.Breadcrumb(prefix, leaf),
+								"Extra":      day.PrevNext(prefix),
+							},
+						})
 					}
-
-					modules = append(modules, page.Module{
-						Cfg: cfg,
-						Tpl: tpls[0],
-						Body: map[string]interface{}{
-							"Year":       year,
-							"Quarter":    quarter,
-							"Month":      month,
-							"Week":       week,
-							"Day":        day,
-							"Breadcrumb": day.Breadcrumb(),
-							"Extra":      day.PrevNext(),
-						},
-					})
 				}
 			}
 		}
-	}
 
-	return modules, nil
+		return modules, nil
+	}
 }
 
 func HeaderDaily(cfg config.Config, tpls []string) (page.Modules, error) {

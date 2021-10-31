@@ -40,29 +40,41 @@ func (d Day) WeekLink() string {
 	return hyper.Link(d.ref(), strconv.Itoa(d.Time.Day())+", "+d.Time.Weekday().String())
 }
 
-func (d Day) Breadcrumb() string {
+func (d Day) Breadcrumb(prefix string, leaf string) string {
 	_, wn := d.Time.ISOWeek()
 
-	return header.Items{
+	dayItem := header.NewTextItem(d.Time.Format("Monday, 2")).RefText(d.Time.Format(time.RFC3339))
+	items := header.Items{
 		header.NewIntItem(d.Time.Year()),
 		header.NewTextItem("Q" + strconv.Itoa(int(math.Ceil(float64(d.Time.Month())/3.)))),
 		header.NewMonthItem(d.Time.Month()),
 		header.NewTextItem("Week " + strconv.Itoa(wn)),
-		header.NewTextItem(d.Time.Format("Monday, 2")).RefText(d.Time.Format(time.RFC3339)).Ref(true),
-	}.Table(true)
+	}
+
+	if len(leaf) > 0 {
+		items = append(items, dayItem, header.NewTextItem(leaf).RefText(prefix+d.ref()).Ref(true))
+	} else {
+		items = append(items, dayItem.Ref(true))
+	}
+
+	return items.Table(true)
 }
 
-func (d Day) PrevNext() header.Items {
+func (d Day) LinkLeaf(prefix, leaf string) string {
+	return hyper.Link(prefix+d.ref(), leaf)
+}
+
+func (d Day) PrevNext(prefix string) header.Items {
 	items := header.Items{}
 
 	if d.Time.Month() > time.January || d.Time.Day() > 1 {
 		prev := d.Next(-1)
-		items = append(items, header.NewTextItem(prev.Time.Format("Mon, 2")).RefText(prev.ref()))
+		items = append(items, header.NewTextItem(prev.Time.Format("Mon, 2")).RefText(prefix+prev.ref()))
 	}
 
 	if d.Time.Month() < time.December || d.Time.Day() < 31 {
 		next := d.Next(1)
-		items = append(items, header.NewTextItem(next.Time.Format("Mon, 2")).RefText(next.ref()))
+		items = append(items, header.NewTextItem(next.Time.Format("Mon, 2")).RefText(prefix+next.ref()))
 	}
 
 	return items
