@@ -23,11 +23,15 @@ func MonthlyV2(cfg config.Config, tpls []string) (page.Modules, error) {
 				Cfg: cfg,
 				Tpl: tpls[0],
 				Body: map[string]interface{}{
-					"Year":       year,
-					"Quarter":    quarter,
-					"Month":      month,
-					"Breadcrumb": month.Breadcrumb(),
-					"Extra":      month.PrevNext(),
+					"Year":         year,
+					"Quarter":      quarter,
+					"Month":        month,
+					"Breadcrumb":   month.Breadcrumb(),
+					"HeadingMOS":   month.HeadingMOS(),
+					"SideQuarters": year.SideQuarters(quarter.Number),
+					"SideMonths":   year.SideMonths(month.Month),
+					"Extra":        month.PrevNext(),
+					"Extra2":       extra2(false),
 				},
 			})
 		}

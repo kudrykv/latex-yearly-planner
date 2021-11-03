@@ -118,3 +118,9 @@ func (m *Month) PrevNext() header.Items {
 func (m *Month) ShortName() string {
 	return m.Month.String()[:3]
 }
+
+func (m *Month) HeadingMOS() string {
+	return `\begin{tabular}{@{}l}
+  \resizebox{!}{\myLenHeaderResizeBox}{` + hyper.Target(m.Month.String(), m.Month.String()) + `\myDummyQ}
+\end{tabular}`
+}

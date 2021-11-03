@@ -28,9 +28,9 @@ func QuarterlyV2(cfg config.Config, tpls []string) (page.Modules, error) {
 				"Breadcrumb":   quarter.Breadcrumb(),
 				"HeadingMOS":   quarter.HeadingMOS(),
 				"SideQuarters": year.SideQuarters(quarter.Number),
-				"SideMonths":   year.SideMonths(),
+				"SideMonths":   year.SideMonths(0),
 				"Extra":        hRight,
-				"Extra2":       extra2(),
+				"Extra2":       extra2(false),
 			},
 		})
 	}

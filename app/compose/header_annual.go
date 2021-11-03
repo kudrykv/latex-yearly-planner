@@ -22,16 +22,16 @@ func AnnualV2(cfg config.Config, tpls []string) (page.Modules, error) {
 			"Breadcrumb":   year.Breadcrumb(),
 			"HeadingMOS":   year.HeadingMOS(),
 			"SideQuarters": year.SideQuarters(0),
-			"SideMonths":   year.SideMonths(),
+			"SideMonths":   year.SideMonths(0),
 			"Extra":        header.Items{header.NewTextItem("Notes").RefText("Notes Index")},
-			"Extra2":       extra2(),
+			"Extra2":       extra2(true),
 		},
 	}}, nil
 }
 
-func extra2() header.Items {
+func extra2(sel bool) header.Items {
 	return header.Items{
-		header.NewCellItem("Calendar").Select(),
+		header.NewCellItem("Calendar").Selected(sel),
 		header.NewCellItem("Notes").Refer("Notes Index"),
 	}
 }
