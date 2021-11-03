@@ -9,7 +9,7 @@ layout:
       left: 1cm
 
   numbers:
-    dailybottomhour: 8
+    dailybottomhour: 9
     dailytophour: 20
     dailytodos: 5
     dailynotes: 18

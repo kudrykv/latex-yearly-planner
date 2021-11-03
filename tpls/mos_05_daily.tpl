@@ -1,5 +1,7 @@
 {{ template "mos_00_header.tpl" dict "Cfg" .Cfg "Body" .Body }}
 
+{{- $today := .Body.Day -}}
+
 \begin{minipage}[t]{\myLenTriCol}
 {{template "schedule.tpl" dict "Cfg" .Cfg "Day" .Body.Day}}
   \vspace{\dimexpr4mm+.3pt}
@@ -14,7 +16,7 @@
   \myUnderline{Notes\hfill\hyperlink{Notes {{- .Body.Today.RefText -}} }{More}}
   \Repeat{\myNumDailyNotes}{\myLineGrayVskipTop}
   \vskip\dimexpr7mm-1.2pt
-  \myUnderline{Personal\hfill\hyperlink{Reflect {{- .Body.Today.RefText -}} }{Reflect}}
+  \myUnderline{Personal\hfill{{ $today.LinkLeaf "Reflect" "Reflect" }}}
   \Repeat{\myNumDailyPersonal}{\myLineGrayVskipTop}
 \end{minipage}
 \par\pagebreak

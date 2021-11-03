@@ -112,10 +112,15 @@ func (d Day) Month() time.Month {
 	return d.Time.Month()
 }
 
-func (d Day) HeadingMOS() string {
-	return hyper.Target(d.ref(), "") + `%
+func (d Day) HeadingMOS(prefix, leaf string) string {
+	day := strconv.Itoa(d.Time.Day())
+	if len(leaf) > 0 {
+		day = hyper.Link(d.ref(), day)
+	}
+
+	return hyper.Target(prefix+d.ref(), "") + `%
 \begin{tabular}{@{}l|l}
-  \multirow{2}{*}{\resizebox{!}{\myLenHeaderResizeBox}{` + strconv.Itoa(d.Time.Day()) + `}} & \textbf{` + d.Time.Weekday().String() + `} \\
+  \multirow{2}{*}{\resizebox{!}{\myLenHeaderResizeBox}{` + day + `}} & \textbf{` + d.Time.Weekday().String() + `} \\
   & ` + d.Time.Month().String() + `
 \end{tabular}`
 }
