@@ -30,7 +30,7 @@ func QuarterlyV2(cfg config.Config, tpls []string) (page.Modules, error) {
 				"SideQuarters": year.SideQuarters(quarter.Number),
 				"SideMonths":   year.SideMonths(0),
 				"Extra":        hRight,
-				"Extra2":       extra2(false),
+				"Extra2":       extra2(false, false),
 			},
 		})
 	}

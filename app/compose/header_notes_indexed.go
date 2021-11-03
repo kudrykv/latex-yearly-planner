@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/kudrykv/latex-yearly-planner/app/components/cal2"
 	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
 	"github.com/kudrykv/latex-yearly-planner/app/components/note"
@@ -13,6 +14,7 @@ import (
 
 func NotesIndexedV2(cfg config.Config, tpls []string) (page.Modules, error) {
 	index := note.NewIndex(cfg.Year, 35, 2)
+	year := cal2.NewYear(cfg.WeekStart, cfg.Year)
 	modules := make(page.Modules, 0, 1)
 
 	for idx, indexPage := range index.Pages {
@@ -20,9 +22,13 @@ func NotesIndexedV2(cfg config.Config, tpls []string) (page.Modules, error) {
 			Cfg: cfg,
 			Tpl: tpls[0],
 			Body: map[string]interface{}{
-				"Notes":      indexPage,
-				"Breadcrumb": indexPage.Breadcrumb(cfg.Year, idx),
-				"Extra":      index.PrevNext(idx),
+				"Notes":        indexPage,
+				"Breadcrumb":   indexPage.Breadcrumb(cfg.Year, idx),
+				"HeadingMOS":   year.HeadingMOS(),
+				"SideQuarters": year.SideQuarters(0),
+				"SideMonths":   year.SideMonths(0),
+				"Extra":        index.PrevNext(idx),
+				"Extra2":       extra2(false, true),
 			},
 		})
 	}
@@ -33,9 +39,13 @@ func NotesIndexedV2(cfg config.Config, tpls []string) (page.Modules, error) {
 				Cfg: cfg,
 				Tpl: tpls[1],
 				Body: map[string]interface{}{
-					"Note":       nt,
-					"Breadcrumb": nt.Breadcrumb(),
-					"Extra":      nt.PrevNext(),
+					"Note":         nt,
+					"Breadcrumb":   nt.Breadcrumb(),
+					"HeadingMOS":   year.HeadingMOS(),
+					"SideQuarters": year.SideQuarters(0),
+					"SideMonths":   year.SideMonths(0),
+					"Extra":        nt.PrevNext(),
+					"Extra2":       extra2(false, false),
 				},
 			})
 		}

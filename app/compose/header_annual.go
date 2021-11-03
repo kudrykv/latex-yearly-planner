@@ -24,15 +24,15 @@ func AnnualV2(cfg config.Config, tpls []string) (page.Modules, error) {
 			"SideQuarters": year.SideQuarters(0),
 			"SideMonths":   year.SideMonths(0),
 			"Extra":        header.Items{header.NewTextItem("Notes").RefText("Notes Index")},
-			"Extra2":       extra2(true),
+			"Extra2":       extra2(true, false),
 		},
 	}}, nil
 }
 
-func extra2(sel bool) header.Items {
+func extra2(sel1, sel2 bool) header.Items {
 	return header.Items{
-		header.NewCellItem("Calendar").Selected(sel),
-		header.NewCellItem("Notes").Refer("Notes Index"),
+		header.NewCellItem("Calendar").Selected(sel1),
+		header.NewCellItem("Notes").Refer("Notes Index").Selected(sel2),
 	}
 }
 
