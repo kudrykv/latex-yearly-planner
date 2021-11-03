@@ -103,3 +103,19 @@ func (d Day) FormatHour(ampm interface{}) string {
 
 	return d.Time.Format("15")
 }
+
+func (d Day) Quarter() int {
+	return int(math.Ceil(float64(d.Time.Month()) / 3.))
+}
+
+func (d Day) Month() time.Month {
+	return d.Time.Month()
+}
+
+func (d Day) HeadingMOS() string {
+	return hyper.Target(d.ref(), "") + `%
+\begin{tabular}{@{}l|l}
+  \multirow{2}{*}{\resizebox{!}{\myLenHeaderResizeBox}{` + strconv.Itoa(d.Time.Day()) + `}} & \textbf{` + d.Time.Weekday().String() + `} \\
+  & ` + d.Time.Month().String() + `
+\end{tabular}`
+}
