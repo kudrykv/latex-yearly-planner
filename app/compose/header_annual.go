@@ -18,27 +18,20 @@ func AnnualV2(cfg config.Config, tpls []string) (page.Modules, error) {
 		Cfg: cfg,
 		Tpl: tpls[0],
 		Body: map[string]interface{}{
-			"Year":       year,
-			"Breadcrumb": year.Breadcrumb(),
-			"Extra": header.Items{
-				header.NewTextItem("Notes").RefText("Notes Index"),
-			},
+			"Year":         year,
+			"Breadcrumb":   year.Breadcrumb(),
+			"SideQuarters": year.SideQuarters(),
+			"SideMonths":   year.SideMonths(),
+			"HeadingMOS":   year.HeadingMOS(),
+			"Extra":        header.Items{header.NewTextItem("Notes").RefText("Notes Index")},
+			"Extra2":       extra2(),
 		},
 	}}, nil
-}
-
-func sideQuarters(cfg config.Config) []header.CellItem {
-	return QuartersToCellItems(calendar.NewYearInQuarters(cfg.Year).Reverse())
-}
-
-func sideMonths(cfg config.Config) []header.CellItem {
-	return MonthsToCellItems(cfg.WeekStart, calendar.NewYearInMonths(cfg.Year).Reverse())
 }
 
 func extra2() header.Items {
 	return header.Items{
 		header.NewCellItem("Calendar").Select(),
-		header.NewCellItem("To Do").Refer("Todos Index"),
 		header.NewCellItem("Notes").Refer("Notes Index"),
 	}
 }

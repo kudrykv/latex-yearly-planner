@@ -1,0 +1,86 @@
+pages:
+  - name: title
+    renderblocks:
+      - funcname: title
+        tpls:
+          - title.tpl
+
+  - name: annual
+    renderblocks:
+      - funcname: annualV2
+        tpls:
+          - mos_01_annual.tpl
+
+#  - name: quarterly
+#    renderblocks:
+#      - funcname: header_quarterly2
+#        tpls:
+#          - header_margin_quarters_months.tpl
+#      - funcname: quarterly
+#        tpls:
+#          - quarterly.tpl
+#
+#  - name: monthly
+#    renderblocks:
+#      - funcname: header_monthly2
+#        tpls:
+#          - header_margin_quarters_months.tpl
+#      - funcname: monthly
+#        tpls:
+#          - monthly.tpl
+#
+#  - name: weekly
+#    renderblocks:
+#      - funcname: header_weekly2
+#        tpls:
+#          - header_margin_quarters_months.tpl
+#      - funcname: weekly
+#        tpls:
+#          - weekly.tpl
+#
+#  - name: daily
+#    renderblocks:
+#      - funcname: header_daily2
+#        tpls:
+#          - header_margin_quarters_months.tpl
+#      - funcname: daily2
+#        tpls:
+#          - daily_with_month.tpl
+#
+#  - name: daily_notes
+#    renderblocks:
+#      - funcname: header_daily_notes2
+#        tpls:
+#          - header_margin_quarters_months.tpl
+#      - funcname: daily_notes
+#        tpls:
+#          - daily_notes.tpl
+#
+#  - name: daily_reflect
+#    renderblocks:
+#      - funcname: header_daily_reflect2
+#        tpls:
+#          - header_margin_quarters_months.tpl
+#      - funcname: daily_reflect
+#        tpls:
+#          - daily_reflect.tpl
+#
+#  - name: notes_indexed
+#    renderblocks:
+#      - funcname: header_notes_indexed2
+#        tpls:
+#          - header_margin_quarters_months.tpl
+#      - funcname: notes_indexed
+#        tpls:
+#          - notes_index.tpl
+#          - daily_notes.tpl
+#
+#  - name: todos_indexed
+#    renderblocks:
+#      - funcname: header_todos_indexed2
+#        tpls:
+#          - header_margin_quarters_months.tpl
+#      - funcname: todos_indexed
+#        tpls:
+#          - todos_index.tpl
+#          - todos_note.tpl

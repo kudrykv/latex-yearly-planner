@@ -8,6 +8,7 @@ layout:
 
     marginparwidth: 1cm
     marginparsep: 0cm
+    reversemargins: true
 
     margin:
       top: 1.2cm

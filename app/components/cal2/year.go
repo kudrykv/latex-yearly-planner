@@ -1,6 +1,7 @@
 package cal2
 
 import (
+	"strconv"
 	"time"
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
@@ -34,4 +35,32 @@ func (y Year) Breadcrumb() string {
 			header.NewTextItem("Q4"),
 		),
 	}.Table(true)
+}
+
+func (y Year) SideQuarters() []header.CellItem {
+	out := make([]header.CellItem, 0, len(y.Quarters))
+
+	for i := len(y.Quarters) - 1; i >= 0; i-- {
+		out = append(out, header.NewCellItem(y.Quarters[i].Name()))
+	}
+
+	return out
+}
+
+func (y Year) SideMonths() []header.CellItem {
+	out := make([]header.CellItem, 0, 12)
+
+	for i := len(y.Quarters) - 1; i >= 0; i-- {
+		for j := len(y.Quarters[i].Months) - 1; j >= 0; j-- {
+			out = append(out, header.NewCellItem(y.Quarters[i].Months[j].ShortName()))
+		}
+	}
+
+	return out
+}
+
+func (y Year) HeadingMOS() string {
+	return `\begin{tabular}{@{}l}
+  \resizebox{!}{\myLenHeaderResizeBox}{\hypertarget{Calendar}{` + strconv.Itoa(y.Number) + `\myDummyQ}}
+\end{tabular}`
 }

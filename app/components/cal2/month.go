@@ -114,3 +114,7 @@ func (m *Month) PrevNext() header.Items {
 
 	return items
 }
+
+func (m *Month) ShortName() string {
+	return m.Month.String()[:3]
+}

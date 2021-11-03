@@ -1,6 +1,7 @@
 package cal2
 
 import (
+	"strconv"
 	"time"
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
@@ -33,4 +34,8 @@ func (q *Quarter) Breadcrumb() string {
 		header.NewTextItem("Q3").Bold(q.Number == 3).Ref(q.Number == 3),
 		header.NewTextItem("Q4").Bold(q.Number == 4).Ref(q.Number == 4),
 	)}.Table(true)
+}
+
+func (q *Quarter) Name() string {
+	return "Q" + strconv.Itoa(q.Number)
 }
