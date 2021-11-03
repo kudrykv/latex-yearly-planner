@@ -20,10 +20,14 @@ func WeeklyV2(cfg config.Config, tpls []string) (page.Modules, error) {
 			Cfg: cfg,
 			Tpl: tpls[0],
 			Body: map[string]interface{}{
-				"Year":       year,
-				"Week":       week,
-				"Breadcrumb": week.Breadcrumb(),
-				"Extra":      week.PrevNext(),
+				"Year":         year,
+				"Week":         week,
+				"Breadcrumb":   week.Breadcrumb(),
+				"HeadingMOS":   week.HeadingMOS(),
+				"SideQuarters": year.SideQuarters(0),
+				"SideMonths":   year.SideMonths(0),
+				"Extra":        week.PrevNext(),
+				"Extra2":       extra2(false),
 			},
 		})
 	}

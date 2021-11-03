@@ -273,3 +273,9 @@ func (w *Week) rightYear() int {
 
 	return -1
 }
+
+func (w *Week) HeadingMOS() string {
+	return `\begin{tabular}{@{}l}
+  \resizebox{!}{\myLenHeaderResizeBox}{` + hyper.Target(w.ref(), "Week "+strconv.Itoa(w.weekNumber())) + `\myDummyQ}
+\end{tabular}`
+}
