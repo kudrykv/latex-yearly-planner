@@ -34,21 +34,18 @@ pages:
       - funcname: dailyV2
         tpls:
           - mos_05_daily.tpl
-#
-#  - name: daily_notes
-#    renderblocks:
-#      - funcname: header_daily_notes2
-#        tpls:
-#          - header_margin_quarters_months.tpl
-#      - funcname: daily_notes
-#        tpls:
-#          - daily_notes.tpl
 
   - name: daily_reflect
     renderblocks:
       - funcname: daily_reflectV2
         tpls:
           - mos_06_daily_reflect.tpl
+
+  - name: daily_notes
+    renderblocks:
+      - funcname: daily_notesV2
+        tpls:
+          - mos_07_daily_notes.tpl
 
 #  - name: notes_indexed
 #    renderblocks:

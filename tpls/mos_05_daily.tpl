@@ -13,7 +13,7 @@
   \myUnderline{Top priorities\textcolor{white}{g}}
   \Repeat{\myNumDailyTodos}{\myTodoLineGray}
   \vskip\dimexpr7mm-1.4pt
-  \myUnderline{Notes\hfill\hyperlink{Notes {{- .Body.Today.RefText -}} }{More}}
+  \myUnderline{Notes\hfill {{- $today.LinkLeaf "More" "More" -}} }
   \Repeat{\myNumDailyNotes}{\myLineGrayVskipTop}
   \vskip\dimexpr7mm-1.2pt
   \myUnderline{Personal\hfill{{ $today.LinkLeaf "Reflect" "Reflect" }}}
