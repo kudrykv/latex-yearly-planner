@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
+	"github.com/kudrykv/latex-yearly-planner/app/components/hyper"
 )
 
 type Quarters []*Quarter
@@ -38,4 +39,10 @@ func (q *Quarter) Breadcrumb() string {
 
 func (q *Quarter) Name() string {
 	return "Q" + strconv.Itoa(q.Number)
+}
+
+func (q *Quarter) HeadingMOS() string {
+	return ` \begin{tabular}{@{}l}
+  \resizebox{!}{\myLenHeaderResizeBox}{` + hyper.Target(q.Name(), q.Name()) + `}
+\end{tabular}`
 }

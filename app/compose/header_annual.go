@@ -20,9 +20,9 @@ func AnnualV2(cfg config.Config, tpls []string) (page.Modules, error) {
 		Body: map[string]interface{}{
 			"Year":         year,
 			"Breadcrumb":   year.Breadcrumb(),
-			"SideQuarters": year.SideQuarters(),
-			"SideMonths":   year.SideMonths(),
 			"HeadingMOS":   year.HeadingMOS(),
+			"SideQuarters": year.SideQuarters(0),
+			"SideMonths":   year.SideMonths(),
 			"Extra":        header.Items{header.NewTextItem("Notes").RefText("Notes Index")},
 			"Extra2":       extra2(),
 		},

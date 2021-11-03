@@ -37,11 +37,11 @@ func (y Year) Breadcrumb() string {
 	}.Table(true)
 }
 
-func (y Year) SideQuarters() []header.CellItem {
+func (y Year) SideQuarters(sel int) []header.CellItem {
 	out := make([]header.CellItem, 0, len(y.Quarters))
 
 	for i := len(y.Quarters) - 1; i >= 0; i-- {
-		out = append(out, header.NewCellItem(y.Quarters[i].Name()))
+		out = append(out, header.NewCellItem(y.Quarters[i].Name()).Selected(y.Quarters[i].Number == sel))
 	}
 
 	return out

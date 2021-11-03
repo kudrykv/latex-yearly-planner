@@ -23,10 +23,14 @@ func QuarterlyV2(cfg config.Config, tpls []string) (page.Modules, error) {
 			Cfg: cfg,
 			Tpl: tpls[0],
 			Body: map[string]interface{}{
-				"Year":       year,
-				"Quarter":    quarter,
-				"Breadcrumb": quarter.Breadcrumb(),
-				"Extra":      hRight,
+				"Year":         year,
+				"Quarter":      quarter,
+				"Breadcrumb":   quarter.Breadcrumb(),
+				"HeadingMOS":   quarter.HeadingMOS(),
+				"SideQuarters": year.SideQuarters(quarter.Number),
+				"SideMonths":   year.SideMonths(),
+				"Extra":        hRight,
+				"Extra2":       extra2(),
 			},
 		})
 	}

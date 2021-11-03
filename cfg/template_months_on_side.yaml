@@ -11,14 +11,11 @@ pages:
         tpls:
           - mos_01_annual.tpl
 
-#  - name: quarterly
-#    renderblocks:
-#      - funcname: header_quarterly2
-#        tpls:
-#          - header_margin_quarters_months.tpl
-#      - funcname: quarterly
-#        tpls:
-#          - quarterly.tpl
+  - name: quarterly
+    renderblocks:
+      - funcname: quarterlyV2
+        tpls:
+          - mos_02_quarterly.tpl
 #
 #  - name: monthly
 #    renderblocks:
