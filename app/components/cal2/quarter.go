@@ -9,6 +9,21 @@ import (
 )
 
 type Quarters []*Quarter
+
+func (q Quarters) Numbers() []int {
+	if len(q) == 0 {
+		return nil
+	}
+
+	out := make([]int, 0, len(q))
+
+	for _, quarter := range q {
+		out = append(out, quarter.Number)
+	}
+
+	return out
+}
+
 type Quarter struct {
 	Year   *Year
 	Number int

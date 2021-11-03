@@ -10,6 +10,21 @@ import (
 )
 
 type Months []*Month
+
+func (m Months) Months() []time.Month {
+	if len(m) == 0 {
+		return nil
+	}
+
+	out := make([]time.Month, 0, len(m))
+
+	for _, month := range m {
+		out = append(out, month.Month)
+	}
+
+	return out
+}
+
 type Month struct {
 	Year    *Year
 	Quarter *Quarter

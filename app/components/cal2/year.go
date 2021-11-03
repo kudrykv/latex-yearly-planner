@@ -37,23 +37,42 @@ func (y Year) Breadcrumb() string {
 	}.Table(true)
 }
 
-func (y Year) SideQuarters(sel int) []header.CellItem {
+func (y Year) SideQuarters(sel ...int) []header.CellItem {
 	out := make([]header.CellItem, 0, len(y.Quarters))
 
 	for i := len(y.Quarters) - 1; i >= 0; i-- {
-		out = append(out, header.NewCellItem(y.Quarters[i].Name()).Selected(y.Quarters[i].Number == sel))
+		mark := false
+		for _, oneof := range sel {
+			if oneof == y.Quarters[i].Number {
+				mark = true
+
+				break
+			}
+		}
+
+		out = append(out, header.NewCellItem(y.Quarters[i].Name()).Selected(mark))
 	}
 
 	return out
 }
 
-func (y Year) SideMonths(sel time.Month) []header.CellItem {
+func (y Year) SideMonths(sel ...time.Month) []header.CellItem {
 	out := make([]header.CellItem, 0, 12)
 
 	for i := len(y.Quarters) - 1; i >= 0; i-- {
 		for j := len(y.Quarters[i].Months) - 1; j >= 0; j-- {
 			mon := y.Quarters[i].Months[j]
-			cell := header.NewCellItem(mon.ShortName()).Refer(mon.Month.String()).Selected(mon.Month == sel)
+			mark := false
+
+			for _, month := range sel {
+				if month == mon.Month {
+					mark = true
+
+					break
+				}
+			}
+
+			cell := header.NewCellItem(mon.ShortName()).Refer(mon.Month.String()).Selected(mark)
 			out = append(out, cell)
 		}
 	}
