@@ -1,14 +1,14 @@
 package compose
 
 import (
-	"github.com/kudrykv/latex-yearly-planner/app/components/cal2"
+	"github.com/kudrykv/latex-yearly-planner/app/components/cal"
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
 func AnnualV2(cfg config.Config, tpls []string) (page.Modules, error) {
-	year := cal2.NewYear(cfg.WeekStart, cfg.Year)
+	year := cal.NewYear(cfg.WeekStart, cfg.Year)
 
 	return page.Modules{{
 		Cfg: cfg,

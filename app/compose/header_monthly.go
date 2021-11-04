@@ -1,13 +1,13 @@
 package compose
 
 import (
-	"github.com/kudrykv/latex-yearly-planner/app/components/cal2"
+	"github.com/kudrykv/latex-yearly-planner/app/components/cal"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
 func MonthlyV2(cfg config.Config, tpls []string) (page.Modules, error) {
-	year := cal2.NewYear(cfg.WeekStart, cfg.Year)
+	year := cal.NewYear(cfg.WeekStart, cfg.Year)
 	modules := make(page.Modules, 0, 12)
 
 	for _, quarter := range year.Quarters {

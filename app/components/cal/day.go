@@ -1,4 +1,4 @@
-package cal2
+package cal
 
 import (
 	"math"

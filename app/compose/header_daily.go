@@ -1,7 +1,7 @@
 package compose
 
 import (
-	"github.com/kudrykv/latex-yearly-planner/app/components/cal2"
+	"github.com/kudrykv/latex-yearly-planner/app/components/cal"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
@@ -12,7 +12,7 @@ var DailyNotesV2 = DailyStuff("More", "Notes")
 
 func DailyStuff(prefix, leaf string) func(cfg config.Config, tpls []string) (page.Modules, error) {
 	return func(cfg config.Config, tpls []string) (page.Modules, error) {
-		year := cal2.NewYear(cfg.WeekStart, cfg.Year)
+		year := cal.NewYear(cfg.WeekStart, cfg.Year)
 		modules := make(page.Modules, 0, 366)
 
 		for _, quarter := range year.Quarters {

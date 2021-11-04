@@ -1,7 +1,7 @@
 package compose
 
 import (
-	"github.com/kudrykv/latex-yearly-planner/app/components/cal2"
+	"github.com/kudrykv/latex-yearly-planner/app/components/cal"
 	"github.com/kudrykv/latex-yearly-planner/app/components/note"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
@@ -9,7 +9,7 @@ import (
 
 func NotesIndexedV2(cfg config.Config, tpls []string) (page.Modules, error) {
 	index := note.NewIndex(cfg.Year, 35, 2)
-	year := cal2.NewYear(cfg.WeekStart, cfg.Year)
+	year := cal.NewYear(cfg.WeekStart, cfg.Year)
 	modules := make(page.Modules, 0, 1)
 
 	for idx, indexPage := range index.Pages {

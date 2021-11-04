@@ -1,7 +1,7 @@
 package compose
 
 import (
-	"github.com/kudrykv/latex-yearly-planner/app/components/cal2"
+	"github.com/kudrykv/latex-yearly-planner/app/components/cal"
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
@@ -9,7 +9,7 @@ import (
 
 func QuarterlyV2(cfg config.Config, tpls []string) (page.Modules, error) {
 	modules := make(page.Modules, 0, 4)
-	year := cal2.NewYear(cfg.WeekStart, cfg.Year)
+	year := cal.NewYear(cfg.WeekStart, cfg.Year)
 
 	hRight := header.Items{
 		header.NewTextItem("Notes").RefText("Notes Index"),
