@@ -15,8 +15,9 @@ _configurations=(
 #  2 "${_sn_a5x_lh},cfg/template_planner_daily_with_cal.yaml,cfg/sn_a5x_lh.planner.daily-with-cal.yaml"
 
   # new
-#  1 "cfg/base.yaml,cfg/template_breadcrumb.yaml,cfg/sn_a5x.breadcrumb.default.yaml" "sn_a5x.breadcrumb.default"
-  1 "cfg/base.yaml,cfg/rm2.base.yaml,cfg/template_breadcrumb.yaml,cfg/rm2.breadcrumb.default.yaml" "rm2.breadcrumb.default"
+  1 "cfg/base.yaml,cfg/template_breadcrumb.yaml,cfg/sn_a5x.breadcrumb.default.yaml"                "sn_a5x.breadcrumb.default"
+#  1 "cfg/base.yaml,cfg/rm2.base.yaml,cfg/template_breadcrumb.yaml,cfg/rm2.breadcrumb.default.yaml" "rm2.breadcrumb.default"
+  2 "cfg/base.yaml,cfg/template_months_on_side.yaml,cfg/sn_a5x.mos.default.yaml"                   "sn_a5x.mos.default"
 )
 
 _configurations_len=${#_configurations[@]}
