@@ -24,7 +24,7 @@ func NotesIndexedV2(cfg config.Config, tpls []string) (page.Modules, error) {
 			Body: map[string]interface{}{
 				"Notes":        indexPage,
 				"Breadcrumb":   indexPage.Breadcrumb(cfg.Year, idx),
-				"HeadingMOS":   year.HeadingMOS(),
+				"HeadingMOS":   indexPage.HeadingMOS(),
 				"SideQuarters": year.SideQuarters(0),
 				"SideMonths":   year.SideMonths(0),
 				"Extra":        index.PrevNext(idx),
@@ -41,7 +41,7 @@ func NotesIndexedV2(cfg config.Config, tpls []string) (page.Modules, error) {
 				Body: map[string]interface{}{
 					"Note":         nt,
 					"Breadcrumb":   nt.Breadcrumb(),
-					"HeadingMOS":   year.HeadingMOS(),
+					"HeadingMOS":   nt.HeadingMOS(),
 					"SideQuarters": year.SideQuarters(0),
 					"SideMonths":   year.SideMonths(0),
 					"Extra":        nt.PrevNext(),

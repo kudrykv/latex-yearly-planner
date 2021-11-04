@@ -4,6 +4,7 @@ import (
 	"strconv"
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
+	"github.com/kudrykv/latex-yearly-planner/app/components/hyper"
 )
 
 type Notes []*Note
@@ -28,6 +29,12 @@ func (p Notes) Breadcrumb(year, idx int) string {
 	}.Table(true)
 }
 
+func (p Notes) HeadingMOS() string {
+	return `\begin{tabular}{@{}l}` +
+		hyper.Target("Notes Index", "") + `\resizebox{!}{\myLenHeaderResizeBox}{Index Notes\myDummyQ}
+\end{tabular}`
+}
+
 func (n Note) Breadcrumb() string {
 	return header.Items{
 		header.NewIntItem(n.Year),
@@ -44,4 +51,11 @@ func (n Note) PrevNext() header.Items {
 	}
 
 	return items
+}
+
+func (n Note) HeadingMOS() string {
+	num := strconv.Itoa(n.Number)
+	return `\begin{tabular}{@{}l}` +
+		hyper.Target("Note "+num, "") + `\resizebox{!}{\myLenHeaderResizeBox}{Note ` + num + `\myDummyQ}
+\end{tabular}`
 }

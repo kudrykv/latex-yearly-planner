@@ -2,7 +2,7 @@
 
 \begin{tabularx}{\linewidth}{l|X}
 {{ range $note := .Body.Notes }}
-{{ $note.Number }} & \myLineHeightButLine{} \\ \hline
+\hyperlink{Note {{ $note.Number }}}{ {{- $note.Number -}} } & \myLineHeightButLine{} \\ \hline
 {{ end }}
 \end{tabularx}
 
