@@ -1,20 +1,4 @@
 {{ template "mos_00_header.tpl" dict "Cfg" .Cfg "Body" .Body }}
-
-{{- template "monthTabularV2.tpl" dict "Month" .Body.Month "Large" true -}}
-\medskip
-
-\parbox{\myLenTwoCol}{
-  \myUnderline{Notes}
-  \vbox to \dimexpr\textheight-\pagetotal-\myLenLineHeightButLine\relax {%
-    \leaders\hbox to \linewidth{\textcolor{\myColorGray}{\rule{0pt}{\myLenLineHeightButLine}\hrulefill}}\vfil
-  }%
-}%
-\hspace{\myLenTwoColSep}%
-\parbox{\myLenTwoCol}{
-  \myUnderline{Notes}
-  \vbox to \dimexpr\textheight-\pagetotal-\myLenLineHeightButLine\relax {%
-    \leaders\hbox to \linewidth{\textcolor{\myColorGray}{\rule{0pt}{\myLenLineHeightButLine}\hrulefill}}\vfil
-  }%
-}
+{{ template "_common_03_monthly.tpl" dict "Cfg" .Cfg "Body" .Body }}
 
 \pagebreak
