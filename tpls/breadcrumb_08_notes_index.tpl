@@ -1,4 +1,4 @@
-{{ template "header_v2.tpl" dict "Cfg" .Cfg "Body" .Body }}
+{{ template "breadcrumb_00_header.tpl" dict "Cfg" .Cfg "Body" .Body }}
 
 \begin{tabularx}{\linewidth}{l|X}
 {{ range $note := .Body.Notes }}
