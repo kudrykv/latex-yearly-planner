@@ -1,9 +1,4 @@
 {{ template "mos_00_header.tpl" dict "Cfg" .Cfg "Body" .Body }}
-
-\begin{tabularx}{\linewidth}{l|X}
-{{ range $note := .Body.Notes }}
-\hyperlink{Note {{ $note.Number }}}{ {{- $note.Number -}} } & \myLineHeightButLine{} \\ \hline
-{{ end }}
-\end{tabularx}
+{{ template "_common_08_notes_index.tpl" dict "Cfg" .Cfg "Body" .Body }}
 
 \par\pagebreak
