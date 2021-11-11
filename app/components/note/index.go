@@ -19,7 +19,7 @@ func NewIndex(year, notesOnPage, pages int) *Index {
 		pg := make(Notes, 0, notesOnPage)
 
 		for noteNum := 1; noteNum <= notesOnPage; noteNum++ {
-			pg = append(pg, NewNote(year, pageNum*notesOnPage+noteNum))
+			pg = append(pg, NewNote(year, pageNum+1, pageNum*notesOnPage+noteNum))
 		}
 
 		pgs = append(pgs, pg)

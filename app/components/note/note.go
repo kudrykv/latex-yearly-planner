@@ -12,10 +12,11 @@ type Notes []*Note
 type Note struct {
 	Year   int
 	Number int
+	Page   int
 }
 
-func NewNote(year, number int) *Note {
-	return &Note{Year: year, Number: number}
+func NewNote(year, page, number int) *Note {
+	return &Note{Year: year, Page: page, Number: number}
 }
 
 func (p Notes) Breadcrumb(year, idx int) string {
@@ -30,9 +31,15 @@ func (p Notes) Breadcrumb(year, idx int) string {
 	}.Table(true)
 }
 
-func (p Notes) HeadingMOS() string {
+func (p Notes) HeadingMOS(page int) string {
+	suffix := ""
+
+	if page > 1 {
+		suffix = " " + strconv.Itoa(page)
+	}
+
 	return `\begin{tabular}{@{}l}` +
-		hyper.Target("Notes Index", "") + `\resizebox{!}{\myLenHeaderResizeBox}{Index Notes\myDummyQ}
+		hyper.Target("Notes Index"+suffix, "") + `\resizebox{!}{\myLenHeaderResizeBox}{Index Notes\myDummyQ}
 \end{tabular}`
 }
 
@@ -41,9 +48,15 @@ func (n Note) HyperLink() string {
 }
 
 func (n Note) Breadcrumb() string {
+	page := ""
+
+	if n.Page > 1 {
+		page = " " + strconv.Itoa(n.Page)
+	}
+
 	return header.Items{
 		header.NewIntItem(n.Year),
-		header.NewTextItem("Notes Index"),
+		header.NewTextItem("Notes Index" + page),
 		header.NewTextItem(n.ref()).Ref(true),
 	}.Table(true)
 }
