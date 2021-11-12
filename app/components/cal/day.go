@@ -39,7 +39,7 @@ func (d Day) ref() string {
 	return d.Time.Format(time.RFC3339)
 }
 
-func (d Day) Next(days int) Day {
+func (d Day) Add(days int) Day {
 	return Day{Time: d.Time.AddDate(0, 0, days)}
 }
 
@@ -79,12 +79,12 @@ func (d Day) PrevNext(prefix string) header.Items {
 	items := header.Items{}
 
 	if d.Time.Month() > time.January || d.Time.Day() > 1 {
-		prev := d.Next(-1)
+		prev := d.Add(-1)
 		items = append(items, header.NewTextItem(prev.Time.Format("Mon, 2")).RefText(prefix+prev.ref()))
 	}
 
 	if d.Time.Month() < time.December || d.Time.Day() < 31 {
-		next := d.Next(1)
+		next := d.Add(1)
 		items = append(items, header.NewTextItem(next.Time.Format("Mon, 2")).RefText(prefix+next.ref()))
 	}
 

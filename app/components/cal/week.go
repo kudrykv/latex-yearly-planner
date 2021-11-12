@@ -64,14 +64,14 @@ func NewWeeksForYear(wd time.Weekday, year *Year) Weeks {
 
 	for i := 0; i < 7; i++ {
 		week.Days[i] = ptr
-		ptr = ptr.Next(1)
+		ptr = ptr.Add(1)
 	}
 
 	weeks = append(weeks, week)
 
 	for ptr.Time.Year() == year.Number {
 		weeks = append(weeks, fillWeekly(wd, year, ptr))
-		ptr = ptr.Next(7)
+		ptr = ptr.Add(7)
 	}
 
 	weeks[len(weeks)-1].Quarters = weeks[len(weeks)-1].Quarters[:1]
@@ -88,7 +88,7 @@ func fillWeekly(wd time.Weekday, year *Year, ptr Day) *Week {
 
 	for i := 0; i < 7; i++ {
 		week.Days[i] = ptr
-		ptr = ptr.Next(1)
+		ptr = ptr.Add(1)
 	}
 
 	if week.quarterOverlap() {
@@ -212,11 +212,11 @@ func (w *Week) PrevExists() bool {
 }
 
 func (w *Week) Next() *Week {
-	return fillWeekly(w.Weekday, w.Year, w.Days[0].Next(7))
+	return fillWeekly(w.Weekday, w.Year, w.Days[0].Add(7))
 }
 
 func (w *Week) Prev() *Week {
-	return fillWeekly(w.Weekday, w.Year, w.Days[0].Next(-7))
+	return fillWeekly(w.Weekday, w.Year, w.Days[0].Add(-7))
 }
 
 func (w *Week) QuartersBreadcrumb() header.ItemsGroup {
