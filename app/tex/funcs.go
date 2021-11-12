@@ -9,3 +9,7 @@ func CellColor(color, text string) string {
 func TextColor(color, text string) string {
 	return fmt.Sprintf(`\textcolor{%s}{%s}`, color, text)
 }
+
+func Hyperlink(ref, text string) string {
+	return fmt.Sprintf(`\hyperlink{%s}{%s}`, ref, text)
+}

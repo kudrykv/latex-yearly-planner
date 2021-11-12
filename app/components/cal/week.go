@@ -279,3 +279,7 @@ func (w *Week) HeadingMOS() string {
   \resizebox{!}{\myLenHeaderResizeBox}{` + hyper.Target(w.ref(), "Week "+strconv.Itoa(w.weekNumber())) + `\myDummyQ}
 \end{tabular}`
 }
+
+func (w *Week) Name() string {
+	return "Week " + strconv.Itoa(w.weekNumber())
+}

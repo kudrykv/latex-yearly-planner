@@ -23,7 +23,7 @@ func NotesIndexedV2(cfg config.Config, tpls []string) (page.Modules, error) {
 				"SideQuarters": year.SideQuarters(0),
 				"SideMonths":   year.SideMonths(0),
 				"Extra":        index.PrevNext(idx),
-				"Extra2":       extra2(false, true),
+				"Extra2":       extra2(false, true, nil),
 			},
 		})
 	}
@@ -40,7 +40,7 @@ func NotesIndexedV2(cfg config.Config, tpls []string) (page.Modules, error) {
 					"SideQuarters": year.SideQuarters(0),
 					"SideMonths":   year.SideMonths(0),
 					"Extra":        nt.PrevNext(),
-					"Extra2":       extra2(false, false),
+					"Extra2":       extra2(false, false, nil),
 				},
 			})
 		}
