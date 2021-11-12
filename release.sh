@@ -36,7 +36,7 @@ function createPDFs() {
 
 function mvDefaultTo() {
   for filename in ./*pdf; do
-    _newname=$(perl -pe "s/default/$1/g" <(echo "$filename") )
+    _newname=$(echo "$filename" | perl -pe "s/default/$1/g")
     mv "$filename" "$_newname"
   done
 }
