@@ -123,12 +123,12 @@ type Composer func(cfg config.Config, tpls []string) (page.Modules, error)
 
 var ComposerMap = map[string]Composer{
 	"title":         compose.Title,
-	"annual":        compose.AnnualV2,
-	"quarterly":     compose.QuarterlyV2,
-	"monthly":       compose.MonthlyV2,
-	"weekly":        compose.WeeklyV2,
-	"daily":         compose.DailyV2,
-	"daily_reflect": compose.DailyReflectV2,
-	"daily_notes":   compose.DailyNotesV2,
-	"notes_indexed": compose.NotesIndexedV2,
+	"annual":        compose.Annual,
+	"quarterly":     compose.Quarterly,
+	"monthly":       compose.Monthly,
+	"weekly":        compose.Weekly,
+	"daily":         compose.Daily,
+	"daily_reflect": compose.DailyReflect,
+	"daily_notes":   compose.DailyNotes,
+	"notes_indexed": compose.NotesIndexed,
 }

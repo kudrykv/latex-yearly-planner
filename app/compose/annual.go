@@ -7,7 +7,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-func AnnualV2(cfg config.Config, tpls []string) (page.Modules, error) {
+func Annual(cfg config.Config, tpls []string) (page.Modules, error) {
 	year := cal.NewYear(cfg.WeekStart, cfg.Year)
 
 	return page.Modules{{

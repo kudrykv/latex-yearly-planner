@@ -6,9 +6,9 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-var DailyV2 = DailyStuff("", "")
-var DailyReflectV2 = DailyStuff("Reflect", "Reflect")
-var DailyNotesV2 = DailyStuff("More", "Notes")
+var Daily = DailyStuff("", "")
+var DailyReflect = DailyStuff("Reflect", "Reflect")
+var DailyNotes = DailyStuff("More", "Notes")
 
 func DailyStuff(prefix, leaf string) func(cfg config.Config, tpls []string) (page.Modules, error) {
 	return func(cfg config.Config, tpls []string) (page.Modules, error) {

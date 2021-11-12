@@ -7,7 +7,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-func NotesIndexedV2(cfg config.Config, tpls []string) (page.Modules, error) {
+func NotesIndexed(cfg config.Config, tpls []string) (page.Modules, error) {
 	index := note.NewIndex(cfg.Year, 35, 2)
 	year := cal.NewYear(cfg.WeekStart, cfg.Year)
 	modules := make(page.Modules, 0, 1)

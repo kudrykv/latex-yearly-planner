@@ -6,7 +6,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-func MonthlyV2(cfg config.Config, tpls []string) (page.Modules, error) {
+func Monthly(cfg config.Config, tpls []string) (page.Modules, error) {
 	year := cal.NewYear(cfg.WeekStart, cfg.Year)
 	modules := make(page.Modules, 0, 12)
 
