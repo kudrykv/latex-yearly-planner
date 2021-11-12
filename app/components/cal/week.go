@@ -7,6 +7,7 @@ import (
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
 	"github.com/kudrykv/latex-yearly-planner/app/components/hyper"
+	"github.com/kudrykv/latex-yearly-planner/app/tex"
 )
 
 type Weeks []*Week
@@ -275,11 +276,13 @@ func (w *Week) rightYear() int {
 }
 
 func (w *Week) HeadingMOS() string {
-	return `\begin{tabular}{@{}l}
-  \resizebox{!}{\myLenHeaderResizeBox}{` + hyper.Target(w.ref(), "Week "+strconv.Itoa(w.weekNumber())) + `\myDummyQ}
-\end{tabular}`
+	return tex.Tabular("@{}l", tex.ResizeBoxW(`\myLenHeaderResizeBox`, w.Target()+`\myDummyQ`))
 }
 
 func (w *Week) Name() string {
 	return "Week " + strconv.Itoa(w.weekNumber())
+}
+
+func (w *Week) Target() string {
+	return tex.Hypertarget(w.ref(), w.Name())
 }
