@@ -11,7 +11,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/compose"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
-	"github.com/kudrykv/latex-yearly-planner/app/tex"
+	"github.com/kudrykv/latex-yearly-planner/app/tpls"
 	"github.com/urfave/cli/v2"
 )
 
@@ -49,7 +49,7 @@ func action(c *cli.Context) error {
 
 	wr := &bytes.Buffer{}
 
-	t := tex.New()
+	t := tpls.New()
 
 	if err = t.Document(wr, cfg); err != nil {
 		return fmt.Errorf("tex document: %w", err)

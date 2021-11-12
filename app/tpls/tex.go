@@ -1,10 +1,9 @@
-package tex
+package tpls
 
 import (
 	"errors"
 	"fmt"
 	"io"
-	"strings"
 	"text/template"
 
 	"github.com/kudrykv/latex-yearly-planner/app/config"
@@ -45,17 +44,17 @@ var tpl = template.Must(template.New("").Funcs(template.FuncMap{
 	},
 }).ParseGlob(`./tpls/*`))
 
-type Tex struct {
+type Tpl struct {
 	tpl *template.Template
 }
 
-func New() Tex {
-	return Tex{
+func New() Tpl {
+	return Tpl{
 		tpl: tpl,
 	}
 }
 
-func (t Tex) Document(wr io.Writer, cfg config.Config) error {
+func (t Tpl) Document(wr io.Writer, cfg config.Config) error {
 	type pack struct {
 		Cfg   config.Config
 		Pages []config.Page
@@ -69,20 +68,10 @@ func (t Tex) Document(wr io.Writer, cfg config.Config) error {
 	return nil
 }
 
-func (t Tex) Execute(wr io.Writer, name string, data interface{}) error {
+func (t Tpl) Execute(wr io.Writer, name string, data interface{}) error {
 	if err := t.tpl.ExecuteTemplate(wr, name, data); err != nil {
 		return fmt.Errorf("execute template: %w", err)
 	}
 
 	return nil
-}
-
-func Execute(name string, data interface{}) string {
-	builder := &strings.Builder{}
-
-	if err := tpl.ExecuteTemplate(builder, name, data); err != nil {
-		panic(err)
-	}
-
-	return builder.String()
 }
