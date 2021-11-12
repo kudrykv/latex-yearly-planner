@@ -22,12 +22,47 @@ _configurations=(
 
 _configurations_len=${#_configurations[@]}
 
-for _year in $CURRENT_YEAR $NEXT_YEAR; do
-  for _idx in $(seq 0 3 $((_configurations_len-1))); do
-    _passes=${_configurations[_idx]}
-    _cfg=${_configurations[_idx+1]}
-    _name=${_configurations[_idx+2]}
+function createPDFs() {
+  for _year in $CURRENT_YEAR $NEXT_YEAR; do
+    for _idx in $(seq 0 3 $((_configurations_len-1))); do
+      _passes=${_configurations[_idx]}
+      _cfg=${_configurations[_idx+1]}
+      _name=${_configurations[_idx+2]}
 
-    PLANNER_YEAR="${_year}" PASSES="${_passes}" CFG="${_cfg}" NAME="${_name}.${_year}" ./single.sh
+      PLANNER_YEAR="${_year}" PASSES="${_passes}" CFG="${_cfg}" NAME="${_name}.${_year}" ./single.sh
+    done
   done
-done
+}
+
+function mvDefaultTo() {
+  for filename in ./*pdf; do
+    _newname=$(perl -pe "s/default/$1/g" <(echo "$filename") )
+    mv "$filename" "$_newname"
+  done
+}
+
+# default planners
+createPDFs
+mv ./*pdf pile
+
+# sunday-first planners
+sed -i 's/weekstart: 1/weekstart: 0/' cfg/base.yaml
+createPDFs
+git restore cfg/base.yaml
+mvDefaultTo "sunday_first"
+mv ./*pdf pile
+
+# am/pm time
+sed -i 's/ampmtime: false/ampmtime: true/' cfg/base.yaml
+createPDFs
+git restore cfg/base.yaml
+mvDefaultTo "ampm"
+mv ./*pdf pile
+
+# sunday-first + am/pm
+sed -i 's/weekstart: 1/weekstart: 0/' cfg/base.yaml
+sed -i 's/ampmtime: false/ampmtime: true/' cfg/base.yaml
+createPDFs
+git restore cfg/base.yaml
+mvDefaultTo "sunday_first.ampm"
+mv ./*pdf pile
