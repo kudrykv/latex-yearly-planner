@@ -7,6 +7,7 @@ import (
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
 	"github.com/kudrykv/latex-yearly-planner/app/components/hyper"
+	"github.com/kudrykv/latex-yearly-planner/app/texx"
 )
 
 type Days []*Day
@@ -14,7 +15,7 @@ type Day struct {
 	Time time.Time
 }
 
-func (d Day) Day(large interface{}) string {
+func (d Day) Day(today, large interface{}) string {
 	if d.Time.IsZero() {
 		return ""
 	}
@@ -23,6 +24,12 @@ func (d Day) Day(large interface{}) string {
 
 	if larg, _ := large.(bool); larg {
 		return `\hyperlink{` + d.ref() + `}{\begin{tabular}{@{}p{5mm}@{}|}\hfil{}` + day + `\\ \hline\end{tabular}}`
+	}
+
+	if td, ok := today.(Day); ok {
+		if d.Time.Equal(td.Time) {
+			return texx.EmphCell(day)
+		}
 	}
 
 	return hyper.Link(d.ref(), day)

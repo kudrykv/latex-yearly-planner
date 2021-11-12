@@ -9,7 +9,7 @@
   {{- range $i, $week := .Month.Weeks }}
   {{$week.WeekNumber $.Large}} &
     {{- range $j, $day := $week.Days -}}
-      {{- $day.Day $.Large -}}
+      {{- $day.Day $.Today $.Large -}}
       {{- if eq $j 6 -}}
         \\ {{ if $.Large -}} \hline {{- end -}}
       {{- else -}} & {{- end -}}

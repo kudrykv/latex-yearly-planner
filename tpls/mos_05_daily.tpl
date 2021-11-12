@@ -6,7 +6,7 @@
 {{template "schedule.tpl" dict "Cfg" .Cfg "Day" .Body.Day}}
   \vspace{\dimexpr4mm+.3pt}
 
-{{- template "monthTabularV2.tpl" dict "Month" .Body.Month -}}
+{{- template "monthTabularV2.tpl" dict "Month" .Body.Month "Today" $today -}}
 \end{minipage}%
 \hspace{\myLenTriColSep}%
 \begin{minipage}[t]{\dimexpr2\myLenTriCol+\myLenTriColSep}
