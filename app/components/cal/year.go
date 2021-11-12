@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
+	"github.com/kudrykv/latex-yearly-planner/app/tex"
 )
 
 type Years []*Year
@@ -81,7 +82,5 @@ func (y Year) SideMonths(sel ...time.Month) []header.CellItem {
 }
 
 func (y Year) HeadingMOS() string {
-	return `\begin{tabular}{@{}l}
-  \resizebox{!}{\myLenHeaderResizeBox}{\hypertarget{Calendar}{` + strconv.Itoa(y.Number) + `\myDummyQ}}
-\end{tabular}`
+	return tex.ResizeBoxW(`\myLenHeaderResizeBox`, strconv.Itoa(y.Number))
 }
