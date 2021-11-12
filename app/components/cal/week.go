@@ -3,6 +3,7 @@ package cal
 import (
 	"math"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
@@ -276,7 +277,21 @@ func (w *Week) rightYear() int {
 }
 
 func (w *Week) HeadingMOS() string {
-	return tex.Tabular("@{}l", tex.ResizeBoxW(`\myLenHeaderResizeBox`, w.Target()+`\myDummyQ`))
+	var contents []string
+
+	if w.PrevExists() {
+		leftNavBox := tex.ResizeBoxW(`\myLenHeaderResizeBox`, `$\langle$`)
+		contents = append(contents, tex.Hyperlink(w.Prev().ref(), leftNavBox))
+	}
+
+	contents = append(contents, tex.ResizeBoxW(`\myLenHeaderResizeBox`, w.Target()))
+
+	if w.NextExists() {
+		rightNavBox := tex.ResizeBoxW(`\myLenHeaderResizeBox`, `$\rangle$`)
+		contents = append(contents, tex.Hyperlink(w.Next().ref(), rightNavBox))
+	}
+
+	return tex.Tabular("@{}"+strings.Repeat("l", len(contents)), strings.Join(contents, ` & `))
 }
 
 func (w *Week) Name() string {
