@@ -82,5 +82,5 @@ func (y Year) SideMonths(sel ...time.Month) []header.CellItem {
 }
 
 func (y Year) HeadingMOS() string {
-	return tex.ResizeBoxW(`\myLenHeaderResizeBox`, strconv.Itoa(y.Number))
+	return tex.ResizeBoxW(`\myLenHeaderResizeBox`, tex.Hypertarget("Calendar", strconv.Itoa(y.Number)))
 }
