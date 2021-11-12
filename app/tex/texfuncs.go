@@ -27,3 +27,11 @@ func Tabular(format, text string) string {
 func ResizeBoxW(width, text string) string {
 	return fmt.Sprintf(`\resizebox{!}{%s}{%s}`, width, text)
 }
+
+func Multirow(rows int, text string) string {
+	return fmt.Sprintf(`\multirow{%d}{*}{%s}`, rows, text)
+}
+
+func Bold(text string) string {
+	return fmt.Sprintf(`\textbf{%s}`, text)
+}

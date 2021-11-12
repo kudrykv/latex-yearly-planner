@@ -3,10 +3,12 @@ package cal
 import (
 	"math"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
 	"github.com/kudrykv/latex-yearly-planner/app/components/hyper"
+	"github.com/kudrykv/latex-yearly-planner/app/tex"
 	"github.com/kudrykv/latex-yearly-planner/app/texx"
 )
 
@@ -35,8 +37,14 @@ func (d Day) Day(today, large interface{}) string {
 	return hyper.Link(d.ref(), day)
 }
 
-func (d Day) ref() string {
-	return d.Time.Format(time.RFC3339)
+func (d Day) ref(prefix ...string) string {
+	p := ""
+
+	if len(prefix) > 0 {
+		p = prefix[0]
+	}
+
+	return p + d.Time.Format(time.RFC3339)
 }
 
 func (d Day) Add(days int) Day {
@@ -78,17 +86,33 @@ func (d Day) LinkLeaf(prefix, leaf string) string {
 func (d Day) PrevNext(prefix string) header.Items {
 	items := header.Items{}
 
-	if d.Time.Month() > time.January || d.Time.Day() > 1 {
-		prev := d.Add(-1)
+	if d.PrevExists() {
+		prev := d.Prev()
 		items = append(items, header.NewTextItem(prev.Time.Format("Mon, 2")).RefText(prefix+prev.ref()))
 	}
 
-	if d.Time.Month() < time.December || d.Time.Day() < 31 {
-		next := d.Add(1)
+	if d.NextExists() {
+		next := d.Next()
 		items = append(items, header.NewTextItem(next.Time.Format("Mon, 2")).RefText(prefix+next.ref()))
 	}
 
 	return items
+}
+
+func (d Day) Next() Day {
+	return d.Add(1)
+}
+
+func (d Day) Prev() Day {
+	return d.Add(-1)
+}
+
+func (d Day) NextExists() bool {
+	return d.Time.Month() < time.December || d.Time.Day() < 31
+}
+
+func (d Day) PrevExists() bool {
+	return d.Time.Month() > time.January || d.Time.Day() > 1
 }
 
 func (d Day) Hours(bottom, top int) Days {
@@ -125,9 +149,28 @@ func (d Day) HeadingMOS(prefix, leaf string) string {
 		day = hyper.Link(d.ref(), day)
 	}
 
-	return hyper.Target(prefix+d.ref(), "") + `%
-\begin{tabular}{@{}l|l}
-  \multirow{2}{*}{\resizebox{!}{\myLenHeaderResizeBox}{` + day + `}} & \textbf{` + d.Time.Weekday().String() + `} \\
-  & ` + d.Time.Month().String() + `
-\end{tabular}`
+	var ll, rl string
+	var r1, r2 []string
+
+	if d.PrevExists() {
+		ll = "l"
+		leftNavBox := tex.ResizeBoxW(`\myLenHeaderResizeBox`, `$\langle$`)
+		r1 = append(r1, tex.Multirow(2, tex.Hyperlink(d.Prev().ref(prefix), leftNavBox)))
+		r2 = append(r2, "")
+	}
+
+	r1 = append(r1, tex.Multirow(2, tex.ResizeBoxW(`\myLenHeaderResizeBox`, day)))
+	r2 = append(r2, "")
+	r1 = append(r1, tex.Bold(d.Time.Weekday().String()))
+	r2 = append(r2, d.Time.Month().String())
+
+	if d.NextExists() {
+		rl = "l"
+		rightNavBox := tex.ResizeBoxW(`\myLenHeaderResizeBox`, `$\rangle$`)
+		r1 = append(r1, tex.Multirow(2, tex.Hyperlink(d.Next().ref(prefix), rightNavBox)))
+		r2 = append(r2, "")
+	}
+
+	contents := strings.Join(r1, ` & `) + `\\` + "\n" + strings.Join(r2, ` & `)
+	return tex.Hypertarget(prefix+d.ref(), "") + tex.Tabular("@{}"+ll+"l|l"+rl, contents)
 }
