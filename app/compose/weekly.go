@@ -22,7 +22,7 @@ func Weekly(cfg config.Config, tpls []string) (page.Modules, error) {
 				"SideQuarters": year.SideQuarters(week.Quarters.Numbers()...),
 				"SideMonths":   year.SideMonths(week.Months.Months()...),
 				"Extra":        week.PrevNext(),
-				"Extra2":       extra2(false, false, nil),
+				"Extra2":       extra2(false, false, nil, 0),
 			},
 		})
 	}

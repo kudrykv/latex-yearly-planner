@@ -6,6 +6,7 @@ import (
 
 	"github.com/kudrykv/latex-yearly-planner/app/components/header"
 	"github.com/kudrykv/latex-yearly-planner/app/components/hyper"
+	"github.com/kudrykv/latex-yearly-planner/app/tex"
 )
 
 type Notes []*Note
@@ -31,16 +32,30 @@ func (p Notes) Breadcrumb(year, idx int) string {
 	}.Table(true)
 }
 
-func (p Notes) HeadingMOS(page int) string {
-	suffix := ""
+func (p Notes) HeadingMOS(page, pages int) string {
+	var out string
+
+	if page > 1 {
+		out += tex.Hyperlink(p.ref(page-1), tex.ResizeBoxW(`\myLenHeaderResizeBox`, `$\langle$`)) + " "
+	}
+
+	out += tex.Hypertarget(p.ref(page), "") + tex.ResizeBoxW(`\myLenHeaderResizeBox`, `Index Notes`)
+
+	if page < pages {
+		out += " " + tex.Hyperlink(p.ref(page+1), tex.ResizeBoxW(`\myLenHeaderResizeBox`, `$\rangle$`))
+	}
+
+	return out
+}
+
+func (p Notes) ref(page int) string {
+	var suffix string
 
 	if page > 1 {
 		suffix = " " + strconv.Itoa(page)
 	}
 
-	return `\begin{tabular}{@{}l}` +
-		hyper.Target("Notes Index"+suffix, "") + `\resizebox{!}{\myLenHeaderResizeBox}{Index Notes\myDummyQ}
-\end{tabular}`
+	return "Notes Index" + suffix
 }
 
 func (n Note) HyperLink() string {
@@ -71,11 +86,10 @@ func (n Note) PrevNext() header.Items {
 	return items
 }
 
-func (n Note) HeadingMOS() string {
+func (n Note) HeadingMOS(page int) string {
 	num := strconv.Itoa(n.Number)
-	return `\begin{tabular}{@{}l}` +
-		hyper.Target(n.ref(), "") + `\resizebox{!}{\myLenHeaderResizeBox}{Note ` + num + `\myDummyQ}
-\end{tabular}`
+
+	return tex.Hypertarget(n.ref(), "") + tex.ResizeBoxW(`\myLenHeaderResizeBox`, `Note `+num+`\myDummyQ`)
 }
 
 func (n Note) ref() string {

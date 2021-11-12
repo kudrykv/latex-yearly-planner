@@ -19,16 +19,16 @@ func NotesIndexed(cfg config.Config, tpls []string) (page.Modules, error) {
 			Body: map[string]interface{}{
 				"Notes":        indexPage,
 				"Breadcrumb":   indexPage.Breadcrumb(cfg.Year, idx),
-				"HeadingMOS":   indexPage.HeadingMOS(idx + 1),
+				"HeadingMOS":   indexPage.HeadingMOS(idx+1, len(index.Pages)),
 				"SideQuarters": year.SideQuarters(0),
 				"SideMonths":   year.SideMonths(0),
 				"Extra":        index.PrevNext(idx),
-				"Extra2":       extra2(false, true, nil),
+				"Extra2":       extra2(false, true, nil, 0),
 			},
 		})
 	}
 
-	for _, notes := range index.Pages {
+	for idxPage, notes := range index.Pages {
 		for _, nt := range notes {
 			modules = append(modules, page.Module{
 				Cfg: cfg,
@@ -36,11 +36,11 @@ func NotesIndexed(cfg config.Config, tpls []string) (page.Modules, error) {
 				Body: map[string]interface{}{
 					"Note":         nt,
 					"Breadcrumb":   nt.Breadcrumb(),
-					"HeadingMOS":   nt.HeadingMOS(),
+					"HeadingMOS":   nt.HeadingMOS(idxPage),
 					"SideQuarters": year.SideQuarters(0),
 					"SideMonths":   year.SideMonths(0),
 					"Extra":        nt.PrevNext(),
-					"Extra2":       extra2(false, false, nil),
+					"Extra2":       extra2(false, false, nil, idxPage+1),
 				},
 			})
 		}
