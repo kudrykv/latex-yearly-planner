@@ -149,12 +149,14 @@ func (d Day) HeadingMOS(prefix, leaf string) string {
 		day = hyper.Link(d.ref(), day)
 	}
 
+	anglesize := `\dimexpr\myLenHeaderResizeBox-0.86pt`
+
 	var ll, rl string
 	var r1, r2 []string
 
 	if d.PrevExists() {
 		ll = "l"
-		leftNavBox := tex.ResizeBoxW(`\myLenHeaderResizeBox`, `$\langle$`)
+		leftNavBox := tex.ResizeBoxW(anglesize, `$\langle$`)
 		r1 = append(r1, tex.Multirow(2, tex.Hyperlink(d.Prev().ref(prefix), leftNavBox)))
 		r2 = append(r2, "")
 	}
@@ -166,7 +168,7 @@ func (d Day) HeadingMOS(prefix, leaf string) string {
 
 	if d.NextExists() {
 		rl = "l"
-		rightNavBox := tex.ResizeBoxW(`\myLenHeaderResizeBox`, `$\rangle$`)
+		rightNavBox := tex.ResizeBoxW(anglesize, `$\rangle$`)
 		r1 = append(r1, tex.Multirow(2, tex.Hyperlink(d.Next().ref(prefix), rightNavBox)))
 		r2 = append(r2, "")
 	}

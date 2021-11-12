@@ -7,49 +7,49 @@ pages:
 
   - name: annual
     renderblocks:
-      - funcname: annualV2
+      - funcname: annual
         tpls:
           - breadcrumb_01_annual.tpl
 
   - name: quarterly
     renderblocks:
-      - funcname: quarterlyV2
+      - funcname: quarterly
         tpls:
           - breadcrumb_02_quarterly.tpl
 
   - name: monthly
     renderblocks:
-      - funcname: monthlyV2
+      - funcname: monthly
         tpls:
           - breadcrumb_03_monthly.tpl
 
   - name: weekly
     renderblocks:
-      - funcname: weeklyV2
+      - funcname: weekly
         tpls:
           - breadcrumb_04_weekly.tpl
 
   - name: daily
     renderblocks:
-      - funcname: dailyV2
+      - funcname: daily
         tpls:
           - breadcrumb_05_daily.tpl
 
   - name: daily_reflect
     renderblocks:
-      - funcname: daily_reflectV2
+      - funcname: daily_reflect
         tpls:
           - breadcrumb_06_daily_reflect.tpl
 
   - name: daily_notes
     renderblocks:
-      - funcname: daily_notesV2
+      - funcname: daily_notes
         tpls:
           - breadcrumb_07_daily_notes.tpl
 
   - name: notes_indexed
     renderblocks:
-      - funcname: notes_indexedV2
+      - funcname: notes_indexed
         tpls:
           - breadcrumb_08_notes_index.tpl
           - breadcrumb_09_notes.tpl

@@ -122,13 +122,13 @@ func RootFilename(pathconfig string) string {
 type Composer func(cfg config.Config, tpls []string) (page.Modules, error)
 
 var ComposerMap = map[string]Composer{
-	"title":           compose.Title,
-	"annualV2":        compose.AnnualV2,
-	"quarterlyV2":     compose.QuarterlyV2,
-	"monthlyV2":       compose.MonthlyV2,
-	"weeklyV2":        compose.WeeklyV2,
-	"dailyV2":         compose.DailyV2,
-	"daily_reflectV2": compose.DailyReflectV2,
-	"daily_notesV2":   compose.DailyNotesV2,
-	"notes_indexedV2": compose.NotesIndexedV2,
+	"title":         compose.Title,
+	"annual":        compose.AnnualV2,
+	"quarterly":     compose.QuarterlyV2,
+	"monthly":       compose.MonthlyV2,
+	"weekly":        compose.WeeklyV2,
+	"daily":         compose.DailyV2,
+	"daily_reflect": compose.DailyReflectV2,
+	"daily_notes":   compose.DailyNotesV2,
+	"notes_indexed": compose.NotesIndexedV2,
 }
