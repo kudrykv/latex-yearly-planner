@@ -1,6 +1,6 @@
 weekstart: 1
 ampmtime: false
-dotted: false
+dotted: true
 
 layout:
   paper:
