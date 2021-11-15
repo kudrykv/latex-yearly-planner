@@ -15,6 +15,7 @@ type Config struct {
 
 	Year                int `env:"PLANNER_YEAR"`
 	WeekStart           time.Weekday
+	Dotted              bool
 	ClearTopRightCorner bool
 	AMPMTime            bool
 

@@ -65,3 +65,17 @@
 
 \newcommand{\myTodo}{\myLineHeightButLine$\square$\myLinePlain}
 \newcommand{\myTodoLineGray}{\myLineHeightButLine$\square$\myLineGray}
+
+\newcommand{\myDotGrid}[2]{\vbox to 0pt{\leavevmode\multido{\dC=0mm+5mm}{#1}{\multido{\dR=0mm+5mm}{#2}{\put(\dR,\dC){\circle*{0.1}}}}}}
+
+\newcommand{\myMash}[2]{
+  {{- if $.Cfg.Dotted -}} \myDotGrid{#1}{#2} {{- else -}} \Repeat{#1}{\myLineGrayVskipBottom} {{- end -}}
+}
+
+\newcommand{\remainingHeight}{%
+  \ifdim\pagegoal=\maxdimen
+  \dimexpr\textheight-9.4pt\relax
+  \else
+  \dimexpr\pagegoal-\pagetotal-\lineskip-9.4pt\relax
+  \fi%
+}

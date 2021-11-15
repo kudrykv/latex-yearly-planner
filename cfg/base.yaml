@@ -1,5 +1,6 @@
 weekstart: 1
 ampmtime: false
+dotted: true
 
 layout:
   paper:
@@ -18,7 +19,7 @@ layout:
 
   numbers:
     arraystretch: 1.5
-    quarterlylines: 12
+    quarterlylines: 36
     weeklylines: 11
     dailytodos: 15
     dailynotes: 18
