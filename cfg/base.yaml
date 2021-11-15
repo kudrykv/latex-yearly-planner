@@ -21,18 +21,21 @@ layout:
     arraystretch: 1.5
     quarterlylines: 36
     weeklylines: 11
-    dailytodos: 15
-    dailynotes: 18
+    dailytodos: 10
+    dailynotes: 23
     dailypersonal: 6
     dailybottomhour: 6
     dailytophour: 22
     dailydiarygoals: 10
-    dailydiarygrateful: 10
-    dailydiarybest: 11
-    dailydiarylog: 35
+    dailydiarygrateful: 3
+    dailydiarybest: 3
+    dailydiarylog: 26
     todolinesintodopage: 10
     notesindexpages: 3
     notesonpage: 35
+    dotheightfull: 36
+    dotwidthfull: 30
+    dotwidthtwothirds: 20
 
   lengths:
     tabcolsep: 3.5pt
@@ -41,6 +44,7 @@ layout:
     lineheightbutline: \dimexpr5mm-.4pt
     twocolsep: 5pt
     tricolsep: 5pt
+    fivecolsep: 5pt
     monthlycellheight: 55pt
     notesindexcellheight: 1.37cm
     headerresizebox: 6mm
