@@ -15,8 +15,10 @@ layout:
     dailynotes: 18
     dailypersonal: 8
     dotwidthtwothirds: 19
+    dotwidthfull: 29
 
   lengths:
     headersidequarterswidth: 4cm
     headersidemonthswidth: 14.35cm
     quarterlyspring: \myDummyQ
+    monthlyspring: \vskip.5mm

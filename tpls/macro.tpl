@@ -57,6 +57,7 @@
 \setlength{\myLenHeaderSideMonthsWidth}{ {{- $lengths.HeaderSideMonthsWidth -}} }
 
 \newcommand{\myQuarterlySpring}{ {{- $lengths.QuarterlySpring -}} }
+\newcommand{\myMonthlySpring}{ {{- $lengths.MonthlySpring -}} }
 \newcommand{\myColorGray}{ {{- .Cfg.Layout.Colors.Gray -}} }
 \newcommand{\myColorLightGray}{ {{- .Cfg.Layout.Colors.LightGray -}} }
 
