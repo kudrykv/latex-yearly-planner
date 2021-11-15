@@ -9,6 +9,7 @@ layout:
       left: 1cm
 
   numbers:
+    weeklylines: 10
     dailybottomhour: 9
     dailytophour: 20
     dailytodos: 5
