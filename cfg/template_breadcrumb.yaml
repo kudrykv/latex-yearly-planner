@@ -1,0 +1,55 @@
+pages:
+  - name: title
+    renderblocks:
+      - funcname: title
+        tpls:
+          - title.tpl
+
+  - name: annual
+    renderblocks:
+      - funcname: annual
+        tpls:
+          - breadcrumb_01_annual.tpl
+
+  - name: quarterly
+    renderblocks:
+      - funcname: quarterly
+        tpls:
+          - breadcrumb_02_quarterly.tpl
+
+  - name: monthly
+    renderblocks:
+      - funcname: monthly
+        tpls:
+          - breadcrumb_03_monthly.tpl
+
+  - name: weekly
+    renderblocks:
+      - funcname: weekly
+        tpls:
+          - breadcrumb_04_weekly.tpl
+
+  - name: daily
+    renderblocks:
+      - funcname: daily
+        tpls:
+          - breadcrumb_05_daily.tpl
+
+  - name: daily_reflect
+    renderblocks:
+      - funcname: daily_reflect
+        tpls:
+          - breadcrumb_06_daily_reflect.tpl
+
+  - name: daily_notes
+    renderblocks:
+      - funcname: daily_notes
+        tpls:
+          - breadcrumb_07_daily_notes.tpl
+
+  - name: notes_indexed
+    renderblocks:
+      - funcname: notes_indexed
+        tpls:
+          - breadcrumb_08_notes_index.tpl
+          - breadcrumb_09_notes.tpl

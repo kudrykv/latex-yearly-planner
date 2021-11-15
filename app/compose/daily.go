@@ -1,47 +1,50 @@
 package compose
 
 import (
-	"fmt"
-	"time"
-
-	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
+	"github.com/kudrykv/latex-yearly-planner/app/components/cal"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
-func Daily(cfg config.Config, tpls []string) (page.Modules, error) {
-	if len(tpls) != 1 {
-		return nil, fmt.Errorf("exppected one tpl, got %d %v", len(tpls), tpls)
+var Daily = DailyStuff("", "")
+var DailyReflect = DailyStuff("Reflect", "Reflect")
+var DailyNotes = DailyStuff("More", "Notes")
+
+func DailyStuff(prefix, leaf string) func(cfg config.Config, tpls []string) (page.Modules, error) {
+	return func(cfg config.Config, tpls []string) (page.Modules, error) {
+		year := cal.NewYear(cfg.WeekStart, cfg.Year)
+		modules := make(page.Modules, 0, 366)
+
+		for _, quarter := range year.Quarters {
+			for _, month := range quarter.Months {
+				for _, week := range month.Weeks {
+					for _, day := range week.Days {
+						if day.Time.IsZero() {
+							continue
+						}
+
+						modules = append(modules, page.Module{
+							Cfg: cfg,
+							Tpl: tpls[0],
+							Body: map[string]interface{}{
+								"Year":         year,
+								"Quarter":      quarter,
+								"Month":        month,
+								"Week":         week,
+								"Day":          day,
+								"Breadcrumb":   day.Breadcrumb(prefix, leaf, cfg.ClearTopRightCorner && len(leaf) > 0),
+								"HeadingMOS":   day.HeadingMOS(prefix, leaf),
+								"SideQuarters": year.SideQuarters(day.Quarter()),
+								"SideMonths":   year.SideMonths(day.Month()),
+								"Extra":        day.PrevNext(prefix).WithTopRightCorner(cfg.ClearTopRightCorner),
+								"Extra2":       extra2(cfg.ClearTopRightCorner, false, false, week, 0),
+							},
+						})
+					}
+				}
+			}
+		}
+
+		return modules, nil
 	}
-
-	modules := make(page.Modules, 0, 366)
-	day := calendar.DayTime{Time: time.Date(cfg.Year, time.January, 1, 0, 0, 0, 0, time.Local)}
-
-	for day.Year() == cfg.Year {
-		modules = append(modules, page.Module{
-			Cfg: cfg,
-			Tpl: tpls[0],
-			Body: map[string]interface{}{
-				"Day":   day,
-				"Hours": Hours(cfg.Layout.Numbers.DailyBottomHour, cfg.Layout.Numbers.DailyTopHour),
-			},
-		})
-
-		day = day.AddDate(0, 0, 1)
-	}
-
-	return modules, nil
-}
-
-func Hours(from, to int) []calendar.DayTime {
-	moment := time.Date(1, 1, 1, from, 0, 0, 0, time.Local)
-
-	out := make([]calendar.DayTime, 0, to-from+1)
-
-	for i := from; i <= to; i++ {
-		out = append(out, calendar.DayTime{Time: moment})
-		moment = moment.Add(time.Hour)
-	}
-
-	return out
 }

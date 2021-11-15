@@ -81,6 +81,8 @@ type Numbers struct {
 	DailyDiaryLog       int
 	TodoLinesInTodoPage int
 	IndexMeetingNotes   int
+	NotesIndexPages     int
+	NotesOnPage         int
 }
 
 type Paper struct {

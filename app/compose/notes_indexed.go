@@ -1,40 +1,50 @@
 package compose
 
 import (
-	"fmt"
-
+	"github.com/kudrykv/latex-yearly-planner/app/components/cal"
+	"github.com/kudrykv/latex-yearly-planner/app/components/note"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
 func NotesIndexed(cfg config.Config, tpls []string) (page.Modules, error) {
-	if len(tpls) != 2 {
-		return nil, fmt.Errorf("exppected two tpls, got %d %v", len(tpls), tpls)
+	index := note.NewIndex(cfg.Year, cfg.Layout.Numbers.NotesOnPage, cfg.Layout.Numbers.NotesIndexPages)
+	year := cal.NewYear(cfg.WeekStart, cfg.Year)
+	modules := make(page.Modules, 0, 1)
+
+	for idx, indexPage := range index.Pages {
+		modules = append(modules, page.Module{
+			Cfg: cfg,
+			Tpl: tpls[0],
+			Body: map[string]interface{}{
+				"Notes":        indexPage,
+				"Breadcrumb":   indexPage.Breadcrumb(cfg.Year, idx),
+				"HeadingMOS":   indexPage.HeadingMOS(idx+1, len(index.Pages)),
+				"SideQuarters": year.SideQuarters(0),
+				"SideMonths":   year.SideMonths(0),
+				"Extra":        index.PrevNext(idx),
+				"Extra2":       extra2(cfg.ClearTopRightCorner, false, true, nil, 0),
+			},
+		})
 	}
 
-	modules := make(page.Modules, 0, 101)
-
-	modules = append(modules, notesIndexPage(cfg, tpls[0]))
-
-	for i := 1; i <= 100; i++ {
-		modules = append(modules, page.Module{Cfg: cfg, Tpl: tpls[1]})
+	for idxPage, notes := range index.Pages {
+		for _, nt := range notes {
+			modules = append(modules, page.Module{
+				Cfg: cfg,
+				Tpl: tpls[1],
+				Body: map[string]interface{}{
+					"Note":         nt,
+					"Breadcrumb":   nt.Breadcrumb(),
+					"HeadingMOS":   nt.HeadingMOS(idxPage),
+					"SideQuarters": year.SideQuarters(0),
+					"SideMonths":   year.SideMonths(0),
+					"Extra":        nt.PrevNext().WithTopRightCorner(cfg.ClearTopRightCorner),
+					"Extra2":       extra2(cfg.ClearTopRightCorner, false, false, nil, idxPage+1),
+				},
+			})
+		}
 	}
 
 	return modules, nil
-}
-
-func notesIndexPage(cfg config.Config, tpl string) page.Module {
-	notesMatrix := make([][]int, 0, 10)
-
-	for i := 1; i <= 10; i++ {
-		notesRow := make([]int, 0, 10)
-
-		for j := 1; j <= 10; j++ {
-			notesRow = append(notesRow, (i-1)*10+j)
-		}
-
-		notesMatrix = append(notesMatrix, notesRow)
-	}
-
-	return page.Module{Cfg: cfg, Tpl: tpl, Body: notesMatrix}
 }

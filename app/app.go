@@ -11,7 +11,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/compose"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
-	"github.com/kudrykv/latex-yearly-planner/app/tex"
+	"github.com/kudrykv/latex-yearly-planner/app/tpls"
 	"github.com/urfave/cli/v2"
 )
 
@@ -49,7 +49,7 @@ func action(c *cli.Context) error {
 
 	wr := &bytes.Buffer{}
 
-	t := tex.New()
+	t := tpls.New()
 
 	if err = t.Document(wr, cfg); err != nil {
 		return fmt.Errorf("tex document: %w", err)
@@ -90,7 +90,7 @@ func action(c *cli.Context) error {
 		for i := 0; i < allLen; i++ {
 			for j, mod := range mom {
 				if err = t.Execute(wr, mod[i].Tpl, mod[i]); err != nil {
-					return fmt.Errorf("execute %s on %s: %w", file.RenderBlocks[j].FuncName, file.RenderBlocks[j].Tpls[i], err)
+					return fmt.Errorf("execute %s on %s: %w", file.RenderBlocks[j].FuncName, mod[i].Tpl, err)
 				}
 			}
 		}
@@ -122,35 +122,13 @@ func RootFilename(pathconfig string) string {
 type Composer func(cfg config.Config, tpls []string) (page.Modules, error)
 
 var ComposerMap = map[string]Composer{
-	"title":                    compose.Title,
-	"annual":                   compose.Annual,
-	"quarterly":                compose.Quarterly,
-	"monthly":                  compose.Monthly,
-	"weekly":                   compose.Weekly,
-	"daily":                    compose.Daily,
-	"daily2":                   compose.DailyWMonth,
-	"daily_reflect":            compose.DailyReflect,
-	"daily_notes":              compose.DailyNotes,
-	"notes_indexed":            compose.NotesIndexed,
-	"todos_indexed":            compose.TodosIndexed,
-	"meetings_indexed":         compose.MeetingsIndexed,
-	"header_annual":            compose.HeaderAnnual,
-	"header_annual2":           compose.HeaderAnnual2,
-	"header_quarterly":         compose.HeaderQuarterly,
-	"header_quarterly2":        compose.HeaderQuarterly2,
-	"header_monthly":           compose.HeaderMonthly,
-	"header_monthly2":          compose.HeaderMonthly2,
-	"header_weekly":            compose.HeaderWeekly,
-	"header_weekly2":           compose.HeaderWeekly2,
-	"header_daily":             compose.HeaderDaily,
-	"header_daily2":            compose.HeaderDaily2,
-	"header_daily_notes":       compose.HeaderDailyNotes,
-	"header_daily_notes2":      compose.HeaderDailyNotes2,
-	"header_daily_reflect":     compose.HeaderDailyReflect,
-	"header_daily_reflect2":    compose.HeaderDailyReflect2,
-	"header_notes_indexed":     compose.HeaderNotesIndexed,
-	"header_notes_indexed2":    compose.HeaderNotesIndexed2,
-	"header_todos_indexed":     compose.HeaderTodosIndexed,
-	"header_todos_indexed2":    compose.HeaderTodosIndexed2,
-	"header_meetings_indexed2": compose.HeaderMeetingsIndexed2,
+	"title":         compose.Title,
+	"annual":        compose.Annual,
+	"quarterly":     compose.Quarterly,
+	"monthly":       compose.Monthly,
+	"weekly":        compose.Weekly,
+	"daily":         compose.Daily,
+	"daily_reflect": compose.DailyReflect,
+	"daily_notes":   compose.DailyNotes,
+	"notes_indexed": compose.NotesIndexed,
 }

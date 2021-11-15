@@ -14,3 +14,7 @@ layout:
       bottom: 0.7cm
       left: 1.4cm
       right: 0.3cm
+
+  numbers:
+    notesindexpages: 3
+    notesonpage: 38

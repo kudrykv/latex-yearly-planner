@@ -1,27 +1,33 @@
 package compose
 
 import (
-	"fmt"
-	"time"
-
-	"github.com/kudrykv/latex-yearly-planner/app/components/calendar"
+	"github.com/kudrykv/latex-yearly-planner/app/components/cal"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
 
 func Monthly(cfg config.Config, tpls []string) (page.Modules, error) {
-	if len(tpls) != 1 {
-		return nil, fmt.Errorf("exppected one tpl, got %d %v", len(tpls), tpls)
-	}
-
+	year := cal.NewYear(cfg.WeekStart, cfg.Year)
 	modules := make(page.Modules, 0, 12)
 
-	for month := time.January; month <= time.December; month++ {
-		modules = append(modules, page.Module{
-			Cfg:  cfg,
-			Tpl:  tpls[0],
-			Body: calendar.NewYearMonth(cfg.Year, month).Calendar(cfg.WeekStart),
-		})
+	for _, quarter := range year.Quarters {
+		for _, month := range quarter.Months {
+			modules = append(modules, page.Module{
+				Cfg: cfg,
+				Tpl: tpls[0],
+				Body: map[string]interface{}{
+					"Year":         year,
+					"Quarter":      quarter,
+					"Month":        month,
+					"Breadcrumb":   month.Breadcrumb(),
+					"HeadingMOS":   month.HeadingMOS(),
+					"SideQuarters": year.SideQuarters(quarter.Number),
+					"SideMonths":   year.SideMonths(month.Month),
+					"Extra":        month.PrevNext().WithTopRightCorner(cfg.ClearTopRightCorner),
+					"Extra2":       extra2(cfg.ClearTopRightCorner, false, false, nil, 0),
+				},
+			})
+		}
 	}
 
 	return modules, nil
