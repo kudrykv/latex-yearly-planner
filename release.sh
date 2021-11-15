@@ -20,6 +20,9 @@ _configurations=(
 
   1 "cfg/base.yaml,cfg/rm2.base.yaml,cfg/template_breadcrumb.yaml,cfg/rm2.breadcrumb.default.yaml" "rm2.breadcrumb.default"
   2 "cfg/base.yaml,cfg/rm2.base.yaml,cfg/template_months_on_side.yaml,cfg/rm2.mos.default.yaml"    "rm2.mos.default"
+
+  1 "cfg/base.yaml,cfg/rm2_ddvk.base.yaml,cfg/template_breadcrumb.yaml,cfg/rm2.breadcrumb.default.yaml" "rm2_ddvk.breadcrumb.default"
+  2 "cfg/base.yaml,cfg/rm2_ddvk.base.yaml,cfg/template_months_on_side.yaml,cfg/rm2.mos.default.yaml"    "rm2_ddvk.mos.default"
 )
 
 _configurations_len=${#_configurations[@]}
