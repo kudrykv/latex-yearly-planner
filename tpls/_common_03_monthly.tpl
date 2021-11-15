@@ -4,7 +4,7 @@
 {{ if $.Cfg.Dotted -}}
 \myUnderline{Notes}
 \myLineHeightButLine
-\myMash{20}{30}
+\vbox to 0pt{\myMash{20}{30}}
 {{- else -}}
 \parbox{\myLenTwoCol}{
   \myUnderline{Notes}

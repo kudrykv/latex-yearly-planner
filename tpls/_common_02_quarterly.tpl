@@ -7,5 +7,5 @@
 \end{minipage}%
 \hspace{\myLenTriColSep}
 \begin{minipage}[t][\remainingHeight]{\dimexpr2\myLenTriCol+\myLenTriColSep}
-  \myMash{\myNumQuarterlyLines}{20}
+  \vbox to 0pt{\myMash{\myNumQuarterlyLines}{20}}
 \end{minipage}

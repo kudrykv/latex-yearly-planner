@@ -7,27 +7,23 @@
 {{- $day6 := index $days 5 -}}
 {{- $day7 := index $days 6 -}}
 
-\begin{minipage}[t][60mm]{\linewidth}
-  \parbox{\myLenTriCol}{\myUnderline{ {{- $day1.WeekLink -}} }}%
-  \hspace{\myLenTriColSep}%
-  \parbox{\myLenTriCol}{\myUnderline{ {{- $day2.WeekLink -}} }}%
-  \hspace{\myLenTriColSep}%
-  \parbox{\myLenTriCol}{\myUnderline{ {{- $day3.WeekLink -}} }}
-  \par\myMash{\myNumWeeklyLines}{30}
-\end{minipage}
+\parbox{\myLenTriCol}{\myUnderline{ {{- $day1.WeekLink -}} }}%
+\hspace{\myLenTriColSep}%
+\parbox{\myLenTriCol}{\myUnderline{ {{- $day2.WeekLink -}} }}%
+\hspace{\myLenTriColSep}%
+\parbox{\myLenTriCol}{\myUnderline{ {{- $day3.WeekLink -}} }}
+\vskip\myLenLineHeightButLine\par\myMash{\myNumWeeklyLines}{30}
+\vfill
 
-\begin{minipage}[t][60mm]{\linewidth}
-  \parbox{\myLenTriCol}{\myUnderline{ {{- $day4.WeekLink -}} }}%
-  \hspace{\myLenTriColSep}%
-  \parbox{\myLenTriCol}{\myUnderline{ {{- $day5.WeekLink -}} }}%
-  \hspace{\myLenTriColSep}%
-  \parbox{\myLenTriCol}{\myUnderline{ {{- $day6.WeekLink -}} }}
-  \par\myMash{\myNumWeeklyLines}{30}
-\end{minipage}
+\parbox{\myLenTriCol}{\myUnderline{ {{- $day4.WeekLink -}} }}%
+\hspace{\myLenTriColSep}%
+\parbox{\myLenTriCol}{\myUnderline{ {{- $day5.WeekLink -}} }}%
+\hspace{\myLenTriColSep}%
+\parbox{\myLenTriCol}{\myUnderline{ {{- $day6.WeekLink -}} }}
+\vskip\myLenLineHeightButLine\par\myMash{\myNumWeeklyLines}{30}
+\vfill
 
-\begin{minipage}[t][60mm]{\linewidth}
-  \parbox{\myLenTriCol}{ \myUnderline{ {{- $day7.WeekLink -}} }}%
-  \hspace{\myLenTriColSep}%
-  \parbox{\dimexpr2\myLenTriCol+\myLenTriColSep}{\myUnderline{Notes\myDummyQ}}
-  \par\myMash{\myNumWeeklyLines}{30}
-\end{minipage}
+\parbox{\myLenTriCol}{ \myUnderline{ {{- $day7.WeekLink -}} }}%
+\hspace{\myLenTriColSep}%
+\parbox{\dimexpr2\myLenTriCol+\myLenTriColSep}{\myUnderline{Notes\myDummyQ}}
+\vskip\myLenLineHeightButLine\par\myMash{\myNumWeeklyLines}{30}

@@ -7,6 +7,7 @@ type Lengths struct {
 	LineHeightButLine       string
 	TwoColSep               string
 	TriColSep               string
+	FiveColSep              string
 	MonthlyCellHeight       string
 	NotesIndexCellHeight    string
 	HeaderResizeBox         string
