@@ -1,13 +1,6 @@
 {{- .Body.HeadingMOS -}}
 {}\hfill%
-{\renewcommand{\arraystretch}{\myNumArrayStretch}%
-  \begin{tabular}{*{ {{- len .Body.Extra2 -}} }{c|}@{}{{if .Cfg.ClearTopRightCorner}}c@{}{{end}}}
-  {{range $i, $cell := .Body.Extra2}}
-  {{$cell.Display}} {{ if not (eq (incr $i) (len $.Body.Extra2)) }}
-    & {{end}}
-    {{end}}
-    {{- if .Cfg.ClearTopRightCorner}}& \hspace{7mm}{{end}}
-  \end{tabular}}%
+{\renewcommand{\arraystretch}{\myNumArrayStretch} {{ .Body.Extra2.Table false }} }%
 \medskip%
 \myLineThick%
 \marginnote{%

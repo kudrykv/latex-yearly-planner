@@ -23,8 +23,8 @@ func Monthly(cfg config.Config, tpls []string) (page.Modules, error) {
 					"HeadingMOS":   month.HeadingMOS(),
 					"SideQuarters": year.SideQuarters(quarter.Number),
 					"SideMonths":   year.SideMonths(month.Month),
-					"Extra":        month.PrevNext(),
-					"Extra2":       extra2(false, false, nil, 0),
+					"Extra":        month.PrevNext().WithTopRightCorner(cfg.ClearTopRightCorner),
+					"Extra2":       extra2(cfg.ClearTopRightCorner, false, false, nil, 0),
 				},
 			})
 		}

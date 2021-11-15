@@ -23,7 +23,7 @@ func NotesIndexed(cfg config.Config, tpls []string) (page.Modules, error) {
 				"SideQuarters": year.SideQuarters(0),
 				"SideMonths":   year.SideMonths(0),
 				"Extra":        index.PrevNext(idx),
-				"Extra2":       extra2(false, true, nil, 0),
+				"Extra2":       extra2(cfg.ClearTopRightCorner, false, true, nil, 0),
 			},
 		})
 	}
@@ -39,8 +39,8 @@ func NotesIndexed(cfg config.Config, tpls []string) (page.Modules, error) {
 					"HeadingMOS":   nt.HeadingMOS(idxPage),
 					"SideQuarters": year.SideQuarters(0),
 					"SideMonths":   year.SideMonths(0),
-					"Extra":        nt.PrevNext(),
-					"Extra2":       extra2(false, false, nil, idxPage+1),
+					"Extra":        nt.PrevNext().WithTopRightCorner(cfg.ClearTopRightCorner),
+					"Extra2":       extra2(cfg.ClearTopRightCorner, false, false, nil, idxPage+1),
 				},
 			})
 		}

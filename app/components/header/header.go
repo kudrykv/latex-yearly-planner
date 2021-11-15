@@ -18,6 +18,14 @@ type Item interface {
 	Display() string
 }
 
+func (i Items) WithTopRightCorner(flag bool) Items {
+	if !flag {
+		return i
+	}
+
+	return append(i, NewPlainItem(`\kern 5mm`))
+}
+
 func (i Items) Length() int {
 	return len(i)
 }
