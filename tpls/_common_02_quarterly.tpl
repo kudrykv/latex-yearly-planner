@@ -5,8 +5,8 @@
 {{- if ne $j 2 -}} \vfill {{- end -}}
 {{- end -}}
 \end{minipage}%
-\hspace{\myLenTriColSep}
+\hspace{\myLenTriColSep}%
 \begin{minipage}[t][\remainingHeight]{\dimexpr2\myLenTriCol+\myLenTriColSep}
   \vskip-\myLenLineHeightButLine
-  \vbox to 0pt{\myMash{\myNumQuarterlyLines}{\myNumDotWidthTwoThirds}}
+  \vbox to 0pt{\myMash[\myQuarterlySpring]{\myNumQuarterlyLines}{\myNumDotWidthTwoThirds}}
 \end{minipage}

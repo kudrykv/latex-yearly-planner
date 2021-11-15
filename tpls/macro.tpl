@@ -56,6 +56,7 @@
 \setlength{\myLenHeaderSideQuartersWidth}{ {{- $lengths.HeaderSideQuartersWidth -}} }
 \setlength{\myLenHeaderSideMonthsWidth}{ {{- $lengths.HeaderSideMonthsWidth -}} }
 
+\newcommand{\myQuarterlySpring}{ {{- $lengths.QuarterlySpring -}} }
 \newcommand{\myColorGray}{ {{- .Cfg.Layout.Colors.Gray -}} }
 \newcommand{\myColorLightGray}{ {{- .Cfg.Layout.Colors.LightGray -}} }
 
@@ -75,8 +76,8 @@
 
 \newcommand{\myDotGrid}[2]{\leavevmode\multido{\dC=0mm+5mm}{#1}{\multido{\dR=0mm+5mm}{#2}{\put(\dR,\dC){\circle*{0.1}}}}}
 
-\newcommand{\myMash}[2]{
-  {{- if $.Cfg.Dotted -}} \vskip\myLenLineHeightButLine\myDotGrid{#1}{#2} {{- else -}} \Repeat{#1}{\myLineGrayVskipTop} {{- end -}}
+\newcommand{\myMash}[3][]{
+  {{- if $.Cfg.Dotted -}} \vskip\myLenLineHeightButLine#1\myDotGrid{#2}{#3} {{- else -}} \Repeat{#2}{\myLineGrayVskipTop} {{- end -}}
 }
 
 \newcommand{\remainingHeight}{%
