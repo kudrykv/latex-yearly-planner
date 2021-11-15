@@ -76,7 +76,7 @@
 \newcommand{\myDotGrid}[2]{\leavevmode\multido{\dC=0mm+5mm}{#1}{\multido{\dR=0mm+5mm}{#2}{\put(\dR,\dC){\circle*{0.1}}}}}
 
 \newcommand{\myMash}[2]{
-  \vskip\myLenLineHeightButLine{{- if $.Cfg.Dotted -}} \myDotGrid{#1}{#2} {{- else -}} \Repeat{#1}{\myLineGrayVskipTop} {{- end -}}
+  {{- if $.Cfg.Dotted -}} \vskip\myLenLineHeightButLine\myDotGrid{#1}{#2} {{- else -}} \Repeat{#1}{\myLineGrayVskipTop} {{- end -}}
 }
 
 \newcommand{\remainingHeight}{%
