@@ -32,7 +32,7 @@ func DailyStuff(prefix, leaf string) func(cfg config.Config, tpls []string) (pag
 								"Month":        month,
 								"Week":         week,
 								"Day":          day,
-								"Breadcrumb":   day.Breadcrumb(prefix, leaf),
+								"Breadcrumb":   day.Breadcrumb(prefix, leaf, cfg.ClearTopRightCorner && len(leaf) > 0),
 								"HeadingMOS":   day.HeadingMOS(prefix, leaf),
 								"SideQuarters": year.SideQuarters(day.Quarter()),
 								"SideMonths":   year.SideMonths(day.Month()),
