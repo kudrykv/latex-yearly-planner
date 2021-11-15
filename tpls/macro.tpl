@@ -8,6 +8,9 @@
 {{- $numbers := .Cfg.Layout.Numbers -}}
 \newcommand{\myNumArrayStretch}{ {{- $numbers.ArrayStretch -}} }
 \newcommand{\myNumQuarterlyLines}{ {{- $numbers.QuarterlyLines -}} }
+\newcommand{\myNumDotHeightFull}{ {{- $numbers.DotHeightFull -}} }
+\newcommand{\myNumDotWidthFull}{ {{- $numbers.DotWidthFull -}} }
+\newcommand{\myNumDotWidthTwoThirds}{ {{- $numbers.DotWidthTwoThirds -}} }
 \newcommand{\myNumWeeklyLines}{ {{- $numbers.WeeklyLines -}} }
 \newcommand{\myNumDailyTodos}{ {{- $numbers.DailyTodos -}} }
 \newcommand{\myNumDailyNotes}{ {{- $numbers.DailyNotes -}} }

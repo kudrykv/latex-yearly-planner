@@ -11,7 +11,7 @@
   \Repeat{\myNumDailyTodos}{\myTodoLineGray}
   \vskip\dimexpr7mm-4pt
   \myUnderline{Notes $\vert$ {{ $today.LinkLeaf "More" "More" }}\hfill{}{{ $today.LinkLeaf "Reflect" "Reflect" }}\hfill{}\hyperlink{Notes Index}{All notes}}
-  \myMash{\myNumDailyNotes}{20}
+  \myMash{\myNumDailyNotes}{\myNumDotWidthTwoThirds}
 }
 
 \pagebreak

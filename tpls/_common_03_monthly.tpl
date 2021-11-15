@@ -3,7 +3,7 @@
 
 {{ if $.Cfg.Dotted -}}
 \myUnderline{Notes}
-\vbox to 0pt{\myMash{20}{30}}
+\vbox to 0pt{\myMash{20}{\myNumDotWidthFull}}
 {{- else -}}
 \parbox{\myLenTwoCol}{
   \myUnderline{Notes}

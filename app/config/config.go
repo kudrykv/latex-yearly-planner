@@ -84,6 +84,9 @@ type Numbers struct {
 	IndexMeetingNotes   int
 	NotesIndexPages     int
 	NotesOnPage         int
+	DotHeightFull       int
+	DotWidthFull        int
+	DotWidthTwoThirds   int
 }
 
 type Paper struct {
