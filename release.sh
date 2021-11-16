@@ -39,9 +39,16 @@ function mvDefaultTo() {
   done
 }
 
-# default planners
+# default dotted planners
 createPDFs
 mvDefaultTo "dotted.default"
+mv ./*pdf pile
+
+# default lined planners
+sed -i 's/dotted: true/dotted: false/' cfg/base.yaml
+createPDFs
+git restore cfg/base.yaml
+mvDefaultTo "lined.default"
 mv ./*pdf pile
 
 # sunday-first planners
