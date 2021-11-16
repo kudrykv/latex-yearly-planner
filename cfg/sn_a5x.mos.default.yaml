@@ -12,9 +12,8 @@ layout:
     weeklylines: 10
     dailybottomhour: 9
     dailytophour: 20
-    dailytodos: 5
-    dailynotes: 26
-    dailypersonal: 8
+    dailytodos: 8
+    dailynotes: 24
     dotwidthtwothirds: 19
     dotwidthfull: 29
 
