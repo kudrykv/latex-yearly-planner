@@ -39,7 +39,7 @@ func NotesIndexed(cfg config.Config, tpls []string) (page.Modules, error) {
 					"HeadingMOS":   nt.HeadingMOS(idxPage),
 					"SideQuarters": year.SideQuarters(0),
 					"SideMonths":   year.SideMonths(0),
-					"Extra":        nt.PrevNext().WithTopRightCorner(cfg.ClearTopRightCorner),
+					"Extra":        nt.PrevNext(cfg.Layout.Numbers.NotesOnPage * cfg.Layout.Numbers.NotesIndexPages).WithTopRightCorner(cfg.ClearTopRightCorner),
 					"Extra2":       extra2(cfg.ClearTopRightCorner, false, false, nil, idxPage+1),
 				},
 			})
