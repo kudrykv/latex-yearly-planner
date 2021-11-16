@@ -19,6 +19,7 @@ type Config struct {
 	CalAfterSchedule    bool
 	ClearTopRightCorner bool
 	AMPMTime            bool
+	AddLastHalfHour     bool
 
 	Pages Pages
 

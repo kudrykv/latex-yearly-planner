@@ -1,7 +1,7 @@
 {{- $today := .Body.Day -}}
 
 \begin{minipage}[t]{\myLenTriCol}
-{{template "schedule.tpl" dict "Cfg" .Cfg "Day" .Body.Day "AddLastHalfHour" (not .Cfg.CalAfterSchedule)}}
+{{template "schedule.tpl" dict "Cfg" .Cfg "Day" .Body.Day}}
   \vspace{\dimexpr4mm+.3pt}
 
 {{- if .Cfg.CalAfterSchedule -}}

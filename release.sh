@@ -5,6 +5,7 @@ NEXT_YEAR=$((CURRENT_YEAR+1))
 
 _configurations=(
   1 "cfg/base.yaml,cfg/template_breadcrumb.yaml,cfg/sn_a5x.breadcrumb.default.yaml" "sn_a5x.breadcrumb.default"
+  1 "cfg/base.yaml,cfg/template_breadcrumb.yaml,cfg/sn_a5x.breadcrumb.default.yaml,cfg/sn_a5x.breadcrumb.default.dailycal.yaml" "sn_a5x.breadcrumb.default.dailycal"
   2 "cfg/base.yaml,cfg/template_months_on_side.yaml,cfg/sn_a5x.mos.default.yaml"    "sn_a5x.mos.default"
 
   1 "cfg/base.yaml,cfg/rm2.base.yaml,cfg/template_breadcrumb.yaml,cfg/rm2.breadcrumb.default.yaml" "rm2.breadcrumb.default"
@@ -40,6 +41,7 @@ function mvDefaultTo() {
 
 # default planners
 createPDFs
+mvDefaultTo "dotted.default"
 mv ./*pdf pile
 
 # sunday-first planners

@@ -8,4 +8,4 @@
 {{- end}}
 \myLineLightGray\vskip\myLenLineHeightButLine\myLineGray
 {{- end}}
-{{if .AddLastHalfHour}}\vskip\myLenLineHeightButLine\vbox to 0pt{\myLineLightGray}{{end}}
+{{if $.Cfg.AddLastHalfHour}}\vskip\myLenLineHeightButLine\vbox to 0pt{\myLineLightGray}{{end}}
