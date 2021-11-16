@@ -1,6 +1,7 @@
+addlasthalfhour: false
+
 layout:
   paper:
-
     marginparwidth: .8cm
     marginparsep: .25cm
     reversemargins: true
@@ -10,9 +11,6 @@ layout:
 
   numbers:
     weeklylines: 10
-    dailybottomhour: 9
-    dailytophour: 20
-    dailytodos: 8
     dailynotes: 24
     dotwidthtwothirds: 19
     dotwidthfull: 29
