@@ -1,6 +1,7 @@
 weekstart: 1
 ampmtime: false
 dotted: true
+calafterschedule: false
 
 layout:
   paper:
@@ -21,11 +22,11 @@ layout:
     arraystretch: 1.5
     quarterlylines: 36
     weeklylines: 11
-    dailytodos: 10
-    dailynotes: 23
+    dailytodos: 8
+    dailynotes: 25
     dailypersonal: 6
-    dailybottomhour: 6
-    dailytophour: 22
+    dailybottomhour: 7
+    dailytophour: 23
     dailydiarygoals: 10
     dailydiarygrateful: 3
     dailydiarybest: 3
@@ -50,6 +51,7 @@ layout:
     headerresizebox: 6mm
     headersidequarterswidth: 4cm
     headersidemonthswidth: 14.5cm
+    dailyspring: \textcolor{white}{.}
 
   colors:
     gray: gray
