@@ -58,6 +58,7 @@
 
 \newcommand{\myQuarterlySpring}{ {{- $lengths.QuarterlySpring -}} }
 \newcommand{\myMonthlySpring}{ {{- $lengths.MonthlySpring -}} }
+\newcommand{\myDailySpring}{ {{- $lengths.DailySpring -}} }
 \newcommand{\myColorGray}{ {{- .Cfg.Layout.Colors.Gray -}} }
 \newcommand{\myColorLightGray}{ {{- .Cfg.Layout.Colors.LightGray -}} }
 

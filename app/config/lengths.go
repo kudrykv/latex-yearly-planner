@@ -16,4 +16,5 @@ type Lengths struct {
 	HeaderSideMonthsWidth   string
 	QuarterlySpring         string
 	MonthlySpring           string
+	DailySpring             string
 }

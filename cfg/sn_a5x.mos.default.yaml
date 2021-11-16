@@ -13,7 +13,7 @@ layout:
     dailybottomhour: 9
     dailytophour: 20
     dailytodos: 5
-    dailynotes: 18
+    dailynotes: 26
     dailypersonal: 8
     dotwidthtwothirds: 19
     dotwidthfull: 29
@@ -23,3 +23,4 @@ layout:
     headersidemonthswidth: 14.35cm
     quarterlyspring: \myDummyQ
     monthlyspring: \vskip.5mm
+    dailyspring: \textcolor{white}{..}
