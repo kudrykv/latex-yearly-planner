@@ -19,8 +19,10 @@ _configurations=(
   2 "cfg/base.yaml,cfg/rm2.base.yaml,cfg/rm2_ddvk.base.yaml,cfg/template_months_on_side.yaml,cfg/rm2.mos.default.yaml"             "rm2_ddvk.mos.default"
   2 "cfg/base.yaml,cfg/rm2.base.yaml,cfg/rm2_ddvk.base.yaml,cfg/template_months_on_side.yaml,cfg/rm2.mos.default.dailycal.yaml"    "rm2_ddvk.mos.default.dailycal"
 
-  1 "cfg/base.yaml,cfg/rm2_ddvk_lh.base.yaml,cfg/template_breadcrumb.yaml,cfg/rm2.breadcrumb.default.yaml" "rm2_ddvk_lh.breadcrumb.default"
-  2 "cfg/base.yaml,cfg/rm2_ddvk_lh.base.yaml,cfg/template_months_on_side.yaml,cfg/rm2.mos.default.yaml"    "rm2_ddvk_lh.mos.default"
+  1 "cfg/base.yaml,cfg/rm2.base.yaml,cfg/rm2_ddvk_lh.base.yaml,cfg/template_breadcrumb.yaml,cfg/rm2.breadcrumb.default.yaml"          "rm2_ddvk_lh.breadcrumb.default"
+  1 "cfg/base.yaml,cfg/rm2.base.yaml,cfg/rm2_ddvk_lh.base.yaml,cfg/template_breadcrumb.yaml,cfg/rm2.breadcrumb.default.dailycal.yaml" "rm2_ddvk_lh.breadcrumb.default.dailycal"
+  2 "cfg/base.yaml,cfg/rm2.base.yaml,cfg/rm2_ddvk_lh.base.yaml,cfg/template_months_on_side.yaml,cfg/rm2.mos.default.yaml"             "rm2_ddvk_lh.mos.default"
+  2 "cfg/base.yaml,cfg/rm2.base.yaml,cfg/rm2_ddvk_lh.base.yaml,cfg/template_months_on_side.yaml,cfg/rm2.mos.default.dailycal.yaml"    "rm2_ddvk_lh.mos.default.dailycal"
 )
 
 _configurations_len=${#_configurations[@]}
