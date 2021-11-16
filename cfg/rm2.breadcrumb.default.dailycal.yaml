@@ -1,0 +1,7 @@
+calafterschedule: true
+addlasthalfhour: true
+
+layout:
+  numbers:
+    dailybottomhour: 8
+    dailytophour: 20
