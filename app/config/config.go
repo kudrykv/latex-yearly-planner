@@ -15,8 +15,11 @@ type Config struct {
 
 	Year                int `env:"PLANNER_YEAR"`
 	WeekStart           time.Weekday
+	Dotted              bool
+	CalAfterSchedule    bool
 	ClearTopRightCorner bool
 	AMPMTime            bool
+	AddLastHalfHour     bool
 
 	Pages Pages
 
@@ -83,6 +86,9 @@ type Numbers struct {
 	IndexMeetingNotes   int
 	NotesIndexPages     int
 	NotesOnPage         int
+	DotHeightFull       int
+	DotWidthFull        int
+	DotWidthTwoThirds   int
 }
 
 type Paper struct {

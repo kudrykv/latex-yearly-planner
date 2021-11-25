@@ -1,9 +1,12 @@
+\begin{minipage}[t][\remainingHeight]{\myLenTriCol}
 {{- range $j, $month := .Body.Quarter.Months -}}
-  {\noindent\renewcommand{\arraystretch}{0}%
-\begin{tabularx}{\textwidth}{@{}l X@{}}
+{\noindent\renewcommand{\arraystretch}{0}%
 {{- template "monthTabularV2.tpl" dict "Month" $month "TableType" "tabular" -}}
-  &
-  \Repeat{\myNumQuarterlyLines}{\myLineGrayVskipBottom}
-\end{tabularx}}
-{{if ne $j (len $.Body)}} \vfill {{end}}
-{{end -}}
+{{- if ne $j 2 -}} \vfill {{- end -}}
+{{- end -}}
+\end{minipage}%
+\hspace{\myLenTriColSep}%
+\begin{minipage}[t][\remainingHeight]{\dimexpr2\myLenTriCol+\myLenTriColSep}
+  \vskip-\myLenLineHeightButLine
+  \vbox to 0pt{\myMash[\myQuarterlySpring]{\myNumQuarterlyLines}{\myNumDotWidthTwoThirds}}
+\end{minipage}

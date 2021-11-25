@@ -22,6 +22,7 @@
 \usepackage{hyperref}
 \usepackage{marginnote}
 \usepackage{adjustbox}
+\usepackage{multido}
 
 \hypersetup{
     {{- if not .Cfg.Debug.ShowLinks}}hidelinks=true{{end -}}

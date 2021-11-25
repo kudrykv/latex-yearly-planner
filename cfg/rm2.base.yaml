@@ -11,10 +11,33 @@ layout:
 
     margin:
       top: .3cm
-      bottom: 0.7cm
+      bottom: 0.6cm
       left: 1.4cm
       right: 0.3cm
 
   numbers:
+    quarterlylines: 38
+    weeklylines: 11
+    dailybottomhour: 6
+    dailytophour: 23
+    dailytodos: 8
+    dailynotes: 27
+    dailydiarygrateful: 4
+    dailydiarybest: 4
+    dailydiarylog: 26
     notesindexpages: 3
     notesonpage: 38
+    dotheightfull: 38
+    dotwidthtwothirds: 19
+    dotwidthfull: 29
+
+  lengths:
+    tabcolsep: 3.5pt
+    linethicknessdefault: .4pt
+    linethicknessthick: .8pt
+    lineheightbutline: \dimexpr5mm-.4pt
+    twocolsep: 5pt
+    tricolsep: 5pt
+    monthlycellheight: 55pt
+    notesindexcellheight: 1.45cm
+    quarterlyspring: \textcolor{white}{..}

@@ -1,13 +1,10 @@
-\parbox[t]{\myLenTwoCol}{%
-  \myUnderline{Goals{}\textcolor{white}{g}}
-  \myLineHeightButLine\Repeat{\myNumDailyDiaryGoals}{\myLineGrayVskipBottom}\vspace{3pt}
-  \myUnderline{Things I'm grateful for}
-  \myLineHeightButLine\Repeat{\myNumDailyDiaryGrateful}{\myLineGrayVskipBottom}\vspace{3pt}
-  \myUnderline{The best thing that happened today}
-  \Repeat{\myNumDailyDiaryBest}{\myLineGrayVskipTop}
-}%
-\hspace{\myLenTwoColSep}%
-\parbox[t]{\myLenTwoCol}{%
-  \myUnderline{Daily log}
-  \Repeat{\myNumDailyDiaryLog}{\myLineGrayVskipTop}
-}
+\myUnderline{Things I'm grateful for}
+\myMash{\myNumDailyDiaryGrateful}{\myNumDotWidthFull}
+\medskip
+
+\myUnderline{The best thing that happened today}
+\myMash{\myNumDailyDiaryBest}{\myNumDotWidthFull}
+\medskip
+
+\myUnderline{Daily log}
+\myMash{\myNumDailyDiaryLog}{\myNumDotWidthFull}

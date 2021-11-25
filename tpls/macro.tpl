@@ -8,6 +8,9 @@
 {{- $numbers := .Cfg.Layout.Numbers -}}
 \newcommand{\myNumArrayStretch}{ {{- $numbers.ArrayStretch -}} }
 \newcommand{\myNumQuarterlyLines}{ {{- $numbers.QuarterlyLines -}} }
+\newcommand{\myNumDotHeightFull}{ {{- $numbers.DotHeightFull -}} }
+\newcommand{\myNumDotWidthFull}{ {{- $numbers.DotWidthFull -}} }
+\newcommand{\myNumDotWidthTwoThirds}{ {{- $numbers.DotWidthTwoThirds -}} }
 \newcommand{\myNumWeeklyLines}{ {{- $numbers.WeeklyLines -}} }
 \newcommand{\myNumDailyTodos}{ {{- $numbers.DailyTodos -}} }
 \newcommand{\myNumDailyNotes}{ {{- $numbers.DailyNotes -}} }
@@ -28,6 +31,8 @@
 \newlength{\myLenTwoCol}
 \newlength{\myLenTriColSep}
 \newlength{\myLenTriCol}
+\newlength{\myLenFiveColSep}
+\newlength{\myLenFiveCol}
 \newlength{\myLenMonthlyCellHeight}
 \newlength{\myLenNotesIndexCellHeight}
 \newlength{\myLenHeaderResizeBox}
@@ -41,6 +46,8 @@
 \setlength{\myLenLineHeightButLine}{ {{- $lengths.LineHeightButLine -}} }
 \setlength{\myLenTwoColSep}{ {{- $lengths.TwoColSep -}} }
 \setlength{\myLenTwoCol}{\dimexpr.5\linewidth-.5\myLenTwoColSep}
+\setlength{\myLenFiveColSep}{ {{- $lengths.FiveColSep -}} }
+\setlength{\myLenFiveCol}{\dimexpr.2\linewidth-\myLenFiveColSep}
 \setlength{\myLenMonthlyCellHeight}{ {{- $lengths.MonthlyCellHeight -}} }
 \setlength{\myLenTriColSep}{ {{- $lengths.TriColSep -}} }
 \setlength{\myLenTriCol}{\dimexpr.333\linewidth-.667\myLenTriColSep}
@@ -49,6 +56,9 @@
 \setlength{\myLenHeaderSideQuartersWidth}{ {{- $lengths.HeaderSideQuartersWidth -}} }
 \setlength{\myLenHeaderSideMonthsWidth}{ {{- $lengths.HeaderSideMonthsWidth -}} }
 
+\newcommand{\myQuarterlySpring}{ {{- $lengths.QuarterlySpring -}} }
+\newcommand{\myMonthlySpring}{ {{- $lengths.MonthlySpring -}} }
+\newcommand{\myDailySpring}{ {{- $lengths.DailySpring -}} }
 \newcommand{\myColorGray}{ {{- .Cfg.Layout.Colors.Gray -}} }
 \newcommand{\myColorLightGray}{ {{- .Cfg.Layout.Colors.LightGray -}} }
 
@@ -65,3 +75,17 @@
 
 \newcommand{\myTodo}{\myLineHeightButLine$\square$\myLinePlain}
 \newcommand{\myTodoLineGray}{\myLineHeightButLine$\square$\myLineGray}
+
+\newcommand{\myDotGrid}[2]{\leavevmode\multido{\dC=0mm+5mm}{#1}{\multido{\dR=0mm+5mm}{#2}{\put(\dR,\dC){\circle*{0.1}}}}}
+
+\newcommand{\myMash}[3][]{
+  {{- if $.Cfg.Dotted -}} \vskip\myLenLineHeightButLine#1\myDotGrid{#2}{#3} {{- else -}} \Repeat{#2}{\myLineGrayVskipTop} {{- end -}}
+}
+
+\newcommand{\remainingHeight}{%
+  \ifdim\pagegoal=\maxdimen
+  \dimexpr\textheight-9.4pt\relax
+  \else
+  \dimexpr\pagegoal-\pagetotal-\lineskip-9.4pt\relax
+  \fi%
+}

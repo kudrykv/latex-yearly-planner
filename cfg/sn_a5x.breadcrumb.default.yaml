@@ -12,3 +12,6 @@ layout:
     reversemargins: true
     marginparwidth: .8cm
     marginparsep: 3mm
+
+  lengths:
+    quarterlyspring: \textcolor{white}{.}

@@ -76,11 +76,15 @@ func (n Note) Breadcrumb() string {
 	}.Table(true)
 }
 
-func (n Note) PrevNext() header.Items {
+func (n Note) PrevNext(notes int) header.Items {
 	items := header.Items{}
 
 	if n.Number > 1 {
 		items = append(items, header.NewTextItem("Note "+strconv.Itoa(n.Number-1)))
+	}
+
+	if n.Number < notes {
+		items = append(items, header.NewTextItem("Note "+strconv.Itoa(n.Number+1)))
 	}
 
 	return items

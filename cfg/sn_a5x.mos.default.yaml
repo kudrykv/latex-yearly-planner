@@ -1,6 +1,7 @@
+addlasthalfhour: false
+
 layout:
   paper:
-
     marginparwidth: .8cm
     marginparsep: .25cm
     reversemargins: true
@@ -9,12 +10,14 @@ layout:
       left: 1cm
 
   numbers:
-    dailybottomhour: 9
-    dailytophour: 20
-    dailytodos: 5
-    dailynotes: 18
-    dailypersonal: 8
+    weeklylines: 10
+    dailynotes: 24
+    dotwidthtwothirds: 19
+    dotwidthfull: 29
 
   lengths:
     headersidequarterswidth: 4cm
     headersidemonthswidth: 14.35cm
+    quarterlyspring: \myDummyQ
+    monthlyspring: \vskip.5mm
+    dailyspring: \textcolor{white}{..}

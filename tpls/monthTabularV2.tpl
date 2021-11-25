@@ -15,5 +15,5 @@
       {{- else -}} & {{- end -}}
     {{- end -}}
   {{ end }}
-  {{ .Month.EndTable .TableType }}
+  {{ .Month.EndTable .TableType -}}
 }

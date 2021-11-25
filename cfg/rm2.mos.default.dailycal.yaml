@@ -1,10 +1,9 @@
-addlasthalfhour: false
+calafterschedule: true
 
 layout:
   numbers:
-    dailybottomhour: 6
-    dailytophour: 23
-    dailynotes: 26
+    dailybottomhour: 8
+    dailytophour: 20
 
   lengths:
     headersidecellheight: "[1.35ex]"
