@@ -1,7 +1,7 @@
 import signal
 import sys
 
-# Read stdin for \[[0-9]+\]
+# Read stdin for \[[0-9]+(?:\/[0-9]+)?\]
 START_CHAR = "["
 END_CHAR = "]"
 
