@@ -76,7 +76,7 @@ func action(c *cli.Context) error {
 
 			// Only one page per unique module if preview flag is enabled
 			if preview {
-				modules = filterModules(modules, uniqueModuleFilter())
+				modules = filterUniqueModules(modules)
 			}
 
 			if err != nil {
@@ -143,27 +143,16 @@ var ComposerMap = map[string]Composer{
 	"notes_indexed": compose.NotesIndexed,
 }
 
-func filterModules(array []page.Module, fn func(index int, element page.Module) bool) []page.Module {
+func filterUniqueModules(array []page.Module) []page.Module {
 	filtered := make([]page.Module, 0)
+	found := map[string]bool{}
 
-	for idx, val := range array {
-		if fn(idx, val) {
+	for _, val := range array {
+		if _, present := found[val.Tpl]; !present {
 			filtered = append(filtered, val)
+			found[val.Tpl] = true
 		}
 	}
 
 	return filtered
-}
-
-func uniqueModuleFilter() func(index int, element page.Module) bool {
-	found := map[string]bool{}
-
-	return func(index int, element page.Module) bool {
-		if _, present := found[element.Tpl]; present {
-			return false
-		} else {
-			found[element.Tpl] = true
-			return true
-		}
-	}
 }
