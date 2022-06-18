@@ -17,6 +17,7 @@ import (
 
 const (
 	fConfig = "config"
+	pConfig = "preview"
 )
 
 func New() *cli.App {
@@ -28,6 +29,7 @@ func New() *cli.App {
 
 		Flags: []cli.Flag{
 			&cli.PathFlag{Name: fConfig, Required: true},
+			&cli.BoolFlag{Name: pConfig, Required: false},
 		},
 
 		Action: action,
@@ -41,6 +43,8 @@ func action(c *cli.Context) error {
 		cfg config.Config
 		err error
 	)
+
+	preview := c.Bool(pConfig)
 
 	pathConfigs := strings.Split(c.Path(fConfig), ",")
 	if cfg, err = config.New(pathConfigs...); err != nil {
@@ -69,6 +73,12 @@ func action(c *cli.Context) error {
 			}
 
 			modules, err := fn(cfg, block.Tpls)
+
+			// Only one page per unique module if preview flag is enabled
+			if preview {
+				modules = filterUniqueModules(modules)
+			}
+
 			if err != nil {
 				return fmt.Errorf("%s: %w", block.FuncName, err)
 			}
@@ -131,4 +141,18 @@ var ComposerMap = map[string]Composer{
 	"daily_reflect": compose.DailyReflect,
 	"daily_notes":   compose.DailyNotes,
 	"notes_indexed": compose.NotesIndexed,
+}
+
+func filterUniqueModules(array []page.Module) []page.Module {
+	filtered := make([]page.Module, 0)
+	found := map[string]bool{}
+
+	for _, val := range array {
+		if _, present := found[val.Tpl]; !present {
+			filtered = append(filtered, val)
+			found[val.Tpl] = true
+		}
+	}
+
+	return filtered
 }

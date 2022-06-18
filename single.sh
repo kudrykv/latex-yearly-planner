@@ -2,7 +2,13 @@
 
 set -eo pipefail
 
-go run cmd/plannergen/plannergen.go --config "${CFG}"
+if [ -z "$PREVIEW" ]; then
+  go run cmd/plannergen/plannergen.go --config "${CFG}"
+else
+  go run cmd/plannergen/plannergen.go --preview --config "${CFG}"
+fi
+
+
 
 nakedname=$(echo "${CFG}" | rev | cut -d, -f1 | cut -d'/' -f 1 | cut -d'.' -f 2-99 | rev)
 
