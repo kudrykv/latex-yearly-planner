@@ -1,0 +1,36 @@
+addlasthalfhour: true
+ampmtime: true
+weekstart: 1
+
+layout:
+  paper:
+    marginparwidth: .8cm
+    marginparsep: .25cm
+    reversemargins: true
+
+    margin:
+      top: 1.5cm
+      left: 1cm
+
+  numbers:
+    dailydiarybest: 3
+    dailydiarygrateful: 3
+    dailydiarylog: 23
+    dailynotes: 22
+    dailybottomhour: 9
+    dailytophour: 18
+    dailytodos: 6
+    dotheightfull: 35
+    dotwidthfull: 29
+    dotwidthtwothirds: 19
+    notesindexpages: 5
+    notesonpage: 22
+    weeklylines: 8
+
+  lengths:
+    headersidequarterswidth: 4cm
+    headersidemonthswidth: 10.45cm
+    lineheightbutline: \dimexpr8mm-.4pt
+    quarterlyspring: \myDummyQ
+    monthlyspring: \vskip.5mm
+    dailyspring: \textcolor{white}{..}
