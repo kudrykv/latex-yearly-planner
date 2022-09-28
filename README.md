@@ -13,8 +13,7 @@ Anyhow, more info on this will come.
 Here are the steps to quickly get the project up and running.
 
 * Note: if you are here just for the planners you can find pre-generated
- planners in [2022-2032 Planners](./2022-2032%20Planners). Simply download
-  the zip file for this project and you should be all set.
+ planners in [2022-2032 Planners Discussions](https://github.com/kudrykv/latex-yearly-planner/discussions/57).
 
 For the tinkerers, read on.
 
