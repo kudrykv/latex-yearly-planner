@@ -1,0 +1,17 @@
+name: "Build 2023"
+on:
+  pull_request:
+  push:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: cachix/install-nix-action@v19
+    - name: Build pdf
+      run: nix develop -c ./build.sh 2023
+    - name: Output pdf
+      uses: actions/upload-artifact@v3
+      with:
+        name: output
+        path: planner.2023.pdf
