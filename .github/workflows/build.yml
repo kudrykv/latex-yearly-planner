@@ -8,10 +8,14 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: cachix/install-nix-action@v19
-    - name: Build pdf
-      run: nix develop -c ./build.sh 2023
-    - name: Output pdf
+    - name: Build PDFs
+      run: nix build
+    - name: Copy PDFs
+      run: cp result/*.pdf .
+    - name: Output PDFs
       uses: actions/upload-artifact@v3
       with:
-        name: output
-        path: planner.2023.pdf
+        name: result
+        path: ./*.pdf
+        if-no-files-found: error
+

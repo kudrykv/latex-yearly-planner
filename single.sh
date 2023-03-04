@@ -2,10 +2,17 @@
 
 set -eo pipefail
 
-if [ -z "$PREVIEW" ]; then
-  go run cmd/plannergen/plannergen.go --config "${CFG}"
+if [ -z "$PLANNERGEN_BINARY" ]; then
+  export GO_CMD="go run cmd/plannergen/plannergen.go"
 else
-  go run cmd/plannergen/plannergen.go --preview --config "${CFG}"
+  export GO_CMD="$PLANNERGEN_BINARY"
+  echo "Building using plannergen binary at \"${PLANNERGEN_BINARY}\""
+fi
+
+if [ -z "$PREVIEW" ]; then
+  eval $GO_CMD --config "${CFG}"
+else
+  eval $GO_CMD --preview --config "${CFG}"
 fi
 
 
