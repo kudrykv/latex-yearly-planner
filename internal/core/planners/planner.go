@@ -1,9 +1,9 @@
-package planner
+package planners
 
 import (
 	"context"
 	"fmt"
-	"github.com/kudrykv/latex-yearly-planner/internal/core/planner/entities"
+	"github.com/kudrykv/latex-yearly-planner/internal/core/planners/entities"
 )
 
 type Planner struct {
