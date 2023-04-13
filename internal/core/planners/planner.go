@@ -14,8 +14,8 @@ type Planner struct {
 	fileStructure entities.FileStructure
 }
 
-func New(builder Builder, fileWriter FileWriter, commander Commander) Planner {
-	return Planner{
+func New(builder Builder, fileWriter FileWriter, commander Commander) *Planner {
+	return &Planner{
 		builder:    builder,
 		fileWriter: fileWriter,
 		commander:  commander,
