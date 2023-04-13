@@ -75,17 +75,17 @@ func (m *MockFileWriter) EXPECT() *MockFileWriterMockRecorder {
 }
 
 // Write mocks base method.
-func (m *MockFileWriter) Write(arg0 context.Context, arg1 entities.File) error {
+func (m *MockFileWriter) Write(arg0 context.Context, arg1 planners.BasePath, arg2 entities.File) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Write", arg0, arg1)
+	ret := m.ctrl.Call(m, "Write", arg0, arg1, arg2)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // Write indicates an expected call of Write.
-func (mr *MockFileWriterMockRecorder) Write(arg0, arg1 interface{}) *gomock.Call {
+func (mr *MockFileWriterMockRecorder) Write(arg0, arg1, arg2 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Write", reflect.TypeOf((*MockFileWriter)(nil).Write), arg0, arg1)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Write", reflect.TypeOf((*MockFileWriter)(nil).Write), arg0, arg1, arg2)
 }
 
 // MockCommander is a mock of Commander interface.
