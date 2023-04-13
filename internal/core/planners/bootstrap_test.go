@@ -8,18 +8,18 @@ import (
 )
 
 type mocked struct {
-	builder    *mocks.MockBuilder
+	builder    *mocks.MockPlannerBuilder
 	fileWriter *mocks.MockFileWriter
 	commander  *mocks.MockCommander
 	command    *mocks.MockCommand
 }
 
-func setup(t *testing.T) (planners.Planner, mocked) {
+func setup(t *testing.T) (*planners.Planner, mocked) {
 	t.Helper()
 
 	controller := gomock.NewController(t)
 
-	builder := mocks.NewMockBuilder(controller)
+	builder := mocks.NewMockPlannerBuilder(controller)
 	writer := mocks.NewMockFileWriter(controller)
 	commander := mocks.NewMockCommander(controller)
 	command := mocks.NewMockCommand(controller)

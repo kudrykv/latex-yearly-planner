@@ -13,31 +13,31 @@ import (
 	entities "github.com/kudrykv/latex-yearly-planner/internal/core/planners/entities"
 )
 
-// MockBuilder is a mock of Builder interface.
-type MockBuilder struct {
+// MockPlannerBuilder is a mock of PlannerBuilder interface.
+type MockPlannerBuilder struct {
 	ctrl     *gomock.Controller
-	recorder *MockBuilderMockRecorder
+	recorder *MockPlannerBuilderMockRecorder
 }
 
-// MockBuilderMockRecorder is the mock recorder for MockBuilder.
-type MockBuilderMockRecorder struct {
-	mock *MockBuilder
+// MockPlannerBuilderMockRecorder is the mock recorder for MockPlannerBuilder.
+type MockPlannerBuilderMockRecorder struct {
+	mock *MockPlannerBuilder
 }
 
-// NewMockBuilder creates a new mock instance.
-func NewMockBuilder(ctrl *gomock.Controller) *MockBuilder {
-	mock := &MockBuilder{ctrl: ctrl}
-	mock.recorder = &MockBuilderMockRecorder{mock}
+// NewMockPlannerBuilder creates a new mock instance.
+func NewMockPlannerBuilder(ctrl *gomock.Controller) *MockPlannerBuilder {
+	mock := &MockPlannerBuilder{ctrl: ctrl}
+	mock.recorder = &MockPlannerBuilderMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockBuilder) EXPECT() *MockBuilderMockRecorder {
+func (m *MockPlannerBuilder) EXPECT() *MockPlannerBuilderMockRecorder {
 	return m.recorder
 }
 
 // Generate mocks base method.
-func (m *MockBuilder) Generate(arg0 context.Context) (entities.FileStructure, error) {
+func (m *MockPlannerBuilder) Generate(arg0 context.Context) (entities.FileStructure, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Generate", arg0)
 	ret0, _ := ret[0].(entities.FileStructure)
@@ -46,9 +46,9 @@ func (m *MockBuilder) Generate(arg0 context.Context) (entities.FileStructure, er
 }
 
 // Generate indicates an expected call of Generate.
-func (mr *MockBuilderMockRecorder) Generate(arg0 interface{}) *gomock.Call {
+func (mr *MockPlannerBuilderMockRecorder) Generate(arg0 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Generate", reflect.TypeOf((*MockBuilder)(nil).Generate), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Generate", reflect.TypeOf((*MockPlannerBuilder)(nil).Generate), arg0)
 }
 
 // MockFileWriter is a mock of FileWriter interface.

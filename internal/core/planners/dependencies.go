@@ -12,7 +12,7 @@ type (
 	BasePath    = string
 )
 
-type Builder interface {
+type PlannerBuilder interface {
 	Generate(context.Context) (entities.FileStructure, error)
 }
 

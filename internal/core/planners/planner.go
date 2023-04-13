@@ -7,14 +7,14 @@ import (
 )
 
 type Planner struct {
-	builder    Builder
+	builder    PlannerBuilder
 	fileWriter FileWriter
 	commander  Commander
 
 	fileStructure entities.FileStructure
 }
 
-func New(builder Builder, fileWriter FileWriter, commander Commander) *Planner {
+func New(builder PlannerBuilder, fileWriter FileWriter, commander Commander) *Planner {
 	return &Planner{
 		builder:    builder,
 		fileWriter: fileWriter,
