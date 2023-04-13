@@ -136,4 +136,49 @@ func TestPlanner_Compile(t *testing.T) {
 
 		require.NoError(t, err)
 	})
+
+	t.Run("error when generate returns an error", func(t *testing.T) {
+		t.Parallel()
+
+		planner, m := setup(t)
+
+		m.builder.EXPECT().Generate(ctx).Return(entities.FileStructure{}, assert.AnError)
+
+		err := planner.Generate(ctx)
+
+		require.ErrorIs(t, err, assert.AnError)
+
+		err = planner.Compile(ctx, "./out_test")
+
+		require.ErrorIs(t, err, planners.ErrNothingToCompile)
+	})
+
+	t.Run("error when generate has not been run", func(t *testing.T) {
+		t.Parallel()
+
+		planner, _ := setup(t)
+
+		err := planner.Compile(ctx, "./out_test")
+
+		require.ErrorIs(t, err, planners.ErrNothingToCompile)
+	})
+
+	t.Run("error when compile returns an error", func(t *testing.T) {
+		t.Parallel()
+
+		planner, m := setup(t)
+
+		m.builder.EXPECT().Generate(ctx).Return(fileStructure, nil)
+		m.commander.EXPECT().CreateCommand("pdflatex", fileStructure.Index.Name).Return(m.command)
+		m.command.EXPECT().SetBasePath("./out_test")
+		m.command.EXPECT().Run(ctx).Return(assert.AnError)
+
+		err := planner.Generate(ctx)
+
+		require.NoError(t, err)
+
+		err = planner.Compile(ctx, "./out_test")
+
+		require.ErrorIs(t, err, assert.AnError)
+	})
 }
