@@ -1,4 +1,4 @@
-package mos
+package plannerbuilders
 
 import (
 	"context"
@@ -6,16 +6,16 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/core/planners/entities"
 )
 
-type MOS struct {
+type Builder struct {
 	sections Sections
 	indexer  Indexer
 }
 
-func New(sections Sections) *MOS {
-	return &MOS{sections: sections}
+func New(sections Sections) *Builder {
+	return &Builder{sections: sections}
 }
 
-func (r *MOS) Generate(ctx context.Context) (entities.FileStructure, error) {
+func (r *Builder) Generate(ctx context.Context) (entities.FileStructure, error) {
 	fileStructure := entities.FileStructure{}
 
 	for _, section := range r.sections {
