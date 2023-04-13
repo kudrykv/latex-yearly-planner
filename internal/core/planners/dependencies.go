@@ -14,3 +14,17 @@ type Builder interface {
 type FileWriter interface {
 	Write(context.Context, entities.File) error
 }
+
+type (
+	CommandName = string
+	BasePath    = string
+)
+
+type Commander interface {
+	CreateCommand(CommandName, BasePath) Command
+}
+
+type Command interface {
+	SetBasePath(path BasePath)
+	Run(context.Context) error
+}

@@ -9,6 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
+	planners "github.com/kudrykv/latex-yearly-planner/internal/core/planners"
 	entities "github.com/kudrykv/latex-yearly-planner/internal/core/planners/entities"
 )
 
@@ -85,4 +86,90 @@ func (m *MockFileWriter) Write(arg0 context.Context, arg1 entities.File) error {
 func (mr *MockFileWriterMockRecorder) Write(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Write", reflect.TypeOf((*MockFileWriter)(nil).Write), arg0, arg1)
+}
+
+// MockCommander is a mock of Commander interface.
+type MockCommander struct {
+	ctrl     *gomock.Controller
+	recorder *MockCommanderMockRecorder
+}
+
+// MockCommanderMockRecorder is the mock recorder for MockCommander.
+type MockCommanderMockRecorder struct {
+	mock *MockCommander
+}
+
+// NewMockCommander creates a new mock instance.
+func NewMockCommander(ctrl *gomock.Controller) *MockCommander {
+	mock := &MockCommander{ctrl: ctrl}
+	mock.recorder = &MockCommanderMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockCommander) EXPECT() *MockCommanderMockRecorder {
+	return m.recorder
+}
+
+// CreateCommand mocks base method.
+func (m *MockCommander) CreateCommand(arg0 planners.CommandName, arg1 planners.BasePath) planners.Command {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateCommand", arg0, arg1)
+	ret0, _ := ret[0].(planners.Command)
+	return ret0
+}
+
+// CreateCommand indicates an expected call of CreateCommand.
+func (mr *MockCommanderMockRecorder) CreateCommand(arg0, arg1 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateCommand", reflect.TypeOf((*MockCommander)(nil).CreateCommand), arg0, arg1)
+}
+
+// MockCommand is a mock of Command interface.
+type MockCommand struct {
+	ctrl     *gomock.Controller
+	recorder *MockCommandMockRecorder
+}
+
+// MockCommandMockRecorder is the mock recorder for MockCommand.
+type MockCommandMockRecorder struct {
+	mock *MockCommand
+}
+
+// NewMockCommand creates a new mock instance.
+func NewMockCommand(ctrl *gomock.Controller) *MockCommand {
+	mock := &MockCommand{ctrl: ctrl}
+	mock.recorder = &MockCommandMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockCommand) EXPECT() *MockCommandMockRecorder {
+	return m.recorder
+}
+
+// Run mocks base method.
+func (m *MockCommand) Run(arg0 context.Context) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Run", arg0)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Run indicates an expected call of Run.
+func (mr *MockCommandMockRecorder) Run(arg0 interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Run", reflect.TypeOf((*MockCommand)(nil).Run), arg0)
+}
+
+// SetBasePath mocks base method.
+func (m *MockCommand) SetBasePath(path planners.BasePath) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "SetBasePath", path)
+}
+
+// SetBasePath indicates an expected call of SetBasePath.
+func (mr *MockCommandMockRecorder) SetBasePath(path interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetBasePath", reflect.TypeOf((*MockCommand)(nil).SetBasePath), path)
 }

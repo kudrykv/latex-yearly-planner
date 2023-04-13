@@ -9,6 +9,7 @@ import (
 type Planner struct {
 	builder    Builder
 	fileWriter FileWriter
+	commander  Commander
 
 	fileStructure entities.FileStructure
 }
@@ -47,6 +48,17 @@ func (r *Planner) Write(ctx context.Context) error {
 	return nil
 }
 
-func (r *Planner) Compile() error {
-	panic("not implemented")
+func (r *Planner) Compile(ctx context.Context, basepath string) error {
+	if r.fileStructure.IsEmpty() {
+		return fmt.Errorf("nothing has been generated: %w", ErrNothingToCompile)
+	}
+
+	command := r.commander.CreateCommand("pdflatex", r.fileStructure.Index.Name)
+	command.SetBasePath(basepath)
+
+	if err := command.Run(ctx); err != nil {
+		return fmt.Errorf("rum: %w", err)
+	}
+
+	return nil
 }
