@@ -101,3 +101,39 @@ func TestPlanner_Write(t *testing.T) {
 		require.ErrorIs(t, err, assert.AnError)
 	})
 }
+
+func TestPlanner_Compile(t *testing.T) {
+	t.Parallel()
+
+	ctx := context.Background()
+	fileStructure := entities.FileStructure{
+		Index: entities.File{Name: "index.tex"},
+		Files: []entities.File{{Name: "file1.tex"}, {Name: "file2.tex"}},
+	}
+
+	t.Run("successful run", func(t *testing.T) {
+		t.Parallel()
+
+		planner, m := setup(t)
+
+		m.builder.EXPECT().Generate(ctx).Return(fileStructure, nil)
+		m.fileWriter.EXPECT().Write(ctx, fileStructure.Index).Return(nil)
+		m.fileWriter.EXPECT().Write(ctx, fileStructure.Files[0]).Return(nil)
+		m.fileWriter.EXPECT().Write(ctx, fileStructure.Files[1]).Return(nil)
+		m.commander.EXPECT().CreateCommand("pdflatex", fileStructure.Index.Name).Return(m.command)
+		m.command.EXPECT().SetBasePath("./out_test")
+		m.command.EXPECT().Run(ctx).Return(nil)
+
+		err := planner.Generate(ctx)
+
+		require.NoError(t, err)
+
+		err = planner.Write(ctx)
+
+		require.NoError(t, err)
+
+		err = planner.Compile(ctx, "./out_test")
+
+		require.NoError(t, err)
+	})
+}
