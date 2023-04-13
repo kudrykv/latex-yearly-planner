@@ -17,6 +17,20 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 			Reader:    reader,
 			Writer:    writer,
 			ErrWriter: errWriter,
+
+			Commands: cli.Commands{
+				{
+					Name: "generate",
+					Subcommands: cli.Commands{
+						{
+							Name: "mos",
+							Action: func(cliContext *cli.Context) error {
+								panic("not implemented")
+							},
+						},
+					},
+				},
+			},
 		},
 	}
 }
