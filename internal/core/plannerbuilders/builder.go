@@ -11,8 +11,11 @@ type Builder struct {
 	indexer  Indexer
 }
 
-func New(sections Sections) *Builder {
-	return &Builder{sections: sections}
+func New(indexer Indexer, sections Sections) *Builder {
+	return &Builder{
+		indexer:  indexer,
+		sections: sections,
+	}
 }
 
 func (r *Builder) Generate(ctx context.Context) (entities.FileStructure, error) {
