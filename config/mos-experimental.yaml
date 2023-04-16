@@ -1,0 +1,61 @@
+document:
+  debug:
+    enabled: true
+    options:
+      highlight_links: true
+      highlight_frames: true
+
+  layout:
+    dimensions:
+      width: 156mm
+      height: 230mm
+
+    margin:
+      top: 10mm
+      bottom: 5mm
+      left: 14mm
+      right: 5mm
+
+    margin_notes:
+      width: 10mm
+      separator: 6.3mm
+      placement: left
+
+
+parameters:
+  start_date: 2023, January
+  end_date: 2023, December
+  weekday_start: Monday
+  show_week_numbers: true
+
+
+sections:
+  - title:
+      name: 2023
+
+  - yearly:
+      enabled: true
+
+  - quarterly:
+      enabled: true
+
+  - monthly:
+      enabled: true
+
+  - weekly:
+      enabled: true
+
+  - daily:
+      enabled: true
+
+  - daily_reflections:
+      enabled: true
+
+  - daily_notes:
+      enabled: true
+
+  - notes:
+      enabled: true
+
+  - tasks:
+      enabled: true
