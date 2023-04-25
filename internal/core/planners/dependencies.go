@@ -16,7 +16,7 @@ type PlannerBuilder interface {
 	Generate(context.Context) (entities.NoteStructure, error)
 }
 
-type FileWriter interface {
+type NoteWriter interface {
 	Write(context.Context, BasePath, entities.Note) error
 }
 

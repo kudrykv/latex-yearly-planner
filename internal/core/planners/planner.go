@@ -8,13 +8,13 @@ import (
 
 type Planner struct {
 	builder    PlannerBuilder
-	fileWriter FileWriter
+	fileWriter NoteWriter
 	commander  Commander
 
 	fileStructure entities.NoteStructure
 }
 
-func New(builder PlannerBuilder, fileWriter FileWriter, commander Commander) *Planner {
+func New(builder PlannerBuilder, fileWriter NoteWriter, commander Commander) *Planner {
 	return &Planner{
 		builder:    builder,
 		fileWriter: fileWriter,
