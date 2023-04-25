@@ -18,8 +18,8 @@ func New(indexer Indexer, sections Sections) *Builder {
 	}
 }
 
-func (r *Builder) Generate(ctx context.Context) (entities.FileStructure, error) {
-	fileStructure := entities.FileStructure{}
+func (r *Builder) Generate(ctx context.Context) (entities.NoteStructure, error) {
+	fileStructure := entities.NoteStructure{}
 
 	for _, section := range r.sections {
 		if !section.IsEnabled() {
@@ -31,11 +31,11 @@ func (r *Builder) Generate(ctx context.Context) (entities.FileStructure, error) 
 			return fileStructure, fmt.Errorf("generate section: %w", err)
 		}
 
-		fileStructure.Files = append(fileStructure.Files, file)
+		fileStructure.Notes = append(fileStructure.Notes, file)
 	}
 
 	var err error
-	if fileStructure.Index, err = r.indexer.CreateIndex(ctx, fileStructure.Files); err != nil {
+	if fileStructure.Index, err = r.indexer.CreateIndex(ctx, fileStructure.Notes); err != nil {
 		return fileStructure, fmt.Errorf("create index: %w", err)
 	}
 

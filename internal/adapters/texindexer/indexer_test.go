@@ -12,14 +12,14 @@ func TestTeXIndexer_CreateIndex(t *testing.T) {
 	t.Parallel()
 
 	ctx := context.Background()
-	files := entities.Files{
+	files := entities.Notes{
 		{Name: "first.tex", Contents: []byte("unused here")},
 		{Name: "second.tex", Contents: []byte("unused there")},
 	}
 
-	templateString := `doc begins here — {{ .Files }} — doc ends here`
+	templateString := `doc begins here — {{ .Notes }} — doc ends here`
 
-	expected := entities.File{
+	expected := entities.Note{
 		Name: "index.tex",
 		Contents: []byte(
 			`doc begins here — \include{first.tex}` + "\n" + `\include{second.tex} — doc ends here`,

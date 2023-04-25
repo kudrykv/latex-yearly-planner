@@ -13,7 +13,7 @@ func TestPlanner_Generate(t *testing.T) {
 	t.Parallel()
 
 	ctx := context.Background()
-	fileStructure := entities.FileStructure{}
+	fileStructure := entities.NoteStructure{}
 
 	t.Run("successful run", func(t *testing.T) {
 		t.Parallel()
@@ -32,7 +32,7 @@ func TestPlanner_Generate(t *testing.T) {
 
 		planner, m := setup(t)
 
-		m.builder.EXPECT().Generate(ctx).Return(entities.FileStructure{}, assert.AnError)
+		m.builder.EXPECT().Generate(ctx).Return(entities.NoteStructure{}, assert.AnError)
 
 		err := planner.Generate(ctx)
 
@@ -45,9 +45,9 @@ func TestPlanner_Write(t *testing.T) {
 
 	ctx := context.Background()
 	basePath := "./out_test"
-	fileStructure := entities.FileStructure{
-		Index: entities.File{Name: "index.tex"},
-		Files: []entities.File{{Name: "file1.tex"}, {Name: "file2.tex"}},
+	fileStructure := entities.NoteStructure{
+		Index: entities.Note{Name: "index.tex"},
+		Notes: []entities.Note{{Name: "file1.tex"}, {Name: "file2.tex"}},
 	}
 
 	t.Run("successful run", func(t *testing.T) {
@@ -57,8 +57,8 @@ func TestPlanner_Write(t *testing.T) {
 
 		m.builder.EXPECT().Generate(ctx).Return(fileStructure, nil)
 		m.fileWriter.EXPECT().Write(ctx, basePath, fileStructure.Index).Return(nil)
-		m.fileWriter.EXPECT().Write(ctx, basePath, fileStructure.Files[0]).Return(nil)
-		m.fileWriter.EXPECT().Write(ctx, basePath, fileStructure.Files[1]).Return(nil)
+		m.fileWriter.EXPECT().Write(ctx, basePath, fileStructure.Notes[0]).Return(nil)
+		m.fileWriter.EXPECT().Write(ctx, basePath, fileStructure.Notes[1]).Return(nil)
 
 		err := planner.Generate(ctx)
 
@@ -74,7 +74,7 @@ func TestPlanner_Write(t *testing.T) {
 
 		planner, m := setup(t)
 
-		m.builder.EXPECT().Generate(ctx).Return(entities.FileStructure{}, assert.AnError)
+		m.builder.EXPECT().Generate(ctx).Return(entities.NoteStructure{}, assert.AnError)
 
 		err := planner.Generate(ctx)
 
@@ -108,9 +108,9 @@ func TestPlanner_Compile(t *testing.T) {
 
 	ctx := context.Background()
 	basePath := "./out_test"
-	fileStructure := entities.FileStructure{
-		Index: entities.File{Name: "index.tex"},
-		Files: []entities.File{{Name: "file1.tex"}, {Name: "file2.tex"}},
+	fileStructure := entities.NoteStructure{
+		Index: entities.Note{Name: "index.tex"},
+		Notes: []entities.Note{{Name: "file1.tex"}, {Name: "file2.tex"}},
 	}
 
 	t.Run("successful run", func(t *testing.T) {
@@ -120,8 +120,8 @@ func TestPlanner_Compile(t *testing.T) {
 
 		m.builder.EXPECT().Generate(ctx).Return(fileStructure, nil)
 		m.fileWriter.EXPECT().Write(ctx, basePath, fileStructure.Index).Return(nil)
-		m.fileWriter.EXPECT().Write(ctx, basePath, fileStructure.Files[0]).Return(nil)
-		m.fileWriter.EXPECT().Write(ctx, basePath, fileStructure.Files[1]).Return(nil)
+		m.fileWriter.EXPECT().Write(ctx, basePath, fileStructure.Notes[0]).Return(nil)
+		m.fileWriter.EXPECT().Write(ctx, basePath, fileStructure.Notes[1]).Return(nil)
 		m.commander.EXPECT().CreateCommand("pdflatex", fileStructure.Index.Name).Return(m.command)
 		m.command.EXPECT().SetBasePath("./out_test")
 		m.command.EXPECT().Run(ctx).Return(nil)
@@ -144,7 +144,7 @@ func TestPlanner_Compile(t *testing.T) {
 
 		planner, m := setup(t)
 
-		m.builder.EXPECT().Generate(ctx).Return(entities.FileStructure{}, assert.AnError)
+		m.builder.EXPECT().Generate(ctx).Return(entities.NoteStructure{}, assert.AnError)
 
 		err := planner.Generate(ctx)
 

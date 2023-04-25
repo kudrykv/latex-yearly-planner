@@ -26,20 +26,20 @@ func New(templateText string) (TeXIndexer, error) {
 	}, nil
 }
 
-func (r TeXIndexer) CreateIndex(_ context.Context, files entities.Files) (entities.File, error) {
+func (r TeXIndexer) CreateIndex(_ context.Context, files entities.Notes) (entities.Note, error) {
 	buffer := bytes.NewBuffer(nil)
 
-	if err := r.templateTree.Execute(buffer, map[string]any{"Files": r.files(files)}); err != nil {
-		return entities.File{}, fmt.Errorf("execute template: %w", err)
+	if err := r.templateTree.Execute(buffer, map[string]any{"Notes": r.files(files)}); err != nil {
+		return entities.Note{}, fmt.Errorf("execute template: %w", err)
 	}
 
-	return entities.File{
+	return entities.Note{
 		Name:     "index.tex",
 		Contents: buffer.Bytes(),
 	}, nil
 }
 
-func (r TeXIndexer) files(files entities.Files) string {
+func (r TeXIndexer) files(files entities.Notes) string {
 	buffer := bytes.NewBuffer(nil)
 
 	fileNames := make([]string, 0, len(files))

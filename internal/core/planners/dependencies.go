@@ -13,11 +13,11 @@ type (
 )
 
 type PlannerBuilder interface {
-	Generate(context.Context) (entities.FileStructure, error)
+	Generate(context.Context) (entities.NoteStructure, error)
 }
 
 type FileWriter interface {
-	Write(context.Context, BasePath, entities.File) error
+	Write(context.Context, BasePath, entities.Note) error
 }
 
 type Commander interface {

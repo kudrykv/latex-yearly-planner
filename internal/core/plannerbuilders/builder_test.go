@@ -11,12 +11,12 @@ func TestBuilder_Generate(t *testing.T) {
 	t.Parallel()
 
 	ctx := context.Background()
-	file := entities.File{Name: "file.tex", Contents: []byte(`hello world`)}
-	files := entities.Files{file}
-	indexFile := entities.File{Name: "index.tex", Contents: []byte(`index`)}
-	expected := entities.FileStructure{
+	file := entities.Note{Name: "file.tex", Contents: []byte(`hello world`)}
+	files := entities.Notes{file}
+	indexFile := entities.Note{Name: "index.tex", Contents: []byte(`index`)}
+	expected := entities.NoteStructure{
 		Index: indexFile,
-		Files: files,
+		Notes: files,
 	}
 
 	t.Run("successful run", func(t *testing.T) {

@@ -11,9 +11,9 @@ type Sections []Section
 
 type Section interface {
 	IsEnabled() bool
-	GenerateSection(context.Context) (entities.File, error)
+	GenerateSection(context.Context) (entities.Note, error)
 }
 
 type Indexer interface {
-	CreateIndex(context.Context, entities.Files) (entities.File, error)
+	CreateIndex(context.Context, entities.Notes) (entities.Note, error)
 }

@@ -36,10 +36,10 @@ func (m *MockSection) EXPECT() *MockSectionMockRecorder {
 }
 
 // GenerateSection mocks base method.
-func (m *MockSection) GenerateSection(arg0 context.Context) (entities.File, error) {
+func (m *MockSection) GenerateSection(arg0 context.Context) (entities.Note, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GenerateSection", arg0)
-	ret0, _ := ret[0].(entities.File)
+	ret0, _ := ret[0].(entities.Note)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -88,10 +88,10 @@ func (m *MockIndexer) EXPECT() *MockIndexerMockRecorder {
 }
 
 // CreateIndex mocks base method.
-func (m *MockIndexer) CreateIndex(arg0 context.Context, arg1 entities.Files) (entities.File, error) {
+func (m *MockIndexer) CreateIndex(arg0 context.Context, arg1 entities.Notes) (entities.Note, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "CreateIndex", arg0, arg1)
-	ret0, _ := ret[0].(entities.File)
+	ret0, _ := ret[0].(entities.Note)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

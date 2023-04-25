@@ -11,7 +11,7 @@ type Planner struct {
 	fileWriter FileWriter
 	commander  Commander
 
-	fileStructure entities.FileStructure
+	fileStructure entities.NoteStructure
 }
 
 func New(builder PlannerBuilder, fileWriter FileWriter, commander Commander) *Planner {
@@ -40,7 +40,7 @@ func (r *Planner) Write(ctx context.Context, basePath string) error {
 		return fmt.Errorf("write index: %w", err)
 	}
 
-	for _, file := range r.fileStructure.Files {
+	for _, file := range r.fileStructure.Notes {
 		if err := r.fileWriter.Write(ctx, basePath, file); err != nil {
 			return fmt.Errorf("write file: %w", err)
 		}

@@ -1,16 +1,16 @@
 package entities
 
-type Files []File
+type Notes []Note
 
-func (r Files) IsEmpty() bool {
+func (r Notes) IsEmpty() bool {
 	return len(r) == 0
 }
 
-type File struct {
+type Note struct {
 	Name     string
 	Contents []byte
 }
 
-func (r File) IsEmpty() bool {
+func (r Note) IsEmpty() bool {
 	return len(r.Name) == 0 && len(r.Contents) == 0
 }
