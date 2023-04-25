@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/commanders"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/filewriters"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mosdocument"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mostitles"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/texindexer"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/plannerbuilders"
@@ -31,10 +32,20 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 						{
 							Name: "mos",
 							Action: func(cliContext *cli.Context) error {
+								document, err := mosdocument.New(mosdocument.DocumentParameters{})
+								if err != nil {
+									return fmt.Errorf("new document: %w", err)
+								}
+
+								templateText, err := document.Execute()
+								if err != nil {
+									return fmt.Errorf("execute: %w", err)
+								}
+
 								fileWriter := filewriters.New("./out")
 								cmder := commanders.New("./out")
 
-								indexer, err := texindexer.New("")
+								indexer, err := texindexer.New(templateText)
 								if err != nil {
 									return fmt.Errorf("new indexer: %w", err)
 								}
