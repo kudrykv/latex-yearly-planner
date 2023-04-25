@@ -11,7 +11,6 @@ type mocked struct {
 	builder    *mocks.MockPlannerBuilder
 	noteWriter *mocks.MockNoteWriter
 	commander  *mocks.MockCommander
-	command    *mocks.MockCommand
 }
 
 func setup(t *testing.T) (*planners.Planner, mocked) {
@@ -22,7 +21,6 @@ func setup(t *testing.T) (*planners.Planner, mocked) {
 	builder := mocks.NewMockPlannerBuilder(controller)
 	writer := mocks.NewMockNoteWriter(controller)
 	commander := mocks.NewMockCommander(controller)
-	command := mocks.NewMockCommand(controller)
 
 	planner := planners.New(builder, writer, commander)
 
@@ -30,6 +28,5 @@ func setup(t *testing.T) (*planners.Planner, mocked) {
 		builder:    builder,
 		noteWriter: writer,
 		commander:  commander,
-		command:    command,
 	}
 }

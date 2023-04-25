@@ -49,16 +49,13 @@ func (r *Planner) Write(ctx context.Context) error {
 	return nil
 }
 
-func (r *Planner) Compile(ctx context.Context, basePath string) error {
+func (r *Planner) Compile(ctx context.Context) error {
 	if r.fileStructure.IsEmpty() {
 		return fmt.Errorf("nothing has been generated: %w", ErrNothingToCompile)
 	}
 
-	command := r.commander.CreateCommand("pdflatex", r.fileStructure.Index.Name)
-	command.SetBasePath(basePath)
-
-	if err := command.Run(ctx); err != nil {
-		return fmt.Errorf("rum: %w", err)
+	if err := r.commander.Run(ctx, "pdflatex", r.fileStructure.Index.Name); err != nil {
+		return fmt.Errorf("compile index: %w", err)
 	}
 
 	return nil

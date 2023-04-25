@@ -120,9 +120,7 @@ func TestPlanner_Compile(t *testing.T) {
 		m.noteWriter.EXPECT().Write(ctx, fileStructure.Index).Return(nil)
 		m.noteWriter.EXPECT().Write(ctx, fileStructure.Notes[0]).Return(nil)
 		m.noteWriter.EXPECT().Write(ctx, fileStructure.Notes[1]).Return(nil)
-		m.commander.EXPECT().CreateCommand("pdflatex", fileStructure.Index.Name).Return(m.command)
-		m.command.EXPECT().SetBasePath("./out_test")
-		m.command.EXPECT().Run(ctx).Return(nil)
+		m.commander.EXPECT().Run(ctx, "pdflatex", fileStructure.Index.Name).Return(nil)
 
 		err := planner.Generate(ctx)
 
@@ -132,7 +130,7 @@ func TestPlanner_Compile(t *testing.T) {
 
 		require.NoError(t, err)
 
-		err = planner.Compile(ctx, "./out_test")
+		err = planner.Compile(ctx)
 
 		require.NoError(t, err)
 	})
@@ -148,7 +146,7 @@ func TestPlanner_Compile(t *testing.T) {
 
 		require.ErrorIs(t, err, assert.AnError)
 
-		err = planner.Compile(ctx, "./out_test")
+		err = planner.Compile(ctx)
 
 		require.ErrorIs(t, err, planners.ErrNothingToCompile)
 	})
@@ -158,7 +156,7 @@ func TestPlanner_Compile(t *testing.T) {
 
 		planner, _ := setup(t)
 
-		err := planner.Compile(ctx, "./out_test")
+		err := planner.Compile(ctx)
 
 		require.ErrorIs(t, err, planners.ErrNothingToCompile)
 	})
@@ -169,15 +167,13 @@ func TestPlanner_Compile(t *testing.T) {
 		planner, m := setup(t)
 
 		m.builder.EXPECT().Generate(ctx).Return(fileStructure, nil)
-		m.commander.EXPECT().CreateCommand("pdflatex", fileStructure.Index.Name).Return(m.command)
-		m.command.EXPECT().SetBasePath("./out_test")
-		m.command.EXPECT().Run(ctx).Return(assert.AnError)
+		m.commander.EXPECT().Run(ctx, "pdflatex", fileStructure.Index.Name).Return(assert.AnError)
 
 		err := planner.Generate(ctx)
 
 		require.NoError(t, err)
 
-		err = planner.Compile(ctx, "./out_test")
+		err = planner.Compile(ctx)
 
 		require.ErrorIs(t, err, assert.AnError)
 	})

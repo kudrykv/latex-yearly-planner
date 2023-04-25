@@ -111,70 +111,21 @@ func (m *MockCommander) EXPECT() *MockCommanderMockRecorder {
 	return m.recorder
 }
 
-// CreateCommand mocks base method.
-func (m *MockCommander) CreateCommand(arg0 planners.CommandName, arg1 ...planners.StringArg) planners.Command {
+// Run mocks base method.
+func (m *MockCommander) Run(arg0 context.Context, arg1 planners.CommandName, arg2 ...planners.StringArg) error {
 	m.ctrl.T.Helper()
-	varargs := []interface{}{arg0}
-	for _, a := range arg1 {
+	varargs := []interface{}{arg0, arg1}
+	for _, a := range arg2 {
 		varargs = append(varargs, a)
 	}
-	ret := m.ctrl.Call(m, "CreateCommand", varargs...)
-	ret0, _ := ret[0].(planners.Command)
-	return ret0
-}
-
-// CreateCommand indicates an expected call of CreateCommand.
-func (mr *MockCommanderMockRecorder) CreateCommand(arg0 interface{}, arg1 ...interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	varargs := append([]interface{}{arg0}, arg1...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateCommand", reflect.TypeOf((*MockCommander)(nil).CreateCommand), varargs...)
-}
-
-// MockCommand is a mock of Command interface.
-type MockCommand struct {
-	ctrl     *gomock.Controller
-	recorder *MockCommandMockRecorder
-}
-
-// MockCommandMockRecorder is the mock recorder for MockCommand.
-type MockCommandMockRecorder struct {
-	mock *MockCommand
-}
-
-// NewMockCommand creates a new mock instance.
-func NewMockCommand(ctrl *gomock.Controller) *MockCommand {
-	mock := &MockCommand{ctrl: ctrl}
-	mock.recorder = &MockCommandMockRecorder{mock}
-	return mock
-}
-
-// EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockCommand) EXPECT() *MockCommandMockRecorder {
-	return m.recorder
-}
-
-// Run mocks base method.
-func (m *MockCommand) Run(arg0 context.Context) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Run", arg0)
+	ret := m.ctrl.Call(m, "Run", varargs...)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // Run indicates an expected call of Run.
-func (mr *MockCommandMockRecorder) Run(arg0 interface{}) *gomock.Call {
+func (mr *MockCommanderMockRecorder) Run(arg0, arg1 interface{}, arg2 ...interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Run", reflect.TypeOf((*MockCommand)(nil).Run), arg0)
-}
-
-// SetBasePath mocks base method.
-func (m *MockCommand) SetBasePath(path planners.BasePath) {
-	m.ctrl.T.Helper()
-	m.ctrl.Call(m, "SetBasePath", path)
-}
-
-// SetBasePath indicates an expected call of SetBasePath.
-func (mr *MockCommandMockRecorder) SetBasePath(path interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SetBasePath", reflect.TypeOf((*MockCommand)(nil).SetBasePath), path)
+	varargs := append([]interface{}{arg0, arg1}, arg2...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Run", reflect.TypeOf((*MockCommander)(nil).Run), varargs...)
 }

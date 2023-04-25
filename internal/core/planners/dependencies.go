@@ -22,10 +22,5 @@ type NoteWriter interface {
 }
 
 type Commander interface {
-	CreateCommand(CommandName, ...StringArg) Command
-}
-
-type Command interface {
-	SetBasePath(path BasePath)
-	Run(context.Context) error
+	Run(context.Context, CommandName, ...StringArg) error
 }
