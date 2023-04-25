@@ -2,8 +2,8 @@ package planners_test
 
 import (
 	"context"
+	entities2 "github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/planners"
-	"github.com/kudrykv/latex-yearly-planner/internal/core/planners/entities"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
@@ -13,7 +13,7 @@ func TestPlanner_Generate(t *testing.T) {
 	t.Parallel()
 
 	ctx := context.Background()
-	fileStructure := entities.NoteStructure{}
+	fileStructure := entities2.NoteStructure{}
 
 	t.Run("successful run", func(t *testing.T) {
 		t.Parallel()
@@ -32,7 +32,7 @@ func TestPlanner_Generate(t *testing.T) {
 
 		planner, m := setup(t)
 
-		m.builder.EXPECT().Generate(ctx).Return(entities.NoteStructure{}, assert.AnError)
+		m.builder.EXPECT().Generate(ctx).Return(entities2.NoteStructure{}, assert.AnError)
 
 		err := planner.Generate(ctx)
 
@@ -44,9 +44,9 @@ func TestPlanner_Write(t *testing.T) {
 	t.Parallel()
 
 	ctx := context.Background()
-	fileStructure := entities.NoteStructure{
-		Index: entities.Note{Name: "index.tex"},
-		Notes: []entities.Note{{Name: "file1.tex"}, {Name: "file2.tex"}},
+	fileStructure := entities2.NoteStructure{
+		Index: entities2.Note{Name: "index.tex"},
+		Notes: []entities2.Note{{Name: "file1.tex"}, {Name: "file2.tex"}},
 	}
 
 	t.Run("successful run", func(t *testing.T) {
@@ -73,7 +73,7 @@ func TestPlanner_Write(t *testing.T) {
 
 		planner, m := setup(t)
 
-		m.builder.EXPECT().Generate(ctx).Return(entities.NoteStructure{}, assert.AnError)
+		m.builder.EXPECT().Generate(ctx).Return(entities2.NoteStructure{}, assert.AnError)
 
 		err := planner.Generate(ctx)
 
@@ -106,9 +106,9 @@ func TestPlanner_Compile(t *testing.T) {
 	t.Parallel()
 
 	ctx := context.Background()
-	fileStructure := entities.NoteStructure{
-		Index: entities.Note{Name: "index.tex"},
-		Notes: []entities.Note{{Name: "file1.tex"}, {Name: "file2.tex"}},
+	fileStructure := entities2.NoteStructure{
+		Index: entities2.Note{Name: "index.tex"},
+		Notes: []entities2.Note{{Name: "file1.tex"}, {Name: "file2.tex"}},
 	}
 
 	t.Run("successful run", func(t *testing.T) {
@@ -140,7 +140,7 @@ func TestPlanner_Compile(t *testing.T) {
 
 		planner, m := setup(t)
 
-		m.builder.EXPECT().Generate(ctx).Return(entities.NoteStructure{}, assert.AnError)
+		m.builder.EXPECT().Generate(ctx).Return(entities2.NoteStructure{}, assert.AnError)
 
 		err := planner.Generate(ctx)
 

@@ -3,7 +3,7 @@ package filewriter
 import (
 	"context"
 	"fmt"
-	"github.com/kudrykv/latex-yearly-planner/internal/core/planners/entities"
+	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 	"os"
 	"path"
 )

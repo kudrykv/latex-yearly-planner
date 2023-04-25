@@ -6,10 +6,10 @@ package mocks
 
 import (
 	context "context"
+	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	entities "github.com/kudrykv/latex-yearly-planner/internal/core/planners/entities"
 )
 
 // MockSection is a mock of Section interface.

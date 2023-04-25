@@ -3,7 +3,7 @@ package filewriter_test
 import (
 	"context"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/filewriter"
-	"github.com/kudrykv/latex-yearly-planner/internal/core/planners/entities"
+	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 	"github.com/stretchr/testify/require"
 	"os"
 	"testing"

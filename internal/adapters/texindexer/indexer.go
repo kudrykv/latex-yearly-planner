@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/kudrykv/latex-yearly-planner/internal/core/planners/entities"
+	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 	"strings"
 	"text/template"
 )

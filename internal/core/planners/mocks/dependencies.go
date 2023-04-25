@@ -6,11 +6,11 @@ package mocks
 
 import (
 	context "context"
+	entities2 "github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
 	planners "github.com/kudrykv/latex-yearly-planner/internal/core/planners"
-	entities "github.com/kudrykv/latex-yearly-planner/internal/core/planners/entities"
 )
 
 // MockPlannerBuilder is a mock of PlannerBuilder interface.
@@ -37,10 +37,10 @@ func (m *MockPlannerBuilder) EXPECT() *MockPlannerBuilderMockRecorder {
 }
 
 // Generate mocks base method.
-func (m *MockPlannerBuilder) Generate(arg0 context.Context) (entities.NoteStructure, error) {
+func (m *MockPlannerBuilder) Generate(arg0 context.Context) (entities2.NoteStructure, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Generate", arg0)
-	ret0, _ := ret[0].(entities.NoteStructure)
+	ret0, _ := ret[0].(entities2.NoteStructure)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -75,7 +75,7 @@ func (m *MockNoteWriter) EXPECT() *MockNoteWriterMockRecorder {
 }
 
 // Write mocks base method.
-func (m *MockNoteWriter) Write(arg0 context.Context, arg1 entities.Note) error {
+func (m *MockNoteWriter) Write(arg0 context.Context, arg1 entities2.Note) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Write", arg0, arg1)
 	ret0, _ := ret[0].(error)

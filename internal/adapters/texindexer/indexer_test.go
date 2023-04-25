@@ -3,7 +3,7 @@ package texindexer_test
 import (
 	"context"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/texindexer"
-	"github.com/kudrykv/latex-yearly-planner/internal/core/planners/entities"
+	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 	"github.com/stretchr/testify/require"
 	"testing"
 )

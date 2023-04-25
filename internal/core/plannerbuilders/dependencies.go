@@ -2,7 +2,7 @@ package plannerbuilders
 
 import (
 	"context"
-	"github.com/kudrykv/latex-yearly-planner/internal/core/planners/entities"
+	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 )
 
 //go:generate mockgen -source=dependencies.go -destination=mocks/dependencies.go -package=mocks

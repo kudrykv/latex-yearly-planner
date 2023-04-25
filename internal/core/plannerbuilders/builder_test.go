@@ -2,7 +2,7 @@ package plannerbuilders_test
 
 import (
 	"context"
-	"github.com/kudrykv/latex-yearly-planner/internal/core/planners/entities"
+	entities2 "github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 	"github.com/stretchr/testify/require"
 	"testing"
 )
@@ -11,10 +11,10 @@ func TestBuilder_Generate(t *testing.T) {
 	t.Parallel()
 
 	ctx := context.Background()
-	file := entities.Note{Name: "file.tex", Contents: []byte(`hello world`)}
-	files := entities.Notes{file}
-	indexFile := entities.Note{Name: "index.tex", Contents: []byte(`index`)}
-	expected := entities.NoteStructure{
+	file := entities2.Note{Name: "file.tex", Contents: []byte(`hello world`)}
+	files := entities2.Notes{file}
+	indexFile := entities2.Note{Name: "index.tex", Contents: []byte(`index`)}
+	expected := entities2.NoteStructure{
 		Index: indexFile,
 		Notes: files,
 	}
