@@ -10,8 +10,6 @@ import (
 //go:embed document_template.tex
 var documentTemplate string
 
-type DocumentParameters struct{}
-
 type Document struct {
 	templateTree *template.Template
 	parameters   DocumentParameters
