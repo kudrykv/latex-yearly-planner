@@ -1,8 +1,8 @@
-package filewriter_test
+package filewriters_test
 
 import (
 	"context"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/filewriter"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/filewriters"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 	"github.com/stretchr/testify/require"
 	"os"
@@ -19,7 +19,7 @@ func TestFileWriter_Write(t *testing.T) {
 	t.Run("should write to file", func(t *testing.T) {
 		t.Parallel()
 
-		writer := filewriter.New(basePath)
+		writer := filewriters.New(basePath)
 
 		err := writer.Write(context.Background(), note)
 

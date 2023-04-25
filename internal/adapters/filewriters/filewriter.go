@@ -1,4 +1,4 @@
-package filewriter
+package filewriters
 
 import (
 	"context"

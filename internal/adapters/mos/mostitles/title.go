@@ -1,4 +1,4 @@
-package mostitle
+package mostitles
 
 import (
 	"context"
