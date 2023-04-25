@@ -112,17 +112,22 @@ func (m *MockCommander) EXPECT() *MockCommanderMockRecorder {
 }
 
 // CreateCommand mocks base method.
-func (m *MockCommander) CreateCommand(arg0 planners.CommandName, arg1 planners.BasePath) planners.Command {
+func (m *MockCommander) CreateCommand(arg0 planners.CommandName, arg1 ...planners.StringArg) planners.Command {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateCommand", arg0, arg1)
+	varargs := []interface{}{arg0}
+	for _, a := range arg1 {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "CreateCommand", varargs...)
 	ret0, _ := ret[0].(planners.Command)
 	return ret0
 }
 
 // CreateCommand indicates an expected call of CreateCommand.
-func (mr *MockCommanderMockRecorder) CreateCommand(arg0, arg1 interface{}) *gomock.Call {
+func (mr *MockCommanderMockRecorder) CreateCommand(arg0 interface{}, arg1 ...interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateCommand", reflect.TypeOf((*MockCommander)(nil).CreateCommand), arg0, arg1)
+	varargs := append([]interface{}{arg0}, arg1...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateCommand", reflect.TypeOf((*MockCommander)(nil).CreateCommand), varargs...)
 }
 
 // MockCommand is a mock of Command interface.

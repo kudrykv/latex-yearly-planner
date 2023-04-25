@@ -10,6 +10,7 @@ import (
 type (
 	CommandName = string
 	BasePath    = string
+	StringArg   = string
 )
 
 type PlannerBuilder interface {
@@ -21,7 +22,7 @@ type NoteWriter interface {
 }
 
 type Commander interface {
-	CreateCommand(CommandName, BasePath) Command
+	CreateCommand(CommandName, ...StringArg) Command
 }
 
 type Command interface {
