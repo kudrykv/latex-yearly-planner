@@ -39,13 +39,25 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 									return fmt.Errorf("new indexer: %w", err)
 								}
 
-								titleSection := mostitles.New(mostitles.TitleParameters{})
+								titleSection := mostitles.New(mostitles.TitleParameters{IsEnabled: true, Name: "hello world"})
 
 								builder := plannerbuilders.New(indexer, plannerbuilders.Sections{titleSection})
 
-								planners.New(builder, fileWriter, cmder)
+								planner := planners.New(builder, fileWriter, cmder)
 
-								panic("not implemented")
+								if err = planner.Generate(cliContext.Context); err != nil {
+									return fmt.Errorf("generate: %w", err)
+								}
+
+								if err = planner.Write(cliContext.Context); err != nil {
+									return fmt.Errorf("write: %w", err)
+								}
+
+								if err = planner.Compile(cliContext.Context); err != nil {
+									return fmt.Errorf("compile: %w", err)
+								}
+
+								return nil
 							},
 						},
 					},
