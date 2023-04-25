@@ -8,16 +8,16 @@ import (
 
 type Planner struct {
 	builder    PlannerBuilder
-	fileWriter NoteWriter
+	noteWriter NoteWriter
 	commander  Commander
 
 	fileStructure entities.NoteStructure
 }
 
-func New(builder PlannerBuilder, fileWriter NoteWriter, commander Commander) *Planner {
+func New(builder PlannerBuilder, noteWriter NoteWriter, commander Commander) *Planner {
 	return &Planner{
 		builder:    builder,
-		fileWriter: fileWriter,
+		noteWriter: noteWriter,
 		commander:  commander,
 	}
 }
@@ -36,12 +36,12 @@ func (r *Planner) Write(ctx context.Context) error {
 		return fmt.Errorf("nothing has been generated: %w", ErrNothingToWrite)
 	}
 
-	if err := r.fileWriter.Write(ctx, r.fileStructure.Index); err != nil {
+	if err := r.noteWriter.Write(ctx, r.fileStructure.Index); err != nil {
 		return fmt.Errorf("write index: %w", err)
 	}
 
 	for _, file := range r.fileStructure.Notes {
-		if err := r.fileWriter.Write(ctx, file); err != nil {
+		if err := r.noteWriter.Write(ctx, file); err != nil {
 			return fmt.Errorf("write file: %w", err)
 		}
 	}
