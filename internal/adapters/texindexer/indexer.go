@@ -3,27 +3,52 @@ package texindexer
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/planners/entities"
+	"strings"
+	"text/template"
 )
 
-type TeXIndexer struct{}
+type TeXIndexer struct {
+	templateTree *template.Template
+}
 
-func New() TeXIndexer {
-	return TeXIndexer{}
+func New(templateText string) (TeXIndexer, error) {
+	templateTree := template.New("index")
+
+	var err error
+	if templateTree, err = templateTree.Parse(templateText); err != nil {
+		return TeXIndexer{}, fmt.Errorf("parse template: %w", err)
+	}
+
+	return TeXIndexer{
+		templateTree: templateTree,
+	}, nil
 }
 
 func (r TeXIndexer) CreateIndex(_ context.Context, files entities.Files) (entities.File, error) {
 	buffer := bytes.NewBuffer(nil)
 
-	for _, file := range files {
-		buffer.WriteString(`\include{`)
-		buffer.WriteString(file.Name)
-		buffer.WriteString(`}`)
-		buffer.WriteString("\n")
+	if err := r.templateTree.Execute(buffer, map[string]any{"Files": r.files(files)}); err != nil {
+		return entities.File{}, fmt.Errorf("execute template: %w", err)
 	}
 
 	return entities.File{
 		Name:     "index.tex",
 		Contents: buffer.Bytes(),
 	}, nil
+}
+
+func (r TeXIndexer) files(files entities.Files) string {
+	buffer := bytes.NewBuffer(nil)
+
+	fileNames := make([]string, 0, len(files))
+
+	for _, file := range files {
+		fileNames = append(fileNames, `\include{`+file.Name+`}`)
+	}
+
+	buffer.WriteString(strings.Join(fileNames, "\n"))
+
+	return buffer.String()
 }
