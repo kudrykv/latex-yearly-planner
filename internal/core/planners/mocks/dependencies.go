@@ -51,41 +51,41 @@ func (mr *MockPlannerBuilderMockRecorder) Generate(arg0 interface{}) *gomock.Cal
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Generate", reflect.TypeOf((*MockPlannerBuilder)(nil).Generate), arg0)
 }
 
-// MockFileWriter is a mock of FileWriter interface.
-type MockFileWriter struct {
+// MockNoteWriter is a mock of NoteWriter interface.
+type MockNoteWriter struct {
 	ctrl     *gomock.Controller
-	recorder *MockFileWriterMockRecorder
+	recorder *MockNoteWriterMockRecorder
 }
 
-// MockFileWriterMockRecorder is the mock recorder for MockFileWriter.
-type MockFileWriterMockRecorder struct {
-	mock *MockFileWriter
+// MockNoteWriterMockRecorder is the mock recorder for MockNoteWriter.
+type MockNoteWriterMockRecorder struct {
+	mock *MockNoteWriter
 }
 
-// NewMockFileWriter creates a new mock instance.
-func NewMockFileWriter(ctrl *gomock.Controller) *MockFileWriter {
-	mock := &MockFileWriter{ctrl: ctrl}
-	mock.recorder = &MockFileWriterMockRecorder{mock}
+// NewMockNoteWriter creates a new mock instance.
+func NewMockNoteWriter(ctrl *gomock.Controller) *MockNoteWriter {
+	mock := &MockNoteWriter{ctrl: ctrl}
+	mock.recorder = &MockNoteWriterMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockFileWriter) EXPECT() *MockFileWriterMockRecorder {
+func (m *MockNoteWriter) EXPECT() *MockNoteWriterMockRecorder {
 	return m.recorder
 }
 
 // Write mocks base method.
-func (m *MockFileWriter) Write(arg0 context.Context, arg1 planners.BasePath, arg2 entities.Note) error {
+func (m *MockNoteWriter) Write(arg0 context.Context, arg1 entities.Note) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Write", arg0, arg1, arg2)
+	ret := m.ctrl.Call(m, "Write", arg0, arg1)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // Write indicates an expected call of Write.
-func (mr *MockFileWriterMockRecorder) Write(arg0, arg1, arg2 interface{}) *gomock.Call {
+func (mr *MockNoteWriterMockRecorder) Write(arg0, arg1 interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Write", reflect.TypeOf((*MockFileWriter)(nil).Write), arg0, arg1, arg2)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Write", reflect.TypeOf((*MockNoteWriter)(nil).Write), arg0, arg1)
 }
 
 // MockCommander is a mock of Commander interface.

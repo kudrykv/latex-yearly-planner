@@ -17,7 +17,7 @@ type PlannerBuilder interface {
 }
 
 type NoteWriter interface {
-	Write(context.Context, BasePath, entities.Note) error
+	Write(context.Context, entities.Note) error
 }
 
 type Commander interface {

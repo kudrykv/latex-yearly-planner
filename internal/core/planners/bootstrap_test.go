@@ -9,7 +9,7 @@ import (
 
 type mocked struct {
 	builder    *mocks.MockPlannerBuilder
-	fileWriter *mocks.MockFileWriter
+	noteWriter *mocks.MockNoteWriter
 	commander  *mocks.MockCommander
 	command    *mocks.MockCommand
 }
@@ -20,7 +20,7 @@ func setup(t *testing.T) (*planners.Planner, mocked) {
 	controller := gomock.NewController(t)
 
 	builder := mocks.NewMockPlannerBuilder(controller)
-	writer := mocks.NewMockFileWriter(controller)
+	writer := mocks.NewMockNoteWriter(controller)
 	commander := mocks.NewMockCommander(controller)
 	command := mocks.NewMockCommand(controller)
 
@@ -28,7 +28,7 @@ func setup(t *testing.T) (*planners.Planner, mocked) {
 
 	return planner, mocked{
 		builder:    builder,
-		fileWriter: writer,
+		noteWriter: writer,
 		commander:  commander,
 		command:    command,
 	}

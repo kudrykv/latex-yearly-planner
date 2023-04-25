@@ -31,17 +31,17 @@ func (r *Planner) Generate(ctx context.Context) error {
 	return nil
 }
 
-func (r *Planner) Write(ctx context.Context, basePath string) error {
+func (r *Planner) Write(ctx context.Context) error {
 	if r.fileStructure.IsEmpty() {
 		return fmt.Errorf("nothing has been generated: %w", ErrNothingToWrite)
 	}
 
-	if err := r.fileWriter.Write(ctx, basePath, r.fileStructure.Index); err != nil {
+	if err := r.fileWriter.Write(ctx, r.fileStructure.Index); err != nil {
 		return fmt.Errorf("write index: %w", err)
 	}
 
 	for _, file := range r.fileStructure.Notes {
-		if err := r.fileWriter.Write(ctx, basePath, file); err != nil {
+		if err := r.fileWriter.Write(ctx, file); err != nil {
 			return fmt.Errorf("write file: %w", err)
 		}
 	}
