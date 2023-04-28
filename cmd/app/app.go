@@ -6,7 +6,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/commanders"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/filewriters"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mosdocument"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mostitles"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mostitles"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/texindexer"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/plannerbuilders"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/planners"
