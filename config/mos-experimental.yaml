@@ -7,7 +7,7 @@ document:
 
   layout:
     dimensions:
-      width: 156mm
+      width: 156.00mm
       height: 230mm
 
     margin:

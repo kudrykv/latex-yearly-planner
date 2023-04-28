@@ -15,20 +15,20 @@ type Layout struct {
 }
 
 type Dimensions struct {
-	Width  entities.Millimeters
-	Height entities.Millimeters
+	Width  entities.Length
+	Height entities.Length
 }
 
 type Margin struct {
-	Top    entities.Millimeters
-	Right  entities.Millimeters
-	Bottom entities.Millimeters
-	Left   entities.Millimeters
+	Top    entities.Length
+	Right  entities.Length
+	Bottom entities.Length
+	Left   entities.Length
 }
 
 type MarginNotes struct {
-	Width     entities.Millimeters
-	Separator entities.Millimeters
+	Width     entities.Length
+	Separator entities.Length
 	Placement string
 }
 

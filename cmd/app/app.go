@@ -11,7 +11,9 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/core/plannerbuilders"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/planners"
 	"github.com/urfave/cli/v2"
+	"gopkg.in/yaml.v3"
 	"io"
+	"os"
 )
 
 type App struct {
@@ -31,8 +33,23 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 					Subcommands: cli.Commands{
 						{
 							Name: "mos",
+							Flags: cli.FlagsByName{
+								&cli.PathFlag{Name: "template-configuration"},
+							},
 							Action: func(cliContext *cli.Context) error {
-								document, err := mosdocument.New(mosdocument.DocumentParameters{})
+								path := cliContext.Path("template-configuration")
+
+								fileBytes, err := os.ReadFile(path)
+								if err != nil {
+									return fmt.Errorf("read file: %w", err)
+								}
+
+								var documentParameters YAMLMOS
+								if err := yaml.Unmarshal(fileBytes, &documentParameters); err != nil {
+									return fmt.Errorf("unmarshal: %w", err)
+								}
+
+								document, err := mosdocument.New(documentParameters.ToDocumentParameters())
 								if err != nil {
 									return fmt.Errorf("new document: %w", err)
 								}

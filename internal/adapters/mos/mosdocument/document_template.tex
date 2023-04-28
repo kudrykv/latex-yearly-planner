@@ -23,6 +23,20 @@
 \usepackage{adjustbox}
 \usepackage{multido}
 
+\geometry{paperwidth={{ .Layout.Dimensions.Width }}, paperheight={{ .Layout.Dimensions.Height }}}
+\geometry{
+  top={{ .Layout.Margin.Top }},
+  bottom={{ .Layout.Margin.Bottom }},
+  left={{ .Layout.Margin.Left }},
+  right={{ .Layout.Margin.Right }},
+  marginparwidth={{ .Layout.MarginNotes.Width }},
+  marginparsep={{ .Layout.MarginNotes.Separator }}
+}
+
+{{ if eq $.Layout.MarginNotes.Placement "left" -}} \reversemarginpar {{- end }}
+
+\pagestyle{empty}
+
 \begin{document}
 {{"{{ .Notes }}"}}
 \end{document}
