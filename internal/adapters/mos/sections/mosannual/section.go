@@ -3,19 +3,24 @@ package mosannual
 import (
 	"context"
 	"fmt"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 )
 
 type Section struct {
-	parameters SectionParameters
+	globalParameters mos.Parameters
+	parameters       SectionParameters
 }
 
 type SectionParameters struct {
 	Enabled bool
 }
 
-func New(parameters SectionParameters) Section {
-	return Section{parameters: parameters}
+func New(global mos.Parameters, local SectionParameters) Section {
+	return Section{
+		globalParameters: global,
+		parameters:       local,
+	}
 }
 
 func (r Section) IsEnabled() bool {

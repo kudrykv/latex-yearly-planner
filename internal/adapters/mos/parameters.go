@@ -5,9 +5,5 @@ import (
 )
 
 type Parameters struct {
-	Start           calendar.Month
-	End             calendar.Month
-	Weekday         calendar.Weekday
-	WithWeekNumbers bool
-	AMPMFormat      bool
+	Months calendar.Months
 }
