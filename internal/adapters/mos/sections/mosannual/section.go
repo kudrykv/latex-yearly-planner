@@ -1,6 +1,7 @@
 package mosannual
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos"
@@ -28,30 +29,29 @@ func (r Section) IsEnabled() bool {
 }
 
 func (r Section) GenerateSection(_ context.Context) (entities.Note, error) {
-	if err := r.makeHeader(); err != nil {
+	headerBytes, err := r.makeHeader()
+	if err != nil {
 		return entities.Note{}, fmt.Errorf("make header: %w", err)
 	}
 
-	if err := r.makeBody(); err != nil {
+	bodyBytes, err := r.makeBody()
+	if err != nil {
 		return entities.Note{}, fmt.Errorf("make body: %w", err)
 	}
 
-	note, err := r.makeNote()
-	if err != nil {
-		return entities.Note{}, fmt.Errorf("make note: %w", err)
-	}
+	buffer := bytes.NewBuffer(headerBytes)
+	buffer.Write(bodyBytes)
 
-	return note, nil
+	return entities.Note{
+		Name:     "annual.tex",
+		Contents: buffer.Bytes(),
+	}, nil
 }
 
-func (r Section) makeHeader() error {
-	return fmt.Errorf("not implemented")
+func (r Section) makeHeader() ([]byte, error) {
+	return nil, fmt.Errorf("not implemented")
 }
 
-func (r Section) makeBody() error {
-	return fmt.Errorf("not implemented")
-}
-
-func (r Section) makeNote() (entities.Note, error) {
-	return entities.Note{}, fmt.Errorf("not implemented")
+func (r Section) makeBody() ([]byte, error) {
+	return nil, fmt.Errorf("not implemented")
 }
