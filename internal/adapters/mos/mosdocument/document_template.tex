@@ -36,6 +36,9 @@
 {{ if eq $.Layout.MarginNotes.Placement "left" -}} \reversemarginpar {{- end }}
 
 \pagestyle{empty}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\parindent=0pt
+\fboxsep0pt
 
 \begin{document}
 {{"{{ .Notes }}"}}
