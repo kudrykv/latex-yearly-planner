@@ -11,16 +11,22 @@ import (
 type Section struct {
 	globalParameters mos.Parameters
 	parameters       SectionParameters
+
+	header Component
+	body   Component
 }
 
 type SectionParameters struct {
 	Enabled bool
 }
 
-func New(global mos.Parameters, local SectionParameters) Section {
+func New(global mos.Parameters, local SectionParameters, header, body Component) Section {
 	return Section{
 		globalParameters: global,
 		parameters:       local,
+
+		header: header,
+		body:   body,
 	}
 }
 
@@ -28,13 +34,13 @@ func (r Section) IsEnabled() bool {
 	return r.parameters.Enabled
 }
 
-func (r Section) GenerateSection(_ context.Context) (entities.Note, error) {
-	headerBytes, err := r.makeHeader()
+func (r Section) GenerateSection(ctx context.Context) (entities.Note, error) {
+	headerBytes, err := r.makeHeader(ctx)
 	if err != nil {
 		return entities.Note{}, fmt.Errorf("make header: %w", err)
 	}
 
-	bodyBytes, err := r.makeBody()
+	bodyBytes, err := r.makeBody(ctx)
 	if err != nil {
 		return entities.Note{}, fmt.Errorf("make body: %w", err)
 	}
@@ -48,10 +54,20 @@ func (r Section) GenerateSection(_ context.Context) (entities.Note, error) {
 	}, nil
 }
 
-func (r Section) makeHeader() ([]byte, error) {
-	return nil, fmt.Errorf("not implemented")
+func (r Section) makeHeader(ctx context.Context) ([]byte, error) {
+	componentBytes, err := r.header.GenerateComponent(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("generate header: %w", err)
+	}
+
+	return componentBytes, nil
 }
 
-func (r Section) makeBody() ([]byte, error) {
-	return nil, fmt.Errorf("not implemented")
+func (r Section) makeBody(ctx context.Context) ([]byte, error) {
+	componentBytes, err := r.body.GenerateComponent(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("generate body: %w", err)
+	}
+
+	return componentBytes, nil
 }

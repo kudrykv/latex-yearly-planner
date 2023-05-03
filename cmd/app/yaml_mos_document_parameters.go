@@ -1,12 +1,19 @@
 package app
 
 import (
+	"fmt"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mosdocument"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
+	"gopkg.in/yaml.v3"
+	"regexp"
+	"strconv"
+	"time"
 )
 
 type YAMLMOS struct {
-	Document YAMLDocumentParameters `yaml:"document"`
+	Document   YAMLDocumentParameters `yaml:"document"`
+	Parameters YAMLParameters         `yaml:"parameters"`
 }
 
 type YAMLDocumentParameters struct {
@@ -20,6 +27,10 @@ func (r YAMLMOS) ToDocumentParameters() mosdocument.DocumentParameters {
 		Layout:       r.Document.Layout.ToLayout(),
 		DebugOptions: r.Document.DebugOptions.ToDebugOptions(),
 	}
+}
+
+func (r YAMLMOS) ToParameters() mos.Parameters {
+	panic("not implemented")
 }
 
 type YAMLDimensions struct {
@@ -90,5 +101,75 @@ func (r YAMLDebugOptions) ToDebugOptions() mosdocument.DebugOptions {
 		Enabled:         r.Enabled,
 		HighlightLinks:  r.HighlightLinks,
 		HighlightFrames: r.HighlightFrames,
+	}
+}
+
+type YAMLParameters struct {
+	StartDate       YAMLDate `yaml:"start_date"`
+	EndDate         YAMLDate `yaml:"end_date"`
+	WeekdayStart    string   `yaml:"weekday_start"`
+	ShowWeekNumbers bool     `yaml:"show_week_numbers"`
+	FormatAMPM      bool     `yaml:"format_ampm"`
+}
+
+var dateRegex = regexp.MustCompile(`(?i)(^\d{4}),?\s* (january|february|march|april|may|june|july|august|september|november|october|december)$`)
+
+type YAMLDate time.Time
+
+func (r *YAMLDate) UnmarshalYAML(value *yaml.Node) error {
+	if value.Tag != "!!str" {
+		return entities.ErrNotAString
+	}
+
+	if !dateRegex.MatchString(value.Value) {
+		return fmt.Errorf("expected '<year>, <month_name>':%w", entities.ErrBadPattern)
+	}
+
+	matches := dateRegex.FindAllStringSubmatch(value.Value, -1)[0]
+	stringYear, stringMonth := matches[1], matches[2]
+
+	year, err := strconv.Atoi(stringYear)
+	if err != nil {
+		return fmt.Errorf("parse year: %w", err)
+	}
+
+	month, err := parseMonth(stringMonth)
+	if err != nil {
+		return fmt.Errorf("parse month: %w", err)
+	}
+
+	*r = YAMLDate(time.Date(year, month, 1, 0, 0, 0, 0, time.Local))
+
+	return nil
+}
+
+func parseMonth(month string) (time.Month, error) {
+	switch {
+	case regexp.MustCompile("(?i)january").MatchString(month):
+		return time.January, nil
+	case regexp.MustCompile("(?i)february").MatchString(month):
+		return time.February, nil
+	case regexp.MustCompile("(?i)march").MatchString(month):
+		return time.March, nil
+	case regexp.MustCompile("(?i)april").MatchString(month):
+		return time.April, nil
+	case regexp.MustCompile("(?i)may").MatchString(month):
+		return time.May, nil
+	case regexp.MustCompile("(?i)june").MatchString(month):
+		return time.June, nil
+	case regexp.MustCompile("(?i)july").MatchString(month):
+		return time.July, nil
+	case regexp.MustCompile("(?i)august").MatchString(month):
+		return time.August, nil
+	case regexp.MustCompile("(?i)september").MatchString(month):
+		return time.September, nil
+	case regexp.MustCompile("(?i)october").MatchString(month):
+		return time.October, nil
+	case regexp.MustCompile("(?i)november").MatchString(month):
+		return time.November, nil
+	case regexp.MustCompile("(?i)december").MatchString(month):
+		return time.December, nil
+	default:
+		return 0, fmt.Errorf("unknown month: %s", month)
 	}
 }

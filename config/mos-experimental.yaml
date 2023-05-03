@@ -27,7 +27,7 @@ parameters:
   end_date: 2023, December
   weekday_start: Monday
   show_week_numbers: true
-  ampm_format: false
+  format_ampm: false
 
 
 sections:

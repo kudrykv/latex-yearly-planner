@@ -44,12 +44,12 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 									return fmt.Errorf("read file: %w", err)
 								}
 
-								var documentParameters YAMLMOS
-								if err := yaml.Unmarshal(fileBytes, &documentParameters); err != nil {
+								var mosParameters YAMLMOS
+								if err := yaml.Unmarshal(fileBytes, &mosParameters); err != nil {
 									return fmt.Errorf("unmarshal: %w", err)
 								}
 
-								document, err := mosdocument.New(documentParameters.ToDocumentParameters())
+								document, err := mosdocument.New(mosParameters.ToDocumentParameters())
 								if err != nil {
 									return fmt.Errorf("new document: %w", err)
 								}
