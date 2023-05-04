@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/commanders"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/filewriters"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosheaderoverview"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mosdocument"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mostitles"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/texindexer"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/plannerbuilders"
@@ -67,9 +69,16 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 									return fmt.Errorf("new indexer: %w", err)
 								}
 
-								titleSection := mostitles.New(mostitles.TitleParameters{IsEnabled: true, Name: "hello world"})
+								sectionTitle := mostitles.New(mostitles.TitleParameters{IsEnabled: true, Name: "hello world"})
 
-								builder := plannerbuilders.New(indexer, plannerbuilders.Sections{titleSection})
+								header, err := mosheaderoverview.New()
+								if err != nil {
+									return fmt.Errorf("new header: %w", err)
+								}
+
+								sectionAnnual := mosannual.New(mosParameters.ToParameters(), mosannual.SectionParameters{Enabled: true}, header, header)
+
+								builder := plannerbuilders.New(indexer, plannerbuilders.Sections{sectionTitle, sectionAnnual})
 
 								planner := planners.New(builder, fileWriter, cmder)
 

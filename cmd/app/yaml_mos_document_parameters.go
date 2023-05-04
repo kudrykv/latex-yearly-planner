@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mosdocument"
+	"github.com/kudrykv/latex-yearly-planner/internal/core/calendar"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 	"gopkg.in/yaml.v3"
 	"regexp"
@@ -30,7 +31,15 @@ func (r YAMLMOS) ToDocumentParameters() mosdocument.DocumentParameters {
 }
 
 func (r YAMLMOS) ToParameters() mos.Parameters {
-	panic("not implemented")
+	months := calendar.NewMonths(
+		calendar.Weekday(r.Parameters.WeekdayStart),
+		r.Parameters.StartDate.Year(), r.Parameters.StartDate.Month(),
+		r.Parameters.EndDate.Year(), r.Parameters.EndDate.Month(),
+	)
+
+	return mos.Parameters{
+		Months: months,
+	}
 }
 
 type YAMLDimensions struct {
@@ -105,11 +114,11 @@ func (r YAMLDebugOptions) ToDebugOptions() mosdocument.DebugOptions {
 }
 
 type YAMLParameters struct {
-	StartDate       YAMLDate `yaml:"start_date"`
-	EndDate         YAMLDate `yaml:"end_date"`
-	WeekdayStart    string   `yaml:"weekday_start"`
-	ShowWeekNumbers bool     `yaml:"show_week_numbers"`
-	FormatAMPM      bool     `yaml:"format_ampm"`
+	StartDate       YAMLDate    `yaml:"start_date"`
+	EndDate         YAMLDate    `yaml:"end_date"`
+	WeekdayStart    YAMLWeekday `yaml:"weekday_start"`
+	ShowWeekNumbers bool        `yaml:"show_week_numbers"`
+	FormatAMPM      bool        `yaml:"format_ampm"`
 }
 
 var dateRegex = regexp.MustCompile(`(?i)(^\d{4}),?\s* (january|february|march|april|may|june|july|august|september|november|october|december)$`)
@@ -143,6 +152,14 @@ func (r *YAMLDate) UnmarshalYAML(value *yaml.Node) error {
 	return nil
 }
 
+func (r *YAMLDate) Year() int {
+	return time.Time(*r).Year()
+}
+
+func (r *YAMLDate) Month() time.Month {
+	return time.Time(*r).Month()
+}
+
 func parseMonth(month string) (time.Month, error) {
 	switch {
 	case regexp.MustCompile("(?i)january").MatchString(month):
@@ -171,5 +188,49 @@ func parseMonth(month string) (time.Month, error) {
 		return time.December, nil
 	default:
 		return 0, fmt.Errorf("unknown month: %s", month)
+	}
+}
+
+var weekdayRegex = regexp.MustCompile(`(?i)(^monday|tuesday|wednesday|thursday|friday|saturday|sunday)$`)
+
+type YAMLWeekday calendar.Weekday
+
+func (r *YAMLWeekday) UnmarshalYAML(value *yaml.Node) error {
+	if value.Tag != "!!str" {
+		return entities.ErrNotAString
+	}
+
+	if !weekdayRegex.MatchString(value.Value) {
+		return fmt.Errorf("expected '<weekday>':%w", entities.ErrBadPattern)
+	}
+
+	weekday, err := parseWeekday(value.Value)
+	if err != nil {
+		return fmt.Errorf("parse weekday: %w", err)
+	}
+
+	*r = YAMLWeekday(weekday)
+
+	return nil
+}
+
+func parseWeekday(value string) (calendar.Weekday, error) {
+	switch {
+	case regexp.MustCompile("(?i)monday").MatchString(value):
+		return calendar.Monday, nil
+	case regexp.MustCompile("(?i)tuesday").MatchString(value):
+		return calendar.Tuesday, nil
+	case regexp.MustCompile("(?i)wednesday").MatchString(value):
+		return calendar.Wednesday, nil
+	case regexp.MustCompile("(?i)thursday").MatchString(value):
+		return calendar.Thursday, nil
+	case regexp.MustCompile("(?i)friday").MatchString(value):
+		return calendar.Friday, nil
+	case regexp.MustCompile("(?i)saturday").MatchString(value):
+		return calendar.Saturday, nil
+	case regexp.MustCompile("(?i)sunday").MatchString(value):
+		return calendar.Sunday, nil
+	default:
+		return calendar.Weekday{}, fmt.Errorf("unknown weekday: %s", value)
 	}
 }
