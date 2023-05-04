@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosannualbody"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosheaderoverview"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 )
@@ -27,12 +28,17 @@ func New(global mos.Parameters, local SectionParameters) (Section, error) {
 		return Section{}, fmt.Errorf("new header: %w", err)
 	}
 
+	body, err := mosannualbody.New()
+	if err != nil {
+		return Section{}, fmt.Errorf("new body: %w", err)
+	}
+
 	return Section{
 		globalParameters: global,
 		parameters:       local,
 
 		header: header,
-		//body:   body,
+		body:   body,
 	}, nil
 }
 
@@ -46,13 +52,13 @@ func (r Section) GenerateSection(ctx context.Context) (entities.Note, error) {
 		return entities.Note{}, fmt.Errorf("make header: %w", err)
 	}
 
-	//bodyBytes, err := r.makeBody(ctx)
-	//if err != nil {
-	//	return entities.Note{}, fmt.Errorf("make body: %w", err)
-	//}
+	bodyBytes, err := r.makeBody(ctx)
+	if err != nil {
+		return entities.Note{}, fmt.Errorf("make body: %w", err)
+	}
 
 	buffer := bytes.NewBuffer(headerBytes)
-	//buffer.Write(bodyBytes)
+	buffer.Write(bodyBytes)
 
 	return entities.Note{
 		Name:     "annual.tex",
