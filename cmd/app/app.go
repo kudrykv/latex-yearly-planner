@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/commanders"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/filewriters"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosheaderoverview"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mosdocument"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mostitles"
@@ -71,12 +70,10 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 
 								sectionTitle := mostitles.New(mostitles.TitleParameters{IsEnabled: true, Name: "hello world"})
 
-								header, err := mosheaderoverview.New()
+								sectionAnnual, err := mosannual.New(mosParameters.ToParameters(), mosannual.SectionParameters{Enabled: true})
 								if err != nil {
-									return fmt.Errorf("new header: %w", err)
+									return fmt.Errorf("new annual: %w", err)
 								}
-
-								sectionAnnual := mosannual.New(mosParameters.ToParameters(), mosannual.SectionParameters{Enabled: true}, header, header)
 
 								builder := plannerbuilders.New(indexer, plannerbuilders.Sections{sectionTitle, sectionAnnual})
 
