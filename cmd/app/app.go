@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/commanders"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/filewriters"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosannualbody"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosheaderoverview"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mosdocument"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mostitles"
@@ -70,7 +72,17 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 
 								sectionTitle := mostitles.New(mostitles.TitleParameters{IsEnabled: true, Name: "hello world"})
 
-								sectionAnnual, err := mosannual.New(mosParameters.ToParameters(), mosannual.SectionParameters{Enabled: true})
+								annualHeader, err := mosheaderoverview.New()
+								if err != nil {
+									return fmt.Errorf("new header: %w", err)
+								}
+
+								annualBody, err := mosannualbody.New(mosParameters.ToParameters())
+								if err != nil {
+									return fmt.Errorf("new body: %w", err)
+								}
+
+								sectionAnnual, err := mosannual.New(mosParameters.ToParameters(), mosannual.SectionParameters{Enabled: true}, annualHeader, annualBody)
 								if err != nil {
 									return fmt.Errorf("new annual: %w", err)
 								}

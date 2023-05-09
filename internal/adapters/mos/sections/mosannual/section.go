@@ -5,8 +5,6 @@ import (
 	"context"
 	"fmt"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosannualbody"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosheaderoverview"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 )
 
@@ -20,19 +18,10 @@ type Section struct {
 
 type SectionParameters struct {
 	Enabled bool
+	Pages   int
 }
 
-func New(global mos.Parameters, local SectionParameters) (Section, error) {
-	header, err := mosheaderoverview.New()
-	if err != nil {
-		return Section{}, fmt.Errorf("new header: %w", err)
-	}
-
-	body, err := mosannualbody.New()
-	if err != nil {
-		return Section{}, fmt.Errorf("new body: %w", err)
-	}
-
+func New(global mos.Parameters, local SectionParameters, header, body Component) (Section, error) {
 	return Section{
 		globalParameters: global,
 		parameters:       local,
@@ -47,39 +36,25 @@ func (r Section) IsEnabled() bool {
 }
 
 func (r Section) GenerateSection(ctx context.Context) (entities.Note, error) {
-	headerBytes, err := r.makeHeader(ctx)
-	if err != nil {
-		return entities.Note{}, fmt.Errorf("make header: %w", err)
-	}
+	buffer := bytes.NewBuffer(nil)
 
-	bodyBytes, err := r.makeBody(ctx)
-	if err != nil {
-		return entities.Note{}, fmt.Errorf("make body: %w", err)
-	}
+	for pageNumber := 1; pageNumber <= r.parameters.Pages; pageNumber++ {
+		headerBytes, err := r.header.GenerateComponent(ctx, pageNumber, r.globalParameters, r.parameters)
+		if err != nil {
+			return entities.Note{}, fmt.Errorf("make header at page %d: %w", pageNumber, err)
+		}
 
-	buffer := bytes.NewBuffer(headerBytes)
-	buffer.Write(bodyBytes)
+		bodyBytes, err := r.body.GenerateComponent(ctx, pageNumber, r.globalParameters, r.parameters)
+		if err != nil {
+			return entities.Note{}, fmt.Errorf("make body at page %d: %w", pageNumber, err)
+		}
+
+		buffer.Write(headerBytes)
+		buffer.Write(bodyBytes)
+	}
 
 	return entities.Note{
 		Name:     "annual.tex",
 		Contents: buffer.Bytes(),
 	}, nil
-}
-
-func (r Section) makeHeader(ctx context.Context) ([]byte, error) {
-	componentBytes, err := r.header.GenerateComponent(ctx)
-	if err != nil {
-		return nil, fmt.Errorf("generate header: %w", err)
-	}
-
-	return componentBytes, nil
-}
-
-func (r Section) makeBody(ctx context.Context) ([]byte, error) {
-	componentBytes, err := r.body.GenerateComponent(ctx)
-	if err != nil {
-		return nil, fmt.Errorf("generate body: %w", err)
-	}
-
-	return componentBytes, nil
 }
