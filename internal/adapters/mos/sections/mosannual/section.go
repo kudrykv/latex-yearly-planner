@@ -47,12 +47,12 @@ func (r Section) GenerateSection(ctx context.Context) (entities.Note, error) {
 	buffer := bytes.NewBuffer(nil)
 
 	for pageNumber := 1; pageNumber <= r.parameters.GetPages(); pageNumber++ {
-		headerBytes, err := r.header.GenerateComponent(ctx, pageNumber, r.globalParameters, r.parameters)
+		headerBytes, err := r.header.GenerateComponent(ctx, pageNumber, r.parameters)
 		if err != nil {
 			return entities.Note{}, fmt.Errorf("make header at page %d: %w", pageNumber, err)
 		}
 
-		bodyBytes, err := r.body.GenerateComponent(ctx, pageNumber, r.globalParameters, r.parameters)
+		bodyBytes, err := r.body.GenerateComponent(ctx, pageNumber, r.parameters)
 		if err != nil {
 			return entities.Note{}, fmt.Errorf("make body at page %d: %w", pageNumber, err)
 		}

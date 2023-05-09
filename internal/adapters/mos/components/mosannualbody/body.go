@@ -32,7 +32,7 @@ func New(global mos.Parameters) (Body, error) {
 }
 
 func (r Body) GenerateComponent(
-	_ context.Context, _ mosannual.PageNumber, _ mos.Parameters, _ mosannual.SectionParameters,
+	_ context.Context, _ mosannual.PageNumber, _ mosannual.SectionParameters,
 ) ([]byte, error) {
 	buffer := bytes.NewBuffer(nil)
 

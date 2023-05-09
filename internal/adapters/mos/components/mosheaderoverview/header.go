@@ -15,9 +15,10 @@ var headerTemplate string
 
 type Header struct {
 	templateTree *template.Template
+	global       mos.Parameters
 }
 
-func New() (Header, error) {
+func New(global mos.Parameters) (Header, error) {
 	templateTree, err := template.New("mosheaderoverview").Parse(headerTemplate)
 	if err != nil {
 		return Header{}, fmt.Errorf("parse: %w", err)
@@ -25,11 +26,12 @@ func New() (Header, error) {
 
 	return Header{
 		templateTree: templateTree,
+		global:       global,
 	}, nil
 }
 
 func (r Header) GenerateComponent(
-	_ context.Context, _ mosannual.PageNumber, _ mos.Parameters, _ mosannual.SectionParameters,
+	_ context.Context, _ mosannual.PageNumber, _ mosannual.SectionParameters,
 ) ([]byte, error) {
 	buffer := bytes.NewBuffer(nil)
 

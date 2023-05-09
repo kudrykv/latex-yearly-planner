@@ -72,7 +72,7 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 
 								sectionTitle := mostitles.New(mostitles.TitleParameters{IsEnabled: true, Name: "hello world"})
 
-								annualHeader, err := mosheaderoverview.New()
+								annualHeader, err := mosheaderoverview.New(mosParameters.ToParameters())
 								if err != nil {
 									return fmt.Errorf("new header: %w", err)
 								}
