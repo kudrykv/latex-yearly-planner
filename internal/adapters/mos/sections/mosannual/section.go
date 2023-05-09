@@ -21,6 +21,14 @@ type SectionParameters struct {
 	Pages   int
 }
 
+func (r SectionParameters) GetPages() int {
+	if r.Pages == 0 {
+		return 1
+	}
+
+	return r.Pages
+}
+
 func New(global mos.Parameters, local SectionParameters, header, body Component) (Section, error) {
 	return Section{
 		globalParameters: global,
@@ -38,7 +46,7 @@ func (r Section) IsEnabled() bool {
 func (r Section) GenerateSection(ctx context.Context) (entities.Note, error) {
 	buffer := bytes.NewBuffer(nil)
 
-	for pageNumber := 1; pageNumber <= r.parameters.Pages; pageNumber++ {
+	for pageNumber := 1; pageNumber <= r.parameters.GetPages(); pageNumber++ {
 		headerBytes, err := r.header.GenerateComponent(ctx, pageNumber, r.globalParameters, r.parameters)
 		if err != nil {
 			return entities.Note{}, fmt.Errorf("make header at page %d: %w", pageNumber, err)
