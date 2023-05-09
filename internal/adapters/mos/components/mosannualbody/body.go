@@ -3,41 +3,39 @@ package mosannualbody
 import (
 	"bytes"
 	"context"
-	_ "embed"
-	"fmt"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/texcalendar"
 	"text/template"
 )
-
-//go:embed body_template.tex
-var bodyTemplate string
 
 type Body struct {
 	templateTree *template.Template
 	global       mos.Parameters
 }
 
-func New(global mos.Parameters) (Body, error) {
-	templateTree, err := template.New("mosbodyoverview").Parse(bodyTemplate)
-	if err != nil {
-		return Body{}, fmt.Errorf("parse: %w", err)
-	}
-
-	return Body{
-		templateTree: templateTree,
-
-		global: global,
-	}, nil
+func New(global mos.Parameters) Body {
+	return Body{global: global}
 }
 
 func (r Body) GenerateComponent(
-	_ context.Context, _ mosannual.PageNumber, _ mosannual.SectionParameters,
+	_ context.Context, pageNumber mosannual.PageNumber, sectionParameters mosannual.SectionParameters,
 ) ([]byte, error) {
 	buffer := bytes.NewBuffer(nil)
 
-	if err := r.templateTree.Execute(buffer, nil); err != nil {
-		return nil, fmt.Errorf("execute: %w", err)
+	littleCalendars := texcalendar.NewCalendarsLittle(r.global.Months)
+
+	from := (pageNumber - 1) * sectionParameters.MonthsPerPage
+	to := pageNumber * sectionParameters.MonthsPerPage
+	column := 0
+
+	for _, littleCal := range littleCalendars[from:to] {
+		buffer.WriteString(littleCal.String())
+
+		column = (column + 1) % sectionParameters.Columns
+		if column == 0 {
+			buffer.WriteString("\n")
+		}
 	}
 
 	return buffer.Bytes(), nil

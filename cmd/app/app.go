@@ -77,12 +77,12 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 									return fmt.Errorf("new header: %w", err)
 								}
 
-								annualBody, err := mosannualbody.New(mosParameters.ToParameters())
+								annualBody := mosannualbody.New(mosParameters.ToParameters())
 								if err != nil {
 									return fmt.Errorf("new body: %w", err)
 								}
 
-								sectionAnnual, err := mosannual.New(mosParameters.ToParameters(), mosannual.SectionParameters{Enabled: true}, annualHeader, annualBody)
+								sectionAnnual, err := mosannual.New(mosParameters.ToParameters(), mosannual.SectionParameters{Enabled: true, Pages: 2, MonthsPerPage: 6, Columns: 2}, annualHeader, annualBody)
 								if err != nil {
 									return fmt.Errorf("new annual: %w", err)
 								}

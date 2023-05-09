@@ -18,7 +18,10 @@ type Section struct {
 
 type SectionParameters struct {
 	Enabled bool
-	Pages   int
+
+	Pages         int
+	MonthsPerPage int
+	Columns       int
 }
 
 func (r SectionParameters) GetPages() int {
@@ -59,6 +62,7 @@ func (r Section) GenerateSection(ctx context.Context) (entities.Note, error) {
 
 		buffer.Write(headerBytes)
 		buffer.Write(bodyBytes)
+		buffer.WriteString(`{}\pagebreak{}` + "\n\n")
 	}
 
 	return entities.Note{

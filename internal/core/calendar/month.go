@@ -32,3 +32,7 @@ type Month struct {
 	Month   time.Month
 	Weekday Weekday
 }
+
+func (r Month) Name() string {
+	return r.Month.String()
+}
