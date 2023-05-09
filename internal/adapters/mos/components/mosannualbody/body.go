@@ -6,6 +6,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/texcalendar"
+	"strings"
 	"text/template"
 )
 
@@ -29,14 +30,20 @@ func (r Body) GenerateComponent(
 	to := pageNumber * sectionParameters.MonthsPerPage
 	column := 0
 
+	buffer.WriteString(`\begin{tabularx}{\linewidth}{` + strings.Repeat("c", sectionParameters.Columns) + `}` + "\n")
+
 	for _, littleCal := range littleCalendars[from:to] {
 		buffer.WriteString(littleCal.String())
 
 		column = (column + 1) % sectionParameters.Columns
 		if column == 0 {
-			buffer.WriteString("\n")
+			buffer.WriteString(`\\` + "\n")
+		} else {
+			buffer.WriteString(` & `)
 		}
 	}
+
+	buffer.WriteString(`\end{tabularx}` + "\n")
 
 	return buffer.Bytes(), nil
 }
