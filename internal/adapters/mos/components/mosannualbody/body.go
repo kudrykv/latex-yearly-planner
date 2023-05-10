@@ -5,7 +5,7 @@ import (
 	"context"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/tabularx"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/minipage"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/texcalendar"
 	"text/template"
 )
@@ -30,27 +30,20 @@ func (r Body) GenerateComponent(
 	to := pageNumber * sectionParameters.MonthsPerPage
 	columnIndex := 0
 
-	tabular := tabularx.New(LineWidth{})
-
-	var columns tabularx.Cells
-
 	for _, littleCal := range littleCalendars[from:to] {
 		columnIndex = (columnIndex + 1) % sectionParameters.Columns
-		columns = append(columns, tabularx.Cell{Text: littleCal})
+		buffer.WriteString(minipage.New(String("3cm")).SetContent(littleCal).Render())
 
 		if columnIndex == 0 {
-			tabular.AddRow(columns...)
-			columns = nil
+			buffer.WriteString("\n\n")
 		}
 	}
-
-	buffer.WriteString(tabular.Render())
 
 	return buffer.Bytes(), nil
 }
 
-type LineWidth struct{}
+type String string
 
-func (LineWidth) String() string {
-	return `\linewidth`
+func (r String) String() string {
+	return string(r)
 }
