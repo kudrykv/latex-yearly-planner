@@ -33,11 +33,9 @@ func (r *Tabularx) AddRow(cells ...Cell) {
 }
 
 func (r *Tabularx) Render() string {
-	return fmt.Sprintf(`
-			\begin{tabularx}{%s}{%s}
-				%s
-			\end{tabularx}
-		`,
+	return fmt.Sprintf(`{\newcolumntype{Y}{>{\centering\arraybackslash}X}\begin{tabularx}{%s}{%s}
+%s
+\end{tabularx}}`,
 		r.Width,
 		r.columnFormat(),
 		r.rows(),
@@ -45,7 +43,7 @@ func (r *Tabularx) Render() string {
 }
 
 func (r *Tabularx) columnFormat() string {
-	return strings.Repeat("c", len(r.Rows[0].Cells))
+	return strings.Repeat("Y", len(r.Rows[0].Cells))
 }
 
 func (r *Tabularx) rows() string {
