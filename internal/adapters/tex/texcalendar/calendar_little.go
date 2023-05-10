@@ -1,6 +1,9 @@
 package texcalendar
 
-import "github.com/kudrykv/latex-yearly-planner/internal/core/calendar"
+import (
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/tabularx"
+	"github.com/kudrykv/latex-yearly-planner/internal/core/calendar"
+)
 
 type CalendarsLittle []CalendarLittle
 
@@ -23,9 +26,20 @@ type CalendarLittle struct {
 }
 
 func (r CalendarLittle) String() string {
-	return r.Month.Name()
+	tabular := tabularx.New(LineWidth{})
+	tabular.SetHeaderName(r.Month.Name())
+
+	tabular.AddRow(tabularx.Cell{Text: r.Month.Month})
+
+	return tabular.Render()
 }
 
 func NewCalendarLittle(month calendar.Month) CalendarLittle {
 	return CalendarLittle{Month: month}
+}
+
+type LineWidth struct{}
+
+func (r LineWidth) String() string {
+	return `\linewidth`
 }

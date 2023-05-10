@@ -6,8 +6,9 @@ import (
 )
 
 type Tabularx struct {
-	Width fmt.Stringer
-	Rows  Rows
+	Width      fmt.Stringer
+	Rows       Rows
+	HeaderName string
 }
 
 type Row struct {
@@ -34,10 +35,11 @@ func (r *Tabularx) AddRow(cells ...Cell) {
 
 func (r *Tabularx) Render() string {
 	return fmt.Sprintf(`{\newcolumntype{Y}{>{\centering\arraybackslash}X}\begin{tabularx}{%s}{%s}
-%s
+%s%s
 \end{tabularx}}`,
 		r.Width,
 		r.columnFormat(),
+		r.headerCenterName(),
 		r.rows(),
 	)
 }
@@ -59,4 +61,16 @@ func (r *Tabularx) rows() string {
 	}
 
 	return strings.Join(rows, `\\`+"\n")
+}
+
+func (r *Tabularx) SetHeaderName(headerName string) {
+	r.HeaderName = headerName
+}
+
+func (r *Tabularx) headerCenterName() string {
+	if r.HeaderName == "" {
+		return ""
+	}
+
+	return fmt.Sprintf(`\multicolumn{%d}{Y}{%s}\\`, len(r.Rows[0].Cells), r.HeaderName)
 }
