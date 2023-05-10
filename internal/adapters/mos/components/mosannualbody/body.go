@@ -5,8 +5,8 @@ import (
 	"context"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/tabularx"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/texcalendar"
-	"strings"
 	"text/template"
 )
 
@@ -28,22 +28,29 @@ func (r Body) GenerateComponent(
 
 	from := (pageNumber - 1) * sectionParameters.MonthsPerPage
 	to := pageNumber * sectionParameters.MonthsPerPage
-	column := 0
+	columnIndex := 0
 
-	buffer.WriteString(`\begin{tabularx}{\linewidth}{` + strings.Repeat("c", sectionParameters.Columns) + `}` + "\n")
+	tabular := tabularx.New(LineWidth{})
+
+	var columns tabularx.Cells
 
 	for _, littleCal := range littleCalendars[from:to] {
-		buffer.WriteString(littleCal.String())
+		columnIndex = (columnIndex + 1) % sectionParameters.Columns
+		columns = append(columns, tabularx.Cell{Text: littleCal})
 
-		column = (column + 1) % sectionParameters.Columns
-		if column == 0 {
-			buffer.WriteString(`\\` + "\n")
-		} else {
-			buffer.WriteString(` & `)
+		if columnIndex == 0 {
+			tabular.AddRow(columns...)
+			columns = nil
 		}
 	}
 
-	buffer.WriteString(`\end{tabularx}` + "\n")
+	buffer.WriteString(tabular.Render())
 
 	return buffer.Bytes(), nil
+}
+
+type LineWidth struct{}
+
+func (LineWidth) String() string {
+	return `\linewidth`
 }
