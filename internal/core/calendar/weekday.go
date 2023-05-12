@@ -6,13 +6,15 @@ type Weekday struct {
 	Raw time.Weekday
 }
 
-func (r Weekday) AbsoluteDistanceTo(weekday Weekday) int {
-	distance := int(r.Raw - weekday.Raw)
-	if distance < 0 {
-		return -distance
+func (r Weekday) RightDistanceTo(weekday Weekday) int {
+	left := r.Raw
+	right := weekday.Raw
+
+	if left < right {
+		left += 7
 	}
 
-	return distance
+	return int(left-right) % 7
 }
 
 var (

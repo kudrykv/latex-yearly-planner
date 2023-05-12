@@ -19,7 +19,16 @@ func (r Day) Weekday() Weekday {
 }
 
 func (r Day) NextDay() Day {
-	return Day{Raw: r.Raw.AddDate(0, 0, 1)}
+	nextDay := r.Raw.AddDate(0, 0, 1)
+
+	return Day{
+		Raw: nextDay,
+		month: Month{
+			Year:    nextDay.Year(),
+			Month:   nextDay.Month(),
+			Weekday: r.month.Weekday,
+		},
+	}
 }
 
 func (r Day) IsZero() bool {
@@ -28,6 +37,10 @@ func (r Day) IsZero() bool {
 
 func (r Day) Month() Month {
 	return r.month
+}
+
+func (r Day) Day() int {
+	return r.Raw.Day()
 }
 
 type Days [7]Day
