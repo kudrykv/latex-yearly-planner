@@ -39,6 +39,18 @@ func (r CalendarLittle) String() string {
 	tabular := tabularx.New(LineWidth{})
 	tabular.SetHeaderName(r.Month.Name())
 
+	//    MONTH NAME
+	// # | M | T | W | T | F | S | S |
+	// 1 | _ | _ | _ | _ | 1 | 2 | 3 |
+	// 2 | 4 | 5 | 6 | 7 | 8 | 9 | 10|
+	// ...
+	// 5 | 28| 29| 30| 31| _ | _ | _ |
+	// ^                               ^--\
+	//  \ week number; can go to the right \
+	// or be disabled at all
+
+	r.Month.Weeks()
+
 	tabular.AddRow(tabularx.Cell{Text: r.Month.Month})
 
 	return tabular.Render()

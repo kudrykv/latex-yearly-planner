@@ -36,3 +36,11 @@ type Month struct {
 func (r Month) Name() string {
 	return r.Month.String()
 }
+
+func (r Month) Weeks() Weeks {
+	return NewWeeksOfMonth(r)
+}
+
+func (r Month) FirstDay() Day {
+	return NewDay(r)
+}
