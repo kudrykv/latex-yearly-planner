@@ -7,7 +7,7 @@ import (
 
 type CalendarsLittle []CalendarLittle
 
-func NewCalendarsLittle(months calendar.Months) CalendarsLittle {
+func NewCalendarsLittle(months calendar.Months, parameters CalendarLittleParameters) CalendarsLittle {
 	if len(months) == 0 {
 		return nil
 	}
@@ -15,14 +15,24 @@ func NewCalendarsLittle(months calendar.Months) CalendarsLittle {
 	calendars := make(CalendarsLittle, 0, len(months))
 
 	for _, month := range months {
-		calendars = append(calendars, NewCalendarLittle(month))
+		calendars = append(calendars, NewCalendarLittle(month, parameters))
 	}
 
 	return calendars
 }
 
 type CalendarLittle struct {
-	Month calendar.Month
+	Month      calendar.Month
+	Parameters CalendarLittleParameters
+}
+
+type CalendarLittleParameters struct{}
+
+func NewCalendarLittle(month calendar.Month, parameters CalendarLittleParameters) CalendarLittle {
+	return CalendarLittle{
+		Month:      month,
+		Parameters: parameters,
+	}
 }
 
 func (r CalendarLittle) String() string {
@@ -32,10 +42,6 @@ func (r CalendarLittle) String() string {
 	tabular.AddRow(tabularx.Cell{Text: r.Month.Month})
 
 	return tabular.Render()
-}
-
-func NewCalendarLittle(month calendar.Month) CalendarLittle {
-	return CalendarLittle{Month: month}
 }
 
 type LineWidth struct{}

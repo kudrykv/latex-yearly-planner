@@ -12,11 +12,16 @@ import (
 
 type Body struct {
 	templateTree *template.Template
-	global       mos.Parameters
+
+	global              mos.Parameters
+	calendarsParameters texcalendar.CalendarLittleParameters
 }
 
-func New(global mos.Parameters) Body {
-	return Body{global: global}
+func New(global mos.Parameters, calendarsParameters texcalendar.CalendarLittleParameters) Body {
+	return Body{
+		global:              global,
+		calendarsParameters: calendarsParameters,
+	}
 }
 
 func (r Body) GenerateComponent(
@@ -24,7 +29,7 @@ func (r Body) GenerateComponent(
 ) ([]byte, error) {
 	buffer := bytes.NewBuffer(nil)
 
-	littleCalendars := texcalendar.NewCalendarsLittle(r.global.Months)
+	littleCalendars := texcalendar.NewCalendarsLittle(r.global.Months, r.calendarsParameters)
 
 	from := (pageNumber - 1) * sectionParameters.MonthsPerPage
 	to := pageNumber * sectionParameters.MonthsPerPage
