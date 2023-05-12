@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mosdocument"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/calendar"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 	"gopkg.in/yaml.v3"
@@ -15,6 +16,20 @@ import (
 type YAMLMOS struct {
 	Document   YAMLDocumentParameters `yaml:"document"`
 	Parameters YAMLParameters         `yaml:"parameters"`
+	Sections   YAMLSections           `yaml:"sections"`
+}
+
+type YAMLSections struct {
+	AnnualSection YAMLAnnualSection `yaml:"yearly"`
+}
+
+type YAMLAnnualSection struct {
+	Enabled bool `yaml:"enabled"`
+
+	Pages         int             `yaml:"pages"`
+	MonthsPerPage int             `yaml:"months_per_page"`
+	Columns       int             `yaml:"columns"`
+	ColumnWidth   entities.Length `yaml:"column_width"`
 }
 
 type YAMLDocumentParameters struct {
@@ -39,6 +54,17 @@ func (r YAMLMOS) ToParameters() mos.Parameters {
 
 	return mos.Parameters{
 		Months: months,
+	}
+}
+
+func (r YAMLMOS) AnnualParameters() mosannual.SectionParameters {
+	return mosannual.SectionParameters{
+		Enabled: r.Sections.AnnualSection.Enabled,
+
+		Pages:         r.Sections.AnnualSection.Pages,
+		MonthsPerPage: r.Sections.AnnualSection.MonthsPerPage,
+		Columns:       r.Sections.AnnualSection.Columns,
+		ColumnWidth:   r.Sections.AnnualSection.ColumnWidth,
 	}
 }
 

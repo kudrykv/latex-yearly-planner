@@ -31,32 +31,37 @@ parameters:
 
 
 sections:
-  - title:
-      name: 2023
+  title:
+    name: 2023
 
-  - yearly:
-      enabled: true
+  yearly:
+    enabled: true
 
-  - quarterly:
-      enabled: true
+    pages: 2
+    months_per_page: 6
+    columns: 2
+    column_width: 5cm
 
-  - monthly:
-      enabled: true
+  quarterly:
+    enabled: true
 
-  - weekly:
-      enabled: true
+  monthly:
+    enabled: true
 
-  - daily:
-      enabled: true
+  weekly:
+    enabled: true
 
-  - daily_reflections:
-      enabled: true
+  daily:
+    enabled: true
 
-  - daily_notes:
-      enabled: true
+  daily_reflections:
+    enabled: true
 
-  - notes:
-      enabled: true
+  daily_notes:
+    enabled: true
 
-  - tasks:
-      enabled: true
+  notes:
+    enabled: true
+
+  tasks:
+    enabled: true

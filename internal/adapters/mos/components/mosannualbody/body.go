@@ -7,7 +7,6 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/minipage"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/texcalendar"
-	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 	"text/template"
 )
 
@@ -33,7 +32,7 @@ func (r Body) GenerateComponent(
 
 	for i, littleCal := range littleCalendars[from:to] {
 		columnIndex = (columnIndex + 1) % sectionParameters.Columns
-		buffer.WriteString(minipage.New(5 * entities.Centimeter).SetContent(littleCal).Render())
+		buffer.WriteString(minipage.New(sectionParameters.ColumnWidth).SetContent(littleCal).Render())
 
 		if columnIndex == 0 {
 			buffer.WriteString("\n\n")

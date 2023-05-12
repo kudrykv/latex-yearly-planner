@@ -22,6 +22,7 @@ type SectionParameters struct {
 	Pages         int
 	MonthsPerPage int
 	Columns       int
+	ColumnWidth   entities.Length
 }
 
 func (r SectionParameters) GetPages() int {
