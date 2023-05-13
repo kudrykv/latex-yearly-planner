@@ -3,6 +3,7 @@ package texcalendar
 import (
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/tabularx"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/calendar"
+	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 )
 
 type CalendarsLittle []CalendarLittle
@@ -26,7 +27,10 @@ type CalendarLittle struct {
 	Parameters CalendarLittleParameters
 }
 
-type CalendarLittleParameters struct{}
+type CalendarLittleParameters struct {
+	ShowWeekNumbers     bool
+	WeekNumberPlacement entities.Placement
+}
 
 func NewCalendarLittle(month calendar.Month, parameters CalendarLittleParameters) CalendarLittle {
 	return CalendarLittle{
@@ -39,19 +43,23 @@ func (r CalendarLittle) String() string {
 	tabular := tabularx.New(LineWidth{})
 	tabular.SetHeaderName(r.Month.Name())
 
-	//    MONTH NAME
-	// # | M | T | W | T | F | S | S |
-	// 1 | _ | _ | _ | _ | 1 | 2 | 3 |
-	// 2 | 4 | 5 | 6 | 7 | 8 | 9 | 10|
-	// ...
-	// 5 | 28| 29| 30| 31| _ | _ | _ |
-	// ^                               ^--\
-	//  \ week number; can go to the right \
-	// or be disabled at all
+	for _, week := range r.Month.Weeks() {
+		cells := make([]tabularx.Cell, 0, len(week.Days)+1)
 
-	r.Month.Weeks()
+		for _, day := range week.Days {
+			cells = append(cells, tabularx.Cell{Text: NewDayCalendarLittle(day)})
+		}
 
-	tabular.AddRow(tabularx.Cell{Text: r.Month.Month})
+		if r.Parameters.ShowWeekNumbers {
+			if r.Parameters.WeekNumberPlacement == entities.PlacementRight {
+				cells = append(cells, tabularx.Cell{Text: NewWeekCalendarLittle(week)})
+			} else {
+				cells = append([]tabularx.Cell{{Text: NewWeekCalendarLittle(week)}}, cells...)
+			}
+		}
+
+		tabular.AddRow(cells...)
+	}
 
 	return tabular.Render()
 }

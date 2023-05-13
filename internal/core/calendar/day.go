@@ -43,6 +43,12 @@ func (r Day) Day() int {
 	return r.Raw.Day()
 }
 
+func (r Day) WeekNumber() int {
+	_, weekNumber := r.Raw.ISOWeek()
+
+	return weekNumber
+}
+
 type Days [7]Day
 
 func (r Days) Last() Day {

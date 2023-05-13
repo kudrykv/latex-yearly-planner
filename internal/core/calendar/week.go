@@ -66,4 +66,14 @@ func (r Week) Next() Week {
 	return Week{Days: days}
 }
 
+func (r Week) Number() int {
+	for i := 6; i >= 0; i-- {
+		if !r.Days[i].IsZero() {
+			return r.Days[i].WeekNumber()
+		}
+	}
+
+	return -1
+}
+
 type Weeks []Week

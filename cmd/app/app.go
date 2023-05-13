@@ -10,7 +10,6 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mosdocument"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mostitles"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/texcalendar"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/texindexer"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/plannerbuilders"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/planners"
@@ -78,7 +77,7 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 									return fmt.Errorf("new header: %w", err)
 								}
 
-								annualBody := mosannualbody.New(mosParameters.ToParameters(), texcalendar.CalendarLittleParameters{})
+								annualBody := mosannualbody.New(mosParameters.ToParameters(), mosParameters.AnnualLittleCalendarParameters())
 								if err != nil {
 									return fmt.Errorf("new body: %w", err)
 								}

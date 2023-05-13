@@ -5,6 +5,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mosdocument"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/texcalendar"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/calendar"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 	"gopkg.in/yaml.v3"
@@ -65,6 +66,13 @@ func (r YAMLMOS) AnnualParameters() mosannual.SectionParameters {
 		MonthsPerPage: r.Sections.AnnualSection.MonthsPerPage,
 		Columns:       r.Sections.AnnualSection.Columns,
 		ColumnWidth:   r.Sections.AnnualSection.ColumnWidth,
+	}
+}
+
+func (r YAMLMOS) AnnualLittleCalendarParameters() texcalendar.CalendarLittleParameters {
+	return texcalendar.CalendarLittleParameters{
+		ShowWeekNumbers:     r.Parameters.ShowWeekNumbers,
+		WeekNumberPlacement: r.Parameters.WeekNumberPlacement,
 	}
 }
 
@@ -140,11 +148,12 @@ func (r YAMLDebugOptions) ToDebugOptions() mosdocument.DebugOptions {
 }
 
 type YAMLParameters struct {
-	StartDate       YAMLDate    `yaml:"start_date"`
-	EndDate         YAMLDate    `yaml:"end_date"`
-	WeekdayStart    YAMLWeekday `yaml:"weekday_start"`
-	ShowWeekNumbers bool        `yaml:"show_week_numbers"`
-	FormatAMPM      bool        `yaml:"format_ampm"`
+	StartDate           YAMLDate           `yaml:"start_date"`
+	EndDate             YAMLDate           `yaml:"end_date"`
+	WeekdayStart        YAMLWeekday        `yaml:"weekday_start"`
+	ShowWeekNumbers     bool               `yaml:"show_week_numbers"`
+	WeekNumberPlacement entities.Placement `yaml:"week_number_placement"`
+	FormatAMPM          bool               `yaml:"format_ampm"`
 }
 
 var dateRegex = regexp.MustCompile(`(?i)(^\d{4}),?\s* (january|february|march|april|may|june|july|august|september|november|october|december)$`)
