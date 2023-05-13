@@ -21,8 +21,10 @@ type SectionParameters struct {
 
 	CalendarsColumn          entities.Placement
 	CalendarsColumnWidth     entities.Length
-	CalendarsColumnHeight    entities.Length
+	ColumnHeight             entities.Length
 	CalendarsVerticalSpacing entities.Length
+	NotesColumnWidth         entities.Length
+	ColumnSpacing            entities.Length
 }
 
 func New(global mos.Parameters, local SectionParameters, header, body Component) Section {

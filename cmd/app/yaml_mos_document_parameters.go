@@ -43,7 +43,9 @@ type YAMLQuarterlySection struct {
 	CalendarsColumn          entities.Placement `yaml:"calendars_column"`
 	CalendarsColumnWidth     entities.Length    `yaml:"calendars_column_width"`
 	CalendarsVerticalSpacing entities.Length    `yaml:"calendars_vertical_spacing"`
-	CalendarsColumnHeight    entities.Length    `yaml:"calendars_column_height"`
+	NotesColumnWidth         entities.Length    `yaml:"notes_column_width"`
+	ColumnHeight             entities.Length    `yaml:"column_height"`
+	ColumnSpacing            entities.Length    `yaml:"column_spacing"`
 }
 
 type YAMLDocumentParameters struct {
@@ -97,8 +99,10 @@ func (r YAMLMOS) QuarterlyParameters() mosquarterly.SectionParameters {
 
 		CalendarsColumn:          r.Sections.QuarterlySection.CalendarsColumn,
 		CalendarsColumnWidth:     r.Sections.QuarterlySection.CalendarsColumnWidth,
-		CalendarsColumnHeight:    r.Sections.QuarterlySection.CalendarsColumnHeight,
+		NotesColumnWidth:         r.Sections.QuarterlySection.NotesColumnWidth,
+		ColumnHeight:             r.Sections.QuarterlySection.ColumnHeight,
 		CalendarsVerticalSpacing: r.Sections.QuarterlySection.CalendarsVerticalSpacing,
+		ColumnSpacing:            r.Sections.QuarterlySection.ColumnSpacing,
 	}
 }
 

@@ -50,9 +50,11 @@ sections:
     enabled: true
 
     calendars_column_width: 5cm
-    calendars_column_height: 15cm
-    calendars_column: right
+    notes_column_width: 5cm
+    column_height: 15cm
+    calendars_column: left
     calendars_vertical_spacing: vfill
+    column_spacing: 5mm
 
   monthly:
     enabled: true
