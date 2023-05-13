@@ -7,8 +7,8 @@ document:
 
   layout:
     dimensions:
-      width: 156.00mm
-      height: 230mm
+      width: 138.00mm
+      height: 188mm
 
     margin:
       top: 10mm
@@ -28,6 +28,7 @@ parameters:
   weekday_start: Monday
   show_week_numbers: true
   format_ampm: false
+  week_number_placement: right
 
 
 sections:
