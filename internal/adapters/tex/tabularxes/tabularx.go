@@ -1,4 +1,4 @@
-package tabularx
+package tabularxes
 
 import (
 	"fmt"

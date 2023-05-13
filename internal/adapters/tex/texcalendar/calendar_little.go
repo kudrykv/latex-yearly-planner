@@ -1,7 +1,7 @@
 package texcalendar
 
 import (
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/tabularx"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/tabularxes"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/calendar"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 )
@@ -40,23 +40,23 @@ func NewCalendarLittle(month calendar.Month, parameters CalendarLittleParameters
 }
 
 func (r CalendarLittle) String() string {
-	tabular := tabularx.New(LineWidth{})
+	tabular := tabularxes.New(LineWidth{})
 	tabular.SetHeaderName(r.Month.Name())
 
 	tabular.AddRow(r.makeWeekdays()...)
 
 	for _, week := range r.Month.Weeks() {
-		cells := make([]tabularx.Cell, 0, len(week.Days)+1)
+		cells := make([]tabularxes.Cell, 0, len(week.Days)+1)
 
 		for _, day := range week.Days {
-			cells = append(cells, tabularx.Cell{Text: NewDayCalendarLittle(day)})
+			cells = append(cells, tabularxes.Cell{Text: NewDayCalendarLittle(day)})
 		}
 
 		if r.Parameters.ShowWeekNumbers {
 			if r.Parameters.WeekNumberPlacement == entities.PlacementRight {
-				cells = append(cells, tabularx.Cell{Text: NewWeekCalendarLittle(week)})
+				cells = append(cells, tabularxes.Cell{Text: NewWeekCalendarLittle(week)})
 			} else {
-				cells = append([]tabularx.Cell{{Text: NewWeekCalendarLittle(week)}}, cells...)
+				cells = append([]tabularxes.Cell{{Text: NewWeekCalendarLittle(week)}}, cells...)
 			}
 		}
 
@@ -66,19 +66,19 @@ func (r CalendarLittle) String() string {
 	return tabular.Render()
 }
 
-func (r CalendarLittle) makeWeekdays() tabularx.Cells {
-	cells := make(tabularx.Cells, 0, 7)
+func (r CalendarLittle) makeWeekdays() tabularxes.Cells {
+	cells := make(tabularxes.Cells, 0, 7)
 
 	weekday := r.Month.Weekday
 	for i := 0; i < 7; i++ {
-		cells = append(cells, tabularx.Cell{Text: NewWeekdayCalendarLittle(weekday)})
+		cells = append(cells, tabularxes.Cell{Text: NewWeekdayCalendarLittle(weekday)})
 		weekday = weekday.Next()
 	}
 
 	if r.Parameters.ShowWeekNumbers && r.Parameters.WeekNumberPlacement == entities.PlacementRight {
-		cells = append(cells, tabularx.Cell{Text: NewWeekNameCalendarLittle()})
+		cells = append(cells, tabularxes.Cell{Text: NewWeekNameCalendarLittle()})
 	} else {
-		cells = append([]tabularx.Cell{{Text: NewWeekNameCalendarLittle()}}, cells...)
+		cells = append([]tabularxes.Cell{{Text: NewWeekNameCalendarLittle()}}, cells...)
 	}
 
 	return cells
