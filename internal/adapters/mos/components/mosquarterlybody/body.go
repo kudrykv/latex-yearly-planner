@@ -5,9 +5,9 @@ import (
 	"context"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosquarterly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/minipage"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/spacer"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/texcalendar"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/calendar"
-	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 )
 
 type Body struct {
@@ -35,7 +35,7 @@ func (r Body) GenerateComponent(
 
 		if i-1 != len(months) {
 			mp.AddString("\n\n")
-			mp.Add(entities.VFill)
+			mp.Add(spacer.NewVSpace(sectionParameters.CalendarsVerticalSpacing))
 		}
 	}
 
