@@ -17,6 +17,14 @@ func (r Weekday) RightDistanceTo(weekday Weekday) int {
 	return int(left-right) % 7
 }
 
+func (r Weekday) String() string {
+	return r.Raw.String()
+}
+
+func (r Weekday) Next() Weekday {
+	return Weekday{Raw: (r.Raw + 1) % 7}
+}
+
 var (
 	Sunday    = Weekday{Raw: time.Sunday}
 	Monday    = Weekday{Raw: time.Monday}

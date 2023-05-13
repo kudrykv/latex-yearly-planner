@@ -43,6 +43,8 @@ func (r CalendarLittle) String() string {
 	tabular := tabularx.New(LineWidth{})
 	tabular.SetHeaderName(r.Month.Name())
 
+	tabular.AddRow(r.makeWeekdays()...)
+
 	for _, week := range r.Month.Weeks() {
 		cells := make([]tabularx.Cell, 0, len(week.Days)+1)
 
@@ -62,6 +64,24 @@ func (r CalendarLittle) String() string {
 	}
 
 	return tabular.Render()
+}
+
+func (r CalendarLittle) makeWeekdays() tabularx.Cells {
+	cells := make(tabularx.Cells, 0, 7)
+
+	weekday := r.Month.Weekday
+	for i := 0; i < 7; i++ {
+		cells = append(cells, tabularx.Cell{Text: NewWeekdayCalendarLittle(weekday)})
+		weekday = weekday.Next()
+	}
+
+	if r.Parameters.ShowWeekNumbers && r.Parameters.WeekNumberPlacement == entities.PlacementRight {
+		cells = append(cells, tabularx.Cell{Text: NewWeekNameCalendarLittle()})
+	} else {
+		cells = append([]tabularx.Cell{{Text: NewWeekNameCalendarLittle()}}, cells...)
+	}
+
+	return cells
 }
 
 type LineWidth struct{}
