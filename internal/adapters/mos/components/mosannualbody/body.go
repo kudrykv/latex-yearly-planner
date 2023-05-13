@@ -35,6 +35,10 @@ func (r Body) GenerateComponent(
 	to := pageNumber * sectionParameters.MonthsPerPage
 	columnIndex := 0
 
+	if to > len(littleCalendars) {
+		to = len(littleCalendars)
+	}
+
 	for i, littleCal := range littleCalendars[from:to] {
 		columnIndex = (columnIndex + 1) % sectionParameters.Columns
 		buffer.WriteString(parbox.New(sectionParameters.ColumnWidth).SetContent(littleCal).Render())

@@ -24,7 +24,7 @@ document:
 
 parameters:
   start_date: 2023, January
-  end_date: 2023, December
+  end_date: 2024, April
   weekday_start: Monday
   show_week_numbers: true
   format_ampm: false
@@ -39,10 +39,10 @@ sections:
     enabled: true
 
     pages: 2
-    months_per_page: 6
+    months_per_page: 8
     columns: 2
     column_width: 5cm
-    column_spacing: hfill
+    column_spacing: 5mm
 
 
   quarterly:
