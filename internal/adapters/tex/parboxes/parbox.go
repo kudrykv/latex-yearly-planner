@@ -1,4 +1,4 @@
-package parbox
+package parboxes
 
 import (
 	"fmt"

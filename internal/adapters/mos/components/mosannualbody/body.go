@@ -5,7 +5,7 @@ import (
 	"context"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/parbox"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/parboxes"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/spacer"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/texcalendar"
 	"text/template"
@@ -42,7 +42,7 @@ func (r Body) GenerateComponent(
 
 	for i, littleCal := range littleCalendars[from:to] {
 		columnIndex = (columnIndex + 1) % sectionParameters.Columns
-		buffer.WriteString(parbox.New(sectionParameters.ColumnWidth).SetContent(littleCal).Render())
+		buffer.WriteString(parboxes.New(sectionParameters.ColumnWidth).SetContent(littleCal).Render())
 
 		if columnIndex == 0 {
 			buffer.WriteString("\n\n")
