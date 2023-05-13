@@ -21,6 +21,7 @@ type SectionParameters struct {
 
 	CalendarsColumn          entities.Placement
 	CalendarsColumnWidth     entities.Length
+	CalendarsColumnHeight    entities.Length
 	CalendarsVerticalSpacing entities.Length
 }
 

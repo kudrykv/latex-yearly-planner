@@ -27,6 +27,12 @@ func (r *Parbox) Add(stringer fmt.Stringer) *Parbox {
 	return r
 }
 
+func (r *Parbox) AddString(string string) *Parbox {
+	r.Content += string
+
+	return r
+}
+
 func (r *Parbox) Render() string {
 	return fmt.Sprintf(`\parbox[t]{%s}{%s}`, r.Width, r.Content)
 }

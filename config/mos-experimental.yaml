@@ -50,6 +50,7 @@ sections:
     enabled: true
 
     calendars_column_width: 5cm
+    calendars_column_height: 15cm
     calendars_column: right
     calendars_vertical_spacing: 1cm
 

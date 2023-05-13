@@ -1,24 +1,42 @@
 package minipage
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
+)
 
 type Minipage struct {
-	Width   fmt.Stringer
-	Content fmt.Stringer
+	Content    string
+	Parameters Parameters
 }
 
-func New(width fmt.Stringer) *Minipage {
+type Parameters struct {
+	Width  entities.Length
+	Height entities.Length
+}
+
+func New(parameters Parameters) *Minipage {
 	return &Minipage{
-		Width: width,
+		Parameters: parameters,
 	}
 }
 
 func (r *Minipage) SetContent(content fmt.Stringer) *Minipage {
-	r.Content = content
+	r.Content = content.String()
 
 	return r
 }
 
+func (r *Minipage) Add(content fmt.Stringer) *Minipage {
+	r.Content += content.String()
+
+	return r
+}
+
+func (r *Minipage) AddString(str string) {
+	r.Content += str
+}
+
 func (r *Minipage) Render() string {
-	return fmt.Sprintf(`\begin{minipage}{%s}%s\end{minipage}`, r.Width, r.Content)
+	return fmt.Sprintf(`\begin{minipage}[t][%s]{%s}%s\end{minipage}`, r.Parameters.Height, r.Parameters.Width, r.Content)
 }
