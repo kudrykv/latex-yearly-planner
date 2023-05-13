@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"context"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosquarterly"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/minipage"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/minipages"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/spacer"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/texcalendar"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/calendar"
@@ -25,7 +25,7 @@ func (r Body) GenerateComponent(
 ) ([]byte, error) {
 	buffer := bytes.NewBuffer(nil)
 
-	mp := minipage.New(minipage.Parameters{
+	mp := minipages.New(minipages.Parameters{
 		Width:  sectionParameters.CalendarsColumnWidth,
 		Height: sectionParameters.CalendarsColumnHeight,
 	})

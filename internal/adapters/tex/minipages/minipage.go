@@ -1,4 +1,4 @@
-package minipage
+package minipages
 
 import (
 	"fmt"
