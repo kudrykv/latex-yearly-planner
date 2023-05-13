@@ -34,7 +34,7 @@ func (r *Tabularx) AddRow(cells ...Cell) {
 }
 
 func (r *Tabularx) Render() string {
-	return fmt.Sprintf(`{\newcolumntype{Y}{>{\centering\arraybackslash}X}\begin{tabularx}{%s}{%s}
+	return fmt.Sprintf(`{\newcolumntype{Y}{>{\centering\arraybackslash}X}\begin{tabularx}{%s}[t]{%s}
 %s%s
 \end{tabularx}}`,
 		r.Width,
