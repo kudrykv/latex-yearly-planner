@@ -72,5 +72,5 @@ func (r *Tabularx) headerCenterName() string {
 		return ""
 	}
 
-	return fmt.Sprintf(`\multicolumn{%d}{Y}{%s}\\`, len(r.Rows[0].Cells), r.HeaderName)
+	return fmt.Sprintf(`\multicolumn{%d}{c}{%s}\\`+"\n", len(r.Rows[0].Cells), r.HeaderName)
 }
