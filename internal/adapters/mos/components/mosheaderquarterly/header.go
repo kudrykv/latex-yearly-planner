@@ -13,5 +13,5 @@ func New() Header {
 }
 
 func (r Header) GenerateComponent(_ context.Context, _ calendar.Months, _ mosquarterly.SectionParameters) ([]byte, error) {
-	return []byte(`quarterly header`), nil
+	return []byte(``), nil
 }

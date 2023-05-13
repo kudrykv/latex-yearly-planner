@@ -80,7 +80,7 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 									return fmt.Errorf("new header: %w", err)
 								}
 
-								annualBody := mosannualbody.New(mosParameters.ToParameters(), mosParameters.AnnualLittleCalendarParameters())
+								annualBody := mosannualbody.New(mosParameters.ToParameters(), mosParameters.LittleCalendarParameters())
 								if err != nil {
 									return fmt.Errorf("new body: %w", err)
 								}
@@ -88,7 +88,7 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 								sectionAnnual := mosannual.New(mosParameters.ToParameters(), mosParameters.AnnualParameters(), annualHeader, annualBody)
 
 								quarterlyHeader := mosheaderquarterly.New()
-								quarterlyBody := mosquarterlybody.New()
+								quarterlyBody := mosquarterlybody.New(mosParameters.LittleCalendarParameters())
 
 								sectionQuarterly := mosquarterly.New(mosParameters.ToParameters(), mosParameters.QuarterlyParameters(), quarterlyHeader, quarterlyBody)
 

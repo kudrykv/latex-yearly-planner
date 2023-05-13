@@ -18,6 +18,10 @@ type Section struct {
 
 type SectionParameters struct {
 	Enabled bool
+
+	CalendarsColumn          entities.Placement
+	CalendarsColumnWidth     entities.Length
+	CalendarsVerticalSpacing entities.Length
 }
 
 func New(global mos.Parameters, local SectionParameters, header, body Component) Section {
@@ -41,7 +45,7 @@ func (r Section) GenerateSection(ctx context.Context) (entities.Note, error) {
 
 	for quarter := 1; quarter <= numberOfMonths; quarter += 3 {
 		from := quarter - 1
-		to := quarter + 3
+		to := quarter + 2
 		if to > numberOfMonths {
 			to = numberOfMonths
 		}

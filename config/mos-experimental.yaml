@@ -49,6 +49,10 @@ sections:
   quarterly:
     enabled: true
 
+    calendars_column_width: 5cm
+    calendars_column: right
+    calendars_vertical_spacing: 1cm
+
   monthly:
     enabled: true
 

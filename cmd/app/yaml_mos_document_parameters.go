@@ -39,6 +39,10 @@ type YAMLAnnualSection struct {
 
 type YAMLQuarterlySection struct {
 	Enabled bool `yaml:"enabled"`
+
+	CalendarsColumn          entities.Placement `yaml:"calendars_column"`
+	CalendarsColumnWidth     entities.Length    `yaml:"calendars_column_width"`
+	CalendarsVerticalSpacing entities.Length    `yaml:"calendars_vertical_spacing"`
 }
 
 type YAMLDocumentParameters struct {
@@ -79,7 +83,7 @@ func (r YAMLMOS) AnnualParameters() mosannual.SectionParameters {
 	}
 }
 
-func (r YAMLMOS) AnnualLittleCalendarParameters() texcalendar.CalendarLittleParameters {
+func (r YAMLMOS) LittleCalendarParameters() texcalendar.CalendarLittleParameters {
 	return texcalendar.CalendarLittleParameters{
 		ShowWeekNumbers:     r.Parameters.ShowWeekNumbers,
 		WeekNumberPlacement: r.Parameters.WeekNumberPlacement,
@@ -89,6 +93,10 @@ func (r YAMLMOS) AnnualLittleCalendarParameters() texcalendar.CalendarLittlePara
 func (r YAMLMOS) QuarterlyParameters() mosquarterly.SectionParameters {
 	return mosquarterly.SectionParameters{
 		Enabled: r.Sections.QuarterlySection.Enabled,
+
+		CalendarsColumn:          r.Sections.QuarterlySection.CalendarsColumn,
+		CalendarsColumnWidth:     r.Sections.QuarterlySection.CalendarsColumnWidth,
+		CalendarsVerticalSpacing: r.Sections.QuarterlySection.CalendarsVerticalSpacing,
 	}
 }
 
