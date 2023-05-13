@@ -45,6 +45,12 @@ func (r Body) GenerateComponent(
 			if i+1 != sectionParameters.MonthsPerPage {
 				buffer.WriteString(`\vfill{}` + "\n")
 			}
+		} else {
+			if sectionParameters.ColumnSpacing.IsSpecial() {
+				buffer.WriteString(sectionParameters.ColumnSpacing.String())
+			} else {
+				buffer.WriteString(`\hspace{` + sectionParameters.ColumnSpacing.String() + `}`)
+			}
 		}
 	}
 

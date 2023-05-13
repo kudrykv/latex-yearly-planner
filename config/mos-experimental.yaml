@@ -42,6 +42,8 @@ sections:
     months_per_page: 6
     columns: 2
     column_width: 5cm
+    column_spacing: hfill
+
 
   quarterly:
     enabled: true

@@ -3,6 +3,7 @@ package entities
 import (
 	"fmt"
 	"gopkg.in/yaml.v3"
+	"math"
 	"regexp"
 	"strconv"
 )
@@ -15,11 +16,16 @@ const (
 	Millimeter        = 1000 * Micrometer
 	Centimeter        = 10 * Millimeter
 	Inch              = 25400 * Micrometer
+
+	HFill Length = math.MaxInt64
+	HFil  Length = math.MaxInt64 - 1
+	VFill Length = math.MaxInt64 - 2
+	VFil  Length = math.MaxInt64 - 3
 )
 
 var _ yaml.Unmarshaler = (*Length)(nil)
 
-var lengthPattern = regexp.MustCompile(`^(\d+(?:[.,]\d+)?)(mm|cm|in)$`)
+var lengthPattern = regexp.MustCompile(`^(?:hfill|hfil|vfill|vfil|(\d+(?:[.,]\d+)?)(mm|cm|in))$`)
 
 var (
 	ErrNotAString       = fmt.Errorf("not a string")
@@ -35,6 +41,24 @@ func (r *Length) UnmarshalYAML(value *yaml.Node) error {
 
 	if !lengthPattern.MatchString(value.Value) {
 		return fmt.Errorf("%w: %s: want <length><dimension>, e.g.: 12.34mm", ErrBadPattern, value.Value)
+	}
+
+	switch value.Value {
+	case "hfill":
+		*r = HFill
+		return nil
+
+	case "hfil":
+		*r = HFil
+		return nil
+
+	case "vfill":
+		*r = VFill
+		return nil
+
+	case "vfil":
+		*r = VFil
+		return nil
 	}
 
 	matches := lengthPattern.FindAllStringSubmatch(value.Value, -1)[0]
@@ -57,7 +81,31 @@ func (r *Length) UnmarshalYAML(value *yaml.Node) error {
 
 //goland:noinspection GoMixedReceiverTypes
 func (r Length) String() string {
+	if r == HFill {
+		return `\hfill{}`
+	}
+
+	if r == HFil {
+		return `\hfil{}`
+	}
+
+	if r == VFill {
+		return `\vfill{}`
+	}
+
+	if r == VFil {
+		return `\vfil{}`
+	}
+
 	return fmt.Sprintf("%fmm", float64(r)/float64(Millimeter))
+}
+
+func (r *Length) IsSpecial() bool {
+	if r == nil {
+		return false
+	}
+
+	return *r == HFill || *r == HFil || *r == VFill || *r == VFil
 }
 
 func dimensionToLength(dimension string) (Length, error) {

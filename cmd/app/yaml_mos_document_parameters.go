@@ -31,6 +31,7 @@ type YAMLAnnualSection struct {
 	MonthsPerPage int             `yaml:"months_per_page"`
 	Columns       int             `yaml:"columns"`
 	ColumnWidth   entities.Length `yaml:"column_width"`
+	ColumnSpacing entities.Length `yaml:"column_spacing"`
 }
 
 type YAMLDocumentParameters struct {
@@ -66,6 +67,7 @@ func (r YAMLMOS) AnnualParameters() mosannual.SectionParameters {
 		MonthsPerPage: r.Sections.AnnualSection.MonthsPerPage,
 		Columns:       r.Sections.AnnualSection.Columns,
 		ColumnWidth:   r.Sections.AnnualSection.ColumnWidth,
+		ColumnSpacing: r.Sections.AnnualSection.ColumnSpacing,
 	}
 }
 
