@@ -43,6 +43,7 @@ sections:
     columns: 2
     column_width: 5cm
     column_spacing: 5mm
+    vertical_spacing: 1cm
 
 
   quarterly:

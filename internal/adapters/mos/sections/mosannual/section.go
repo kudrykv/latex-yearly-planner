@@ -19,11 +19,12 @@ type Section struct {
 type SectionParameters struct {
 	Enabled bool
 
-	Pages         int
-	MonthsPerPage int
-	Columns       int
-	ColumnWidth   entities.Length
-	ColumnSpacing entities.Length
+	Pages           int
+	MonthsPerPage   int
+	Columns         int
+	ColumnWidth     entities.Length
+	ColumnSpacing   entities.Length
+	VerticalSpacing entities.Length
 }
 
 func (r SectionParameters) GetPages() int {

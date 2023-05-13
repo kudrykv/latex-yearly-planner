@@ -27,11 +27,12 @@ type YAMLSections struct {
 type YAMLAnnualSection struct {
 	Enabled bool `yaml:"enabled"`
 
-	Pages         int             `yaml:"pages"`
-	MonthsPerPage int             `yaml:"months_per_page"`
-	Columns       int             `yaml:"columns"`
-	ColumnWidth   entities.Length `yaml:"column_width"`
-	ColumnSpacing entities.Length `yaml:"column_spacing"`
+	Pages           int             `yaml:"pages"`
+	MonthsPerPage   int             `yaml:"months_per_page"`
+	Columns         int             `yaml:"columns"`
+	ColumnWidth     entities.Length `yaml:"column_width"`
+	ColumnSpacing   entities.Length `yaml:"column_spacing"`
+	VerticalSpacing entities.Length `yaml:"vertical_spacing"`
 }
 
 type YAMLDocumentParameters struct {
@@ -63,11 +64,12 @@ func (r YAMLMOS) AnnualParameters() mosannual.SectionParameters {
 	return mosannual.SectionParameters{
 		Enabled: r.Sections.AnnualSection.Enabled,
 
-		Pages:         r.Sections.AnnualSection.Pages,
-		MonthsPerPage: r.Sections.AnnualSection.MonthsPerPage,
-		Columns:       r.Sections.AnnualSection.Columns,
-		ColumnWidth:   r.Sections.AnnualSection.ColumnWidth,
-		ColumnSpacing: r.Sections.AnnualSection.ColumnSpacing,
+		Pages:           r.Sections.AnnualSection.Pages,
+		MonthsPerPage:   r.Sections.AnnualSection.MonthsPerPage,
+		Columns:         r.Sections.AnnualSection.Columns,
+		ColumnWidth:     r.Sections.AnnualSection.ColumnWidth,
+		ColumnSpacing:   r.Sections.AnnualSection.ColumnSpacing,
+		VerticalSpacing: r.Sections.AnnualSection.VerticalSpacing,
 	}
 }
 
