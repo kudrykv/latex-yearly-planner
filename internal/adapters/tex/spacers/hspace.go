@@ -1,4 +1,4 @@
-package spacer
+package spacers
 
 import "github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 

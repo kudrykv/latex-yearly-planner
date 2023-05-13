@@ -6,7 +6,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/parboxes"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/spacer"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/spacers"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/texcalendar"
 	"text/template"
 )
@@ -48,10 +48,10 @@ func (r Body) GenerateComponent(
 			buffer.WriteString("\n\n")
 
 			if i+1 != sectionParameters.MonthsPerPage {
-				buffer.WriteString(spacer.NewVSpace(sectionParameters.VerticalSpacing).String())
+				buffer.WriteString(spacers.NewVSpace(sectionParameters.VerticalSpacing).String())
 			}
 		} else {
-			buffer.WriteString(spacer.NewHSpace(sectionParameters.ColumnSpacing).String())
+			buffer.WriteString(spacers.NewHSpace(sectionParameters.ColumnSpacing).String())
 		}
 	}
 

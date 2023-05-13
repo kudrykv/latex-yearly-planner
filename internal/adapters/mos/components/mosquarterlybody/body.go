@@ -5,7 +5,7 @@ import (
 	"context"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosquarterly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/minipages"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/spacer"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/spacers"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/texcalendar"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/calendar"
 )
@@ -35,7 +35,7 @@ func (r Body) GenerateComponent(
 
 		if i-1 != len(months) {
 			mp.AddString("\n\n")
-			mp.Add(spacer.NewVSpace(sectionParameters.CalendarsVerticalSpacing))
+			mp.Add(spacers.NewVSpace(sectionParameters.CalendarsVerticalSpacing))
 		}
 	}
 
