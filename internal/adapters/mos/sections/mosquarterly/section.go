@@ -1,4 +1,4 @@
-package mosannual
+package mosquarterly
 
 import (
 	"bytes"
@@ -18,21 +18,6 @@ type Section struct {
 
 type SectionParameters struct {
 	Enabled bool
-
-	Pages           int
-	MonthsPerPage   int
-	Columns         int
-	ColumnWidth     entities.Length
-	ColumnSpacing   entities.Length
-	VerticalSpacing entities.Length
-}
-
-func (r SectionParameters) GetPages() int {
-	if r.Pages == 0 {
-		return 1
-	}
-
-	return r.Pages
 }
 
 func New(global mos.Parameters, local SectionParameters, header, body Component) Section {
@@ -52,15 +37,25 @@ func (r Section) IsEnabled() bool {
 func (r Section) GenerateSection(ctx context.Context) (entities.Note, error) {
 	buffer := bytes.NewBuffer(nil)
 
-	for pageNumber := 1; pageNumber <= r.parameters.GetPages(); pageNumber++ {
-		headerBytes, err := r.header.GenerateComponent(ctx, pageNumber, r.parameters)
-		if err != nil {
-			return entities.Note{}, fmt.Errorf("make header at page %d: %w", pageNumber, err)
+	numberOfMonths := len(r.globalParameters.Months)
+
+	for quarter := 1; quarter <= numberOfMonths; quarter += 3 {
+		from := quarter - 1
+		to := quarter + 3
+		if to > numberOfMonths {
+			to = numberOfMonths
 		}
 
-		bodyBytes, err := r.body.GenerateComponent(ctx, pageNumber, r.parameters)
+		months := r.globalParameters.Months[from:to]
+
+		headerBytes, err := r.header.GenerateComponent(ctx, months, r.parameters)
 		if err != nil {
-			return entities.Note{}, fmt.Errorf("make body at page %d: %w", pageNumber, err)
+			return entities.Note{}, fmt.Errorf("make header at q %d: %w", quarter, err)
+		}
+
+		bodyBytes, err := r.body.GenerateComponent(ctx, months, r.parameters)
+		if err != nil {
+			return entities.Note{}, fmt.Errorf("make body at q %d: %w", quarter, err)
 		}
 
 		buffer.Write(headerBytes)
@@ -69,7 +64,7 @@ func (r Section) GenerateSection(ctx context.Context) (entities.Note, error) {
 	}
 
 	return entities.Note{
-		Name:     "annual.tex",
+		Name:     "quarterly.tex",
 		Contents: buffer.Bytes(),
 	}, nil
 }

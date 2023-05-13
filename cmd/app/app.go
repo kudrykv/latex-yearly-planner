@@ -82,10 +82,7 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 									return fmt.Errorf("new body: %w", err)
 								}
 
-								sectionAnnual, err := mosannual.New(mosParameters.ToParameters(), mosParameters.AnnualParameters(), annualHeader, annualBody)
-								if err != nil {
-									return fmt.Errorf("new annual: %w", err)
-								}
+								sectionAnnual := mosannual.New(mosParameters.ToParameters(), mosParameters.AnnualParameters(), annualHeader, annualBody)
 
 								builder := plannerbuilders.New(indexer, plannerbuilders.Sections{sectionTitle, sectionAnnual})
 
