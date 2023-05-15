@@ -17,15 +17,16 @@ const (
 	Centimeter        = 10 * Millimeter
 	Inch              = 25400 * Micrometer
 
-	HFill Length = math.MaxInt64
-	HFil  Length = math.MaxInt64 - 1
-	VFill Length = math.MaxInt64 - 2
-	VFil  Length = math.MaxInt64 - 3
+	HFill           Length = math.MaxInt64
+	HFil            Length = math.MaxInt64 - 1
+	VFill           Length = math.MaxInt64 - 2
+	VFil            Length = math.MaxInt64 - 3
+	RemainingHeight Length = math.MaxInt64 - 4
 )
 
 var _ yaml.Unmarshaler = (*Length)(nil)
 
-var lengthPattern = regexp.MustCompile(`^(?:hfill|hfil|vfill|vfil|(\d+(?:[.,]\d+)?)(mm|cm|in))$`)
+var lengthPattern = regexp.MustCompile(`^(?:hfill|hfil|vfill|vfil|remaining height|(\d+(?:[.,]\d+)?)(mm|cm|in))$`)
 
 var (
 	ErrNotAString       = fmt.Errorf("not a string")
@@ -58,6 +59,10 @@ func (r *Length) UnmarshalYAML(value *yaml.Node) error {
 
 	case "vfil":
 		*r = VFil
+		return nil
+
+	case "remaining height":
+		*r = RemainingHeight
 		return nil
 	}
 
@@ -97,6 +102,10 @@ func (r Length) String() string {
 		return `\vfil{}`
 	}
 
+	if r == RemainingHeight {
+		return `\remainingHeight{}`
+	}
+
 	return fmt.Sprintf("%fmm", float64(r)/float64(Millimeter))
 }
 
@@ -105,7 +114,7 @@ func (r *Length) IsSpecial() bool {
 		return false
 	}
 
-	return *r == HFill || *r == HFil || *r == VFill || *r == VFil
+	return *r == HFill || *r == HFil || *r == VFill || *r == VFil || *r == RemainingHeight
 }
 
 func dimensionToLength(dimension string) (Length, error) {

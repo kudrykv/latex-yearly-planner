@@ -51,7 +51,7 @@ sections:
 
     calendars_column_width: 5cm
     notes_column_width: 5cm
-    column_height: 15cm
+    column_height: remaining height
     calendars_column: left
     calendars_vertical_spacing: vfill
     column_spacing: 5mm
