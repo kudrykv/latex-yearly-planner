@@ -40,6 +40,30 @@
 \parindent=0pt
 \fboxsep0pt
 
+\pgfdeclarepatternformonly{dotted5mm}%
+  {\pgfqpoint{-0.5pt}{-0.5pt}}%
+  {\pgfqpoint{0.5pt}{0.5pt}}%
+  {\pgfqpoint{5mm}{5mm}}%
+{%
+  \pgfpathcircle{\pgfqpoint{0pt}{0pt}}{.5pt}%
+  \pgfusepath{fill}%
+}%
+
+\pgfdeclarepatternformonly{lined5mm}{\pgfpointorigin}{\pgfpoint{5mm}{5mm}}{\pgfpoint{5mm}{5mm}}{
+    \pgfsetlinewidth{1pt}
+    \pgfpathmoveto{\pgfpointorigin}
+    \pgfpathlineto{\pgfpoint{5mm}{0mm}}
+    \pgfusepath{stroke}
+}
+
+\newcommand{\remainingHeight}{%
+  \ifdim\pagegoal=\maxdimen
+  \dimexpr\textheight-9.4pt\relax
+  \else
+  \dimexpr\pagegoal-\pagetotal-\lineskip-9.4pt\relax
+  \fi%
+}
+
 \begin{document}
 {{"{{ .Notes }}"}}
 \end{document}
