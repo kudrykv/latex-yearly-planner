@@ -13,11 +13,13 @@ import (
 
 type Body struct {
 	calendarsParameters texcalendar.CalendarLittleParameters
+	notes               Notes
 }
 
-func New(calendarsParameters texcalendar.CalendarLittleParameters) Body {
+func New(calendarsParameters texcalendar.CalendarLittleParameters, notes Notes) Body {
 	return Body{
 		calendarsParameters: calendarsParameters,
+		notes:               notes,
 	}
 }
 
@@ -45,7 +47,7 @@ func (r Body) GenerateComponent(
 		Height: sectionParameters.ColumnHeight,
 	})
 
-	notesColumn.AddString("future notes here")
+	notesColumn.AddString(r.notes.Render(sectionParameters.NotesColumnWidth, sectionParameters.ColumnHeight))
 
 	if sectionParameters.CalendarsColumn == entities.PlacementRight {
 		buffer.WriteString(notesColumn.Render())

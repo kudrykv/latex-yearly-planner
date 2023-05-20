@@ -1,4 +1,4 @@
-package notes
+package noting
 
 type PatternError struct{}
 

@@ -184,6 +184,11 @@ type YAMLParameters struct {
 	ShowWeekNumbers     bool               `yaml:"show_week_numbers"`
 	WeekNumberPlacement entities.Placement `yaml:"week_number_placement"`
 	FormatAMPM          bool               `yaml:"format_ampm"`
+	Notes               YAMLNotes          `yaml:"notes"`
+}
+
+type YAMLNotes struct {
+	Pattern string `yaml:"pattern"`
 }
 
 var dateRegex = regexp.MustCompile(`(?i)(^\d{4}),?\s* (january|february|march|april|may|june|july|august|september|november|october|december)$`)

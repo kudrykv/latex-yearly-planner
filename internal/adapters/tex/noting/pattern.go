@@ -1,4 +1,4 @@
-package notes
+package noting
 
 func NewPattern(name string) Pattern {
 	switch name {

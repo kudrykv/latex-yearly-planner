@@ -1,4 +1,4 @@
-package notes
+package noting
 
 type PatternLined struct{}
 

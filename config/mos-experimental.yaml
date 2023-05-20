@@ -29,6 +29,8 @@ parameters:
   show_week_numbers: true
   format_ampm: false
   week_number_placement: right
+  notes:
+    pattern: dotted
 
 
 sections:
