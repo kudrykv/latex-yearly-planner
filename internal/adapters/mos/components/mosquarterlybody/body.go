@@ -33,6 +33,8 @@ func (r Body) GenerateComponent(
 		Height: sectionParameters.ColumnHeight,
 	})
 
+	calendarsColumn.AddString(`\vspace{0pt}`)
+
 	for i, calendarLittle := range texcalendar.NewCalendarsLittle(months, r.calendarsParameters) {
 		calendarsColumn.Add(calendarLittle)
 
@@ -47,6 +49,7 @@ func (r Body) GenerateComponent(
 		Height: sectionParameters.ColumnHeight,
 	})
 
+	notesColumn.AddString(`\vspace{0pt}`)
 	notesColumn.AddString(r.notes.Render(sectionParameters.NotesColumnWidth, sectionParameters.ColumnHeight))
 
 	if sectionParameters.CalendarsColumn == entities.PlacementRight {

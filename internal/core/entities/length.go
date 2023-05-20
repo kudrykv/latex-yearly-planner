@@ -87,23 +87,23 @@ func (r *Length) UnmarshalYAML(value *yaml.Node) error {
 //goland:noinspection GoMixedReceiverTypes
 func (r Length) String() string {
 	if r == HFill {
-		return `\hfill{}`
+		return `\hfill`
 	}
 
 	if r == HFil {
-		return `\hfil{}`
+		return `\hfil`
 	}
 
 	if r == VFill {
-		return `\vfill{}`
+		return `\vfill`
 	}
 
 	if r == VFil {
-		return `\vfil{}`
+		return `\vfil`
 	}
 
 	if r == RemainingHeight {
-		return `\remainingHeight{}`
+		return `\remainingHeight`
 	}
 
 	return fmt.Sprintf("%fmm", float64(r)/float64(Millimeter))

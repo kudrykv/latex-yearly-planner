@@ -22,6 +22,7 @@
 \usepackage{marginnote}
 \usepackage{adjustbox}
 \usepackage{multido}
+\usetikzlibrary{patterns}
 
 \geometry{paperwidth={{ .Layout.Dimensions.Width }}, paperheight={{ .Layout.Dimensions.Height }}}
 \geometry{
@@ -62,6 +63,15 @@
   \else
   \dimexpr\pagegoal-\pagetotal-\lineskip-9.4pt\relax
   \fi%
+}
+
+\pgfdeclarepatternformonly{custom_dotted}%
+  {\pgfqpoint{-0.5pt}{-0.5pt}}%
+  {\pgfqpoint{0.5pt}{0.5pt}}%
+  {\pgfqpoint{5mm}{5mm}}%
+{%
+  \pgfpathcircle{\pgfqpoint{0pt}{0pt}}{.5pt}%
+  \pgfusepath{fill}%
 }
 
 \begin{document}
