@@ -27,7 +27,7 @@ func (r CalendarLarge) String() string {
 	table := tabularxes.New(entities.LineWidth)
 
 	table.SetHeaderName(r.Month.Name())
-	table.SetColumnFormat("lllllllp{1cm}")
+	table.SetColumnFormat(r.makeFormat())
 
 	table.AddRow(r.makeWeekdays()...)
 
@@ -70,4 +70,18 @@ func (r CalendarLarge) makeWeekdays() tabularxes.Cells {
 	}
 
 	return cells
+}
+
+func (r CalendarLarge) makeFormat() string {
+	format := "|X|X|X|X|X|X|X|"
+
+	if r.Parameters.ShowWeekNumbers {
+		if r.Parameters.WeekNumberPlacement == entities.PlacementRight {
+			format += "p{5mm}|"
+		} else {
+			format = "p{5mm}|" + format
+		}
+	}
+
+	return format
 }

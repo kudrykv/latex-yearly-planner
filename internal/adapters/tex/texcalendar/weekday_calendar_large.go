@@ -11,5 +11,5 @@ func NewWeekdayCalendarLarge(weekday calendar.Weekday) WeekdayCalendarLarge {
 }
 
 func (r WeekdayCalendarLarge) String() string {
-	return r.Weekday.String()
+	return r.Weekday.String()[:3]
 }
