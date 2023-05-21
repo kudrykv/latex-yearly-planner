@@ -118,6 +118,13 @@ func (r YAMLMOS) MonthlyParameters() mosmonthly.SectionParameters {
 	}
 }
 
+func (r YAMLMOS) LargeCalendarParameters() texcalendar.CalendarLargeParameters {
+	return texcalendar.CalendarLargeParameters{
+		ShowWeekNumbers:     r.Parameters.ShowWeekNumbers,
+		WeekNumberPlacement: r.Parameters.WeekNumberPlacement,
+	}
+}
+
 type YAMLDimensions struct {
 	Width  entities.Length `yaml:"width"`
 	Height entities.Length `yaml:"height"`

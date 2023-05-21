@@ -100,7 +100,7 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 								sectionQuarterly := mosquarterly.New(mosParameters.ToParameters(), mosParameters.QuarterlyParameters(), quarterlyHeader, quarterlyBody)
 
 								monthlyHeader := mosheadermonthly.New()
-								monthlyBody := mosbodymonthly.New(notes)
+								monthlyBody := mosbodymonthly.New(mosParameters.LargeCalendarParameters(), notes)
 
 								sectionMonthly := mosmonthly.New(mosParameters.ToParameters(), mosParameters.MonthlyParameters(), monthlyHeader, monthlyBody)
 
