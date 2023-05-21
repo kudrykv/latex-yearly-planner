@@ -5,6 +5,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mosdocument"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosmonthly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosquarterly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/texcalendar"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/calendar"
@@ -24,6 +25,7 @@ type YAMLMOS struct {
 type YAMLSections struct {
 	AnnualSection    YAMLAnnualSection    `yaml:"yearly"`
 	QuarterlySection YAMLQuarterlySection `yaml:"quarterly"`
+	MonthlySection   YAMLMonthlySection   `yaml:"monthly"`
 }
 
 type YAMLAnnualSection struct {
@@ -46,6 +48,10 @@ type YAMLQuarterlySection struct {
 	NotesColumnWidth         entities.Length    `yaml:"notes_column_width"`
 	ColumnHeight             entities.Length    `yaml:"column_height"`
 	ColumnSpacing            entities.Length    `yaml:"column_spacing"`
+}
+
+type YAMLMonthlySection struct {
+	Enabled bool `yaml:"enabled"`
 }
 
 type YAMLDocumentParameters struct {
@@ -103,6 +109,12 @@ func (r YAMLMOS) QuarterlyParameters() mosquarterly.SectionParameters {
 		ColumnHeight:             r.Sections.QuarterlySection.ColumnHeight,
 		CalendarsVerticalSpacing: r.Sections.QuarterlySection.CalendarsVerticalSpacing,
 		ColumnSpacing:            r.Sections.QuarterlySection.ColumnSpacing,
+	}
+}
+
+func (r YAMLMOS) MonthlyParameters() mosmonthly.SectionParameters {
+	return mosmonthly.SectionParameters{
+		Enabled: r.Sections.MonthlySection.Enabled,
 	}
 }
 

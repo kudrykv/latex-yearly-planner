@@ -11,6 +11,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosheaderquarterly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mosdocument"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosmonthly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosquarterly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mostitles"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/noting"
@@ -96,7 +97,10 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 
 								sectionQuarterly := mosquarterly.New(mosParameters.ToParameters(), mosParameters.QuarterlyParameters(), quarterlyHeader, quarterlyBody)
 
-								builder := plannerbuilders.New(indexer, plannerbuilders.Sections{sectionTitle, sectionAnnual, sectionQuarterly})
+								sectionMonthly := mosmonthly.New(mosParameters.ToParameters(), mosParameters.MonthlyParameters())
+
+								sections := plannerbuilders.Sections{sectionTitle, sectionAnnual, sectionQuarterly, sectionMonthly}
+								builder := plannerbuilders.New(indexer, sections)
 
 								planner := planners.New(builder, fileWriter, cmder)
 
