@@ -26,8 +26,8 @@ func NewCalendarLarge(month calendar.Month, parameters CalendarLargeParameters) 
 func (r CalendarLarge) String() string {
 	table := tabularxes.New(entities.LineWidth)
 
-	table.SetHeaderName(r.Month.Name())
 	table.SetColumnFormat(r.makeFormat())
+	table.SetHorizontalLines(true)
 
 	table.AddRow(r.makeWeekdays()...)
 

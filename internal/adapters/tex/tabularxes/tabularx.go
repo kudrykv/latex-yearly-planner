@@ -6,10 +6,11 @@ import (
 )
 
 type Tabularx struct {
-	Width        fmt.Stringer
-	Rows         Rows
-	HeaderName   string
-	ColumnFormat string
+	Width           fmt.Stringer
+	Rows            Rows
+	HeaderName      string
+	ColumnFormat    string
+	HorizontalLines bool
 }
 
 type Row struct {
@@ -65,7 +66,20 @@ func (r *Tabularx) rows() string {
 		rows = append(rows, strings.Join(cells, " & "))
 	}
 
-	return strings.Join(rows, `\\`+"\n")
+	separator := `\\`
+	if r.HorizontalLines {
+		separator += ` \hline`
+	}
+
+	separator += "\n"
+
+	rowData := strings.Join(rows, separator)
+
+	if r.HorizontalLines {
+		rowData = `\hline` + "\n" + rowData + `\\ \hline` + "\n"
+	}
+
+	return rowData
 }
 
 func (r *Tabularx) SetHeaderName(headerName string) {
@@ -82,4 +96,8 @@ func (r *Tabularx) headerCenterName() string {
 
 func (r *Tabularx) SetColumnFormat(columnFormat string) {
 	r.ColumnFormat = columnFormat
+}
+
+func (r *Tabularx) SetHorizontalLines(horizontalLines bool) {
+	r.HorizontalLines = horizontalLines
 }
