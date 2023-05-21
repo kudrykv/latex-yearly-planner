@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/commanders"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/filewriters"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosannualbody"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosbodyannual"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosbodyquarterly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosheaderoverview"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosheaderquarterly"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosquarterlybody"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mosdocument"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosquarterly"
@@ -84,7 +84,7 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 									return fmt.Errorf("new header: %w", err)
 								}
 
-								annualBody := mosannualbody.New(mosParameters.ToParameters(), mosParameters.LittleCalendarParameters())
+								annualBody := mosbodyannual.New(mosParameters.ToParameters(), mosParameters.LittleCalendarParameters())
 								if err != nil {
 									return fmt.Errorf("new body: %w", err)
 								}
@@ -92,7 +92,7 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 								sectionAnnual := mosannual.New(mosParameters.ToParameters(), mosParameters.AnnualParameters(), annualHeader, annualBody)
 
 								quarterlyHeader := mosheaderquarterly.New()
-								quarterlyBody := mosquarterlybody.New(mosParameters.LittleCalendarParameters(), notes)
+								quarterlyBody := mosbodyquarterly.New(mosParameters.LittleCalendarParameters(), notes)
 
 								sectionQuarterly := mosquarterly.New(mosParameters.ToParameters(), mosParameters.QuarterlyParameters(), quarterlyHeader, quarterlyBody)
 

@@ -1,4 +1,4 @@
-package mosquarterlybody
+package mosbodyquarterly
 
 import (
 	"bytes"
