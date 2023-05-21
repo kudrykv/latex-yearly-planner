@@ -6,9 +6,10 @@ import (
 )
 
 type Tabularx struct {
-	Width      fmt.Stringer
-	Rows       Rows
-	HeaderName string
+	Width        fmt.Stringer
+	Rows         Rows
+	HeaderName   string
+	ColumnFormat string
 }
 
 type Row struct {
@@ -45,6 +46,10 @@ func (r *Tabularx) Render() string {
 }
 
 func (r *Tabularx) columnFormat() string {
+	if r.ColumnFormat != "" {
+		return r.ColumnFormat
+	}
+
 	return strings.Repeat("Y", len(r.Rows[0].Cells))
 }
 
@@ -73,4 +78,8 @@ func (r *Tabularx) headerCenterName() string {
 	}
 
 	return fmt.Sprintf(`\multicolumn{%d}{c}{%s}\\`+"\n", len(r.Rows[0].Cells), r.HeaderName)
+}
+
+func (r *Tabularx) SetColumnFormat(columnFormat string) {
+	r.ColumnFormat = columnFormat
 }
