@@ -22,11 +22,12 @@ const (
 	VFill           Length = math.MaxInt64 - 2
 	VFil            Length = math.MaxInt64 - 3
 	RemainingHeight Length = math.MaxInt64 - 4
+	LineWidth       Length = math.MaxInt64 - 5
 )
 
 var _ yaml.Unmarshaler = (*Length)(nil)
 
-var lengthPattern = regexp.MustCompile(`^(?:hfill|hfil|vfill|vfil|remaining height|(\d+(?:[.,]\d+)?)(mm|cm|in))$`)
+var lengthPattern = regexp.MustCompile(`^(?:hfill|hfil|vfill|vfil|remaining height|line width|(\d+(?:[.,]\d+)?)(mm|cm|in))$`)
 
 var (
 	ErrNotAString       = fmt.Errorf("not a string")
@@ -64,6 +65,10 @@ func (r *Length) UnmarshalYAML(value *yaml.Node) error {
 	case "remaining height":
 		*r = RemainingHeight
 		return nil
+
+	case "line width":
+		*r = LineWidth
+		return nil
 	}
 
 	matches := lengthPattern.FindAllStringSubmatch(value.Value, -1)[0]
@@ -86,24 +91,19 @@ func (r *Length) UnmarshalYAML(value *yaml.Node) error {
 
 //goland:noinspection GoMixedReceiverTypes
 func (r Length) String() string {
-	if r == HFill {
+	switch r {
+	case HFill:
 		return `\hfill`
-	}
-
-	if r == HFil {
+	case HFil:
 		return `\hfil`
-	}
-
-	if r == VFill {
+	case VFill:
 		return `\vfill`
-	}
-
-	if r == VFil {
+	case VFil:
 		return `\vfil`
-	}
-
-	if r == RemainingHeight {
+	case RemainingHeight:
 		return `\remainingHeight`
+	case LineWidth:
+		return `\linewidth`
 	}
 
 	return fmt.Sprintf("%fmm", float64(r)/float64(Millimeter))
@@ -114,7 +114,7 @@ func (r *Length) IsSpecial() bool {
 		return false
 	}
 
-	return *r == HFill || *r == HFil || *r == VFill || *r == VFil || *r == RemainingHeight
+	return *r == HFill || *r == HFil || *r == VFill || *r == VFil || *r == RemainingHeight || *r == LineWidth
 }
 
 func dimensionToLength(dimension string) (Length, error) {
