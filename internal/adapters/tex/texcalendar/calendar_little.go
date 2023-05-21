@@ -40,7 +40,7 @@ func NewCalendarLittle(month calendar.Month, parameters CalendarLittleParameters
 }
 
 func (r CalendarLittle) String() string {
-	tabular := tabularxes.New(LineWidth{})
+	tabular := tabularxes.New(entities.LineWidth)
 	tabular.SetHeaderName(r.Month.Name())
 
 	tabular.AddRow(r.makeWeekdays()...)
@@ -82,10 +82,4 @@ func (r CalendarLittle) makeWeekdays() tabularxes.Cells {
 	}
 
 	return cells
-}
-
-type LineWidth struct{}
-
-func (r LineWidth) String() string {
-	return `\linewidth`
 }
