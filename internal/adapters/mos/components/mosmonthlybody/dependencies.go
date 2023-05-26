@@ -1,4 +1,4 @@
-package mosbodymonthly
+package mosmonthlybody
 
 import "github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 

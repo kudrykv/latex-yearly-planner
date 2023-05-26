@@ -1,4 +1,4 @@
-package mosheaderoverview
+package mosannualheader
 
 import (
 	"bytes"
@@ -19,7 +19,7 @@ type Header struct {
 }
 
 func New(global mos.Parameters) (Header, error) {
-	templateTree, err := template.New("mosheaderoverview").Parse(headerTemplate)
+	templateTree, err := template.New("mosannualheader").Parse(headerTemplate)
 	if err != nil {
 		return Header{}, fmt.Errorf("parse: %w", err)
 	}

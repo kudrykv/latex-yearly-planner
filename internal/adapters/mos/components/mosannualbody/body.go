@@ -1,4 +1,4 @@
-package mosbodyannual
+package mosannualbody
 
 import (
 	"bytes"

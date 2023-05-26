@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/commanders"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/filewriters"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosbodyannual"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosbodymonthly"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosbodyquarterly"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosheadermonthly"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosheaderoverview"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosheaderquarterly"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosannualbody"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosannualheader"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosmonthlybody"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosmonthlyheader"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosquarterlybody"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosquarterlyheader"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mosdocument"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosmonthly"
@@ -82,25 +82,25 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 
 								sectionTitle := mostitles.New(mostitles.TitleParameters{IsEnabled: true, Name: "hello world"})
 
-								annualHeader, err := mosheaderoverview.New(mosParameters.ToParameters())
+								annualHeader, err := mosannualheader.New(mosParameters.ToParameters())
 								if err != nil {
 									return fmt.Errorf("new header: %w", err)
 								}
 
-								annualBody := mosbodyannual.New(mosParameters.ToParameters(), mosParameters.LittleCalendarParameters())
+								annualBody := mosannualbody.New(mosParameters.ToParameters(), mosParameters.LittleCalendarParameters())
 								if err != nil {
 									return fmt.Errorf("new body: %w", err)
 								}
 
 								sectionAnnual := mosannual.New(mosParameters.ToParameters(), mosParameters.AnnualParameters(), annualHeader, annualBody)
 
-								quarterlyHeader := mosheaderquarterly.New()
-								quarterlyBody := mosbodyquarterly.New(mosParameters.LittleCalendarParameters(), notes)
+								quarterlyHeader := mosquarterlyheader.New()
+								quarterlyBody := mosquarterlybody.New(mosParameters.LittleCalendarParameters(), notes)
 
 								sectionQuarterly := mosquarterly.New(mosParameters.ToParameters(), mosParameters.QuarterlyParameters(), quarterlyHeader, quarterlyBody)
 
-								monthlyHeader := mosheadermonthly.New()
-								monthlyBody := mosbodymonthly.New(mosParameters.LargeCalendarParameters(), notes)
+								monthlyHeader := mosmonthlyheader.New()
+								monthlyBody := mosmonthlybody.New(mosParameters.LargeCalendarParameters(), notes)
 
 								sectionMonthly := mosmonthly.New(mosParameters.ToParameters(), mosParameters.MonthlyParameters(), monthlyHeader, monthlyBody)
 
