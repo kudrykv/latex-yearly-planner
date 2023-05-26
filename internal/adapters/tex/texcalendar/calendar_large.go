@@ -79,7 +79,7 @@ func (r CalendarLarge) makeFormat() string {
 		if r.Parameters.WeekNumberPlacement == entities.PlacementRight {
 			format += "p{5mm}|"
 		} else {
-			format = "p{5mm}|" + format
+			format = "|p{5mm}" + format
 		}
 	}
 
