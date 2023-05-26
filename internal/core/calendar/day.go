@@ -55,6 +55,10 @@ func (r Day) LastInMonth() Day {
 	return Day{Raw: raw, month: r.month}
 }
 
+func (r Day) AfterOrEquals(day Day) bool {
+	return r.Raw.After(day.Raw) || r.Raw.Equal(day.Raw)
+}
+
 type Days [7]Day
 
 func (r Days) Last() Day {

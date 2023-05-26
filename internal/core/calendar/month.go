@@ -28,15 +28,26 @@ func NewMonths(weekday Weekday, fromYear int, fromMonth time.Month, toYear int, 
 }
 
 func (r Months) Weeks() Weeks {
-	return nil
+	if len(r) == 0 {
+		return nil
+	}
 
-	//if len(r) == 0 {
-	//	return nil
-	//}
-	//
-	//cutoff := r[len(r)-1].LastDay()
-	//
-	//NewFirstWeek(r[0])
+	var weeks Weeks
+	cutoffDate := r[len(r)-1].LastDay()
+
+	week := NewFirstWeek(r[0])
+	weeks = append(weeks, week)
+
+	for {
+		week = week.Next()
+		weeks = append(weeks, week)
+
+		if week.LastDay().AfterOrEquals(cutoffDate) {
+			break
+		}
+	}
+
+	return weeks
 }
 
 type Month struct {

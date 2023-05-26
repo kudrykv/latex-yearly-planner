@@ -80,4 +80,14 @@ func (r Week) Number() int {
 	return -1
 }
 
+func (r Week) LastDay() Day {
+	for i := 6; i >= 0; i-- {
+		if !r.Days[i].IsZero() {
+			return r.Days[i]
+		}
+	}
+
+	return Day{}
+}
+
 type Weeks []Week
