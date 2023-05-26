@@ -49,6 +49,12 @@ func (r Day) WeekNumber() int {
 	return weekNumber
 }
 
+func (r Day) LastInMonth() Day {
+	raw := NewDay(r.month).Raw.AddDate(0, 1, -1)
+
+	return Day{Raw: raw, month: r.month}
+}
+
 type Days [7]Day
 
 func (r Days) Last() Day {

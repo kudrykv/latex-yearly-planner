@@ -5,19 +5,8 @@ type Week struct {
 }
 
 func NewWeeksOfMonth(month Month) Weeks {
-	day := month.FirstDay()
-	weekday := day.Weekday()
-	shift := weekday.RightDistanceTo(month.Weekday)
-
-	days := Days{}
-
-	for i := shift; i < 7; i++ {
-		days[i] = day
-		day = day.NextDay()
-	}
-
 	var ok bool
-	week := Week{days}
+	week := NewFirstWeek(month)
 	weeks := Weeks{week}
 
 	for {
@@ -30,6 +19,21 @@ func NewWeeksOfMonth(month Month) Weeks {
 	}
 
 	return weeks
+}
+
+func NewFirstWeek(month Month) Week {
+	day := month.FirstDay()
+	weekday := day.Weekday()
+	shift := weekday.RightDistanceTo(month.Weekday)
+
+	days := Days{}
+
+	for i := shift; i < 7; i++ {
+		days[i] = day
+		day = day.NextDay()
+	}
+
+	return Week{days}
 }
 
 func (r Week) NextWeekInMonth() (Week, bool) {
