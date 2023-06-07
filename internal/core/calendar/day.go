@@ -59,7 +59,12 @@ func (r Day) AfterOrEquals(day Day) bool {
 	return r.Raw.After(day.Raw) || r.Raw.Equal(day.Raw)
 }
 
+func (r Day) BeforeOrEquals(day Day) bool {
+	return r.Raw.Before(day.Raw) || r.Raw.Equal(day.Raw)
+}
+
 type Days [7]Day
+type DaysSlice []Day
 
 func (r Days) Last() Day {
 	return r[6]

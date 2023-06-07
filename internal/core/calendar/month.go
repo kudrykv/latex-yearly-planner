@@ -50,6 +50,20 @@ func (r Months) Weeks() Weeks {
 	return weeks
 }
 
+func (r Months) Days() DaysSlice {
+	if len(r) == 0 {
+		return nil
+	}
+
+	days := make(DaysSlice, 0, len(r)*31)
+
+	for day := r[0].FirstDay(); day.BeforeOrEquals(r[len(r)-1].LastDay()); day = day.NextDay() {
+		days = append(days, day)
+	}
+
+	return days
+}
+
 type Month struct {
 	Year    int
 	Month   time.Month

@@ -7,6 +7,8 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/filewriters"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosannualbody"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosannualheader"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosdailybody"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosdailyheader"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosmonthlybody"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosmonthlyheader"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosquarterlybody"
@@ -15,6 +17,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosweeklyheader"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mosdocument"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosdaily"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosmonthly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosquarterly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mostitles"
@@ -111,7 +114,11 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 								weeklyBody := mosweeklybody.New(notes)
 								sectionWeekly := mosweekly.New(mosParameters.ToParameters(), mosParameters.WeeklyParameters(), weeklyHeader, weeklyBody)
 
-								sections := plannerbuilders.Sections{sectionTitle, sectionAnnual, sectionQuarterly, sectionMonthly, sectionWeekly}
+								dailyHeader := mosdailyheader.New()
+								dailyBody := mosdailybody.New(notes)
+								sectionDaily := mosdaily.New(mosParameters.ToParameters(), mosParameters.DailyParameters(), dailyHeader, dailyBody)
+
+								sections := plannerbuilders.Sections{sectionTitle, sectionAnnual, sectionQuarterly, sectionMonthly, sectionWeekly, sectionDaily}
 								builder := plannerbuilders.New(indexer, sections)
 
 								planner := planners.New(builder, fileWriter, cmder)
