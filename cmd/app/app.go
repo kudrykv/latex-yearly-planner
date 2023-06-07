@@ -25,6 +25,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosquarterly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mostitles"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosweekly"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/refinfo"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/noting"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/texindexer"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/plannerbuilders"
@@ -125,7 +126,9 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 								dailyReflectionsBody := mosdailyreflectionsbody.New(notes)
 								sectionDailyReflections := mosdailyreflections.New(mosParameters.ToParameters(), mosParameters.DailyReflectionsParameters(), dailyReflectionsHeader, dailyReflectionsBody)
 
-								sections := plannerbuilders.Sections{sectionTitle, sectionAnnual, sectionQuarterly, sectionMonthly, sectionWeekly, sectionDaily, sectionDailyReflections}
+								refInfo := refinfo.New()
+
+								sections := plannerbuilders.Sections{sectionTitle, sectionAnnual, sectionQuarterly, sectionMonthly, sectionWeekly, sectionDaily, sectionDailyReflections, refInfo}
 								builder := plannerbuilders.New(indexer, sections)
 
 								planner := planners.New(builder, fileWriter, cmder)
