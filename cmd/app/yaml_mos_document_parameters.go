@@ -6,6 +6,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mosdocument"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosdaily"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosdailyreflections"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosmonthly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosquarterly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosweekly"
@@ -25,11 +26,12 @@ type YAMLMOS struct {
 }
 
 type YAMLSections struct {
-	AnnualSection    YAMLAnnualSection    `yaml:"yearly"`
-	QuarterlySection YAMLQuarterlySection `yaml:"quarterly"`
-	MonthlySection   YAMLMonthlySection   `yaml:"monthly"`
-	WeeklySection    YAMLWeeklySection    `yaml:"weekly"`
-	DailySection     YAMLDailySection     `yaml:"daily"`
+	AnnualSection           YAMLAnnualSection           `yaml:"yearly"`
+	QuarterlySection        YAMLQuarterlySection        `yaml:"quarterly"`
+	MonthlySection          YAMLMonthlySection          `yaml:"monthly"`
+	WeeklySection           YAMLWeeklySection           `yaml:"weekly"`
+	DailySection            YAMLDailySection            `yaml:"daily"`
+	DailyReflectionsSection YAMLDailyReflectionsSection `yaml:"daily_reflections"`
 }
 
 type YAMLAnnualSection struct {
@@ -63,6 +65,10 @@ type YAMLWeeklySection struct {
 }
 
 type YAMLDailySection struct {
+	Enabled bool `yaml:"enabled"`
+}
+
+type YAMLDailyReflectionsSection struct {
 	Enabled bool `yaml:"enabled"`
 }
 
@@ -146,6 +152,12 @@ func (r YAMLMOS) WeeklyParameters() mosweekly.SectionParameters {
 func (r YAMLMOS) DailyParameters() mosdaily.SectionParameters {
 	return mosdaily.SectionParameters{
 		Enabled: r.Sections.DailySection.Enabled,
+	}
+}
+
+func (r YAMLMOS) DailyReflectionsParameters() mosdailyreflections.SectionParameters {
+	return mosdailyreflections.SectionParameters{
+		Enabled: r.Sections.DailyReflectionsSection.Enabled,
 	}
 }
 
