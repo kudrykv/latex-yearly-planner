@@ -6,6 +6,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mosdocument"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosdaily"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosdailynotes"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosdailyreflections"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosmonthly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosquarterly"
@@ -32,6 +33,7 @@ type YAMLSections struct {
 	WeeklySection           YAMLWeeklySection           `yaml:"weekly"`
 	DailySection            YAMLDailySection            `yaml:"daily"`
 	DailyReflectionsSection YAMLDailyReflectionsSection `yaml:"daily_reflections"`
+	DailyNotesSection       YAMLDailyNotesSection       `yaml:"daily_notes"`
 }
 
 type YAMLAnnualSection struct {
@@ -69,6 +71,10 @@ type YAMLDailySection struct {
 }
 
 type YAMLDailyReflectionsSection struct {
+	Enabled bool `yaml:"enabled"`
+}
+
+type YAMLDailyNotesSection struct {
 	Enabled bool `yaml:"enabled"`
 }
 
@@ -158,6 +164,12 @@ func (r YAMLMOS) DailyParameters() mosdaily.SectionParameters {
 func (r YAMLMOS) DailyReflectionsParameters() mosdailyreflections.SectionParameters {
 	return mosdailyreflections.SectionParameters{
 		Enabled: r.Sections.DailyReflectionsSection.Enabled,
+	}
+}
+
+func (r YAMLMOS) DailyNotesParameters() mosdailynotes.SectionParameters {
+	return mosdailynotes.SectionParameters{
+		Enabled: r.Sections.DailyNotesSection.Enabled,
 	}
 }
 
