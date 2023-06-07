@@ -11,11 +11,14 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosmonthlyheader"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosquarterlybody"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosquarterlyheader"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosweeklybody"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosweeklyheader"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/mosdocument"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosmonthly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosquarterly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mostitles"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosweekly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/noting"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/texindexer"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/plannerbuilders"
@@ -104,7 +107,11 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 
 								sectionMonthly := mosmonthly.New(mosParameters.ToParameters(), mosParameters.MonthlyParameters(), monthlyHeader, monthlyBody)
 
-								sections := plannerbuilders.Sections{sectionTitle, sectionAnnual, sectionQuarterly, sectionMonthly}
+								weeklyHeader := mosweeklyheader.New()
+								weeklyBody := mosweeklybody.New(notes)
+								sectionWeekly := mosweekly.New(mosParameters.ToParameters(), mosParameters.WeeklyParameters(), weeklyHeader, weeklyBody)
+
+								sections := plannerbuilders.Sections{sectionTitle, sectionAnnual, sectionQuarterly, sectionMonthly, sectionWeekly}
 								builder := plannerbuilders.New(indexer, sections)
 
 								planner := planners.New(builder, fileWriter, cmder)

@@ -6,5 +6,5 @@ import (
 )
 
 type Component interface {
-	GenerateComponent(ctx context.Context, month calendar.Week, parameters SectionParameters) ([]byte, error)
+	GenerateComponent(ctx context.Context, week calendar.Week, parameters SectionParameters) ([]byte, error)
 }

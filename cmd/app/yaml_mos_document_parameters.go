@@ -7,6 +7,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosmonthly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosquarterly"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosweekly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/texcalendar"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/calendar"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
@@ -26,6 +27,7 @@ type YAMLSections struct {
 	AnnualSection    YAMLAnnualSection    `yaml:"yearly"`
 	QuarterlySection YAMLQuarterlySection `yaml:"quarterly"`
 	MonthlySection   YAMLMonthlySection   `yaml:"monthly"`
+	WeeklySection    YAMLWeeklySection    `yaml:"weekly"`
 }
 
 type YAMLAnnualSection struct {
@@ -51,6 +53,10 @@ type YAMLQuarterlySection struct {
 }
 
 type YAMLMonthlySection struct {
+	Enabled bool `yaml:"enabled"`
+}
+
+type YAMLWeeklySection struct {
 	Enabled bool `yaml:"enabled"`
 }
 
@@ -122,6 +128,12 @@ func (r YAMLMOS) LargeCalendarParameters() texcalendar.CalendarLargeParameters {
 	return texcalendar.CalendarLargeParameters{
 		ShowWeekNumbers:     r.Parameters.ShowWeekNumbers,
 		WeekNumberPlacement: r.Parameters.WeekNumberPlacement,
+	}
+}
+
+func (r YAMLMOS) WeeklyParameters() mosweekly.SectionParameters {
+	return mosweekly.SectionParameters{
+		Enabled: r.Sections.WeeklySection.Enabled,
 	}
 }
 
