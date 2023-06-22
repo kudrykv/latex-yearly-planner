@@ -9,10 +9,11 @@ import (
 )
 
 type SectionParameters struct {
-	Enabled      bool
-	IndexPages   int
-	NotesNumber  int
-	PagesPerNote int
+	Enabled           bool
+	IndexPages        int
+	NotesPerIndexPage int
+	NotesNumber       int
+	PagesPerNote      int
 }
 
 type Section struct {

@@ -76,5 +76,10 @@ sections:
   notes:
     enabled: true
 
+    index_pages: 2
+    notes_per_index_page: 50
+    notes_number: 100
+    pages_per_note: 2
+
   tasks:
     enabled: true

@@ -8,6 +8,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosdaily"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosdailynotes"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosdailyreflections"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosdedicatednotes"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosmonthly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosquarterly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosweekly"
@@ -34,6 +35,7 @@ type YAMLSections struct {
 	DailySection            YAMLDailySection            `yaml:"daily"`
 	DailyReflectionsSection YAMLDailyReflectionsSection `yaml:"daily_reflections"`
 	DailyNotesSection       YAMLDailyNotesSection       `yaml:"daily_notes"`
+	DedicatedNotesSection   YAMLDedicatedNotesSection   `yaml:"dedicated_notes"`
 }
 
 type YAMLAnnualSection struct {
@@ -76,6 +78,15 @@ type YAMLDailyReflectionsSection struct {
 
 type YAMLDailyNotesSection struct {
 	Enabled bool `yaml:"enabled"`
+}
+
+type YAMLDedicatedNotesSection struct {
+	Enabled bool `yaml:"enabled"`
+
+	IndexPages        int `yaml:"index_pages"`
+	NotesPerIndexPage int `yaml:"notes_per_index_page"`
+	NotesNumber       int `yaml:"notes_number"`
+	PagesPerNote      int `yaml:"pages_per_note"`
 }
 
 type YAMLDocumentParameters struct {
@@ -170,6 +181,17 @@ func (r YAMLMOS) DailyReflectionsParameters() mosdailyreflections.SectionParamet
 func (r YAMLMOS) DailyNotesParameters() mosdailynotes.SectionParameters {
 	return mosdailynotes.SectionParameters{
 		Enabled: r.Sections.DailyNotesSection.Enabled,
+	}
+}
+
+func (r YAMLMOS) DedicatedNotesParameters() mosdedicatednotes.SectionParameters {
+	return mosdedicatednotes.SectionParameters{
+		Enabled: r.Sections.DedicatedNotesSection.Enabled,
+
+		IndexPages:        r.Sections.DedicatedNotesSection.IndexPages,
+		NotesPerIndexPage: r.Sections.DedicatedNotesSection.NotesPerIndexPage,
+		NotesNumber:       r.Sections.DedicatedNotesSection.NotesNumber,
+		PagesPerNote:      r.Sections.DedicatedNotesSection.PagesPerNote,
 	}
 }
 
