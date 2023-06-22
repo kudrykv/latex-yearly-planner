@@ -13,6 +13,8 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosdailynotesheader"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosdailyreflectionsbody"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosdailyreflectionsheader"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosdedicatednotesbody"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosdedicatednotesheader"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosmonthlybody"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosmonthlyheader"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/components/mosquarterlybody"
@@ -24,6 +26,7 @@ import (
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosdaily"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosdailynotes"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosdailyreflections"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosdedicatednotes"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosmonthly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosquarterly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mostitles"
@@ -133,12 +136,17 @@ func New(reader io.Reader, writer, errWriter io.Writer) App {
 								dailyNotesBody := mosdailynotesbody.New(notes)
 								sectionDailyNotes := mosdailynotes.New(mosParameters.ToParameters(), mosParameters.DailyNotesParameters(), dailyNotesHeader, dailyNotesBody)
 
+								dedicatedNotesHeader := mosdedicatednotesheader.New()
+								dedicatedNotesBody := mosdedicatednotesbody.New()
+								sectionDedicatedNotes := mosdedicatednotes.New(mosParameters.ToParameters(), mosParameters.DedicatedNotesParameters(), dedicatedNotesHeader, dedicatedNotesBody)
+
 								refInfo := refinfo.New()
 
 								sections := plannerbuilders.Sections{
 									sectionTitle,
 									sectionAnnual, sectionQuarterly, sectionMonthly, sectionWeekly,
 									sectionDaily, sectionDailyReflections, sectionDailyNotes,
+									sectionDedicatedNotes,
 									refInfo,
 								}
 								builder := plannerbuilders.New(indexer, sections)

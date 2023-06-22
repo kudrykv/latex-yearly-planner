@@ -73,7 +73,7 @@ sections:
   daily_notes:
     enabled: true
 
-  notes:
+  dedicated_notes:
     enabled: true
 
     index_pages: 2
