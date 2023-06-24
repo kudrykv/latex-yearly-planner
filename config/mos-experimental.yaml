@@ -61,6 +61,7 @@ sections:
   monthly:
     enabled: true
 
+    gap: 5mm
     notes_width: line width
     notes_height: remaining height
 

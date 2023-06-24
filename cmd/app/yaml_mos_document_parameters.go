@@ -65,6 +65,7 @@ type YAMLMonthlySection struct {
 
 	NotesWidth  entities.Length `yaml:"notes_width"`
 	NotesHeight entities.Length `yaml:"notes_height"`
+	Gap         entities.Length `yaml:"gap"`
 }
 
 type YAMLWeeklySection struct {
@@ -154,6 +155,7 @@ func (r YAMLMOS) MonthlyParameters() mosmonthly.SectionParameters {
 	return mosmonthly.SectionParameters{
 		Enabled: r.Sections.MonthlySection.Enabled,
 
+		Gap:         r.Sections.MonthlySection.Gap,
 		NotesWidth:  r.Sections.MonthlySection.NotesWidth,
 		NotesHeight: r.Sections.MonthlySection.NotesHeight,
 	}

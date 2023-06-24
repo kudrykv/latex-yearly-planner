@@ -2,6 +2,7 @@ package mosmonthlybody
 
 import (
 	"context"
+	"fmt"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosmonthly"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/texcalendar"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/calendar"
@@ -21,7 +22,8 @@ func New(calendarParameters texcalendar.CalendarLargeParameters, notes Notes) Bo
 
 func (r Body) GenerateComponent(_ context.Context, month calendar.Month, parameters mosmonthly.SectionParameters) ([]byte, error) {
 	cal := texcalendar.NewCalendarLarge(month, r.calendarParameters)
+	gap := fmt.Sprintf(`\vspace{%s}`, parameters.Gap)
 	notes := r.notes.Render(parameters.NotesWidth, parameters.NotesHeight)
 
-	return []byte(cal.String() + "\n\n" + notes), nil
+	return []byte(cal.String() + "\n\n" + gap + "\n\n" + notes), nil
 }

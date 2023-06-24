@@ -11,6 +11,7 @@ import (
 type SectionParameters struct {
 	Enabled bool
 
+	Gap         entities.Length
 	NotesWidth  entities.Length
 	NotesHeight entities.Length
 }
