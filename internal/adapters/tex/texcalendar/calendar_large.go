@@ -1,9 +1,11 @@
 package texcalendar
 
 import (
+	"fmt"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/tabularxes"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/calendar"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
+	"strings"
 )
 
 type CalendarLarge struct {
@@ -12,8 +14,10 @@ type CalendarLarge struct {
 }
 
 type CalendarLargeParameters struct {
-	ShowWeekNumbers     bool
+	ShowWeekNumbers bool
+
 	WeekNumberPlacement entities.Placement
+	DateLeftOffset      entities.Length
 }
 
 func NewCalendarLarge(month calendar.Month, parameters CalendarLargeParameters) CalendarLarge {
@@ -73,7 +77,7 @@ func (r CalendarLarge) makeWeekdays() tabularxes.Cells {
 }
 
 func (r CalendarLarge) makeFormat() string {
-	format := "|X|X|X|X|X|X|X|"
+	format := strings.Repeat(fmt.Sprintf(`|@{\hspace{%s}}X@{}`, r.Parameters.DateLeftOffset), 7) + "|"
 
 	if r.Parameters.ShowWeekNumbers {
 		if r.Parameters.WeekNumberPlacement == entities.PlacementRight {

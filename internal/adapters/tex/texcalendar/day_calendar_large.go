@@ -18,5 +18,5 @@ func (r DayCalendarLarge) String() string {
 		return ""
 	}
 
-	return `\vspace{1cm}` + strconv.Itoa(r.Day.Day())
+	return strconv.Itoa(r.Day.Day())
 }

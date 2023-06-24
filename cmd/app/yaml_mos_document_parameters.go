@@ -63,9 +63,10 @@ type YAMLQuarterlySection struct {
 type YAMLMonthlySection struct {
 	Enabled bool `yaml:"enabled"`
 
-	NotesWidth  entities.Length `yaml:"notes_width"`
-	NotesHeight entities.Length `yaml:"notes_height"`
-	Gap         entities.Length `yaml:"gap"`
+	NotesWidth     entities.Length `yaml:"notes_width"`
+	NotesHeight    entities.Length `yaml:"notes_height"`
+	Gap            entities.Length `yaml:"gap"`
+	DateLeftOffset entities.Length `yaml:"date_left_offset"`
 }
 
 type YAMLWeeklySection struct {
@@ -165,6 +166,7 @@ func (r YAMLMOS) LargeCalendarParameters() texcalendar.CalendarLargeParameters {
 	return texcalendar.CalendarLargeParameters{
 		ShowWeekNumbers:     r.Parameters.ShowWeekNumbers,
 		WeekNumberPlacement: r.Parameters.WeekNumberPlacement,
+		DateLeftOffset:      r.Sections.MonthlySection.DateLeftOffset,
 	}
 }
 
@@ -280,6 +282,8 @@ type YAMLParameters struct {
 	WeekdayStart        YAMLWeekday        `yaml:"weekday_start"`
 	ShowWeekNumbers     bool               `yaml:"show_week_numbers"`
 	WeekNumberPlacement entities.Placement `yaml:"week_number_placement"`
+	DateLeftOffset      entities.Length    `yaml:"date_left_offset"`
+	DateTopOffset       entities.Length    `yaml:"date_top_offset"`
 	FormatAMPM          bool               `yaml:"format_ampm"`
 	Notes               YAMLNotes          `yaml:"notes"`
 }

@@ -1,8 +1,8 @@
 package texcalendar
 
 import (
+	"fmt"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/calendar"
-	"strconv"
 )
 
 type WeekCalendarLarge struct {
@@ -14,5 +14,5 @@ func NewWeekCalendarLarge(week calendar.Week) WeekCalendarLarge {
 }
 
 func (r WeekCalendarLarge) String() string {
-	return strconv.Itoa(r.Week.Number())
+	return fmt.Sprintf(`\rotatebox[origin=tr]{90}{\makebox[1.7cm][c]{Week %d}}`, r.Week.Number())
 }
