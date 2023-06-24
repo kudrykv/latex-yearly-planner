@@ -10,6 +10,9 @@ import (
 
 type SectionParameters struct {
 	Enabled bool
+
+	NotesWidth  entities.Length
+	NotesHeight entities.Length
 }
 
 type Section struct {

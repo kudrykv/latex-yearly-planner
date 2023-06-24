@@ -62,6 +62,9 @@ type YAMLQuarterlySection struct {
 
 type YAMLMonthlySection struct {
 	Enabled bool `yaml:"enabled"`
+
+	NotesWidth  entities.Length `yaml:"notes_width"`
+	NotesHeight entities.Length `yaml:"notes_height"`
 }
 
 type YAMLWeeklySection struct {
@@ -150,6 +153,9 @@ func (r YAMLMOS) QuarterlyParameters() mosquarterly.SectionParameters {
 func (r YAMLMOS) MonthlyParameters() mosmonthly.SectionParameters {
 	return mosmonthly.SectionParameters{
 		Enabled: r.Sections.MonthlySection.Enabled,
+
+		NotesWidth:  r.Sections.MonthlySection.NotesWidth,
+		NotesHeight: r.Sections.MonthlySection.NotesHeight,
 	}
 }
 

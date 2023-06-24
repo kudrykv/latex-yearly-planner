@@ -19,8 +19,9 @@ func New(calendarParameters texcalendar.CalendarLargeParameters, notes Notes) Bo
 	}
 }
 
-func (r Body) GenerateComponent(_ context.Context, month calendar.Month, _ mosmonthly.SectionParameters) ([]byte, error) {
+func (r Body) GenerateComponent(_ context.Context, month calendar.Month, parameters mosmonthly.SectionParameters) ([]byte, error) {
 	cal := texcalendar.NewCalendarLarge(month, r.calendarParameters)
+	notes := r.notes.Render(parameters.NotesWidth, parameters.NotesHeight)
 
-	return []byte(cal.String()), nil
+	return []byte(cal.String() + "\n\n" + notes), nil
 }

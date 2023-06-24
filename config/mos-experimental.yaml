@@ -61,6 +61,9 @@ sections:
   monthly:
     enabled: true
 
+    notes_width: line width
+    notes_height: remaining height
+
   weekly:
     enabled: true
 
