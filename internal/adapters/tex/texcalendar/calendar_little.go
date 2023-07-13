@@ -1,6 +1,7 @@
 package texcalendar
 
 import (
+	"fmt"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/tabularxes"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/calendar"
 	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
@@ -30,6 +31,7 @@ type CalendarLittle struct {
 type CalendarLittleParameters struct {
 	ShowWeekNumbers     bool
 	WeekNumberPlacement entities.Placement
+	Width               entities.Length
 }
 
 func NewCalendarLittle(month calendar.Month, parameters CalendarLittleParameters) CalendarLittle {
@@ -40,7 +42,7 @@ func NewCalendarLittle(month calendar.Month, parameters CalendarLittleParameters
 }
 
 func (r CalendarLittle) String() string {
-	tabular := tabularxes.New(entities.LineWidth)
+	tabular := tabularxes.New(r.makeWidth())
 	tabular.SetHeaderName(r.Month.Name())
 
 	tabular.AddRow(r.makeWeekdays()...)
@@ -92,4 +94,12 @@ func (r CalendarLittle) makeWeekdays() tabularxes.Cells {
 	}
 
 	return cells
+}
+
+func (r CalendarLittle) makeWidth() fmt.Stringer {
+	if r.Parameters.Width.IsZero() {
+		return entities.LineWidth
+	}
+
+	return r.Parameters.Width
 }

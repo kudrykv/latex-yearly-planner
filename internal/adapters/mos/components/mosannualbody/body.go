@@ -5,9 +5,7 @@ import (
 	"context"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/tabularxes"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/texcalendar"
-	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 	"text/template"
 )
 
@@ -30,6 +28,7 @@ func (r Body) GenerateComponent(
 ) ([]byte, error) {
 	buffer := bytes.NewBuffer(nil)
 
+	r.calendarsParameters.Width = sectionParameters.ColumnWidth
 	littleCalendars := texcalendar.NewCalendarsLittle(r.global.Months, r.calendarsParameters)
 
 	from := (pageNumber - 1) * sectionParameters.MonthsPerPage
@@ -45,20 +44,16 @@ func (r Body) GenerateComponent(
 			iTo = to
 		}
 
-		calTable := tabularxes.New(entities.LineWidth)
-		calTable.SetColumnFormat("XX")
+		for j, littleCal := range littleCalendars[i:iTo] {
+			buffer.WriteString(littleCal.String())
 
-		cells := make([]tabularxes.Cell, 0, sectionParameters.Columns)
-
-		for _, littleCal := range littleCalendars[i:iTo] {
-			cells = append(cells, tabularxes.Cell{Text: littleCal})
+			if j < len(littleCalendars[i:iTo])-1 {
+				buffer.WriteString(`\hfill{}`)
+			}
 		}
 
-		calTable.AddRow(cells...)
-		buffer.WriteString(calTable.Render())
-
 		if iTo < to {
-			buffer.WriteString("\n" + `\vfill{}`)
+			buffer.WriteString("\n\n" + `\vfill{}`)
 		}
 	}
 

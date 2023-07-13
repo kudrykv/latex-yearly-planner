@@ -84,7 +84,7 @@ func (r *Length) UnmarshalYAML(value *yaml.Node) error {
 		return fmt.Errorf("parse float: %w", err)
 	}
 
-	*r = Length(float) * dimension
+	*r = Length(float * float64(dimension))
 
 	return nil
 }
@@ -115,6 +115,14 @@ func (r *Length) IsSpecial() bool {
 	}
 
 	return *r == HFill || *r == HFil || *r == VFill || *r == VFil || *r == RemainingHeight || *r == LineWidth
+}
+
+func (r *Length) IsZero() bool {
+	if r == nil {
+		return true
+	}
+
+	return *r == 0
 }
 
 func dimensionToLength(dimension string) (Length, error) {
