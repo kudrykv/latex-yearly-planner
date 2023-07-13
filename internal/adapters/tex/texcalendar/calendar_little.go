@@ -45,6 +45,16 @@ func (r CalendarLittle) String() string {
 
 	tabular.AddRow(r.makeWeekdays()...)
 
+	if r.Parameters.ShowWeekNumbers {
+		if r.Parameters.WeekNumberPlacement == entities.PlacementRight {
+			tabular.SetColumnFormat("*{7}{Y}|Y")
+		} else {
+			tabular.SetColumnFormat("Y|*{7}{Y}")
+		}
+	} else {
+		tabular.SetColumnFormat("*{7}{Y}")
+	}
+
 	for _, week := range r.Month.Weeks() {
 		cells := make([]tabularxes.Cell, 0, len(week.Days)+1)
 
