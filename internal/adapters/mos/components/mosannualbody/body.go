@@ -5,9 +5,9 @@ import (
 	"context"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/parboxes"
-	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/spacers"
+	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/tabularxes"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/texcalendar"
+	"github.com/kudrykv/latex-yearly-planner/internal/core/entities"
 	"text/template"
 )
 
@@ -34,24 +34,31 @@ func (r Body) GenerateComponent(
 
 	from := (pageNumber - 1) * sectionParameters.MonthsPerPage
 	to := pageNumber * sectionParameters.MonthsPerPage
-	columnIndex := 0
 
 	if to > len(littleCalendars) {
 		to = len(littleCalendars)
 	}
 
-	for i, littleCal := range littleCalendars[from:to] {
-		columnIndex = (columnIndex + 1) % sectionParameters.Columns
-		buffer.WriteString(parboxes.New(sectionParameters.ColumnWidth).SetContent(littleCal).Render())
+	for i := from; i < to; i += sectionParameters.Columns {
+		iTo := i + sectionParameters.Columns
+		if iTo > to {
+			iTo = to
+		}
 
-		if columnIndex == 0 {
-			buffer.WriteString("\n\n")
+		calTable := tabularxes.New(entities.LineWidth)
+		calTable.SetColumnFormat("XX")
 
-			if i+1 != sectionParameters.MonthsPerPage {
-				buffer.WriteString(spacers.NewVSpace(sectionParameters.VerticalSpacing).String())
-			}
-		} else {
-			buffer.WriteString(spacers.NewHSpace(sectionParameters.ColumnSpacing).String())
+		cells := make([]tabularxes.Cell, 0, sectionParameters.Columns)
+
+		for _, littleCal := range littleCalendars[i:iTo] {
+			cells = append(cells, tabularxes.Cell{Text: littleCal})
+		}
+
+		calTable.AddRow(cells...)
+		buffer.WriteString(calTable.Render())
+
+		if iTo < to {
+			buffer.WriteString("\n" + `\vfill{}`)
 		}
 	}
 

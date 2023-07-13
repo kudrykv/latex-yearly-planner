@@ -36,9 +36,10 @@ func (r *Tabularx) AddRow(cells ...Cell) {
 }
 
 func (r *Tabularx) Render() string {
-	return fmt.Sprintf(`\begin{tabularx}{%s}[t]{%s}
+	return fmt.Sprintf(`{\renewcommand{\arraystretch}{1}\setlength{\tabcolsep}{0mm}%%
+\begin{tabularx}{%s}[t]{%s}
 %s%s
-\end{tabularx}`,
+\end{tabularx}}`,
 		r.Width,
 		r.columnFormat(),
 		r.headerCenterName(),
