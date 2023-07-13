@@ -43,9 +43,10 @@ sections:
     pages: 2
     months_per_page: 8
     columns: 2
-    column_width: 5cm
+    column_width: 5.6cm
     column_spacing: 1cm
     vertical_spacing: 1cm
+    underfull_vertical_spacing: 1cm
 
 
   quarterly:
