@@ -3,6 +3,7 @@ package mosannualbody
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/mos/sections/mosannual"
 	"github.com/kudrykv/latex-yearly-planner/internal/adapters/tex/texcalendar"
@@ -54,7 +55,7 @@ func (r Body) GenerateComponent(
 
 		if iTo < to {
 			if from > 0 && (to-from) < sectionParameters.MonthsPerPage {
-				buffer.WriteString("\n\n" + `\vspace{1cm}`)
+				buffer.WriteString("\n\n" + fmt.Sprintf(`\vspace{%s}`, sectionParameters.UnderfullVerticalSpacing))
 			} else {
 				buffer.WriteString("\n\n" + `\vfill{}`)
 			}
