@@ -53,7 +53,11 @@ func (r Body) GenerateComponent(
 		}
 
 		if iTo < to {
-			buffer.WriteString("\n\n" + `\vfill{}`)
+			if from > 0 && (to-from) < sectionParameters.MonthsPerPage {
+				buffer.WriteString("\n\n" + `\vspace{1cm}`)
+			} else {
+				buffer.WriteString("\n\n" + `\vfill{}`)
+			}
 		}
 	}
 
