@@ -4,23 +4,27 @@ module LatexYearlyPlanner
   module Core
     module Planners
       class Planner
-        attr_reader :generator
-
-        def initialize(generator)
+        def initialize(generator, writer)
           @generator = generator
+          @writer = writer
         end
 
         def generate
-          generator.generate
+          self.tree = generator.generate
         end
 
         def write
-          raise NotImplementedError
+          writer.write(tree)
         end
 
         def compile
           raise NotImplementedError
         end
+
+        private
+
+        attr_reader :generator, :writer
+        attr_accessor :tree
       end
     end
   end

@@ -13,7 +13,9 @@ module LatexYearlyPlanner
         sections = LatexYearlyPlanner::Adapters::Sectioner.new(config).sections
 
         generator = LatexYearlyPlanner::Core::Planners::Generator.new(indexer, sections)
-        planner = LatexYearlyPlanner::Core::Planners::Planner.new(generator)
+        writer = LatexYearlyPlanner::Adapters::FileWriter.new(options[:out])
+
+        planner = LatexYearlyPlanner::Core::Planners::Planner.new(generator, writer)
 
         planner.generate
         planner.write
