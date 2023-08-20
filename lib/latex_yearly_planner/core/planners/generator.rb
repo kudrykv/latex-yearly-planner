@@ -12,7 +12,7 @@ module LatexYearlyPlanner
         def generate
           hash = { index: nil, sections: [] }
 
-          sections.select(&:enabled?).each { |section| hash[:sections] << section }
+          sections.select(&:enabled?).each { |section| hash[:sections] << section.generate }
 
           hash[:index] = indexer.generate(hash[:sections])
 

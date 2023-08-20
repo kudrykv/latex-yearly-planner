@@ -29,7 +29,10 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'activesupport'
+  spec.add_dependency 'erb'
+  spec.add_dependency 'recursive-open-struct'
   spec.add_dependency 'thor'
+  spec.add_dependency 'yaml'
   spec.add_dependency 'zeitwerk'
 
   # For more information and examples about making a new gem, check out our

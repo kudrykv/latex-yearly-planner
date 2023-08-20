@@ -1,5 +1,14 @@
-template_name: mos
 document:
+  debug:
+    enabled: true
+    parameters:
+      highlight_links: true
+      highlight_frames: true
+
+  document_class:
+    name: article
+    options: 9pt
+
   layout:
     dimensions:
       width: 138.00mm
@@ -13,5 +22,34 @@ document:
 
     margin_notes:
       width: 10mm
-      separator: 6.3mm
+      separation: 6.3mm
       placement: left
+
+parameters:
+  template_name: mos
+  parameters:
+    start_date: 2023, January
+    end_date: 2023, December
+    weekday_start: Monday
+    show_week_numbers: true
+    format_ampm: false
+    week_number_placement: right
+    notes:
+      type: dotted
+
+sections:
+  title:
+    enabled: true
+    parameters:
+      name: 2023
+
+  annual:
+    enabled: false
+    parameters:
+        pages: 2
+        months_per_page: 8
+        columns: 2
+        column_width: 5.6cm
+        column_spacing: 1cm
+        vertical_spacing: 1cm
+        underfull_vertical_spacing: 1cm
