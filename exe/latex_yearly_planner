@@ -5,6 +5,7 @@
 lib_path = File.expand_path("../lib", __dir__)
 $LOAD_PATH.unshift(lib_path) unless $LOAD_PATH.include?(lib_path)
 
-require "latex_yearly_planner/cli"
+require "latex_yearly_planner"
+require "latex_yearly_planner/app"
 
-LatexYearlyPlanner::CLI.start(ARGV)
+LatexYearlyPlanner::App.start(ARGV)

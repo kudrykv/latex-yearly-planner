@@ -3,7 +3,7 @@
 require "thor"
 
 module LatexYearlyPlanner
-  class CLI < Thor
+  class App < LatexYearlyPlanner::CLI::App
     desc "hello NAME", "say hello to NAME"
     def hello(name)
       puts "Hello #{name}"
