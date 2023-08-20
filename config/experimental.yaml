@@ -1,0 +1,17 @@
+template_name: mos
+document:
+  layout:
+    dimensions:
+      width: 138.00mm
+      height: 188mm
+
+    margin:
+      top: 10mm
+      bottom: 5mm
+      left: 14mm
+      right: 5mm
+
+    margin_notes:
+      width: 10mm
+      separator: 6.3mm
+      placement: left
