@@ -79,6 +79,8 @@
 
 \begin{document}
 
-later
+<% notes.each do |note| %>
+  \include{<%= note.name %>}
+<% end %>
 
 \end{document}

@@ -12,9 +12,10 @@ module LatexYearlyPlanner
         hash = YAML.load_file(yaml_config)
         config = RecursiveOpenStruct.new(hash, recurse_over_arrays: true)
 
+        indexer = LatexYearlyPlanner::Adapters::Indexer.new(config)
         sections = LatexYearlyPlanner::Adapters::Sectioner.new(config).sections
 
-        generator = LatexYearlyPlanner::Core::Planners::Generator.new(nil, [])
+        generator = LatexYearlyPlanner::Core::Planners::Generator.new(indexer, sections)
         planner = LatexYearlyPlanner::Core::Planners::Planner.new(generator)
 
         planner.generate

@@ -11,7 +11,7 @@ module LatexYearlyPlanner
         end
 
         def generate
-          raise NotImplementedError
+          generator.generate
         end
 
         def write

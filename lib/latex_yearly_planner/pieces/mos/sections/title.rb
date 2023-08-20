@@ -5,6 +5,9 @@ module LatexYearlyPlanner
     module Mos
       module Sections
         class Title < Section
+          def generate
+            LatexYearlyPlanner::Core::Entities::Note.new('title', 'hello world')
+          end
         end
       end
     end

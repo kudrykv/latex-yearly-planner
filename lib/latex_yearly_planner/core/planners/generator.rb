@@ -10,11 +10,11 @@ module LatexYearlyPlanner
         end
 
         def generate
-          hash = { index: nil, sections: [] }
+          hash = { index: nil, notes: [] }
 
-          sections.select(&:enabled?).each { |section| hash[:sections] << section.generate }
+          sections.select(&:enabled?).each { |section| hash[:notes] << section.generate }
 
-          hash[:index] = indexer.generate(hash[:sections])
+          hash[:index] = indexer.generate(hash[:notes])
 
           hash
         end
