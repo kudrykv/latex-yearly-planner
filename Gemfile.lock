@@ -1,16 +1,28 @@
 PATH
   remote: .
   specs:
-    LatexYearlyPlanner (0.1.0)
+    latex_yearly_planner (0.1.0)
+      activesupport
+      thor
+      zeitwerk
 
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (7.0.7)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
     ast (2.4.2)
     base64 (0.1.1)
+    concurrent-ruby (1.2.2)
     diff-lcs (1.5.0)
+    i18n (1.14.1)
+      concurrent-ruby (~> 1.0)
     json (2.6.3)
     language_server-protocol (3.17.0.3)
+    minitest (5.19.0)
     parallel (1.23.0)
     parser (3.2.2.3)
       ast (~> 2.4.1)
@@ -58,13 +70,17 @@ GEM
       rubocop-capybara (~> 2.17)
       rubocop-factory_bot (~> 2.22)
     ruby-progressbar (1.13.0)
+    thor (1.2.2)
+    tzinfo (2.0.6)
+      concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
+    zeitwerk (2.6.11)
 
 PLATFORMS
   arm64-darwin-22
 
 DEPENDENCIES
-  LatexYearlyPlanner!
+  latex_yearly_planner!
   rake (~> 13.0)
   rspec (~> 3.0)
   rubocop (~> 1.21)

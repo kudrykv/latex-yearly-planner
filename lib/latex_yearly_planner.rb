@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
-require_relative "latex_yearly_planner/version"
+require "zeitwerk"
+
+loader = Zeitwerk::Loader.for_gem
+loader.setup
 
 module LatexYearlyPlanner
   class Error < StandardError; end
