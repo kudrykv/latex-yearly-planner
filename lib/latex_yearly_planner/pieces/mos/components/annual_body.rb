@@ -5,7 +5,9 @@ module LatexYearlyPlanner
     module Mos
       module Components
         class AnnualBody < Component
-
+          def generate(months)
+            "#{months.first}, #{months.last}"
+          end
         end
       end
     end
