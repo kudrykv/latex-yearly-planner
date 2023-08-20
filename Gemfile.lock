@@ -88,8 +88,10 @@ PLATFORMS
   arm64-darwin-22
 
 DEPENDENCIES
+  activesupport (~> 7.0)
   latex_yearly_planner!
   rake (~> 13.0)
+  recursive-open-struct (~> 1.1)
   rspec (~> 3.0)
   rubocop (~> 1.56)
   rubocop-rake (~> 0.6.0)
