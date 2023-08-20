@@ -8,6 +8,10 @@ module LatexYearlyPlanner
         @section_config = section_config
       end
 
+      def generate
+        raise NotImplementedError
+      end
+
       private
 
       attr_reader :config, :section_config
