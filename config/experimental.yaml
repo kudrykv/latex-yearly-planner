@@ -44,7 +44,7 @@ sections:
       name: 2023
 
   annual:
-    enabled: false
+    enabled: true
     parameters:
         pages: 2
         months_per_page: 8
