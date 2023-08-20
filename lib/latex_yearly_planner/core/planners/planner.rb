@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
+require 'English'
 module LatexYearlyPlanner
   module Core
     module Planners
       class Planner
-        def initialize(generator, writer)
+        def initialize(generator, writer, compiler)
           @generator = generator
           @writer = writer
+          @compiler = compiler
         end
 
         def generate
@@ -18,12 +20,12 @@ module LatexYearlyPlanner
         end
 
         def compile
-          raise NotImplementedError
+          compiler.compile(writer.index_file)
         end
 
         private
 
-        attr_reader :generator, :writer
+        attr_reader :generator, :writer, :compiler
         attr_accessor :tree
       end
     end

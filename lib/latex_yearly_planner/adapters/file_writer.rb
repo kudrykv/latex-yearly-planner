@@ -3,6 +3,8 @@
 module LatexYearlyPlanner
   module Adapters
     class FileWriter
+      attr_accessor :index_file
+
       def initialize(file_path)
         @file_path = file_path
       end
@@ -10,11 +12,17 @@ module LatexYearlyPlanner
       def write(tree)
         FileUtils.mkdir_p(file_path)
 
-        tree[:notes].each { |note| File.write("#{file_path}/#{note.name}.tex", note.contents) }
-        File.write("#{file_path}/#{tree[:index].name}.tex", tree[:index].contents)
+        tree[:notes].each { |note| write_note_to_file(note) }
+        write_note_to_file(tree[:index])
+
+        self.index_file = "#{tree[:index].name}.tex"
       end
 
       private
+
+      def write_note_to_file(note)
+        File.write("#{file_path}/#{note.name}.tex", note.contents)
+      end
 
       attr_reader :file_path
     end

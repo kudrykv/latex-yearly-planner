@@ -26,14 +26,12 @@
 
 \geometry{
   paperwidth=<%= document.layout.dimensions.width %>,
-  paperheight={{ document.layout.dimensions.height }},
-
+  paperheight=<%= document.layout.dimensions.height %>,
   top=<%= document.layout.margin.top %>,
   bottom=<%= document.layout.margin.bottom %>,
   left=<%= document.layout.margin.left %>,
   right=<%= document.layout.margin.right %>,
-
-  marginparwidth=<%= document.layout.margin_notes.width %>
+  marginparwidth=<%= document.layout.margin_notes.width %>,
   marginparsep=<%= document.layout.margin_notes.separation %>
 }
 
