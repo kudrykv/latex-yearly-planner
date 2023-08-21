@@ -5,12 +5,11 @@ module LatexYearlyPlanner
     class Month
       WEEKDAYS = %i[sunday monday tuesday wednesday thursday friday saturday].freeze
 
-      attr_reader :date, :weekday_start, :show_week_numbers
+      attr_reader :date, :weekday_start
 
-      def initialize(date, weekday_start: :monday, show_week_numbers: true)
+      def initialize(date, weekday_start: :monday)
         @date = date
         @weekday_start = weekday_start
-        @show_week_numbers = show_week_numbers
       end
 
       def name
@@ -19,6 +18,20 @@ module LatexYearlyPlanner
 
       def weekdays_one_letter
         WEEKDAYS.rotate(WEEKDAYS.find_index(weekday_start)).map { |day| day[0] }.map(&:capitalize)
+      end
+
+      def weeks
+        date
+          .beginning_of_week(weekday_start)
+          .upto(date.end_of_month + 7.days)
+          .each_slice(7)
+          .map { |week| cut_not_our_month(week) }
+          .reject { |week| week.all?(&:nil?) }
+          .map { |week| Week.new(week) }
+      end
+
+      def cut_not_our_month(week)
+        week.map { |day| day.mon == date.mon ? day : nil }
       end
     end
   end

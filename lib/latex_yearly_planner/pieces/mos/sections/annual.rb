@@ -45,7 +45,7 @@ module LatexYearlyPlanner
 
           def make_months_range(from_month, to_month)
             (from_month..to_month).select { |date| date.mday == 1 }.map do |date|
-              LatexYearlyPlanner::Calendar::Month.new(date, weekday_start:, show_week_numbers:)
+              LatexYearlyPlanner::Calendar::Month.new(date, weekday_start:)
             end
           end
 
