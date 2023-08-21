@@ -26,14 +26,13 @@ module LatexYearlyPlanner
           def months_for_page(page_number)
             from = (page_number - 1) * months_per_page
             to = from + months_per_page - 1
+
             from_month = start_month + from.months
             to_month = start_month + to.months
 
             to_month = end_month if to_month > end_month
 
-            (from_month..to_month).select { |date| date.mday == 1 }.map do |date|
-              LatexYearlyPlanner::Calendar::Month.new(date, weekday_start:, show_week_numbers:)
-            end
+            make_months_range(from_month, to_month)
           end
 
           def annual_pages
@@ -42,6 +41,12 @@ module LatexYearlyPlanner
 
           def months_per_page
             section_config.parameters.months_per_page
+          end
+
+          def make_months_range(from_month, to_month)
+            (from_month..to_month).select { |date| date.mday == 1 }.map do |date|
+              LatexYearlyPlanner::Calendar::Month.new(date, weekday_start:, show_week_numbers:)
+            end
           end
 
           def start_month
