@@ -12,7 +12,7 @@ module LatexYearlyPlanner
               pages << page_iteration(page_number)
             end
 
-            LatexYearlyPlanner::Core::Entities::Note.new('annual', pages.join("\\pagebreak{}\n\n"))
+            LatexYearlyPlanner::Core::Entities::Note.new('annual', pages.join("\n\\pagebreak{}\n\n"))
           end
 
           private
@@ -31,7 +31,9 @@ module LatexYearlyPlanner
 
             to_month = end_month if to_month > end_month
 
-            (from_month..to_month).to_a
+            (from_month..to_month).select { |date| date.mday == 1 }.map do |date|
+              LatexYearlyPlanner::Calendar::Month.new(date, weekday_start:, show_week_numbers:)
+            end
           end
 
           def annual_pages
@@ -48,6 +50,14 @@ module LatexYearlyPlanner
 
           def end_month
             @end_month ||= Date.parse(config.parameters.parameters.end_date)
+          end
+
+          def weekday_start
+            @weekday_start ||= param(:weekday_start)
+          end
+
+          def show_week_numbers
+            @show_week_numbers ||= param(:show_week_numbers)
           end
         end
       end
