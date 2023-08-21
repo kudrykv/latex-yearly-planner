@@ -58,7 +58,7 @@ module LatexYearlyPlanner
           end
 
           def weekday_start
-            @weekday_start ||= param(:weekday_start)
+            @weekday_start ||= param(:weekday_start).downcase.to_sym
           end
 
           def show_week_numbers

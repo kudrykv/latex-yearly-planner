@@ -33,7 +33,7 @@ parameters:
     weekday_start: Monday
     show_week_numbers: true
     format_ampm: false
-    week_number_placement: right
+    week_number_placement: left
     notes:
       type: dotted
 

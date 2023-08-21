@@ -9,7 +9,8 @@ require 'English'
 loader = Zeitwerk::Loader.for_gem
 loader.inflector.inflect(
   'cli' => 'CLI',
-  'xtex' => 'XTeX'
+  'xtex' => 'XTeX',
+  'tex' => 'TeX'
 )
 
 loader.setup
