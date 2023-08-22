@@ -7,7 +7,7 @@ module LatexYearlyPlanner
       method_option :out, type: :string, default: './out'
       def generate(yaml_file_path)
         hash = YAML.load_file(yaml_file_path)
-        config = RecursiveOpenStruct.new(hash, recurse_over_arrays: true)
+        config = LatexYearlyPlanner::Adapters::Config.new(hash)
 
         planner = make_planner(config)
 
