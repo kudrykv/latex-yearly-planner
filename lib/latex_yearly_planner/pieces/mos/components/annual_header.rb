@@ -6,11 +6,12 @@ module LatexYearlyPlanner
       module Components
         class AnnualHeader < Component
           def generate(all_months, _months)
-            "#{margin_note(all_months)}" \
-              "#{TeX::TextSize.new(year).huge}" \
+            "#{TeX::TextSize.new(year).huge}" \
               '\\hfill{}' \
               "#{table_to_the_right}" \
-              "\\medskip\\hrule{}\n"
+              '\\hrule{}' \
+              "#{margin_note(all_months)}" \
+              "\\medskip\n"
           end
 
           private
@@ -30,6 +31,7 @@ module LatexYearlyPlanner
             <<~LATEX
               \\marginnote{%
                 #{quarter_table_from_months(all_months)}
+                \\\\[5mm]
                 #{table_from_months(all_months)}
               }
             LATEX
@@ -54,7 +56,7 @@ module LatexYearlyPlanner
             table.format = 'X[c,m]'
 
             months.each do |month|
-              table.add_row(["#{month.name[0..2]}"])
+              table.add_row([month.name[0..2].to_s])
             end
 
             table
