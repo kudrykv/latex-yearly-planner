@@ -39,6 +39,8 @@ module LatexYearlyPlanner
 
           def table_from_months(months)
             table = TeX::Tabular.new(vertical_padding_factor:)
+            table.format = "P{#{config.document.layout.margin_notes.width}}"
+            table.horizontal_lines = true
 
             months.each do |month|
               table.add_row([month.name[0..2]])

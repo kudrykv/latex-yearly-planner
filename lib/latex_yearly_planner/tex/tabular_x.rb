@@ -3,13 +3,15 @@
 module LatexYearlyPlanner
   module TeX
     class TabularX
-      attr_accessor :width, :rows, :format
+      attr_accessor :width, :rows, :format, :vertical_padding_factor
       attr_reader :position
 
-      def initialize(position: 'c')
+      def initialize(position: 'c', vertical_padding_factor: 1, width: '\linewidth')
         @rows = []
 
         @position = position
+        @vertical_padding_factor = vertical_padding_factor
+        @width = width
       end
 
       def title=(name)
@@ -22,8 +24,8 @@ module LatexYearlyPlanner
 
       def to_s
         <<~LATEX
-          {\\renewcommand{\\arraystretch}{1}\\setlength{\\tabcolsep}{0mm}%
-          \\begin{tabularx}{#{width}}[#{position}]{#{format}}
+          {\\renewcommand{\\arraystretch}{#{vertical_padding_factor}}\\setlength{\\tabcolsep}{0mm}%
+          \\begin{tabularx}{#{width}}[#{position}]{#{make_format}}
           #{build_rows}
           \\end{tabularx}}
         LATEX
@@ -31,6 +33,12 @@ module LatexYearlyPlanner
       end
 
       private
+
+      def make_format
+        return format if format
+
+        rows.map(&:size).max.times.map { 'X' }.join(' | ')
+      end
 
       def build_rows
         longest_row = rows.map(&:size).max
