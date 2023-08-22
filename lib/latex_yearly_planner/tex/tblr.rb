@@ -5,13 +5,14 @@ module LatexYearlyPlanner
     class Tblr
       attr_accessor :rows, :format, :row_spacing, :column_spacing, :horizontal_lines, :width
 
-      def initialize(vertical_padding_factor: 1, column_spacing: nil, row_spacing: nil, width: nil)
+      def initialize(**options)
         @rows = []
 
-        @vertical_padding_factor = vertical_padding_factor
-        @column_spacing = column_spacing
-        @row_spacing = row_spacing
-        @width = width
+        @column_spacing = options.fetch(:column_spacing, nil)
+        @row_spacing = options.fetch(:row_spacing, nil)
+        @width = options.fetch(:width, nil)
+        @format = options.fetch(:format, nil)
+        @horizontal_lines = options.fetch(:horizontal_lines, nil)
       end
 
       def add_row(row)
@@ -35,10 +36,11 @@ module LatexYearlyPlanner
 
       def table_options
         [
+          make_format,
           make_width,
           make_row_spacing,
           make_column_spacing,
-          make_format
+          make_horizontal_lines
         ].compact.join(', ')
       end
 
@@ -60,6 +62,10 @@ module LatexYearlyPlanner
         line = @rows.map(&:size).max.times.map { 'c' }.join('|')
 
         "colspec = {#{line}}"
+      end
+
+      def make_horizontal_lines
+        return "hlines" if horizontal_lines
       end
 
       def build_rows

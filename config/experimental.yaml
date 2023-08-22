@@ -42,7 +42,7 @@ parameters:
     notes:
       type: dotted
     little_calendar:
-      row_spacing: 1.3pt
+      row_spacing: 1.5pt
       column_spacing: 0pt
 
 sections:
