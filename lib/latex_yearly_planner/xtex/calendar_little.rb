@@ -16,21 +16,21 @@ module LatexYearlyPlanner
       end
 
       def to_s
-        table = TeX::Tblr.new
+        table = TeX::Tblr.new(**table_options)
 
         table.title = month.name
-        table.width = width
-        table.format = format
-        table.row_spacing = row_spacing
-        table.column_spacing = column_spacing
-
         table.add_row(header)
+
         week_rows.each { |row| table.add_row(row) }
 
         table.to_s
       end
 
       private
+
+      def table_options
+        { width:, format:, row_spacing:, column_spacing: }
+      end
 
       def header
         row = month.weekdays_one_letter
