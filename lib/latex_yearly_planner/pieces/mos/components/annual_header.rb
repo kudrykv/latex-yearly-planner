@@ -38,18 +38,19 @@ module LatexYearlyPlanner
           end
 
           def table_from_months(months)
-            table = TeX::Tabular.new(vertical_padding_factor:, column_spacing:)
+            table = TeX::Tblr.new(column_spacing:, row_spacing:)
             table.horizontal_lines = true
+            table.format = 'X[c,m]'
 
             months.each do |month|
-              table.add_row([month.name[0..2]])
+              table.add_row(["#{month.name[0..2]}"])
             end
 
             table
           end
 
-          def vertical_padding_factor
-            config.parameters.parameters.header.vertical_padding_factor
+          def row_spacing
+            config.parameters.parameters.header.row_spacing
           end
 
           def column_spacing

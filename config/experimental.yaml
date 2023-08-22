@@ -17,12 +17,12 @@ document:
     margin:
       top: 10mm
       bottom: 5mm
-      left: 14mm
+      left: 12mm
       right: 5mm
 
     margin_notes:
       width: 10mm
-      separation: 6.3mm
+      separation: 1.9mm
       placement: left
 
 parameters:
@@ -31,8 +31,8 @@ parameters:
     runs: 2
   parameters:
     header:
-      vertical_padding_factor: 3
-      column_spacing: 1.5pt
+      row_spacing: 3mm
+      column_spacing: 0mm
     start_date: 2023, January
     end_date: 2023, December
     weekday_start: Monday
@@ -54,7 +54,7 @@ sections:
         pages: 2
         months_per_page: 8
         columns: 2
-        column_width: 5.6cm
+        column_width: 5.8cm
         column_spacing: 1cm
         vertical_spacing: 1cm
         underfull_vertical_spacing: 1cm
