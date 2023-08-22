@@ -65,7 +65,7 @@ module LatexYearlyPlanner
       end
 
       def make_horizontal_lines
-        return "hlines" if horizontal_lines
+        'hlines' if horizontal_lines
       end
 
       def build_rows

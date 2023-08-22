@@ -17,6 +17,5 @@ module LatexYearlyPlanner
         (date.mon / 3.0).ceil
       end
     end
-
   end
 end
