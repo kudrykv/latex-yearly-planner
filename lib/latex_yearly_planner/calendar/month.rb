@@ -16,6 +16,10 @@ module LatexYearlyPlanner
         date.strftime('%B')
       end
 
+      def quarter
+        Quarter.new(date.beginning_of_quarter)
+      end
+
       def weekdays_one_letter
         WEEKDAYS.rotate(WEEKDAYS.find_index(weekday_start)).map { |day| day[0] }.map(&:capitalize)
       end

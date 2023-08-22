@@ -1,6 +1,6 @@
 document:
   debug:
-    enabled: true
+    enabled: false
     parameters:
       highlight_links: true
       highlight_frames: true

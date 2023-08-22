@@ -29,12 +29,23 @@ module LatexYearlyPlanner
           def margin_note(all_months)
             <<~LATEX
               \\marginnote{%
-                %\\rotatebox[origin=tr]{90}{%
+                #{quarter_table_from_months(all_months)}
                 #{table_from_months(all_months)}
-                %}%
               }
             LATEX
               .strip
+          end
+
+          def quarter_table_from_months(months)
+            table = TeX::Tblr.new(
+              column_spacing:, row_spacing:, horizontal_lines: true, format: 'X[c,m]'
+            )
+
+            months.map(&:quarter).uniq(&:date).map(&:name).map do |name|
+              table.add_row([name])
+            end
+
+            table
           end
 
           def table_from_months(months)
