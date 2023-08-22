@@ -19,6 +19,7 @@ module LatexYearlyPlanner
             #{build_rows}
           \\end{tabular}
         LATEX
+          .strip
       end
 
       private

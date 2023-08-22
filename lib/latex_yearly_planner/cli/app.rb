@@ -24,7 +24,7 @@ module LatexYearlyPlanner
 
         generator = LatexYearlyPlanner::Core::Planners::Generator.new(indexer, sections)
         writer = LatexYearlyPlanner::Adapters::FileWriter.new(options[:out])
-        compiler = LatexYearlyPlanner::Adapters::Compiler.new(options[:out])
+        compiler = LatexYearlyPlanner::Adapters::Compiler.new(config.parameters.compile, options[:out])
 
         LatexYearlyPlanner::Core::Planners::Planner.new(generator, writer, compiler)
       end
