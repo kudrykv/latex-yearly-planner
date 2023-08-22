@@ -31,8 +31,16 @@ parameters:
     runs: 2
   parameters:
     header:
-      row_spacing: 3mm
-      column_spacing: 0mm
+      monthly_table:
+        row_spacing: 3mm
+        column_spacing: 0mm
+        format: X[c,m]
+        horizontal_lines: true
+      quarterly_table:
+        row_spacing: 3mm
+        column_spacing: 0mm
+        format: X[c,m]
+        horizontal_lines: true
     start_date: 2023, January
     end_date: 2023, December
     weekday_start: Monday
@@ -54,10 +62,10 @@ sections:
   annual:
     enabled: true
     parameters:
-        pages: 2
-        months_per_page: 8
-        columns: 2
-        column_width: 5.8cm
-        column_spacing: 1cm
-        vertical_spacing: 1cm
-        underfull_vertical_spacing: 1cm
+      pages: 2
+      months_per_page: 8
+      columns: 2
+      column_width: 5.8cm
+      column_spacing: 1cm
+      vertical_spacing: 1cm
+      underfull_vertical_spacing: 1cm

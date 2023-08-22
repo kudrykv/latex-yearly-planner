@@ -39,9 +39,7 @@ module LatexYearlyPlanner
           end
 
           def quarter_table_from_months(months)
-            table = TeX::Tblr.new(
-              column_spacing:, row_spacing:, horizontal_lines: true, format: 'X[c,m]'
-            )
+            table = TeX::Tblr.new(**quarterly_table_options)
 
             months.map(&:quarter).uniq(&:date).map(&:name).map do |name|
               table.add_row([name])
@@ -51,9 +49,7 @@ module LatexYearlyPlanner
           end
 
           def table_from_months(months)
-            table = TeX::Tblr.new(column_spacing:, row_spacing:)
-            table.horizontal_lines = true
-            table.format = 'X[c,m]'
+            table = TeX::Tblr.new(**monthly_table_options)
 
             months.each do |month|
               table.add_row([month.name[0..2].to_s])
@@ -62,12 +58,12 @@ module LatexYearlyPlanner
             table
           end
 
-          def row_spacing
-            config.parameters.parameters.header.row_spacing
+          def quarterly_table_options
+            config.parameters.parameters.header.quarterly_table_as_a_hash
           end
 
-          def column_spacing
-            config.parameters.parameters.header.column_spacing
+          def monthly_table_options
+            config.parameters.parameters.header.monthly_table_as_a_hash
           end
         end
       end
