@@ -13,18 +13,20 @@ module LatexYearlyPlanner
       end
 
       def to_s
-        "{\\SetCell[#{stretch}]{c}#{content}}"
+        "{\\SetCell#{stretch}{c}#{content}}"
       end
 
       private
 
       def stretch
+        return '' unless columns || rows
+
         out = []
 
         out << "c=#{columns}" if columns
         out << "r=#{rows}" if rows
 
-        out.join(',')
+        "[#{out.join(',')}]"
       end
     end
   end
