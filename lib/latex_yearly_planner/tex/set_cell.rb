@@ -13,7 +13,7 @@ module LatexYearlyPlanner
       end
 
       def to_s
-        "{\\SetCell[#{stretch}]{h}#{content}}"
+        "{\\SetCell[#{stretch}]{c}#{content}}"
       end
 
       private

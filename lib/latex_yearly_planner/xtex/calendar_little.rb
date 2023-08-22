@@ -38,11 +38,11 @@ module LatexYearlyPlanner
       end
 
       def format
-        return 'X' * 7 unless show_week_numbers
+        return 'X[c]' * 7 unless show_week_numbers
 
-        return "X|#{'X' * 7}" if week_number_placement == :left
+        return "X[c]|#{'X[c]' * 7}" if week_number_placement == :left
 
-        "#{'X' * 7}|X"
+        "#{'X[c]' * 7}|X[c]"
       end
 
       def week_rows

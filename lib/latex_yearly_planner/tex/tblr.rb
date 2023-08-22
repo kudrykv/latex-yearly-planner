@@ -5,7 +5,7 @@ module LatexYearlyPlanner
     class Tblr
       attr_accessor :rows, :format, :row_spacing, :column_spacing, :horizontal_lines, :width
 
-      def initialize(vertical_padding_factor: 1, column_spacing: '1pt', row_spacing: '6pt', width: '\\linewidth')
+      def initialize(vertical_padding_factor: 1, column_spacing: nil, row_spacing: nil, width: nil)
         @rows = []
 
         @vertical_padding_factor = vertical_padding_factor
@@ -24,12 +24,7 @@ module LatexYearlyPlanner
 
       def to_s
         <<~LATEX
-          \\begin{tblr}{
-            width = #{width},
-            colspec = {#{make_format}},
-            rowsep = #{row_spacing},
-            colsep = #{column_spacing}
-          }
+          \\begin{tblr}[T]{#{table_options}}
             #{build_rows}
           \\end{tblr}
         LATEX
@@ -38,10 +33,33 @@ module LatexYearlyPlanner
 
       private
 
-      def make_format
-        return format if format
+      def table_options
+        [
+          make_width,
+          make_row_spacing,
+          make_column_spacing,
+          make_format
+        ].compact.join(', ')
+      end
 
-        @rows.map(&:size).max.times.map { 'c' }.join('|')
+      def make_width
+        "width = #{width}" if width
+      end
+
+      def make_row_spacing
+        "rowsep = #{row_spacing}" if row_spacing
+      end
+
+      def make_column_spacing
+        "colsep = #{column_spacing}" if column_spacing
+      end
+
+      def make_format
+        return "colspec = {#{format}}" if format
+
+        line = @rows.map(&:size).max.times.map { 'c' }.join('|')
+
+        "colspec = {#{line}}"
       end
 
       def build_rows
