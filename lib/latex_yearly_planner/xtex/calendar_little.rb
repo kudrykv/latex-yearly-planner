@@ -3,7 +3,7 @@
 module LatexYearlyPlanner
   module XTeX
     class CalendarLittle
-      def initialize(month, width: '\\textwidth', show_week_numbers: true, week_number_placement: :left)
+      def initialize(month, width: '\\linewidth', show_week_numbers: true, week_number_placement: :left)
         @month = month
         @width = width
         @show_week_numbers = show_week_numbers
@@ -11,7 +11,7 @@ module LatexYearlyPlanner
       end
 
       def to_s
-        table = LatexYearlyPlanner::TeX::TabularX.new
+        table = TeX::Tblr.new
 
         table.title = month.name
         table.width = width
@@ -38,11 +38,11 @@ module LatexYearlyPlanner
       end
 
       def format
-        return 'Y' * 7 unless show_week_numbers
+        return 'X' * 7 unless show_week_numbers
 
-        return "Y|#{'Y' * 7}" if week_number_placement == :left
+        return "X|#{'X' * 7}" if week_number_placement == :left
 
-        "#{'Y' * 7}|Y"
+        "#{'X' * 7}|X"
       end
 
       def week_rows

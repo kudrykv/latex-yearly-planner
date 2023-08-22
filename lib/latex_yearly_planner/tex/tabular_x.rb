@@ -45,27 +45,13 @@ module LatexYearlyPlanner
 
         rows.map do |row|
           row = row.map do |cell|
-            cell.width = longest_row if cell.is_a?(Multicolumn) && cell.width == :full_width
+            cell.width = longest_row if cell.is_a?(TeX::Multicolumn) && cell.width == :full_width
 
             cell
           end
 
           row.map(&:to_s).join(' & ')
         end.join("\\\\\n")
-      end
-    end
-
-    class Multicolumn
-      attr_accessor :width, :format, :content
-
-      def initialize(width, format, content)
-        @width = width
-        @format = format
-        @content = content
-      end
-
-      def to_s
-        "\\multicolumn{#{width}}{#{format}}{#{content}}"
       end
     end
   end

@@ -3,23 +3,29 @@
 module LatexYearlyPlanner
   module TeX
     class Tblr
-      attr_accessor :rows, :format, :row_spacing, :column_spacing, :horizontal_lines
+      attr_accessor :rows, :format, :row_spacing, :column_spacing, :horizontal_lines, :width
 
-      def initialize(vertical_padding_factor: 1, column_spacing: '1pt', row_spacing: '6pt')
+      def initialize(vertical_padding_factor: 1, column_spacing: '1pt', row_spacing: '6pt', width: '\\linewidth')
         @rows = []
 
         @vertical_padding_factor = vertical_padding_factor
         @column_spacing = column_spacing
         @row_spacing = row_spacing
+        @width = width
       end
 
       def add_row(row)
         rows << row
       end
 
+      def title=(name)
+        add_row([TeX::SetCell.new(name, columns: :full_width)])
+      end
+
       def to_s
         <<~LATEX
           \\begin{tblr}{
+            width = #{width},
             colspec = {#{make_format}},
             rowsep = #{row_spacing},
             colsep = #{column_spacing}
@@ -39,15 +45,17 @@ module LatexYearlyPlanner
       end
 
       def build_rows
-        out = "#{horizontal_line}\n"
+        longest_row = rows.map(&:size).max
 
-        out += rows.map { |row| "#{row.join(' & ')} \\\\#{horizontal_line}" }.join("\n")
+        rows.map do |row|
+          row = row.map do |cell|
+            cell.columns = longest_row if cell.is_a?(TeX::SetCell) && cell.columns == :full_width
 
-        out.strip
-      end
+            cell
+          end
 
-      def horizontal_line
-        horizontal_lines ? '\\hline' : ''
+          row.map(&:to_s).join(' & ')
+        end.join("\\\\\n")
       end
     end
   end
