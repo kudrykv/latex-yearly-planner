@@ -24,6 +24,10 @@
 \usepackage{multido}
 \usetikzlibrary{patterns}
 
+<% if document.debug.enabled %>
+  <% if document.debug.parameters.highlight_frames %>\usepackage{showframe}<% end %>
+<% end %>
+
 \geometry{
   paperwidth=<%= document.layout.dimensions.width %>,
   paperheight=<%= document.layout.dimensions.height %>,

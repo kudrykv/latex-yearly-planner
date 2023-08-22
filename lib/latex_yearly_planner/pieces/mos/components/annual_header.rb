@@ -38,8 +38,7 @@ module LatexYearlyPlanner
           end
 
           def table_from_months(months)
-            table = TeX::Tabular.new(vertical_padding_factor:)
-            table.format = "P{#{config.document.layout.margin_notes.width}}"
+            table = TeX::Tabular.new(vertical_padding_factor:, column_spacing:)
             table.horizontal_lines = true
 
             months.each do |month|
@@ -51,6 +50,10 @@ module LatexYearlyPlanner
 
           def vertical_padding_factor
             config.parameters.parameters.header.vertical_padding_factor
+          end
+
+          def column_spacing
+            config.parameters.parameters.header.column_spacing
           end
         end
       end
