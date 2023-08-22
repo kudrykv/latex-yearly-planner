@@ -20,7 +20,7 @@ module LatexYearlyPlanner
           def page_iteration(page_number)
             months = months_for_page(page_number)
 
-            "#{header.generate(months)}#{body.generate(months)}"
+            "#{header.generate(all_months, months)}#{body.generate(months)}"
           end
 
           def months_for_page(page_number)
@@ -33,6 +33,10 @@ module LatexYearlyPlanner
             to_month = end_month if to_month > end_month
 
             make_months_range(from_month, to_month)
+          end
+
+          def all_months
+            @all_months ||= make_months_range(start_month, end_month)
           end
 
           def annual_pages

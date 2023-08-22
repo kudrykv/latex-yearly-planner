@@ -30,6 +30,8 @@ parameters:
   compile:
     runs: 2
   parameters:
+    header:
+      vertical_padding_factor: 2
     start_date: 2023, January
     end_date: 2023, December
     weekday_start: Monday

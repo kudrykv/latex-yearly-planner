@@ -5,8 +5,12 @@ module LatexYearlyPlanner
     module Mos
       module Components
         class AnnualHeader < Component
-          def generate(_months)
-            "#{margin_note}#{TeX::TextSize.new(year).huge}\\hfill{}#{table_to_the_right}\\medskip\\hrule{}\n"
+          def generate(all_months, _months)
+            "#{margin_note(all_months)}" \
+              "#{TeX::TextSize.new(year).huge}" \
+              '\\hfill{}' \
+              "#{table_to_the_right}" \
+              "\\medskip\\hrule{}\n"
           end
 
           private
@@ -22,15 +26,29 @@ module LatexYearlyPlanner
             table
           end
 
-          def margin_note
+          def margin_note(all_months)
             <<~LATEX
               \\marginnote{%
-                \\rotatebox{90}{%
-                  hello world%
-                }%
+                %\\rotatebox[origin=tr]{90}{%
+                #{table_from_months(all_months)}
+                %}%
               }
             LATEX
               .strip
+          end
+
+          def table_from_months(months)
+            table = TeX::Tabular.new(vertical_padding_factor:)
+
+            months.each do |month|
+              table.add_row([month.name[0..2]])
+            end
+
+            table
+          end
+
+          def vertical_padding_factor
+            config.parameters.parameters.header.vertical_padding_factor
           end
         end
       end

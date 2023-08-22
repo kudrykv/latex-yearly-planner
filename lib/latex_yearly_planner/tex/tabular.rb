@@ -3,10 +3,11 @@
 module LatexYearlyPlanner
   module TeX
     class Tabular
-      attr_accessor :rows
+      attr_accessor :rows, :vertical_padding_factor
 
-      def initialize
+      def initialize(vertical_padding_factor: 1)
         @rows = []
+        @vertical_padding_factor = vertical_padding_factor
       end
 
       def add_row(row)
@@ -15,9 +16,9 @@ module LatexYearlyPlanner
 
       def to_s
         <<~LATEX
-          \\begin{tabular}{#{format}}
+          {\\renewcommand{\\arraystretch}{#{vertical_padding_factor}}\\begin{tabular}{#{format}}
             #{build_rows}
-          \\end{tabular}
+          \\end{tabular}}
         LATEX
           .strip
       end
