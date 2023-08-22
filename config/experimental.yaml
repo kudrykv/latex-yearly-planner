@@ -41,6 +41,9 @@ parameters:
     week_number_placement: left
     notes:
       type: dotted
+    little_calendar:
+      row_spacing: 1.3pt
+      column_spacing: 0pt
 
 sections:
   title:

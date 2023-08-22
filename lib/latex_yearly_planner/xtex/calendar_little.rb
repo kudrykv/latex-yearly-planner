@@ -3,11 +3,16 @@
 module LatexYearlyPlanner
   module XTeX
     class CalendarLittle
-      def initialize(month, width: '\\linewidth', show_week_numbers: true, week_number_placement: :left)
+      attr_reader :month, :width, :show_week_numbers, :week_number_placement, :row_spacing, :column_spacing
+
+      def initialize(month, **options)
         @month = month
-        @width = width
-        @show_week_numbers = show_week_numbers
-        @week_number_placement = week_number_placement.downcase.to_sym
+
+        @width = options.fetch(:width, nil)
+        @show_week_numbers = options.fetch(:show_week_numbers, true)
+        @week_number_placement = options.fetch(:week_number_placement, :right).downcase.to_sym
+        @row_spacing = options.fetch(:row_spacing, nil)
+        @column_spacing = options.fetch(:column_spacing, nil)
       end
 
       def to_s
@@ -16,16 +21,16 @@ module LatexYearlyPlanner
         table.title = month.name
         table.width = width
         table.format = format
-        table.add_row(header)
+        table.row_spacing = row_spacing
+        table.column_spacing = column_spacing
 
+        table.add_row(header)
         week_rows.each { |row| table.add_row(row) }
 
         table.to_s
       end
 
       private
-
-      attr_reader :month, :width, :show_week_numbers, :week_number_placement
 
       def header
         row = month.weekdays_one_letter

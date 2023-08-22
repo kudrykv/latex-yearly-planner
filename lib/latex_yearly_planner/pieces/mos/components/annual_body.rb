@@ -25,7 +25,9 @@ module LatexYearlyPlanner
             {
               width: column_width,
               show_week_numbers: param(:show_week_numbers),
-              week_number_placement: param(:week_number_placement)
+              week_number_placement: param(:week_number_placement),
+              row_spacing: config.parameters.parameters.little_calendar.row_spacing,
+              column_spacing: config.parameters.parameters.little_calendar.column_spacing,
             }
           end
 
