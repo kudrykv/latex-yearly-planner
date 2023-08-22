@@ -21,7 +21,7 @@ module LatexYearlyPlanner
 
           def table_to_the_right
             table = TeX::Tblr.new
-            table.add_row([TeX::Cell.new('Calendar').selected, 'here', 'there'])
+            table.add_row([TeX::SetCell.new('Calendar').selected, 'here', 'there'])
 
             table
           end

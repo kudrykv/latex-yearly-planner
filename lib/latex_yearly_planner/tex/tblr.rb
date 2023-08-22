@@ -20,7 +20,7 @@ module LatexYearlyPlanner
       end
 
       def title=(name)
-        add_row([TeX::SetCell.new(name, columns: :full_width)])
+        add_row([TeX::SetCell.new(name, stretch_columns: :full_width)])
       end
 
       def to_s
@@ -73,7 +73,7 @@ module LatexYearlyPlanner
 
         rows.map do |row|
           row = row.map do |cell|
-            cell.columns = longest_row if cell.is_a?(TeX::SetCell) && cell.columns == :full_width
+            cell.stretch_columns = longest_row if cell.is_a?(TeX::SetCell) && cell.stretch_columns == :full_width
 
             cell
           end
