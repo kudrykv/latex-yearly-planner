@@ -17,7 +17,9 @@ module LatexYearlyPlanner
       attr_reader :config, :section_config
 
       def param(key)
-        section_config.parameters.send(key) || config.parameters.parameters.send(key)
+        @param ||= {}
+
+        @param[key] ||= section_config.parameters.send(key) || config.parameters.parameters.send(key)
       end
     end
   end
