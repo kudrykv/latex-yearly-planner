@@ -12,31 +12,31 @@ module LatexYearlyPlanner
             table
           end
 
-          def margin_note(all_months)
+          def margin_note
             <<~LATEX
               \\marginnote{%
-                #{quarter_table_from_months(all_months)}
+                #{quarter_table_from_months}
                 \\\\[#{config.between_tables_spacing}]
-                #{table_from_months(all_months)}
+                #{table_from_months}
               }
             LATEX
               .strip
           end
 
-          def quarter_table_from_months(months)
+          def quarter_table_from_months
             table = TeX::Tblr.new(**config.quarterly_table_options)
 
-            months.map(&:quarter).uniq(&:date).map(&:name).map do |name|
+            all_months.map(&:quarter).uniq(&:date).map(&:name).map do |name|
               table.add_row([name])
             end
 
             table
           end
 
-          def table_from_months(months)
+          def table_from_months
             table = TeX::Tblr.new(**config.monthly_table_options)
 
-            months.each do |month|
+            all_months.each do |month|
               table.add_row([month.name[0..2].to_s])
             end
 

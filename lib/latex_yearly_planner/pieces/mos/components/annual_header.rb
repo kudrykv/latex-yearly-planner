@@ -5,12 +5,12 @@ module LatexYearlyPlanner
     module Mos
       module Components
         class AnnualHeader < Header
-          def generate(all_months, _months)
+          def generate
             "#{top_table}" \
               '\\hfill{}' \
-                "#{title}" \
+              "#{title}" \
               '\\hrule{}' \
-              "#{margin_note(all_months)}" \
+              "#{margin_note}" \
               "\\medskip\n"
           end
 
