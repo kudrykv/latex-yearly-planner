@@ -33,7 +33,7 @@ module LatexYearlyPlanner
           def quarter_table_from_months
             table = TeX::Tblr.new(**config.quarterly_table_options)
 
-            all_months.map(&:quarter).uniq(&:date).map(&:name).map do |name|
+            all_quarters.map(&:name).map do |name|
               table.add_row([name])
             end
 

@@ -21,6 +21,10 @@ module LatexYearlyPlanner
         @all_months ||= make_months_range(start_month, end_month)
       end
 
+      def all_quarters
+        all_months.map(&:quarter).uniq(&:date)
+      end
+
       def make_months_range(from_month, to_month)
         (from_month..to_month).select { |date| date.mday == 1 }.map do |date|
           LatexYearlyPlanner::Calendar::Month.new(date, weekday_start:)
