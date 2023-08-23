@@ -56,13 +56,13 @@ module LatexYearlyPlanner
 
         def local_week_parameters(section_name)
           {
-            show_week_numbers: section(section_name).parameters.show_week_numbers,
-            week_number_placement: section(section_name).parameters.week_number_placement
+            show_week_numbers: section(section_name).parameters&.show_week_numbers,
+            week_number_placement: section(section_name).parameters&.week_number_placement
           }.compact
         end
 
         def local_little_calendar_parameters(section_name)
-          section(section_name).parameters.little_calendar_as_a_hash || {}
+          section(section_name).parameters&.little_calendar_as_a_hash || {}
         end
 
         def global_parameters

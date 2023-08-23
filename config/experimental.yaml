@@ -1,6 +1,6 @@
 document:
   debug:
-    enabled: false
+    enabled: true
     parameters:
       highlight_links: true
       highlight_frames: true
@@ -72,3 +72,4 @@ sections:
   quarterly:
     enabled: true
     parameters:
+      calendars_width: 5.8cm
