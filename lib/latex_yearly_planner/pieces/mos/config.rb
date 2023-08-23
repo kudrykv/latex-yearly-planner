@@ -29,6 +29,18 @@ module LatexYearlyPlanner
           struct.sections.send(section)
         end
 
+        def quarterly_table_options
+          struct.parameters.parameters.header.quarterly_table_as_a_hash
+        end
+
+        def monthly_table_options
+          struct.parameters.parameters.header.monthly_table_as_a_hash
+        end
+
+        def between_tables_spacing
+          struct.parameters.parameters.header.between_tables_spacing
+        end
+
         private
 
         def global_week_parameters

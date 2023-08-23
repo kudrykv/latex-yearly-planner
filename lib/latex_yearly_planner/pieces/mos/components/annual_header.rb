@@ -31,7 +31,7 @@ module LatexYearlyPlanner
             <<~LATEX
               \\marginnote{%
                 #{quarter_table_from_months(all_months)}
-                \\\\[#{between_tables_spacing}]
+                \\\\[#{config.between_tables_spacing}]
                 #{table_from_months(all_months)}
               }
             LATEX
@@ -39,7 +39,7 @@ module LatexYearlyPlanner
           end
 
           def quarter_table_from_months(months)
-            table = TeX::Tblr.new(**quarterly_table_options)
+            table = TeX::Tblr.new(**config.quarterly_table_options)
 
             months.map(&:quarter).uniq(&:date).map(&:name).map do |name|
               table.add_row([name])
@@ -49,25 +49,13 @@ module LatexYearlyPlanner
           end
 
           def table_from_months(months)
-            table = TeX::Tblr.new(**monthly_table_options)
+            table = TeX::Tblr.new(**config.monthly_table_options)
 
             months.each do |month|
               table.add_row([month.name[0..2].to_s])
             end
 
             table
-          end
-
-          def quarterly_table_options
-            config.parameters.parameters.header.quarterly_table_as_a_hash
-          end
-
-          def monthly_table_options
-            config.parameters.parameters.header.monthly_table_as_a_hash
-          end
-
-          def between_tables_spacing
-            config.parameters.parameters.header.between_tables_spacing
           end
         end
       end
