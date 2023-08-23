@@ -6,11 +6,7 @@ module LatexYearlyPlanner
       module Sections
         class Annual < Section
           def generate
-            pages = []
-
-            1.upto(annual_pages) do |page_number|
-              pages << page_iteration(page_number)
-            end
+            pages = 1.upto(annual_pages).map { |page_number| page_iteration(page_number) }
 
             LatexYearlyPlanner::Core::Entities::Note.new('annual', pages.join("\n\\pagebreak{}\n\n"))
           end

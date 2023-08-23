@@ -5,17 +5,17 @@ module LatexYearlyPlanner
     module Mos
       module Components
         class QuarterlyHeader < Header
-          def generate
+          def generate(quarter)
             "#{top_table}" \
               '\\hfill{}' \
-              "#{title}" \
+              "#{title(quarter)}" \
               '\\hrule{}' \
-              "#{margin_note}" \
+              "#{margin_note(quarter:)}" \
               "\\medskip\n"
           end
 
-          def title
-            'quarterly header'
+          def title(quarter)
+            TeX::TextSize.new(quarter.name).huge
           end
         end
       end

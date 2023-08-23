@@ -6,7 +6,9 @@ module LatexYearlyPlanner
       module Sections
         class Quarterly < Section
           def generate
-            LatexYearlyPlanner::Core::Entities::Note.new('quarterly', "#{header.generate}#{body.generate}")
+            pages = all_quarters.map { |quarter| "#{header.generate(quarter)}#{body.generate(quarter)}" }
+
+            LatexYearlyPlanner::Core::Entities::Note.new('quarterly', pages.join("\n\\pagebreak{}\n\n"))
           end
         end
       end
