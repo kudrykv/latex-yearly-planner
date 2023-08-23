@@ -64,10 +64,6 @@ module LatexYearlyPlanner
           def weekday_start
             @weekday_start ||= param(:weekday_start).downcase.to_sym
           end
-
-          def show_week_numbers
-            @show_week_numbers ||= param(:show_week_numbers)
-          end
         end
       end
     end

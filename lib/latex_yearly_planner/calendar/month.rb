@@ -5,7 +5,8 @@ module LatexYearlyPlanner
     class Month
       WEEKDAYS = %i[sunday monday tuesday wednesday thursday friday saturday].freeze
 
-      attr_reader :date, :weekday_start
+      attr_reader :date
+      attr_accessor :weekday_start
 
       def initialize(date, weekday_start: :monday)
         @date = date

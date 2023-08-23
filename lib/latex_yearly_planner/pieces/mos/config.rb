@@ -20,9 +20,9 @@ module LatexYearlyPlanner
 
         def little_calendar(section_name)
           base = {
-            show_week_numbers: struct.parameters.parameters.show_week_numbers,
-            week_number_placement: struct.parameters.parameters.week_number_placement,
-          }.merge(struct.parameters.parameters.little_calendar_as_a_hash)
+            show_week_numbers: global_parameters.show_week_numbers,
+            week_number_placement: global_parameters.week_number_placement
+          }.merge(global_parameters.little_calendar_as_a_hash)
 
           if section(section_name).parameters.show_week_numbers
             base = base.merge({ show_week_numbers: section(section_name).parameters.show_week_numbers })
@@ -41,6 +41,12 @@ module LatexYearlyPlanner
 
         def section(section)
           struct.sections.send(section)
+        end
+
+        private
+
+        def global_parameters
+          struct.parameters.parameters
         end
       end
     end
