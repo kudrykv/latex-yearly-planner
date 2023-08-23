@@ -9,7 +9,7 @@ module LatexYearlyPlanner
         hash = YAML.load_file(yaml_file_path)
         config = LatexYearlyPlanner::Adapters::Config.new(hash)
 
-        planner = make_planner(config)
+        planner = make_planner(config.template)
 
         planner.generate
         planner.write

@@ -15,6 +15,12 @@ module LatexYearlyPlanner
         struct.method_missing(...)
       end
 
+      def template
+        return self unless struct.parameters.template_name
+
+        "LatexYearlyPlanner::Pieces::#{struct.parameters.template_name.camelize}::Config".constantize.new(struct)
+      end
+
       private
 
       attr_reader :struct
