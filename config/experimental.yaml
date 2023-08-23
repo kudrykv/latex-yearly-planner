@@ -73,3 +73,9 @@ sections:
     enabled: true
     parameters:
       calendars_width: 5.8cm
+      notes_width: 4cm
+      spacer_width: 0.5cm
+      notes:
+        parameters:
+          width: 5
+          height: 10
