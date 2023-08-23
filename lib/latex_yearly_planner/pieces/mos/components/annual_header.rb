@@ -6,9 +6,9 @@ module LatexYearlyPlanner
       module Components
         class AnnualHeader < Component
           def generate(all_months, _months)
-            "#{TeX::TextSize.new(year).huge}" \
+            "#{top_table}" \
               '\\hfill{}' \
-              "#{table_to_the_right}" \
+                "#{title}" \
               '\\hrule{}' \
               "#{margin_note(all_months)}" \
               "\\medskip\n"
@@ -16,11 +16,15 @@ module LatexYearlyPlanner
 
           private
 
+          def title
+            TeX::TextSize.new(year).huge
+          end
+
           def year
             Date.parse(param(:start_date)).year
           end
 
-          def table_to_the_right
+          def top_table
             table = TeX::Tblr.new
             table.add_row([TeX::SetCell.new('Calendar').selected])
 
