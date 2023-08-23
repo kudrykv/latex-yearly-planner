@@ -68,3 +68,7 @@ sections:
       months_per_page: 8
       columns: 2
       underfull_vertical_spacing: 1cm
+
+  quarterly:
+    enabled: true
+    parameters:

@@ -35,34 +35,12 @@ module LatexYearlyPlanner
             make_months_range(from_month, to_month)
           end
 
-          def all_months
-            @all_months ||= make_months_range(start_month, end_month)
-          end
-
           def annual_pages
             section_config.parameters.pages
           end
 
           def months_per_page
             section_config.parameters.months_per_page
-          end
-
-          def make_months_range(from_month, to_month)
-            (from_month..to_month).select { |date| date.mday == 1 }.map do |date|
-              LatexYearlyPlanner::Calendar::Month.new(date, weekday_start:)
-            end
-          end
-
-          def start_month
-            @start_month ||= Date.parse(config.parameters.parameters.start_date)
-          end
-
-          def end_month
-            @end_month ||= Date.parse(config.parameters.parameters.end_date)
-          end
-
-          def weekday_start
-            @weekday_start ||= param(:weekday_start).downcase.to_sym
           end
         end
       end
