@@ -2,11 +2,12 @@
 
 module LatexYearlyPlanner
   module Pieces
-    class Section
+    class Section < Base
+      attr_reader :header, :body
+
       def initialize(section_name, config, section_config, header, body)
-        @section_name = section_name
-        @config = config
-        @section_config = section_config
+        super(section_name, config, section_config)
+
         @header = header
         @body = body
       end
@@ -17,14 +18,6 @@ module LatexYearlyPlanner
 
       def generate
         NotImplementedError
-      end
-
-      private
-
-      attr_reader :section_name, :config, :section_config, :header, :body
-
-      def param(key)
-        section_config.parameters.send(key) || config.parameters.parameters.send(key)
       end
     end
   end
