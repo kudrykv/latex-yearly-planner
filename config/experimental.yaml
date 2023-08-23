@@ -50,6 +50,7 @@ parameters:
     notes:
       type: dotted
     little_calendar:
+      width: 5.8cm
       row_spacing: 1.5pt
       column_spacing: 0pt
 
@@ -65,7 +66,4 @@ sections:
       pages: 2
       months_per_page: 8
       columns: 2
-      column_width: 5.8cm
-      column_spacing: 1cm
-      vertical_spacing: 1cm
       underfull_vertical_spacing: 1cm
