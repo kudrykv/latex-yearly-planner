@@ -22,7 +22,7 @@ module LatexYearlyPlanner
 
           def table_to_the_right
             table = TeX::Tblr.new
-            table.add_row([TeX::SetCell.new('Calendar').selected, 'here', 'there'])
+            table.add_row([TeX::SetCell.new('Calendar').selected])
 
             table
           end
@@ -31,7 +31,7 @@ module LatexYearlyPlanner
             <<~LATEX
               \\marginnote{%
                 #{quarter_table_from_months(all_months)}
-                \\\\[5mm]
+                \\\\[#{between_tables_spacing}]
                 #{table_from_months(all_months)}
               }
             LATEX
@@ -64,6 +64,10 @@ module LatexYearlyPlanner
 
           def monthly_table_options
             config.parameters.parameters.header.monthly_table_as_a_hash
+          end
+
+          def between_tables_spacing
+            config.parameters.parameters.header.between_tables_spacing
           end
         end
       end
