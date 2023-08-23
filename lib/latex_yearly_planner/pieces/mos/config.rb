@@ -19,24 +19,10 @@ module LatexYearlyPlanner
         end
 
         def little_calendar(section_name)
-          base = {
-            show_week_numbers: global_parameters.show_week_numbers,
-            week_number_placement: global_parameters.week_number_placement
-          }.merge(global_parameters.little_calendar_as_a_hash)
-
-          if section(section_name).parameters.show_week_numbers
-            base = base.merge({ show_week_numbers: section(section_name).parameters.show_week_numbers })
-          end
-
-          if section(section_name).parameters.week_number_placement
-            base = base.merge({ week_number_placement: section(section_name).parameters.week_number_placement })
-          end
-
-          if section(section_name).parameters.little_calendar_as_a_hash
-            base = base.merge(section(section_name).parameters.little_calendar_as_a_hash)
-          end
-
-          base
+          global_week_parameters
+            .merge(global_little_calendar_parameters)
+            .merge(local_week_parameters(section_name))
+            .merge(local_little_calendar_parameters(section_name))
         end
 
         def section(section)
@@ -44,6 +30,28 @@ module LatexYearlyPlanner
         end
 
         private
+
+        def global_week_parameters
+          {
+            show_week_numbers: global_parameters.show_week_numbers,
+            week_number_placement: global_parameters.week_number_placement
+          }.compact
+        end
+
+        def global_little_calendar_parameters
+          global_parameters.little_calendar_as_a_hash || {}
+        end
+
+        def local_week_parameters(section_name)
+          {
+            show_week_numbers: section(section_name).parameters.show_week_numbers,
+            week_number_placement: section(section_name).parameters.week_number_placement
+          }.compact
+        end
+
+        def local_little_calendar_parameters(section_name)
+          section(section_name).parameters.little_calendar_as_a_hash || {}
+        end
 
         def global_parameters
           struct.parameters.parameters
