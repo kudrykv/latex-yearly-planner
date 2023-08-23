@@ -10,7 +10,10 @@ module LatexYearlyPlanner
       end
 
       def number
-        days.compact.map(&:cweek).max
+        shift = 0
+        shift = 1 if days.compact.none?(&:monday?) && days.last.nil?
+
+        days.compact.map(&:cweek).max + shift
       end
     end
   end
