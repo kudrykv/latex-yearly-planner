@@ -7,9 +7,16 @@ module LatexYearlyPlanner
         class Header < Component
           def top_table
             table = TeX::Tblr.new
-            table.add_row([TeX::SetCell.new('Calendar').selected])
+            table.add_row([calendar_cell])
 
             table
+          end
+
+          def calendar_cell
+            cell = TeX::SetCell.new('Calendar')
+            cell = cell.selected if section_name == :annual
+
+            cell
           end
 
           def margin_note
