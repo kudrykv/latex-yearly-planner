@@ -14,7 +14,7 @@ module LatexYearlyPlanner
       def param(key)
         @param ||= {}
 
-        @param[key] ||= section_config.parameters.send(key) || config.parameters.parameters.send(key)
+        @param[key] ||= section_config.parameters&.send(key) || config.parameters&.parameters&.send(key)
       end
 
       def all_months

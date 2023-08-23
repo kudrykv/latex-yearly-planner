@@ -5,6 +5,9 @@ module LatexYearlyPlanner
     module Mos
       module Components
         class QuarterlyBody < Component
+          def generate
+            ''
+          end
         end
       end
     end
