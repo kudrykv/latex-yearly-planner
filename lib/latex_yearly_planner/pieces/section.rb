@@ -3,7 +3,8 @@
 module LatexYearlyPlanner
   module Pieces
     class Section
-      def initialize(config, section_config, header, body)
+      def initialize(section_name, config, section_config, header, body)
+        @section_name = section_name
         @config = config
         @section_config = section_config
         @header = header
@@ -20,7 +21,7 @@ module LatexYearlyPlanner
 
       private
 
-      attr_reader :config, :section_config, :header, :body
+      attr_reader :section_name, :config, :section_config, :header, :body
 
       def param(key)
         section_config.parameters.send(key) || config.parameters.parameters.send(key)

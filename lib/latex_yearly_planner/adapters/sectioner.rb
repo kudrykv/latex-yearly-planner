@@ -20,10 +20,10 @@ module LatexYearlyPlanner
       attr_reader :config
 
       def make_section(name, opts)
-        header = component_constant(name, opts, :header).new(config, opts)
-        body = component_constant(name, opts, :body).new(config, opts)
+        header = component_constant(name, opts, :header).new(name, config, opts)
+        body = component_constant(name, opts, :body).new(name, config, opts)
 
-        section_constant(name, opts).new(config, opts, header, body)
+        section_constant(name, opts).new(name, config, opts, header, body)
       end
 
       def section_constant(section_name, section_config)

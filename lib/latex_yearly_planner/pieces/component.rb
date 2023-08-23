@@ -3,7 +3,8 @@
 module LatexYearlyPlanner
   module Pieces
     class Component
-      def initialize(config, section_config)
+      def initialize(section_name, config, section_config)
+        @section_name = section_name
         @config = config
         @section_config = section_config
       end
@@ -14,7 +15,7 @@ module LatexYearlyPlanner
 
       private
 
-      attr_reader :config, :section_config
+      attr_reader :config, :section_config, :section_name
 
       def param(key)
         @param ||= {}
