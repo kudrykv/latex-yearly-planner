@@ -1,4 +1,4 @@
-\documentclass[<%= document.document_class.options %>]{<%= document.document_class.name %>}
+\documentclass[<%= document_options %>]{<%= document.document_class.name %>}
 
 \usepackage{geometry}
 \usepackage[table]{xcolor}
@@ -66,9 +66,9 @@
 
 \newcommand{\remainingHeight}{%
 \ifdim\pagegoal=\maxdimen
-\dimexpr\textheight-5pt\relax
+\dimexpr\textheight-1pt\relax
 \else
-\dimexpr\pagegoal-\pagetotal-\lineskip-5pt\relax
+\dimexpr\pagegoal-\pagetotal-\lineskip-1pt\relax
 \fi%
 }
 

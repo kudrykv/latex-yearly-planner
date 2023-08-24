@@ -6,14 +6,14 @@ module LatexYearlyPlanner
       module Components
         class QuarterlyBody < Component
           def generate(quarter)
-            ["\\fbox{#{calendars_minipage(quarter)}}", spacer, "\\fbox{#{notes}}"].join('')
+            [calendars_minipage(quarter), spacer, notes].join('')
           end
 
           private
 
           def calendars_minipage(quarter)
             TeX::Minipage.new(
-              content: "\\vspace{0pt}#{calendars_vertical(quarter)}",
+              content: calendars_vertical(quarter),
               height: '\\remainingHeight',
               width: param(:calendars_width),
             )
@@ -32,9 +32,10 @@ module LatexYearlyPlanner
 
           def notes
             TeX::Minipage.new(
-              content: "\\vspace{0pt}#{XTeX::Notes.new(notes_type, **notes_parameters)}",
+              content: XTeX::Notes.new(notes_type, **notes_parameters),
               height: '\\remainingHeight',
-              width: param(:notes_width)
+              width: param(:notes_width),
+              compensate_height: config.document.document_class.size
             )
           end
 

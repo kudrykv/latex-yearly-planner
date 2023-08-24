@@ -7,7 +7,7 @@ document:
 
   document_class:
     name: article
-    options: 9pt
+    size: 9pt
 
   layout:
     dimensions:
@@ -73,9 +73,9 @@ sections:
     enabled: true
     parameters:
       calendars_width: 5.8cm
-      notes_width: 4cm
+      notes_width: 5.8cm
       spacer_width: 0.5cm
       notes:
         parameters:
-          width: 5
-          height: 10
+          width: 12
+          height: 34
