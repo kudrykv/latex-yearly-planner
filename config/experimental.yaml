@@ -87,7 +87,7 @@ sections:
           cell_height: 2.28cm
 
   weekly:
-    enabled: true
+    enabled: false
     parameters:
       column_width: 4cm
       notes:
@@ -95,3 +95,7 @@ sections:
           width: 12.5cm
           height: 4.5cm
           compensate_height: 0pt
+
+  daily:
+    enabled: true
+    parameters:

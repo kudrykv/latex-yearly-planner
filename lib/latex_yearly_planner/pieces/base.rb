@@ -38,6 +38,10 @@ module LatexYearlyPlanner
                    .map { |days| Calendar::Week.new(days) }
       end
 
+      def all_days
+        start_month.upto(end_month.end_of_month).map { |day| Calendar::Day.new(day) }
+      end
+
       def make_months_range(from_month, to_month)
         (from_month..to_month).select { |date| date.mday == 1 }.map do |date|
           LatexYearlyPlanner::Calendar::Month.new(date, weekday_start:)

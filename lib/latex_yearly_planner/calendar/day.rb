@@ -13,6 +13,14 @@ module LatexYearlyPlanner
         date.strftime('%A, %-d')
       end
 
+      def month
+        Month.new(date.beginning_of_month)
+      end
+
+      def quarter
+        Quarter.new(date.beginning_of_quarter)
+      end
+
       def respond_to_missing?(...)
         date.respond_to?(...)
       end
