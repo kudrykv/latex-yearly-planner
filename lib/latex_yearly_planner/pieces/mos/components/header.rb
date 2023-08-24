@@ -31,11 +31,11 @@ module LatexYearlyPlanner
           end
 
           def quarter_table_from_months(highlight_quarters:)
-            table = TeX::Tblr.new(**config.quarterly_table_options)
+            table = TeX::TabularX.new(**config.quarterly_table_options)
 
             all_quarters.map do |quarter|
-              cell = TeX::SetCell.new(quarter.name)
-              cell = cell.selected if highlight_quarters.include?(quarter)
+              cell = TeX::Cell.new(quarter.name)
+              cell.selected = true if highlight_quarters.include?(quarter)
 
               table.add_row([cell])
             end
@@ -44,11 +44,11 @@ module LatexYearlyPlanner
           end
 
           def table_from_months(highlight_months:)
-            table = TeX::Tblr.new(**config.monthly_table_options)
+            table = TeX::TabularX.new(**config.monthly_table_options)
 
             all_months.each do |month|
-              cell = TeX::SetCell.new(month.name[0..2].to_s)
-              cell = cell.selected if highlight_months.include?(month)
+              cell = TeX::Cell.new(month.name[0..2])
+              cell.selected = true if highlight_months.include?(month)
 
               table.add_row([cell])
             end

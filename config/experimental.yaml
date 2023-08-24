@@ -32,14 +32,14 @@ parameters:
   parameters:
     header:
       monthly_table:
-        row_spacing: 3mm
-        column_spacing: 0mm
-        format: X[c,m]
+        vertical_stretch: 2
+        horizontal_spacing: 0mm
+        format: Y
         horizontal_lines: true
       quarterly_table:
-        row_spacing: 3mm
-        column_spacing: 0mm
-        format: X[c,m]
+        vertical_stretch: 2
+        horizontal_spacing: 0mm
+        format: Y
         horizontal_lines: true
       between_tables_spacing: 5mm
     start_date: 2023, January

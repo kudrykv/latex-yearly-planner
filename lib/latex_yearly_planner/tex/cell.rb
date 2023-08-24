@@ -4,16 +4,11 @@ module LatexYearlyPlanner
   module TeX
     class Cell
       attr_reader :content
+      attr_accessor :selected
 
-      def initialize(content)
+      def initialize(content, selected: false)
         @content = content
-        @selected = false
-      end
-
-      def selected
-        @selected = true
-
-        self
+        @selected = selected
       end
 
       def to_s
