@@ -52,7 +52,7 @@ module LatexYearlyPlanner
           row = week.days.map { |day| day ? "{#{day.mday}}" : '' }
           next row unless show_week_numbers
 
-          wn = "\\vspace{0pt}\\rotatebox[origin=tr]{90}{\\parbox{#{cell_height}}{Week #{week.number}}}"
+          wn = "\\vspace{0pt}\\rotatebox[origin=tr]{90}{\\parbox{#{cell_height}}{\\hfil{}Week #{week.number}}}"
           row.unshift(wn) if week_number_placement == :left
           row.push(wn) if week_number_placement == :right
 
