@@ -25,6 +25,13 @@ module LatexYearlyPlanner
         all_months.map(&:quarter).uniq(&:date)
       end
 
+      def all_weeks
+        start_month.beginning_of_week(weekday_start)
+                   .upto(end_month.end_of_month.end_of_week(weekday_start))
+                   .each_slice(7)
+                   .map { |days| Calendar::Week.new(days) }
+      end
+
       def make_months_range(from_month, to_month)
         (from_month..to_month).select { |date| date.mday == 1 }.map do |date|
           LatexYearlyPlanner::Calendar::Month.new(date, weekday_start:)

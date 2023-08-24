@@ -4,18 +4,18 @@ module LatexYearlyPlanner
   module Pieces
     module Mos
       module Components
-        class MonthlyHeader < Header
-          def generate(month)
+        class WeeklyHeader < Header
+          def generate(week)
             "#{top_table}" \
               '\\hfill{}' \
-              "#{title(month)}" \
+              "#{title(week)}" \
               '\\hrule{}' \
-              "#{margin_note(highlight_quarters: [month.quarter], highlight_months: [month])}" \
+              "#{margin_note(highlight_quarters: week.quarters, highlight_months: week.months)}" \
               "\\medskip\n"
           end
 
-          def title(month)
-            TeX::TextSize.new(month.name).huge
+          def title(week)
+            TeX::TextSize.new(week.name).huge
           end
         end
       end

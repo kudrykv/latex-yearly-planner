@@ -35,7 +35,7 @@ module LatexYearlyPlanner
               content: XTeX::Notes.new(notes_type, **notes_parameters),
               height: section_config.parameters.notes.parameters.height,
               width: section_config.parameters.notes.parameters.width,
-              compensate_height: '0pt'
+              compensate_height: config.document.document_class.size
             )
           end
 

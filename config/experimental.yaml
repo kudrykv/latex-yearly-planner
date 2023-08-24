@@ -85,3 +85,7 @@ sections:
       calendar:
         parameters:
           cell_height: 2.28cm
+
+  weekly:
+    enabled: true
+    parameters:
