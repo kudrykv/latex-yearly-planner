@@ -19,7 +19,6 @@ module LatexYearlyPlanner
             "#{header.generate}#{body.generate(months)}"
           end
 
-
           def annual_pages
             section_config.parameters.pages
           end

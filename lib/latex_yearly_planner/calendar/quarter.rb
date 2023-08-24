@@ -18,11 +18,7 @@ module LatexYearlyPlanner
       end
 
       def months
-        @months ||= begin
-          (0..2).map do |month_number|
-            Month.new(date + month_number.month)
-          end
-        end
+        @months ||= (0..2).map { |month_number| Month.new(date + month_number.month) }
       end
     end
   end

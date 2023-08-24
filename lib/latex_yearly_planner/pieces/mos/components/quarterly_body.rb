@@ -6,7 +6,7 @@ module LatexYearlyPlanner
       module Components
         class QuarterlyBody < Component
           def generate(quarter)
-            [calendars_minipage(quarter), spacer, notes].join('')
+            [calendars_minipage(quarter), spacer, notes].join
           end
 
           private
@@ -15,7 +15,7 @@ module LatexYearlyPlanner
             TeX::Minipage.new(
               content: calendars_vertical(quarter),
               height: '\\remainingHeight',
-              width: param(:calendars_width),
+              width: param(:calendars_width)
             )
           end
 

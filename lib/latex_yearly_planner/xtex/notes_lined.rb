@@ -3,8 +3,7 @@
 module LatexYearlyPlanner
   module XTeX
     class NotesLined
-      def initialize(**_options)
-      end
+      def initialize(**_options); end
     end
   end
 end
