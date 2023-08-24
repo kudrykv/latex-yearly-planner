@@ -6,7 +6,7 @@ module LatexYearlyPlanner
       module Components
         class QuarterlyBody < Component
           def generate(quarter)
-            [calendars_minipage(quarter), spacer, notes].join
+            ["\\fbox{#{calendars_minipage(quarter)}}", spacer, "\\fbox{#{notes}}"].join
           end
 
           private

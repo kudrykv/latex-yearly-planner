@@ -12,15 +12,19 @@ module LatexYearlyPlanner
       end
 
       def to_s
+        "\\adjustbox{valign=t}{#{minipage}}"
+      end
+
+      private
+
+      def minipage
         TeX::Minipage.new(
           content: raw_notes,
           width:,
           height:,
           compensate_height:
-        ).to_s
+        )
       end
-
-      private
 
       def raw_notes
         <<~XTX
