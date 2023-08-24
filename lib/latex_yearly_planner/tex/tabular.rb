@@ -2,25 +2,23 @@
 
 module LatexYearlyPlanner
   module TeX
-    class TabularX
-      attr_accessor :rows, :width, :format, :vertical_stretch, :horizontal_spacing, :horizontal_lines
+    class Tabular
+      attr_accessor :rows, :format, :vertical_stretch, :horizontal_spacing, :horizontal_lines
 
       def initialize(**options)
         @rows = []
 
-        @width = options.fetch(:width, '\\linewidth')
         @format = options.fetch(:format, nil)
         @vertical_stretch = options.fetch(:vertical_stretch, 1)
         @horizontal_spacing = options.fetch(:horizontal_spacing, '6pt')
-        @horizontal_lines = options.fetch(:horizontal_lines, true)
       end
 
       def to_s
         <<~LATEX
           {\\renewcommand{\\arraystretch}{#{vertical_stretch}}\\setlength{\\tabcolsep}{#{horizontal_spacing}}%
-          \\begin{tabularx}{#{width}}{#{make_format}}
+          \\begin{tabular}{#{make_format}}
             #{build_rows}
-          \\end{tabularx}}
+          \\end{tabular}}
         LATEX
           .strip
       end
@@ -52,13 +50,7 @@ module LatexYearlyPlanner
           end
 
           row.map(&:to_s).join(' & ')
-        end.join(separator)
-      end
-
-      def separator
-        hlines = horizontal_lines ? '\\hline' : ''
-
-        "\\\\#{hlines}\n"
+        end.join("\\\\\n")
       end
     end
   end
