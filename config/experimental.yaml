@@ -94,14 +94,14 @@ sections:
           cell_height: 2.28cm
 
   weekly:
-    enabled: false
+    enabled: true
     parameters:
       column_width: 4cm
       notes:
         parameters:
           width: 12.5cm
           height: 4.5cm
-          shift_vertical: 4mm
+          shift_vertical: 3mm
 
   daily:
     enabled: false
