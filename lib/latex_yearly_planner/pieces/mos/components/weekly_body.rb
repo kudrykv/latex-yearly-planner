@@ -17,14 +17,9 @@ module LatexYearlyPlanner
 
           def row(arr)
             names = arr.map { |content| col(content) }.join('\\hfill{}')
-            minipage = TeX::Minipage.new(
-              content: XTeX::Notes.new(notes_type, width: notes_width, height: notes_height),
-              width: notes_width,
-              height: notes_height,
-              compensate_height: '0pt'
-            )
+            notes = XTeX::Notes.new(notes_type, **notes_parameters)
 
-            "#{names}\n#{minipage}".strip
+            "#{names}\n#{notes}".strip
           end
 
           def col(content)
@@ -39,12 +34,8 @@ module LatexYearlyPlanner
             param(:notes, :type)
           end
 
-          def notes_width
-            param(:notes, :parameters, :width)
-          end
-
-          def notes_height
-            param(:notes, :parameters, :height)
+          def notes_parameters
+            param(:notes).parameters_as_a_hash
           end
         end
       end

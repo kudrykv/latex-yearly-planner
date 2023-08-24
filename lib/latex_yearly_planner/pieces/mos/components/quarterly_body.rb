@@ -31,12 +31,7 @@ module LatexYearlyPlanner
           end
 
           def notes
-            TeX::Minipage.new(
-              content: XTeX::Notes.new(notes_type, **notes_parameters),
-              height: minipage_height,
-              width: minipage_width,
-              compensate_height: config.document.document_class.size
-            )
+            XTeX::Notes.new(notes_type, **notes_parameters)
           end
 
           def notes_type
@@ -44,7 +39,8 @@ module LatexYearlyPlanner
           end
 
           def notes_parameters
-            param(:notes).parameters_as_a_hash || {}
+            { compensate_height: '0pt' }
+              .merge(param(:notes).parameters_as_a_hash || {})
           end
 
           def minipage_height

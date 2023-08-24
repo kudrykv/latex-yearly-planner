@@ -3,14 +3,26 @@
 module LatexYearlyPlanner
   module XTeX
     class NotesDotted
-      attr_accessor :width, :height
+      attr_accessor :width, :height, :compensate_height
 
       def initialize(**options)
         @width = options.fetch(:width, '1cm')
         @height = options.fetch(:height, '1cm')
+        @compensate_height = options.fetch(:compensate_height, nil)
       end
 
       def to_s
+        TeX::Minipage.new(
+          content: raw_notes,
+          width:,
+          height:,
+          compensate_height:,
+        ).to_s
+      end
+
+      private
+
+      def raw_notes
         <<~XTX
           \\leavevmode\\multido{\\dC=0mm+5mm}{#{make_height}}{
             \\multido{\\dR=0mm+5mm}{#{make_width}}{
