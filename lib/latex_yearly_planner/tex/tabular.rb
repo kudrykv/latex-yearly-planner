@@ -11,6 +11,7 @@ module LatexYearlyPlanner
         @format = options.fetch(:format, nil)
         @vertical_stretch = options.fetch(:vertical_stretch, 1)
         @horizontal_spacing = options.fetch(:horizontal_spacing, '6pt')
+        @horizontal_lines = options.fetch(:horizontal_lines, true)
       end
 
       def to_s
@@ -50,7 +51,13 @@ module LatexYearlyPlanner
           end
 
           row.map(&:to_s).join(' & ')
-        end.join("\\\\\n")
+        end.join(separator)
+      end
+
+      def separator
+        hlines = horizontal_lines ? '\\hline' : ''
+
+        "\\\\#{hlines}\n"
       end
     end
   end
