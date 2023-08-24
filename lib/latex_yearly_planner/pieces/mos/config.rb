@@ -25,6 +25,12 @@ module LatexYearlyPlanner
             .merge(local_little_calendar_parameters(section_name))
         end
 
+        def large_calendar(section_name)
+          global_week_parameters
+            .merge(local_week_parameters(section_name))
+            .merge(section(section_name).parameters&.calendar&.parameters_as_a_hash || {})
+        end
+
         def section(section)
           struct.sections.send(section)
         end

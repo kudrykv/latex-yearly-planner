@@ -3,13 +3,14 @@
 module LatexYearlyPlanner
   module XTeX
     class CalendarLarge
-      attr_reader :month, :show_week_numbers, :week_number_placement
+      attr_reader :month, :show_week_numbers, :week_number_placement, :cell_height
 
       def initialize(month, **options)
         @month = month
 
         @show_week_numbers = options.fetch(:show_week_numbers, true)
-        @week_number_placement = options.fetch(:week_number_placement, :left)
+        @week_number_placement = options.fetch(:week_number_placement, :left).downcase.to_sym
+        @cell_height = options.fetch(:cell_height, '2cm')
       end
 
       def to_s
@@ -51,7 +52,7 @@ module LatexYearlyPlanner
           row = week.days.map { |day| day ? "{#{day.mday}}" : '' }
           next row unless show_week_numbers
 
-          wn = "\\rotatebox{90}{\\parbox{2cm}{Week #{week.number}}}"
+          wn = "\\vspace{0pt}\\rotatebox[origin=tr]{90}{\\parbox{#{cell_height}}{Week #{week.number}}}"
           row.unshift(wn) if week_number_placement == :left
           row.push(wn) if week_number_placement == :right
 

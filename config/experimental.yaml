@@ -82,3 +82,6 @@ sections:
   monthly:
     enabled: true
     parameters:
+      calendar:
+        parameters:
+          cell_height: 2.28cm
