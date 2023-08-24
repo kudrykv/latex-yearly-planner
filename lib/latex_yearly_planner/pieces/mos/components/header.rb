@@ -6,7 +6,7 @@ module LatexYearlyPlanner
       module Components
         class Header < Component
           def top_table
-            table = TeX::Tabular.new
+            table = TeX::Tabular.new(**param(:header, :top_table_as_a_hash) || {})
             table.add_row([calendar_cell])
 
             table

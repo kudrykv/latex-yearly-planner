@@ -41,6 +41,8 @@ parameters:
         horizontal_spacing: 0mm
         format: Y
         horizontal_lines: true
+      top_table:
+        vertical_stretch: 1.3
       between_tables_spacing: 5mm
     start_date: 2023, January
     end_date: 2023, December
