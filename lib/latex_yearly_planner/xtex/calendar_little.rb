@@ -28,7 +28,7 @@ module LatexYearlyPlanner
 
         week_rows.each { |row| table.add_row(row) }
 
-        table.to_s
+        "\\adjustbox{valign=t}{#{table.to_s}}"
       end
 
       private
