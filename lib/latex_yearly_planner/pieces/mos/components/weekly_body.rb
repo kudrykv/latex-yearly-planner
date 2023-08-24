@@ -7,20 +7,20 @@ module LatexYearlyPlanner
         class WeeklyBody < Component
           def generate(week)
             [
-              week.days.take(3).map { |day| cell(day) }.join('\\hfill{}'),
-              week.days.drop(3).take(3).map { |day| cell(day) }.join('\\hfill{}'),
-              cell(week.days.last)
+              week.days.take(3).map { |day| col(day.name) }.join('\\hfill{}'),
+              week.days.drop(3).take(3).map { |day| col(day.name) }.join('\\hfill{}'),
+              [col(week.days.last.name), col('Notes'), col(XTeX::Dummy.new)].join('\\hfill{}')
             ].join('\\vfill{}')
           end
 
           private
 
-          def cell(day)
-            "\\fbox{#{TeX::Minipage.new(
-              content: day.name,
-              width: param(:cell, :width),
-              height: param(:cell, :height)
-            )}}"
+          def col(content)
+            TeX::Parbox.new(content:, width: column_width)
+          end
+
+          def column_width
+            param(:column_width)
           end
         end
       end

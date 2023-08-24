@@ -89,6 +89,4 @@ sections:
   weekly:
     enabled: true
     parameters:
-      cell:
-        width: 4cm
-        height: 5.2cm
+      column_width: 4cm
