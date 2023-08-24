@@ -11,7 +11,7 @@ module LatexYearlyPlanner
         @format = options.fetch(:format, nil)
         @vertical_stretch = options.fetch(:vertical_stretch, 1)
         @horizontal_spacing = options.fetch(:horizontal_spacing, '6pt')
-        @horizontal_lines = options.fetch(:horizontal_lines, true)
+        @horizontal_lines = options.fetch(:horizontal_lines, false)
       end
 
       def to_s
