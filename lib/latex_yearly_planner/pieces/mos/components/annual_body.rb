@@ -8,7 +8,7 @@ module LatexYearlyPlanner
           def generate(months)
             rows = months.each_slice(section_config.parameters.columns).map do |slice|
               slice
-                .map { |month| LatexYearlyPlanner::XTeX::CalendarLittle.new(month, **calendar_options) }
+                .map { |month| XTeX::CalendarLittle.new(month, **calendar_options) }
                 .map(&:to_s)
                 .join('\\hfill{}')
             end

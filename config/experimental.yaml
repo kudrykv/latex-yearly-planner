@@ -52,8 +52,8 @@ parameters:
       type: dotted
     little_calendar:
       width: 5.8cm
-      row_spacing: 1.5pt
-      column_spacing: 0pt
+      vertical_stretch: 1.2
+      horizontal_spacing: 0mm
 
 sections:
   title:

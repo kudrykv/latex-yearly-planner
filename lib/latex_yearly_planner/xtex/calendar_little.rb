@@ -3,7 +3,12 @@
 module LatexYearlyPlanner
   module XTeX
     class CalendarLittle
-      attr_reader :month, :width, :show_week_numbers, :week_number_placement, :row_spacing, :column_spacing
+      attr_reader :month,
+                  :width,
+                  :show_week_numbers,
+                  :week_number_placement,
+                  :vertical_stretch,
+                  :horizontal_spacing
 
       def initialize(month, **options)
         @month = month
@@ -11,12 +16,12 @@ module LatexYearlyPlanner
         @width = options.fetch(:width, nil)
         @show_week_numbers = options.fetch(:show_week_numbers, true)
         @week_number_placement = options.fetch(:week_number_placement, :right).downcase.to_sym
-        @row_spacing = options.fetch(:row_spacing, nil)
-        @column_spacing = options.fetch(:column_spacing, nil)
+        @vertical_stretch = options.fetch(:vertical_stretch, 1)
+        @horizontal_spacing = options.fetch(:horizontal_spacing, '6pt')
       end
 
       def to_s
-        table = TeX::Tblr.new(**table_options)
+        table = TeX::TabularX.new(**table_options)
 
         table.title = month.name
         table.add_row(header)
@@ -29,7 +34,7 @@ module LatexYearlyPlanner
       private
 
       def table_options
-        { width:, format:, row_spacing:, column_spacing: }
+        { width:, format:, vertical_stretch:, horizontal_spacing: }
       end
 
       def header
@@ -43,11 +48,11 @@ module LatexYearlyPlanner
       end
 
       def format
-        return 'X[c]' * 7 unless show_week_numbers
+        return 'Y' * 7 unless show_week_numbers
 
-        return "X[c]|#{'X[c]' * 7}" if week_number_placement == :left
+        return "Y|#{'Y' * 7}" if week_number_placement == :left
 
-        "#{'X[c]' * 7}|X[c]"
+        "#{'Y' * 7}|Y"
       end
 
       def week_rows
