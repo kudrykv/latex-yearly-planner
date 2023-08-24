@@ -15,7 +15,8 @@ module LatexYearlyPlanner
         <<~LATEX
           {\\renewcommand{\\arraystretch}{#{vertical_stretch}}\\setlength{\\tabcolsep}{#{horizontal_spacing}}%
           \\begin{tabularx}{#{width}}{#{make_format}}
-            #{build_rows}
+            #{starting_hline}
+            #{build_rows}#{trailing_hline}
           \\end{tabularx}}
         LATEX
           .strip

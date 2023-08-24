@@ -18,7 +18,8 @@ module LatexYearlyPlanner
         <<~LATEX
           {\\renewcommand{\\arraystretch}{#{vertical_stretch}}\\setlength{\\tabcolsep}{#{horizontal_spacing}}%
           \\begin{tabular}{#{make_format}}
-            #{build_rows}
+            #{starting_hline}
+            #{build_rows}#{trailing_hline}
           \\end{tabular}}
         LATEX
           .strip
@@ -58,6 +59,14 @@ module LatexYearlyPlanner
         hlines = horizontal_lines ? '\\hline' : ''
 
         "\\\\#{hlines}\n"
+      end
+
+      def starting_hline
+        horizontal_lines ? '\\hline' : ''
+      end
+
+      def trailing_hline
+        horizontal_lines ? '\\\\\\hline' : ''
       end
     end
   end
