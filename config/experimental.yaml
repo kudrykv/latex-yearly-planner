@@ -1,6 +1,6 @@
 document:
   debug:
-    enabled: true
+    enabled: false
     parameters:
       highlight_links: true
       highlight_frames: true
@@ -73,9 +73,8 @@ sections:
     enabled: true
     parameters:
       calendars_width: 5.8cm
-      notes_width: 5.8cm
       spacer_width: 0.5cm
       notes:
         parameters:
-          width: 12
-          height: 34
+          width: 5.8cm
+          height: 16.1cm

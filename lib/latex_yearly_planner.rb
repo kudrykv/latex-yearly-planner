@@ -5,6 +5,7 @@ require 'yaml'
 require 'recursive-open-struct'
 require 'active_support/all'
 require 'English'
+require 'ruby-measurement'
 
 loader = Zeitwerk::Loader.for_gem
 loader.inflector.inflect(

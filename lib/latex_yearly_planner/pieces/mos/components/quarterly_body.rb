@@ -33,9 +33,9 @@ module LatexYearlyPlanner
           def notes
             TeX::Minipage.new(
               content: XTeX::Notes.new(notes_type, **notes_parameters),
-              height: '\\remainingHeight',
-              width: param(:notes_width),
-              compensate_height: config.document.document_class.size
+              height: section_config.parameters.notes.parameters.height,
+              width: section_config.parameters.notes.parameters.width,
+              compensate_height: '0pt'
             )
           end
 

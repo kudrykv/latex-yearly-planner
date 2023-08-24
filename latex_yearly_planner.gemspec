@@ -31,6 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'activesupport'
   spec.add_dependency 'erb'
   spec.add_dependency 'recursive-open-struct'
+  spec.add_dependency 'ruby-measurement'
   spec.add_dependency 'thor'
   spec.add_dependency 'yaml'
   spec.add_dependency 'zeitwerk'
