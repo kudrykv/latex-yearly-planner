@@ -76,7 +76,7 @@ sections:
       underfull_vertical_spacing: 1cm
 
   quarterly:
-    enabled: true
+    enabled: false
     parameters:
       calendars_width: 5.8cm
       spacer_width: 0.5cm
@@ -94,7 +94,7 @@ sections:
           cell_height: 2.28cm
 
   weekly:
-    enabled: true
+    enabled: false
     parameters:
       column_width: 4cm
       notes:
@@ -104,5 +104,5 @@ sections:
           shift_vertical: 3mm
 
   daily:
-    enabled: false
+    enabled: true
     parameters:
