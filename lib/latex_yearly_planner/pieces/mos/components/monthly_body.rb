@@ -6,7 +6,7 @@ module LatexYearlyPlanner
       module Components
         class MonthlyBody < Component
           def generate(month)
-            month.name
+            XTeX::CalendarLarge.new(month).to_s
           end
         end
       end

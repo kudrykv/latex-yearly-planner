@@ -29,6 +29,10 @@ module LatexYearlyPlanner
         WEEKDAYS.rotate(WEEKDAYS.find_index(weekday_start)).map { |day| day[0] }.map(&:capitalize)
       end
 
+      def weekdays_short
+        WEEKDAYS.rotate(WEEKDAYS.find_index(weekday_start)).map { |day| day[0..2] }.map(&:capitalize)
+      end
+
       def weeks
         date
           .beginning_of_week(weekday_start)
