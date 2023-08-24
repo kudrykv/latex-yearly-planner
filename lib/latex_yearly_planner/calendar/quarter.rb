@@ -9,6 +9,10 @@ module LatexYearlyPlanner
         @date = date
       end
 
+      def ==(other)
+        date == other&.date
+      end
+
       def name
         "Q#{number}"
       end

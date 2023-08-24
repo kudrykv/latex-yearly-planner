@@ -33,9 +33,9 @@ module LatexYearlyPlanner
           def quarter_table_from_months(highlight_quarters:)
             table = TeX::Tblr.new(**config.quarterly_table_options)
 
-            all_quarters.map(&:name).map do |name|
-              cell = TeX::SetCell.new(name)
-              cell = cell.selected if highlight_quarters.map(&:name).include?(name)
+            all_quarters.map do |quarter|
+              cell = TeX::SetCell.new(quarter.name)
+              cell = cell.selected if highlight_quarters.include?(quarter)
 
               table.add_row([cell])
             end

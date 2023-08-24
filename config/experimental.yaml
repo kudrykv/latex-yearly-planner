@@ -80,7 +80,7 @@ sections:
           height: 16.1cm
 
   monthly:
-    enabled: true
+    enabled: false
     parameters:
       calendar:
         parameters:
