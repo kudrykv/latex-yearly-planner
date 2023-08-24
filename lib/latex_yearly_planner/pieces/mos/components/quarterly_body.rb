@@ -33,20 +33,26 @@ module LatexYearlyPlanner
           def notes
             TeX::Minipage.new(
               content: XTeX::Notes.new(notes_type, **notes_parameters),
-              height: section_config.parameters.notes.parameters.height,
-              width: section_config.parameters.notes.parameters.width,
+              height: minipage_height,
+              width: minipage_width,
               compensate_height: config.document.document_class.size
             )
           end
 
           def notes_type
-            section_config.parameters&.notes&.type || config.parameters.parameters&.notes&.type
+            param(:notes, :type)
           end
 
           def notes_parameters
-            section_config.parameters&.notes&.parameters_as_a_hash ||
-              config.parameters.parameters&.notes&.parameters_as_a_hash ||
-              {}
+            param(:notes).parameters_as_a_hash || {}
+          end
+
+          def minipage_height
+            param(:notes, :parameters, :height)
+          end
+
+          def minipage_width
+            param(:notes, :parameters, :width)
           end
         end
       end

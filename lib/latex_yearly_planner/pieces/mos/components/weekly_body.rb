@@ -9,7 +9,7 @@ module LatexYearlyPlanner
             [
               row(week.days.take(3).map(&:name)),
               row(week.days.drop(3).take(3).map(&:name)),
-              row([week.days.last.name, 'Notes', XTeX::Dummy.new]),
+              row([week.days.last.name, 'Notes', XTeX::Dummy.new])
             ].join('\\vfill{}')
           end
 
