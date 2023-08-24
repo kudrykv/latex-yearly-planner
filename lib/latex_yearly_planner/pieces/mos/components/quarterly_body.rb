@@ -6,7 +6,7 @@ module LatexYearlyPlanner
       module Components
         class QuarterlyBody < Component
           def generate(quarter)
-            ["\\fbox{#{calendars_minipage(quarter)}}", spacer, "\\fbox{#{notes}}"].join
+            [calendars_minipage(quarter), spacer, notes].join
           end
 
           private
@@ -39,8 +39,7 @@ module LatexYearlyPlanner
           end
 
           def notes_parameters
-            { compensate_height: '0pt' }
-              .merge(param(:notes).parameters_as_a_hash || {})
+            param(:notes).parameters_as_a_hash || {}
           end
 
           def minipage_height

@@ -66,9 +66,9 @@
 
 \newcommand{\remainingHeight}{%
 \ifdim\pagegoal=\maxdimen
-\dimexpr\textheight-3pt\relax
+\dimexpr\textheight-<%= document.remaining_height.lag %>\relax
 \else
-\dimexpr\pagegoal-\pagetotal-\lineskip-3pt\relax
+\dimexpr\pagegoal-\pagetotal-\lineskip-<%= document.remaining_height.lag %>\relax
 \fi%
 }
 

@@ -11,7 +11,7 @@ module LatexYearlyPlanner
               "#{title}" \
               '\\hrule{}' \
               "#{margin_note}" \
-              "\\medskip\n"
+              "\n\\vspace{#{param(:header, :skip)}}\n\n"
           end
 
           private

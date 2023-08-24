@@ -11,7 +11,7 @@ module LatexYearlyPlanner
               "#{title(month)}" \
               '\\hrule{}' \
               "#{margin_note(highlight_quarters: [month.quarter], highlight_months: [month])}" \
-              "\\medskip\n"
+              "\n\\vspace{#{param(:header, :skip)}}\n\n"
           end
 
           def title(month)

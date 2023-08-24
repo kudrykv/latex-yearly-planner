@@ -9,6 +9,9 @@ document:
     name: article
     size: 9pt
 
+  remaining_height:
+    lag: 4pt
+
   layout:
     dimensions:
       width: 138.00mm
@@ -31,6 +34,7 @@ parameters:
     runs: 2
   parameters:
     header:
+      skip: 1mm
       monthly_table:
         vertical_stretch: 2
         horizontal_spacing: 0mm
@@ -79,7 +83,8 @@ sections:
       notes:
         parameters:
           width: 5.8cm
-          height: 16.1cm
+          height: 16cm
+          shift_vertical: 4mm
 
   monthly:
     enabled: false
@@ -96,7 +101,7 @@ sections:
         parameters:
           width: 12.5cm
           height: 4.5cm
-          compensate_height: 0pt
+          shift_vertical: 4mm
 
   daily:
     enabled: false

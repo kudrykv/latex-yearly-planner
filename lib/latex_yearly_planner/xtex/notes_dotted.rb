@@ -3,12 +3,12 @@
 module LatexYearlyPlanner
   module XTeX
     class NotesDotted
-      attr_accessor :width, :height, :compensate_height
+      attr_accessor :width, :height, :shift_vertical
 
       def initialize(**options)
         @width = options.fetch(:width, '1cm')
         @height = options.fetch(:height, '1cm')
-        @compensate_height = options.fetch(:compensate_height, nil)
+        @shift_vertical = options.fetch(:shift_vertical, nil)
       end
 
       def to_s
@@ -18,17 +18,12 @@ module LatexYearlyPlanner
       private
 
       def minipage
-        TeX::Minipage.new(
-          content: raw_notes,
-          width:,
-          height:,
-          compensate_height:
-        )
+        TeX::Minipage.new(content: raw_notes, width:, height:)
       end
 
       def raw_notes
         <<~XTX
-          \\leavevmode\\multido{\\dC=0mm+5mm}{#{make_height}}{
+          #{make_shift_vertical}\\leavevmode\\multido{\\dC=0mm+5mm}{#{make_height}}{
             \\multido{\\dR=0mm+5mm}{#{make_width}}{
                 \\put(\\dR,\\dC){\\circle*{0.1}
               }
@@ -44,6 +39,12 @@ module LatexYearlyPlanner
 
       def make_width
         (width.to_measurement / '5 mm'.to_measurement).quantity.ceil
+      end
+
+      def make_shift_vertical
+        return '' unless shift_vertical
+
+        "\\vspace{#{shift_vertical}}"
       end
     end
   end
