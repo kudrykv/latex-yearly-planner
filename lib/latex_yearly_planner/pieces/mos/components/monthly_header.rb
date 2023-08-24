@@ -10,7 +10,7 @@ module LatexYearlyPlanner
               '\\hfill{}' \
               "#{title(month)}" \
               '\\hrule{}' \
-              "#{margin_note(highlight_month: month)}" \
+              "#{margin_note(highlight_quarter: month.quarter, highlight_month: month)}" \
               "\\medskip\n"
           end
 

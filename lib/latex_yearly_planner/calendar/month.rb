@@ -14,7 +14,7 @@ module LatexYearlyPlanner
       end
 
       def ==(other)
-        date == other.date
+        date == other&.date
       end
 
       def name
