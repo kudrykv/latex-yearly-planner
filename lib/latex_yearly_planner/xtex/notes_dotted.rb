@@ -16,7 +16,7 @@ module LatexYearlyPlanner
           content: raw_notes,
           width:,
           height:,
-          compensate_height:,
+          compensate_height:
         ).to_s
       end
 

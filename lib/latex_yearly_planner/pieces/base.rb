@@ -19,7 +19,7 @@ module LatexYearlyPlanner
 
           [local&.send(key), global&.send(key)]
         end
-          .compact.first
+                             .compact.first
       end
 
       def all_months
