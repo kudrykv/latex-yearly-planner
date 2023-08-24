@@ -11,10 +11,15 @@ module LatexYearlyPlanner
         @section_config = section_config
       end
 
-      def param(key)
+      def param(*keys)
         @param ||= {}
 
-        @param[key] ||= section_config.parameters&.send(key) || config.parameters&.parameters&.send(key)
+        @param[keys] ||= keys.reduce([section_config.parameters, config.parameters&.parameters]) do |acc, key|
+          local, global = acc
+
+          [local&.send(key), global&.send(key)]
+        end
+          .compact.first
       end
 
       def all_months
@@ -29,6 +34,7 @@ module LatexYearlyPlanner
         start_month.beginning_of_week(weekday_start)
                    .upto(end_month.end_of_month.end_of_week(weekday_start))
                    .each_slice(7)
+                   .map { |days| days.map { |day| Calendar::Day.new(day) } }
                    .map { |days| Calendar::Week.new(days) }
       end
 
