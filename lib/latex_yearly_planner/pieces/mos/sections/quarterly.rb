@@ -8,7 +8,7 @@ module LatexYearlyPlanner
           def generate
             pages = all_quarters.map { |quarter| "#{header.generate(quarter)}#{body.generate(quarter)}" }
 
-            LatexYearlyPlanner::Core::Entities::Note.new('quarterly', pages.join("\n\\pagebreak{}\n\n"))
+            Core::Entities::Note.new('quarterly', "#{pages.join("\n\\pagebreak{}\n\n")}\n\\pagebreak{}")
           end
         end
       end

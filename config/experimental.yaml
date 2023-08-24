@@ -90,3 +90,7 @@ sections:
     enabled: true
     parameters:
       column_width: 4cm
+      notes:
+        parameters:
+          width: 12.5cm
+          height: 4.5cm

@@ -8,7 +8,7 @@ module LatexYearlyPlanner
           def generate
             pages = all_weeks.map { |week| "#{header.generate(week)}#{body.generate(week)}" }
 
-            Core::Entities::Note.new('weekly', pages.join("\n\\pagebreak{}\n\n"))
+            Core::Entities::Note.new('weekly', "#{pages.join("\n\\pagebreak{}\n\n")}\n\\pagebreak{}")
           end
         end
       end

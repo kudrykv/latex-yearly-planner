@@ -23,7 +23,7 @@ module LatexYearlyPlanner
       end
 
       def make_height
-        (height.to_measurement / '5 mm'.to_measurement).quantity.ceil
+        (height.to_measurement / '5 mm'.to_measurement).quantity.ceil + 1
       end
 
       def make_width

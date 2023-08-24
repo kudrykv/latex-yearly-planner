@@ -8,7 +8,7 @@ module LatexYearlyPlanner
           def generate
             pages = 1.upto(annual_pages).map { |page_number| page_iteration(page_number) }
 
-            LatexYearlyPlanner::Core::Entities::Note.new('annual', pages.join("\n\\pagebreak{}\n\n"))
+            Core::Entities::Note.new('annual', "#{pages.join("\n\\pagebreak{}\n\n")}\n\\pagebreak{}")
           end
 
           private

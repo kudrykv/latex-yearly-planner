@@ -8,7 +8,7 @@ module LatexYearlyPlanner
                  when :dotted
                    NotesDotted.new(**options)
                  when :lined
-                   NotesLatexYearlyPlanner::XTeX::Lined.new(**options)
+                   Lined.new(**options)
                  else
                    raise ArgumentError, "Unknown notes type: #{type}"
                  end

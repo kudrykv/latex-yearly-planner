@@ -8,7 +8,7 @@ module LatexYearlyPlanner
           def generate
             pages = all_months.map { |month| "#{header.generate(month)}#{body.generate(month)}" }
 
-            Core::Entities::Note.new('monthly', pages.join("\n\\pagebreak{}\n\n"))
+            Core::Entities::Note.new('monthly', "#{pages.join("\n\\pagebreak{}\n\n")}\n\\pagebreak{}")
           end
         end
       end
