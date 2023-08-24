@@ -19,12 +19,12 @@ module LatexYearlyPlanner
             cell
           end
 
-          def margin_note(quarter: nil)
+          def margin_note(quarter: nil, highlight_month: nil)
             <<~LATEX
               \\marginnote{%
                 #{quarter_table_from_months(quarter:)}
                 \\\\[#{config.between_tables_spacing}]
-                #{table_from_months}
+                #{table_from_months(highlight_month:)}
               }
             LATEX
               .strip
@@ -43,11 +43,14 @@ module LatexYearlyPlanner
             table
           end
 
-          def table_from_months
+          def table_from_months(highlight_month:)
             table = TeX::Tblr.new(**config.monthly_table_options)
 
             all_months.each do |month|
-              table.add_row([month.name[0..2].to_s])
+              cell = TeX::SetCell.new(month.name[0..2].to_s)
+              cell = cell.selected if month == highlight_month
+
+              table.add_row([cell])
             end
 
             table

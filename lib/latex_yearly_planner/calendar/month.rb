@@ -13,6 +13,10 @@ module LatexYearlyPlanner
         @weekday_start = weekday_start
       end
 
+      def ==(other)
+        date == other.date
+      end
+
       def name
         date.strftime('%B')
       end
