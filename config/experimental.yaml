@@ -66,15 +66,23 @@ parameters:
         show_week_numbers: true
         week_number_placement: left
         weekday_start: Monday
+    large_calendar:
+        parameters:
+          cell_height: 2.28cm
+          vertical_stretch: 1.2
+          horizontal_spacing: 0mm
+          show_week_numbers: true
+          week_number_placement: left
+          weekday_start: Monday
 
 sections:
   title:
-    enabled: true
+    enabled: false
     parameters:
       name: 2023
 
   annual:
-    enabled: true
+    enabled: false
     parameters:
       pages: 2
       months_per_page: 8
@@ -85,7 +93,7 @@ sections:
           width: 5.8cm
 
   quarterly:
-    enabled: true
+    enabled: false
     parameters:
       calendars_width: 5.8cm
       spacer_width: 0.5cm
@@ -98,12 +106,9 @@ sections:
   monthly:
     enabled: true
     parameters:
-      calendar:
-        parameters:
-          cell_height: 2.28cm
 
   weekly:
-    enabled: true
+    enabled: false
     parameters:
       column_width: 4cm
       notes:
@@ -113,7 +118,7 @@ sections:
           shift_vertical: 3mm
 
   daily:
-    enabled: true
+    enabled: false
     parameters:
       schedule_column_width: 5cm
       schedule:
