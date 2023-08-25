@@ -5,7 +5,7 @@ module LatexYearlyPlanner
     module Mos
       module Components
         class DailyBody < Component
-          def generate(day)
+          def generate(_day)
             XTeX::Schedule.new(**schedule_options)
           end
 
