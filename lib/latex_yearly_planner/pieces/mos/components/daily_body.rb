@@ -6,13 +6,20 @@ module LatexYearlyPlanner
       module Components
         class DailyBody < Component
           def generate(day)
-            XTeX::CalendarLittle.new(day.month, **config.little_calendar(section_name))
+            TeX::Minipage.new(
+              content: "#{schedule}\n#{little_calendar(day.month)}",
+              width: '0.5\linewidth',
+            )
           end
 
           private
 
           def schedule
             XTeX::Schedule.new(**schedule_options)
+          end
+
+          def little_calendar(month)
+            XTeX::CalendarLittle.new(month, **config.little_calendar(section_name))
           end
 
           def schedule_options
