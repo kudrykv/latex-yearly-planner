@@ -57,7 +57,6 @@ parameters:
     notes:
       type: dotted
     little_calendar:
-#      width: 5.8cm
       vertical_stretch: 1.2
       horizontal_spacing: 0mm
 
@@ -68,12 +67,14 @@ sections:
       name: 2023
 
   annual:
-    enabled: false
+    enabled: true
     parameters:
       pages: 2
       months_per_page: 8
       columns: 2
       underfull_vertical_spacing: 1cm
+      little_calendar:
+        width: 5.8cm
 
   quarterly:
     enabled: false
@@ -104,7 +105,7 @@ sections:
           shift_vertical: 3mm
 
   daily:
-    enabled: true
+    enabled: false
     parameters:
       schedule:
         parameters:

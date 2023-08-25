@@ -57,7 +57,7 @@ module LatexYearlyPlanner
         end
 
         def global_little_calendar_parameters
-          global_parameters.little_calendar_as_a_hash || {}
+          global_parameters.little_calendar_as_a_hash&.compact || {}
         end
 
         def local_week_parameters(section_name)
@@ -68,7 +68,7 @@ module LatexYearlyPlanner
         end
 
         def local_little_calendar_parameters(section_name)
-          section(section_name).parameters&.little_calendar_as_a_hash || {}
+          section(section_name).parameters&.little_calendar_as_a_hash&.compact || {}
         end
 
         def global_parameters
