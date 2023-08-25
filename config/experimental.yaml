@@ -69,7 +69,7 @@ parameters:
 
 sections:
   title:
-    enabled: false
+    enabled: true
     parameters:
       name: 2023
 
@@ -85,7 +85,7 @@ sections:
           width: 5.8cm
 
   quarterly:
-    enabled: false
+    enabled: true
     parameters:
       calendars_width: 5.8cm
       spacer_width: 0.5cm
@@ -96,14 +96,14 @@ sections:
           shift_vertical: 4mm
 
   monthly:
-    enabled: false
+    enabled: true
     parameters:
       calendar:
         parameters:
           cell_height: 2.28cm
 
   weekly:
-    enabled: false
+    enabled: true
     parameters:
       column_width: 4cm
       notes:
@@ -113,7 +113,7 @@ sections:
           shift_vertical: 3mm
 
   daily:
-    enabled: false
+    enabled: true
     parameters:
       schedule_column_width: 5cm
       schedule:

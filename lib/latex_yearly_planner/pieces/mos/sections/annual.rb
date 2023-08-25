@@ -24,7 +24,7 @@ module LatexYearlyPlanner
           end
 
           def months_per_page
-            section_config.parameters.months_per_page
+            param(:months_per_page)
           end
         end
       end
