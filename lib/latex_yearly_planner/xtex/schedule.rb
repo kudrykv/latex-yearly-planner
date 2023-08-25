@@ -16,17 +16,13 @@ module LatexYearlyPlanner
       end
 
       def to_s
-        # "\\fbox{#{TeX::Minipage.new(content: string_range, height: '10cm', compensate_height: '9pt')}}"
-        "#{compensate}#{string_range}"
-        # 'hello world'
+        "\\fbox{#{TeX::Minipage.new(content: string_range, height:, compensate_height:)}}"
       end
 
       private
 
-      def compensate
-        return '' if compensate_height.nil?
-
-        "\\vspace{-#{compensate_height}}"
+      def height
+        "#{range.size / 2.0}cm"
       end
 
       def string_range
@@ -47,11 +43,11 @@ module LatexYearlyPlanner
       end
 
       def hour_line(time)
-        "\\myLineGray\\mbox{\\vphantom{\\rule{0pt}{5mm}}\\raisebox{1mm}{#{time.hour}}}\n"
+        "\\myLineGray\\mbox{\\vphantom{\\rule{0pt}{\\dimexpr5mm-.4pt}}\\raisebox{1.5mm}{#{time.hour}}}\n"
       end
 
       def half_hour_line
-        "\\myLineLightGray\\vskip5mm\n"
+        "\\myLineLightGray\\vskip\\dimexpr5mm-.4pt\n"
       end
     end
   end

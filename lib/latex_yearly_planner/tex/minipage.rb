@@ -7,7 +7,7 @@ module LatexYearlyPlanner
 
       def initialize(**options)
         @content = options.fetch(:content, '')
-        @width = options.fetch(:width, '\\textwidth')
+        @width = options.fetch(:width, '\\linewidth')
         @height = options.fetch(:height, nil)
         @position = options.fetch(:position, 't')
         @inner_position = options.fetch(:inner_position, nil)
