@@ -14,12 +14,15 @@ module LatexYearlyPlanner
       def param(*keys)
         @param ||= {}
 
-        @param[keys] ||= keys.reduce([section_config.parameters, config.parameters&.parameters]) do |acc, key|
-          local, global = acc
+        @param[keys] ||= reduce_param(*keys)
+      end
 
-          [local&.send(key), global&.send(key)]
+      def reduce_param(*keys)
+        reduced = keys.reduce([section_config.parameters, config.parameters&.parameters]) do |acc, key|
+          [acc[0]&.send(key), acc[1]&.send(key)]
         end
-                             .compact.first
+
+        reduced.compact.first.then { |result| result.is_a?(Hash) ? result.compact : result }
       end
 
       def all_months
