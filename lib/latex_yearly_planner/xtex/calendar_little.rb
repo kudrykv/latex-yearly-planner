@@ -8,7 +8,8 @@ module LatexYearlyPlanner
                   :show_week_numbers,
                   :week_number_placement,
                   :vertical_stretch,
-                  :horizontal_spacing
+                  :horizontal_spacing,
+                  :highlight_day
 
       def initialize(month, **options)
         @month = month
@@ -18,6 +19,7 @@ module LatexYearlyPlanner
         @week_number_placement = options.fetch(:week_number_placement, :right).downcase.to_sym
         @vertical_stretch = options.fetch(:vertical_stretch, 1)
         @horizontal_spacing = options.fetch(:horizontal_spacing, '6pt')
+        @highlight_day = options.fetch(:highlight_day, nil)
       end
 
       def to_s
@@ -57,7 +59,7 @@ module LatexYearlyPlanner
 
       def week_rows
         month.weeks.map do |week|
-          row = week.days.map { |day| day ? "{#{day.mday}}" : '' }
+          row = week.days.map { |day| format_day(day) }
           next row unless show_week_numbers
 
           row.unshift(week.number) if week_number_placement == :left
@@ -65,6 +67,16 @@ module LatexYearlyPlanner
 
           row
         end
+      end
+
+      def format_day(day)
+        return '' unless day
+        return "{#{day.mday}}" unless day == highlight_day.date
+
+        cell = TeX::Cell.new(day.mday)
+        cell.selected = true
+
+        cell.to_s
       end
     end
   end
