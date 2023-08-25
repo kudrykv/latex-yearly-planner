@@ -21,7 +21,7 @@ module LatexYearlyPlanner
           end
 
           def little_calendar(month)
-            XTeX::CalendarLittle.new(month, **param(:little_calendar, :parameters_as_a_hash))
+            XTeX::CalendarLittle.new(month, **parameters(:little_calendar))
           end
 
           def separator(months_number)

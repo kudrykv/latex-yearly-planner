@@ -11,6 +11,10 @@ module LatexYearlyPlanner
         @section_config = section_config
       end
 
+      def parameters(*keys)
+        param(*keys, :parameters_as_a_hash)
+      end
+
       def param(*keys)
         @param ||= {}
 
