@@ -109,5 +109,7 @@ sections:
       schedule_column:
         width: 4cm
       schedule:
-        from: 8:30
-        to: 15:00
+        parameters:
+          from: '8:30'
+          to: '15:00'
+          hour_format: '24'

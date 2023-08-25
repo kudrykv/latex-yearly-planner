@@ -81,6 +81,11 @@
 \pgfusepath{fill}%
 }
 
+\newcommand{\myLineColor}[1]{\textcolor{#1}{\myLinePlain}}
+
+\newcommand{\myLinePlain}{\hrule width \linewidth height 0.4pt}
+\newcommand{\myLineGray}{\myLineColor{gray}}
+
 \begin{document}
 
 <% notes.each do |note| %>

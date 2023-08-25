@@ -11,7 +11,7 @@ module LatexYearlyPlanner
       end
 
       def to_s
-        "\\textcolor{#{color}}{#{text}}"
+        "\\vphantom{#{text}}"
       end
     end
   end
