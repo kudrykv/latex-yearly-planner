@@ -65,15 +65,13 @@ parameters:
         horizontal_spacing: 0mm
         show_week_numbers: true
         week_number_placement: left
-        weekday_start: Monday
     large_calendar:
         parameters:
-          cell_height: 2.28cm
-          vertical_stretch: 1.2
+          cell_height: 2.55cm
+          vertical_stretch: 1
           horizontal_spacing: 0mm
           show_week_numbers: true
           week_number_placement: left
-          weekday_start: Monday
 
 sections:
   title:
