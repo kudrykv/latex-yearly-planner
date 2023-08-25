@@ -20,10 +20,11 @@ module LatexYearlyPlanner
           end
 
           def calendars_vertical(quarter)
-            quarter
-              .months
-              .map { |month| XTeX::CalendarLittle.new(month, **config.little_calendar(section_name)) }
-              .join("\n\\vfill{}")
+            quarter.months.map(&method(:little_calendar)).join("\n\\vfill{}")
+          end
+
+          def little_calendar(month)
+            XTeX::CalendarLittle.new(month, **parameters(:little_calendar))
           end
 
           def spacer
@@ -31,23 +32,11 @@ module LatexYearlyPlanner
           end
 
           def notes
-            XTeX::Notes.new(notes_type, **notes_parameters)
+            XTeX::Notes.new(notes_type, **parameters(:notes))
           end
 
           def notes_type
             param(:notes, :type)
-          end
-
-          def notes_parameters
-            param(:notes).parameters_as_a_hash || {}
-          end
-
-          def minipage_height
-            param(:notes, :parameters, :height)
-          end
-
-          def minipage_width
-            param(:notes, :parameters, :width)
           end
         end
       end
