@@ -46,6 +46,8 @@ module LatexYearlyPlanner
       end
 
       def hour_line(time)
+        return '\\myLineGray' if time == to
+
         "\\myLineGray\\mbox{\\vphantom{\\rule{0pt}{\\dimexpr5mm-.4pt}}\\raisebox{1.5mm}{#{hour(time)}}}\n"
       end
 

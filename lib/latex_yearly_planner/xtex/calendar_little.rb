@@ -34,7 +34,7 @@ module LatexYearlyPlanner
       private
 
       def table_options
-        { width:, format:, vertical_stretch:, horizontal_spacing: }
+        { width:, format:, vertical_stretch:, horizontal_spacing: }.compact
       end
 
       def header

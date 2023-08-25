@@ -57,7 +57,7 @@ parameters:
     notes:
       type: dotted
     little_calendar:
-      width: 5.8cm
+#      width: 5.8cm
       vertical_stretch: 1.2
       horizontal_spacing: 0mm
 
@@ -109,5 +109,5 @@ sections:
       schedule:
         parameters:
           from: '8:00'
-          to: '18:30'
+          to: '19:00'
           hour_format: '24'
