@@ -12,7 +12,9 @@ module LatexYearlyPlanner
           private
 
           def schedule_options
-            param(:schedule).parameters_as_a_hash
+            {
+              compensate_height: config.document.document_class.size
+            }.merge(param(:schedule).parameters_as_a_hash)
           end
         end
       end

@@ -110,6 +110,6 @@ sections:
         width: 4cm
       schedule:
         parameters:
-          from: '8:30'
-          to: '15:00'
+          from: '8:00'
+          to: '15:30'
           hour_format: '24'
