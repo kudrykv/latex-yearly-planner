@@ -22,7 +22,10 @@ module LatexYearlyPlanner
           [acc[0]&.send(key), acc[1]&.send(key)]
         end
 
-        reduced.compact.first.then { |result| result.is_a?(Hash) ? result.compact : result }
+        return reduced[1].compact.merge(reduced[0].compact) if reduced[0].is_a?(Hash) && reduced[1].is_a?(Hash)
+
+        one = reduced.compact.first
+        one.is_a?(Hash) ? one.compact : one
       end
 
       def all_months

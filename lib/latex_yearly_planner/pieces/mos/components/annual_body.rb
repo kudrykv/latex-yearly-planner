@@ -20,7 +20,7 @@ module LatexYearlyPlanner
           private
 
           def calendar_options
-            config.little_calendar(section_name)
+            param(:little_calendar, :parameters_as_a_hash)
           end
 
           def separator(months_number)

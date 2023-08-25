@@ -71,7 +71,7 @@ module LatexYearlyPlanner
 
       def format_day(day)
         return '' unless day
-        return "{#{day.mday}}" unless day == highlight_day.date
+        return "{#{day.mday}}" unless day == highlight_day&.date
 
         cell = TeX::Cell.new(day.mday)
         cell.selected = true
