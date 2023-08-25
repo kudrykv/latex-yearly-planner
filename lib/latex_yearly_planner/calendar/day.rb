@@ -3,10 +3,11 @@
 module LatexYearlyPlanner
   module Calendar
     class Day
-      attr_reader :date
+      attr_reader :date, :weekday_start
 
-      def initialize(date)
+      def initialize(date, weekday_start: nil)
         @date = date
+        @weekday_start = weekday_start
       end
 
       def name
@@ -14,11 +15,11 @@ module LatexYearlyPlanner
       end
 
       def month
-        Month.new(date.beginning_of_month)
+        Month.new(date.beginning_of_month, weekday_start:)
       end
 
       def quarter
-        Quarter.new(date.beginning_of_quarter)
+        Quarter.new(date.beginning_of_quarter, weekday_start:)
       end
 
       def respond_to_missing?(...)

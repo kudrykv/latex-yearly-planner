@@ -22,7 +22,7 @@ module LatexYearlyPlanner
       end
 
       def quarter
-        Quarter.new(date.beginning_of_quarter)
+        Quarter.new(date.beginning_of_quarter, weekday_start:)
       end
 
       def weekdays_one_letter
@@ -40,7 +40,7 @@ module LatexYearlyPlanner
           .each_slice(7)
           .map { |week| cut_not_our_month(week) }
           .reject { |week| week.all?(&:nil?) }
-          .map { |week| Week.new(week) }
+          .map { |week| Week.new(week, weekday_start:) }
       end
 
       def cut_not_our_month(week)

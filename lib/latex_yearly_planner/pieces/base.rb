@@ -34,18 +34,18 @@ module LatexYearlyPlanner
         start_month.beginning_of_week(weekday_start)
                    .upto(end_month.end_of_month.end_of_week(weekday_start))
                    .each_slice(7)
-                   .map { |days| days.map { |day| Calendar::Day.new(day) } }
-                   .map { |days| Calendar::Week.new(days) }
+                   .map { |days| days.map { |day| Calendar::Day.new(day, weekday_start:) } }
+                   .map { |days| Calendar::Week.new(days, weekday_start:) }
       end
 
       def all_days
-        start_month.upto(end_month.end_of_month).map { |day| Calendar::Day.new(day) }
+        start_month.upto(end_month.end_of_month).map { |day| Calendar::Day.new(day, weekday_start:) }
       end
 
       def make_months_range(from_month, to_month)
-        (from_month..to_month).select { |date| date.mday == 1 }.map do |date|
-          LatexYearlyPlanner::Calendar::Month.new(date, weekday_start:)
-        end
+        (from_month..to_month)
+          .select { |date| date.mday == 1 }
+          .map { |date| Calendar::Month.new(date, weekday_start:) }
       end
 
       def start_month

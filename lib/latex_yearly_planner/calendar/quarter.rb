@@ -3,10 +3,11 @@
 module LatexYearlyPlanner
   module Calendar
     class Quarter
-      attr_reader :date
+      attr_reader :date, :weekday_start
 
-      def initialize(date)
+      def initialize(date, weekday_start: nil)
         @date = date
+        @weekday_start = weekday_start
       end
 
       def ==(other)
@@ -22,7 +23,7 @@ module LatexYearlyPlanner
       end
 
       def months
-        @months ||= (0..2).map { |month_number| Month.new(date + month_number.month) }
+        @months ||= (0..2).map { |month_number| Month.new(date + month_number.month, weekday_start:) }
       end
     end
   end

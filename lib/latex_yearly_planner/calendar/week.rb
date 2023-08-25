@@ -3,10 +3,11 @@
 module LatexYearlyPlanner
   module Calendar
     class Week
-      attr_reader :days
+      attr_reader :days, :weekday_start
 
-      def initialize(days)
+      def initialize(days, weekday_start: nil)
         @days = days
+        @weekday_start = weekday_start
       end
 
       def name
@@ -21,11 +22,11 @@ module LatexYearlyPlanner
       end
 
       def months
-        days.compact.uniq(&:mon).map { |date| Month.new(date.beginning_of_month) }
+        days.compact.uniq(&:mon).map { |date| Month.new(date.beginning_of_month, weekday_start:) }
       end
 
       def quarters
-        days.compact.uniq(&:mon).map { |date| Quarter.new(date.beginning_of_quarter) }
+        days.compact.uniq(&:mon).map { |date| Quarter.new(date.beginning_of_quarter, weekday_start:) }
       end
     end
   end
