@@ -6,7 +6,7 @@ module LatexYearlyPlanner
       module Sections
         class Annual < Section
           def generate
-            pages = 1.upto(annual_pages).map { |page_number| page_iteration(page_number) }
+            pages = 1.upto(param(:pages)).map { |page_number| page_iteration(page_number) }
 
             Core::Entities::Note.new('annual', "#{pages.join("\n\\pagebreak{}\n\n")}\n\\pagebreak{}")
           end
@@ -14,17 +14,9 @@ module LatexYearlyPlanner
           private
 
           def page_iteration(page_number)
-            months = all_months.each_slice(months_per_page).take(page_number).last
+            months = all_months.each_slice(param(:months_per_page)).take(page_number).last
 
             "#{header.generate}#{body.generate(months)}"
-          end
-
-          def annual_pages
-            section_config.parameters.pages
-          end
-
-          def months_per_page
-            param(:months_per_page)
           end
         end
       end
