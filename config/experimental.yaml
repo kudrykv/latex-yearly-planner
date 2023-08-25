@@ -106,10 +106,8 @@ sections:
   daily:
     enabled: true
     parameters:
-      schedule_column:
-        width: 4cm
       schedule:
         parameters:
           from: '8:00'
-          to: '15:30'
+          to: '18:30'
           hour_format: '24'
