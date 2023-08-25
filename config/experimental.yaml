@@ -111,5 +111,5 @@ sections:
       schedule:
         parameters:
           from: '8:00'
-          to: '19:00'
+          to: '19:30'
           hour_format: '24'
