@@ -6,11 +6,8 @@ module LatexYearlyPlanner
       module Components
         class AnnualBody < Component
           def generate(months)
-            rows = months.each_slice(section_config.parameters.columns).map do |slice|
-              slice
-                .map { |month| XTeX::CalendarLittle.new(month, **calendar_options) }
-                .map(&:to_s)
-                .join('\\hfill{}')
+            rows = months.each_slice(columns).map do |months_row|
+              months_row.map(&method(:little_calendar)).map(&:to_s).join('\\hfill{}')
             end
 
             months_number = months.size
@@ -19,8 +16,12 @@ module LatexYearlyPlanner
 
           private
 
-          def calendar_options
-            param(:little_calendar, :parameters_as_a_hash)
+          def columns
+            param(:columns)
+          end
+
+          def little_calendar(month)
+            XTeX::CalendarLittle.new(month, **param(:little_calendar, :parameters_as_a_hash))
           end
 
           def separator(months_number)
