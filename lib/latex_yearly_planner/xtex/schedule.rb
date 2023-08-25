@@ -3,12 +3,13 @@
 module LatexYearlyPlanner
   module XTeX
     class Schedule
-      attr_reader :from, :to, :compensate_height
+      attr_reader :from, :to, :compensate_height, :width
 
       def initialize(**options)
         @from = Time.parse(options.fetch(:from, '10:00'))
         @to = Time.parse(options.fetch(:to, '18:00'))
         @compensate_height = options.fetch(:compensate_height, nil)
+        @width = options.fetch(:width, '0.5\\textwidth')
 
         raise ArgumentError, 'from must be before to' if @from >= @to
         raise ArgumentError, 'from must end with :00 or :30' unless (@from.min % 30).zero?
@@ -16,7 +17,7 @@ module LatexYearlyPlanner
       end
 
       def to_s
-        "\\fbox{#{TeX::Minipage.new(content: string_range, height:, compensate_height:)}}"
+        TeX::Minipage.new(content: string_range, height:, width:, compensate_height:).to_s
       end
 
       private
