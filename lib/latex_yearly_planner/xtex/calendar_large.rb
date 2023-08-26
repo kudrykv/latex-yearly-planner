@@ -63,8 +63,7 @@ module LatexYearlyPlanner
 
       def week_rows
         month.weeks.map do |week|
-          row = week.days.map { |day| day ? "{#{day.mday}}" : '' }
-          row[0] = "\\adjustbox{valign=t}{\\vphantom{\\rule{0pt}{#{cell_height}}}}#{row[0]}"
+          row = prepare_row(week)
 
           next row unless show_week_numbers
 
@@ -73,6 +72,17 @@ module LatexYearlyPlanner
 
           row
         end
+      end
+
+      def prepare_row(week)
+        row = week.days.map { |day| day ? "{#{day.mday}}" : '' }
+        row[0] = "#{make_cell_height}#{row[0]}"
+
+        row
+      end
+
+      def make_cell_height
+        "\\adjustbox{valign=t}{\\vphantom{\\rule{0pt}{#{cell_height}}}}"
       end
 
       def rotated(week)

@@ -22,14 +22,18 @@ module LatexYearlyPlanner
       end
 
       def reduce_param(*keys)
-        reduced = keys.reduce([section_config.parameters, config.parameters&.parameters]) do |acc, key|
-          [acc[0]&.send(key), acc[1]&.send(key)]
-        end
+        reduced = reduce_configs_with_keys(*keys)
 
         return reduced[1].compact.merge(reduced[0].compact) if reduced[0].is_a?(Hash) && reduced[1].is_a?(Hash)
 
         one = reduced.compact.first
         one.is_a?(Hash) ? one.compact : one
+      end
+
+      def reduce_configs_with_keys(*keys)
+        keys.reduce([section_config.parameters, config.parameters&.parameters]) do |acc, key|
+          [acc[0]&.send(key), acc[1]&.send(key)]
+        end
       end
 
       def all_months

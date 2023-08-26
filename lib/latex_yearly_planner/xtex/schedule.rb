@@ -11,10 +11,7 @@ module LatexYearlyPlanner
         @hour_format = options.fetch(:hour_format, '24')
         @width = options.fetch(:width, '\\linewidth')
 
-        raise ArgumentError, 'from must be before to' if @from >= @to
-        raise ArgumentError, 'from must end with :00 or :30' unless (@from.min % 30).zero?
-        raise ArgumentError, 'to must end with :00 or :30' unless (@to.min % 30).zero?
-        raise ArgumentError, 'hour_format must be 12 or 24' unless %w[12 24].include?(@hour_format)
+        validate
       end
 
       def to_s
@@ -22,6 +19,13 @@ module LatexYearlyPlanner
       end
 
       private
+
+      def validate
+        raise ArgumentError, 'from must be before to' if from >= to
+        raise ArgumentError, 'from must end with :00 or :30' unless (from.min % 30).zero?
+        raise ArgumentError, 'to must end with :00 or :30' unless (to.min % 30).zero?
+        raise ArgumentError, 'hour_format must be 12 or 24' unless %w[12 24].include?(hour_format)
+      end
 
       def content
         "\\parbox{#{width}}{#{string_range.join}}"
