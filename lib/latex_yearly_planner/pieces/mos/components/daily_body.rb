@@ -24,7 +24,11 @@ module LatexYearlyPlanner
 
           def writings_column
             TeX::Minipage.new(
-              content: XTeX::ToDo.new(**parameters(:todo)),
+              content: [
+                XTeX::ToDo.new(**parameters(:todo)),
+                nl,
+                XTeX::Notes.new(param(:notes, :type), **parameters(:notes))
+              ].join,
               width: param(:write_column_width)
             )
           end

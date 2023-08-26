@@ -134,4 +134,12 @@ sections:
           line_height: 5mm
       todo:
         parameters:
+          show_label: true
           count: 10
+          line_height: 5mm
+      notes:
+        parameters:
+          show_label: true
+          shift_vertical: 2mm
+          width: 5.8cm
+          height: 8cm
