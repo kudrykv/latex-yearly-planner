@@ -163,8 +163,9 @@ sections:
           height: 4cm
 
   daily_notes:
-    enabled: false
+    enabled: true
     parameters:
+      pages: 2
       notes:
         parameters:
           shift_vertical: 4mm

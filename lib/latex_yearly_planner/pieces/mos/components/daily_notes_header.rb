@@ -5,7 +5,7 @@ module LatexYearlyPlanner
     module Mos
       module Components
         class DailyNotesHeader < Header
-          def generate(day)
+          def generate(_page, day)
             [
               top_table,
               hfill,

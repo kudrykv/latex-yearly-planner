@@ -5,7 +5,7 @@ module LatexYearlyPlanner
     module Mos
       module Components
         class DailyNotesBody < Component
-          def generate(_day)
+          def generate(_page, _day)
             XTeX::Notes.new(**struct(:notes))
           end
         end
