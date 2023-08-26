@@ -79,12 +79,12 @@ parameters:
 
 sections:
   title:
-    enabled: true
+    enabled: false
     parameters:
       name: 2023
 
   annual:
-    enabled: true
+    enabled: false
     parameters:
       pages: 2
       months_per_page: 8
@@ -95,7 +95,7 @@ sections:
           width: 5.8cm
 
   quarterly:
-    enabled: true
+    enabled: false
     parameters:
       calendars_width: 5.8cm
       spacer_width: 0.5cm
@@ -106,11 +106,11 @@ sections:
           shift_vertical: 4mm
 
   monthly:
-    enabled: true
+    enabled: false
     parameters:
 
   weekly:
-    enabled: true
+    enabled: false
     parameters:
       column_width: 4cm
       notes:
@@ -120,7 +120,7 @@ sections:
           shift_vertical: 1mm
 
   daily:
-    enabled: true
+    enabled: false
     parameters:
       schedule_column_width: 5.8cm
       spacer_width: 0.5cm
@@ -161,3 +161,12 @@ sections:
           shift_vertical: 5mm
           width: 5.8cm
           height: 4cm
+
+  daily_notes:
+    enabled: true
+    parameters:
+      notes:
+        parameters:
+          shift_vertical: 4mm
+          width: 12cm
+          height: 16cm

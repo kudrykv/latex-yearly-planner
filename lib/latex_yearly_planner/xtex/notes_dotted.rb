@@ -63,7 +63,7 @@ module LatexYearlyPlanner
       end
 
       def width_in_dots_number
-        (width.to_measurement / horizontal_spacing_between_dots.to_measurement).quantity.ceil
+        (width.to_measurement / horizontal_spacing_between_dots.to_measurement).quantity.ceil + 1
       end
 
       def width
