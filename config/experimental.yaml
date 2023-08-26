@@ -131,6 +131,7 @@ sections:
           from: '8:00'
           to: '19:30'
           hour_format: '24'
+          line_height: 5mm
       todo:
         parameters:
           count: 10
