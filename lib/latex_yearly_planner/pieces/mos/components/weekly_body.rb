@@ -17,25 +17,17 @@ module LatexYearlyPlanner
 
           def row(arr)
             names = arr.map { |content| col(content) }.join('\\hfill{}')
-            notes = XTeX::Notes.new(notes_type, **notes_parameters)
+            notes = XTeX::Notes.new(notes_type, **parameters(:notes))
 
             "#{names}\n#{notes}".strip
           end
 
           def col(content)
-            TeX::Parbox.new(content:, width: column_width)
-          end
-
-          def column_width
-            param(:column_width)
+            TeX::Parbox.new(content:, width: param(:column_width))
           end
 
           def notes_type
             param(:notes, :type)
-          end
-
-          def notes_parameters
-            param(:notes).parameters_as_a_hash
           end
         end
       end
