@@ -6,12 +6,16 @@ module LatexYearlyPlanner
       module Components
         class DailyHeader < Header
           def generate(day)
-            "#{top_table}" \
-              '\\hfill{}' \
-              "#{title(day)}" \
-              '\\hrule{}' \
-              "#{margin_note(highlight_quarters: [day.quarter], highlight_months: [day.month])}" \
-              "\\medskip\n"
+            [
+              top_table,
+              hfill,
+              title(day),
+              hrule,
+              margin_note(highlight_quarters: [day.quarter], highlight_months: [day.month]),
+              "\n",
+              TeX::VSpace.new(param(:header, :skip)),
+              "\n\n"
+            ].to_s
           end
 
           def title(day)

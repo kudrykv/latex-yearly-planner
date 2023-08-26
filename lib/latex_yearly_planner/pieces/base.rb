@@ -77,6 +77,22 @@ module LatexYearlyPlanner
       def vfill
         TeX::VFill.new.to_s
       end
+
+      def hrule
+        TeX::HRule.new.to_s
+      end
+
+      def vspace(height)
+        TeX::VSpace.new(height).to_s
+      end
+
+      def nl
+        "\n"
+      end
+
+      def nlnl
+        "\n\n"
+      end
     end
   end
 end
