@@ -118,9 +118,14 @@ sections:
   daily:
     enabled: true
     parameters:
-      schedule_column_width: 5cm
+      schedule_column_width: 5.8cm
+      spacer_width: 0.5cm
+      write_column_width: 5.8cm
       schedule:
         parameters:
           from: '8:00'
           to: '19:30'
           hour_format: '24'
+      todo:
+        parameters:
+          count: 10

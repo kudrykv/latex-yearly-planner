@@ -3,13 +3,12 @@
 module LatexYearlyPlanner
   module XTeX
     class Schedule
-      attr_reader :from, :to, :hour_format, :compensate_height, :width
+      attr_reader :from, :to, :hour_format, :width
 
       def initialize(**options)
         @from = Time.parse(options.fetch(:from, '10:00'))
         @to = Time.parse(options.fetch(:to, '18:00'))
         @hour_format = options.fetch(:hour_format, '24')
-        @compensate_height = options.fetch(:compensate_height, nil)
         @width = options.fetch(:width, '\\linewidth')
 
         raise ArgumentError, 'from must be before to' if @from >= @to
@@ -19,10 +18,14 @@ module LatexYearlyPlanner
       end
 
       def to_s
-        TeX::Minipage.new(content: string_range, height:, width:, compensate_height:).to_s
+        TeX::AdjustBox.new(content:).to_s
       end
 
       private
+
+      def content
+        "\\parbox{#{width}}{#{string_range.join}}"
+      end
 
       def height
         "#{range.size / 2.0}cm"
@@ -34,7 +37,6 @@ module LatexYearlyPlanner
 
           half_hour_line
         end
-             .join
       end
 
       def range

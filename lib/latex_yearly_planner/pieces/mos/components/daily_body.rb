@@ -6,20 +6,31 @@ module LatexYearlyPlanner
       module Components
         class DailyBody < Component
           def generate(day)
-            schedule_column(day)
+            [
+              schedule_column(day),
+              spacer,
+              writings_column
+            ].join
           end
 
           private
 
           def schedule_column(day)
             TeX::Minipage.new(
-              content: "#{schedule}\n#{little_calendar(day)}",
+              content: [schedule, little_calendar(day)].join("\n"),
               width: param(:schedule_column_width)
             )
           end
 
+          def writings_column
+            TeX::Minipage.new(
+              content: XTeX::ToDo.new(**parameters(:todo)),
+              width: param(:write_column_width)
+            )
+          end
+
           def schedule
-            XTeX::Schedule.new(**schedule_options)
+            XTeX::Schedule.new(**parameters(:schedule))
           end
 
           def little_calendar(day)
@@ -29,10 +40,12 @@ module LatexYearlyPlanner
             )
           end
 
-          def schedule_options
-            { compensate_height: config.document.document_class.size }
-              .compact
-              .merge(parameters(:schedule))
+          def spacer
+            "\\hspace{#{param(:spacer_width)}}"
+          end
+
+          def write_column_width
+            param(:write_column_width)
           end
         end
       end
