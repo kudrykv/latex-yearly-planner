@@ -17,7 +17,7 @@ module LatexYearlyPlanner
 
           def schedule_column(day)
             TeX::Minipage.new(
-              content: [schedule_label, schedule, little_calendar(day)].join("\n"),
+              content: [schedule_label, schedule, little_calendar(day)].join(nl),
               width: param(:schedule_column_width)
             )
           end
@@ -45,13 +45,13 @@ module LatexYearlyPlanner
                 notes_label, notes,
                 nl,
                 personal_notes_label, personal_notes
-              ].join("\n"),
+              ].join(nl),
               width: param(:write_column_width)
             )
           end
 
           def todo_label
-            XTeX::Label.new(**param(:todo_label_as_a_hash))
+            XTeX::Label.new(**struct(:todo_label).deep_merge({ parameters: { text: 'To Do' } }))
           end
 
           def todo
@@ -59,7 +59,7 @@ module LatexYearlyPlanner
           end
 
           def notes_label
-            XTeX::Label.new(**param(:notes_label_as_a_hash))
+            XTeX::Label.new(**struct(:notes_label).deep_merge({ parameters: { text: 'Notes' } }))
           end
 
           def notes
@@ -67,7 +67,7 @@ module LatexYearlyPlanner
           end
 
           def personal_notes_label
-            XTeX::Label.new(**param(:personal_notes_label_as_a_hash))
+            XTeX::Label.new(**struct(:personal_notes_label).deep_merge({ parameters: { text: 'Personal Notes' } }))
           end
 
           def personal_notes
@@ -75,7 +75,7 @@ module LatexYearlyPlanner
           end
 
           def spacer
-            "\\hspace{#{param(:spacer_width)}}"
+            hspace(param(:spacer_width))
           end
 
           def write_column_width

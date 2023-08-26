@@ -138,8 +138,6 @@ sections:
           line_height: 5mm
       todo_label:
         enabled: true
-        parameters:
-          text: 'To do'
       todo:
         parameters:
           count: 10
@@ -147,7 +145,6 @@ sections:
       notes_label:
         enabled: true
         parameters:
-          text: 'Notes'
           vertical_shift: 2mm
       notes:
         parameters:
@@ -157,7 +154,6 @@ sections:
       personal_notes_label:
         enabled: true
         parameters:
-          text: 'Personal notes'
           vertical_shift: 9mm
       personal_notes:
         parameters:

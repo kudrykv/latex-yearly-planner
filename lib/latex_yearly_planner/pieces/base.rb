@@ -15,6 +15,15 @@ module LatexYearlyPlanner
         param(*keys, :parameters_as_a_hash)
       end
 
+      def struct(*keys)
+        @struct ||= {}
+
+        last = "#{keys.last}_as_a_hash".to_sym
+        keys = keys.take(keys.size - 1).push(last)
+
+        @struct[keys] ||= reduce_param(*keys)
+      end
+
       def param(*keys)
         @param ||= {}
 
@@ -24,7 +33,7 @@ module LatexYearlyPlanner
       def reduce_param(*keys)
         reduced = reduce_configs_with_keys(*keys)
 
-        return reduced[1].compact.merge(reduced[0].compact) if reduced[0].is_a?(Hash) && reduced[1].is_a?(Hash)
+        return reduced[1].compact.deep_merge(reduced[0].compact) if reduced[0].is_a?(Hash) && reduced[1].is_a?(Hash)
 
         one = reduced.compact.first
         one.is_a?(Hash) ? one.compact : one
