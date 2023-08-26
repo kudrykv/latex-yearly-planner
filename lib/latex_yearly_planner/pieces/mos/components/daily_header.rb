@@ -12,10 +12,10 @@ module LatexYearlyPlanner
               title(day),
               hrule,
               margin_note(highlight_quarters: [day.quarter], highlight_months: [day.month]),
-              "\n",
-              TeX::VSpace.new(param(:header, :skip)),
-              "\n\n"
-            ].to_s
+              nl,
+              vspace(param(:header, :skip)),
+              nlnl
+            ].join
           end
 
           def title(day)

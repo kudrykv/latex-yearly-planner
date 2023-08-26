@@ -86,6 +86,10 @@ module LatexYearlyPlanner
         TeX::VSpace.new(height).to_s
       end
 
+      def hspace(width)
+        TeX::HSpace.new(width).to_s
+      end
+
       def nl
         "\n"
       end

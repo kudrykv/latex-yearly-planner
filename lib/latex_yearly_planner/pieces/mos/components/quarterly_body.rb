@@ -20,7 +20,7 @@ module LatexYearlyPlanner
           end
 
           def calendars_vertical(quarter)
-            quarter.months.map(&method(:little_calendar)).join("\n\\vfill{}")
+            quarter.months.map(&method(:little_calendar)).join("#{nl}#{vfill}")
           end
 
           def little_calendar(month)
@@ -28,7 +28,7 @@ module LatexYearlyPlanner
           end
 
           def spacer
-            "\\hspace{#{param(:spacer_width)}}"
+            hspace(param(:spacer_width))
           end
 
           def notes
