@@ -80,7 +80,7 @@ sections:
       name: 2023
 
   annual:
-    enabled: false
+    enabled: true
     parameters:
       pages: 2
       months_per_page: 8
@@ -116,7 +116,7 @@ sections:
           shift_vertical: 3mm
 
   daily:
-    enabled: true
+    enabled: false
     parameters:
       schedule_column_width: 5.8cm
       spacer_width: 0.5cm

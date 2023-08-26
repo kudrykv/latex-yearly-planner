@@ -6,19 +6,19 @@ module LatexYearlyPlanner
       module Components
         class AnnualHeader < Header
           def generate
-            "#{top_table}" \
-              '\\hfill{}' \
-              "#{title}" \
-              '\\hrule{}' \
-              "#{margin_note}" \
-              "\n\\vspace{#{param(:header, :skip)}}\n\n"
+            [
+              top_table,
+              TeX::HFill.new,
+              TeX::TextSize.new(year).huge,
+              TeX::HRule.new,
+              margin_note,
+              "\n",
+              TeX::VSpace.new(param(:header, :skip)),
+              "\n\n"
+            ].join
           end
 
           private
-
-          def title
-            TeX::TextSize.new(year).huge
-          end
 
           def year
             Date.parse(param(:start_date)).year
