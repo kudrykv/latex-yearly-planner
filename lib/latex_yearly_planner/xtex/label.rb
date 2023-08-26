@@ -15,7 +15,7 @@ module LatexYearlyPlanner
 
       def initialize(**options)
         @enabled = options.fetch(:enabled, false)
-        @parameters = RecursiveOpenStruct.new(default_parameters.merge(options.fetch(:parameters, {}).compact))
+        @parameters = RecursiveOpenStruct.new(default_parameters.deep_merge(options.fetch(:parameters, {}).compact))
       end
 
       def to_s

@@ -33,7 +33,7 @@ module LatexYearlyPlanner
           def little_calendar(day)
             XTeX::CalendarLittle.new(
               day.month,
-              **parameters(:little_calendar).merge({ highlight_day: day })
+              **struct(:little_calendar).merge({ highlight_day: day })
             )
           end
 
