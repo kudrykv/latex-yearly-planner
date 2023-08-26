@@ -67,9 +67,8 @@ parameters:
         week_number_placement: left
     large_calendar:
         parameters:
-          cell_height: 2.55cm
-          vertical_stretch: 1
-          horizontal_spacing: 0mm
+          name_cell_height: 6mm
+          cell_height: 2.5cm
           show_week_numbers: true
           week_number_placement: left
 
