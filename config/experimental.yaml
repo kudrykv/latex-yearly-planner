@@ -125,6 +125,10 @@ sections:
       schedule_column_width: 5.8cm
       spacer_width: 0.5cm
       write_column_width: 5.8cm
+      schedule_label:
+        enabled: true
+        parameters:
+          text: 'Schedule'
       schedule:
         parameters:
           show_label: true
@@ -132,14 +136,20 @@ sections:
           to: '19:30'
           hour_format: '24'
           line_height: 5mm
+      todo_label:
+        enabled: true
+        parameters:
+          text: 'To do'
       todo:
         parameters:
-          show_label: true
           count: 10
           line_height: 5mm
+      notes_label:
+        enabled: true
+        parameters:
+          text: 'Notes'
       notes:
         parameters:
-          show_label: true
-          shift_vertical: 2mm
+          shift_vertical: 5mm
           width: 5.8cm
           height: 8cm

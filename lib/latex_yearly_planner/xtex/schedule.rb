@@ -3,14 +3,13 @@
 module LatexYearlyPlanner
   module XTeX
     class Schedule
-      attr_reader :from, :to, :hour_format, :width, :show_label, :line_height
+      attr_reader :from, :to, :hour_format, :width, :line_height
 
       def initialize(**options)
         @from = Time.parse(options.fetch(:from, '10:00'))
         @to = Time.parse(options.fetch(:to, '18:00'))
         @hour_format = options.fetch(:hour_format, '24')
         @width = options.fetch(:width, '\\linewidth')
-        @show_label = options.fetch(:show_label, false)
         @line_height = options.fetch(:line_height, '5mm')
 
         validate
@@ -30,13 +29,7 @@ module LatexYearlyPlanner
       end
 
       def content
-        "\\parbox{#{width}}{#{label}#{string_range.join}}"
-      end
-
-      def label
-        return '' unless show_label
-
-        "#{XTeX::MinHeight.new('5mm')}Schedule\\myLinePlain"
+        "\\parbox{#{width}}{#{string_range.join}}"
       end
 
       def height
@@ -62,9 +55,7 @@ module LatexYearlyPlanner
       def hour_line(time)
         return Line.gray if time == to
 
-        line = time == from && show_label ? '' : Line.gray
-
-        "#{line}\n#{MinHeight.new(make_line_height)}#{hour(time)}\n"
+        "#{Line.gray}\n#{MinHeight.new(make_line_height)}#{hour(time)}\n"
       end
 
       def half_hour_line(time)

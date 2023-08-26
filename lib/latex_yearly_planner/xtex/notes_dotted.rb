@@ -7,8 +7,7 @@ module LatexYearlyPlanner
                     :height,
                     :horizontal_spacing_between_dots,
                     :vertical_spacing_between_dots,
-                    :shift_vertical,
-                    :show_label
+                    :shift_vertical
 
       def initialize(**options)
         @width = options.fetch(:width, '1cm')
@@ -16,7 +15,6 @@ module LatexYearlyPlanner
         @horizontal_spacing_between_dots = options.fetch(:horizontal_spacing_between_dots, '5mm')
         @vertical_spacing_between_dots = options.fetch(:vertical_spacing_between_dots, '5mm')
         @shift_vertical = options.fetch(:shift_vertical, nil)
-        @show_label = options.fetch(:show_label, false)
       end
 
       def to_s
@@ -26,24 +24,12 @@ module LatexYearlyPlanner
       private
 
       def minipage
-        TeX::Minipage.new(content: [make_label, raw_notes].join, width:, height:)
-      end
-
-      def make_label
-        return make_shift_vertical unless show_label
-
-        [
-          make_shift_vertical,
-          MinHeight.new(horizontal_spacing_between_dots),
-          'Notes $\vert$ More',
-          Line.plain,
-          "\\vspace{#{vertical_spacing_between_dots}}"
-        ].join
+        TeX::Minipage.new(content: raw_notes, width:, height:)
       end
 
       def raw_notes
         <<~XTX
-          \\leavevmode\\multido{\\dC=0mm+#{vertical_spacing_between_dots}}{#{make_height}}{
+          #{make_shift_vertical}\\leavevmode\\multido{\\dC=0mm+#{vertical_spacing_between_dots}}{#{make_height}}{
             \\multido{\\dR=0mm+#{horizontal_spacing_between_dots}}{#{make_width}}{
                 \\put(\\dR,\\dC){\\circle*{0.1}
               }

@@ -17,20 +17,13 @@ module LatexYearlyPlanner
 
           def schedule_column(day)
             TeX::Minipage.new(
-              content: [schedule, little_calendar(day)].join("\n"),
+              content: [schedule_label, schedule, little_calendar(day)].join("\n"),
               width: param(:schedule_column_width)
             )
           end
 
-          def writings_column
-            TeX::Minipage.new(
-              content: [
-                XTeX::ToDo.new(**parameters(:todo)),
-                nl,
-                XTeX::Notes.new(param(:notes, :type), **parameters(:notes))
-              ].join,
-              width: param(:write_column_width)
-            )
+          def schedule_label
+            XTeX::Label.new(**param(:schedule_label_as_a_hash))
           end
 
           def schedule
@@ -42,6 +35,34 @@ module LatexYearlyPlanner
               day.month,
               **parameters(:little_calendar).merge({ highlight_day: day })
             )
+          end
+
+          def writings_column
+            TeX::Minipage.new(
+              content: [
+                todo_label,
+                todo,
+                notes_label,
+                notes
+              ].join("\n"),
+              width: param(:write_column_width)
+            )
+          end
+
+          def todo_label
+            XTeX::Label.new(**param(:todo_label_as_a_hash))
+          end
+
+          def todo
+            XTeX::ToDo.new(**parameters(:todo))
+          end
+
+          def notes_label
+            XTeX::Label.new(**param(:notes_label_as_a_hash))
+          end
+
+          def notes
+            XTeX::Notes.new(param(:notes, :type), **parameters(:notes))
           end
 
           def spacer
