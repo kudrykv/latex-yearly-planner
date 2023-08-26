@@ -101,7 +101,7 @@ sections:
           shift_vertical: 4mm
 
   monthly:
-    enabled: true
+    enabled: false
     parameters:
 
   weekly:
@@ -122,6 +122,7 @@ sections:
       write_column_width: 5.8cm
       schedule:
         parameters:
+          show_label: true
           from: '8:00'
           to: '19:30'
           hour_format: '24'
