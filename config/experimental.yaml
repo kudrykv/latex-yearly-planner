@@ -74,6 +74,8 @@ parameters:
           cell_height: 2.5cm
           show_week_numbers: true
           week_number_placement: left
+          day_number_shift: 1.5mm
+          week_column_width: 6mm
 
 sections:
   title:
@@ -93,7 +95,7 @@ sections:
           width: 5.8cm
 
   quarterly:
-    enabled: true
+    enabled: false
     parameters:
       calendars_width: 5.8cm
       spacer_width: 0.5cm
@@ -104,7 +106,7 @@ sections:
           shift_vertical: 4mm
 
   monthly:
-    enabled: false
+    enabled: true
     parameters:
 
   weekly:

@@ -10,7 +10,9 @@ module LatexYearlyPlanner
                   :vertical_stretch,
                   :horizontal_spacing,
                   :horizontal_lines,
-                  :name_cell_height
+                  :name_cell_height,
+                  :day_number_shift,
+                  :week_column_width
 
       def initialize(month, **options)
         @month = month
@@ -22,6 +24,8 @@ module LatexYearlyPlanner
         @horizontal_spacing = options.fetch(:horizontal_spacing, nil)
         @horizontal_lines = options.fetch(:horizontal_lines, true)
         @name_cell_height = options.fetch(:name_cell_height, '5mm')
+        @day_number_shift = options.fetch(:day_number_shift, '1.5mm')
+        @week_column_width = options.fetch(:week_column_width, '6mm')
       end
 
       def to_s
@@ -41,7 +45,7 @@ module LatexYearlyPlanner
       end
 
       def format
-        space = '@{\hspace{1.5mm}}'
+        space = "@{#{TeX::HSpace.new(day_number_shift)}}"
 
         return "#{"|#{space}X" * 7}|" unless show_week_numbers
 
@@ -90,7 +94,7 @@ module LatexYearlyPlanner
       end
 
       def week_name_box(week)
-        "#{XTeX::MinHeight.new('6mm')}Week #{week.number}"
+        "#{XTeX::MinHeight.new(week_column_width)}Week #{week.number}"
       end
     end
   end
