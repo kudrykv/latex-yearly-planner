@@ -163,10 +163,13 @@ sections:
           height: 4cm
 
   daily_notes:
-    enabled: true
+    enabled: false
     parameters:
       notes:
         parameters:
           shift_vertical: 4mm
           width: 12cm
           height: 16cm
+
+  daily_reflect:
+    enabled: false
