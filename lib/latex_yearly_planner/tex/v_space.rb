@@ -13,6 +13,5 @@ module LatexYearlyPlanner
         "\\vspace{#{height}}"
       end
     end
-
   end
 end
