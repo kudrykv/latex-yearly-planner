@@ -3,34 +3,39 @@
 module LatexYearlyPlanner
   module XTeX
     class NotesDotted
-      attr_accessor :width,
-                    :height,
-                    :horizontal_spacing_between_dots,
-                    :vertical_spacing_between_dots,
-                    :shift_vertical
+      def default_parameters
+        {
+          width: '1cm',
+          height: '1cm',
+          horizontal_spacing_between_dots: '5mm',
+          vertical_spacing_between_dots: '5mm',
+          shift_vertical: nil
+        }
+      end
+
+      attr_accessor :enabled, :parameters
 
       def initialize(**options)
-        @width = options.fetch(:width, '1cm')
-        @height = options.fetch(:height, '1cm')
-        @horizontal_spacing_between_dots = options.fetch(:horizontal_spacing_between_dots, '5mm')
-        @vertical_spacing_between_dots = options.fetch(:vertical_spacing_between_dots, '5mm')
-        @shift_vertical = options.fetch(:shift_vertical, nil)
+        @enabled = options.fetch(:enabled, true)
+        @parameters = RecursiveOpenStruct.new(default_parameters.merge(options.fetch(:parameters, {}).compact))
       end
 
       def to_s
+        return '' unless enabled
+
         "\\adjustbox{valign=t}{#{minipage}}"
       end
 
       private
 
       def minipage
-        TeX::Minipage.new(content: raw_notes, width:, height:)
+        TeX::Minipage.new(content:, width: parameters.width, height: parameters.height)
       end
 
-      def raw_notes
+      def content
         <<~XTX
-          #{make_shift_vertical}\\leavevmode\\multido{\\dC=0mm+#{vertical_spacing_between_dots}}{#{make_height}}{
-            \\multido{\\dR=0mm+#{horizontal_spacing_between_dots}}{#{make_width}}{
+          #{shift_vertical}\\leavevmode\\multido{\\dC=0mm+#{vertical_spacing_between_dots}}{#{height_in_dots_number}}{
+            \\multido{\\dR=0mm+#{horizontal_spacing_between_dots}}{#{width_in_dots_number}}{
                 \\put(\\dR,\\dC){\\circle*{0.1}
               }
             }
@@ -39,18 +44,34 @@ module LatexYearlyPlanner
           .strip.gsub(/\s+/, '')
       end
 
-      def make_height
+      def shift_vertical
+        return '' unless parameters.shift_vertical
+
+        "\\vspace{#{parameters.shift_vertical}}"
+      end
+
+      def vertical_spacing_between_dots
+        parameters.vertical_spacing_between_dots
+      end
+
+      def height_in_dots_number
         (height.to_measurement / vertical_spacing_between_dots.to_measurement).quantity.ceil + 1
       end
 
-      def make_width
+      def horizontal_spacing_between_dots
+        parameters.horizontal_spacing_between_dots
+      end
+
+      def width_in_dots_number
         (width.to_measurement / horizontal_spacing_between_dots.to_measurement).quantity.ceil + 1
       end
 
-      def make_shift_vertical
-        return '' unless shift_vertical
+      def width
+        parameters.width
+      end
 
-        "\\vspace{#{shift_vertical}}"
+      def height
+        parameters.height
       end
     end
   end

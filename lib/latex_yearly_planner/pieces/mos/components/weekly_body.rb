@@ -17,7 +17,7 @@ module LatexYearlyPlanner
 
           def row(arr)
             names = arr.map(&method(:col)).join('\\hfill{}')
-            notes = XTeX::Notes.new(param(:notes, :type), **parameters(:notes))
+            notes = XTeX::Notes.new(**struct(:notes))
 
             "#{names}\n#{notes}".strip
           end

@@ -63,7 +63,7 @@ module LatexYearlyPlanner
           end
 
           def notes
-            XTeX::Notes.new(param(:notes, :type), **parameters(:notes))
+            XTeX::Notes.new(**struct(:notes))
           end
 
           def personal_notes_label
@@ -71,7 +71,7 @@ module LatexYearlyPlanner
           end
 
           def personal_notes
-            XTeX::Notes.new(param(:notes, :type), **parameters(:personal_notes))
+            XTeX::Notes.new(**struct(:personal_notes))
           end
 
           def spacer

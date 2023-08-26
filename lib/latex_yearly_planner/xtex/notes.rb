@@ -3,14 +3,14 @@
 module LatexYearlyPlanner
   module XTeX
     class Notes
-      def initialize(type, **options)
-        @notes = case type.downcase.to_sym
+      def initialize(**options)
+        @notes = case options[:type].downcase.to_sym
                  when :dotted
                    NotesDotted.new(**options)
                  when :lined
                    Lined.new(**options)
                  else
-                   raise ArgumentError, "Unknown notes type: #{type}"
+                   raise ArgumentError, "Unknown notes type: #{options[:type]}"
                  end
       end
 

@@ -32,11 +32,7 @@ module LatexYearlyPlanner
           end
 
           def notes
-            XTeX::Notes.new(notes_type, **parameters(:notes))
-          end
-
-          def notes_type
-            param(:notes, :type)
+            XTeX::Notes.new(**struct(:notes))
           end
         end
       end
