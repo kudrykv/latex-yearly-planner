@@ -112,7 +112,7 @@ sections:
         parameters:
           width: 12.5cm
           height: 4.5cm
-          shift_vertical: 3mm
+          shift_vertical: 1mm
 
   daily:
     enabled: false

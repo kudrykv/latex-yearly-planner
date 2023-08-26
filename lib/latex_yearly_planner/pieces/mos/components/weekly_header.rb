@@ -6,12 +6,16 @@ module LatexYearlyPlanner
       module Components
         class WeeklyHeader < Header
           def generate(week)
-            "#{top_table}" \
-              '\\hfill{}' \
-              "#{title(week)}" \
-              '\\hrule{}' \
-              "#{margin_note(highlight_quarters: week.quarters, highlight_months: week.months)}" \
-              "\n\\vspace{#{param(:header, :skip)}}\n\n"
+            [
+              top_table,
+              hfill,
+              title(week),
+              hrule,
+              margin_note(highlight_quarters: week.quarters, highlight_months: week.months),
+              nl,
+              vspace(param(:header, :skip)),
+              nlnl
+            ].join
           end
 
           def title(week)
