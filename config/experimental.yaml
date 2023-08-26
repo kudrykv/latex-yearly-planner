@@ -41,13 +41,13 @@ parameters:
           vertical_stretch: 1.3
       quarterly_table:
         parameters:
-          vertical_stretch: 2.5
+          min_cell_height: 10mm
           horizontal_spacing: 0mm
           format: Y
           horizontal_lines: true
       monthly_table:
         parameters:
-          vertical_stretch: 2
+          min_cell_height: 10mm
           horizontal_spacing: 0mm
           format: Y
           horizontal_lines: true

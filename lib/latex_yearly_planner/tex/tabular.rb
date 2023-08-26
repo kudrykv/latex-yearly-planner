@@ -3,15 +3,21 @@
 module LatexYearlyPlanner
   module TeX
     class Tabular
-      attr_accessor :rows, :format, :vertical_stretch, :horizontal_spacing, :horizontal_lines
+      attr_accessor :rows,
+                    :format,
+                    :vertical_stretch,
+                    :horizontal_spacing,
+                    :horizontal_lines,
+                    :min_cell_height
 
       def initialize(**options)
         @rows = []
 
         @format = options.fetch(:format, nil)
         @vertical_stretch = options.fetch(:vertical_stretch, 1)
-        @horizontal_spacing = options.fetch(:horizontal_spacing, '6pt')
+        @horizontal_spacing = options.fetch(:horizontal_spacing, '0pt')
         @horizontal_lines = options.fetch(:horizontal_lines, false)
+        @min_cell_height = options.fetch(:min_cell_height, nil)
       end
 
       def to_s
@@ -48,7 +54,7 @@ module LatexYearlyPlanner
           row = row.map do |cell|
             cell.width = longest_row if cell.is_a?(TeX::Multicolumn) && cell.width == :full_width
 
-            cell
+            "#{make_min_cell_height}#{cell}"
           end
 
           row.map(&:to_s).join(' & ')
@@ -67,6 +73,10 @@ module LatexYearlyPlanner
 
       def trailing_hline
         horizontal_lines ? '\\\\\\hline' : ''
+      end
+
+      def make_min_cell_height
+        min_cell_height ? "\\vphantom{\\parbox{0pt}{\\vskip#{min_cell_height}}}" : ''
       end
     end
   end
