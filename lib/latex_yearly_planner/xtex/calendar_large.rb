@@ -76,7 +76,7 @@ module LatexYearlyPlanner
       end
 
       def week_name_box(week)
-        "\\mbox{\\vphantom{\\rule{0pt}{6mm}}\\raisebox{1.7mm}{Week #{week.number}}}"
+        "#{XTeX::MinHeight.new('6mm')}Week #{week.number}"
       end
     end
   end
