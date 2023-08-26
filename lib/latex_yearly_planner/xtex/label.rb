@@ -7,7 +7,8 @@ module LatexYearlyPlanner
         {
           text: '',
           line_height: '5mm',
-          vertical_shift: nil
+          width: nil,
+          shift_vertical: nil
         }
       end
 
@@ -20,16 +21,21 @@ module LatexYearlyPlanner
 
       def to_s
         return '' unless enabled
+        return line unless parameters.width
 
-        [vertical_shift, line_height, parameters.text, Line.plain].join
+        TeX::Parbox.new(content: line, width: parameters.width).to_s
       end
 
       private
 
-      def vertical_shift
-        return '' unless parameters.vertical_shift
+      def line
+        [shift_vertical, line_height, parameters.text, Line.plain].join
+      end
 
-        "\\vspace{#{parameters.vertical_shift}}"
+      def shift_vertical
+        return '' unless parameters.shift_vertical
+
+        "\\vspace{#{parameters.shift_vertical}}"
       end
 
       def line_height
