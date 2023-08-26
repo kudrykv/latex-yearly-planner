@@ -7,7 +7,7 @@ module LatexYearlyPlanner
         class AnnualBody < Component
           def generate(months)
             rows = months.each_slice(columns).map do |months_row|
-              months_row.map(&method(:little_calendar)).map(&:to_s).join('\\hfill{}')
+              months_row.map(&method(:little_calendar)).map(&:to_s).join(hfill)
             end
 
             months_number = months.size
@@ -25,9 +25,9 @@ module LatexYearlyPlanner
           end
 
           def separator(months_number)
-            return "\n\\vfill{}\n\n" if months_number == param(:months_per_page)
+            return "\n#{vfill}\n\n" if months_number == param(:months_per_page)
 
-            "\n\\vspace{#{param(:underfull_vertical_spacing)}}\n\n"
+            "\n#{TeX::VSpace.new(param(:underfull_vertical_spacing))}\n\n"
           end
         end
       end

@@ -69,6 +69,14 @@ module LatexYearlyPlanner
       def weekday_start
         @weekday_start ||= param(:weekday_start).downcase.to_sym
       end
+
+      def hfill
+        TeX::HFill.new.to_s
+      end
+
+      def vfill
+        TeX::VFill.new.to_s
+      end
     end
   end
 end
