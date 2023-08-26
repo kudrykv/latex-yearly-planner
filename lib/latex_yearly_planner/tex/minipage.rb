@@ -14,10 +14,7 @@ module LatexYearlyPlanner
       end
 
       def to_s
-        <<~LATEX
-          \\begin{minipage}#{make_options}{#{width}}#{content}\\end{minipage}
-        LATEX
-          .strip
+        "\\begin{minipage}#{make_options}{#{width}}#{content}\\end{minipage}"
       end
 
       private
