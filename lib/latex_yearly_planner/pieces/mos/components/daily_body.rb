@@ -42,6 +42,7 @@ module LatexYearlyPlanner
               content: [
                 todo_label,
                 todo,
+                nl,
                 notes_label,
                 notes
               ].join("\n"),

@@ -148,8 +148,9 @@ sections:
         enabled: true
         parameters:
           text: 'Notes'
+          vertical_shift: 2mm
       notes:
         parameters:
           shift_vertical: 5mm
           width: 5.8cm
-          height: 8cm
+          height: 4cm

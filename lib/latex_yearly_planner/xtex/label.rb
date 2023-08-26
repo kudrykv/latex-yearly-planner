@@ -6,7 +6,8 @@ module LatexYearlyPlanner
       def default_parameters
         {
           text: '',
-          line_height: '5mm'
+          line_height: '5mm',
+          vertical_shift: nil
         }
       end
 
@@ -20,7 +21,21 @@ module LatexYearlyPlanner
       def to_s
         return '' unless enabled
 
-        "#{MinHeight.new(parameters.line_height)}#{parameters.text}#{Line.plain}"
+        [vertical_shift, line_height, parameters.text, Line.plain].join
+      end
+
+      private
+
+      def vertical_shift
+        return '' unless parameters.vertical_shift
+
+        "\\vspace{#{parameters.vertical_shift}}"
+      end
+
+      def line_height
+        return '' unless parameters.line_height
+
+        MinHeight.new(parameters.line_height)
       end
     end
   end
