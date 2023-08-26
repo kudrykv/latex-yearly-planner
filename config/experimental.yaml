@@ -91,7 +91,7 @@ sections:
           width: 5.8cm
 
   quarterly:
-    enabled: true
+    enabled: false
     parameters:
       calendars_width: 5.8cm
       spacer_width: 0.5cm
@@ -102,7 +102,7 @@ sections:
           shift_vertical: 4mm
 
   monthly:
-    enabled: false
+    enabled: true
     parameters:
 
   weekly:

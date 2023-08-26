@@ -6,12 +6,16 @@ module LatexYearlyPlanner
       module Components
         class MonthlyHeader < Header
           def generate(month)
-            "#{top_table}" \
-              '\\hfill{}' \
-              "#{title(month)}" \
-              '\\hrule{}' \
-              "#{margin_note(highlight_quarters: [month.quarter], highlight_months: [month])}" \
-              "\n\\vspace{#{param(:header, :skip)}}\n\n"
+            [
+              top_table,
+              hfill,
+              title(month),
+              hrule,
+              margin_note(highlight_quarters: [month.quarter], highlight_months: [month]),
+              nl,
+              vspace(param(:header, :skip)),
+              nlnl
+            ].join
           end
 
           def title(month)
