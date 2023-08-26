@@ -40,11 +40,11 @@ module LatexYearlyPlanner
           def writings_column
             TeX::Minipage.new(
               content: [
-                todo_label,
-                todo,
+                todo_label, todo,
                 nl,
-                notes_label,
-                notes
+                notes_label, notes,
+                nl,
+                personal_notes_label, personal_notes
               ].join("\n"),
               width: param(:write_column_width)
             )
@@ -64,6 +64,14 @@ module LatexYearlyPlanner
 
           def notes
             XTeX::Notes.new(param(:notes, :type), **parameters(:notes))
+          end
+
+          def personal_notes_label
+            XTeX::Label.new(**param(:personal_notes_label_as_a_hash))
+          end
+
+          def personal_notes
+            XTeX::Notes.new(param(:notes, :type), **parameters(:personal_notes))
           end
 
           def spacer

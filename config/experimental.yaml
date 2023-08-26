@@ -154,3 +154,13 @@ sections:
           shift_vertical: 5mm
           width: 5.8cm
           height: 4cm
+      personal_notes_label:
+        enabled: true
+        parameters:
+          text: 'Personal notes'
+          vertical_shift: 9mm
+      personal_notes:
+        parameters:
+          shift_vertical: 5mm
+          width: 5.8cm
+          height: 4cm
