@@ -25,14 +25,14 @@ module LatexYearlyPlanner
           def little_calendar(day)
             XTeX::CalendarLittle.new(
               day.month,
-              **config.little_calendar(section_name).merge({ highlight_day: day })
+              **parameters(:little_calendar).merge({ highlight_day: day })
             )
           end
 
           def schedule_options
             { compensate_height: config.document.document_class.size }
               .compact
-              .merge(param(:schedule).parameters_as_a_hash&.compact)
+              .merge(parameters(:schedule))
           end
         end
       end
