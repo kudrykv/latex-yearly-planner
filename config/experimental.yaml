@@ -59,6 +59,9 @@ parameters:
     week_number_placement: left
     notes:
       type: dotted
+      parameters:
+        horizontal_spacing_between_dots: 5mm
+        vertical_spacing_between_dots: 5mm
     little_calendar:
       parameters:
         vertical_stretch: 1.2
@@ -90,7 +93,7 @@ sections:
           width: 5.8cm
 
   quarterly:
-    enabled: false
+    enabled: true
     parameters:
       calendars_width: 5.8cm
       spacer_width: 0.5cm
@@ -115,7 +118,7 @@ sections:
           shift_vertical: 1mm
 
   daily:
-    enabled: true
+    enabled: false
     parameters:
       schedule_column_width: 5.8cm
       spacer_width: 0.5cm
