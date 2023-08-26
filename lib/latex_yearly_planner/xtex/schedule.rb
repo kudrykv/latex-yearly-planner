@@ -59,17 +59,17 @@ module LatexYearlyPlanner
       end
 
       def hour_line(time)
-        return '\\myLineGray' if time == to
+        return Line.gray if time == to
 
-        line = time == from && show_label ? '' : '\\myLineGray'
+        line = time == from && show_label ? '' : Line.gray
 
-        "#{line}\n#{XTeX::MinHeight.new(line_height)}#{hour(time)}\n"
+        "#{line}\n#{MinHeight.new(line_height)}#{hour(time)}\n"
       end
 
       def half_hour_line(time)
-        return '\\myLineLightGray' if time == to
+        return Line.light_gray if time == to
 
-        "\\myLineLightGray#{XTeX::MinHeight.new(line_height)}\n"
+        "\\myLineLightGray#{MinHeight.new(line_height)}\n"
       end
 
       def hour(time)
