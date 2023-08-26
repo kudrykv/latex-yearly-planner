@@ -189,5 +189,29 @@ sections:
         type: dotted
         parameters:
           width: 12cm
-          height: 4cm
+          height: 3cm
+          shift_vertical: 5mm
+
+      gratitude_label:
+        enabled: true
+        parameters:
+          shift_vertical: 9mm
+
+      gratitude_notes:
+        type: dotted
+        parameters:
+          width: 12cm
+          height: 3cm
+          shift_vertical: 5mm
+
+      daily_log_label:
+        enabled: true
+        parameters:
+          shift_vertical: 9mm
+
+      daily_log_notes:
+        type: dotted
+        parameters:
+          width: 12cm
+          height: 6.5cm
           shift_vertical: 5mm
