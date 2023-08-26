@@ -102,7 +102,7 @@ sections:
           shift_vertical: 4mm
 
   monthly:
-    enabled: true
+    enabled: false
     parameters:
 
   weekly:
@@ -116,7 +116,7 @@ sections:
           shift_vertical: 3mm
 
   daily:
-    enabled: false
+    enabled: true
     parameters:
       schedule_column_width: 5cm
       schedule:

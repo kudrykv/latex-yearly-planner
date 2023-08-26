@@ -48,11 +48,11 @@ module LatexYearlyPlanner
       def hour_line(time)
         return '\\myLineGray' if time == to
 
-        "\\myLineGray\\mbox{\\vphantom{\\rule{0pt}{\\dimexpr5mm-.4pt}}\\raisebox{1.5mm}{#{hour(time)}}}\n"
+        "\\myLineGray\n#{XTeX::MinHeight.new(line_height)}#{hour(time)}\n"
       end
 
       def half_hour_line
-        "\\myLineLightGray\\vskip\\dimexpr5mm-.4pt\n"
+        "\\myLineLightGray\\vskip#{line_height}\n"
       end
 
       def hour(time)
@@ -61,6 +61,10 @@ module LatexYearlyPlanner
         else
           time.hour
         end
+      end
+
+      def line_height
+        '\\dimexpr5mm-.4pt'
       end
     end
   end
