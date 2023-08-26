@@ -27,7 +27,7 @@ module LatexYearlyPlanner
           def separator(months_number)
             return "\n#{vfill}\n\n" if months_number == param(:months_per_page)
 
-            "\n#{TeX::VSpace.new(param(:underfull_vertical_spacing))}\n\n"
+            "\n#{vspace(param(:underfull_vertical_spacing))}\n\n"
           end
         end
       end
