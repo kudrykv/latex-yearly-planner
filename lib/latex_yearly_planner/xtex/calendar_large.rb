@@ -40,7 +40,7 @@ module LatexYearlyPlanner
       end
 
       def format
-        space = '@{\hspace{1mm}}'
+        space = '@{\hspace{1.5mm}}'
 
         return "#{"|#{space}X" * 7}|" unless show_week_numbers
 
@@ -64,12 +64,19 @@ module LatexYearlyPlanner
           row = week.days.map { |day| day ? "{#{day.mday}}" : '' }
           next row unless show_week_numbers
 
-          wn = "\\vspace{0pt}\\rotatebox[origin=tr]{90}{\\parbox{#{cell_height}}{\\hfil{}\\mbox{\\vphantom{\\rule{0pt}{6mm}}\\raisebox{1.5mm}{Week #{week.number}}}}}"
-          row.unshift(wn) if week_number_placement == :left
-          row.push(wn) if week_number_placement == :right
+          row.unshift(rotated(week)) if week_number_placement == :left
+          row.push(rotated(week)) if week_number_placement == :right
 
           row
         end
+      end
+
+      def rotated(week)
+        "\\vspace{0pt}\\rotatebox[origin=tr]{90}{\\parbox{#{cell_height}}{\\hfil{}#{week_name_box(week)}}}"
+      end
+
+      def week_name_box(week)
+        "\\mbox{\\vphantom{\\rule{0pt}{6mm}}\\raisebox{1.7mm}{Week #{week.number}}}"
       end
     end
   end
