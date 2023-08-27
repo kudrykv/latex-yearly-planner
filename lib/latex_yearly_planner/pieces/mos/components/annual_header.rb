@@ -5,7 +5,7 @@ module LatexYearlyPlanner
     module Mos
       module Components
         class AnnualHeader < Header
-          def generate
+          def generate(_months)
             [
               top_table,
               hfill,

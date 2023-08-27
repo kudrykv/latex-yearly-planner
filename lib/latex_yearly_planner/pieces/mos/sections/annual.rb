@@ -5,13 +5,8 @@ module LatexYearlyPlanner
     module Mos
       module Sections
         class Annual < Section
-          def generate
-
-            pages = all_months.each_slice(param(:months_per_page)).map do |months|
-              "#{header.generate}#{body.generate(months)}"
-            end
-
-            Core::Entities::Note.new('annual', "#{pages.join("\n\\pagebreak{}\n\n")}\n\\pagebreak{}")
+          def pages_parameters
+            all_months.each_slice(param(:months_per_page)).map { |months| [months] }
           end
         end
       end

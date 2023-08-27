@@ -17,11 +17,13 @@ module LatexYearlyPlanner
       end
 
       def generate
-        NotImplementedError
+        pages = pages_parameters.map { |parameters| "#{header.generate(*parameters)}#{body.generate(*parameters)}" }
+
+        Core::Entities::Note.new(section_name, "#{pages.join("\n\\pagebreak{}\n\n")}\n\\pagebreak{}")
       end
 
-      def pages
-        NotImplementedError
+      def pages_parameters
+        raise NotImplementedError
       end
     end
   end
