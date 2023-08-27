@@ -5,10 +5,8 @@ module LatexYearlyPlanner
     module Mos
       module Sections
         class Quarterly < Section
-          def generate
-            pages = all_quarters.map { |quarter| "#{header.generate(quarter)}#{body.generate(quarter)}" }
-
-            Core::Entities::Note.new('quarterly', "#{pages.join("\n\\pagebreak{}\n\n")}\n\\pagebreak{}")
+          def iterations
+            all_quarters.map { |quarter| [quarter] }
           end
         end
       end
