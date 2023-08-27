@@ -3,46 +3,14 @@
 module LatexYearlyPlanner
   module Pieces
     class Base
+      include TeX::Helpers
+
       attr_reader :config, :section_config, :section_name
 
       def initialize(section_name, config, section_config)
         @section_name = section_name
         @config = config
         @section_config = section_config
-      end
-
-      def parameters(*keys)
-        param(*keys, :parameters_as_a_hash)
-      end
-
-      def struct(*keys)
-        @struct ||= {}
-
-        last = "#{keys.last}_as_a_hash".to_sym
-        keys = keys.take(keys.size - 1).push(last)
-
-        @struct[keys] ||= reduce_param(*keys)
-      end
-
-      def param(*keys)
-        @param ||= {}
-
-        @param[keys] ||= reduce_param(*keys)
-      end
-
-      def reduce_param(*keys)
-        reduced = reduce_configs_with_keys(*keys)
-
-        return reduced[1].compact.deep_merge(reduced[0].compact) if reduced[0].is_a?(Hash) && reduced[1].is_a?(Hash)
-
-        one = reduced.compact.first
-        one.is_a?(Hash) ? one.compact : one
-      end
-
-      def reduce_configs_with_keys(*keys)
-        keys.reduce([section_config.parameters, config.parameters&.parameters]) do |acc, key|
-          [acc[0]&.send(key), acc[1]&.send(key)]
-        end
       end
 
       def all_months
@@ -83,32 +51,38 @@ module LatexYearlyPlanner
         @weekday_start ||= param(:weekday_start).downcase.to_sym
       end
 
-      def hfill
-        TeX::HFill.new.to_s
+      def parameters(*keys)
+        param(*keys, :parameters_as_a_hash)
       end
 
-      def vfill
-        TeX::VFill.new.to_s
+      def struct(*keys)
+        @struct ||= {}
+
+        last = "#{keys.last}_as_a_hash".to_sym
+        keys = keys.take(keys.size - 1).push(last)
+
+        @struct[keys] ||= reduce_param(*keys)
       end
 
-      def hrule
-        TeX::HRule.new.to_s
+      def param(*keys)
+        @param ||= {}
+
+        @param[keys] ||= reduce_param(*keys)
       end
 
-      def vspace(height)
-        TeX::VSpace.new(height).to_s
+      def reduce_param(*keys)
+        reduced = reduce_configs_with_keys(*keys)
+
+        return reduced[1].compact.deep_merge(reduced[0].compact) if reduced[0].is_a?(Hash) && reduced[1].is_a?(Hash)
+
+        one = reduced.compact.first
+        one.is_a?(Hash) ? one.compact : one
       end
 
-      def hspace(width)
-        TeX::HSpace.new(width).to_s
-      end
+      def reduce_configs_with_keys(*keys)
+        accumulator = [section_config&.parameters, config.parameters&.parameters]
 
-      def nl
-        "\n"
-      end
-
-      def nlnl
-        "\n\n"
+        keys.reduce(accumulator) { |acc, key| [acc[0]&.send(key), acc[1]&.send(key)] }
       end
     end
   end
