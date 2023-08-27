@@ -11,16 +11,19 @@ module LatexYearlyPlanner
 
           def generate_todo(_todo, _page)
             [
-              TeX::Minipage.new(
-                content: XTeX::ToDo.new(**parameters(:todos)),
-                width: param(:column_width),
-              ),
+              minipage_with_todos,
               hfill,
-              TeX::Minipage.new(
-                content: XTeX::ToDo.new(**parameters(:todos)),
-                width: param(:column_width),
-              ),
+              minipage_with_todos
             ].join
+          end
+
+          private
+
+          def minipage_with_todos
+            TeX::Minipage.new(
+              content: XTeX::ToDo.new(**parameters(:todos)),
+              width: param(:column_width)
+            )
           end
 
           def additional_index_params(page)

@@ -19,7 +19,7 @@ module LatexYearlyPlanner
             cell
           end
 
-          attr_accessor :index_notes_disable_highlight
+          attr_accessor :index_notes_disable_highlight, :index_todos_disable_highlight
 
           def index_notes_cell
             cell = TeX::Cell.new('Notes')
@@ -27,8 +27,6 @@ module LatexYearlyPlanner
 
             cell
           end
-
-          attr_accessor :index_todos_disable_highlight
 
           def index_todos_cell
             cell = TeX::Cell.new('Todo')
