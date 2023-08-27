@@ -44,7 +44,7 @@ module LatexYearlyPlanner
       def make_format
         return format if format
 
-        @rows.map(&:size).max.times.map { 'c' }.join
+        @rows.map(&:size).max.times.map { 'c' }.join('|')
       end
 
       def build_rows

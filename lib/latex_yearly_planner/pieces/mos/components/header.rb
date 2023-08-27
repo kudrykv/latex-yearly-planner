@@ -7,7 +7,7 @@ module LatexYearlyPlanner
         class Header < Component
           def top_table
             table = TeX::Tabular.new(**parameters(:header, :top_table))
-            table.add_row([calendar_cell])
+            table.add_row([calendar_cell, index_notes_cell])
 
             table
           end
@@ -15,6 +15,13 @@ module LatexYearlyPlanner
           def calendar_cell
             cell = TeX::Cell.new('Calendar')
             cell.selected = true if section_name == :annual
+
+            cell
+          end
+
+          def index_notes_cell
+            cell = TeX::Cell.new('Notes')
+            cell.selected = true if section_name == :index_notes
 
             cell
           end

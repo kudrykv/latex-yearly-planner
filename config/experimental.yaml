@@ -39,6 +39,7 @@ parameters:
       top_table:
         parameters:
           vertical_stretch: 1.3
+          horizontal_spacing: 6pt
       quarterly_table:
         parameters:
           min_cell_height: 10mm
@@ -173,7 +174,7 @@ sections:
           height: 16cm
 
   daily_reflect:
-    enabled: true
+    enabled: false
     parameters:
       goals_label:
         enabled: true
@@ -215,3 +216,13 @@ sections:
           width: 12cm
           height: 6.5cm
           shift_vertical: 5mm
+
+  index_notes:
+    enabled: true
+    parameters:
+      index_pages: 2
+      notes_pages: 70
+      index_page:
+        parameters:
+          line_height: 7mm
+          count: 30
