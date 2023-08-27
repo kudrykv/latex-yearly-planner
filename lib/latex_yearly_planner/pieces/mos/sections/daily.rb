@@ -5,10 +5,8 @@ module LatexYearlyPlanner
     module Mos
       module Sections
         class Daily < Section
-          def generate
-            pages = all_days.map { |day| "#{header.generate(day)}#{body.generate(day)}" }
-
-            Core::Entities::Note.new('daily', "#{pages.join("\n\\pagebreak{}\n\n")}\n\\pagebreak{}")
+          def iterations
+            all_days.map { |day| [day] }
           end
         end
       end
