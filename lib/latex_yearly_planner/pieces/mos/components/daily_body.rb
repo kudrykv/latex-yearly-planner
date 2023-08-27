@@ -55,7 +55,7 @@ module LatexYearlyPlanner
           end
 
           def todo
-            XTeX::ToDo.new(**parameters(:todo))
+            XTeX::ToDo.new(**struct(:todo))
           end
 
           def notes_label

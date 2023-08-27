@@ -21,13 +21,13 @@ module LatexYearlyPlanner
 
           def minipage_with_todos
             TeX::Minipage.new(
-              content: XTeX::ToDo.new(**parameters(:todos)),
+              content: XTeX::ToDo.new(**struct(:todos)),
               width: param(:column_width)
             )
           end
 
           def additional_index_params(page)
-            { parameters: { start_from: start_from(page), count: param(:todos_per_page) } }
+            { parameters: { start_from: start_from(page) } }
           end
 
           def start_from(page)

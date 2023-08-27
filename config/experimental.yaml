@@ -121,7 +121,7 @@ sections:
           shift_vertical: 1mm
 
   daily:
-    enabled: false
+    enabled: true
     parameters:
       schedule_column_width: 5.8cm
       spacer_width: 0.5cm

@@ -3,11 +3,18 @@
 module LatexYearlyPlanner
   module XTeX
     class ToDo
-      attr_accessor :count, :line_height
+      def default_parameters
+        {
+          count: 1,
+          line_height: '5mm'
+        }
+      end
+
+      attr_accessor :enabled, :parameters
 
       def initialize(**options)
-        @count = options.fetch(:count, 1)
-        @line_height = options.fetch(:line_height, '5mm')
+        @enabled = options.fetch(:enabled, true)
+        @parameters = RecursiveOpenStruct.new(default_parameters.deep_merge(options.fetch(:parameters, {}).compact))
       end
 
       def to_s
@@ -17,11 +24,11 @@ module LatexYearlyPlanner
       private
 
       def todos
-        ([todo] * count).join("\n")
+        ([todo] * parameters.count).join("\n")
       end
 
       def todo
-        "#{MinHeight.new("\\dimexpr#{line_height}-.4pt")}$\\square$#{Line.gray}"
+        "#{MinHeight.new("\\dimexpr#{parameters.line_height}-.4pt")}$\\square$#{Line.gray}"
       end
     end
   end
