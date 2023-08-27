@@ -218,7 +218,7 @@ sections:
           shift_vertical: 5mm
 
   index_notes:
-    enabled: true
+    enabled: false
     parameters:
       index_pages: 2
       notes_per_page: 25
@@ -233,3 +233,18 @@ sections:
           shift_vertical: 4mm
           width: 12cm
           height: 16cm
+
+  index_todos:
+    enabled: true
+    parameters:
+      index_pages: 2
+      todos_per_page: 25
+      index_table:
+        parameters:
+          line_height: 6.4mm
+          lines_color: gray!50
+
+      pages_per_todo: 2
+      todos:
+        parameters:
+          count: 25
