@@ -160,7 +160,7 @@ sections:
           height: 4cm
 
   daily_notes:
-    enabled: true
+    enabled: false
     parameters:
       pages: 2
       notes:
@@ -170,7 +170,7 @@ sections:
           height: 16cm
 
   daily_reflect:
-    enabled: false
+    enabled: true
     parameters:
       goals_label:
         enabled: true
