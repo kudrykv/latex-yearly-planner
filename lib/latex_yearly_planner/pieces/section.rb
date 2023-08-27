@@ -19,6 +19,10 @@ module LatexYearlyPlanner
       def generate
         NotImplementedError
       end
+
+      def pages
+        NotImplementedError
+      end
     end
   end
 end
