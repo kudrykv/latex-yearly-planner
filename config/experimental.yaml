@@ -80,12 +80,12 @@ parameters:
 
 sections:
   title:
-    enabled: false
+    enabled: true
     parameters:
       name: 2023
 
   annual:
-    enabled: false
+    enabled: true
     parameters:
       months_per_page: 8
       columns: 2
@@ -95,7 +95,7 @@ sections:
           width: 5.8cm
 
   quarterly:
-    enabled: false
+    enabled: true
     parameters:
       calendars_width: 5.8cm
       spacer_width: 0.5cm
@@ -106,7 +106,7 @@ sections:
           shift_vertical: 4mm
 
   monthly:
-    enabled: false
+    enabled: true
 
   weekly:
     enabled: false
@@ -170,7 +170,7 @@ sections:
           height: 16cm
 
   daily_reflect:
-    enabled: true
+    enabled: false
     parameters:
       goals_label:
         enabled: true

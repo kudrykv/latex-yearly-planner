@@ -34,6 +34,14 @@ module LatexYearlyPlanner
       def hspace(width)
         HSpace.new(width).to_s
       end
+
+      def target(content, ref: nil)
+        Target.new(content, ref:).to_s
+      end
+
+      def link(content, ref: nil)
+        Link.new(content, ref:).to_s
+      end
     end
   end
 end
