@@ -40,11 +40,11 @@ module LatexYearlyPlanner
       end
 
       def start_month
-        @start_month ||= Date.parse(config.parameters.parameters.start_date)
+        @start_month ||= Date.parse(param(:start_date))
       end
 
       def end_month
-        @end_month ||= Date.parse(config.parameters.parameters.end_date)
+        @end_month ||= Date.parse(param(:end_date))
       end
 
       def weekday_start
