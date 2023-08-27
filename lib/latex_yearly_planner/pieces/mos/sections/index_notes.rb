@@ -10,6 +10,8 @@ module LatexYearlyPlanner
               "#{header.generate_index(page)}#{body.generate_index(page)}"
             end
 
+            header.index_notes_disable_highlight = true
+
             notes_pages = param(:notes_pages).times.map(&:succ).map do |page|
               "#{header.generate_notes(page)}#{body.generate_notes(page)}"
             end
