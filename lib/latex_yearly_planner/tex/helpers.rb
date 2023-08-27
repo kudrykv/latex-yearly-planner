@@ -11,6 +11,10 @@ module LatexYearlyPlanner
         "\n\n"
       end
 
+      def pagebreak
+        '\pagebreak{}'
+      end
+
       def hfill
         HFill.new.to_s
       end
