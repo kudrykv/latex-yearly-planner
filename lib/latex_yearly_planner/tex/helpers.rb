@@ -11,7 +11,7 @@ module LatexYearlyPlanner
         "\n\n"
       end
 
-      def pagebreak
+      def page_break
         '\pagebreak{}'
       end
 

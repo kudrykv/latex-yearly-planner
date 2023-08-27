@@ -19,11 +19,15 @@ module LatexYearlyPlanner
       def generate
         pages = iterations.map { |parameters| "#{header.generate(*parameters)}#{body.generate(*parameters)}" }
 
-        Core::Entities::Note.new(section_name, "#{pages.join("\n\\pagebreak{}\n\n")}\n\\pagebreak{}")
+        Core::Entities::Note.new(section_name, "#{pages.join(pages_glue)}#{nl}#{page_break}")
       end
 
       def iterations
         raise NotImplementedError
+      end
+
+      def pages_glue
+        [nl, page_break, nlnl].join
       end
     end
   end
