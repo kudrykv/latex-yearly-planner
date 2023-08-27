@@ -5,10 +5,8 @@ module LatexYearlyPlanner
     module Mos
       module Sections
         class Weekly < Section
-          def generate
-            pages = all_weeks.map { |week| "#{header.generate(week)}#{body.generate(week)}" }
-
-            Core::Entities::Note.new('weekly', "#{pages.join("\n\\pagebreak{}\n\n")}\n\\pagebreak{}")
+          def iterations
+            all_weeks.map { |week| [week] }
           end
         end
       end

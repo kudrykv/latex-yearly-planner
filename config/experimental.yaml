@@ -106,10 +106,10 @@ sections:
           shift_vertical: 4mm
 
   monthly:
-    enabled: true
+    enabled: false
 
   weekly:
-    enabled: false
+    enabled: true
     parameters:
       column_width: 4cm
       notes:
