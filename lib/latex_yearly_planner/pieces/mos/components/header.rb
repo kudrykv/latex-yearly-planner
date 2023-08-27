@@ -20,6 +20,7 @@ module LatexYearlyPlanner
           end
 
           attr_accessor :index_notes_disable_highlight
+
           def index_notes_cell
             cell = TeX::Cell.new('Notes')
             cell.selected = true if section_name == :index_notes && !index_notes_disable_highlight
