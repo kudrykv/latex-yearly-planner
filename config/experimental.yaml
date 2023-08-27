@@ -128,8 +128,6 @@ sections:
       write_column_width: 5.8cm
       schedule_label:
         enabled: true
-        parameters:
-          text: 'Schedule'
       schedule:
         parameters:
           show_label: true

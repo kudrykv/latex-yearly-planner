@@ -23,7 +23,7 @@ module LatexYearlyPlanner
           end
 
           def schedule_label
-            XTeX::Label.new(**param(:schedule_label_as_a_hash))
+            XTeX::Label.new(**struct(:schedule_label).deep_merge({ parameters: { text: 'Schedule' } }))
           end
 
           def schedule

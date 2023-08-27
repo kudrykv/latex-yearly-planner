@@ -64,6 +64,16 @@ module LatexYearlyPlanner
         @struct[keys] ||= reduce_param(*keys)
       end
 
+      def respond_to_missing?(method_name)
+        param(method_name) != nil
+      end
+
+      def method_missing(symbol, *args)
+        return super if args.size.positive?
+
+        param(symbol)
+      end
+
       def param(*keys)
         @param ||= {}
 
