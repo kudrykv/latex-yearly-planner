@@ -5,7 +5,7 @@ module LatexYearlyPlanner
     module Mos
       module Components
         class AnnualBody < Component
-          def generate(months)
+          def generate(_page, months)
             rows = months.each_slice(columns).map do |months_row|
               months_row.map(&method(:little_calendar)).map(&:to_s).join(hfill)
             end

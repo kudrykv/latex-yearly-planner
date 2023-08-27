@@ -5,11 +5,11 @@ module LatexYearlyPlanner
     module Mos
       module Components
         class AnnualHeader < Header
-          def generate(_months)
+          def generate(page, _months)
             [
               top_table,
               hfill,
-              title,
+              title(page),
               hrule,
               margin_note,
               nl,
@@ -20,8 +20,8 @@ module LatexYearlyPlanner
 
           private
 
-          def title
-            target(start_month.year)
+          def title(page)
+            huge(start_month.year)
           end
         end
       end

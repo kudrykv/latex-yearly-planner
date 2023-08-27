@@ -39,8 +39,8 @@ module LatexYearlyPlanner
         HyperTarget.new(content, ref:).to_s
       end
 
-      def link(content, ref: nil)
-        HyperLink.new(content, ref:).to_s
+      def huge(content)
+        TextSize.new(content).huge.to_s
       end
     end
   end

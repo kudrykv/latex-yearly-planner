@@ -6,7 +6,7 @@ module LatexYearlyPlanner
       module Sections
         class Annual < Section
           def iterations
-            all_months.each_slice(param(:months_per_page)).map { |months| [months] }
+            all_months.each_slice(param(:months_per_page)).map.with_index(1) { |months, page| [page, months] }
           end
         end
       end
