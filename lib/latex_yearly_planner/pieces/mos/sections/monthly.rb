@@ -5,10 +5,8 @@ module LatexYearlyPlanner
     module Mos
       module Sections
         class Monthly < Section
-          def generate
-            pages = all_months.map { |month| "#{header.generate(month)}#{body.generate(month)}" }
-
-            Core::Entities::Note.new('monthly', "#{pages.join("\n\\pagebreak{}\n\n")}\n\\pagebreak{}")
+          def iterations
+            all_months.map { |month| [month] }
           end
         end
       end
