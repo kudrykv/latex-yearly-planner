@@ -221,8 +221,15 @@ sections:
     enabled: true
     parameters:
       index_pages: 2
-      notes_pages: 70
-      index_page:
+      notes_per_page: 25
+      index_table:
         parameters:
-          line_height: 7mm
-          count: 30
+          line_height: 6.4mm
+          lines_color: gray!50
+
+      pages_per_note: 2
+      notes:
+        parameters:
+          shift_vertical: 4mm
+          width: 12cm
+          height: 16cm

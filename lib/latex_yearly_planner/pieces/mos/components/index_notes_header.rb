@@ -18,11 +18,11 @@ module LatexYearlyPlanner
             ].join
           end
 
-          def generate_notes(page)
+          def generate_notes(note, _page)
             [
               top_table,
               hfill,
-              notes_title(page),
+              notes_title(note),
               hrule,
               margin_note,
               nl,
@@ -37,8 +37,8 @@ module LatexYearlyPlanner
             TeX::TextSize.new('Index').huge
           end
 
-          def notes_title(page)
-            TeX::TextSize.new("Note #{page}").huge
+          def notes_title(note)
+            TeX::TextSize.new("Note #{note}").huge
           end
         end
       end

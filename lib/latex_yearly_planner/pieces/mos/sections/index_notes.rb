@@ -12,8 +12,10 @@ module LatexYearlyPlanner
 
             header.index_notes_disable_highlight = true
 
-            notes_pages = param(:notes_pages).times.map(&:succ).map do |page|
-              "#{header.generate_notes(page)}#{body.generate_notes(page)}"
+            notes_pages = (param(:index_pages) * param(:notes_per_page)).times.map(&:succ).map do |note|
+              param(:pages_per_note).times.map(&:succ).map do |page|
+                "#{header.generate_notes(note, page)}#{body.generate_notes(note, page)}"
+              end
             end
 
             contents = "#{index_pages.concat(notes_pages).join("\n\\pagebreak{}\n\n")}\n\\pagebreak{}"

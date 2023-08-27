@@ -8,7 +8,8 @@ module LatexYearlyPlanner
                     :vertical_stretch,
                     :horizontal_spacing,
                     :horizontal_lines,
-                    :min_cell_height
+                    :min_cell_height,
+                    :lines_color
 
       def initialize(**options)
         @rows = []
@@ -18,17 +19,22 @@ module LatexYearlyPlanner
         @horizontal_spacing = options.fetch(:horizontal_spacing, '0pt')
         @horizontal_lines = options.fetch(:horizontal_lines, false)
         @min_cell_height = options.fetch(:min_cell_height, nil)
+        @lines_color = options.fetch(:lines_color, nil)
       end
 
       def to_s
         <<~LATEX
           {\\renewcommand{\\arraystretch}{#{vertical_stretch}}\\setlength{\\tabcolsep}{#{horizontal_spacing}}%
-          \\begin{tabular}{#{make_format}}
+          \\begin{tabular}{#{make_format}}#{make_lines_color}
             #{starting_hline}
             #{build_rows}#{trailing_hline}
           \\end{tabular}}
         LATEX
           .strip
+      end
+
+      def make_lines_color
+        lines_color ? "\\arrayrulecolor{#{lines_color}}" : ''
       end
 
       def add_row(row)
