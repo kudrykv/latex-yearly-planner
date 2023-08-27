@@ -36,11 +36,11 @@ module LatexYearlyPlanner
       end
 
       def target(content, ref: nil)
-        Target.new(content, ref:).to_s
+        HyperTarget.new(content, ref:).to_s
       end
 
       def link(content, ref: nil)
-        Link.new(content, ref:).to_s
+        HyperLink.new(content, ref:).to_s
       end
     end
   end

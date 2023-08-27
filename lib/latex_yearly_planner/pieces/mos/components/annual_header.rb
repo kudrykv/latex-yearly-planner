@@ -21,7 +21,7 @@ module LatexYearlyPlanner
           private
 
           def title
-            TeX::TextSize.new(start_month.year).huge
+            target(start_month.year)
           end
         end
       end
