@@ -245,6 +245,7 @@ sections:
           lines_color: gray!50
 
       pages_per_todo: 2
+      column_width: 5.8cm
       todos:
         parameters:
-          count: 25
+          count: 33
