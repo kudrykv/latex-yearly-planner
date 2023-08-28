@@ -7,7 +7,7 @@ module LatexYearlyPlanner
         class WeeklyHeader < Header
           def generate(week)
             [
-              top_table,
+              top_table(week:),
               hfill,
               title(week),
               hrule,

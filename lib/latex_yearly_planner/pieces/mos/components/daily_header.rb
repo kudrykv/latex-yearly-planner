@@ -7,7 +7,7 @@ module LatexYearlyPlanner
         class DailyHeader < Header
           def generate(day)
             [
-              top_table,
+              top_table(day:),
               hfill,
               title(day),
               hrule,

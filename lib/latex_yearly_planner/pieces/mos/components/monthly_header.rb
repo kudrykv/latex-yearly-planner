@@ -7,7 +7,7 @@ module LatexYearlyPlanner
         class MonthlyHeader < Header
           def generate(month)
             [
-              top_table,
+              top_table(month:),
               hfill,
               title(month),
               hrule,

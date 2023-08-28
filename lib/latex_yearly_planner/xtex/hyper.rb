@@ -10,13 +10,17 @@ module LatexYearlyPlanner
 
       def initialize(content, **refs)
         @content = content
-        @refs = refs.slice(KEYS)
+        @refs = refs.slice(*KEYS)
 
         raise ArgumentError, "Invalid keys: #{refs.keys - KEYS}" if @refs.size < refs.size
       end
 
       def link
         TeX::HyperLink.new(content, ref:)
+      end
+
+      def target
+        TeX::HyperTarget.new(content, ref:)
       end
 
       private

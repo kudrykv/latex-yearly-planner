@@ -7,7 +7,7 @@ module LatexYearlyPlanner
         class QuarterlyHeader < Header
           def generate(quarter)
             [
-              top_table,
+              top_table(quarter:),
               hfill,
               title(quarter),
               hrule,

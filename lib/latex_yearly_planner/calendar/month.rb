@@ -21,8 +21,16 @@ module LatexYearlyPlanner
         date.strftime('%B')
       end
 
+      def mon
+        date.mon
+      end
+
       def quarter
         Quarter.new(date.beginning_of_quarter, weekday_start:)
+      end
+
+      def year
+        date.year
       end
 
       def weekdays_one_letter

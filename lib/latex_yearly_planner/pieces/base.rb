@@ -4,6 +4,7 @@ module LatexYearlyPlanner
   module Pieces
     class Base
       include TeX::Helpers
+      include XTeX::HyperHelpers
 
       attr_reader :config, :section_config, :section_name
 
@@ -37,6 +38,10 @@ module LatexYearlyPlanner
         (from_month..to_month)
           .select { |date| date.mday == 1 }
           .map { |date| Calendar::Month.new(date, weekday_start:) }
+      end
+
+      def year
+        start_month.year
       end
 
       def start_month

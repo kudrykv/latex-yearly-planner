@@ -5,18 +5,34 @@ module LatexYearlyPlanner
     module Mos
       module Components
         class Header < Component
-          def top_table
+          def top_table(...)
             table = TeX::Tabular.new(**parameters(:header, :top_table))
-            table.add_row([calendar_cell, index_notes_cell, index_todos_cell])
+            table.add_row([calendar_cell(...), index_notes_cell, index_todos_cell])
 
             table
           end
 
-          def calendar_cell
+          def calendar_cell(...)
             cell = TeX::Cell.new('Calendar')
             cell.selected = true if section_name == :annual
 
-            cell
+            link_year(cell, year:, page: year_page_from_date(...))
+          end
+
+          def year_page_from_date(quarter: nil,month: nil, week: nil, day: nil)
+            months_per_page = config.sections.annual.parameters.months_per_page.to_f
+
+            if quarter
+              (quarter.months.find { |month| month.year == year }.mon / months_per_page).ceil
+            elsif month
+              (month.mon / months_per_page).ceil
+            elsif week
+              (week.months.find { |month| month.year == year }.mon / months_per_page).ceil
+            elsif day
+              (day.month.mon / months_per_page).ceil
+            else
+              1
+            end
           end
 
           attr_accessor :index_notes_disable_highlight, :index_todos_disable_highlight
