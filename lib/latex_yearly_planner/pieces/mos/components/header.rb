@@ -19,21 +19,20 @@ module LatexYearlyPlanner
             link_year(cell, year:, page: year_page_from_date(...))
           end
 
-          def year_page_from_date(quarter: nil,month: nil, week: nil, day: nil)
+          def year_page_from_date(**kwargs)
             months_per_page = config.sections.annual.parameters.months_per_page.to_f
 
-            if quarter
-              (quarter.months.find { |month| month.year == year }.mon / months_per_page).ceil
-            elsif month
-              (month.mon / months_per_page).ceil
-            elsif week
-              (week.months.find { |month| month.year == year }.mon / months_per_page).ceil
-            elsif day
-              (day.month.mon / months_per_page).ceil
-            else
-              1
-            end
+            (PROCS.fetch(kwargs.keys.first, PROCS[:fallback]).call(kwargs.values.first, year) / months_per_page).ceil
           end
+
+          PROCS = {
+            quarter: ->(quarter, year) { quarter.months.find { |month| month.year == year }.mon },
+            month: ->(month, _year) { month.mon },
+            week: ->(week, year) { week.months.find { |month| month.year == year }.mon },
+            day: ->(day, _year) { day.month.mon },
+
+            fallback: ->(_, _) { 1 }
+          }.freeze
 
           attr_accessor :index_notes_disable_highlight, :index_todos_disable_highlight
 
