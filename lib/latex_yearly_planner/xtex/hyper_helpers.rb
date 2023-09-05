@@ -10,6 +10,14 @@ module LatexYearlyPlanner
       def link_year(content, year:, page: 1)
         Hyper.new(content, page:, year:).link
       end
+
+      def target_quarter(content, quarter:)
+        Hyper.new(content, year: quarter.year, quarter: quarter.name).target
+      end
+
+      def link_quarter(content, quarter:)
+        Hyper.new(content, year: quarter.year, quarter: quarter.name).link
+      end
     end
   end
 end

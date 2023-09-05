@@ -3,7 +3,7 @@
 module LatexYearlyPlanner
   module XTeX
     class Hyper
-      KEYS = %i[page year].freeze
+      KEYS = %i[page year quarter month week day].freeze
 
       attr_accessor :content
       attr_reader :refs
@@ -16,11 +16,11 @@ module LatexYearlyPlanner
       end
 
       def link
-        TeX::HyperLink.new(content, ref:)
+        TeX::HyperLink.new(content.to_s, ref:)
       end
 
       def target
-        TeX::HyperTarget.new(content, ref:)
+        TeX::HyperTarget.new(content.to_s, ref:)
       end
 
       private

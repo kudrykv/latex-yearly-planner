@@ -68,7 +68,7 @@ module LatexYearlyPlanner
               cell = TeX::Cell.new(quarter.name)
               cell.selected = true if highlight_quarters.include?(quarter)
 
-              table.add_row([cell])
+              table.add_row([link_quarter(cell, quarter:)])
             end
 
             table

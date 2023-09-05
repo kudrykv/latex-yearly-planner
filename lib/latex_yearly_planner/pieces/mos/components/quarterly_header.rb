@@ -19,7 +19,7 @@ module LatexYearlyPlanner
           end
 
           def title(quarter)
-            TeX::TextSize.new(quarter.name).huge
+            target_quarter(TeX::TextSize.new(quarter.name).huge, quarter:)
           end
         end
       end
