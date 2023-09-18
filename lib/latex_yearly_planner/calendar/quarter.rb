@@ -26,6 +26,10 @@ module LatexYearlyPlanner
         date.year
       end
 
+      def reference
+        "#{year}-#{number}"
+      end
+
       def months
         @months ||= (0..2).map { |month_number| Month.new(date + month_number.month, weekday_start:) }
       end

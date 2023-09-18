@@ -3,7 +3,7 @@
 module LatexYearlyPlanner
   module XTeX
     class Hyper
-      KEYS = %i[page year quarter month week day].freeze
+      KEYS = %i[page reference].freeze
 
       attr_accessor :content
       attr_reader :refs
