@@ -81,7 +81,7 @@ module LatexYearlyPlanner
               cell = TeX::Cell.new(month.name[0..2])
               cell.selected = true if highlight_months.include?(month)
 
-              table.add_row([cell])
+              table.add_row([link_month(cell, month:)])
             end
 
             table

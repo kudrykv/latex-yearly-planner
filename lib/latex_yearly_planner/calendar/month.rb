@@ -33,6 +33,10 @@ module LatexYearlyPlanner
         date.year
       end
 
+      def reference
+        "#{year}-#{mon}"
+      end
+
       def weekdays_one_letter
         WEEKDAYS.rotate(WEEKDAYS.find_index(weekday_start)).map { |day| day[0] }.map(&:capitalize)
       end
