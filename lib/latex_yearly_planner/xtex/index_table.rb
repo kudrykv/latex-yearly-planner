@@ -3,6 +3,8 @@
 module LatexYearlyPlanner
   module XTeX
     class IndexTable
+      include HyperHelpers
+
       def default_parameters
         {
           horizontal_lines: true,
@@ -32,7 +34,8 @@ module LatexYearlyPlanner
         table = TeX::TabularX.new(**parameters.to_h)
 
         parameters.start_from.upto(parameters.start_from + parameters.count - 1) do |i|
-          table.add_row(["#{MinHeight.new(parameters.line_height)}#{i}.", ''])
+          note = "#{MinHeight.new(parameters.line_height)}#{i}."
+          table.add_row([link_note(note, note: i), ''])
         end
 
         table

@@ -39,7 +39,8 @@ module LatexYearlyPlanner
 
           def notes_title(note)
             content = TeX::TextSize.new("Note #{note}").huge
-            link_reference(content, reference: NOTES_INDEX_REFERENCE, page: notes_page(note:))
+            target = target_note(content, note:)
+            link_reference(target, reference: NOTES_INDEX_REFERENCE, page: notes_page(note:))
           end
         end
       end

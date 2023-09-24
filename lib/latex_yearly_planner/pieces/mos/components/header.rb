@@ -5,9 +5,6 @@ module LatexYearlyPlanner
     module Mos
       module Components
         class Header < Component
-          NOTES_INDEX_REFERENCE = 'notes_index'
-          NOTES_REFERENCE = 'notes'
-
           def top_table(...)
             table = TeX::Tabular.new(**parameters(:header, :top_table))
             table.add_row([calendar_cell(...), index_notes_cell(...), index_todos_cell].compact)
