@@ -5,6 +5,8 @@ module LatexYearlyPlanner
     module HyperHelpers
       NOTES_INDEX_REFERENCE = 'notes_index'
       NOTES_REFERENCE = 'notes'
+      TODOS_INDEX_REFERENCE = 'todos_index'
+      TODOS_REFERENCE = 'todos'
 
       def target_year(content, year:, page: 1)
         Hyper.new(content, page:, reference: year).target
@@ -50,8 +52,12 @@ module LatexYearlyPlanner
         Hyper.new(content, reference: "note-#{note}").target
       end
 
-      def link_note(content, note)
-        Hyper.new(content, reference: "note-#{note}").link
+      def target_todo(content, todo:, page: 1)
+        Hyper.new(content, reference: todo_reference(todo), page:).target
+      end
+
+      def todo_reference(todo)
+        "todo-#{todo}"
       end
 
       def target_reference(content, reference:, page: 1)

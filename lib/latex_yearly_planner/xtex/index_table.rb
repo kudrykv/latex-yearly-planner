@@ -11,7 +11,8 @@ module LatexYearlyPlanner
           format: 'rX',
           start_from: 1,
           count: 1,
-          line_height: '5mm'
+          line_height: '5mm',
+          make_ref: ->(_index) { '' }
         }
       end
 
@@ -33,9 +34,9 @@ module LatexYearlyPlanner
       def index_table
         table = TeX::TabularX.new(**parameters.to_h)
 
-        parameters.start_from.upto(parameters.start_from + parameters.count - 1) do |i|
-          note = "#{MinHeight.new(parameters.line_height)}#{i}."
-          table.add_row([link_note(note, note: i), ''])
+        parameters.start_from.upto(parameters.start_from + parameters.count - 1) do |index|
+          num = "#{MinHeight.new(parameters.line_height)}#{index}."
+          table.add_row([link_reference(num, reference: parameters.make_ref.call(index)), ''])
         end
 
         table

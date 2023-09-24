@@ -7,7 +7,7 @@ module LatexYearlyPlanner
         class IndexTodosHeader < Header
           def generate_index(page)
             [
-              top_table,
+              top_table(page:),
               hfill,
               index_title(page),
               hrule,
@@ -20,7 +20,7 @@ module LatexYearlyPlanner
 
           def generate_todo(todo, _page)
             [
-              top_table,
+              top_table(todo:),
               hfill,
               todo_title(todo),
               hrule,
@@ -33,12 +33,14 @@ module LatexYearlyPlanner
 
           private
 
-          def index_title(_page)
-            TeX::TextSize.new('Index').huge
+          def index_title(page)
+            content = TeX::TextSize.new('Index').huge
+            target_reference(content, reference: TODOS_INDEX_REFERENCE, page:)
           end
 
           def todo_title(todo)
-            TeX::TextSize.new("To Do #{todo}").huge
+            content = TeX::TextSize.new("To Do #{todo}").huge
+            target_todo(content, todo:)
           end
         end
       end
