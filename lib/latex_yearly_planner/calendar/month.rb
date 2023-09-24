@@ -34,7 +34,7 @@ module LatexYearlyPlanner
       end
 
       def reference
-        "#{year}-#{mon}"
+        "#{year}-#{name}"
       end
 
       def weekdays_one_letter
