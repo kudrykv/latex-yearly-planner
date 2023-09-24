@@ -59,7 +59,9 @@ module LatexYearlyPlanner
           end
 
           def notes_label(day)
-            text = ['Notes', hfill, link_daily_notes('More', day:)].join
+            arr = ['Notes']
+            arr.concat([hfill, link_daily_notes('More', day:)]) if config.sections.daily_notes.enabled
+            text = arr.join
 
             XTeX::Label.new(**struct(:notes_label).deep_merge({ parameters: { text: } }))
           end
@@ -69,7 +71,10 @@ module LatexYearlyPlanner
           end
 
           def personal_notes_label(day)
-            text = ['Perfonal Notes', hfill, link_reflect('Reflect', day:)].join
+            arr = ['Personal Notes']
+            arr.concat([hfill, link_daily_notes('More', day:)]) if config.sections.daily_reflect.enabled
+            text = arr.join
+            
             XTeX::Label.new(**struct(:personal_notes_label).deep_merge({ parameters: { text: } }))
           end
 
