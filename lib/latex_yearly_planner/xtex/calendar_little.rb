@@ -3,6 +3,8 @@
 module LatexYearlyPlanner
   module XTeX
     class CalendarLittle
+      include HyperHelpers
+
       def default_parameters
         {
           width: nil,
@@ -70,8 +72,8 @@ module LatexYearlyPlanner
           row = week.days.map { |day| format_day(day) }
           next row unless parameters.show_week_numbers
 
-          row.unshift(week.number) if week_number_placement == :left
-          row.push(week.number) if week_number_placement == :right
+          row.unshift(link_week(week.number, week:)) if week_number_placement == :left
+          row.push(link_week(week.number, week:)) if week_number_placement == :right
 
           row
         end

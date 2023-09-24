@@ -31,8 +31,11 @@ module LatexYearlyPlanner
 
       def reference
         present = days.find(&:present?)
+        yesterday = present.yesterday
 
-        "#{present.year}-#{present.cweek}"
+        return "#{yesterday.year}-week-#{yesterday.cweek}" if yesterday.cweek == present.cweek
+
+        "#{present.year}-week-#{present.cweek}"
       end
     end
   end
