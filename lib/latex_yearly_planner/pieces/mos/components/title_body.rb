@@ -6,7 +6,10 @@ module LatexYearlyPlanner
       module Components
         class TitleBody < Component
           def generate
-            'hello world from component'
+            <<~LATEX
+              \\vspace*{\\fill}
+              \\hfill\\resizebox{!}{3cm}{2023}
+            LATEX
           end
         end
       end

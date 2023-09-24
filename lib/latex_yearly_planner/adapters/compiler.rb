@@ -14,6 +14,8 @@ module LatexYearlyPlanner
         number.times do
           `cd #{file_path} && pdflatex -halt-on-error #{index_file}`
         end
+
+        raise "Error compiling #{index_file}" unless $?.success?
       end
 
       private
