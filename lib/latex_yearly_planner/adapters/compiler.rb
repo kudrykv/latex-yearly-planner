@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'English'
 module LatexYearlyPlanner
   module Adapters
     class Compiler
@@ -15,7 +16,7 @@ module LatexYearlyPlanner
           `cd #{file_path} && pdflatex -halt-on-error #{index_file}`
         end
 
-        raise "Error compiling #{index_file}" unless $?.success?
+        raise "Error compiling #{index_file}" unless $CHILD_STATUS.success?
       end
 
       private
