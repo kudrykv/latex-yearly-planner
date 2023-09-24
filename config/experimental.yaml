@@ -214,7 +214,7 @@ sections:
           shift_vertical: 5mm
 
   index_notes:
-    enabled: false
+    enabled: true
     parameters:
       index_pages: 2
       notes_per_page: 25

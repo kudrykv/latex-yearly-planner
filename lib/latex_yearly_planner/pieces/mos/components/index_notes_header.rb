@@ -7,7 +7,7 @@ module LatexYearlyPlanner
         class IndexNotesHeader < Header
           def generate_index(page)
             [
-              top_table,
+              top_table(page:),
               hfill,
               index_title(page),
               hrule,
@@ -18,11 +18,11 @@ module LatexYearlyPlanner
             ].join
           end
 
-          def generate_notes(note, _page)
+          def generate_notes(note, page)
             [
-              top_table,
+              top_table(page:, note:),
               hfill,
-              notes_title(note),
+              notes_title(page, note),
               hrule,
               margin_note,
               nl,
@@ -33,12 +33,12 @@ module LatexYearlyPlanner
 
           private
 
-          def index_title(_page)
-            TeX::TextSize.new('Index').huge
+          def index_title(page)
+            target_reference(TeX::TextSize.new('Index').huge, reference: 'notes', page:)
           end
 
-          def notes_title(note)
-            TeX::TextSize.new("Note #{note}").huge
+          def notes_title(page, note)
+            link_reference(TeX::TextSize.new("Note #{note}").huge, reference: 'notes', page:)
           end
         end
       end

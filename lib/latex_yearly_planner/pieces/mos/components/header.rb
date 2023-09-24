@@ -7,7 +7,7 @@ module LatexYearlyPlanner
         class Header < Component
           def top_table(...)
             table = TeX::Tabular.new(**parameters(:header, :top_table))
-            table.add_row([calendar_cell(...), index_notes_cell, index_todos_cell])
+            table.add_row([calendar_cell(...), index_notes_cell(...), index_todos_cell])
 
             table
           end
@@ -36,11 +36,17 @@ module LatexYearlyPlanner
 
           attr_accessor :index_notes_disable_highlight, :index_todos_disable_highlight
 
-          def index_notes_cell
+          def index_notes_cell(...)
             cell = TeX::Cell.new('Notes')
             cell.selected = true if section_name == :index_notes && !index_notes_disable_highlight
 
-            cell
+            link_reference(cell, reference: 'notes', page: notes_page(...))
+          end
+
+          def notes_page(**kwargs)
+            return 1 unless kwargs.key? :page
+
+            kwargs[:page]
           end
 
           def index_todos_cell

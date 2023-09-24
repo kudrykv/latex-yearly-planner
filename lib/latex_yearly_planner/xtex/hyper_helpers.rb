@@ -42,6 +42,14 @@ module LatexYearlyPlanner
       def link_day(content, day:)
         Hyper.new(content, reference: day.reference).link
       end
+
+      def target_reference(content, reference:, page: 1)
+        Hyper.new(content, reference:, page:).target
+      end
+
+      def link_reference(content, reference:, page: 1)
+        Hyper.new(content, reference:, page:).link
+      end
     end
   end
 end
