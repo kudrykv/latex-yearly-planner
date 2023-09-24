@@ -33,6 +33,10 @@ module LatexYearlyPlanner
       def reference
         date.strftime('%Y-%m-%d')
       end
+
+      def ==(other)
+        other.is_a?(Day) && date == other.date
+      end
     end
   end
 end
