@@ -9,13 +9,25 @@ module LatexYearlyPlanner
 
           def generate(week)
             [
-              row(week.days.take(3).map { |day| link_day(day.name, day:) }),
-              row(week.days.drop(3).take(3).map { |day| link_day(day.name, day:) }),
-              row([link_day(week.days.last.name, day: week.days.last), 'Notes', XTeX::Dummy.new])
+              first_row(week),
+              second_row(week),
+              third_row(week)
             ].join(vfill)
           end
 
           private
+
+          def first_row(week)
+            row(week.days.take(3).map { |day| link_day(day.name, day:) })
+          end
+
+          def second_row(week)
+            row(week.days.drop(3).take(3).map { |day| link_day(day.name, day:) })
+          end
+
+          def third_row(week)
+            row([link_day(week.days.last.name, day: week.days.last), 'Notes', XTeX::Dummy.new])
+          end
 
           def row(arr)
             names = arr.map(&method(:col)).join('\\hfill{}')
