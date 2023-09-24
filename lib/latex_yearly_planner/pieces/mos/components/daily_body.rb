@@ -44,7 +44,7 @@ module LatexYearlyPlanner
                 nl,
                 notes_label(day), notes,
                 nl,
-                personal_notes_label, personal_notes
+                personal_notes_label(day), personal_notes
               ].join(nl),
               width: param(:write_column_width)
             )
@@ -68,8 +68,9 @@ module LatexYearlyPlanner
             XTeX::Notes.new(**struct(:notes))
           end
 
-          def personal_notes_label
-            XTeX::Label.new(**struct(:personal_notes_label).deep_merge({ parameters: { text: 'Personal Notes' } }))
+          def personal_notes_label(day)
+            text = ['Perfonal Notes', hfill, link_reflect('Reflect', day:)].join
+            XTeX::Label.new(**struct(:personal_notes_label).deep_merge({ parameters: { text: } }))
           end
 
           def personal_notes
