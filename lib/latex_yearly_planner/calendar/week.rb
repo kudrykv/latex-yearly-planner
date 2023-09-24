@@ -28,6 +28,12 @@ module LatexYearlyPlanner
       def quarters
         days.compact.uniq(&:mon).map { |date| Quarter.new(date.beginning_of_quarter, weekday_start:) }
       end
+
+      def reference
+        present = days.find(&:present?)
+
+        "#{present.year}-#{present.cweek}"
+      end
     end
   end
 end
