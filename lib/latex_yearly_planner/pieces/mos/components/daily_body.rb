@@ -9,7 +9,7 @@ module LatexYearlyPlanner
             [
               schedule_column(day),
               spacer,
-              writings_column
+              writings_column(day)
             ].join
           end
 
@@ -37,12 +37,12 @@ module LatexYearlyPlanner
             )
           end
 
-          def writings_column
+          def writings_column(day)
             TeX::Minipage.new(
               content: [
                 todo_label, todo,
                 nl,
-                notes_label, notes,
+                notes_label(day), notes,
                 nl,
                 personal_notes_label, personal_notes
               ].join(nl),
@@ -58,8 +58,10 @@ module LatexYearlyPlanner
             XTeX::ToDo.new(**struct(:todo))
           end
 
-          def notes_label
-            XTeX::Label.new(**struct(:notes_label).deep_merge({ parameters: { text: 'Notes' } }))
+          def notes_label(day)
+            text = ['Notes', hfill, link_daily_notes('More', day:)].join
+
+            XTeX::Label.new(**struct(:notes_label).deep_merge({ parameters: { text: } }))
           end
 
           def notes

@@ -19,7 +19,7 @@ module LatexYearlyPlanner
           end
 
           def title(day)
-            TeX::TextSize.new(day.name).huge
+            target_daily_notes(TeX::TextSize.new(day.name).huge, day:)
           end
         end
       end

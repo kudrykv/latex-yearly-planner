@@ -48,6 +48,14 @@ module LatexYearlyPlanner
         Hyper.new(content, reference: day.reference).link
       end
 
+      def target_daily_notes(content, day:)
+        Hyper.new(content, reference: "daily-notes-#{day.reference}").target
+      end
+
+      def link_daily_notes(content, day:)
+        Hyper.new(content, reference: "daily-notes-#{day.reference}").link
+      end
+
       def target_note(content, note:, page: 1)
         Hyper.new(content, reference: note_reference(note), page:).target
       end
