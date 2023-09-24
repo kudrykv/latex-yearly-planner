@@ -34,12 +34,18 @@ module LatexYearlyPlanner
       def index_table
         table = TeX::TabularX.new(**parameters.to_h)
 
-        parameters.start_from.upto(parameters.start_from + parameters.count - 1) do |index|
+        from_to_entries.each do |index|
           num = "#{MinHeight.new(parameters.line_height)}#{index}."
-          table.add_row([link_reference(num, reference: parameters.make_ref.call(index)), ''])
+          reference = parameters.make_ref.call(index)
+
+          table.add_row([link_reference(num, reference:), ''])
         end
 
         table
+      end
+
+      def from_to_entries
+        parameters.start_from.upto(parameters.start_from + parameters.count - 1)
       end
     end
   end
