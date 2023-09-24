@@ -5,11 +5,13 @@ module LatexYearlyPlanner
     module Mos
       module Components
         class WeeklyBody < Component
+          include XTeX::HyperHelpers
+
           def generate(week)
             [
-              row(week.days.take(3).map(&:name)),
-              row(week.days.drop(3).take(3).map(&:name)),
-              row([week.days.last.name, 'Notes', XTeX::Dummy.new])
+              row(week.days.take(3).map { |day| link_day(day.name, day:) }),
+              row(week.days.drop(3).take(3).map { |day| link_day(day.name, day:) }),
+              row([link_day(week.days.last.name, day: week.days.last), 'Notes', XTeX::Dummy.new])
             ].join(vfill)
           end
 
