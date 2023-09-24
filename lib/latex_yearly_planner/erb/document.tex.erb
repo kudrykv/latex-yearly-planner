@@ -18,7 +18,11 @@
 \usepackage{expl3}
 \usepackage{leading}
 \usepackage{pgffor}
-\usepackage{hyperref}
+<% if document.debug.enabled && document.debug.parameters.highlight_links %>
+  \usepackage{hyperref}
+<% else %>
+  \usepackage[hidelinks]{hyperref}
+<% end %>
 \usepackage{marginnote}
 \usepackage{adjustbox}
 \usepackage{multido}
