@@ -48,8 +48,12 @@ module LatexYearlyPlanner
         Hyper.new(content, reference: day.reference).link
       end
 
-      def target_note(content, note)
-        Hyper.new(content, reference: "note-#{note}").target
+      def target_note(content, note:, page: 1)
+        Hyper.new(content, reference: note_reference(note), page:).target
+      end
+
+      def note_reference(note)
+        "note-#{note}"
       end
 
       def target_todo(content, todo:, page: 1)

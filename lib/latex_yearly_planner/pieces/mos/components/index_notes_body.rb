@@ -16,7 +16,11 @@ module LatexYearlyPlanner
           private
 
           def additional_index_params(page)
-            { parameters: { start_from: start_from(page), count: param(:notes_per_page) } }
+            { parameters: {
+              start_from: start_from(page),
+              count: param(:notes_per_page),
+              make_ref: ->(index) { note_reference(index) }
+            } }
           end
 
           def start_from(page)
