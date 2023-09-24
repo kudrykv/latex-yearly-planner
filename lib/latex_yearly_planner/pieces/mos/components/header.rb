@@ -9,12 +9,14 @@ module LatexYearlyPlanner
 
           def top_table(...)
             table = TeX::Tabular.new(**parameters(:header, :top_table))
-            table.add_row([calendar_cell(...), index_notes_cell(...), index_todos_cell])
+            table.add_row([calendar_cell(...), index_notes_cell(...), index_todos_cell].compact)
 
             table
           end
 
           def calendar_cell(...)
+            return unless config.sections.annual.enabled
+
             cell = TeX::Cell.new('Calendar')
             cell.selected = true if section_name == :annual
 
@@ -39,6 +41,8 @@ module LatexYearlyPlanner
           attr_accessor :index_notes_disable_highlight, :index_todos_disable_highlight
 
           def index_notes_cell(...)
+            return unless config.sections.index_notes.enabled
+
             cell = TeX::Cell.new('Notes')
             cell.selected = true if section_name == :index_notes && !index_notes_disable_highlight
 
@@ -54,6 +58,8 @@ module LatexYearlyPlanner
           end
 
           def index_todos_cell
+            return unless config.sections.index_todos.enabled
+
             cell = TeX::Cell.new('Todo')
             cell.selected = true if section_name == :index_todos && !index_todos_disable_highlight
 
