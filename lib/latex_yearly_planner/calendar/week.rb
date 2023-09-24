@@ -6,7 +6,7 @@ module LatexYearlyPlanner
       attr_reader :days, :weekday_start
 
       def initialize(days, weekday_start: nil)
-        @days = days
+        @days = days.map { |day| day && Day.new(day, weekday_start:) }
         @weekday_start = weekday_start
       end
 

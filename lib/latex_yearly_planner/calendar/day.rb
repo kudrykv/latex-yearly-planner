@@ -29,6 +29,10 @@ module LatexYearlyPlanner
       def method_missing(...)
         date.send(...)
       end
+
+      def reference
+        date.strftime('%Y-%m-%d')
+      end
     end
   end
 end

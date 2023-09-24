@@ -30,7 +30,7 @@ module LatexYearlyPlanner
 
         table = TeX::TabularX.new(**table_options)
 
-        table.title = month.name
+        table.title = link_month(month.name, month:)
         table.add_row(header)
 
         week_rows.each { |row| table.add_row(row) }
@@ -81,12 +81,12 @@ module LatexYearlyPlanner
 
       def format_day(day)
         return '' unless day
-        return "{#{day.mday}}" unless day == parameters.highlight_day&.date
+        return "{#{link_day(day.mday, day:)}}" unless day == parameters.highlight_day&.date
 
         cell = TeX::Cell.new(day.mday)
         cell.selected = true
 
-        cell.to_s
+        link_day(cell, day:)
       end
 
       def week_number_placement
