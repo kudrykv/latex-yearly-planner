@@ -3,6 +3,8 @@
 module LatexYearlyPlanner
   module XTeX
     class CalendarLarge
+      include HyperHelpers
+
       attr_reader :month,
                   :show_week_numbers,
                   :week_number_placement,
@@ -79,7 +81,7 @@ module LatexYearlyPlanner
       end
 
       def prepare_row(week)
-        row = week.days.map { |day| day ? "{#{day.mday}}" : '' }
+        row = week.days.map { |day| day ? "{#{link_day(day.mday, day:)}}" : '' }
         row[0] = "#{make_cell_height}#{row[0]}"
 
         row
@@ -94,7 +96,7 @@ module LatexYearlyPlanner
       end
 
       def week_name_box(week)
-        "#{XTeX::MinHeight.new(week_column_width)}Week #{week.number}"
+        link_week("#{XTeX::MinHeight.new(week_column_width)}Week #{week.number}", week:)
       end
     end
   end
