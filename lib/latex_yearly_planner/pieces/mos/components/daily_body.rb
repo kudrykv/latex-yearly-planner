@@ -74,7 +74,7 @@ module LatexYearlyPlanner
             arr = ['Personal Notes']
             arr.concat([hfill, link_daily_notes('More', day:)]) if config.sections.daily_reflect.enabled
             text = arr.join
-            
+
             XTeX::Label.new(**struct(:personal_notes_label).deep_merge({ parameters: { text: } }))
           end
 
