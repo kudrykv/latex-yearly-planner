@@ -34,11 +34,12 @@ module LatexYearlyPlanner
           private
 
           def index_title(page)
-            target_reference(TeX::TextSize.new('Index').huge, reference: NOTES_REFERENCE, page:)
+            target_reference(TeX::TextSize.new('Index').huge, reference: NOTES_INDEX_REFERENCE, page:)
           end
 
           def notes_title(note)
-            link_reference(TeX::TextSize.new("Note #{note}").huge, reference: NOTES_REFERENCE, page: notes_page(note:))
+            content = TeX::TextSize.new("Note #{note}").huge
+            link_reference(content, reference: NOTES_INDEX_REFERENCE, page: notes_page(note:))
           end
         end
       end
