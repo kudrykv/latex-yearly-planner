@@ -5,7 +5,7 @@ module LatexYearlyPlanner
     class Dummy
       attr_reader :color, :text
 
-      def initialize(color: 'white', text: '.')
+      def initialize(color: 'white', text: 'Q')
         @color = color
         @text = text
       end

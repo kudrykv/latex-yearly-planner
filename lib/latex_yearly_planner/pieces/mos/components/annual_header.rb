@@ -21,7 +21,7 @@ module LatexYearlyPlanner
           private
 
           def title(page)
-            target_year(huge(year), page:, year:)
+            target_year(huge(year.to_s + XTeX::Dummy.new.to_s), page:, year:)
           end
         end
       end

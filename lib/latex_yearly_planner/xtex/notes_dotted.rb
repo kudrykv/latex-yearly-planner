@@ -9,7 +9,8 @@ module LatexYearlyPlanner
           height: '1cm',
           horizontal_spacing_between_dots: '5mm',
           vertical_spacing_between_dots: '5mm',
-          shift_vertical: nil
+          shift_vertical: nil,
+          shift_horizontal: nil
         }
       end
 
@@ -23,7 +24,7 @@ module LatexYearlyPlanner
       def to_s
         return '' unless enabled
 
-        "\\adjustbox{valign=t}{#{minipage}}"
+        "\\adjustbox{valign=t}{#{shift_horizontal}#{minipage}}"
       end
 
       private
@@ -48,6 +49,12 @@ module LatexYearlyPlanner
         return '' unless parameters.shift_vertical
 
         "\\vspace{#{parameters.shift_vertical}}"
+      end
+
+      def shift_horizontal
+        return '' unless parameters.shift_horizontal
+
+        "\\hspace{#{parameters.shift_horizontal}}"
       end
 
       def vertical_spacing_between_dots
