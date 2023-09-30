@@ -245,3 +245,6 @@ sections:
       todos:
         parameters:
           count: 33
+
+  about:
+    enabled: true
