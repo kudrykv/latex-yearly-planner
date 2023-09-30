@@ -16,7 +16,6 @@ RSpec.describe LatexYearlyPlanner::Calendar::Month do
     let(:another_same_month) { described_class.new(date, weekday_start:) }
     let(:quarter) { Quarter.new(date.beginning_of_quarter, weekday_start:) }
 
-
     let :weeks do
       [
         Week.new([nil, nil, nil, nil] + (1..3).map { |day| Date.new(2023, 9, day) }, weekday_start:),

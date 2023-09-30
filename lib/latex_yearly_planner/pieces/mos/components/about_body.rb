@@ -8,7 +8,7 @@ module LatexYearlyPlanner
           def generate
             <<~LATEX
               This is the configuration that was used to build the planner.
-              
+
               SHA: #{sha}
               Config:
               \\begin{multicols}{2}\\begin{tiny}\\begin{verbatim}
