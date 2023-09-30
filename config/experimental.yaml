@@ -95,7 +95,7 @@ sections:
           width: 5.8cm
 
   quarterly:
-    enabled: false
+    enabled: true
     parameters:
       calendars_width: 5.8cm
       spacer_width: 0.5cm
@@ -106,10 +106,10 @@ sections:
           shift_vertical: 4mm
 
   monthly:
-    enabled: false
+    enabled: true
 
   weekly:
-    enabled: false
+    enabled: true
     parameters:
       column_width: 4cm
       notes:
@@ -162,7 +162,7 @@ sections:
           height: 4cm
 
   daily_notes:
-    enabled: false
+    enabled: true
     parameters:
       pages: 2
       notes:
@@ -173,7 +173,7 @@ sections:
           height: 16cm
 
   daily_reflect:
-    enabled: false
+    enabled: true
     parameters:
       goals_label:
         enabled: true
@@ -220,7 +220,7 @@ sections:
           shift_horizontal: 0.5mm
 
   index_notes:
-    enabled: false
+    enabled: true
     parameters:
       index_pages: 2
       notes_per_page: 25
