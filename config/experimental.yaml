@@ -3,7 +3,7 @@ document:
     enabled: false
     parameters:
       highlight_links: true
-      highlight_frames: true
+      highlight_frames: false
 
   document_class:
     name: article
@@ -42,7 +42,7 @@ parameters:
           horizontal_spacing: 6pt
       quarterly_table:
         parameters:
-          min_cell_height: 10mm
+          min_cell_height: 10.8mm
           horizontal_spacing: 0mm
           format: Y
           horizontal_lines: true
@@ -95,28 +95,28 @@ sections:
           width: 5.8cm
 
   quarterly:
-    enabled: true
+    enabled: false
     parameters:
       calendars_width: 5.8cm
       spacer_width: 0.5cm
       notes:
         parameters:
-          width: 5.8cm
+          width: 5.5cm
           height: 16cm
           shift_vertical: 4mm
 
   monthly:
-    enabled: true
+    enabled: false
 
   weekly:
-    enabled: true
+    enabled: false
     parameters:
       column_width: 4cm
       notes:
         parameters:
-          width: 12.5cm
+          width: 12cm
           height: 4.5cm
-          shift_vertical: 1mm
+          shift_vertical: 2mm
 
   daily:
     enabled: true
@@ -146,7 +146,8 @@ sections:
       notes:
         parameters:
           shift_vertical: 5mm
-          width: 5.8cm
+          shift_horizontal: 1mm
+          width: 5.5cm
           height: 4cm
       personal_notes_label:
         enabled: true
@@ -156,21 +157,23 @@ sections:
         type: dotted
         parameters:
           shift_vertical: 5mm
-          width: 5.8cm
+          shift_horizontal: 1mm
+          width: 5.5cm
           height: 4cm
 
   daily_notes:
-    enabled: true
+    enabled: false
     parameters:
       pages: 2
       notes:
         parameters:
           shift_vertical: 4mm
+          shift_horizontal: 0.5mm
           width: 12cm
           height: 16cm
 
   daily_reflect:
-    enabled: true
+    enabled: false
     parameters:
       goals_label:
         enabled: true
@@ -188,6 +191,7 @@ sections:
           width: 12cm
           height: 3cm
           shift_vertical: 5mm
+          shift_horizontal: 0.5mm
 
       gratitude_label:
         enabled: true
@@ -200,6 +204,7 @@ sections:
           width: 12cm
           height: 3cm
           shift_vertical: 5mm
+          shift_horizontal: 0.5mm
 
       daily_log_label:
         enabled: true
@@ -212,9 +217,10 @@ sections:
           width: 12cm
           height: 6.5cm
           shift_vertical: 5mm
+          shift_horizontal: 0.5mm
 
   index_notes:
-    enabled: true
+    enabled: false
     parameters:
       index_pages: 2
       notes_per_page: 25
@@ -227,6 +233,7 @@ sections:
       notes:
         parameters:
           shift_vertical: 4mm
+          shift_horizontal: 0.5mm
           width: 12cm
           height: 16cm
 
