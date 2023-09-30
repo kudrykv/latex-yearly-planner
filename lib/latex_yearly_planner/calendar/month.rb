@@ -55,6 +55,8 @@ module LatexYearlyPlanner
           .map { |week| Week.new(week, weekday_start:) }
       end
 
+      private
+
       def cut_not_our_month(week)
         week.map { |day| day.mon == date.mon ? day : nil }
       end

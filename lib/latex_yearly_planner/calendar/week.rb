@@ -10,6 +10,10 @@ module LatexYearlyPlanner
         @weekday_start = weekday_start
       end
 
+      def ==(other)
+        days == other&.days && weekday_start == other&.weekday_start
+      end
+
       def name
         "Week #{number}"
       end
