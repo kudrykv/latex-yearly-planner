@@ -6,29 +6,11 @@ module LatexYearlyPlanner
       module Components
         class IndexNotesHeader < Header
           def generate_index(page)
-            [
-              top_table(page:),
-              hfill,
-              index_title(page),
-              hrule,
-              margin_note,
-              nl,
-              vspace(param(:header, :skip)),
-              nlnl
-            ].join
+            make_header(top_table(page:), index_title(page))
           end
 
           def generate_notes(note, page)
-            [
-              top_table(page:, note:),
-              hfill,
-              notes_title(note),
-              hrule,
-              margin_note,
-              nl,
-              vspace(param(:header, :skip)),
-              nlnl
-            ].join
+            make_header(top_table(page:), notes_title(note))
           end
 
           private

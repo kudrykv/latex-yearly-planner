@@ -6,16 +6,12 @@ module LatexYearlyPlanner
       module Components
         class DailyNotesHeader < Header
           def generate(_page, day)
-            [
-              top_table,
-              hfill,
+            make_header(
+              top_table(day:),
               title(day),
-              hrule,
-              margin_note(highlight_quarters: [day.quarter], highlight_months: [day.month]),
-              nl,
-              vspace(param(:header, :skip)),
-              nlnl
-            ].join
+              highlight_quarters: [day.quarter],
+              highlight_months: [day.month]
+            )
           end
 
           def title(day)

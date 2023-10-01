@@ -6,16 +6,7 @@ module LatexYearlyPlanner
       module Components
         class AnnualHeader < Header
           def generate(page, _months)
-            [
-              top_table,
-              hfill,
-              title(page),
-              hrule,
-              margin_note,
-              nl,
-              vspace(param(:header, :skip)),
-              nlnl
-            ].join
+            make_header(top_table, title(page))
           end
 
           private

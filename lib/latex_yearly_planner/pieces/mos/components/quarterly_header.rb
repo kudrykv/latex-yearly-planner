@@ -6,16 +6,11 @@ module LatexYearlyPlanner
       module Components
         class QuarterlyHeader < Header
           def generate(quarter)
-            [
+            make_header(
               top_table(quarter:),
-              hfill,
               title(quarter),
-              hrule,
-              margin_note(highlight_quarters: [quarter]),
-              nl,
-              vspace(param(:header, :skip)),
-              nlnl
-            ].join
+              highlight_quarters: [quarter]
+            )
           end
 
           def title(quarter)
