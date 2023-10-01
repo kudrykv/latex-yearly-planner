@@ -34,6 +34,7 @@ parameters:
     runs: 2
   parameters:
     header:
+      title_position: left
       between_tables_spacing: 5mm
       skip: 1mm
       top_table:

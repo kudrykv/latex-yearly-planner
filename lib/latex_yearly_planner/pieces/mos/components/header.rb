@@ -6,16 +6,16 @@ module LatexYearlyPlanner
       module Components
         class Header < Component
           def make_header(top_table, title, highlight_quarters: [], highlight_months: [])
-            [
-              top_table,
-              hfill,
-              title,
+            top_line = [title, hfill, top_table]
+            top_line = top_line.reverse if param(:header, :title_position) == :right
+
+            (top_line + [
               hrule,
               margin_note(highlight_quarters:, highlight_months:),
               nl,
               vspace(param(:header, :skip)),
               nlnl
-            ].join
+            ]).join
           end
 
           def top_table(...)
