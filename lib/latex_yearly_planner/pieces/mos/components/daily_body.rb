@@ -6,11 +6,10 @@ module LatexYearlyPlanner
       module Components
         class DailyBody < Component
           def generate(day)
-            [
-              schedule_column(day),
-              spacer,
-              writings_column(day)
-            ].join
+            elements = [schedule_column(day), spacer, writings_column(day)]
+            elements = elements.reverse if param(:schedule_placement).to_sym == :right
+
+            elements.join
           end
 
           private

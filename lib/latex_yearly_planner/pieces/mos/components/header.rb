@@ -7,7 +7,7 @@ module LatexYearlyPlanner
         class Header < Component
           def make_header(top_table, title, highlight_quarters: [], highlight_months: [])
             top_line = [title, hfill, top_table]
-            top_line = top_line.reverse if param(:header, :title_position) == :right
+            top_line = top_line.reverse if param(:header, :title_position).to_sym == :right
 
             (top_line + [
               hrule,

@@ -98,6 +98,7 @@ sections:
   quarterly:
     enabled: true
     parameters:
+      calendars_column_position: left
       calendars_width: 5.8cm
       spacer_width: 0.5cm
       notes:
@@ -108,6 +109,10 @@ sections:
 
   monthly:
     enabled: true
+    parameters:
+      large_calendar:
+        parameters:
+          week_number_placement: right
 
   weekly:
     enabled: true
@@ -122,6 +127,7 @@ sections:
   daily:
     enabled: true
     parameters:
+      schedule_placement: right
       schedule_column_width: 5.8cm
       spacer_width: 0.5cm
       write_column_width: 5.8cm

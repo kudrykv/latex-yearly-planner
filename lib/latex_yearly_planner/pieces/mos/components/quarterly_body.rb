@@ -6,7 +6,10 @@ module LatexYearlyPlanner
       module Components
         class QuarterlyBody < Component
           def generate(quarter)
-            [calendars_minipage(quarter), spacer, notes].join
+            elements = [calendars_minipage(quarter), spacer, notes]
+            elements = elements.reverse if param(:calendars_column_position).to_sym == :right
+
+            elements.join
           end
 
           private
