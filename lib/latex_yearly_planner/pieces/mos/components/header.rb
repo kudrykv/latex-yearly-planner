@@ -5,6 +5,19 @@ module LatexYearlyPlanner
     module Mos
       module Components
         class Header < Component
+          def make_header(top_table, title, highlight_quarters: [], highlight_months: [])
+            [
+              top_table,
+              hfill,
+              title,
+              hrule,
+              margin_note(highlight_quarters:, highlight_months:),
+              nl,
+              vspace(param(:header, :skip)),
+              nlnl
+            ].join
+          end
+
           def top_table(...)
             table = TeX::Tabular.new(**parameters(:header, :top_table))
             table.add_row([calendar_cell(...), index_notes_cell(...), index_todos_cell(...)].compact)
