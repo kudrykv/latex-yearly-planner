@@ -60,6 +60,7 @@ module LatexYearlyPlanner
           def notes_label(day)
             arr = ['Notes']
             arr.push(hfill, link_daily_notes('More', day:)) if config.sections.daily_notes.enabled
+            arr.push(hfill, link_reflect('Reflect', day:)) if config.sections.daily_reflect.enabled
             text = arr.join
 
             XTeX::Label.new(**struct(:notes_label).deep_merge({ parameters: { text: } }))
