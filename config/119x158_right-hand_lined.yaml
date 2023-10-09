@@ -93,7 +93,7 @@ sections:
           width: 5.8cm
 
   quarterly:
-    enabled: false
+    enabled: true
     parameters:
       calendars_column_position: left
       calendars_width: 5.8cm
@@ -104,11 +104,11 @@ sections:
           height: 13.5cm
 
   monthly:
-    enabled: false
+    enabled: true
     parameters:
 
   weekly:
-    enabled: false
+    enabled: true
     parameters:
       column_width: 3cm
       notes:
@@ -117,7 +117,7 @@ sections:
           height: 4cm
 
   daily:
-    enabled: false
+    enabled: true
     parameters:
       schedule_placement: left
       schedule_column_width: 4cm
@@ -162,7 +162,7 @@ sections:
           height: 4cm
 
   daily_notes:
-    enabled: false
+    enabled: true
     parameters:
       pages: 2
       notes:
@@ -171,7 +171,7 @@ sections:
           height: 13.5cm
 
   daily_reflect:
-    enabled: false
+    enabled: true
     parameters:
       goals_label:
         enabled: true
@@ -212,7 +212,7 @@ sections:
           height: 5.5cm
 
   index_notes:
-    enabled: false
+    enabled: true
     parameters:
       index_pages: 4
       notes_per_page: 20
