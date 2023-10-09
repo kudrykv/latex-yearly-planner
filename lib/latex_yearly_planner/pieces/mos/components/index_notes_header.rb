@@ -10,7 +10,7 @@ module LatexYearlyPlanner
           end
 
           def generate_notes(note, page)
-            make_header(top_table(page:), notes_title(note))
+            make_header(top_table(page:, note:), notes_title(note))
           end
 
           private
