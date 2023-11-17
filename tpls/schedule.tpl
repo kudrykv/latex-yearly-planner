@@ -1,8 +1,27 @@
 \myUnderline{Schedule\textcolor{white}{g}}\vskip-\myLenLineThicknessDefault
-{{range $hour := .Day.Hours .Cfg.Layout.Numbers.DailyBottomHour .Cfg.Layout.Numbers.DailyTopHour -}}
+
+{{range $hour := .Day.Hours .Cfg.Layout.Numbers.DailyBottomHour .Cfg.Layout.Numbers.DailyBottomHourEnd -}}
 \myLineHeightButLine%
 {{if $.Cfg.AMPMTime -}}
-\parbox{9mm}{\hfill\small {{- $hour.FormatHour $.Cfg.AMPMTime -}} }%
+\parbox{9mm}{\hfill\small\textcolor{\myColorGray}{ {{- $hour.FormatHour $.Cfg.AMPMTime -}} }}%
+{{- else -}}
+{\small {{- $hour.FormatHour $.Cfg.AMPMTime -}} }
+{{- end}}
+\myLineLightGray\vskip\myLenLineHeightButLine\myLineGray
+{{- end}}
+{{range $hour := .Day.Hours .Cfg.Layout.Numbers.DailyBusBottomHour .Cfg.Layout.Numbers.DailyBusTopHour -}}
+\myLineHeightButLine%
+{{if $.Cfg.AMPMTime -}}
+\parbox{9mm}{\hfill\small\textcolor{\myColorGray}{ {{- $hour.FormatHour $.Cfg.AMPMTime -}} }}%
+{{- else -}}
+{\small {{- $hour.FormatHour $.Cfg.AMPMTime -}} }
+{{- end}}
+\myLineLightGray\vskip\myLenLineHeightButLine\myLineGray
+{{- end}}
+{{range $hour := .Day.Hours .Cfg.Layout.Numbers.DailyTopHourStart .Cfg.Layout.Numbers.DailyTopHour -}}
+\myLineHeightButLine%
+{{if $.Cfg.AMPMTime -}}
+\parbox{9mm}{\hfill\small\textcolor{\myColorGray}{ {{- $hour.FormatHour $.Cfg.AMPMTime -}} }}%
 {{- else -}}
 {\small {{- $hour.FormatHour $.Cfg.AMPMTime -}} }
 {{- end}}

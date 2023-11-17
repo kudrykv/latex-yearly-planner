@@ -27,7 +27,11 @@ layout:
     dailynotes: 25
     dailypersonal: 6
     dailybottomhour: 7
+    dailybottomhourend: 8
+    dailytophourstart: 18
     dailytophour: 23
+    dailybusbottomhour: 8
+    dailybustophour: 17
     dailydiarygoals: 10
     dailydiarygrateful: 4
     dailydiarybest: 4

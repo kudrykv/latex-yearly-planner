@@ -77,7 +77,11 @@ type Numbers struct {
 	DailyNotes          int
 	DailyPersonal       int
 	DailyBottomHour     int
+	DailyBottomHourEnd  int
+	DailyTopHourStart   int
 	DailyTopHour        int
+	DailyBusBottomHour  int
+	DailyBusTopHour     int
 	DailyDiaryGoals     int
 	DailyDiaryGrateful  int
 	DailyDiaryBest      int
