@@ -12,7 +12,7 @@ layout:
     margin:
       top: .3cm
       bottom: 0.6cm
-      left: 1.4cm
+      left: 0.3cm
       right: 0.3cm
 
   numbers:
@@ -20,16 +20,16 @@ layout:
     weeklylines: 11
     dailybottomhour: 6
     dailytophour: 23
-    dailytodos: 8
-    dailynotes: 27
+    dailytodos: 5
+    dailynotes: 30
     dailydiarygrateful: 4
     dailydiarybest: 4
     dailydiarylog: 26
     notesindexpages: 3
     notesonpage: 38
     dotheightfull: 38
-    dotwidthtwothirds: 19
-    dotwidthfull: 29
+    dotwidthtwothirds: 21
+    dotwidthfull: 31
 
   lengths:
     tabcolsep: 3.5pt

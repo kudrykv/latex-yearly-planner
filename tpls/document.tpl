@@ -46,7 +46,7 @@
 \fboxsep0pt
 
 \begin{document}
-
+\itshape
 {{template "macro.tpl" .}}
 
   {{range .Pages -}}
