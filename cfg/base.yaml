@@ -3,6 +3,7 @@ ampmtime: false
 dotted: true
 calafterschedule: false
 addlasthalfhour: true
+scheduleincludeworkinghours: true
 
 layout:
   paper:

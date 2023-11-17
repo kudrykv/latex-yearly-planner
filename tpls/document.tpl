@@ -25,7 +25,8 @@
 \usepackage{multido}
 \usepackage[sfdefault]{FiraSans}
 \usepackage[T1]{fontenc}
-\usepackage{tcolorbox}
+\usepackage[most]{tcolorbox}
+\usepackage{geometry}
 
 \hypersetup{
     {{- if not .Cfg.Debug.ShowLinks}}hidelinks=true{{end -}}

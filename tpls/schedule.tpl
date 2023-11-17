@@ -9,6 +9,10 @@
 {{- end}}
 \myLineLightGray\vskip\myLenLineHeightButLine\myLineGray
 {{- end}}
+{{ if $.Cfg.ScheduleIncludeWorkingHours -}}
+\colorbox{gray!10}{%
+    \noindent\parbox{\linewidth - 2\fboxsep}{%
+{{- end}}
 {{range $hour := .Day.Hours .Cfg.Layout.Numbers.DailyBusBottomHour .Cfg.Layout.Numbers.DailyBusTopHour -}}
 \myLineHeightButLine%
 {{if $.Cfg.AMPMTime -}}
@@ -17,6 +21,9 @@
 {\small {{- $hour.FormatHour $.Cfg.AMPMTime -}} }
 {{- end}}
 \myLineLightGray\vskip\myLenLineHeightButLine\myLineGray
+{{- end}}
+{{ if $.Cfg.ScheduleIncludeWorkingHours -}}
+}}
 {{- end}}
 {{range $hour := .Day.Hours .Cfg.Layout.Numbers.DailyTopHourStart .Cfg.Layout.Numbers.DailyTopHour -}}
 \myLineHeightButLine%
