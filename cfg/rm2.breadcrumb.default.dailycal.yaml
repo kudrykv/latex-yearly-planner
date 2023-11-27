@@ -6,6 +6,6 @@ ampmtime: true
 layout:
   numbers:
     dailybottomhour: 8
-    dailytophour: 20
+    dailytophour: 21
     dailybusbottomhour: 9
     dailybustophour: 17
