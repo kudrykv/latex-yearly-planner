@@ -1,10 +1,10 @@
 {{- $today := .Body.Day -}}
-
+\colorbox{white}{%
 \begin{minipage}[t]{\dimexpr2\myLenTriCol+\myLenTriColSep}
   \myUnderline{Todo\myDummyQ}
   \Repeat{\myNumDailyTodos}{\myTodoLineGray}
   \vskip\dimexpr5.4mm
-  \myUnderline{Notes \textcolor{\myColorGray}{$\vert$ {{ $today.LinkLeaf "More" "More" }}\hfill{}{{ $today.LinkLeaf "Reflect" "Reflect" }}\hfill{}All \hyperlink{Notes Index}{notes} | \hyperlink{Meetings Index}{meetings}}}
+  \myUnderline{Notes \textcolor{\myColorGray}{$\vert$ {{ $today.LinkLeaf "More" "More" }}\hfill{}{{ $today.LinkLeaf "Reflect" "Reflect" }}\hfill{}\hyperlink{Notes Index}{Notes} $\vert$ \hyperlink{Meetings Index}{Meetings}}}
   \myMash[\myDailySpring]{\myNumDailyNotes}{\myNumDotWidthTwoThirds}
 \end{minipage}%
 \hspace{\myLenTriColSep}%
