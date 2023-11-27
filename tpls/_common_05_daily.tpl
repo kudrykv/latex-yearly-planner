@@ -1,5 +1,4 @@
 {{- $today := .Body.Day -}}
-\colorbox{white}{%
 \begin{minipage}[t]{\dimexpr2\myLenTriCol+\myLenTriColSep}
   \myUnderline{Todo\myDummyQ}
   \Repeat{\myNumDailyTodos}{\myTodoLineGray}
