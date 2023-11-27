@@ -27,6 +27,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[most]{tcolorbox}
 \usepackage{geometry}
+\usepackage{fancyhdr}
 
 \hypersetup{
     {{- if not .Cfg.Debug.ShowLinks}}hidelinks=true{{end -}}

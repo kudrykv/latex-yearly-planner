@@ -53,3 +53,10 @@ pages:
         tpls:
           - breadcrumb_08_notes_index.tpl
           - breadcrumb_09_notes.tpl
+
+  - name: meetings_indexed
+    renderblocks:
+      - funcname: meetings_indexed
+        tpls:
+          - breadcrumb_10_meetings_index.tpl
+          - breadcrumb_11_meetings.tpl
