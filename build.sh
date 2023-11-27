@@ -29,6 +29,7 @@ _exit() {
     else
         echo "❌"
         echo "⚠️ Error during build process ⚠️"
+        cat /tmp/$NAME.log
     fi
 }
 
