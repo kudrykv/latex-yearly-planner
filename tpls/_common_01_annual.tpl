@@ -5,5 +5,5 @@
   {{- if ne $j 2 }} & {{end}}
 {{- end }}
 \end{tabularx}
-{{- if ne $i 3}} \vfill {{- end -}}
-{{- end -}}
+{{- if ne $i 3}} \noindent\vspace*{\fill} {{- end -}}
+{{- end -}}%
