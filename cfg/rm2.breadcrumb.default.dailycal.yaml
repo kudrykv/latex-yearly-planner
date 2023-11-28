@@ -1,5 +1,5 @@
 calafterschedule: true
-addlasthalfhour: false
+addlasthalfhour: true
 weekstart: 0
 ampmtime: true
 
