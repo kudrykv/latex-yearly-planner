@@ -10,7 +10,7 @@ import (
 )
 
 func Annual(cfg config.Config, tpls []string) (page.Modules, error) {
-	year := cal.NewYear(cfg.WeekStart, cfg.Year)
+	year := cal.NewYear(cfg.WeekStart, cfg.Year, cfg.Example)
 
 	return page.Modules{{
 		Cfg: cfg,

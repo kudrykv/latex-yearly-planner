@@ -9,7 +9,7 @@ import (
 
 func Quarterly(cfg config.Config, tpls []string) (page.Modules, error) {
 	modules := make(page.Modules, 0, 4)
-	year := cal.NewYear(cfg.WeekStart, cfg.Year)
+	year := cal.NewYear(cfg.WeekStart, cfg.Year, cfg.Example)
 
 	hRight := header.Items{
 		header.NewTextItem("Notes").RefText("Notes Index"),

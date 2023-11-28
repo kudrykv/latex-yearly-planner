@@ -7,7 +7,7 @@ import (
 )
 
 func Monthly(cfg config.Config, tpls []string) (page.Modules, error) {
-	year := cal.NewYear(cfg.WeekStart, cfg.Year)
+	year := cal.NewYear(cfg.WeekStart, cfg.Year, cfg.Example)
 	modules := make(page.Modules, 0, 12)
 
 	for _, quarter := range year.Quarters {

@@ -63,3 +63,5 @@ layout:
     gray: gray
     lightgray: gray!50
     dots: gray
+
+example: false

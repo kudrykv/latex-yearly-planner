@@ -22,8 +22,8 @@ type Config struct {
 	AddLastHalfHour             bool
 	ScheduleIncludeWorkingHours bool
 	Pages                       Pages
-
-	Layout Layout
+	Example                     bool
+	Layout                      Layout
 }
 
 type Debug struct {
@@ -90,6 +90,7 @@ type Numbers struct {
 	TodoLinesInTodoPage int
 	IndexMeetingNotes   int
 	NotesIndexPages     int
+	MeetingsIndexPages  int
 	NotesOnPage         int
 	DotHeightFull       int
 	DotWidthFull        int

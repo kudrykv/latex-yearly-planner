@@ -9,7 +9,7 @@ import (
 
 func NotesIndexed(cfg config.Config, tpls []string) (page.Modules, error) {
 	index := note.NewIndex(cfg.Year, cfg.Layout.Numbers.NotesOnPage, cfg.Layout.Numbers.NotesIndexPages)
-	year := cal.NewYear(cfg.WeekStart, cfg.Year)
+	year := cal.NewYear(cfg.WeekStart, cfg.Year, cfg.Example)
 	modules := make(page.Modules, 0, 1)
 
 	for idx, indexPage := range index.Pages {

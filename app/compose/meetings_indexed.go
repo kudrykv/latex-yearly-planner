@@ -9,7 +9,7 @@ import (
 
 func MeetingsIndexed(cfg config.Config, tpls []string) (page.Modules, error) {
 	index := meeting.NewIndex(cfg.Year, cfg.Layout.Numbers.NotesOnPage, cfg.Layout.Numbers.NotesIndexPages)
-	year := cal.NewYear(cfg.WeekStart, cfg.Year)
+	year := cal.NewYear(cfg.WeekStart, cfg.Year, cfg.Example)
 	modules := make(page.Modules, 0, 1)
 
 	for idx, indexPage := range index.Pages {
@@ -40,7 +40,7 @@ func MeetingsIndexed(cfg config.Config, tpls []string) (page.Modules, error) {
 					"SideQuarters": year.SideQuarters(0),
 					"SideMonths":   year.SideMonths(0),
 					"Extra": nt.
-						PrevNext(cfg.Layout.Numbers.NotesOnPage * cfg.Layout.Numbers.NotesIndexPages).
+						PrevNext(cfg.Layout.Numbers.NotesOnPage * cfg.Layout.Numbers.MeetingsIndexPages).
 						WithTopRightCorner(cfg.ClearTopRightCorner),
 					"Extra2": extra2(cfg.ClearTopRightCorner, false, false, nil, idxPage+1),
 				},

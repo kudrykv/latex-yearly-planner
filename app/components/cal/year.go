@@ -16,11 +16,14 @@ type Year struct {
 	Weeks    Weeks
 }
 
-func NewYear(wd time.Weekday, year int) *Year {
+func NewYear(wd time.Weekday, year int, example bool) *Year {
 	out := &Year{Number: year}
 	out.Weeks = NewWeeksForYear(wd, out)
-
-	for q := 1; q <= 4; q++ {
+	endIndex := 4
+	if example {
+		endIndex = 1
+	}
+	for q := 1; q <= endIndex; q++ {
 		out.Quarters = append(out.Quarters, NewQuarter(wd, out, q))
 	}
 
@@ -28,11 +31,7 @@ func NewYear(wd time.Weekday, year int) *Year {
 }
 
 func (y Year) Breadcrumb(cfg config.Config) string {
-	items := header.Items{}
-	if cfg.ClearTopLeftCorner {
-		items = append(items, header.NewPlainItem(`\kern 5mm`))
-	}
-	items = append(items,
+	return header.Items{
 		header.NewIntItem(y.Number).Ref(),
 		header.NewItemsGroup(
 			header.NewTextItem("Q1"),
@@ -40,9 +39,7 @@ func (y Year) Breadcrumb(cfg config.Config) string {
 			header.NewTextItem("Q3"),
 			header.NewTextItem("Q4"),
 		),
-	)
-
-	return items.Table(true)
+	}.Table(true)
 }
 
 func (y Year) SideQuarters(sel ...int) []header.CellItem {

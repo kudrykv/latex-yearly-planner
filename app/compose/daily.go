@@ -12,7 +12,7 @@ var DailyNotes = DailyStuff("More", "Notes")
 
 func DailyStuff(prefix, leaf string) func(cfg config.Config, tpls []string) (page.Modules, error) {
 	return func(cfg config.Config, tpls []string) (page.Modules, error) {
-		year := cal.NewYear(cfg.WeekStart, cfg.Year)
+		year := cal.NewYear(cfg.WeekStart, cfg.Year, cfg.Example)
 		modules := make(page.Modules, 0, 366)
 
 		for _, quarter := range year.Quarters {

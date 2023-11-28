@@ -8,7 +8,7 @@ import (
 
 func Weekly(cfg config.Config, tpls []string) (page.Modules, error) {
 	modules := make(page.Modules, 0, 53)
-	year := cal.NewYear(cfg.WeekStart, cfg.Year)
+	year := cal.NewYear(cfg.WeekStart, cfg.Year, cfg.Example)
 
 	for _, week := range year.Weeks {
 		modules = append(modules, page.Module{
