@@ -17,7 +17,7 @@ func Annual(cfg config.Config, tpls []string) (page.Modules, error) {
 		Tpl: tpls[0],
 		Body: map[string]interface{}{
 			"Year":         year,
-			"Breadcrumb":   year.Breadcrumb(),
+			"Breadcrumb":   year.Breadcrumb(cfg),
 			"HeadingMOS":   year.HeadingMOS(),
 			"SideQuarters": year.SideQuarters(0),
 			"SideMonths":   year.SideMonths(0),

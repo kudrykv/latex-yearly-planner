@@ -1,6 +1,7 @@
 package cal
 
 import (
+	"github.com/kudrykv/latex-yearly-planner/app/config"
 	"strconv"
 	"time"
 
@@ -26,8 +27,12 @@ func NewYear(wd time.Weekday, year int) *Year {
 	return out
 }
 
-func (y Year) Breadcrumb() string {
-	return header.Items{
+func (y Year) Breadcrumb(cfg config.Config) string {
+	items := header.Items{}
+	if cfg.ClearTopLeftCorner {
+		items = append(items, header.NewPlainItem(`\kern 5mm`))
+	}
+	items = append(items,
 		header.NewIntItem(y.Number).Ref(),
 		header.NewItemsGroup(
 			header.NewTextItem("Q1"),
@@ -35,7 +40,9 @@ func (y Year) Breadcrumb() string {
 			header.NewTextItem("Q3"),
 			header.NewTextItem("Q4"),
 		),
-	}.Table(true)
+	)
+
+	return items.Table(true)
 }
 
 func (y Year) SideQuarters(sel ...int) []header.CellItem {
