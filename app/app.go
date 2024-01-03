@@ -8,6 +8,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/kudrykv/latex-yearly-planner/app/components/icsparser"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/compose"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
@@ -16,8 +17,9 @@ import (
 )
 
 const (
-	fConfig = "config"
-	pConfig = "preview"
+	fConfig  = "config"
+	pConfig  = "preview"
+	fICSFile = "icsfile"
 )
 
 func New() *cli.App {
@@ -30,6 +32,11 @@ func New() *cli.App {
 		Flags: []cli.Flag{
 			&cli.PathFlag{Name: fConfig, Required: true},
 			&cli.BoolFlag{Name: pConfig, Required: false},
+			&cli.StringFlag{
+				Name:     fICSFile,
+				Usage:    "Path to the ICS file",
+				Required: false,
+			},
 		},
 
 		Action: action,
@@ -49,6 +56,19 @@ func action(c *cli.Context) error {
 	pathConfigs := strings.Split(c.Path(fConfig), ",")
 	if cfg, err = config.New(pathConfigs...); err != nil {
 		return fmt.Errorf("config new: %w", err)
+	}
+
+	icsFilePath := c.String(fICSFile)
+	if icsFilePath != "" {
+		events, err := icsparser.ParseICSFile(icsFilePath)
+		if err != nil {
+			return fmt.Errorf("error parsing ICS file: %w", err)
+		}
+		for i, event := range events {
+			// Directly use the Date from the event, which is already a time.Time
+			events[i].FormattedDate = event.Date.Format("02-01-2006")
+		}
+		cfg.Events = events
 	}
 
 	wr := &bytes.Buffer{}
@@ -118,13 +138,8 @@ func RootFilename(pathconfig string) string {
 		pathconfig = pathconfig[idx+1:]
 	}
 
-	if strings.HasSuffix(pathconfig, ".yml") {
-		pathconfig = pathconfig[:len(pathconfig)-len(".yml")]
-	}
-
-	if strings.HasSuffix(pathconfig, ".yaml") {
-		pathconfig = pathconfig[:len(pathconfig)-len(".yaml")]
-	}
+	pathconfig = strings.TrimSuffix(pathconfig, ".yml")
+	pathconfig = strings.TrimSuffix(pathconfig, ".yaml")
 
 	return pathconfig + ".tex"
 }

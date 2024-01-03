@@ -2,6 +2,9 @@
 
 set -eo pipefail
 
+ICSFILE="${ICSFILE:-}"
+# ICSFILE="app/components/icsparser/example_calendar.ics"
+
 if [ -z "$PLANNERGEN_BINARY" ]; then
   export GO_CMD="go run cmd/plannergen/plannergen.go"
 else
@@ -10,9 +13,9 @@ else
 fi
 
 if [ -z "$PREVIEW" ]; then
-  eval $GO_CMD --config "${CFG}"
+  eval $GO_CMD --config "${CFG}" --icsfile "${ICSFILE}"
 else
-  eval $GO_CMD --preview --config "${CFG}"
+  eval $GO_CMD --preview --config "${CFG}" --icsfile "${ICSFILE}"
 fi
 
 
@@ -33,7 +36,7 @@ for _ in "${_passes[@]}"; do
     -synctex=1 \
     -output-format=pdf \
     -output-directory=./out \
-    "out/${nakedname}.tex"
+    "out/${nakedname}.tex" > /dev/null
 done
 
 if [ -n "${NAME}" ]; then
