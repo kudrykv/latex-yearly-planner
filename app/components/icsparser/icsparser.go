@@ -11,6 +11,7 @@ import (
 type Event struct {
 	Date          time.Time
 	FormattedDate string
+	FormattedTime string
 	Summary       string
 }
 

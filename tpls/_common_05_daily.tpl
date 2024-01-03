@@ -21,8 +21,8 @@
 \myUnderline{Events for Today}
 \begin{itemize}
   {{- range $events }}
-    {{- if eq $today .Date }}
-      \item {{ .Summary }} - hello
+    {{- if eq (formatDate $today.Time) .FormattedDate }}
+      \item {{.FormattedTime}} - {{ .Summary }}
     {{- end }}
   {{- end }}
 \end{itemize}
