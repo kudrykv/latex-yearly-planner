@@ -36,7 +36,6 @@ func ParseICSFile(filePath string) ([]Event, error) {
 		}
 		formattedDate := parsedDate.Format("02-01-2006")
 		formattedTime := parsedDate.Format("15:04")
-		fmt.Println(formattedTime)
 		event := Event{
 			Date:    parsedDate,
 			FormattedDate: formattedDate,
