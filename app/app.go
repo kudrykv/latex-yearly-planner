@@ -64,10 +64,6 @@ func action(c *cli.Context) error {
 		if err != nil {
 			return fmt.Errorf("error parsing ICS file: %w", err)
 		}
-		for i, event := range events {
-			events[i].FormattedDate = event.Date.Format("02-01-2006")
-			events[i].FormattedTime = event.Date.Format("15:06")
-		}
 		cfg.Events = events
 	}
 

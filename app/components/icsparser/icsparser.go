@@ -34,8 +34,13 @@ func ParseICSFile(filePath string) ([]Event, error) {
 		if err != nil {
 			return nil, fmt.Errorf("could not convert Event.Date: %w", err)
 		}
+		formattedDate := parsedDate.Format("02-01-2006")
+		formattedTime := parsedDate.Format("15:04")
+		fmt.Println(formattedTime)
 		event := Event{
 			Date:    parsedDate,
+			FormattedDate: formattedDate,
+			FormattedTime: formattedTime,
 			Summary: component.GetProperty(ical.ComponentPropertySummary).Value,
 		}
 		events = append(events, event)
