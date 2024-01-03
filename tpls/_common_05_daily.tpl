@@ -13,12 +13,12 @@
 \begin{minipage}[t]{\dimexpr2\myLenTriCol+\myLenTriColSep}
   \myUnderline{Top priorities\myDummyQ}
   \Repeat{\myNumDailyTodos}{\myTodoLineGray}
-  \vskip\dimexpr5.4mm
+  \vskip\dimexpr2mm
   \myUnderline{Notes $\vert$ {{ $today.LinkLeaf "More" "More" }}\hfill{}{{ $today.LinkLeaf "Reflect" "Reflect" }}\hfill{}\hyperlink{Notes Index}{All notes}}
   \myMash[\myDailySpring]{\myNumDailyNotes}{\myNumDotWidthTwoThirds}
+  \vskip\dimexpr2mm
 
-\vskip\dimexpr5.4mm
-\myUnderline{Events for Today}
+\myUnderline{Events}
 \begin{itemize}
   {{- range $events }}
     {{- if eq (formatDate $today.Time) .FormattedDate }}
@@ -27,6 +27,6 @@
   {{- end }}
 \end{itemize}
 
-
 \end{minipage}
 \par\pagebreak
+
