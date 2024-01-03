@@ -34,8 +34,12 @@ func ParseICSFile(filePath string) ([]Event, error) {
 		if err != nil {
 			return nil, fmt.Errorf("could not convert Event.Date: %w", err)
 		}
-		formattedDate := parsedDate.Format("02-01-2006")
-		formattedTime := parsedDate.Format("15:04")
+		localLocation := time.Now().Location() // to present events based on currently generated location
+		localTime := parsedDate.In(localLocation)
+		formattedTime := localTime.Format("15:04")
+		formattedDate := localTime.Format("02-01-2006")
+		fmt.Println(formattedDate)
+		fmt.Println(formattedTime)
 		event := Event{
 			Date:    parsedDate,
 			FormattedDate: formattedDate,
