@@ -3,6 +3,7 @@ package icsparser
 import (
 	"fmt"
 	"os"
+	"strings"
 	"time"
 
 	ical "github.com/arran4/golang-ical"
@@ -30,16 +31,20 @@ func ParseICSFile(filePath string) ([]Event, error) {
 	var events []Event
 	for _, component := range calendar.Events() {
 		dateStr := component.GetProperty(ical.ComponentPropertyDtStart).Value
+		
+		// Skip events that don't end with 'Z' (not in UTC format)
+        if !strings.HasSuffix(dateStr, "Z") {
+            continue
+        }
+
 		parsedDate, err := time.Parse("20060102T150405Z", dateStr)
 		if err != nil {
 			return nil, fmt.Errorf("could not convert Event.Date: %w", err)
 		}
-		localLocation := time.Now().Location() // to present events based on currently generated location
+		localLocation := time.Now().Location() // to present events based on current location
 		localTime := parsedDate.In(localLocation)
 		formattedTime := localTime.Format("15:04")
 		formattedDate := localTime.Format("02-01-2006")
-		fmt.Println(formattedDate)
-		fmt.Println(formattedTime)
 		event := Event{
 			Date:    parsedDate,
 			FormattedDate: formattedDate,
