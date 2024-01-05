@@ -19,6 +19,11 @@ fi
 
 nakedname=$(echo "${CFG}" | rev | cut -d, -f1 | cut -d'/' -f 1 | cut -d'.' -f 2-99 | rev)
 
+if [ -n "${TRANSLATE}" ]; then
+  python3 translate.py
+  echo "Translating using translation.yaml..."
+fi
+
 _passes=(1)
 
 if [[ -n "${PASSES}" ]]; then
