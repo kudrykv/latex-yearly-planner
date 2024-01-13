@@ -19,9 +19,11 @@ fi
 
 nakedname=$(echo "${CFG}" | rev | cut -d, -f1 | cut -d'/' -f 1 | cut -d'.' -f 2-99 | rev)
 
-if [ -n "${TRANSLATE}" ]; then
-  python3 translate.py
-  echo "Translating using translation.yaml..."
+if [ -n "${TRANSLATION}" ]; then
+  python3 translate.py ${TRANSLATION}
+  export LATEX_CMD="xelatex"
+else
+  export LATEX_CMD="pdflatex"
 fi
 
 _passes=(1)
@@ -32,7 +34,7 @@ if [[ -n "${PASSES}" ]]; then
 fi
 
 for _ in "${_passes[@]}"; do
-  pdflatex \
+  $LATEX_CMD \
     -file-line-error \
     -interaction=nonstopmode \
     -synctex=1 \
