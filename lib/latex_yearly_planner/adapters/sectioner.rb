@@ -29,7 +29,7 @@ module LatexYearlyPlanner
       def section_constant(section_name, section_config)
         'LatexYearlyPlanner::' \
         'Pieces::' \
-        "#{template_name(section_config)}::" \
+        "#{section_template_name(section_config)}::" \
         'Sections::' \
         "#{section_name.to_s.camelize}".constantize
       end
@@ -37,9 +37,17 @@ module LatexYearlyPlanner
       def component_constant(section_name, section_config, piece_name)
         'LatexYearlyPlanner::' \
         'Pieces::' \
-        "#{template_name(section_config)}::" \
+        "#{component_template_name(section_config, piece_name)}::" \
         'Components::' \
         "#{section_name.to_s.camelize}#{piece_name.to_s.camelize}".constantize
+      end
+
+      def section_template_name(section_config)
+        (section_config.section_template_name || template_name(section_config)).camelize
+      end
+
+      def component_template_name(section_config, piece_name)
+        (section_config.send("#{piece_name}_template_name") || template_name(section_config)).camelize
       end
 
       def template_name(section_config)
