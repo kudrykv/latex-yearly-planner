@@ -43,13 +43,13 @@ parameters:
           horizontal_spacing: 6pt
       quarterly_table:
         parameters:
-          min_cell_height: 9mm
+          min_cell_height: 13mm
           horizontal_spacing: 0mm
           format: Y
           horizontal_lines: true
       monthly_table:
         parameters:
-          min_cell_height: 8.15mm
+          min_cell_height: 11.1mm
           horizontal_spacing: 0mm
           format: Y
           horizontal_lines: true
