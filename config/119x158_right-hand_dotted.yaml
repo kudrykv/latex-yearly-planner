@@ -53,8 +53,8 @@ parameters:
           horizontal_spacing: 0mm
           format: Y
           horizontal_lines: true
-    start_date: 2023, January
-    end_date: 2023, December
+    start_date: 2024, January
+    end_date: 2024, December
     weekday_start: Monday
     show_week_numbers: true
     format_ampm: false
@@ -83,17 +83,17 @@ sections:
   title:
     enabled: true
     parameters:
-      name: 2023
+      name: 2024
 
   annual:
-    enabled: false
+    enabled: true
     parameters:
-      months_per_page: 8
+      months_per_page: 6
       columns: 2
       underfull_vertical_spacing: 1cm
       little_calendar:
         parameters:
-          width: 5.8cm
+          width: 4.8cm
 
   quarterly:
     enabled: true

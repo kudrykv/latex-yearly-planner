@@ -8,7 +8,7 @@ module LatexYearlyPlanner
           def generate
             <<~LATEX
               \\vspace*{\\fill}
-              \\hfill\\resizebox{!}{3cm}{2023}
+              \\hfill\\resizebox{!}{3cm}{#{param(:name)}}
             LATEX
           end
         end
