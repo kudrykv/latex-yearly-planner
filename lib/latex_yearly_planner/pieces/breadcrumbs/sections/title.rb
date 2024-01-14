@@ -3,8 +3,8 @@
 module LatexYearlyPlanner
   module Pieces
     module Breadcrumbs
-      module Components
-        class TitleBody < Mos::Components::TitleBody; end
+      module Sections
+        class Title < Mos::Sections::Title; end
       end
     end
   end

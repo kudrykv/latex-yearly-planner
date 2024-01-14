@@ -4,7 +4,7 @@ module LatexYearlyPlanner
   module Pieces
     module Breadcrumbs
       module Components
-        class TitleBody < Mos::Components::TitleBody; end
+        class TitleHeader < Mos::Components::TitleHeader; end
       end
     end
   end

@@ -62,8 +62,6 @@ parameters:
 sections:
   title:
     enabled: true
-    section_template_name: mos
-    header_template_name: mos
     parameters:
       name: 2024
 
