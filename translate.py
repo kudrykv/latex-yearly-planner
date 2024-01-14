@@ -1,20 +1,22 @@
 from typing import Callable
 import json
 from sys import argv
+from glob import glob
 
 language = argv[1].lower()
+TRANSLATION_FOLDER = "translations/"
+file = f"{TRANSLATION_FOLDER}{language}.json"
 
-with open("translations.json", "r") as file:
-    translations = json.load(file)
-
-if any(language in key for key in translations.keys()):
-    translation = translations.get(language)
+if file in glob(f"{TRANSLATION_FOLDER}*.json"):
+    with open(file, "r") as f:
+        translation = json.load(f)
 else:
     raise ValueError("Requested translation is not currently supported.\nThe program will now exit.")
 
 
 if any(not word.isascii() for word in translation.values()):
-    font_edit = r"" # Do something here to fonts
+    print("unicode found")
+    font_edit = r""
 else:
     font_edit = ""
 print(f"Translating pdf to {language}")
@@ -79,6 +81,7 @@ def handle_monthly() -> None:
     replace = add_identifier(MONTHS, lambda x: "}{" + x + "}")
     replace |= add_identifier(WEEKDAYS)
     replace |= add_identifier(WEEK, lambda x: "[c]{" + x)
+    replace |= add_identifier(NOTES, lambda x: "{" + x + "}")
     for english, spanish in replace.items():
         text = text.replace(english, spanish)
 
