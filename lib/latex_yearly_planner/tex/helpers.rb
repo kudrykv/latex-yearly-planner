@@ -42,6 +42,10 @@ module LatexYearlyPlanner
       def huge(content)
         TextSize.new(content).huge.to_s
       end
+
+      def large(content)
+        TextSize.new(content).large.to_s
+      end
     end
   end
 end

@@ -21,7 +21,7 @@ document:
       top: 10mm
       bottom: 5mm
       left: 5mm
-      right: 12mm
+      right: 5mm
 
     margin_notes:
       width: 10mm
@@ -33,12 +33,14 @@ parameters:
   compile:
     runs: 1
   parameters:
-    start_date: 2023, January
-    end_date: 2023, December
+    start_date: 2024, January
+    end_date: 2024, December
     weekday_start: Monday
     show_week_numbers: true
     format_ampm: false
     week_number_placement: right
+    header:
+      title_position: right
     notes:
       type: dotted
       parameters:
@@ -66,14 +68,14 @@ sections:
       name: 2024
 
   annual:
-    enabled: false
+    enabled: true
     parameters:
-      months_per_page: 8
+      months_per_page: 6
       columns: 2
       underfull_vertical_spacing: 1cm
       little_calendar:
         parameters:
-          width: 5.8cm
+          width: 5.2cm
 
   quarterly:
     enabled: false

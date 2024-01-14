@@ -15,6 +15,12 @@ module LatexYearlyPlanner
         self
       end
 
+      def large
+        self.size = 'large'
+
+        self
+      end
+
       def to_s
         return text unless size
 

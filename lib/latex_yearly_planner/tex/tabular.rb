@@ -8,6 +8,8 @@ module LatexYearlyPlanner
                     :vertical_stretch,
                     :horizontal_spacing,
                     :horizontal_lines,
+                    :starting_hline,
+                    :trailing_hline,
                     :min_cell_height,
                     :lines_color
 
@@ -18,6 +20,8 @@ module LatexYearlyPlanner
         @vertical_stretch = options.fetch(:vertical_stretch, 1)
         @horizontal_spacing = options.fetch(:horizontal_spacing, '0pt')
         @horizontal_lines = options.fetch(:horizontal_lines, false)
+        @starting_hline = options.fetch(:starting_hline, false)
+        @trailing_hline = options.fetch(:trailing_hline, false)
         @min_cell_height = options.fetch(:min_cell_height, nil)
         @lines_color = options.fetch(:lines_color, nil)
       end
@@ -26,8 +30,8 @@ module LatexYearlyPlanner
         <<~LATEX
           {\\renewcommand{\\arraystretch}{#{vertical_stretch}}\\setlength{\\tabcolsep}{#{horizontal_spacing}}%
           \\begin{tabular}{#{make_format}}#{make_lines_color}
-            #{starting_hline}
-            #{build_rows}#{trailing_hline}
+            #{make_starting_hline}
+            #{build_rows}#{make_trailing_hline}
           \\end{tabular}}
         LATEX
           .strip
@@ -73,12 +77,12 @@ module LatexYearlyPlanner
         "\\\\#{hlines}\n"
       end
 
-      def starting_hline
-        horizontal_lines ? '\\hline' : ''
+      def make_starting_hline
+        starting_hline || horizontal_lines ? '\\hline' : ''
       end
 
-      def trailing_hline
-        horizontal_lines ? '\\\\\\hline' : ''
+      def make_trailing_hline
+        trailing_hline || horizontal_lines ? '\\\\\\hline' : ''
       end
 
       def make_min_cell_height
