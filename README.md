@@ -1,52 +1,35 @@
-# latex-yearly-planner
+# LatexYearlyPlanner
 
-PDF planner designed for e-ink devices.
+TODO: Delete this and the text below, and describe your gem
 
-See [discussions](https://github.com/kudrykv/latex-yearly-planner/discussions) for available planners and their variations.
+Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/LatexYearlyPlanner`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-### Documentation work in progress
-I am planning to write more documentation on how to use it and build it on your own.
-Spoiler alert: it won't be easy.
-Anyhow, more info on this will come.
+## Installation
 
-## Quick Start Guide
-Here are the steps to quickly get the project up and running.
+TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
 
-* Note: if you are here just for the planners you can find pre-generated
- planners in [2022-2032 Planners Discussions](https://github.com/kudrykv/latex-yearly-planner/discussions/57).
+Install the gem and add to the application's Gemfile by executing:
 
-For the tinkerers, read on.
+    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
 
-The following was tested with [POP_OS 22.04.1 LTS](https://pop.system76.com/) under [Virtualbox](https://www.virtualbox.org/) version 6.1
+If bundler is not being used to manage dependencies, install the gem by executing:
 
-### Install Dependencies
-1. [Go Language](https://go.dev/dl/)
-2. [LaTex](https://miktex.org/download) & [PDFLaTeX](https://www.latex-project.org/get/)
-3. From the project directory, run the following command after updating
- 'PLANNER_YEAR' below. This should generate the PDF in the 'out' directory.
-<code>PLANNER_YEAR=2022 \
-PASSES=1 \
-CFG="cfg/base.yaml,cfg/template_breadcrumb.yaml,cfg/sn_a5x.breadcrumb.default.yaml" \
-NAME="sn_a5x.breadcrumb.default" \
-./single.sh</code> 
+    $ gem install UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
 
-[Source](https://github.com/kudrykv/latex-yearly-planner/discussions/34#discussioncomment-3128344)
+## Usage
 
-4. Check the "out" directory for the 'pdf' planner. To move it to your device
-, follow the manufacturer's instructions on how to load a PDF on your device.
+TODO: Write usage instructions here
 
-If you encounter any problems related to '.sty' files you likely need to
- install some Latex related dependencies. Copying the error and search using
-  your favorite search engine should get you on track to resolving the
-   dependency issues. All the best!
+## Development
 
-### Alternative install
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-Instead of installing the dependencies manually, this repository is defined as a Nix flake which specifies fixed versions of all the required dependencies. 
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
-1. [Install Nix](https://nixos.org/download.html)
-2. Build a planner pdf using `nix build`
-3. Or, if you want to develop the code, enter a shell with all the dependencies present using `nix develop`
-   
-# Preview examples
-<img src="https://github.com/kudrykv/latex-yearly-planner/blob/main/examples/pictures/sn_a5x.planner/01_annual.png" width="419"><img src="https://github.com/kudrykv/latex-yearly-planner/blob/main/examples/pictures/sn_a5x.planner/02_quarter.png" width="419"><img src="https://github.com/kudrykv/latex-yearly-planner/blob/main/examples/pictures/sn_a5x.planner/03_month.png" width="419"><img src="https://github.com/kudrykv/latex-yearly-planner/blob/main/examples/pictures/sn_a5x.planner/04_week.png" width="419"><img src="https://github.com/kudrykv/latex-yearly-planner/blob/main/examples/pictures/sn_a5x.planner/05_day.png" width="419"><img src="https://github.com/kudrykv/latex-yearly-planner/blob/main/examples/pictures/sn_a5x.planner/06_day_notes.png" width="419"><img src="https://github.com/kudrykv/latex-yearly-planner/blob/main/examples/pictures/sn_a5x.planner/07_day_reflect.png" width="419"><img src="https://github.com/kudrykv/latex-yearly-planner/blob/main/examples/pictures/sn_a5x.planner/08_todos_index.png" width="419"><img src="https://github.com/kudrykv/latex-yearly-planner/blob/main/examples/pictures/sn_a5x.planner/09_todos_page.png" width="419"><img src="https://github.com/kudrykv/latex-yearly-planner/blob/main/examples/pictures/sn_a5x.planner/10_notes_index.png" width="419"><img src="https://github.com/kudrykv/latex-yearly-planner/blob/main/examples/pictures/sn_a5x.planner/11_notes_page.png" width="419">
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/LatexYearlyPlanner. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/LatexYearlyPlanner/blob/main/CODE_OF_CONDUCT.md).
+
+## Code of Conduct
+
+Everyone interacting in the LatexYearlyPlanner project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/LatexYearlyPlanner/blob/main/CODE_OF_CONDUCT.md).

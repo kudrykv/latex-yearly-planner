@@ -1,0 +1,264 @@
+document:
+  debug:
+    enabled: false
+    parameters:
+      highlight_links: true
+      highlight_frames: false
+
+  document_class:
+    name: article
+    size: 9pt
+
+  remaining_height:
+    lag: 4pt
+
+  layout:
+    dimensions:
+      width: 138.00mm
+      height: 188mm
+
+    margin:
+      top: 10mm
+      bottom: 5mm
+      left: 12mm
+      right: 5mm
+
+    margin_notes:
+      width: 10mm
+      separation: 1.9mm
+      placement: left
+
+parameters:
+  template_name: mos
+  compile:
+    runs: 2
+  parameters:
+    header:
+      title_position: left
+      between_tables_spacing: 5mm
+      skip: 1mm
+      top_table:
+        parameters:
+          vertical_stretch: 1.3
+          horizontal_spacing: 6pt
+      quarterly_table:
+        parameters:
+          min_cell_height: 10.8mm
+          horizontal_spacing: 0mm
+          format: Y
+          horizontal_lines: true
+      monthly_table:
+        parameters:
+          min_cell_height: 10mm
+          horizontal_spacing: 0mm
+          format: Y
+          horizontal_lines: true
+    start_date: 2023, January
+    end_date: 2023, December
+    weekday_start: Monday
+    show_week_numbers: true
+    format_ampm: false
+    week_number_placement: left
+    notes:
+      type: dotted
+      parameters:
+        horizontal_spacing_between_dots: 5mm
+        vertical_spacing_between_dots: 5mm
+    little_calendar:
+      parameters:
+        vertical_stretch: 1.2
+        horizontal_spacing: 0mm
+        show_week_numbers: true
+        week_number_placement: left
+    large_calendar:
+      parameters:
+        name_cell_height: 6mm
+        cell_height: 2.5cm
+        show_week_numbers: true
+        week_number_placement: left
+        day_number_shift: 1.5mm
+        week_column_width: 6mm
+
+sections:
+  title:
+    enabled: true
+    parameters:
+      name: 2023
+
+  annual:
+    enabled: true
+    parameters:
+      months_per_page: 8
+      columns: 2
+      underfull_vertical_spacing: 1cm
+      little_calendar:
+        parameters:
+          width: 5.8cm
+
+  quarterly:
+    enabled: true
+    parameters:
+      calendars_column_position: left
+      calendars_width: 5.8cm
+      spacer_width: 0.5cm
+      notes:
+        parameters:
+          width: 5.5cm
+          height: 16cm
+          shift_vertical: 4mm
+
+  monthly:
+    enabled: true
+    parameters:
+      large_calendar:
+        parameters:
+          week_number_placement: right
+
+  weekly:
+    enabled: true
+    parameters:
+      column_width: 4cm
+      notes:
+        parameters:
+          width: 12cm
+          height: 4.5cm
+          shift_vertical: 2mm
+
+  daily:
+    enabled: true
+    parameters:
+      schedule_placement: right
+      schedule_column_width: 5.8cm
+      spacer_width: 0.5cm
+      write_column_width: 5.8cm
+      schedule_label:
+        enabled: true
+      schedule:
+        parameters:
+          show_label: true
+          from: '8:00'
+          to: '19:30'
+          hour_format: '24'
+          line_height: 5mm
+      todo_label:
+        enabled: true
+      todo:
+        parameters:
+          count: 10
+          line_height: 5mm
+      notes_label:
+        enabled: true
+        parameters:
+          shift_vertical: 2mm
+      notes:
+        parameters:
+          shift_vertical: 5mm
+          shift_horizontal: 1mm
+          width: 5.5cm
+          height: 4cm
+      personal_notes_label:
+        enabled: true
+        parameters:
+          shift_vertical: 9mm
+      personal_notes:
+        type: dotted
+        parameters:
+          shift_vertical: 5mm
+          shift_horizontal: 1mm
+          width: 5.5cm
+          height: 4cm
+
+  daily_notes:
+    enabled: true
+    parameters:
+      pages: 2
+      notes:
+        parameters:
+          shift_vertical: 4mm
+          shift_horizontal: 0.5mm
+          width: 12cm
+          height: 16cm
+
+  daily_reflect:
+    enabled: true
+    parameters:
+      goals_label:
+        enabled: true
+        parameters:
+          width: 5.8cm
+
+      best_thing_label:
+        enabled: true
+        parameters:
+          width: 5.8cm
+
+      goals_and_best_thing_notes:
+        type: dotted
+        parameters:
+          width: 12cm
+          height: 3cm
+          shift_vertical: 5mm
+          shift_horizontal: 0.5mm
+
+      gratitude_label:
+        enabled: true
+        parameters:
+          shift_vertical: 9mm
+
+      gratitude_notes:
+        type: dotted
+        parameters:
+          width: 12cm
+          height: 3cm
+          shift_vertical: 5mm
+          shift_horizontal: 0.5mm
+
+      daily_log_label:
+        enabled: true
+        parameters:
+          shift_vertical: 9mm
+
+      daily_log_notes:
+        type: dotted
+        parameters:
+          width: 12cm
+          height: 6.5cm
+          shift_vertical: 5mm
+          shift_horizontal: 0.5mm
+
+  index_notes:
+    enabled: true
+    parameters:
+      index_pages: 2
+      notes_per_page: 25
+      index_table:
+        parameters:
+          line_height: 6.4mm
+          lines_color: gray!50
+
+      pages_per_note: 2
+      notes:
+        parameters:
+          shift_vertical: 4mm
+          shift_horizontal: 0.5mm
+          width: 12cm
+          height: 16cm
+
+  index_todos:
+    enabled: true
+    parameters:
+      index_pages: 2
+      todos_per_page: 25
+      index_table:
+        parameters:
+          line_height: 6.4mm
+          lines_color: gray!50
+
+      pages_per_todo: 2
+      column_width: 5.8cm
+      todos:
+        parameters:
+          count: 33
+
+  about:
+    enabled: true

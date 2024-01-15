@@ -1,0 +1,101 @@
+\documentclass[<%= document_options %>]{<%= document.document_class.name %>}
+
+\usepackage{geometry}
+\usepackage[table]{xcolor}
+\usepackage{calc}
+\usepackage{dashrule}
+\usepackage{setspace}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{varwidth}
+\usepackage{blindtext}
+\usepackage{tabularx}
+\usepackage{wrapfig}
+\usepackage{makecell}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{expl3}
+\usepackage{leading}
+\usepackage{pgffor}
+<% if document.debug.enabled && document.debug.parameters.highlight_links %>
+  \usepackage{hyperref}
+<% else %>
+  \usepackage[hidelinks]{hyperref}
+<% end %>
+\usepackage{marginnote}
+\usepackage{adjustbox}
+\usepackage{multido}
+\usepackage{tabularray}
+\usepackage{multicol}
+\usetikzlibrary{patterns}
+
+<% if document.debug.enabled %>
+  <% if document.debug.parameters.highlight_frames %>\usepackage{showframe}<% end %>
+<% end %>
+
+\geometry{
+  paperwidth=<%= document.layout.dimensions.width %>,
+  paperheight=<%= document.layout.dimensions.height %>,
+  top=<%= document.layout.margin.top %>,
+  bottom=<%= document.layout.margin.bottom %>,
+  left=<%= document.layout.margin.left %>,
+  right=<%= document.layout.margin.right %>,
+  marginparwidth=<%= document.layout.margin_notes.width %>,
+  marginparsep=<%= document.layout.margin_notes.separation %>
+}
+
+<% if document.layout.margin_notes.placement == 'left' %>\reversemarginpar<% end %>
+
+\pagestyle{empty}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\parindent=0pt
+\fboxsep0pt
+
+\pgfdeclarepatternformonly{dotted5mm}%
+{\pgfqpoint{-0.5pt}{-0.5pt}}%
+{\pgfqpoint{0.5pt}{0.5pt}}%
+{\pgfqpoint{5mm}{5mm}}%
+{%
+\pgfpathcircle{\pgfqpoint{0pt}{0pt}}{.5pt}%
+\pgfusepath{fill}%
+}%
+
+\pgfdeclarepatternformonly{lined5mm}{\pgfpointorigin}{\pgfpoint{5mm}{5mm}}{\pgfpoint{5mm}{5mm}}{
+\pgfsetlinewidth{1pt}
+\pgfpathmoveto{\pgfpointorigin}
+\pgfpathlineto{\pgfpoint{5mm}{0mm}}
+\pgfusepath{stroke}
+}
+
+\newcommand{\remainingHeight}{%
+\ifdim\pagegoal=\maxdimen
+\dimexpr\textheight-<%= document.remaining_height.lag %>\relax
+\else
+\dimexpr\pagegoal-\pagetotal-\lineskip-<%= document.remaining_height.lag %>\relax
+\fi%
+}
+
+\pgfdeclarepatternformonly{custom_dotted}%
+{\pgfqpoint{-0.5pt}{-0.5pt}}%
+{\pgfqpoint{0.5pt}{0.5pt}}%
+{\pgfqpoint{5mm}{5mm}}%
+{%
+\pgfpathcircle{\pgfqpoint{0pt}{0pt}}{.5pt}%
+\pgfusepath{fill}%
+}
+
+\newcommand{\myLineColor}[1]{\textcolor{#1}{\myLinePlain}}
+
+\newcommand{\myLinePlain}{\hrule width \linewidth height 0.4pt}
+\newcommand{\myLineGray}{\myLineColor{gray}}
+\newcommand{\myLineLightGray}{\myLineColor{gray!50}}
+
+\begin{document}
+
+<% notes.each do |note| %>
+  \include{<%= note.name %>}
+<% end %>
+
+\end{document}
