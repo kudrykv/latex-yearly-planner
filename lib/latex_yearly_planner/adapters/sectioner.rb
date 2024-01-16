@@ -3,27 +3,27 @@
 module LatexYearlyPlanner
   module Adapters
     class Sectioner
-      def initialize(config)
-        @config = config
+      def initialize(global_config)
+        @global_config = global_config
       end
 
       def sections
-        config
+        global_config
           .sections_as_a_hash
-          .map { |name, opts| [name, RecursiveOpenStruct.new(opts, recurse_over_arrays: true)] }
-          .select { |_, opts| opts.enabled }
-          .map { |name, opts| make_section(name, opts) }
+          .map { |name, section_config| [name, RecursiveOpenStruct.new(section_config, recurse_over_arrays: true)] }
+          .select { |_, section_config| section_config.enabled }
+          .map { |name, section_config| make_section(name, section_config) }
       end
 
       private
 
-      attr_reader :config
+      attr_reader :global_config
 
-      def make_section(name, opts)
-        header = component_constant(name, opts, :header).new(name, config, opts)
-        body = component_constant(name, opts, :body).new(name, config, opts)
+      def make_section(name, section_config)
+        header = component_constant(name, section_config, :header).new(name, global_config, section_config)
+        body = component_constant(name, section_config, :body).new(name, global_config, section_config)
 
-        section_constant(name, opts).new(name, config, opts, header, body)
+        section_constant(name, section_config).new(name, global_config, section_config, header, body)
       end
 
       def section_constant(section_name, section_config)
@@ -51,7 +51,7 @@ module LatexYearlyPlanner
       end
 
       def template_name(section_config)
-        (section_config.template_name || config.parameters.template_name).camelize
+        (section_config.template_name || global_config.parameters.template_name).camelize
       end
     end
   end
