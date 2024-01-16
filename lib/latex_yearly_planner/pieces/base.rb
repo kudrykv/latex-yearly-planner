@@ -19,19 +19,19 @@ module LatexYearlyPlanner
       end
 
       def all_quarters
-        all_months.map(&:quarter).uniq(&:date)
+        @all_quarters ||= all_months.map(&:quarter).uniq(&:date)
       end
 
       def all_weeks
-        start_month.beginning_of_week(weekday_start)
-                   .upto(end_month.end_of_month.end_of_week(weekday_start))
-                   .each_slice(7)
-                   .map { |days| days.map { |day| Calendar::Day.new(day, weekday_start:) } }
-                   .map { |days| Calendar::Week.new(days, weekday_start:) }
+        @all_weeks ||= start_month.beginning_of_week(weekday_start)
+                                  .upto(end_month.end_of_month.end_of_week(weekday_start))
+                                  .each_slice(7)
+                                  .map { |days| days.map { |day| Calendar::Day.new(day, weekday_start:) } }
+                                  .map { |days| Calendar::Week.new(days, weekday_start:) }
       end
 
       def all_days
-        start_month.upto(end_month.end_of_month).map { |day| Calendar::Day.new(day, weekday_start:) }
+        @all_days ||= start_month.upto(end_month.end_of_month).map { |day| Calendar::Day.new(day, weekday_start:) }
       end
 
       def make_months_range(from_month, to_month)
@@ -41,7 +41,7 @@ module LatexYearlyPlanner
       end
 
       def year
-        start_month.year
+        @year ||= start_month.year
       end
 
       def start_month
