@@ -84,6 +84,7 @@ sections:
     enabled: true
     parameters:
       name: 2024
+      height: 3cm
 
   annual:
     enabled: true

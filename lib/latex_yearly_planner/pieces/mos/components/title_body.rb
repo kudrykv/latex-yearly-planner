@@ -7,9 +7,19 @@ module LatexYearlyPlanner
         class TitleBody < Component
           def generate
             <<~LATEX
-              \\vspace*{\\fill}
-              \\hfill\\resizebox{!}{3cm}{#{param(:name)}}
+              #{TeX::VSpace.new(TeX::Fill.new, with_star: true)}
+              #{TeX::HFill.new}#{TeX::ResizeBox.new(name, height:)}
             LATEX
+          end
+
+          private
+
+          def name
+            param(:name)
+          end
+
+          def height
+            param(:height) || '3cm'
           end
         end
       end
