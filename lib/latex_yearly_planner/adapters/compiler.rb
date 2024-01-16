@@ -4,8 +4,12 @@ require 'English'
 module LatexYearlyPlanner
   module Adapters
     class Compiler
+      DEFAULT_PARAMETERS = {
+        runs: 1
+      }.freeze
+
       def initialize(params, file_path)
-        @params = params || RecursiveOpenStruct.new
+        @params = RecursiveOpenStruct.new(DEFAULT_PARAMETERS.merge(params))
         @file_path = file_path
       end
 
