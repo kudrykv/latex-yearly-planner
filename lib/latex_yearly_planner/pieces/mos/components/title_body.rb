@@ -7,8 +7,8 @@ module LatexYearlyPlanner
         class TitleBody < Component
           def generate
             <<~LATEX
-              #{TeX::VSpace.new(TeX::Fill.new, with_star: true)}
-              #{TeX::HFill.new}#{TeX::ResizeBox.new(name, height:)}
+              #{TeX::VSpace.new(fill, with_star: true)}
+              #{hfill}#{TeX::ResizeBox.new(name, height:)}
             LATEX
           end
 
