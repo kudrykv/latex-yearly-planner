@@ -19,6 +19,8 @@ module LatexYearlyPlanner
         return self unless struct.parameters.template_name
 
         "LatexYearlyPlanner::Pieces::#{struct.parameters.template_name.camelize}::Config".constantize.new(struct)
+      rescue NameError
+        self
       end
 
       private
