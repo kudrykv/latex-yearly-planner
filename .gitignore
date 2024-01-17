@@ -1,3 +1,4 @@
 *.pdf
 .vscode
 result
+.DS_Store

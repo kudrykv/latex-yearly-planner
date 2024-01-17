@@ -6,6 +6,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/kudrykv/latex-yearly-planner/app/components/icsparser"
 	"github.com/caarlos0/env/v6"
 	"gopkg.in/yaml.v3"
 )
@@ -20,9 +21,8 @@ type Config struct {
 	ClearTopRightCorner bool
 	AMPMTime            bool
 	AddLastHalfHour     bool
-
+	Events []icsparser.Event
 	Pages Pages
-
 	Layout Layout
 }
 
@@ -133,6 +133,7 @@ func New(pathConfigs ...string) (Config, error) {
 	if cfg.Year == 0 {
 		cfg.Year = time.Now().Year()
 	}
+	
 
 	return cfg, nil
 }

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"text/template"
+	"time"
 
 	"github.com/kudrykv/latex-yearly-planner/app/config"
 )
@@ -42,6 +43,9 @@ var tpl = template.Must(template.New("").Funcs(template.FuncMap{
 
 		return i != nil
 	},
+	"formatDate": func(t time.Time) string {
+        return t.Format("02-01-2006")
+    },
 }).ParseGlob(`./tpls/*`))
 
 type Tpl struct {
