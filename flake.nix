@@ -32,7 +32,7 @@
           (texlive.combine {
             inherit (texlive)
               metafont
-              scheme-basic
+              scheme-small
               xcolor
               pgf
               wrapfig
