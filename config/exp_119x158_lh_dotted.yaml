@@ -6,7 +6,7 @@ compile:
   runs: 2
 
 document:
-  class:
+  klass:
     name: article
     size: 9pt
 

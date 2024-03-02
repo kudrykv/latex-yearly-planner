@@ -8,7 +8,8 @@ module LatexYearlyPlanner
 
         organize InitializeConfig,
                  InitializeI18n,
-                 InitializeSectioner
+                 InitializeSectioner,
+                 InitializeIndexer
       end
     end
   end

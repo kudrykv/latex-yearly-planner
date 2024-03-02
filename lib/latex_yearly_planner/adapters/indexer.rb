@@ -11,7 +11,7 @@ module LatexYearlyPlanner
       end
 
       def index(text_documents)
-        [index_text_file, *text_documents]
+        [index_text_file(text_documents), *text_documents]
       end
 
       def document_options
@@ -28,7 +28,9 @@ module LatexYearlyPlanner
 
       private
 
-      def index_text_file
+      # binding uses the `text_documents`
+      # noinspection RubyUnusedLocalVariable
+      def index_text_file(text_documents)
         content = template.result(binding)
         Entities::TextDocument.new(name: 'index.tex', content:)
       end

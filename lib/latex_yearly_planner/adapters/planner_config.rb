@@ -20,11 +20,11 @@ module LatexYearlyPlanner
       end
 
       def document_options
-        config.document.class.size
+        config.document.klass.size
       end
 
       def document_class
-        config.document.class.name
+        config.document.klass.name
       end
 
       def paper
