@@ -16,7 +16,7 @@ module LatexYearlyPlanner
       end
 
       def path_to_yaml_file
-        raise DevelopmentError, 'path_to_yaml_file is required' unless context.path_to_yaml_file
+        raise DevelopmentError, '`path_to_yaml_file` is not defined' unless context.path_to_yaml_file
 
         context.path_to_yaml_file
       end

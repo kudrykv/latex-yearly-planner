@@ -9,6 +9,12 @@ module LatexYearlyPlanner
         @config = RecursiveOpenStruct.new(hash, recurse_over_arrays: true)
       end
 
+      def template
+        raise ConfigurationError, '`template` key is missing in configuration file' unless config.template
+
+        config.template
+      end
+
       def sections
         planner_sections.map(&method(:to_section_config))
       end
@@ -20,7 +26,7 @@ module LatexYearlyPlanner
         raise ConfigurationError, 'Only one section is allowed in section container' if keys.size > 1
 
         name = keys.first
-        SectionConfig.new(name:, config: section.send(name))
+        SectionConfig.new(name:, config: section.send(name), planner_config: self)
       end
 
       def planner_sections

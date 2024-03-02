@@ -6,7 +6,8 @@ module LatexYearlyPlanner
       class Generate
         include Interactor::Organizer
 
-        organize InitializeConfig
+        organize InitializeConfig,
+                 InitializeSectioner
       end
     end
   end
