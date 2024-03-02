@@ -9,6 +9,10 @@ module LatexYearlyPlanner
         @section_config = section_config.section_config
         @planner_config = section_config.planner_config
       end
+
+      def get(*keys)
+        section_config.dig(:parameters, *keys)
+      end
     end
   end
 end

@@ -19,6 +19,10 @@ module LatexYearlyPlanner
         constant.new(name:, header:, body:, section_config: self)
       end
 
+      def params
+        @params ||= ConfigOperator.new(section_config: self)
+      end
+
       private
 
       def header

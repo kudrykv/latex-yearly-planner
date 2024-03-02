@@ -6,13 +6,13 @@ module LatexYearlyPlanner
       module Sections
         class Title < Section
           def pages
-            []
+            [title]
           end
 
           private
 
           def title
-            section_config
+            params.get(:name)
           end
         end
       end

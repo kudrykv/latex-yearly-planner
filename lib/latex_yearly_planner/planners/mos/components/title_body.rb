@@ -5,6 +5,9 @@ module LatexYearlyPlanner
     module Mos
       module Components
         class TitleBody < Component
+          def generate(name)
+            name
+          end
         end
       end
     end
