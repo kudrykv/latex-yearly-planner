@@ -3,6 +3,8 @@
 module LatexYearlyPlanner
   module Planners
     class Section
+      include XTeX::Handy
+
       attr_reader :name, :header, :body, :section_config, :planner_config
 
       def initialize(name:, header:, body:, section_config:, planner_config:)
@@ -28,7 +30,7 @@ module LatexYearlyPlanner
       end
 
       def pages_glue
-        "\n\n"
+        [nl, page_break, nlnl].join
       end
     end
   end
