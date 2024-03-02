@@ -4,7 +4,7 @@ module LatexYearlyPlanner
   module Planners
     module Mos
       module Sections
-        class Title
+        class Title < Section
         end
       end
     end
