@@ -7,8 +7,6 @@ module LatexYearlyPlanner
 
       def call
         context.indexer = Adapters::Indexer.new(planner_config:)
-
-        context.indexer.index([])
       end
 
       private

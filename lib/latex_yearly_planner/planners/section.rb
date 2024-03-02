@@ -13,6 +13,10 @@ module LatexYearlyPlanner
         @body = body
       end
 
+      def enabled?
+        section_config.enabled?
+      end
+
       def generate
         Entities::TextDocument.new(name: "#{name}.tex", content:)
       end

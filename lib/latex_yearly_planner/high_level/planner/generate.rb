@@ -9,7 +9,8 @@ module LatexYearlyPlanner
         organize InitializeConfig,
                  InitializeI18n,
                  InitializeSectioner,
-                 InitializeIndexer
+                 InitializeIndexer,
+                 InitializeGenerator
       end
     end
   end
