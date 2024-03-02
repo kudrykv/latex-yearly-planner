@@ -8,6 +8,7 @@ require 'English'
 require 'ruby-measurement'
 require 'thor'
 require 'interactor'
+require 'i18n'
 
 loader = Zeitwerk::Loader.for_gem
 loader.ignore("#{__dir__}/latex_yearly_planner_old")

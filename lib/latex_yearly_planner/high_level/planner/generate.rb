@@ -7,6 +7,7 @@ module LatexYearlyPlanner
         include Interactor::Organizer
 
         organize InitializeConfig,
+                 InitializeI18n,
                  InitializeSectioner
       end
     end

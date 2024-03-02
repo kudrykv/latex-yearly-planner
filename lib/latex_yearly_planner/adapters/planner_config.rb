@@ -15,6 +15,10 @@ module LatexYearlyPlanner
         config.template
       end
 
+      def locale
+        (config.locale || 'en').to_sym
+      end
+
       def sections
         planner_sections.map(&method(:to_section_config))
       end
