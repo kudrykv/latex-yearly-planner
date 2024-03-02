@@ -2,7 +2,7 @@
 
 module LatexYearlyPlanner
   module HighLevel
-    class ReadYamlConfigFile
+    class InitializeConfig
       include Interactor
 
       def call
