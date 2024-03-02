@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'activesupport', '~> 7.0'
   spec.add_dependency 'erb'
+  spec.add_dependency 'i18n', '~> 1.14'
   spec.add_dependency 'interactor', '~> 3.1'
   spec.add_dependency 'recursive-open-struct', '~> 1.1'
   spec.add_dependency 'ruby-measurement', '~> 1.3'

@@ -4,6 +4,7 @@ PATH
     latex_yearly_planner (0.1.0)
       activesupport (~> 7.0)
       erb
+      i18n (~> 1.14)
       interactor (~> 3.1)
       recursive-open-struct (~> 1.1)
       ruby-measurement (~> 1.3)
