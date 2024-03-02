@@ -5,7 +5,7 @@ module LatexYearlyPlanner
     class Section < Base
       attr_reader :name, :header, :body
 
-      def initialize(name:, header:, body:)
+      def initialize(name:, header:, body:, section_config:)
         super(section_config:)
 
         @name = name

@@ -10,6 +10,10 @@ module LatexYearlyPlanner
       def initialize(section_config:)
         @section_config = section_config
       end
+
+      def params
+        section_config.params
+      end
     end
   end
 end

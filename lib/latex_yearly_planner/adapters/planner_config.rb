@@ -19,6 +19,10 @@ module LatexYearlyPlanner
         planner_sections.map(&method(:to_section_config))
       end
 
+      def params
+        @params ||= ConfigOperator.new(section_config:)
+      end
+
       private
 
       def to_section_config(section)
