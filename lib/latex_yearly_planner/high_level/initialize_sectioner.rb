@@ -7,8 +7,6 @@ module LatexYearlyPlanner
 
       def call
         context.sectioner = Adapters::Sectioner.new(planner_config:)
-
-        context.sectioner.sections.first.generate
       end
 
       private
