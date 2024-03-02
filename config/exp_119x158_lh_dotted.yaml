@@ -1,0 +1,33 @@
+version: '0.1'
+
+template: mos
+compile:
+  runs: 2
+
+document:
+  class:
+    name: article
+    size: 9pt
+
+  paper:
+    dimensions:
+      width: 119mm
+      height: 158mm
+
+    margin:
+      top: 10mm
+      bottom: 5mm
+      left: 12mm
+      right: 5mm
+
+    margin_notes:
+      placement: left
+      width: 10mm
+      separation: 1.9mm
+
+planner:
+  sections:
+    - title:
+        enabled: true
+        parameters:
+          name: 2024

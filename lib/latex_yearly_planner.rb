@@ -6,8 +6,10 @@ require 'recursive-open-struct'
 require 'active_support/all'
 require 'English'
 require 'ruby-measurement'
+require 'thor'
 
 loader = Zeitwerk::Loader.for_gem
+loader.ignore("#{__dir__}/latex_yearly_planner_old")
 loader.inflector.inflect(
   'cli' => 'CLI',
   'xtex' => 'XTeX',
