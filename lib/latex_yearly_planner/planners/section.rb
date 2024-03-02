@@ -12,6 +12,24 @@ module LatexYearlyPlanner
         @section_config = section_config
         @planner_config = planner_config
       end
+
+      def generate
+        pages.map(&method(:generate_page)).join(pages_glue)
+      end
+
+      private
+
+      def generate_page(...)
+        "#{header.generate(...)}#{body.generate(...)}"
+      end
+
+      def pages
+        raise NotImplementedError
+      end
+
+      def pages_glue
+        "\n\n"
+      end
     end
   end
 end

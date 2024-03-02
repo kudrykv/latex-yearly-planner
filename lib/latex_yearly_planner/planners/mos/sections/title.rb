@@ -5,6 +5,9 @@ module LatexYearlyPlanner
     module Mos
       module Sections
         class Title < Section
+          def generate
+
+          end
         end
       end
     end
