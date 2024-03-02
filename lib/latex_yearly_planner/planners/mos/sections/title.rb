@@ -5,8 +5,14 @@ module LatexYearlyPlanner
     module Mos
       module Sections
         class Title < Section
-          def generate
+          def pages
+            []
+          end
 
+          private
+
+          def title
+            section_config
           end
         end
       end
