@@ -16,17 +16,17 @@ module LatexYearlyPlanner
       end
 
       def instantiate
-        constant.new(name:, header:, body:, section_config: self, planner_config:)
+        constant.new(name:, header:, body:, section_config: self)
       end
 
       private
 
       def header
-        header_constant.new(name:, section_config: self, planner_config:)
+        header_constant.new(name:, section_config: self)
       end
 
       def body
-        body_constant.new(name:, section_config: self, planner_config:)
+        body_constant.new(name:, section_config: self)
       end
 
       def constant

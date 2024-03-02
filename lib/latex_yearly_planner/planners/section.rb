@@ -5,14 +5,13 @@ module LatexYearlyPlanner
     class Section
       include XTeX::Handy
 
-      attr_reader :name, :header, :body, :section_config, :planner_config
+      attr_reader :name, :header, :body, :section_config
 
-      def initialize(name:, header:, body:, section_config:, planner_config:)
+      def initialize(name:, header:, body:, section_config:)
         @name = name
         @header = header
         @body = body
         @section_config = section_config
-        @planner_config = planner_config
       end
 
       def generate
