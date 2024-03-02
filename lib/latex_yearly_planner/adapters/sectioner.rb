@@ -16,7 +16,7 @@ module LatexYearlyPlanner
       private
 
       def make_section(section_config)
-        section_config.constant
+        section_config.instantiate
       end
     end
   end
