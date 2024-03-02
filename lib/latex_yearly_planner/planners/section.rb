@@ -14,10 +14,14 @@ module LatexYearlyPlanner
       end
 
       def generate
-        pages.map(&method(:generate_page)).join(pages_glue)
+        Entities::TextDocument.new(name: "#{name}.tex", content:)
       end
 
       private
+
+      def content
+        pages.map(&method(:generate_page)).join(pages_glue)
+      end
 
       def generate_page(...)
         "#{header.generate(...)}#{body.generate(...)}"

@@ -19,6 +19,18 @@ module LatexYearlyPlanner
         (config.locale || 'en').to_sym
       end
 
+      def document_options
+        config.document.class.size
+      end
+
+      def document_class
+        config.document.class.name
+      end
+
+      def paper
+        config.document.paper
+      end
+
       def sections
         planner_sections.map(&method(:to_section_config))
       end
