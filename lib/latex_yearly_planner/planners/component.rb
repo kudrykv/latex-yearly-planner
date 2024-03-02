@@ -4,10 +4,9 @@ module LatexYearlyPlanner
   module Planners
     class Component < Base
       def initialize(name:, section_config:)
-        super()
+        super(section_config:)
 
         @name = name
-        @section_config = section_config
       end
     end
   end

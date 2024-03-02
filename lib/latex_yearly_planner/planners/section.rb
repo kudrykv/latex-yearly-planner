@@ -3,15 +3,14 @@
 module LatexYearlyPlanner
   module Planners
     class Section < Base
-      attr_reader :name, :header, :body, :section_config
+      attr_reader :name, :header, :body
 
-      def initialize(name:, header:, body:, section_config:)
-        super()
+      def initialize(name:, header:, body:)
+        super(section_config:)
 
         @name = name
         @header = header
         @body = body
-        @section_config = section_config
       end
 
       def generate
