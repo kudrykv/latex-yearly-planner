@@ -6,7 +6,7 @@ module LatexYearlyPlanner
       class Generate
         include Interactor::Organizer
 
-        organize
+        organize ReadYamlConfigFile
       end
     end
   end

@@ -2,7 +2,7 @@
 
 module LatexYearlyPlanner
   module Adapters
-    class Config
+    class PlannerConfig
       def initialize(hash)
         @struct = RecursiveOpenStruct.new(hash, recurse_over_arrays: true)
       end

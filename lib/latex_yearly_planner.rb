@@ -21,5 +21,6 @@ loader.setup
 
 module LatexYearlyPlanner
   class Error < StandardError; end
+  class DevelopmentError < Error; end
   # Your code goes here...
 end
