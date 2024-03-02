@@ -2,12 +2,12 @@
 
 module LatexYearlyPlanner
   module Planners
-    class Section
-      include XTeX::Handy
-
+    class Section < Base
       attr_reader :name, :header, :body, :section_config
 
       def initialize(name:, header:, body:, section_config:)
+        super()
+
         @name = name
         @header = header
         @body = body

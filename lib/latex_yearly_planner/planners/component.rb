@@ -2,8 +2,10 @@
 
 module LatexYearlyPlanner
   module Planners
-    class Component
+    class Component < Base
       def initialize(name:, section_config:)
+        super()
+
         @name = name
         @section_config = section_config
       end
