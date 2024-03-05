@@ -13,10 +13,10 @@ module LatexYearlyPlanner
              aliases: '-l',
              desc: 'Locales file pattern',
              default: 'locales/*.yaml'
-      option :generated_files_output_path,
+      option :workdir,
              type: :string,
-             aliases: '-o',
-             desc: 'Generated files output path',
+             aliases: '-w',
+             desc: 'Working directory, where generation and compilation will be done',
              default: './out'
 
       def generate(path_to_yaml_file)

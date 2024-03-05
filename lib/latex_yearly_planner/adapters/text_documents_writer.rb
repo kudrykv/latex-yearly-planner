@@ -3,10 +3,10 @@
 module LatexYearlyPlanner
   module Adapters
     class TextDocumentsWriter
-      attr_reader :output_path
+      attr_reader :workdir
 
-      def initialize(output_path:)
-        @output_path = output_path
+      def initialize(workdir:)
+        @workdir = workdir
       end
 
       def write(text_documents)
@@ -16,7 +16,7 @@ module LatexYearlyPlanner
       private
 
       def write_text_document(text_document)
-        File.write("#{output_path}/#{text_document.name}", text_document.content)
+        File.write("#{workdir}/#{text_document.name}", text_document.content)
       end
     end
   end

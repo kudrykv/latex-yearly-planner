@@ -6,15 +6,15 @@ module LatexYearlyPlanner
       include Interactor
 
       def call
-        context.text_documents_writer = Adapters::TextDocumentsWriter.new(output_path: generated_files_output_path)
+        context.text_documents_writer = Adapters::TextDocumentsWriter.new(workdir:)
       end
 
       private
 
-      def generated_files_output_path
-        raise DevelopmentError, 'generated_files_output_path is not defined' unless context.generated_files_output_path
+      def workdir
+        raise DevelopmentError, 'workdir is not defined' unless context.workdir
 
-        context.generated_files_output_path
+        context.workdir
       end
     end
   end
