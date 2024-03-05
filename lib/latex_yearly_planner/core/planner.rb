@@ -3,7 +3,13 @@
 module LatexYearlyPlanner
   module Core
     class Planner
-      attr_accessor :generator, :writer, :compiler
+      attr_reader :generator, :writer, :compiler
+
+      def initialize(generator:, writer:, compiler:)
+        @generator = generator
+        @writer = writer
+        @compiler = compiler
+      end
 
       def create
         writer.write(text_documents)

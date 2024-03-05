@@ -12,7 +12,9 @@ module LatexYearlyPlanner
                  InitializeIndexer,
                  InitializeGenerator,
                  InitializeTextDocumentsWriter,
-                 InitializeCompiler
+                 InitializeCompiler,
+                 InitializePlanner,
+                 CreatePlanner
       end
     end
   end
