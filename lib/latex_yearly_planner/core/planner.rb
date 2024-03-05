@@ -6,15 +6,15 @@ module LatexYearlyPlanner
       attr_accessor :generator, :writer, :compiler
 
       def create
-        writer.write(file_tree)
+        writer.write(text_documents)
 
-        compiler.compile(writer.entry_file)
+        compiler.compile(text_documents.first)
       end
 
       private
 
-      def file_tree
-        generator.generate
+      def text_documents
+        @text_documents ||= generator.generate
       end
     end
   end
