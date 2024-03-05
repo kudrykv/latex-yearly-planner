@@ -13,17 +13,17 @@ module LatexYearlyPlanner
              aliases: '-l',
              desc: 'Locales file pattern',
              default: 'locales/*.yaml'
+      option :generated_files_output_path,
+             type: :string,
+             aliases: '-o',
+             desc: 'Generated files output path',
+             default: './out'
+
       def generate(path_to_yaml_file)
-        result = HighLevel::Planner::Generate.call(path_to_yaml_file:, locales_file_pattern:)
+        result = HighLevel::Planner::Generate.call(path_to_yaml_file:, **options)
         raise result.error if result.failure?
 
         puts 'Generated'
-      end
-
-      private
-
-      def locales_file_pattern
-        options[:locales_file_pattern]
       end
     end
   end

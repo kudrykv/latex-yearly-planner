@@ -10,7 +10,8 @@ module LatexYearlyPlanner
                  InitializeI18n,
                  InitializeSectioner,
                  InitializeIndexer,
-                 InitializeGenerator
+                 InitializeGenerator,
+                 InitializeTextDocumentsWriter
       end
     end
   end
