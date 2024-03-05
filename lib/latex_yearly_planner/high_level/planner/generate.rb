@@ -11,7 +11,8 @@ module LatexYearlyPlanner
                  InitializeSectioner,
                  InitializeIndexer,
                  InitializeGenerator,
-                 InitializeTextDocumentsWriter
+                 InitializeTextDocumentsWriter,
+                 InitializeCompiler
       end
     end
   end
