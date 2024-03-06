@@ -15,6 +15,10 @@ module LatexYearlyPlanner
           planner_config.planner.dig(:parameters, *keys)
       end
 
+      def object(key)
+        planner_config.object(key)
+      end
+
       def months
         (start_date..end_date)
           .select { |date| date.mday == 1 }
