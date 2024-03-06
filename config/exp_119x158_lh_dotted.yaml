@@ -30,12 +30,15 @@ planner:
   parameters:
     hand: left
     time_format: 24
-    with_week_numbers: true
-    week_number_placement: right
 
     start_date: 2024, January
     end_date: 2024, December
     weekday_start: Monday
+
+  objects:
+    little_calendar:
+      with_week_numbers: true
+      week_number_placement: right
 
   sections:
     - title:

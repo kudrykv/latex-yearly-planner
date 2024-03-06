@@ -11,7 +11,8 @@ module LatexYearlyPlanner
       end
 
       def get(*keys)
-        section_config.dig(:parameters, *keys) || planner_config.planner.dig(:parameters, *keys)
+        section_config.dig(:parameters, *keys) ||
+          planner_config.planner.dig(:parameters, *keys)
       end
 
       def months

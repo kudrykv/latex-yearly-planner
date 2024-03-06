@@ -10,10 +10,9 @@ module LatexYearlyPlanner
 
       attr_reader :month, :parameters
 
-      def initialize(month:, **config)
+      def initialize(month:, **parameters)
         @month = month
-        @enabled = config.fetch(:enabled, true)
-        @parameters = RecursiveOpenStruct.new(DEFAULT_PARAMETERS.merge(config.fetch(:parameters, {}).compact))
+        @parameters = RecursiveOpenStruct.new(DEFAULT_PARAMETERS.merge(parameters.compact))
       end
     end
   end
