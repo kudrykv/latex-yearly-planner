@@ -14,6 +14,14 @@ module LatexYearlyPlanner
       def page_break
         '\pagebreak{}'
       end
+
+      def horizontal_spring
+        '\hfill{}'
+      end
+
+      def vertical_spring
+        '\vfill{}'
+      end
     end
   end
 end
