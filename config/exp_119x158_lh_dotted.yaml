@@ -46,6 +46,6 @@ planner:
     - annual:
         enabled: true
         parameters:
-          columns: 2
           months_per_page: 6
+          months_per_row: 2
 

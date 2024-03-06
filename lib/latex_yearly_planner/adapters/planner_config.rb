@@ -35,6 +35,12 @@ module LatexYearlyPlanner
         planner_sections.map(&method(:to_section_config))
       end
 
+      def planner
+        raise ConfigurationError, '`planner` key is missing in configuration file' unless config.planner
+
+        config.planner
+      end
+
       private
 
       def to_section_config(section)
@@ -49,12 +55,6 @@ module LatexYearlyPlanner
         raise ConfigurationError, '`sections` key is missing in configuration file' unless config.planner.sections
 
         planner.sections
-      end
-
-      def planner
-        raise ConfigurationError, '`planner` key is missing in configuration file' unless config.planner
-
-        config.planner
       end
     end
   end

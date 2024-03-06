@@ -5,8 +5,10 @@ module LatexYearlyPlanner
     module Mos
       module Components
         class AnnualBody < Component
-          def generate(...)
-            'annual body'
+          def generate(months_rows)
+            months_rows
+              .map { |row| row.map(&:moment).join(' ') }
+              .join("\n\n")
           end
         end
       end
