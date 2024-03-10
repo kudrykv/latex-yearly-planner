@@ -21,11 +21,21 @@ module LatexYearlyPlanner
         <<~LATEX
           \\renewcommand{\\arraystretch}{#{vertical_stretch}}%
           \\setlength{\\tabcolsep}{#{horizontal_spacing}}%
-          \\begin{tabularx}{#{width}}{|X|}
-            hello
+          \\begin{tabularx}{#{width}}{#{make_format}}
+            #{build_rows}
           \\end{tabularx}
         LATEX
           .strip
+      end
+
+      private
+
+      def make_format
+        rows.first.size.times.map { 'X' }.join(' ')
+      end
+
+      def build_rows
+        rows.map { |row| "#{row.join(' & ')} \\\\" }.join("\n")
       end
     end
   end
