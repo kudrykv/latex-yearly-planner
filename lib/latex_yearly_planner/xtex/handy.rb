@@ -22,6 +22,10 @@ module LatexYearlyPlanner
       def vertical_spring
         '\vfill{}'
       end
+
+      def adjust_box(content, vertical_align: 't')
+        TeX::AdjustBox.new(content, vertical_align:).to_s
+      end
     end
   end
 end

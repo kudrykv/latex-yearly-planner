@@ -3,6 +3,8 @@
 module LatexYearlyPlanner
   module XTeX
     class LittleCalendar
+      include Handy
+
       DEFAULT_PARAMETERS = {
         with_week_numbers: true,
         week_number_placement: 'left'
@@ -16,7 +18,7 @@ module LatexYearlyPlanner
       end
 
       def to_s
-        month.moment.to_s
+        adjust_box(month.moment)
       end
     end
   end
