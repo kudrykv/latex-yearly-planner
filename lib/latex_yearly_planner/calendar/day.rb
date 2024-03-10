@@ -9,6 +9,10 @@ module LatexYearlyPlanner
         @weekday_start = weekday_start
         @moment = Time.new(year, month, day)
       end
+
+      def day
+        moment.day
+      end
     end
   end
 end

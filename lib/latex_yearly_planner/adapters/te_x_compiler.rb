@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'English'
 module LatexYearlyPlanner
   module Adapters
     class TeXCompiler
@@ -10,7 +11,8 @@ module LatexYearlyPlanner
       end
 
       def compile(text_document)
-        `cd #{workdir} && xelatex #{text_document.name}`
+        `cd #{workdir} && xelatex -halt-on-error #{text_document.name}`
+        raise "Error compiling #{text_document.name}" unless $CHILD_STATUS.success?
       end
     end
   end

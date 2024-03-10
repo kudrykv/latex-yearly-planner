@@ -18,7 +18,20 @@ module LatexYearlyPlanner
       end
 
       def to_s
-        adjust_box(month.moment)
+        adjust_box(table_month)
+      end
+
+      private
+
+      def table_month
+        table = TeX::TabularX.new
+        table.rows = month.weeks.map(&method(:week_row))
+
+        table
+      end
+
+      def week_row(week)
+        week.days.map { |day| day ? TeX::TableCell.new(day.day) : '' }
       end
     end
   end

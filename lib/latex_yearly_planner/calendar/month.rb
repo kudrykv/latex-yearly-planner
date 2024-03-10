@@ -15,14 +15,24 @@ module LatexYearlyPlanner
           .upto(moment.end_of_month + 7.days)
           .each_slice(7)
           .map(&method(:nil_not_our_month))
-          .reject { |week| week.all?(&:nil?) }
-          .map { |week| Week.new(days: week, weekday_start:) }
+          .reject { |days| days.all?(&:nil?) }
+          .map { |days| Week.new(days: make_days(days), weekday_start:) }
       end
 
       private
 
       def nil_not_our_month(week)
         week.map { |day| day.month == moment.month ? day : nil }
+      end
+
+      def make_days(days)
+        days.map(&method(:make_day))
+      end
+
+      def make_day(day)
+        return if day.nil?
+
+        Day.new(weekday_start:, year: day.year, month: day.month, day: day.day)
       end
     end
   end
