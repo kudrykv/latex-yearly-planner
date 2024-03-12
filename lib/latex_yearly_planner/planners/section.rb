@@ -36,7 +36,7 @@ module LatexYearlyPlanner
       end
 
       def pages_glue
-        [nl, page_break, nlnl].join
+        [page_break, nlnl].join
       end
     end
   end

@@ -24,7 +24,7 @@ module LatexYearlyPlanner
       private
 
       def table_month
-        table = TeX::TabularX.new
+        table = TeX::TabularX.new(width: '5cm')
         table.rows = month.weeks.map(&method(:week_row))
 
         table

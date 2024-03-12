@@ -19,7 +19,7 @@ document:
       top: 10mm
       bottom: 5mm
       left: 12mm
-      right: 5mm
+      right: 0mm
 
     margin_notes:
       placement: left

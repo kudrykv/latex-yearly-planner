@@ -11,8 +11,8 @@ module LatexYearlyPlanner
 
       attr_accessor :rows, :width, :vertical_stretch, :horizontal_spacing
 
-      def initialize
-        @width = DEFAULT_PARAMETERS[:width]
+      def initialize(width: nil)
+        @width = width || DEFAULT_PARAMETERS[:width]
         @vertical_stretch = DEFAULT_PARAMETERS[:vertical_stretch]
         @horizontal_spacing = DEFAULT_PARAMETERS[:horizontal_spacing]
       end
@@ -31,7 +31,7 @@ module LatexYearlyPlanner
       private
 
       def make_format
-        rows.first.size.times.map { 'X' }.join(' ')
+        "|#{rows.first.size.times.map { 'X' }.join('|')}|"
       end
 
       def build_rows
