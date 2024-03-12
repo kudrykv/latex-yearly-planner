@@ -39,7 +39,7 @@ planner:
     little_calendar:
       with_week_numbers: true
       week_number_placement: right
-      width: 5.8cm
+      width: 5cm
 
   sections:
     - title:
