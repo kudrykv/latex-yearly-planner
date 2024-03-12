@@ -9,21 +9,19 @@ module LatexYearlyPlanner
         horizontal_spacing: '0pt',
       }.freeze
 
-      attr_accessor :rows, :width, :vertical_stretch, :horizontal_spacing
+      attr_accessor :rows, :parameters
 
-      def initialize(width: nil)
-        @width = width || DEFAULT_PARAMETERS[:width]
-        @vertical_stretch = DEFAULT_PARAMETERS[:vertical_stretch]
-        @horizontal_spacing = DEFAULT_PARAMETERS[:horizontal_spacing]
+      def initialize(**parameters)
+        @parameters = RecursiveOpenStruct.new(DEFAULT_PARAMETERS.merge(parameters.compact))
       end
 
       def to_s
         <<~LATEX
-          \\renewcommand{\\arraystretch}{#{vertical_stretch}}%
-          \\setlength{\\tabcolsep}{#{horizontal_spacing}}%
-          \\begin{tabularx}{#{width}}{#{make_format}}
+          {\\renewcommand{\\arraystretch}{#{parameters.vertical_stretch}}%
+          \\setlength{\\tabcolsep}{#{parameters.horizontal_spacing}}%
+          \\begin{tabularx}{#{parameters.width}}{#{make_format}}
             #{build_rows}
-          \\end{tabularx}
+          \\end{tabularx}}
         LATEX
           .strip
       end
@@ -31,7 +29,7 @@ module LatexYearlyPlanner
       private
 
       def make_format
-        "|#{rows.first.size.times.map { 'Y' }.join('|')}|"
+        rows.first.size.times.map { 'Y' }.join
       end
 
       def build_rows
