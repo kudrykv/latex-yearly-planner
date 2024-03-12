@@ -39,6 +39,7 @@ planner:
     little_calendar:
       with_week_numbers: true
       week_number_placement: right
+      width: 5.8cm
 
   sections:
     - title:
@@ -51,4 +52,3 @@ planner:
         parameters:
           months_per_page: 6
           months_per_row: 2
-

@@ -23,6 +23,13 @@ module LatexYearlyPlanner
         @params ||= ConfigOperator.new(section_config: self)
       end
 
+      def object(key)
+        objects = section_config.objects
+        return if objects.nil?
+
+        objects.send(key)
+      end
+
       private
 
       def header

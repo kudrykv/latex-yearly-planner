@@ -6,17 +6,17 @@ module LatexYearlyPlanner
       attr_reader :section_config, :planner_config
 
       def initialize(section_config:)
-        @section_config = section_config.section_config
+        @section_config = section_config
         @planner_config = section_config.planner_config
       end
 
       def get(*keys)
-        section_config.dig(:parameters, *keys) ||
+        section_config.section_config.dig(:parameters, *keys) ||
           planner_config.planner.dig(:parameters, *keys)
       end
 
       def object(key)
-        planner_config.object(key)
+        section_config.object(key) || planner_config.object(key)
       end
 
       def months
