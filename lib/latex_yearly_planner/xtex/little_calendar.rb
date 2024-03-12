@@ -10,9 +10,12 @@ module LatexYearlyPlanner
         week_number_placement: 'left'
       }.freeze
 
-      attr_reader :month, :parameters
+      WEEKDAYS = %w[monday tuesday wednesday thursday friday saturday sunday].freeze
 
-      def initialize(month:, **parameters)
+      attr_reader :i18n, :month, :parameters
+
+      def initialize(month:, i18n: I18n, **parameters)
+        @i18n = i18n
         @month = month
         @parameters = RecursiveOpenStruct.new(DEFAULT_PARAMETERS.merge(parameters.compact))
       end
@@ -25,13 +28,13 @@ module LatexYearlyPlanner
 
       def table_month
         table = TeX::TabularX.new(**parameters.to_h)
-        table.rows = month.weeks.map(&method(:week_row))
+        table.add_rows(month.weeks.map(&method(:week_row)))
 
         table
       end
 
       def week_row(week)
-        week.days.map { |day| day ? TeX::TableCell.new(day.day) : '' }
+        TeX::TableRow.new(week.days.map { |day| day ? TeX::TableCell.new(day.day) : '' })
       end
     end
   end

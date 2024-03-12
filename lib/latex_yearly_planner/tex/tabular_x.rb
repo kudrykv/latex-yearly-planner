@@ -13,6 +13,11 @@ module LatexYearlyPlanner
 
       def initialize(**parameters)
         @parameters = RecursiveOpenStruct.new(DEFAULT_PARAMETERS.merge(parameters.compact))
+        @rows = []
+      end
+
+      def add_rows(rows)
+        self.rows.concat(rows)
       end
 
       def to_s
@@ -33,7 +38,7 @@ module LatexYearlyPlanner
       end
 
       def build_rows
-        rows.map { |row| "#{row.join(' & ')} \\\\" }.join("\n")
+        rows.map(&:to_s).join("\n")
       end
     end
   end
