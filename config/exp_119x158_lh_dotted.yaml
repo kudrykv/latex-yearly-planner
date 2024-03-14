@@ -40,6 +40,8 @@ planner:
       week_number_placement: right
       width: 5cm
       vertical_stretch: 1.5
+      underline_weekdays: true
+      upperline_weekdays: true
 
   sections:
     - title:

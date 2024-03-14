@@ -7,7 +7,9 @@ module LatexYearlyPlanner
 
       DEFAULT_PARAMETERS = {
         with_week_numbers: true,
-        week_number_placement: 'left'
+        week_number_placement: 'left',
+        underline_weekdays: false,
+        upperline_weekdays: false
       }.freeze
 
       WEEKDAYS = %i[monday tuesday wednesday thursday friday saturday sunday].freeze
@@ -54,13 +56,29 @@ module LatexYearlyPlanner
       end
 
       def column_headings
-        row = TeX::TableRow.new(WEEKDAYS.rotate(WEEKDAYS.index(month.weekday_start)).map { |day| TeX::TableCell.new(i18n.t("calendar.one_letter.#{day}")) })
+        row = weekdays_row
         return row unless parameters.with_week_numbers
 
-        row.unshift(TeX::TableCell.new(i18n.t('calendar.one_letter.week'))) if parameters.week_number_placement == 'left'
-        row.push(TeX::TableCell.new(i18n.t('calendar.one_letter.week'))) if parameters.week_number_placement == 'right'
+        week_cell = TeX::TableCell.new(i18n.t('calendar.one_letter.week'))
+        row.unshift(week_cell) if parameters.week_number_placement == 'left'
+        row.push(week_cell) if parameters.week_number_placement == 'right'
 
         row
+      end
+
+      def weekdays_row
+        cells = rotated_weekdays.map { |day| TeX::TableCell.new(i18n.t("calendar.one_letter.#{day}")) }
+
+        row = TeX::TableRow.new(cells)
+
+        row.underline if parameters.underline_weekdays
+        row.upperline if parameters.upperline_weekdays
+
+        row
+      end
+
+      def rotated_weekdays
+        WEEKDAYS.rotate(WEEKDAYS.index(month.weekday_start))
       end
     end
   end
