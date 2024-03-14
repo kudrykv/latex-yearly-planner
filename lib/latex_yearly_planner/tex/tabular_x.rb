@@ -38,7 +38,7 @@ module LatexYearlyPlanner
       private
 
       def make_format
-        rows.first.size.times.map { 'Y' }.join
+        rows.map(&:size).max.times.map { 'Y' }.join
       end
 
       def build_rows
