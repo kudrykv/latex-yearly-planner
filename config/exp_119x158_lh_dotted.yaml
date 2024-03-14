@@ -38,6 +38,7 @@ planner:
     little_calendar:
       with_week_numbers: true
       week_number_placement: right
+      week_vertical_line: true
       width: 5cm
       vertical_stretch: 1.5
       underline_weekdays: true

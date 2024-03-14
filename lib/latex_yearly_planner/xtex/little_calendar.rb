@@ -9,7 +9,8 @@ module LatexYearlyPlanner
         with_week_numbers: true,
         week_number_placement: 'left',
         underline_weekdays: false,
-        upperline_weekdays: false
+        upperline_weekdays: false,
+        week_vertical_line: false
       }.freeze
 
       WEEKDAYS = %i[monday tuesday wednesday thursday friday saturday sunday].freeze
@@ -30,11 +31,18 @@ module LatexYearlyPlanner
 
       def table_month
         table = TeX::TabularX.new(**parameters.to_h)
+        table.add_vertical_line(vertical_line_index) if parameters.with_week_numbers && parameters.week_vertical_line
         table.add_row(month_name_row)
         table.add_row(column_headings)
         table.add_rows(weeks)
 
         table
+      end
+
+      def vertical_line_index
+        return 1 if parameters.week_number_placement == 'left'
+
+        7
       end
 
       def month_name_row
