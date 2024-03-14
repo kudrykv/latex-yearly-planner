@@ -39,6 +39,7 @@ planner:
       with_week_numbers: true
       week_number_placement: right
       width: 5cm
+      vertical_stretch: 1.5
 
   sections:
     - title:
