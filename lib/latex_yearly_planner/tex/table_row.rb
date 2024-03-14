@@ -13,6 +13,14 @@ module LatexYearlyPlanner
         cells.size
       end
 
+      def push(cell)
+        cells.push(cell)
+      end
+
+      def unshift(cell)
+        cells.unshift(cell)
+      end
+
       def to_s
         "#{cells.join(' & ')} \\\\"
       end

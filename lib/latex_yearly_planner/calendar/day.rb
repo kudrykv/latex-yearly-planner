@@ -7,11 +7,19 @@ module LatexYearlyPlanner
 
       def initialize(weekday_start:, year:, month:, day:)
         @weekday_start = weekday_start
-        @moment = Time.new(year, month, day)
+        @moment = DateTime.new(year, month, day)
       end
 
       def day
         moment.day
+      end
+
+      def monday?
+        moment.monday?
+      end
+
+      def cweek
+        moment.cweek
       end
     end
   end
