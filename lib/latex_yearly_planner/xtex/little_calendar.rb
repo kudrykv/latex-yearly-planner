@@ -10,7 +10,7 @@ module LatexYearlyPlanner
         week_number_placement: 'left'
       }.freeze
 
-      WEEKDAYS = %w[monday tuesday wednesday thursday friday saturday sunday].freeze
+      WEEKDAYS = %i[monday tuesday wednesday thursday friday saturday sunday].freeze
 
       attr_reader :i18n, :month, :parameters
 
@@ -28,6 +28,7 @@ module LatexYearlyPlanner
 
       def table_month
         table = TeX::TabularX.new(**parameters.to_h)
+        table.add_row(column_headings)
         table.add_rows(weeks)
 
         table
@@ -48,6 +49,16 @@ module LatexYearlyPlanner
         week_num = TeX::TableCell.new(week.number)
         row.unshift(week_num) if parameters.week_number_placement == 'left'
         row.push(week_num) if parameters.week_number_placement == 'right'
+
+        row
+      end
+
+      def column_headings
+        row = TeX::TableRow.new(WEEKDAYS.rotate(WEEKDAYS.index(month.weekday_start)).map { |day| TeX::TableCell.new(i18n.t("calendar.one_letter.#{day}")) })
+        return row unless parameters.with_week_numbers
+
+        row.unshift(TeX::TableCell.new(i18n.t('calendar.one_letter.week'))) if parameters.week_number_placement == 'left'
+        row.push(TeX::TableCell.new(i18n.t('calendar.one_letter.week'))) if parameters.week_number_placement == 'right'
 
         row
       end

@@ -1,8 +1,12 @@
 en:
-  monday_one_letter: M
-  tuesday_one_letter: T
-  wednesday_one_letter: W
-  thursday_one_letter: T
-  friday_one_letter: F
-  saturday_one_letter: S
-  sunday_one_letter: S
+  calendar:
+    one_letter:
+      monday: M
+      tuesday: T
+      wednesday: W
+      thursday: T
+      friday: F
+      saturday: S
+      sunday: S
+
+      week: W

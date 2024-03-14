@@ -20,6 +20,10 @@ module LatexYearlyPlanner
         self.rows.concat(rows)
       end
 
+      def add_row(row)
+        self.rows << row
+      end
+
       def to_s
         <<~LATEX
           {\\renewcommand{\\arraystretch}{#{parameters.vertical_stretch}}%
