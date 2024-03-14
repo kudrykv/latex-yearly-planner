@@ -1,0 +1,26 @@
+uk:
+  calendar:
+    one_letter:
+      monday: П
+      tuesday: В
+      wednesday: С
+      thursday: Ч
+      friday: П
+      saturday: С
+      sunday: Н
+
+      week: "Т"
+
+    month:
+      january: Січень
+      february: Лютий
+      march: Березень
+      april: Квітень
+      may: Травень
+      june: Червень
+      july: Липень
+      august: Серпень
+      september: Вересень
+      october: Жовтень
+      november: Листопад
+      december: Грудень
