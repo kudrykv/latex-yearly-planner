@@ -19,6 +19,10 @@ module LatexYearlyPlanner
           .map { |days| Week.new(days: make_days(days), weekday_start:) }
       end
 
+      def name
+        moment.strftime('%B')
+      end
+
       private
 
       def nil_not_our_month(week)

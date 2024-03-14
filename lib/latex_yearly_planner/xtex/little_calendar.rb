@@ -30,10 +30,21 @@ module LatexYearlyPlanner
 
       def table_month
         table = TeX::TabularX.new(**parameters.to_h)
+        table.add_row(month_name_row)
         table.add_row(column_headings)
         table.add_rows(weeks)
 
         table
+      end
+
+      def month_name_row
+        TeX::TableRow.new([TeX::TableMulticolumn.new(i18n.t("calendar.month.#{month.name.downcase}"), columns_number)])
+      end
+
+      def columns_number
+        return 7 unless parameters.with_week_numbers
+
+        8
       end
 
       def weeks
