@@ -41,6 +41,10 @@ module LatexYearlyPlanner
         row = TeX::TableRow.new(week.days.map { |day| TeX::TableCell.new(day ? day.day : '') })
         return row unless parameters.with_week_numbers
 
+        add_week_number(row, week)
+      end
+
+      def add_week_number(row, week)
         week_num = TeX::TableCell.new(week.number)
         row.unshift(week_num) if parameters.week_number_placement == 'left'
         row.push(week_num) if parameters.week_number_placement == 'right'

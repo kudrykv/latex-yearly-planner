@@ -1,2 +1,8 @@
 en:
-  test: "This is a test"
+  monday_one_letter: M
+  tuesday_one_letter: T
+  wednesday_one_letter: W
+  thursday_one_letter: T
+  friday_one_letter: F
+  saturday_one_letter: S
+  sunday_one_letter: S
