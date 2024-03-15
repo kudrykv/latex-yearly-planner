@@ -12,6 +12,7 @@ module LatexYearlyPlanner
 
       def to_s
         table = TeX::TabularX.new(**parameters.to_h)
+        table.add_vertical_line(1)
         table.add_rows(transposed)
         table.to_s
       end
@@ -21,9 +22,7 @@ module LatexYearlyPlanner
       def transposed
         items.each_with_index.map do |item, index|
           row = TeX::TableRow.new([TeX::TableCell.new(item)])
-          row.upperline if index == 0
-          row.underline
-
+          row.underline unless index == items.size - 1
           row
         end
       end
