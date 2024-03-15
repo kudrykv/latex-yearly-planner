@@ -10,10 +10,10 @@ document:
     name: article
     size: 9pt
 
-#  fonts:
-#    roman: Georgia
-#    sans_serif: PT Sans
-#    monospace: PT Mono
+  #  fonts:
+  #    roman: Georgia
+  #    sans_serif: PT Sans
+  #    monospace: PT Mono
 
   paper:
     dimensions:
@@ -39,6 +39,8 @@ planner:
     end_date: 2024, December
     weekday_start: Monday
 
+    quarters_months_separation: 5mm
+
   objects:
     little_calendar:
       with_week_numbers: true
@@ -50,6 +52,9 @@ planner:
       upperline_weekdays: true
 
     quarter_navigation:
+      vertical_stretch: 2
+
+    month_navigation:
       vertical_stretch: 2
 
   sections:

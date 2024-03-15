@@ -9,7 +9,9 @@ module LatexYearlyPlanner
 
             <<~LATEX
               \\marginnote{%
-                #{quarters}%
+                #{quarters}
+                \\vskip#{params.get(:quarters_months_separation)}
+                #{months}%
               }
             LATEX
               .strip
@@ -29,6 +31,20 @@ module LatexYearlyPlanner
 
           def quarter_navigation_params
             params.object(:quarter_navigation).to_h
+          end
+
+          def months
+            XTeX::VerticalStick.new(items: month_names, **month_navigation_params)
+          end
+
+          def month_names
+            params.months.map do |month|
+              i18n.t("calendar.short.month.#{month.name.downcase}")
+            end
+          end
+
+          def month_navigation_params
+            params.object(:month_navigation).to_h
           end
         end
       end
