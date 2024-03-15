@@ -23,6 +23,14 @@ module LatexYearlyPlanner
         moment.strftime('%B')
       end
 
+      def year
+        moment.year
+      end
+
+      def quarter
+        Quarter.new(weekday_start:, year: moment.year, number: ((moment.month - 1) / 3) + 1)
+      end
+
       private
 
       def nil_not_our_month(week)

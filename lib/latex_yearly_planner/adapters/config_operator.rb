@@ -25,6 +25,10 @@ module LatexYearlyPlanner
           .map(&method(:initialize_month))
       end
 
+      def quarters
+        months.each_slice(3).map(&:first).map(&:quarter)
+      end
+
       private
 
       def start_date

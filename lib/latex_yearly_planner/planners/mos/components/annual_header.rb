@@ -6,7 +6,16 @@ module LatexYearlyPlanner
       module Components
         class AnnualHeader < Component
           def generate(...)
-            ''
+            params.quarters
+
+            <<~LATEX
+                            \\marginnote{%
+              \\begin{tabularx}{\\linewidth}{|@{}X@{}|}
+                Hai \\\\
+              \\end{tabularx}
+              }
+            LATEX
+              .strip
           end
         end
       end
