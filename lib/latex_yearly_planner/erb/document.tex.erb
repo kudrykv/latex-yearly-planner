@@ -1,8 +1,9 @@
 \documentclass[<%= document_options %>]{<%= document_class %>}
 
 \usepackage[<%= babel_language %>, english]{babel}
-\babelfont{rm}{SF Pro}
-\babelfont{sf}{SF Pro}
+<% if roman_font %>\babelfont{rm}{<%= roman_font %>}<% end %>
+<% if sans_serif_font %>\babelfont{sf}{<%= sans_serif_font %>}<% end %>
+<% if monospace_font %>\babelfont{tt}{<%= monospace_font %>}<% end %>
 
 \usepackage{geometry}
 \usepackage[table]{xcolor}

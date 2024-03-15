@@ -27,6 +27,10 @@ module LatexYearlyPlanner
         config.document.klass.name
       end
 
+      def fonts
+        Fonter.new(**config.document.fonts.to_h)
+      end
+
       def paper
         config.document.paper
       end

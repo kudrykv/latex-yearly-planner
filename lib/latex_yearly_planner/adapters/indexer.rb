@@ -39,6 +39,18 @@ module LatexYearlyPlanner
       def babel_language
         i18n.t('babel')
       end
+
+      def roman_font
+        planner_config.fonts.roman
+      end
+
+      def sans_serif_font
+        planner_config.fonts.sans_serif
+      end
+
+      def monospace_font
+        planner_config.fonts.monospace
+      end
     end
   end
 end

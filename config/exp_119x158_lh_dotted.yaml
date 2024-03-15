@@ -10,6 +10,11 @@ document:
     name: article
     size: 9pt
 
+  fonts:
+    roman: Georgia
+    sans_serif: PT Sans
+    monospace: PT Mono
+
   paper:
     dimensions:
       width: 119mm
