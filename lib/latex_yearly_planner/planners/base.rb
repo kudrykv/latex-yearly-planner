@@ -5,10 +5,11 @@ module LatexYearlyPlanner
     class Base
       include XTeX::Handy
 
-      attr_reader :section_config
+      attr_reader :section_config, :i18n
 
-      def initialize(section_config:)
+      def initialize(section_config:, i18n: I18n)
         @section_config = section_config
+        @i18n = i18n
       end
 
       def params

@@ -4,7 +4,7 @@ module LatexYearlyPlanner
   module TeX
     class TabularX
       DEFAULT_PARAMETERS = {
-        width: '\\textwidth',
+        width: '\\linewidth',
         vertical_stretch: 1,
         horizontal_spacing: '0pt',
       }.freeze

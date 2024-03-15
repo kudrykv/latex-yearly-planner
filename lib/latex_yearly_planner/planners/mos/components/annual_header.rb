@@ -6,16 +6,25 @@ module LatexYearlyPlanner
       module Components
         class AnnualHeader < Component
           def generate(...)
-            params.quarters
 
             <<~LATEX
-                            \\marginnote{%
-              \\begin{tabularx}{\\linewidth}{|@{}X@{}|}
-                Hai \\\\
-              \\end{tabularx}
+              \\marginnote{%
+                #{quarters}%
               }
             LATEX
               .strip
+          end
+
+          private
+
+          def quarters
+            XTeX::VerticalStick.new(items: quarter_names, **params.object(:quarter_navigation))
+          end
+
+          def quarter_names
+            params.quarters.map do |quarter|
+              "#{i18n.t('calendar.one_letter.quarter')}#{quarter.number}"
+            end
           end
         end
       end
