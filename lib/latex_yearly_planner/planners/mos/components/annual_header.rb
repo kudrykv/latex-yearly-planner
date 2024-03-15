@@ -12,7 +12,8 @@ module LatexYearlyPlanner
                 #{quarters}
                 \\vskip#{params.get(:quarters_months_separation)}
                 #{months}%
-              }
+              }hello, world!
+              \\vskip#{params.get(:header_separation)}
             LATEX
               .strip
           end

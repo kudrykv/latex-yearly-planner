@@ -40,6 +40,7 @@ planner:
     weekday_start: Monday
 
     quarters_months_separation: 5mm
+    header_separation: 1mm
 
   objects:
     little_calendar:
