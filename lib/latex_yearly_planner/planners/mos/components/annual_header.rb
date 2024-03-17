@@ -10,9 +10,9 @@ module LatexYearlyPlanner
 
             <<~LATEX
               \\marginnote{%
-                #{quarters}
+                #{quarters_navigation}
                 \\vskip#{params.get(:quarters_months_separation)}
-                #{months}%
+                #{months_navigation}%
               }hello, world!
               \\vskip#{params.get(:header_separation)}
             LATEX
@@ -21,7 +21,15 @@ module LatexYearlyPlanner
 
           private
 
-          def quarters
+          def in_margin_note
+            params.placement(:side_navigation).map do |placement|
+              next "\\vskip{#{placement}}" if placement.match?(/\A\d/)
+
+
+            end
+          end
+
+          def quarters_navigation
             XTeX::VerticalStick.new(items: quarter_names, **quarter_navigation_params)
           end
 
@@ -35,7 +43,7 @@ module LatexYearlyPlanner
             params.object(:quarters_navigation).to_h
           end
 
-          def months
+          def months_navigation
             XTeX::VerticalStick.new(items: month_names, **month_navigation_params)
           end
 
