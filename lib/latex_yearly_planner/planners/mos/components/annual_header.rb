@@ -6,14 +6,8 @@ module LatexYearlyPlanner
       module Components
         class AnnualHeader < Component
           def generate(...)
-            params.placement(:side_navigation)
-
             <<~LATEX
-              \\marginnote{%
-                #{quarters_navigation}
-                \\vskip#{params.get(:quarters_months_separation)}
-                #{months_navigation}%
-              }hello, world!
+              \\marginnote{#{in_margin_note}}hello, world!
               \\vskip#{params.get(:header_separation)}
             LATEX
               .strip
@@ -23,7 +17,7 @@ module LatexYearlyPlanner
 
           def in_margin_note
             params.placement(:side_navigation).map do |placement|
-              next "\\vskip{#{placement}}" if placement.match?(/\A\d/)
+              next "\\vskip#{placement}" if placement.match?(/\A\d/)
 
               method(placement).call
             end.join("\n")
