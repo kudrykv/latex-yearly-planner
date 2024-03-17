@@ -25,8 +25,8 @@ module LatexYearlyPlanner
             params.placement(:side_navigation).map do |placement|
               next "\\vskip{#{placement}}" if placement.match?(/\A\d/)
 
-
-            end
+              method(placement).call
+            end.join("\n")
           end
 
           def quarters_navigation
