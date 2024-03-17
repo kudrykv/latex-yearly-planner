@@ -58,6 +58,12 @@ planner:
     month_navigation:
       vertical_stretch: 2
 
+  placements:
+    side_navigation:
+      - quarter_navigation
+      - 5mm
+      - month_navigation
+
   sections:
     - title:
         enabled: true

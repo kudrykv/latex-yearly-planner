@@ -30,6 +30,13 @@ module LatexYearlyPlanner
         objects.send(key)
       end
 
+      def placement(key)
+        placements = section_config.placements
+        return if placements.nil?
+
+        placements.send(key)
+      end
+
       private
 
       def header

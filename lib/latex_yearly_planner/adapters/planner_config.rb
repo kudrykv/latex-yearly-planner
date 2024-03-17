@@ -40,7 +40,15 @@ module LatexYearlyPlanner
       end
 
       def object(key)
+        return nil unless planner.objects
+
         planner.objects.send(key)
+      end
+
+      def placement(key)
+        return nil unless planner.placements
+
+        planner.placements.send(key)
       end
 
       def planner
