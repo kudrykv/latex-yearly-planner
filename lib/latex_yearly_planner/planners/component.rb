@@ -3,8 +3,8 @@
 module LatexYearlyPlanner
   module Planners
     class Component < Base
-      def initialize(name:, section_config:)
-        super(section_config:)
+      def initialize(name:, section_config:, i18n: I18n)
+        super(section_config:, i18n:)
 
         @name = name
       end

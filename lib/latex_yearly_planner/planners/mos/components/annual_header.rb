@@ -6,7 +6,6 @@ module LatexYearlyPlanner
       module Components
         class AnnualHeader < Component
           def generate(...)
-
             <<~LATEX
               \\marginnote{%
                 #{quarters}
