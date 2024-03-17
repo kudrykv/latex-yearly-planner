@@ -1,9 +1,12 @@
 \documentclass[<%= document_options %>]{<%= document_class %>}
 
 \usepackage[<%= babel_language %>, english]{babel}
-<% if roman_font %>\babelfont{rm}{<%= roman_font %>}<% end %>
-<% if sans_serif_font %>\babelfont{sf}{<%= sans_serif_font %>}<% end %>
-<% if monospace_font %>\babelfont{tt}{<%= monospace_font %>}<% end %>
+<% if roman_font %>\babelfont{rm}{<%= roman_font %>}
+<% end %>
+<% if sans_serif_font %>\babelfont{sf}{<%= sans_serif_font %>}
+<% end %>
+<% if monospace_font %>\babelfont{tt}{<%= monospace_font %>}
+<% end %>
 
 \usepackage{geometry}
 \usepackage[table]{xcolor}
@@ -32,17 +35,18 @@
 \usetikzlibrary{patterns}
 
 \geometry{
-  paperwidth=<%= paper.dimensions.width %>,
-  paperheight=<%= paper.dimensions.height %>,
-  top=<%= paper.margin.top %>,
-  bottom=<%= paper.margin.bottom %>,
-  left=<%= paper.margin.left %>,
-  right=<%= paper.margin.right %>,
-  marginparwidth=<%= paper.margin_notes.width %>,
-  marginparsep=<%= paper.margin_notes.separation %>
+paperwidth=<%= paper.dimensions.width %>,
+paperheight=<%= paper.dimensions.height %>,
+top=<%= paper.margin.top %>,
+bottom=<%= paper.margin.bottom %>,
+left=<%= paper.margin.left %>,
+right=<%= paper.margin.right %>,
+marginparwidth=<%= paper.margin_notes.width %>,
+marginparsep=<%= paper.margin_notes.separation %>
 }
 
-<% if paper.margin_notes.placement == 'left' %>\reversemarginpar<% end %>
+<% if paper.margin_notes.placement == 'left' %>\reversemarginpar
+<% end %>
 
 \pagestyle{empty}
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
@@ -83,11 +87,9 @@
 \pgfusepath{fill}%
 }
 
-\newcommand{\myLineColor}[1]{\textcolor{#1}{\myLinePlain}}
-
-\newcommand{\myLinePlain}{\hrule width \linewidth height 0.4pt}
-\newcommand{\myLineGray}{\myLineColor{gray}}
-\newcommand{\myLineLightGray}{\myLineColor{gray!50}}
+<% register_commands.each do |command| %>
+  <%= command.register %>
+<% end %>
 
 \begin{document}
 

@@ -5,16 +5,10 @@ module LatexYearlyPlanner
     class Line
       attr_reader :height, :normal_cmd, :colored_cmd
 
-      def initialize(height: '0.4pt', normal_cmd: 'normal', colored_cmd: 'colored')
-        @height = height
-        @normal_cmd = normal_cmd
-        @colored_cmd = colored_cmd
-      end
-
-      def register
+      def self.register
         <<~TEX
-          \\newcommand{\\myLine#{normal_cmd.camelize}}{\\hrule width \\linewidth height #{height}}
-          \\newcommand{\\myLine#{colored_cmd.camelize}}[1]{\\textcolor{#1}{\\myLine#{normal_cmd.camelize}}}
+          \\newcommand{\\myLineNormal}{\\hrule width \\linewidth height 0.4pt}
+          \\newcommand{\\myLineColored}[1]{\\textcolor{#1}{\\myLineNormal}}
         TEX
           .strip
       end

@@ -6,7 +6,7 @@ module LatexYearlyPlanner
       include Interactor
 
       def call
-        context.indexer = Adapters::Indexer.new(planner_config:)
+        context.indexer = Adapters::Indexer.new(planner_config:, register_commands:)
       end
 
       private
@@ -15,6 +15,10 @@ module LatexYearlyPlanner
         raise DevelopmentError, '`planner_config` is not defined' unless context.planner_config
 
         context.planner_config
+      end
+
+      def register_commands
+        [XTeX::Line]
       end
     end
   end
