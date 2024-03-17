@@ -52,17 +52,17 @@ planner:
       underline_weekdays: true
       upperline_weekdays: true
 
-    quarter_navigation:
+    quarters_navigation:
       vertical_stretch: 2
 
-    month_navigation:
+    months_navigation:
       vertical_stretch: 2
 
   placements:
     side_navigation:
-      - quarter_navigation
+      - quarters_navigation
       - 5mm
-      - month_navigation
+      - months_navigation
 
   sections:
     - title:

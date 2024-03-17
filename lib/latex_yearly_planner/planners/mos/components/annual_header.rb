@@ -6,6 +6,8 @@ module LatexYearlyPlanner
       module Components
         class AnnualHeader < Component
           def generate(...)
+            params.placement(:side_navigation)
+
             <<~LATEX
               \\marginnote{%
                 #{quarters}
@@ -30,7 +32,7 @@ module LatexYearlyPlanner
           end
 
           def quarter_navigation_params
-            params.object(:quarter_navigation).to_h
+            params.object(:quarters_navigation).to_h
           end
 
           def months
@@ -44,7 +46,7 @@ module LatexYearlyPlanner
           end
 
           def month_navigation_params
-            params.object(:month_navigation).to_h
+            params.object(:months_navigation).to_h
           end
         end
       end
