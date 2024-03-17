@@ -5,7 +5,7 @@ module LatexYearlyPlanner
     module Mos
       module Components
         class AnnualBody < Component
-          def generate(months_rows)
+          def generate(months_rows, _page_number)
             months_rows
               .map(&method(:months_row))
               .join(vertical_spring)
