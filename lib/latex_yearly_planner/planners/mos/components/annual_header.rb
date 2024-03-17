@@ -7,7 +7,10 @@ module LatexYearlyPlanner
         class AnnualHeader < Component
           def generate(...)
             <<~LATEX
-              \\marginnote{#{in_margin_note}}hello, world!
+              \\marginnote{#{in_margin_note}}%
+              Hello, world!%
+              \\hfill{}%
+              #{XTeX::Line.new}%
               \\vskip#{params.get(:header_separation)}
             LATEX
               .strip
@@ -20,7 +23,7 @@ module LatexYearlyPlanner
               next "\\vskip#{placement}" if placement.match?(/\A\d/)
 
               method(placement).call
-            end.join("\n")
+            end.join("%\n")
           end
 
           def quarters_navigation

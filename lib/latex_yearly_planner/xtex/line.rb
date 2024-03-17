@@ -12,6 +12,10 @@ module LatexYearlyPlanner
         TEX
           .strip
       end
+
+      def to_s
+        '\myLineNormal{}'
+      end
     end
   end
 end
