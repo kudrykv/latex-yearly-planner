@@ -5,10 +5,10 @@ module LatexYearlyPlanner
     module Mos
       module Components
         class AnnualHeader < Component
-          def generate(...)
+          def generate(_months, _page_number)
             <<~LATEX
               \\marginnote{#{in_margin_note}}%
-              Hello, world!%
+              #{heading_name}%
               \\hfill{}%
               #{XTeX::Line.new}%
               \\vskip#{params.get(:header_separation)}
@@ -17,6 +17,15 @@ module LatexYearlyPlanner
           end
 
           private
+
+          def heading_name
+            first = params.months.first
+            last = params.months.last
+
+            return first.year if first.year == last.year && first.january? && last.december?
+
+            "#{first.year}, #{short_month_name(first)} -- #{last.year}, #{short_month_name(last)}"
+          end
 
           def in_margin_note
             params.placement(:side_navigation).map do |placement|
@@ -45,9 +54,11 @@ module LatexYearlyPlanner
           end
 
           def month_names
-            params.months.map do |month|
-              i18n.t("calendar.short.month.#{month.name.downcase}")
-            end
+            params.months.map(&method(:short_month_name))
+          end
+
+          def short_month_name(month)
+            i18n.t("calendar.short.month.#{month.name.downcase}")
           end
 
           def month_navigation_params

@@ -12,11 +12,11 @@ module LatexYearlyPlanner
 
       def weeks
         moment.beginning_of_week(weekday_start)
-          .upto(moment.end_of_month + 7.days)
-          .each_slice(7)
-          .map(&method(:nil_not_our_month))
-          .reject { |days| days.all?(&:nil?) }
-          .map { |days| Week.new(days: make_days(days), weekday_start:) }
+              .upto(moment.end_of_month + 7.days)
+              .each_slice(7)
+              .map(&method(:nil_not_our_month))
+              .reject { |days| days.all?(&:nil?) }
+              .map { |days| Week.new(days: make_days(days), weekday_start:) }
       end
 
       def name
@@ -29,6 +29,14 @@ module LatexYearlyPlanner
 
       def quarter
         Quarter.new(weekday_start:, year: moment.year, number: ((moment.month - 1) / 3) + 1)
+      end
+
+      def january?
+        moment.month == 1
+      end
+
+      def december?
+        moment.month == 12
       end
 
       private
