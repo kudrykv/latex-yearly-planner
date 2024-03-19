@@ -8,8 +8,7 @@ module LatexYearlyPlanner
           def generate(_months, _page_number)
             <<~LATEX
               \\marginnote{#{in_margin_note}}%
-              #{heading_name}%
-              \\hfill{}%
+              #{dummy_table}%
               #{XTeX::Line.new}%
               \\vskip#{params.get(:header_separation)}
             LATEX
@@ -17,6 +16,15 @@ module LatexYearlyPlanner
           end
 
           private
+
+          def dummy_table
+            row = TeX::TableRow.new([TeX::TableCell.new(heading_name), TeX::TableCell.new, TeX::TableCell.new('hello world')])
+
+            table = TeX::TabularX.new
+            table.formatting = TeX::TableFormatting.new('lX| r |')
+            table.add_row(row)
+            table
+          end
 
           def heading_name
             first = params.months.first

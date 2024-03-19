@@ -9,7 +9,7 @@ module LatexYearlyPlanner
         horizontal_spacing: '0pt',
       }.freeze
 
-      attr_accessor :vertical_line_indexes, :rows, :parameters
+      attr_accessor :vertical_line_indexes, :rows, :parameters, :formatting
 
       def initialize(**parameters)
         self.parameters = RecursiveOpenStruct.new(DEFAULT_PARAMETERS.merge(parameters.compact))
@@ -43,6 +43,8 @@ module LatexYearlyPlanner
       private
 
       def make_format
+        return formatting if formatting
+
         format = rows.map(&:size).max.times.map { 'Y' }.join
 
         vertical_line_indexes.sort.reverse.each do |index|

@@ -5,7 +5,7 @@ module LatexYearlyPlanner
     class TableCell
       attr_accessor :content
 
-      def initialize(content)
+      def initialize(content = '')
         @content = content
       end
 
