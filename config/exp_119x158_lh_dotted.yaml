@@ -63,6 +63,13 @@ planner:
       - 5mm
       - months_navigation
 
+    heading:
+      - function: page_name
+        position: "@{}l"
+      - function: empty_cell_filler
+        position: X
+      - function: top_navigation
+
   sections:
     - title:
         enabled: true

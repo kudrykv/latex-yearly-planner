@@ -18,10 +18,10 @@ module LatexYearlyPlanner
           private
 
           def dummy_table
-            row = TeX::TableRow.new([TeX::TableCell.new(heading_name), TeX::TableCell.new, TeX::TableCell.new('hello world')])
+            row = TeX::TableRow.new([TeX::TableCell.new(heading_name), TeX::TableCell.new, TeX::TableCell.new('Calendar')])
 
-            table = TeX::TabularX.new
-            table.formatting = TeX::TableFormatting.new('lX| r |')
+            table = TeX::TabularX.new(horizontal_spacing: '6pt')
+            table.formatting = TeX::TableFormatting.new('@{}lX|l|')
             table.add_row(row)
             table
           end
