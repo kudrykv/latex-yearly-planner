@@ -64,11 +64,11 @@ planner:
       - months_navigation
 
     heading:
-      - function: page_name
-        position: "@{}l"
+      - function: top_navigation
       - function: empty_cell_filler
         position: X
-      - function: top_navigation
+      - function: page_name
+        position: "@{}l"
 
   sections:
     - title:

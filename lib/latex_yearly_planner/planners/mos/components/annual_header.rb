@@ -18,12 +18,24 @@ module LatexYearlyPlanner
           private
 
           def dummy_table
-            row = TeX::TableRow.new([TeX::TableCell.new(heading_name), TeX::TableCell.new, TeX::TableCell.new('Calendar')])
+            cell_parts = params.placement(:heading).map { |item| method(item.function).call }
+            nav = cell_parts.find { |cp| cp.is_a?(Array) }
+            layout_part = nav.size.times.map { 'l' }.split.join('|')
+            layout_parts = params
+                           .placement(:heading)
+                           .map(&:position)
+                           .map { |part| part || "|#{layout_part}|" }
+
+            row = TeX::TableRow.new(cell_parts.flatten)
 
             table = TeX::TabularX.new(horizontal_spacing: '6pt')
-            table.formatting = TeX::TableFormatting.new('@{}lX|l|')
+            table.formatting = TeX::TableFormatting.new(layout_parts.join)
             table.add_row(row)
             table
+          end
+
+          def page_name
+            TeX::TableCell.new(heading_name)
           end
 
           def heading_name
@@ -33,6 +45,14 @@ module LatexYearlyPlanner
             return first.year if first.year == last.year && first.january? && last.december?
 
             "#{first.year}, #{short_month_name(first)} -- #{last.year}, #{short_month_name(last)}"
+          end
+
+          def empty_cell_filler
+            TeX::TableCell.new
+          end
+
+          def top_navigation
+            [TeX::TableCell.new('one'), TeX::TableCell.new('two')]
           end
 
           def in_margin_note
