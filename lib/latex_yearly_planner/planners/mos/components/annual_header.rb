@@ -28,7 +28,7 @@ module LatexYearlyPlanner
 
             row = TeX::TableRow.new(cell_parts.flatten)
 
-            table = TeX::TabularX.new(horizontal_spacing: '6pt')
+            table = TeX::TabularX.new(**params.object(:heading).to_h)
             table.formatting = TeX::TableFormatting.new(layout_parts.join)
             table.add_row(row)
             table
