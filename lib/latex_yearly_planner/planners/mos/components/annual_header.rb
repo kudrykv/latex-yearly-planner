@@ -8,7 +8,7 @@ module LatexYearlyPlanner
           def generate(_months, _page_number)
             <<~LATEX
               \\marginnote{#{in_margin_note}}%
-              #{dummy_table}%
+              #{heading_table}%
               #{XTeX::Line.new}%
               \\vskip#{params.get(:header_separation)}
             LATEX
@@ -17,21 +17,31 @@ module LatexYearlyPlanner
 
           private
 
-          def dummy_table
-            cell_parts = params.placement(:heading).map { |item| method(item.function).call }
-            nav = cell_parts.find { |cp| cp.is_a?(Array) }
-            layout_part = nav.size.times.map { 'l' }.split.join('|')
-            layout_parts = params
-                           .placement(:heading)
-                           .map(&:position)
-                           .map { |part| part || "|#{layout_part}|" }
-
-            row = TeX::TableRow.new(cell_parts.flatten)
+          def heading_table
+            row = TeX::TableRow.new(heading_table_cell_parts.flatten)
 
             table = TeX::TabularX.new(**params.object(:heading).to_h)
-            table.formatting = TeX::TableFormatting.new(layout_parts.join)
+            table.formatting = TeX::TableFormatting.new(heading_table_layout_parts.join)
             table.add_row(row)
             table
+          end
+
+          def heading_table_layout_parts
+            @heading_table_layout_parts ||= params
+                                            .placement(:heading)
+                                            .map { |item| item.position || "|#{heading_table_nav_layout_part}|" }
+          end
+
+          def heading_table_nav_layout_part
+            @heading_table_nav_layout_part ||= heading_table_nav.size.times.map { 'l' }.split.join('|')
+          end
+
+          def heading_table_cell_parts
+            @heading_table_cell_parts ||= params.placement(:heading).map { |item| method(item.function).call }
+          end
+
+          def heading_table_nav
+            @heading_table_nav ||= heading_table_cell_parts.find { |cp| cp.is_a?(Array) }
           end
 
           def page_name
