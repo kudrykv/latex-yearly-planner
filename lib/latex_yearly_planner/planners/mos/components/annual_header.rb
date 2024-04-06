@@ -18,12 +18,17 @@ module LatexYearlyPlanner
           private
 
           def heading_table
-            row = TeX::TableRow.new(heading_table_cell_parts.flatten)
+            XTeX::MosHeadingTable.new(
+              page_name:,
+              placement: params.placement(:heading),
+              tabularx: params.object(:heading).tabularx,
+              navigation:
+            )
 
-            table = TeX::TabularX.new(**params.object(:heading).to_h)
-            table.formatting = TeX::TableFormatting.new(heading_table_layout_parts.join)
-            table.add_row(row)
-            table
+            # table = TeX::TabularX.new(**params.object(:heading).tabularx.to_h)
+            # table.formatting = TeX::TableFormatting.new(heading_table_layout_parts.join)
+            # table.add_row(TeX::TableRow.new(heading_table_cell_parts.flatten))
+            # table
           end
 
           def heading_table_layout_parts
@@ -61,7 +66,7 @@ module LatexYearlyPlanner
             TeX::TableCell.new
           end
 
-          def top_navigation
+          def navigation
             [TeX::TableCell.new('one'), TeX::TableCell.new('two')]
           end
 

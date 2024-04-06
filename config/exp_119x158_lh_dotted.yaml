@@ -58,7 +58,8 @@ planner:
       vertical_stretch: 2
 
     heading:
-      horizontal_spacing: 6pt
+      tabularx:
+        horizontal_spacing: 6pt
 
   placements:
     side_navigation:
@@ -71,7 +72,7 @@ planner:
         position: "@{}l"
       - function: empty_cell_filler
         position: X
-      - function: top_navigation
+      - function: navigation
 
   sections:
     - title:
