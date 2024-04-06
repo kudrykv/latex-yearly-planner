@@ -63,7 +63,7 @@ module LatexYearlyPlanner
       def struct(*keys)
         @struct ||= {}
 
-        last = "#{keys.last}_as_a_hash".to_sym
+        last = :"#{keys.last}_as_a_hash"
         keys = keys.take(keys.size - 1).push(last)
 
         @struct[keys] ||= reduce_param(*keys)

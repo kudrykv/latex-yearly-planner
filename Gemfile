@@ -11,3 +11,5 @@ gem 'rubocop', '~> 1.56'
 gem 'rubocop-rake', '~> 0.6.0'
 gem 'rubocop-rspec', '~> 2.23'
 gem 'ruby-measurement', '~> 1.3'
+
+gem "factory_bot", "~> 6.4"

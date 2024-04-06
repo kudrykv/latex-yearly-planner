@@ -6,7 +6,7 @@ module LatexYearlyPlanner
       DEFAULT_PARAMETERS = {
         width: '\\linewidth',
         vertical_stretch: 1,
-        horizontal_spacing: '0pt',
+        horizontal_spacing: '0pt'
       }.freeze
 
       attr_accessor :vertical_line_indexes, :rows, :parameters, :formatting
@@ -22,7 +22,7 @@ module LatexYearlyPlanner
       end
 
       def add_row(row)
-        self.rows << row
+        rows << row
       end
 
       def add_vertical_line(index)

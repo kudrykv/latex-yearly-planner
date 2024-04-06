@@ -3,7 +3,6 @@
 module LatexYearlyPlanner
   module TeX
     class TableFormatting
-
       attr_accessor :formatting
 
       def initialize(formatting)
