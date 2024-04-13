@@ -21,6 +21,10 @@ module LatexYearlyPlanner
       def cweek
         moment.cweek
       end
+
+      def ==(other)
+        other.is_a?(Day) && moment == other.moment && weekday_start == other.weekday_start
+      end
     end
   end
 end

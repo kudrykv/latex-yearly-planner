@@ -10,6 +10,13 @@ module LatexYearlyPlanner
         @year = year
         @number = number
       end
+
+      def ==(other)
+        other.is_a?(Quarter) &&
+          other.weekday_start == weekday_start &&
+          other.year == year &&
+          other.number == number
+      end
     end
   end
 end

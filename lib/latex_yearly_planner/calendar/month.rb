@@ -27,6 +27,10 @@ module LatexYearlyPlanner
         moment.year
       end
 
+      def mon
+        moment.mon
+      end
+
       def quarter
         Quarter.new(weekday_start:, year: moment.year, number: ((moment.month - 1) / 3) + 1)
       end
@@ -37,6 +41,10 @@ module LatexYearlyPlanner
 
       def december?
         moment.month == 12
+      end
+
+      def ==(other)
+        other.is_a?(Month) && other.moment == moment && other.weekday_start == weekday_start
       end
 
       private

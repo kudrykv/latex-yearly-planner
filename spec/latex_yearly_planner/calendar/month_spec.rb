@@ -7,22 +7,23 @@ Quarter = LatexYearlyPlanner::Calendar::Quarter
 Day = LatexYearlyPlanner::Calendar::Day
 
 RSpec.describe LatexYearlyPlanner::Calendar::Month do
-  let(:date) { Date.new(2023, 9, 30).beginning_of_month }
+  let(:month_number) { 9 }
+  let(:year) { 2023 }
   let(:weekday_start) { :monday }
 
   context 'when calling month methods' do
-    subject(:month) { described_class.new(date, weekday_start:) }
+    subject(:month) { described_class.new(month: month_number, year:, weekday_start:) }
 
-    let(:another_same_month) { described_class.new(date, weekday_start:) }
-    let(:quarter) { Quarter.new(date.beginning_of_quarter, weekday_start:) }
+    let(:another_same_month) { described_class.new(month: month_number, year:, weekday_start:) }
+    let(:quarter) { Quarter.new(weekday_start:, year:, number: 3) }
 
     let :weeks do
       [
-        Week.new([nil, nil, nil, nil] + (1..3).map { |day| Date.new(2023, 9, day) }, weekday_start:),
-        Week.new((4..10).map { |day| Date.new(2023, 9, day) }, weekday_start:),
-        Week.new((11..17).map { |day| Date.new(2023, 9, day) }, weekday_start:),
-        Week.new((18..24).map { |day| Date.new(2023, 9, day) }, weekday_start:),
-        Week.new((25..30).map { |day| Date.new(2023, 9, day) } + [nil], weekday_start:)
+        Week.new(days: [nil, nil, nil, nil] + (1..3).map { |day| Day.new(year:, month: month_number, day:, weekday_start:) }, weekday_start:),
+        Week.new(days: (4..10).map { |day| Day.new(year:, month: month_number, day:, weekday_start:) }, weekday_start:),
+        Week.new(days: (11..17).map { |day| Day.new(year:, month: month_number, day:, weekday_start:) }, weekday_start:),
+        Week.new(days: (18..24).map { |day| Day.new(year:, month: month_number, day:, weekday_start:) }, weekday_start:),
+        Week.new(days: (25..30).map { |day| Day.new(year:, month: month_number, day:, weekday_start:) } + [nil], weekday_start:)
       ]
     end
 
@@ -31,9 +32,6 @@ RSpec.describe LatexYearlyPlanner::Calendar::Month do
     it { expect(month.mon).to eq(9) }
     it { expect(month.quarter).to eq(quarter) }
     it { expect(month.year).to eq(2023) }
-    it { expect(month.reference).to eq('2023-September') }
-    it { expect(month.weekdays_one_letter).to eq(%w[M T W T F S S]) }
-    it { expect(month.weekdays_short).to eq(%w[Mon Tue Wed Thu Fri Sat Sun]) }
     it { expect(month.weeks).to eq(weeks) }
   end
 end

@@ -16,6 +16,12 @@ module LatexYearlyPlanner
 
         days.compact.map(&:cweek).max + shift
       end
+
+      def ==(other)
+        return false unless other.is_a?(Week)
+
+        weekday_start == other.weekday_start && days == other.days
+      end
     end
   end
 end
