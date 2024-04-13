@@ -3,6 +3,8 @@
 module LatexYearlyPlanner
   module TeX
     class VerticalPhantom
+      attr_reader :content
+
       def initialize(content)
         @content = content
       end
