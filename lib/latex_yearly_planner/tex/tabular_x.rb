@@ -13,8 +13,9 @@ module LatexYearlyPlanner
 
       def initialize(**parameters)
         self.parameters = RecursiveOpenStruct.new(DEFAULT_PARAMETERS.merge(parameters.compact))
-        self.rows = []
+        self.rows = parameters[:rows] || []
         self.vertical_line_indexes = []
+        self.formatting = parameters[:formatting]
       end
 
       def add_rows(rows)
@@ -55,7 +56,7 @@ module LatexYearlyPlanner
       end
 
       def build_rows
-        rows.map(&:to_s).join("\n")
+        rows.map(&:to_s).join("\n  ") # two spaces for indentation
       end
     end
   end
