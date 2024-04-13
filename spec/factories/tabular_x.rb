@@ -24,10 +24,10 @@ FactoryBot.define do
       end
     end
 
-    factory :sample_tabularx, traits: [:sample]
+    factory :sample_tabularx_with_custom_formatting, traits: [:sample]
   end
 
-  factory :sample_compiled, class: String do
+  factory :sample_compiled_with_custom_formatting, class: String do
     initialize_with do
       <<~TEX
         {\\renewcommand{\\arraystretch}{1.5}%
