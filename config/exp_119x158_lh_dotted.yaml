@@ -53,9 +53,11 @@ planner:
 
     quarters_navigation:
       vertical_stretch: 2
+      vertical_line_after_column: 1
 
     months_navigation:
       vertical_stretch: 2
+      vertical_line_after_column: 1
 
     heading:
       tabularx:

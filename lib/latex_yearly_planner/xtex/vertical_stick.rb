@@ -12,7 +12,7 @@ module LatexYearlyPlanner
 
       def to_s
         table = TeX::TabularX.new(**parameters.to_h)
-        table.add_vertical_line(1)
+        table.add_vertical_line(parameters.vertical_line_after_column)
         table.add_rows(transposed)
         table.to_s
       end
