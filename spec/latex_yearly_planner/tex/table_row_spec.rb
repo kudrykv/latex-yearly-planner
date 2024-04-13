@@ -38,5 +38,23 @@ RSpec.describe LatexYearlyPlanner::TeX::TableRow do
         expect(row.upperline.underline.to_s).to eq(expected)
       end
     end
+
+    context 'when pushing a cell' do
+      it 'adds the cell to the cells' do
+        expect(row.push('d')).to eq(%w[a b c d])
+      end
+    end
+
+    context 'when unshifting a cell' do
+      it 'adds the cell to the beginning of the cells' do
+        expect(row.unshift('d')).to eq(%w[d a b c])
+      end
+    end
+
+    context 'when size is called' do
+      it 'returns the number of cells' do
+        expect(row.size).to eq(cells.size)
+      end
+    end
   end
 end
