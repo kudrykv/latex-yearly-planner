@@ -3,8 +3,6 @@
 module LatexYearlyPlanner
   module XTeX
     class Line
-      attr_reader :height, :normal_cmd, :colored_cmd
-
       def self.register
         <<~TEX
           \\newcommand{\\myLineNormal}{\\hrule width \\linewidth height 0.4pt}
@@ -13,8 +11,16 @@ module LatexYearlyPlanner
           .strip
       end
 
+      attr_reader :color
+
+      def initialize(color: nil)
+        @color = color
+      end
+
       def to_s
-        '\myLineNormal{}'
+        return '\myLineNormal{}' if color.nil?
+
+        "\\myLineColored{#{color}}"
       end
     end
   end
