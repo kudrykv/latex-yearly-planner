@@ -36,7 +36,7 @@ planner:
     time_format: 24
 
     start_date: 2024, January
-    end_date: 2024, June
+    end_date: 2024, December
     weekday_start: Monday
 
     header_separation: 1mm
