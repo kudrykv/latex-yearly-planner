@@ -17,6 +17,17 @@ module LatexYearlyPlanner
 
           private
 
+          def in_margin_note
+            XTeX::MosNav.new(
+              i18n:,
+              navigation: params.placement(:side_navigation),
+              quarters: params.quarters,
+              quarters_navigation_params: params.object(:quarters_navigation).to_h,
+              months: params.months,
+              months_navigation_params: params.object(:months_navigation).to_h
+            )
+          end
+
           def heading_table
             XTeX::MosHeadingTable.new(
               page_name:,
@@ -39,50 +50,8 @@ module LatexYearlyPlanner
             "#{first.year}, #{short_month_name(first)} -- #{last.year}, #{short_month_name(last)}"
           end
 
-          def empty_cell_filler
-            TeX::TableCell.new
-          end
-
           def navigation
             [TeX::TableCell.new('one'), TeX::TableCell.new('two')]
-          end
-
-          def in_margin_note
-            params.placement(:side_navigation).map do |placement|
-              next "\\vskip#{placement}" if placement.match?(/\A\d/)
-
-              method(placement).call
-            end.join("%\n")
-          end
-
-          def quarters_navigation
-            XTeX::VerticalStick.new(items: quarter_names, **quarter_navigation_params)
-          end
-
-          def quarter_names
-            params.quarters.map do |quarter|
-              "#{i18n.t('calendar.one_letter.quarter')}#{quarter.number}"
-            end
-          end
-
-          def quarter_navigation_params
-            params.object(:quarters_navigation).to_h
-          end
-
-          def months_navigation
-            XTeX::VerticalStick.new(items: month_names, **month_navigation_params)
-          end
-
-          def month_names
-            params.months.map(&method(:short_month_name))
-          end
-
-          def short_month_name(month)
-            i18n.t("calendar.short.month.#{month.name.downcase}")
-          end
-
-          def month_navigation_params
-            params.object(:months_navigation).to_h
           end
         end
       end
