@@ -3,16 +3,16 @@
 module LatexYearlyPlanner
   module XTeX
     class VerticalStick
-      attr_reader :items, :parameters
+      attr_reader :items, :struct
 
-      def initialize(items:, **parameters)
+      def initialize(items:, struct:)
         @items = items
-        @parameters = RecursiveOpenStruct.new(parameters)
+        @struct = struct
       end
 
       def to_s
-        table = TeX::TabularX.new(**parameters.to_h)
-        table.add_vertical_line(parameters.vertical_line_after_column)
+        table = TeX::TabularX.new(**struct.to_h)
+        table.add_vertical_line(struct.vertical_line_after_column)
         table.add_rows(transposed)
         table.to_s
       end

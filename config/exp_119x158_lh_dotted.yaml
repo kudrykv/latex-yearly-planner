@@ -70,11 +70,11 @@ planner:
         - months_navigation
       objects:
         quarter_navigation:
-          vertical_stretch: 1.5
+          vertical_stretch: 2
           vertical_line_after_column: 1
 
         month_navigation:
-          vertical_stretch: 1.5
+          vertical_stretch: 1.8
           vertical_line_after_column: 1
 
   placements:

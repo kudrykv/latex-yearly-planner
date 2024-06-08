@@ -18,13 +18,11 @@ module LatexYearlyPlanner
           private
 
           def in_margin_note
-            XTeX::MosNav.new(
+            XTeX::MosSideNav.new(
               i18n:,
-              navigation: params.object(:side_navigation).placements,
+              struct: params.object(:side_navigation),
               quarters: params.quarters,
-              quarters_navigation_params: params.object(:side_navigation).objects.quarter_navigation.to_h,
               months: params.months,
-              months_navigation_params: params.object(:side_navigation).objects.month_navigation.to_h
             )
           end
 
