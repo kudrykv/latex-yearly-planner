@@ -63,6 +63,20 @@ planner:
       tabularx:
         horizontal_spacing: 6pt
 
+    side_navigation:
+      placements:
+        - quarters_navigation
+        - 5mm
+        - months_navigation
+      objects:
+        quarter_navigation:
+          vertical_stretch: 1.5
+          vertical_line_after_column: 1
+
+        month_navigation:
+          vertical_stretch: 1.5
+          vertical_line_after_column: 1
+
   placements:
     side_navigation:
       - quarters_navigation

@@ -20,11 +20,11 @@ module LatexYearlyPlanner
           def in_margin_note
             XTeX::MosNav.new(
               i18n:,
-              navigation: params.placement(:side_navigation),
+              navigation: params.object(:side_navigation).placements,
               quarters: params.quarters,
-              quarters_navigation_params: params.object(:quarters_navigation).to_h,
+              quarters_navigation_params: params.object(:side_navigation).objects.quarter_navigation.to_h,
               months: params.months,
-              months_navigation_params: params.object(:months_navigation).to_h
+              months_navigation_params: params.object(:side_navigation).objects.month_navigation.to_h
             )
           end
 
