@@ -4,26 +4,20 @@ module LatexYearlyPlanner
   module Planners
     module Mos
       module Components
-        class AnnualHeader < Component
+        class AnnualHeader < HeaderBase
           def generate(_months, _page_number)
-            <<~LATEX
+            <<~LATEX.strip
               \\marginnote{#{in_margin_note}}%
               #{heading_table}%
               #{XTeX::Line.new}%
               \\vskip#{params.get(:header_separation)}
             LATEX
-              .strip
           end
 
           private
 
           def in_margin_note
-            XTeX::MosSideNav.new(
-              i18n:,
-              struct: params.object(:side_navigation),
-              quarters: params.quarters,
-              months: params.months,
-            )
+            XTeX::MosSideNav.new(i18n:, struct: params.object(:side_navigation), quarters:, months:)
           end
 
           def heading_table
