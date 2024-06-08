@@ -78,11 +78,6 @@ planner:
           vertical_line_after_column: 1
 
   placements:
-    side_navigation:
-      - quarters_navigation
-      - 5mm
-      - months_navigation
-
     heading:
       - function: page_name
         position: "@{}l"
