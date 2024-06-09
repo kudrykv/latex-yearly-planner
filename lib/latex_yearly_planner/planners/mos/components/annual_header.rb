@@ -22,9 +22,8 @@ module LatexYearlyPlanner
 
           def heading_table
             XTeX::MosHeadingTable.new(
+              struct: params.object(:heading_table),
               page_name:,
-              placement: params.placement(:heading),
-              tabularx: params.object(:heading).tabularx,
               navigation:
             )
           end

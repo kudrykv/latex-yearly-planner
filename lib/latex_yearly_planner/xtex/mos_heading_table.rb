@@ -3,17 +3,16 @@
 module LatexYearlyPlanner
   module XTeX
     class MosHeadingTable
-      attr_reader :page_name, :placement, :tabularx, :navigation
+      attr_reader :page_name, :struct, :navigation
 
-      def initialize(page_name:, placement:, tabularx:, navigation:)
+      def initialize(page_name:, struct:, navigation:)
         @page_name = page_name
-        @placement = placement
-        @tabularx = tabularx
+        @struct = struct
         @navigation = navigation
       end
 
       def to_s
-        table = TeX::TabularX.new(**tabularx)
+        table = TeX::TabularX.new(**struct.tabularx.to_h)
         table.formatting = TeX::TableFormatting.new(layout)
         table.add_row(TeX::TableRow.new(cell_mix.flatten))
 
@@ -23,7 +22,7 @@ module LatexYearlyPlanner
       private
 
       def layout
-        placement.map { |item| item.position || "|#{nav_layout_part}|" }.join
+        struct.placements.map { |item| item.position || "|#{nav_layout_part}|" }.join
       end
 
       def nav_layout_part
@@ -31,7 +30,7 @@ module LatexYearlyPlanner
       end
 
       def cell_mix
-        @cell_mix ||= placement.map { |item| method(item.function).call }
+        @cell_mix ||= struct.placements.map { |item| method(item.function).call }
       end
 
       def empty_cell_filler

@@ -59,9 +59,16 @@ planner:
       vertical_stretch: 2
       vertical_line_after_column: 1
 
-    heading:
+    heading_table:
       tabularx:
         horizontal_spacing: 6pt
+      placements:
+        - function: page_name
+          position: "@{}l"
+        - function: empty_cell_filler
+          position: X
+        - function: navigation
+
 
     side_navigation:
       placements:
@@ -76,14 +83,6 @@ planner:
         month_navigation:
           vertical_stretch: 1.8
           vertical_line_after_column: 1
-
-  placements:
-    heading:
-      - function: page_name
-        position: "@{}l"
-      - function: empty_cell_filler
-        position: X
-      - function: navigation
 
   sections:
     - title:
