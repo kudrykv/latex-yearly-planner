@@ -95,3 +95,6 @@ planner:
         parameters:
           months_per_page: 6
           months_per_row: 2
+
+    - quarterly:
+        enabled: true

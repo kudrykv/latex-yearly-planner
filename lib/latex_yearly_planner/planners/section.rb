@@ -21,6 +21,10 @@ module LatexYearlyPlanner
         Entities::TextDocument.new(name: "#{name}.tex", content:)
       end
 
+      def pages
+        raise NotImplementedError
+      end
+
       private
 
       def content
@@ -29,10 +33,6 @@ module LatexYearlyPlanner
 
       def generate_page(...)
         "#{header.generate(...)}#{body.generate(...)}"
-      end
-
-      def pages
-        raise NotImplementedError
       end
 
       def pages_glue
