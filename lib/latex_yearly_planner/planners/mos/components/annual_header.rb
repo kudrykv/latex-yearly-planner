@@ -21,11 +21,7 @@ module LatexYearlyPlanner
           end
 
           def heading_table
-            XTeX::MosHeadingTable.new(
-              struct: params.object(:heading_table),
-              page_name:,
-              navigation:
-            )
+            XTeX::MosHeadingTable.new(struct: params.object(:heading_table), page_name:, navigation:)
           end
 
           def page_name
