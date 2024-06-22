@@ -12,7 +12,7 @@ module LatexYearlyPlanner
       private
 
       def hash
-        YAML.load_file(path_to_yaml_file)
+        YAML.load_file(path_to_yaml_file, symbolize_names: true)
       end
 
       def path_to_yaml_file

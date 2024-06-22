@@ -12,7 +12,7 @@ module LatexYearlyPlanner
       end
 
       def compile(text_document)
-        planner_config.config.compile.runs.times do
+        planner_config.config[:compile][:runs].times do
           `cd #{workdir} && xelatex -halt-on-error #{text_document.name}`
           raise "Error compiling #{text_document.name}" unless $CHILD_STATUS.success?
         end

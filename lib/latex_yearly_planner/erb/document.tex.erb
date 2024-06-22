@@ -35,17 +35,17 @@
 \usetikzlibrary{patterns}
 
 \geometry{
-paperwidth=<%= paper.dimensions.width %>,
-paperheight=<%= paper.dimensions.height %>,
-top=<%= paper.margin.top %>,
-bottom=<%= paper.margin.bottom %>,
-left=<%= paper.margin.left %>,
-right=<%= paper.margin.right %>,
-marginparwidth=<%= paper.margin_notes.width %>,
-marginparsep=<%= paper.margin_notes.separation %>
+paperwidth=<%= paper[:dimensions][:width] %>,
+paperheight=<%= paper[:dimensions][:height] %>,
+top=<%= paper[:margin][:top] %>,
+bottom=<%= paper[:margin][:bottom] %>,
+left=<%= paper[:margin][:left] %>,
+right=<%= paper[:margin][:right] %>,
+marginparwidth=<%= paper[:margin_notes][:width] %>,
+marginparsep=<%= paper[:margin_notes][:separation] %>
 }
 
-<% if paper.margin_notes.placement == 'left' %>\reversemarginpar
+<% if paper.dig(:margin_notes, :placement) == 'left' %>\reversemarginpar
 <% end %>
 
 \pagestyle{empty}

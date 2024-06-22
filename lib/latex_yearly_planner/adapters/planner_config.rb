@@ -6,33 +6,33 @@ module LatexYearlyPlanner
       attr_reader :config
 
       def initialize(hash)
-        @config = RecursiveOpenStruct.new(hash, recurse_over_arrays: true)
+        @config = hash
       end
 
       def template
-        raise ConfigurationError, '`template` key is missing in configuration file' unless config.template
+        raise ConfigurationError, '`template` key is missing in configuration file' unless config[:template]
 
-        config.template
+        config[:template]
       end
 
       def locale
-        (config.locale || 'en').to_sym
+        (config[:locale] || 'en').to_sym
       end
 
       def document_options
-        config.document.klass.size
+        config[:document][:klass][:size]
       end
 
       def document_class
-        config.document.klass.name
+        config[:document][:klass][:name]
       end
 
       def fonts
-        Fonter.new(**config.document.fonts.to_h)
+        Fonter.new(**config[:document][:fonts] || {})
       end
 
       def paper
-        config.document.paper
+        config[:document][:paper]
       end
 
       def sections
@@ -40,37 +40,33 @@ module LatexYearlyPlanner
       end
 
       def object(key)
-        return nil unless planner.objects
-
-        planner.objects.send(key)
+        planner.dig(:objects, key)
       end
 
       def placement(key)
-        return nil unless planner.placements
-
-        planner.placements.send(key)
+        planner.dig(:placements, key)
       end
 
       def planner
-        raise ConfigurationError, '`planner` key is missing in configuration file' unless config.planner
+        raise ConfigurationError, '`planner` key is missing in configuration file' unless config[:planner]
 
-        config.planner
+        config[:planner]
       end
 
       private
 
       def to_section_config(section)
-        keys = section.to_h.keys
+        keys = section.keys
         raise ConfigurationError, 'Only one section is allowed in section container' if keys.size > 1
 
-        name = keys.first
-        SectionConfig.new(name:, section_config: section.send(name), planner_config: self)
+        key = keys.first
+        SectionConfig.new(name: key, section_config: section[key], planner_config: self)
       end
 
       def planner_sections
-        raise ConfigurationError, '`sections` key is missing in configuration file' unless config.planner.sections
+        raise ConfigurationError, '`sections` key is missing in configuration file' unless planner[:sections]
 
-        planner.sections
+        planner[:sections]
       end
     end
   end

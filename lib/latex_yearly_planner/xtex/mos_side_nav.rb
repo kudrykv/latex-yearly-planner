@@ -14,7 +14,7 @@ module LatexYearlyPlanner
       end
 
       def to_s
-        struct.placements.map(&method(:handle_placement)).join("%\n")
+        struct[:placements].map(&method(:handle_placement)).join("%\n")
       end
 
       private
@@ -26,7 +26,7 @@ module LatexYearlyPlanner
       end
 
       def quarters_navigation
-        VerticalStick.new(items: quarter_names, struct: struct.objects.quarter_navigation)
+        VerticalStick.new(items: quarter_names, struct: struct[:objects][:quarter_navigation])
       end
 
       def quarter_names
@@ -34,7 +34,7 @@ module LatexYearlyPlanner
       end
 
       def months_navigation
-        VerticalStick.new(items: month_names, struct: struct.objects.month_navigation)
+        VerticalStick.new(items: month_names, struct: struct[:objects][:month_navigation])
       end
 
       def month_names

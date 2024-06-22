@@ -12,7 +12,7 @@ module LatexYearlyPlanner
       end
 
       def enabled?
-        section_config.enabled
+        section_config[:enabled] || false
       end
 
       def instantiate
@@ -24,10 +24,10 @@ module LatexYearlyPlanner
       end
 
       def object(key)
-        objects = section_config.objects
+        objects = section_config[:objects]
         return if objects.nil?
 
-        objects.send(key)
+        objects[key]
       end
 
       def placement(key)

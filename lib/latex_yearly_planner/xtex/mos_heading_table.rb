@@ -12,7 +12,7 @@ module LatexYearlyPlanner
       end
 
       def to_s
-        table = TeX::TabularX.new(**struct.tabularx.to_h)
+        table = TeX::TabularX.new(**struct[:tabularx])
         table.formatting = TeX::TableFormatting.new(layout)
         table.add_row(TeX::TableRow.new(cell_mix.flatten))
 
@@ -22,7 +22,7 @@ module LatexYearlyPlanner
       private
 
       def layout
-        struct.placements.map { |item| item.position || "|#{nav_layout_part}|" }.join
+        struct[:placements].map { |item| item[:position] || "|#{nav_layout_part}|" }.join
       end
 
       def nav_layout_part
@@ -30,7 +30,7 @@ module LatexYearlyPlanner
       end
 
       def cell_mix
-        @cell_mix ||= struct.placements.map { |item| method(item.function).call }
+        @cell_mix ||= struct[:placements].map { |item| method(item[:function]).call }
       end
 
       def empty_cell_filler
