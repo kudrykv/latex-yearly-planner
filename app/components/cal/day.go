@@ -14,7 +14,16 @@ import (
 
 type Days []*Day
 type Day struct {
-	Time time.Time
+	Time   time.Time
+	Events []string
+}
+
+func (d *Day) AddEvent(event string) {
+	d.Events = append(d.Events, event)
+}
+
+func (d *Day) GetEvents() []string {
+	return d.Events
 }
 
 func (d Day) Day(today, large interface{}) string {
@@ -125,7 +134,7 @@ func (d Day) Hours(bottom, top int) Days {
 	list := make(Days, 0, top-bottom+1)
 
 	for i := bottom; i <= top; i++ {
-		list = append(list, &Day{moment})
+		list = append(list, &Day{moment, nil})
 		moment = moment.Add(time.Hour)
 	}
 

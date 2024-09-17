@@ -1,0 +1,9 @@
+events:
+  - date: "2023-01-01"
+    description: "New Year's Day"
+  - date: "2023-02-14"
+    description: "Valentine's Day"
+  - date: "2023-07-04"
+    description: "Independence Day"
+  - date: "2023-12-25"
+    description: "Christmas Day"

@@ -141,6 +141,7 @@ var ComposerMap = map[string]Composer{
 	"daily_reflect": compose.DailyReflect,
 	"daily_notes":   compose.DailyNotes,
 	"notes_indexed": compose.NotesIndexed,
+	"events":        compose.Events, // P504b
 }
 
 func filterUniqueModules(array []page.Module) []page.Module {

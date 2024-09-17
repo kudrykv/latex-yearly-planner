@@ -38,6 +38,7 @@ func DailyStuff(prefix, leaf string) func(cfg config.Config, tpls []string) (pag
 								"SideMonths":   year.SideMonths(day.Month()),
 								"Extra":        day.PrevNext(prefix).WithTopRightCorner(cfg.ClearTopRightCorner),
 								"Extra2":       extra2(cfg.ClearTopRightCorner, false, false, week, 0),
+								"Events":       day.GetEvents(),
 							},
 						})
 					}

@@ -24,6 +24,8 @@ type Config struct {
 	Pages Pages
 
 	Layout Layout
+
+	Events map[string][]string
 }
 
 type Debug struct {
@@ -132,6 +134,23 @@ func New(pathConfigs ...string) (Config, error) {
 
 	if cfg.Year == 0 {
 		cfg.Year = time.Now().Year()
+	}
+
+	// Parse event data from configuration files
+	cfg.Events = make(map[string][]string)
+	for _, filepath := range pathConfigs {
+		if bts, err = ioutil.ReadFile(strings.ToLower(filepath)); err != nil {
+			return cfg, fmt.Errorf("ioutil read file: %w", err)
+		}
+
+		var eventConfig map[string][]string
+		if err = yaml.Unmarshal(bts, &eventConfig); err != nil {
+			return cfg, fmt.Errorf("yaml unmarshal: %w", err)
+		}
+
+		for date, events := range eventConfig {
+			cfg.Events[date] = events
+		}
 	}
 
 	return cfg, nil
