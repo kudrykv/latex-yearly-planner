@@ -1,4 +1,4 @@
-name: "Build 2023"
+name: "Build 2024"
 on:
   pull_request:
   push:
