@@ -43,7 +43,7 @@ layout:
     dotheightfull: 36
     dotwidthfull: 30
     dotwidthtwothirds: 20
-
+    columnsforday: 3
   lengths:
     tabcolsep: 3.5pt
     linethicknessdefault: .4pt
@@ -51,6 +51,7 @@ layout:
     lineheightbutline: \dimexpr5mm-.4pt
     twocolsep: 5pt
     tricolsep: 5pt
+    quadcolsep: 5pt
     fivecolsep: 5pt
     monthlycellheight: 55pt
     notesindexcellheight: 1.37cm
@@ -58,6 +59,7 @@ layout:
     headersidequarterswidth: 4cm
     headersidemonthswidth: 14.5cm
     dailyspring: \textcolor{white}{.}
+    quarterlyspring: \textcolor{white}{..}
 
   colors:
     gray: gray

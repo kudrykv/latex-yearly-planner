@@ -22,6 +22,7 @@
 \newcommand{\myNumDailyDiaryLog}{ {{- $numbers.DailyDiaryLog -}} }
 \newcommand{\myNumDailyPersonal}{ {{- $numbers.DailyPersonal -}} }
 \newcommand{\myNumTodoLinesInTodoPage}{ {{- $numbers.TodoLinesInTodoPage -}} }
+\newcommand{\myNumColsForDay}{ {{- $numbers.ColumnsForDay -}} }
 
 \newlength{\myLenTabColSep}
 \newlength{\myLenLineThicknessDefault}
@@ -31,6 +32,8 @@
 \newlength{\myLenTwoCol}
 \newlength{\myLenTriColSep}
 \newlength{\myLenTriCol}
+\newlength{\myLenQuadColSep}
+\newlength{\myLenQuadCol}
 \newlength{\myLenFiveColSep}
 \newlength{\myLenFiveCol}
 \newlength{\myLenMonthlyCellHeight}
@@ -46,6 +49,8 @@
 \setlength{\myLenLineHeightButLine}{ {{- $lengths.LineHeightButLine -}} }
 \setlength{\myLenTwoColSep}{ {{- $lengths.TwoColSep -}} }
 \setlength{\myLenTwoCol}{\dimexpr.5\linewidth-.5\myLenTwoColSep}
+\setlength{\myLenQuadColSep}{ {{- $lengths.QuadColSep -}} }
+\setlength{\myLenQuadCol}{\dimexpr.25\linewidth-.25\myLenQuadColSep}
 \setlength{\myLenFiveColSep}{ {{- $lengths.FiveColSep -}} }
 \setlength{\myLenFiveCol}{\dimexpr.2\linewidth-\myLenFiveColSep}
 \setlength{\myLenMonthlyCellHeight}{ {{- $lengths.MonthlyCellHeight -}} }
@@ -77,7 +82,7 @@
 \newcommand{\myTodo}{\myLineHeightButLine$\square$\myLinePlain}
 \newcommand{\myTodoLineGray}{\myLineHeightButLine$\square$\myLineGray}
 
-\newcommand{\myDotGrid}[2]{\leavevmode\multido{\dC=0mm+5mm}{#1}{\multido{\dR=0mm+5mm}{#2}{\put(\dR,\dC){\color{\myColorDots}\circle*{0.1}}}}}
+\newcommand{\myDotGrid}[2]{\leavevmode\multido{\dC=0mm+\myLenLineHeightButLine}{#1}{\multido{\dR=0mm+\myLenLineHeightButLine}{#2}{\put(\dR,\dC){\color{\myColorDots}\circle*{0.1}}}}}
 
 \newcommand{\myMash}[3][]{
   {{- if $.Cfg.Dotted -}} \vskip\myLenLineHeightButLine#1\myDotGrid{#2}{#3} {{- else -}} \Repeat{#2}{\myLineGrayVskipTop} {{- end -}}

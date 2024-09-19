@@ -3,7 +3,8 @@
 
 {{ if $.Cfg.Dotted -}}
 \myUnderline{Notes}
-\vbox to 0pt{\myMash[\myMonthlySpring]{20}{\myNumDotWidthFull}}
+% TODO: This 40 needs to be parameterized based on page length or something
+\vbox to 0pt{\myMash[\myMonthlySpring]{40}{\myNumDotWidthFull}}
 {{- else -}}
 \parbox{\myLenTwoCol}{
   \myUnderline{Notes}

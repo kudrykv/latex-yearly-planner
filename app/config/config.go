@@ -95,6 +95,7 @@ type Numbers struct {
 	DotHeightFull       int
 	DotWidthFull        int
 	DotWidthTwoThirds   int
+	ColumnsForDay       int
 }
 
 type Paper struct {
