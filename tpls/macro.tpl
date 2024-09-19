@@ -22,6 +22,7 @@
 \newcommand{\myNumDailyDiaryLog}{ {{- $numbers.DailyDiaryLog -}} }
 \newcommand{\myNumDailyPersonal}{ {{- $numbers.DailyPersonal -}} }
 \newcommand{\myNumTodoLinesInTodoPage}{ {{- $numbers.TodoLinesInTodoPage -}} }
+\newcommand{\myNumColsForDay}{ {{- $numbers.ColumnsForDay -}} }
 
 \newlength{\myLenTabColSep}
 \newlength{\myLenLineThicknessDefault}
@@ -31,6 +32,8 @@
 \newlength{\myLenTwoCol}
 \newlength{\myLenTriColSep}
 \newlength{\myLenTriCol}
+\newlength{\myLenQuadColSep}
+\newlength{\myLenQuadCol}
 \newlength{\myLenFiveColSep}
 \newlength{\myLenFiveCol}
 \newlength{\myLenMonthlyCellHeight}
@@ -38,6 +41,9 @@
 \newlength{\myLenHeaderResizeBox}
 \newlength{\myLenHeaderSideQuartersWidth}
 \newlength{\myLenHeaderSideMonthsWidth}
+\newlength{\myLenChosenCol}
+\newlength{\myLenChosenColSep}
+\newlength{\myLenChosenColLargeContent}
 
 {{- $lengths := .Cfg.Layout.Lengths -}}
 \setlength{\myLenTabColSep}{ {{- $lengths.TabColSep -}} }
@@ -46,6 +52,8 @@
 \setlength{\myLenLineHeightButLine}{ {{- $lengths.LineHeightButLine -}} }
 \setlength{\myLenTwoColSep}{ {{- $lengths.TwoColSep -}} }
 \setlength{\myLenTwoCol}{\dimexpr.5\linewidth-.5\myLenTwoColSep}
+\setlength{\myLenQuadColSep}{ {{- $lengths.QuadColSep -}} }
+\setlength{\myLenQuadCol}{\dimexpr.25\linewidth-.25\myLenQuadColSep}
 \setlength{\myLenFiveColSep}{ {{- $lengths.FiveColSep -}} }
 \setlength{\myLenFiveCol}{\dimexpr.2\linewidth-\myLenFiveColSep}
 \setlength{\myLenMonthlyCellHeight}{ {{- $lengths.MonthlyCellHeight -}} }
@@ -56,12 +64,31 @@
 \setlength{\myLenHeaderSideQuartersWidth}{ {{- $lengths.HeaderSideQuartersWidth -}} }
 \setlength{\myLenHeaderSideMonthsWidth}{ {{- $lengths.HeaderSideMonthsWidth -}} }
 
+{{- if eq .Cfg.Layout.Numbers.ColumnsForDay 2 -}}
+\setlength{\myLenChosenCol}{\myLenTwoCol}
+\setlength{\myLenChosenColSep}{\myLenTwoColSep}
+\setlength{\myLenChosenColLargeContent}{\dimexpr1\myLenChosenCol}
+{{- else if eq .Cfg.Layout.Numbers.ColumnsForDay 3 -}}
+\setlength{\myLenChosenCol}{\myLenTriCol}
+\setlength{\myLenChosenColSep}{\myLenTriColSep}
+\setlength{\myLenChosenColLargeContent}{\dimexpr2\myLenChosenCol}
+{{- else if eq .Cfg.Layout.Numbers.ColumnsForDay 4 -}}
+\setlength{\myLenChosenCol}{\myLenQuadCol}
+\setlength{\myLenChosenColSep}{\myLenQuadColSep}
+\setlength{\myLenChosenColLargeContent}{\dimexpr3\myLenChosenCol}
+{{- else -}}
+\setlength{\myLenChosenCol}{\myLenFiveCol}
+\setlength{\myLenChosenColSep}{\myLenFiveColSep}
+\setlength{\myLenChosenColLargeContent}{\dimexpr4\myLenChosenCol}
+{{- end -}}
+
 \newcommand{\myQuarterlySpring}{ {{- $lengths.QuarterlySpring -}} }
 \newcommand{\myMonthlySpring}{ {{- $lengths.MonthlySpring -}} }
 \newcommand{\myDailySpring}{ {{- $lengths.DailySpring -}} }
 \newcommand{\myColorGray}{ {{- .Cfg.Layout.Colors.Gray -}} }
 \newcommand{\myColorLightGray}{ {{- .Cfg.Layout.Colors.LightGray -}} }
 \newcommand{\myColorDots}{ {{- .Cfg.Layout.Colors.Dots -}} }
+\newcommand{\myColorBackgroundShading}{ {{- .Cfg.Layout.Colors.BackgroundShading -}} }
 
 \newcommand{\myLinePlain}{\hrule width \linewidth height \myLenLineThicknessDefault}
 \newcommand{\myLineThick}{\hrule width \linewidth height \myLenLineThicknessThick}
@@ -77,7 +104,7 @@
 \newcommand{\myTodo}{\myLineHeightButLine$\square$\myLinePlain}
 \newcommand{\myTodoLineGray}{\myLineHeightButLine$\square$\myLineGray}
 
-\newcommand{\myDotGrid}[2]{\leavevmode\multido{\dC=0mm+5mm}{#1}{\multido{\dR=0mm+5mm}{#2}{\put(\dR,\dC){\color{\myColorDots}\circle*{0.1}}}}}
+\newcommand{\myDotGrid}[2]{\leavevmode\multido{\dC=0mm+\myLenLineHeightButLine}{#1}{\multido{\dR=0mm+\myLenLineHeightButLine}{#2}{\put(\dR,\dC){\color{\myColorDots}\circle*{0.1}}}}}
 
 \newcommand{\myMash}[3][]{
   {{- if $.Cfg.Dotted -}} \vskip\myLenLineHeightButLine#1\myDotGrid{#2}{#3} {{- else -}} \Repeat{#2}{\myLineGrayVskipTop} {{- end -}}
@@ -89,6 +116,10 @@
   \else
   \dimexpr\pagegoal-\pagetotal-\lineskip-9.4pt\relax
   \fi%
+}
+
+\newcommand{\remainingHeightInLines}{%
+  \dimexpr\remainingHeight/\myLenLineHeightButLine\relax
 }
 
 \makeatletter

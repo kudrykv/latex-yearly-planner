@@ -10,7 +10,7 @@
 \myLineLightGray\vskip\myLenLineHeightButLine\myLineGray
 {{- end}}
 {{ if $.Cfg.ScheduleIncludeWorkingHours -}}
-\colorbox{gray!10}{%
+\colorbox{\myColorBackgroundShading}{%
     \noindent\parbox{\linewidth - 2\fboxsep}{%
 {{- end}}
 {{range $hour := .Day.Hours .Cfg.Layout.Numbers.DailyBusBottomHour .Cfg.Layout.Numbers.DailyBusTopHour -}}

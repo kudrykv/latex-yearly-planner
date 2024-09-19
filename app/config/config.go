@@ -57,9 +57,10 @@ type RenderBlock struct {
 }
 
 type Colors struct {
-	Gray      string
-	LightGray string
-	Dots      string
+	Gray              string
+	LightGray         string
+	Dots              string
+    BackgroundShading string
 }
 
 type Layout struct {
@@ -95,6 +96,7 @@ type Numbers struct {
 	DotHeightFull       int
 	DotWidthFull        int
 	DotWidthTwoThirds   int
+	ColumnsForDay       int
 }
 
 type Paper struct {
