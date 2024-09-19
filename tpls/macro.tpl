@@ -67,6 +67,7 @@
 \newcommand{\myColorGray}{ {{- .Cfg.Layout.Colors.Gray -}} }
 \newcommand{\myColorLightGray}{ {{- .Cfg.Layout.Colors.LightGray -}} }
 \newcommand{\myColorDots}{ {{- .Cfg.Layout.Colors.Dots -}} }
+\newcommand{\myColorBackgroundShading}{ {{- .Cfg.Layout.Colors.BackgroundShading -}} }
 
 \newcommand{\myLinePlain}{\hrule width \linewidth height \myLenLineThicknessDefault}
 \newcommand{\myLineThick}{\hrule width \linewidth height \myLenLineThicknessThick}

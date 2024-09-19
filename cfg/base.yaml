@@ -65,5 +65,5 @@ layout:
     gray: gray
     lightgray: gray!50
     dots: gray
-
+    backgroundshading: gray!40
 example: false
