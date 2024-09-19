@@ -41,6 +41,9 @@
 \newlength{\myLenHeaderResizeBox}
 \newlength{\myLenHeaderSideQuartersWidth}
 \newlength{\myLenHeaderSideMonthsWidth}
+\newlength{\myLenChosenCol}
+\newlength{\myLenChosenColSep}
+\newlength{\myLenChosenColLargeContent}
 
 {{- $lengths := .Cfg.Layout.Lengths -}}
 \setlength{\myLenTabColSep}{ {{- $lengths.TabColSep -}} }
@@ -60,6 +63,24 @@
 \setlength{\myLenHeaderResizeBox}{ {{- $lengths.HeaderResizeBox -}} }
 \setlength{\myLenHeaderSideQuartersWidth}{ {{- $lengths.HeaderSideQuartersWidth -}} }
 \setlength{\myLenHeaderSideMonthsWidth}{ {{- $lengths.HeaderSideMonthsWidth -}} }
+
+{{- if eq .Cfg.Layout.Numbers.ColumnsForDay 2 -}}
+\setlength{\myLenChosenCol}{\myLenTwoCol}
+\setlength{\myLenChosenColSep}{\myLenTwoColSep}
+\setlength{\myLenChosenColLargeContent}{\dimexpr1\myLenChosenCol}
+{{- else if eq .Cfg.Layout.Numbers.ColumnsForDay 3 -}}
+\setlength{\myLenChosenCol}{\myLenTriCol}
+\setlength{\myLenChosenColSep}{\myLenTriColSep}
+\setlength{\myLenChosenColLargeContent}{\dimexpr2\myLenChosenCol}
+{{- else if eq .Cfg.Layout.Numbers.ColumnsForDay 4 -}}
+\setlength{\myLenChosenCol}{\myLenQuadCol}
+\setlength{\myLenChosenColSep}{\myLenQuadColSep}
+\setlength{\myLenChosenColLargeContent}{\dimexpr3\myLenChosenCol}
+{{- else -}}
+\setlength{\myLenChosenCol}{\myLenFiveCol}
+\setlength{\myLenChosenColSep}{\myLenFiveColSep}
+\setlength{\myLenChosenColLargeContent}{\dimexpr4\myLenChosenCol}
+{{- end -}}
 
 \newcommand{\myQuarterlySpring}{ {{- $lengths.QuarterlySpring -}} }
 \newcommand{\myMonthlySpring}{ {{- $lengths.MonthlySpring -}} }
@@ -95,6 +116,10 @@
   \else
   \dimexpr\pagegoal-\pagetotal-\lineskip-9.4pt\relax
   \fi%
+}
+
+\newcommand{\remainingHeightInLines}{%
+  \dimexpr\remainingHeight/\myLenLineHeightButLine\relax
 }
 
 \makeatletter

@@ -44,6 +44,7 @@ layout:
     dotwidthfull: 30
     dotwidthtwothirds: 20
     columnsforday: 3
+
   lengths:
     tabcolsep: 3.5pt
     linethicknessdefault: .4pt
@@ -66,4 +67,5 @@ layout:
     lightgray: gray!50
     dots: gray
     backgroundshading: gray!40
+
 example: false

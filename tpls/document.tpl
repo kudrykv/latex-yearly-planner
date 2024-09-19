@@ -28,6 +28,7 @@
 \usepackage[most]{tcolorbox}
 \usepackage{geometry}
 \usepackage{fancyhdr}
+\usepackage{mathtools}
 
 \hypersetup{
     {{- if not .Cfg.Debug.ShowLinks}}hidelinks=true{{end -}}
