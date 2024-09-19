@@ -14,7 +14,7 @@
         plannergen = pkgs.buildGoModule {
           src = self;
           name = "plannergen";
-          vendorSha256 = "sha256:F3cln/CPSAonLTCvjSCMHhrzEQgWIOWw0vWwb6BG+pI=";
+          vendorHash = "sha256-T3x9Mtum87xEYz886P2YpchmrsGKWYwOLWxOrpErlA0=";
         };
 
         # Go is packaged into the devShell for developing the package,
