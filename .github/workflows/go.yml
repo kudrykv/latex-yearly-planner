@@ -1,0 +1,55 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: Go
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  cfg: "cfg/base.yaml,cfg/template_breadcrumb.yaml,cfg/rmpp.base.yaml,cfg/rmpp.breadcrumb.default.dailycal.yaml"
+  planner_year: 2024
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.20'
+
+    - name: Build
+      run: go build -v ./...
+
+    - name: Test
+      run: go test -v ./...
+
+    - name: Create latex docs
+      run: go run ./cmd/plannergen/plannergen.go --config "${{env.cfg}}"
+      env:
+        PLANNER_YEAR: "${{env.planner_year}}"
+
+    - name: Get latex filename
+      run: echo "FILENAME=$(echo "${{env.cfg}}" | rev | cut -d, -f1 | cut -d'/' -f 1 | cut -d'.' -f 2-99 | rev)" >> $GITHUB_OUTPUT
+      id: filename
+
+    - name: Compile LaTeX document
+      uses: dante-ev/latex-action@latest
+      with:
+        working_directory: out
+        root_file: ${{ steps.filename.outputs.FILENAME }}.tex
+        args: -xelatex -latexoption=-file-line-error -latexoption=-interaction=nonstopmode
+
+    - name: Output PDFs
+      uses: actions/upload-artifact@v4
+      with:
+        name: result
+        path: out/*.pdf
+        if-no-files-found: error
