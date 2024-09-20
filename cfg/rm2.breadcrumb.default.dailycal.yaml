@@ -1,11 +1,8 @@
 calafterschedule: true
-addlasthalfhour: true
 weekstart: 0
 ampmtime: true
 
 layout:
   numbers:
-    dailybottomhour: 7
     dailytophour: 20
     dailybusbottomhour: 9
-    dailybustophour: 17

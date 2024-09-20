@@ -6,8 +6,6 @@ layout:
     width: 19.6cm
     height: 27.4cm
 
-    reversemargins: true
-    marginparwidth: 1cm
     marginparsep: 4.5mm
 
     margin:
@@ -19,14 +17,9 @@ layout:
   numbers:
     quarterlylines: 52
     weeklylines: 11
-    dailybottomhour: 4
-    dailytophour: 23
     dailytodos: 5
     dailynotes: 30
-    dailydiarygrateful: 4
-    dailydiarybest: 4
     dailydiarylog: 27
-    notesindexpages: 3
     notesonpage: 37
     dotheightfull: 38
     dotwidthtwothirds: 21
