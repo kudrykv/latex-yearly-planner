@@ -1,17 +1,14 @@
-# This workflow will build a golang project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
-
-name: Go
+name: Create Planner
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-env:
-  cfg: "cfg/base.yaml,cfg/template_breadcrumb.yaml,cfg/rmpp.base.yaml,cfg/rmpp.breadcrumb.default.dailycal.yaml"
-  planner_year: 2024
+  workflow_dispatch:
+    inputs:
+      year:
+        type: string
+        description: What year to generate the planner for
+      cfg:
+        type: string
+        description: Configuration string to build. See README for details.
 
 jobs:
 
@@ -32,12 +29,12 @@ jobs:
       run: go test -v ./...
 
     - name: Create latex docs
-      run: go run ./cmd/plannergen/plannergen.go --config "${{env.cfg}}"
+      run: go run ./cmd/plannergen/plannergen.go --config "${{inputs.cfg}}"
       env:
-        PLANNER_YEAR: "${{env.planner_year}}"
+        PLANNER_YEAR: "${{inputs.year}}"
 
     - name: Get latex filename
-      run: echo "FILENAME=$(echo "${{env.cfg}}" | rev | cut -d, -f1 | cut -d'/' -f 1 | cut -d'.' -f 2-99 | rev)" >> $GITHUB_OUTPUT
+      run: echo "FILENAME=$(echo "${{inputs.cfg}}" | rev | cut -d, -f1 | cut -d'/' -f 1 | cut -d'.' -f 2-99 | rev)" >> $GITHUB_OUTPUT
       id: filename
 
     - name: Compile LaTeX document
