@@ -15,7 +15,7 @@ else
   eval $GO_CMD --preview --config "${CFG}"
 fi
 
-
+export XDG_CACHE_HOME="$(mktemp -d)" # to avoid cache conflicts
 
 nakedname=$(echo "${CFG}" | rev | cut -d, -f1 | cut -d'/' -f 1 | cut -d'.' -f 2-99 | rev)
 

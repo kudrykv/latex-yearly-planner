@@ -14,10 +14,10 @@
         plannergen = pkgs.buildGoModule {
           src = self;
           name = "plannergen";
-          vendorSha256 = "sha256:F3cln/CPSAonLTCvjSCMHhrzEQgWIOWw0vWwb6BG+pI=";
+          vendorHash = "sha256-T3x9Mtum87xEYz886P2YpchmrsGKWYwOLWxOrpErlA0=";
         };
 
-        # Go is packaged into the devShell for developing the package, 
+        # Go is packaged into the devShell for developing the package,
         # but is not used for the "nix build" outputs - these use the pre-built
         # binary instead
         goDeps = [
@@ -73,7 +73,7 @@
             # Minimal set of dependencies to build the pdfs
             # Latex, "rev" and the built plannergen binary
             buildInputs = texDeps ++ [ plannergen ];
-            PLANNER_YEAR = 2023;
+            PLANNER_YEAR = 2024;
             src = "${self}";
             buildCommand = ''
               cp -r $src/* .
