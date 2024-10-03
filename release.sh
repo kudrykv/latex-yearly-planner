@@ -28,6 +28,8 @@ _configurations=(
 
   1 "cfg/base.yaml,cfg/template_breadcrumb.yaml,cfg/kscribe.breadcrumb.default.yaml,cfg/kscribe.breadcrumb.default.yaml" "kscribe.breadcrumb.default"
   1 "cfg/base.yaml,cfg/template_breadcrumb.yaml,cfg/kscribe.breadcrumb.default.yaml,cfg/kscribe.breadcrumb.default.dailycal.yaml" "kscribe.breadcrumb.default.dailycal"
+
+  1 "cfg/base.yaml,cfg/template_months_on_side.yaml,cfg/kobo_libra_colour.base.yaml" "kobo_libra_colour.default"
 )
 
 _configurations_len=${#_configurations[@]}
