@@ -1,0 +1,61 @@
+weekstart: 1
+ampmtime: false
+dotted: true
+calafterschedule: true
+addlasthalfhour: false
+
+layout:
+  paper:
+    width: 10.7cm
+    height: 14.1cm
+
+    marginparwidth: 0.8cm
+    marginparsep: 3mm
+    reversemargins: true
+
+    margin:
+      top: 0.2cm
+      bottom: 0.2cm
+      left: 0.8cm
+      right: 0.2cm
+
+  numbers:
+    arraystretch: 1
+    quarterlylines: 42
+    weeklylines: 12
+    dailytodos: 8
+    dailynotes: 17
+    dailypersonal: 6
+    dailybottomhour: 8
+    dailytophour: 20
+    dailydiarygoals: 5
+    dailydiarygrateful: 5
+    dailydiarybest: 5
+    dailydiarylog: 12
+    todolinesintodopage: 4
+    notesindexpages: 3
+    notesonpage: 30
+    dotheightfull: 25
+    dotwidthfull: 30
+    dotwidthtwothirds: 13
+
+  lengths:
+    tabcolsep: 1pt
+    linethicknessdefault: 0.4pt
+    linethicknessthick: 0.7pt
+    lineheightbutline: \dimexpr3mm-.2pt
+    twocolsep: 1pt
+    tricolsep: 1pt
+    fivecolsep: 1pt
+    monthlycellheight: 40pt
+    notesindexcellheight: 4cm
+    headerresizebox: 2mm
+    headersidequarterswidth: 2.5cm
+    headersidemonthswidth: 10cm
+    quarterlyspring: \myDummyQ
+    monthlyspring: \vskip.5mm
+    dailyspring: \textcolor{white}{..}
+
+  colors:
+    gray: gray
+    lightgray: gray!50
