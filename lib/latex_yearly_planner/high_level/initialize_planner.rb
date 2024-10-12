@@ -20,7 +20,7 @@ module LatexYearlyPlanner
       end
 
       def compiler
-        context.compiler
+        context.html_compiler
       end
     end
   end

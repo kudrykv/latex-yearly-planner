@@ -3,14 +3,13 @@
 module LatexYearlyPlanner
   module Planners
     class Section < Base
-      attr_reader :name, :header, :body
+      attr_reader :name, :page
 
-      def initialize(name:, header:, body:, section_config:, i18n: I18n)
+      def initialize(name:, page:, section_config:, i18n: I18n)
         super(section_config:, i18n:)
 
         @name = name
-        @header = header
-        @body = body
+        @page = page
       end
 
       def enabled?
@@ -18,7 +17,7 @@ module LatexYearlyPlanner
       end
 
       def generate
-        Entities::TextDocument.new(name: "#{name}.tex", content:)
+        Entities::TextDocument.new(name:, content:)
       end
 
       def pages
@@ -32,11 +31,11 @@ module LatexYearlyPlanner
       end
 
       def generate_page(...)
-        "#{header.generate(...)}#{body.generate(...)}"
+        page.generate(...)
       end
 
       def pages_glue
-        [page_break, nlnl].join
+        ''
       end
     end
   end

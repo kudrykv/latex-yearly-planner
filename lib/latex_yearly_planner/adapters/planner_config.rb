@@ -60,7 +60,7 @@ module LatexYearlyPlanner
         raise ConfigurationError, 'Only one section is allowed in section container' if keys.size > 1
 
         key = keys.first
-        SectionConfig.new(name: key, section_config: section[key], planner_config: self)
+        HtmlSectionConfig.new(name: key, section_config: section[key], planner_config: self)
       end
 
       def planner_sections

@@ -1,0 +1,28 @@
+version: '0.1'
+
+template: html_mos
+locale: en
+
+document:
+  layout:
+    dimensions:
+      width: 138mm
+      height: 188mm
+
+    margin:
+      top: 10mm
+      bottom: 5mm
+      left: 12mm
+      right: 5mm
+
+  styles: |
+    * {
+      color: green;
+    }
+
+planner:
+  sections:
+    - title:
+        enabled: true
+        parameters:
+          name: 2024
