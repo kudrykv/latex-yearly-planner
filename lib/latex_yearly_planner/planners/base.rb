@@ -15,6 +15,10 @@ module LatexYearlyPlanner
       def params
         section_config.params
       end
+
+      def config
+        section_config.planner_config.config
+      end
     end
   end
 end
