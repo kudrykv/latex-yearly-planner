@@ -7,11 +7,8 @@ module LatexYearlyPlanner
         class Title < Page
           def generate(title, _page_number)
             <<~HTML
-                            <table class="page" style="border-collapse: collapse; border: 1px solid black">
-                  <tr>
-                      <td>
-                          #{title}
-                      </td>
+              <table class="page">
+                  <tr><td><center style="font-size: 8em">#{title}</center></td></tr>
               </table>
             HTML
           end
