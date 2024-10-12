@@ -23,7 +23,7 @@ module LatexYearlyPlanner
           zoom: planner_config.config[:wicked][:zoom]
         )
 
-        File.open('./index.pdf', 'wb') { |file| file << pdf }
+        File.open("#{workdir}/index.pdf", 'wb') { |file| file << pdf }
       end
     end
   end

@@ -12,6 +12,8 @@ module LatexYearlyPlanner
         @template = ERB.new(File.read('./lib/latex_yearly_planner/erb/index.html.erb'))
       end
 
+      # `binding` uses the current scope to get the variables
+      #noinspection RubyUnusedLocalVariable
       def index(text_documents)
         content = template.result(binding)
         [Entities::TextDocument.new(name: 'index.html', content:)]

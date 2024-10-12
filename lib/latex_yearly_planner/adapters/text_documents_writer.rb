@@ -10,6 +10,7 @@ module LatexYearlyPlanner
       end
 
       def write(text_documents)
+        FileUtils.mkdir_p(workdir)
         text_documents.each(&method(:write_text_document))
       end
 
