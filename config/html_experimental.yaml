@@ -3,6 +3,10 @@ version: '0.1'
 template: html_mos
 locale: en
 
+wicked:
+  dpi: 300
+  zoom: 1.249
+
 document:
   layout:
     dimensions:

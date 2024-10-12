@@ -15,12 +15,12 @@ module LatexYearlyPlanner
       def compile(text_document)
         pdf = WickedPdf.new.pdf_from_string(
           File.read("#{workdir}/#{text_document.name}"),
-          page_width: '138mm',
-          page_height: '188mm',
+          page_width: planner_config.config[:document][:layout][:dimensions][:width],
+          page_height: planner_config.config[:document][:layout][:dimensions][:height],
           outline: {outline: false},
           margin: {top: 0, bottom: 0, left: 0, right: 0},
-          dpi: 300,
-          zoom: 1.248
+          dpi: planner_config.config[:wicked][:dpi],
+          zoom: planner_config.config[:wicked][:zoom]
         )
 
         File.open('./index.pdf', 'wb') { |file| file << pdf }

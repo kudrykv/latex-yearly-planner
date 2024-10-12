@@ -3,7 +3,19 @@
   <head>
     <meta charset="UTF-8">
     <style>
+      body {
+          margin: 0;
+          padding: 0;
+      }
 
+      .page {
+          width: <%= planner_config.config[:document][:layout][:dimensions][:width] %>;
+          height: <%= planner_config.config[:document][:layout][:dimensions][:height] %>;
+          margin: 0;
+          padding: 0;
+      }
+
+      <%= planner_config.config[:document][:styles] %>
     </style>
   </head>
 
