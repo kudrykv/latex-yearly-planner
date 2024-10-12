@@ -25,8 +25,21 @@ document:
     }
 
 planner:
+  parameters:
+    time_format: 24
+
+    start_date: 2024, January
+    end_date: 2024, December
+    weekday_start: Monday
+
   sections:
     - title:
         enabled: true
         parameters:
           name: 2024
+
+    - annual:
+        enabled: true
+        parameters:
+          months_per_page: 6
+          months_per_row: 2

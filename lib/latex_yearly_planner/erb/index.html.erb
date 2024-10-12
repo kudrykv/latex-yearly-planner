@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="<%= planner_config.config[:locale] %>>">
-  <head>
-    <meta charset="UTF-8">
-    <style>
+<head>
+  <meta charset="UTF-8">
+  <style>
       body {
           margin: 0;
           padding: 0;
@@ -15,13 +15,19 @@
           padding: 0;
       }
 
-      <%= planner_config.config[:document][:styles] %>
-    </style>
-  </head>
+      .page-break {
+          display: block;
+          clear: both;
+          page-break-after: always;
+      }
 
-  <body>
-  <% text_documents.each do |doc| %>
-    <%= doc.content %>
-  <% end %>
-  </body>
+      <%= planner_config.config[:document][:styles] %>
+  </style>
+</head>
+
+<body>
+<% text_documents.each do |doc| %>
+  <%= doc.content %>
+<% end %>
+</body>
 </html>
