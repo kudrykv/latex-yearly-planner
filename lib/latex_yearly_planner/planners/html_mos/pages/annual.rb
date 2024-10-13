@@ -5,9 +5,9 @@ module LatexYearlyPlanner
     module HtmlMos
       module Pages
         class Annual < Page
-          def generate(months_rows, _page_number)
+          def generate(months_rows, page_number)
             <<~HTML
-              <table class="page">
+              <table id="#{page_id(page_number)}" class="page">
                 <tr>
                   <td class="writing90" rowspan=2>hello world</td>
                   <td>#{heading_name}</td>
