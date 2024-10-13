@@ -13,7 +13,3 @@ gem 'rubocop-rake', '~> 0.6.0'
 gem 'rubocop-rspec', '~> 2.23'
 gem 'ruby-measurement', '~> 1.3'
 gem 'simplecov', '~> 0.22.0'
-
-gem "wicked_pdf", "~> 2.8"
-
-gem "wkhtmltopdf-binary", "~> 0.12.6"

@@ -8,6 +8,10 @@
           padding: 0;
       }
 
+      @page {
+          size: <%= planner_config.config[:document][:layout][:dimensions][:width] %> <%= planner_config.config[:document][:layout][:dimensions][:height] %>;
+      }
+
       .page {
           width: <%= planner_config.config[:document][:layout][:dimensions][:width] %>;
           height: <%= planner_config.config[:document][:layout][:dimensions][:height] %>;
@@ -29,6 +33,11 @@
       .annual-table td {
           width: 6mm;
           text-align: center;
+      }
+
+      td {
+          border-collapse: collapse;
+          border: 1px solid black;
       }
 
       <%= planner_config.config[:document][:styles] %>

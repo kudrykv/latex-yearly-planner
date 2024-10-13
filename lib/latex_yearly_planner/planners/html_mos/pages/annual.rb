@@ -8,7 +8,9 @@ module LatexYearlyPlanner
           def generate(months_rows, _page_number)
             <<~HTML
               <table class="page">
-                <tr><td>title</td></tr>
+                <tr>
+                  <td>#{heading_name}</td>
+                </tr>
                 <tr>
                   <td>
                     <table class='annual-table'>#{make_rows(months_rows)}</table>
@@ -19,6 +21,15 @@ module LatexYearlyPlanner
           end
 
           private
+
+          def heading_name
+            first = params.months.first
+            last = params.months.last
+
+            return first.year if first.year == last.year && first.january? && last.december?
+
+            "#{first.year}, #{short_month_name(first)} -- #{last.year}, #{short_month_name(last)}"
+          end
 
           def make_rows(months_rows)
             months_rows.map { |row| "<tr>#{make_row(row)}</tr>" }.join
