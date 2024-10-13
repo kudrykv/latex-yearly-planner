@@ -9,6 +9,7 @@ module LatexYearlyPlanner
             <<~HTML
               <table class="page">
                 <tr>
+                  <td class="writing90" rowspan=2>hello world</td>
                   <td>#{heading_name}</td>
                 </tr>
                 <tr>
@@ -28,7 +29,7 @@ module LatexYearlyPlanner
 
             return first.year if first.year == last.year && first.january? && last.december?
 
-            "#{first.year}, #{short_month_name(first)} -- #{last.year}, #{short_month_name(last)}"
+            "#{first.year}, #{i18n.t("calendar.short.month.#{first.name.downcase}")} — #{last.year}, #{i18n.t("calendar.short.month.#{last.name.downcase}")}"
           end
 
           def make_rows(months_rows)
