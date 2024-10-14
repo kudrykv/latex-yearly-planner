@@ -9,13 +9,13 @@ module LatexYearlyPlanner
             <<~TYPST
               #grid(
                 stroke: 0.4pt,
-                columns: (1cm, 1fr),
+                columns: (8mm, 1fr),
                 rows: (1cm, 1fr),
                 grid.cell(
                   rowspan: 2,
                   #{temp}
                 ),
-                [test title], [##{typst_months(month_rows)}]
+                [test title], [#pad(left: 2mm, #{typst_months(month_rows)})]
               )
             TYPST
           end
@@ -27,7 +27,7 @@ module LatexYearlyPlanner
               stack(
                 dir: ttb,
                 spacing: 1fr,
-                #{month_rows.map { |row| row_stack(row) }.join(', ')}
+                #{month_rows.map { |row| row_stack(row) }.append('[]').join(', ')}
               )
             TYPST
           end

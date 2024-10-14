@@ -7,6 +7,8 @@ module LatexYearlyPlanner
         with_week_numbers: true,
         week_number_placement: 'left',
         inset: '1.5mm',
+        underline_weekdays: true,
+        sideline_week_numbers: true
       }.freeze
 
       WEEKDAYS = %i[monday tuesday wednesday thursday friday saturday sunday].freeze
@@ -27,7 +29,7 @@ module LatexYearlyPlanner
             inset: #{parameters[:inset]},
             stroke: 0mm,
             table.cell(colspan: #{number_of_columns})[#{i18n.t("calendar.month.#{month.name.downcase}")}],
-            #{weekdays_row.map { |day| "[#{day}]" }.join(', ')},
+            #{weekdays_row.join(', ')},
             #{weeks}
           )
         TYPST
@@ -36,15 +38,22 @@ module LatexYearlyPlanner
       private
 
       def number_of_columns
-        weekdays_row.size
+        return 7 unless parameters[:with_week_numbers]
+
+        8
       end
 
       def weekdays_row
-        row = rotated_weekdays.map { |day| i18n.t("calendar.one_letter.#{day}") }
+        row = rotated_weekdays.map { |day| "[#{i18n.t("calendar.one_letter.#{day}")}]" }
         return row unless parameters[:with_week_numbers]
 
-        row.unshift(i18n.t('calendar.one_letter.week')) if parameters[:week_number_placement] == 'left'
-        row.push(i18n.t('calendar.one_letter.week')) if parameters[:week_number_placement] == 'right'
+        row.unshift("[#{i18n.t('calendar.one_letter.week')}]") if parameters[:week_number_placement] == 'left'
+        row.append("[#{i18n.t('calendar.one_letter.week')}]") if parameters[:week_number_placement] == 'right'
+
+        x = parameters[:week_number_placement] == 'left' ? 1 : 7
+
+        row.unshift("table.vline(x: #{x}, stroke: 0.4pt)") if parameters[:sideline_week_numbers]
+        row.unshift('table.hline(y: 2, stroke: 0.4pt)') if parameters[:underline_weekdays]
 
         row
       end

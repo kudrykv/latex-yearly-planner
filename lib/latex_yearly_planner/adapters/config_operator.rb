@@ -20,10 +20,6 @@ module LatexYearlyPlanner
           planner_config.config.dig(:planner, :objects, key)
       end
 
-      def placement(key)
-        section_config.placement(key) || planner_config.placement(key)
-      end
-
       def months
         (start_date..end_date)
           .select { |date| date.mday == 1 }
