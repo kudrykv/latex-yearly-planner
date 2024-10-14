@@ -11,6 +11,12 @@ module LatexYearlyPlanner
         @number = number
       end
 
+      def months
+        @months ||= (0..2).map do |month_number|
+          Month.new(weekday_start:, year:, month: ((number - 1) * 3) + month_number + 1)
+        end
+      end
+
       def ==(other)
         other.is_a?(Quarter) &&
           other.weekday_start == weekday_start &&

@@ -11,12 +11,16 @@ module LatexYearlyPlanner
         @name = name
       end
 
-      def page_id(page_number = 1)
-        "#{name.to_s.downcase}-#{page_number}"
+      def page_id(suffix = nil)
+        return name.to_s.downcase if suffix.nil?
+
+        "#{name.to_s.downcase}-#{suffix}"
       end
 
-      def page_to(name, number = 1)
-        "##{name}-#{number}"
+      def page_to(name, suffix = nil)
+        return "##{name.to_s.downcase}" if suffix.nil?
+
+        "#{name.to_s.downcase}-#{suffix}"
       end
     end
   end

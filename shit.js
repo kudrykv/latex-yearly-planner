@@ -9,7 +9,8 @@ await page.goto(absoluteHtmlFilePath);
 
 await page.pdf({
     path: outputFilePath,
-    preferCSSPageSize: true
+    preferCSSPageSize: true,
+    printBackground: true
 });
 
 await browser.close();
