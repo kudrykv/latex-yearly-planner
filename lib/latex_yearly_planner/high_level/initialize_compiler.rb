@@ -6,7 +6,7 @@ module LatexYearlyPlanner
       include Interactor
 
       def call
-        context.compiler = Adapters::TeXCompiler.new(workdir:, planner_config:)
+        context.compiler = Adapters::TypstCompiler.new(workdir:, planner_config:)
       end
 
       private

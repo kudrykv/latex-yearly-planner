@@ -6,15 +6,13 @@ module LatexYearlyPlanner
       class Generate
         include Interactor::Organizer
 
-        organize InitializeConfig,
+        organize InitializePlannerConfig,
                  InitializeI18n,
                  InitializeSectioner,
                  InitializeIndexer,
-                 InitializeTypstIndexer,
                  InitializeGenerator,
                  InitializeTextDocumentsWriter,
                  InitializeCompiler,
-                 InitializeTypstCompiler,
                  InitializePlanner,
                  CreatePlanner
       end

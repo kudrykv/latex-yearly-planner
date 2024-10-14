@@ -23,20 +23,6 @@ module LatexYearlyPlanner
         @params ||= ConfigOperator.new(section_config: self)
       end
 
-      def object(key)
-        objects = section_config[:objects]
-        return if objects.nil?
-
-        objects[key]
-      end
-
-      def placement(key)
-        placements = section_config.placements
-        return if placements.nil?
-
-        placements.send(key)
-      end
-
       private
 
       def page

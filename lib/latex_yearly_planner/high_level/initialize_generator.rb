@@ -14,7 +14,7 @@ module LatexYearlyPlanner
       def indexer
         raise DevelopmentError, '`indexer` is not defined' unless context.indexer
 
-        context.typst_indexer
+        context.indexer
       end
 
       def sectioner

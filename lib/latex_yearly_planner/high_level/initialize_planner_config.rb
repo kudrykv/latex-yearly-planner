@@ -2,7 +2,7 @@
 
 module LatexYearlyPlanner
   module HighLevel
-    class InitializeConfig
+    class InitializePlannerConfig
       include Interactor
 
       def call
