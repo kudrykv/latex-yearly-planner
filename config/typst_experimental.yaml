@@ -16,7 +16,7 @@ document:
       right: 5mm
 
   text:
-    size: 12pt
+    size: 10pt
 
 planner:
   parameters:

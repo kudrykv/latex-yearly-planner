@@ -15,7 +15,7 @@ module LatexYearlyPlanner
                   rowspan: 2,
                   #{temp}
                 ),
-                [test title], []
+                [test title], [##{typst_months(month_rows)}]
               )
             TYPST
           end
@@ -23,8 +23,23 @@ module LatexYearlyPlanner
           private
 
           def typst_months(month_rows)
+            <<~TYPST
+              stack(
+                dir: ttb,
+                spacing: 1fr,
+                #{month_rows.map { |row| row_stack(row) }.join(', ')}
+              )
+            TYPST
+          end
 
-
+          def row_stack(months)
+            <<~TYPST
+              stack(
+                dir: ltr,
+                spacing: 1fr,
+                #{months.map { |month| Xtypst::LittleCalendar.new(month).to_typst }.join(', ')}
+              )
+            TYPST
           end
 
           def temp

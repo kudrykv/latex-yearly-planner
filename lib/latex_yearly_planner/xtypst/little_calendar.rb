@@ -23,6 +23,8 @@ module LatexYearlyPlanner
           table(
             columns: #{number_of_columns},
             align: center,
+            gutter: 0mm,
+            inset: 0mm,
             table.cell(colspan: #{number_of_columns})[#{i18n.t("calendar.month.#{month.name.downcase}")}],
             #{weekdays_row.map { |day| "[#{day}]" }.join(', ')},
             #{weeks}
