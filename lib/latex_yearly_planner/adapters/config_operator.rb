@@ -16,7 +16,8 @@ module LatexYearlyPlanner
       end
 
       def object(key)
-        section_config.object(key) || planner_config.object(key)
+        section_config.section_config.dig(:objects, key) ||
+          planner_config.config.dig(:planner, :objects, key)
       end
 
       def placement(key)

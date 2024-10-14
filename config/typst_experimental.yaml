@@ -29,7 +29,8 @@ planner:
   objects:
     little_calendar:
       with_week_numbers: true
-      week_number_placement: left
+      week_number_placement: right
+      inset: 1.5mm
 
   sections:
     - title:

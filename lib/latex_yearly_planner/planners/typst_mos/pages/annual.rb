@@ -37,7 +37,7 @@ module LatexYearlyPlanner
               stack(
                 dir: ltr,
                 spacing: 1fr,
-                #{months.map { |month| Xtypst::LittleCalendar.new(month).to_typst }.join(', ')}
+                #{months.map { |month| Xtypst::LittleCalendar.new(month, **params.object(:little_calendar)).to_typst }.join(', ')}
               )
             TYPST
           end

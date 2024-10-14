@@ -6,6 +6,7 @@ module LatexYearlyPlanner
       DEFAULT_PARAMETERS = {
         with_week_numbers: true,
         week_number_placement: 'left',
+        inset: '1.5mm',
       }.freeze
 
       WEEKDAYS = %i[monday tuesday wednesday thursday friday saturday sunday].freeze
@@ -23,8 +24,8 @@ module LatexYearlyPlanner
           table(
             columns: #{number_of_columns},
             align: center,
-            gutter: 0mm,
-            inset: 0mm,
+            inset: #{parameters[:inset]},
+            stroke: 0mm,
             table.cell(colspan: #{number_of_columns})[#{i18n.t("calendar.month.#{month.name.downcase}")}],
             #{weekdays_row.map { |day| "[#{day}]" }.join(', ')},
             #{weeks}
