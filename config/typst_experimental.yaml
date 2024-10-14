@@ -1,0 +1,47 @@
+version: '0.1'
+
+template: typst_mos
+locale: en
+
+document:
+  layout:
+    dimensions:
+      width: 119mm
+      height: 158mm
+
+    margin:
+      top: 10mm
+      bottom: 5mm
+      left: 12mm
+      right: 5mm
+
+  text:
+    size: 12pt
+
+planner:
+  parameters:
+    time_format: 24
+
+    start_date: 2024, January
+    end_date: 2024, December
+    weekday_start: Monday
+
+  objects:
+    little_calendar:
+      with_week_numbers: true
+      week_number_placement: left
+
+  sections:
+    - title:
+        enabled: true
+        parameters:
+          name: 2024
+
+#    - annual:
+#        enabled: true
+#        parameters:
+#          months_per_page: 6
+#          months_per_row: 2
+#
+#    - quarterly:
+#        enabled: true

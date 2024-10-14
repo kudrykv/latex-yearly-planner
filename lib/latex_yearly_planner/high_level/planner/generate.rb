@@ -10,11 +10,11 @@ module LatexYearlyPlanner
                  InitializeI18n,
                  InitializeSectioner,
                  InitializeIndexer,
-                 InitializeHtmlIndexer,
+                 InitializeTypstIndexer,
                  InitializeGenerator,
                  InitializeTextDocumentsWriter,
                  InitializeCompiler,
-                 InitializeHtmlCompiler,
+                 InitializeTypstCompiler,
                  InitializePlanner,
                  CreatePlanner
       end

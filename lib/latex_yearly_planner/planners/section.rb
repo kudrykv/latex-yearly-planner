@@ -35,7 +35,7 @@ module LatexYearlyPlanner
       end
 
       def pages_glue
-        '<div class="page-break"></div>'
+        "#pagebreak()\n"
       end
     end
   end

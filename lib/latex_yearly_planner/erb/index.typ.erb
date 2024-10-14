@@ -1,0 +1,19 @@
+#set page(
+  width: <%= planner_config.config[:document][:layout][:dimensions][:width] %>,
+  height: <%= planner_config.config[:document][:layout][:dimensions][:height] %>,
+
+  margin: (
+    top: <%= planner_config.config[:document][:layout][:margin][:top] %>,
+    right: <%= planner_config.config[:document][:layout][:margin][:right] %>,
+    bottom: <%= planner_config.config[:document][:layout][:margin][:bottom] %>,
+    left: <%= planner_config.config[:document][:layout][:margin][:left] %>
+  )
+)
+
+#set text(
+  size: <%= planner_config.config[:document][:text][:size] %>,
+)
+
+<% text_documents.each do |doc| %>
+<%= doc.content %>
+<% end %>
