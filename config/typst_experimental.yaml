@@ -11,8 +11,8 @@ document:
 
     margin:
       top: 10mm
-      bottom: 5mm
-      left: 12mm
+      bottom: 0mm
+      left: 0mm
       right: 5mm
 
   text:
@@ -37,11 +37,11 @@ planner:
         parameters:
           name: 2024
 
-#    - annual:
-#        enabled: true
-#        parameters:
-#          months_per_page: 6
-#          months_per_row: 2
-#
+    - annual:
+        enabled: true
+        parameters:
+          months_per_page: 6
+          months_per_row: 2
+
 #    - quarterly:
 #        enabled: true

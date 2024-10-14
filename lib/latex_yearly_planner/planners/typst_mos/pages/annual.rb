@@ -1,0 +1,52 @@
+# frozen_string_literal: true
+
+module LatexYearlyPlanner
+  module Planners
+    module TypstMos
+      module Pages
+        class Annual < Page
+          def generate(month_rows, _page_number)
+            <<~TYPST
+              #grid(
+                stroke: 0.4pt,
+                columns: (1cm, 1fr),
+                rows: (1cm, 1fr),
+                grid.cell(
+                  rowspan: 2,
+                  #{temp}
+                ),
+                [test title], []
+              )
+            TYPST
+          end
+
+          private
+
+          def typst_months(month_rows)
+
+
+          end
+
+          def temp
+            <<~TYPST
+              rotate(
+                  90deg,
+                  origin: center + horizon,
+                  reflow: true,
+                  [
+                  #table(
+                  columns: (#{(['1fr'] * 4).join(', ')}, auto, #{(['1fr'] * 12).join(', ')}),
+                  rows: 1fr,
+                  align: horizon + center,
+                  [Q1], [Q2], [Q3], [Q4],
+                  [],
+                  [Jan], [Feb], [Mar], [Apr], [May], [Jun], [Jul], [Aug], [Sep], [Oct], [Nov], [Dec]
+                  )]
+                )
+            TYPST
+          end
+        end
+      end
+    end
+  end
+end
