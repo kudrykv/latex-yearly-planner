@@ -27,6 +27,17 @@ planner:
     weekday_start: Monday
 
   objects:
+    mos_nav:
+      width: 10mm
+      inset: 2mm
+      rotate: 90deg
+      reverse_array_internals: false
+      reverse_arrays: false
+
+    heading:
+      height: 9mm
+      inset: 3mm
+
     little_calendar:
       with_week_numbers: true
       week_number_placement: left

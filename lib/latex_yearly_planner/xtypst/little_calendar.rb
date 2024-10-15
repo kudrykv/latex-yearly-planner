@@ -14,6 +14,7 @@ module LatexYearlyPlanner
       WEEKDAYS = %i[monday tuesday wednesday thursday friday saturday sunday].freeze
 
       attr_reader :i18n, :month, :parameters
+
       def initialize(month, i18n: I18n, **parameters)
         @i18n = i18n
 

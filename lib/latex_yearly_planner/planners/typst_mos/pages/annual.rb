@@ -8,19 +8,46 @@ module LatexYearlyPlanner
           def generate(month_rows, _page_number)
             <<~TYPST
               #grid(
-                stroke: 0.4pt,
-                columns: (8mm, 1fr),
-                rows: (1cm, 1fr),
+                columns: (#{mosnav[:width]}, 1fr),
+                rows: (#{heading[:height]}, 1fr),
                 grid.cell(
                   rowspan: 2,
-                  #{temp}
+                  pad(right: #{mosnav[:inset]}, #{temp})
                 ),
-                [test title], [#pad(left: 2mm, #{typst_months(month_rows)})]
+                pad(bottom: #{heading[:inset]}, [#{title(month_rows)}]), [##{typst_months(month_rows)})]
               )
             TYPST
           end
 
           private
+
+          def title(month_rows)
+            first = month_rows.first.first
+            last = month_rows.last.last
+
+            <<~TYPST
+              #table(
+                columns: (auto, 1fr, auto),
+                rows: 1fr,
+                align: horizon + center,
+                inset: 0mm,
+                stroke: 0mm,
+                [#{i18n.t("calendar.short.month.#{first.name.downcase}")}
+                 #{first.year}
+                 ---
+                 #{i18n.t("calendar.short.month.#{last.name.downcase}")}
+                 #{last.year}
+                ],
+                [],
+                table(
+                  columns: 2,
+                  rows: 1fr,
+                  align: horizon + center,
+                  [Calendar], [Notes]
+                )
+              )
+            TYPST
+          end
 
           def typst_months(month_rows)
             <<~TYPST
@@ -45,7 +72,7 @@ module LatexYearlyPlanner
           def temp
             <<~TYPST
               rotate(
-                  90deg,
+                  #{mosnav[:rotate]},
                   origin: center + horizon,
                   reflow: true,
                   [
@@ -53,12 +80,32 @@ module LatexYearlyPlanner
                   columns: (#{(['1fr'] * 4).join(', ')}, auto, #{(['1fr'] * 12).join(', ')}),
                   rows: 1fr,
                   align: horizon + center,
-                  [Q1], [Q2], [Q3], [Q4],
-                  [],
-                  [Jan], [Feb], [Mar], [Apr], [May], [Jun], [Jul], [Aug], [Sep], [Oct], [Nov], [Dec]
+                  #{mosnav_content}
                   )]
                 )
             TYPST
+          end
+
+          def mosnav_content
+            quarters = params.quarters.map { |q| "[#{i18n.t('calendar.one_letter.quarter')}#{q.number}]" }
+            months = params.months.map { |m| "[#{i18n.t("calendar.short.month.#{m.name.downcase}")}]" }
+
+            if mosnav[:reverse_array_internals]
+              quarters.reverse!
+              months.reverse!
+            end
+
+            return "#{quarters.join(', ')}, [], #{months.join(', ')}" unless mosnav[:reverse_arrays]
+
+            "#{months.join(', ')}, [], #{quarters.join(', ')}"
+          end
+
+          def mosnav
+            params.object(:mos_nav)
+          end
+
+          def heading
+            params.object(:heading)
           end
         end
       end
