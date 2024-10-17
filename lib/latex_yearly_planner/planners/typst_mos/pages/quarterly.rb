@@ -12,17 +12,17 @@ module LatexYearlyPlanner
           end
 
           def content(quarter, _page_number)
-            months = quarter
-              .months
-              .map { |month| Xtypst::LittleCalendar.new(month, **params.object(:little_calendar)).to_typst }.join(', ')
+            months = quarter.months.map do |month|
+              Xtypst::LittleCalendar.new(month, **params.object(:little_calendar)).to_typst
+            end.join(', ')
 
             <<~TYPST
               grid(
-                columns: (#{params.get(:months_width)}, 5mm, 1fr),
+                columns: (#{params.get(:months_width)}, #{params.get(:gap_width)}, 1fr),
                 rows: 1fr,
                 vert_stack_bottom_outset(#{months}),
                 [],
-                dotted_rect
+                rect_pattern(#{params.get(:pattern)})
               )
             TYPST
           end

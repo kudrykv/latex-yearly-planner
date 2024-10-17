@@ -26,7 +26,23 @@
   ),
 )
 
-#let dotted_rect = rect(fill: dotted, width: 100%, height: 100%)
+#let lined = pattern(
+  size: (5mm, 5mm),
+  place(
+    line(
+      start: (0%, 90%),
+      end: (100%, 90%),
+      stroke: 0.4pt
+    ),
+  )
+)
+
+#let rect_pattern(pattern) = rect(
+  width: 100%,
+  height: 100%,
+  fill: pattern
+)
+
 
 #let vert_stack_bottom_outset(..content) = {
   stack(

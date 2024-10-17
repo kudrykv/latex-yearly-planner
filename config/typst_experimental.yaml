@@ -26,6 +26,8 @@ planner:
     end_date: 2024, December
     weekday_start: Monday
 
+    pattern: dotted
+
   objects:
     mos_nav:
       width: 10mm
@@ -61,3 +63,4 @@ planner:
         enabled: true
         parameters:
           months_width: 4.3cm
+          gap_width: 5mm
