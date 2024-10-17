@@ -30,6 +30,7 @@ module LatexYearlyPlanner
                 #{title(...)},
                 [],
                 table(
+                  stroke: 0.4pt,
                   columns: 2,
                   rows: 1fr,
                   align: horizon + center,
@@ -55,6 +56,7 @@ module LatexYearlyPlanner
                   reflow: true,
                   [
                   #table(
+                  stroke: 0.4pt,
                   columns: (#{(['1fr'] * 4).join(', ')}, auto, #{(['1fr'] * 12).join(', ')}),
                   rows: 1fr,
                   align: horizon + center,
