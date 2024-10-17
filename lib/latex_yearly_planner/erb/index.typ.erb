@@ -14,6 +14,28 @@
   size: <%= planner_config.config[:document][:text][:size] %>,
 )
 
+#let dotted = pattern(
+  size: (5mm, 5mm),
+  place(
+    dx: 0.5pt,
+    dy: 0.5pt,
+    circle(
+      radius: 0.4pt,
+      fill: black
+    )
+  ),
+)
+
+#let dotted_rect = rect(fill: dotted, width: 100%, height: 100%)
+
+#let vert_stack_bottom_outset(..content) = {
+  stack(
+    dir: ttb,
+    spacing: 1fr,
+    ..content, []
+  )
+}
+
 <% text_documents.each do |doc| %>
 <%= doc.content %>
 <% end %>

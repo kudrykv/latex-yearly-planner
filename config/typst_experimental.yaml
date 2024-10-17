@@ -59,3 +59,5 @@ planner:
 
     - quarterly:
         enabled: true
+        parameters:
+          months_width: 4.3cm

@@ -21,11 +21,7 @@ module LatexYearlyPlanner
 
           def content(month_rows, _page_number)
             <<~TYPST
-              stack(
-                dir: ttb,
-                spacing: 1fr,
-                #{month_rows.map { |row| row_stack(row) }.append('[]').join(', ')}
-              )
+              vert_stack_bottom_outset(#{month_rows.map { |row| row_stack(row) }.append('[]').join(', ')})
             TYPST
           end
 
