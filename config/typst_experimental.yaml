@@ -47,6 +47,13 @@ planner:
       underline_weekdays: true
       sideline_week_numbers: true
 
+    large_calendar:
+      with_week_numbers: true
+      week_number_placement: right
+      weekday_names: short
+      heading_height: 6mm
+      week_row_height: 20mm
+
   sections:
     - title:
         enabled: true
@@ -63,4 +70,9 @@ planner:
         enabled: true
         parameters:
           months_width: 4.3cm
+          gap_width: 5mm
+
+    - monthly:
+        enabled: true
+        parameters:
           gap_width: 5mm

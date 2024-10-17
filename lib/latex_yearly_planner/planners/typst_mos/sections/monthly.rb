@@ -4,9 +4,9 @@ module LatexYearlyPlanner
   module Planners
     module TypstMos
       module Sections
-        class Quarterly < Section
+        class Monthly < Section
           def pages
-            params.quarters
+            params.months
           end
         end
       end

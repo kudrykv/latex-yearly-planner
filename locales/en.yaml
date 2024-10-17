@@ -42,3 +42,26 @@ en:
       october: October
       november: November
       december: December
+
+    weekdays:
+      full:
+        monday: Monday
+        tuesday: Tuesday
+        wednesday: Wednesday
+        thursday: Thursday
+        friday: Friday
+        saturday: Saturday
+        sunday: Sunday
+
+        week: Week
+
+      short:
+        monday: Mon
+        tuesday: Tue
+        wednesday: Wed
+        thursday: Thu
+        friday: Fri
+        saturday: Sat
+        sunday: Sun
+
+        week: Wk
