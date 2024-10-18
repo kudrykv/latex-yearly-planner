@@ -53,6 +53,7 @@ planner:
       weekday_names: short
       heading_height: 6mm
       week_row_height: 20mm
+      week_cell_rotate: 90deg
 
   sections:
     - title:
