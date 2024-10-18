@@ -77,3 +77,9 @@ planner:
         enabled: true
         parameters:
           gap_width: 5mm
+
+    - weekly:
+        enabled: true
+        parameters:
+          first_row_height: 8mm
+          rest_row_height: 9mm

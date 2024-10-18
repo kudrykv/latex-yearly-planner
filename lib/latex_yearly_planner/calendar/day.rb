@@ -5,9 +5,9 @@ module LatexYearlyPlanner
     class Day
       attr_reader :weekday_start, :moment
 
-      def initialize(weekday_start:, year:, month:, day:)
+      def initialize(weekday_start:, moment:)
         @weekday_start = weekday_start
-        @moment = DateTime.new(year, month, day)
+        @moment = moment
       end
 
       def day
@@ -20,6 +20,10 @@ module LatexYearlyPlanner
 
       def cweek
         moment.cweek
+      end
+
+      def strftime(format)
+        moment.strftime(format)
       end
 
       def ==(other)

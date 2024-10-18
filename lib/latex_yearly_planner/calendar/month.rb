@@ -60,7 +60,7 @@ module LatexYearlyPlanner
       def make_day(day)
         return if day.nil?
 
-        Day.new(weekday_start:, year: day.year, month: day.month, day: day.day)
+        Day.new(weekday_start:, moment: day)
       end
     end
   end

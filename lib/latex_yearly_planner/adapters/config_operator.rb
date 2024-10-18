@@ -30,6 +30,14 @@ module LatexYearlyPlanner
         months.each_slice(3).map(&:first).map(&:quarter)
       end
 
+      def weeks
+        @all_weeks ||= start_date.beginning_of_week(weekday_start)
+                                 .upto(end_date.end_of_month.end_of_week(weekday_start))
+                                 .each_slice(7)
+                                 .map { |days| days.map { |day| Calendar::Day.new(moment: day, weekday_start:) } }
+                                 .map { |days| Calendar::Week.new(days:, weekday_start:) }
+      end
+
       private
 
       def start_date
