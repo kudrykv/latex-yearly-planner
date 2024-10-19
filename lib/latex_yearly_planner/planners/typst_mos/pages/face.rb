@@ -50,7 +50,7 @@ module LatexYearlyPlanner
                   reflow: true,
                   [
                   #table(
-                  stroke: 0.4pt,
+                  stroke: (x, y) => (left: 0.4pt, right: 0.4pt),
                   columns: (#{(['1fr'] * 4).join(', ')}, auto, #{(['1fr'] * 12).join(', ')}),
                   rows: 1fr,
                   align: horizon + center,
@@ -108,7 +108,7 @@ module LatexYearlyPlanner
 
             <<~TYPST
               table(
-                  stroke: 0.4pt,
+                  stroke: (x, y) => (left: 0.4pt, right: 0.4pt),
                   columns: #{items.size},
                   rows: 1fr,
                   align: horizon + center,
