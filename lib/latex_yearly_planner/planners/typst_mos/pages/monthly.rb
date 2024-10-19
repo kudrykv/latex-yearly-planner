@@ -20,8 +20,8 @@ module LatexYearlyPlanner
             TYPST
           end
 
-          def current_months(month)
-            [month]
+          def top_menu_month(month)
+            month
           end
         end
       end

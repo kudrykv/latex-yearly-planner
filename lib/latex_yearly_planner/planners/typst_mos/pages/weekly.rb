@@ -29,8 +29,8 @@ module LatexYearlyPlanner
             TYPST
           end
 
-          def current_months(week)
-            week.months.select { |month| params.months.include? month }
+          def top_menu_month(week)
+            week.months.select { |month| params.months.include? month }.first
           end
 
           private

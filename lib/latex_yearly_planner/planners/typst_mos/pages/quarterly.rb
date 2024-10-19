@@ -30,6 +30,10 @@ module LatexYearlyPlanner
           def current_quarters(quarter)
             [quarter]
           end
+
+          def top_menu_month(quarter)
+            quarter.months.first
+          end
         end
       end
     end

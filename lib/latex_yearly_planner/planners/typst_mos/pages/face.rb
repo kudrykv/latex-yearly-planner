@@ -84,7 +84,7 @@ module LatexYearlyPlanner
             items = []
 
             if params.planner_config.sections.find { |section| section.name == :annual }.enabled?
-              first = current_months(...).first
+              first = top_menu_month(...)
 
               if first
                 page_number = annual_page_number(first)
@@ -113,8 +113,8 @@ module LatexYearlyPlanner
             []
           end
 
-          def current_months(...)
-            []
+          def top_menu_month(...)
+            nil
           end
 
           def highlight_calendar?
