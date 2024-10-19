@@ -26,6 +26,10 @@ module LatexYearlyPlanner
               )
             TYPST
           end
+
+          def current_months(quarter)
+            quarter.months
+          end
         end
       end
     end

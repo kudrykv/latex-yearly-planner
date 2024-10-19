@@ -14,7 +14,7 @@ module LatexYearlyPlanner
                #{first.year}
                ---
                #{i18n.t("calendar.short.month.#{last.name.downcase}")}
-               #{last.year}
+               #{last.year} #label("annual-#{page_number(first)}")
               ]
             TYPST
           end
@@ -33,6 +33,10 @@ module LatexYearlyPlanner
                 #{months.map { |month| Xtypst::LittleCalendar.new(month, **params.object(:little_calendar)).to_typst }.join(', ')}
               )
             TYPST
+          end
+
+          def page_number(first_month)
+            (params.months.find_index(first_month) / params.get(:months_per_page)) + 1
           end
         end
       end

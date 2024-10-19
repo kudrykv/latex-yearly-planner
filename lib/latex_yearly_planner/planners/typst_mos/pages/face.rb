@@ -29,13 +29,7 @@ module LatexYearlyPlanner
                 stroke: 0mm,
                 #{title(...)},
                 [],
-                table(
-                  stroke: 0.4pt,
-                  columns: 2,
-                  rows: 1fr,
-                  align: horizon + center,
-                  #{menu_items}
-                )
+                #{menu_items(...)}
               )
             TYPST
           end
@@ -81,7 +75,41 @@ module LatexYearlyPlanner
           end
 
           def menu_items(...)
-            ['[Calendar]', '[Notes]'].join(', ')
+            items = []
+
+            if params.planner_config.sections.find { |section| section.name == :annual }.enabled?
+              first = current_months(...).first
+
+              if first
+                page_number = annual_page_number(first)
+                items << "link(label(\"annual-#{page_number}\"), [Calendar])"
+              else
+                items << 'table.cell(fill: black, link(label("annual-1"), text(white)[Calendar]))'
+              end
+            end
+
+            <<~TYPST
+              table(
+                  stroke: 0.4pt,
+                  columns: #{items.size},
+                  rows: 1fr,
+                  align: horizon + center,
+                  #{items.join(', ')}
+                )
+            TYPST
+          end
+
+          def current_months(...)
+            []
+          end
+
+          def annual_page_number(first_month)
+            annual_params = params.planner_config.sections
+                                  .find { |section| section.name == :annual }
+                                  .params
+            months_per_page = annual_params.get(:months_per_page)
+
+            (annual_params.months.find_index(first_month) / months_per_page) + 1
           end
 
           def mosnav
