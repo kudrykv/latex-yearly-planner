@@ -6,7 +6,7 @@ module LatexYearlyPlanner
       module Pages
         class Weekly < Face
           def title(week)
-            "[#{i18n.t('calendar.weekdays.full.week')} #{week.number}]"
+            "[#{i18n.t('calendar.weekdays.full.week')} #{week.number}#label(\"#{week.id}\")]"
           end
 
           def content(week)
@@ -30,7 +30,15 @@ module LatexYearlyPlanner
           end
 
           def top_menu_month(week)
-            week.months.select { |month| params.months.include? month }.first
+            side_menu_months(week).first
+          end
+
+          def side_menu_months(week)
+            week.months.select { |month| params.months.include? month }
+          end
+
+          def side_menu_quarters(week)
+            side_menu_months(week).map(&:quarter).uniq
           end
 
           private

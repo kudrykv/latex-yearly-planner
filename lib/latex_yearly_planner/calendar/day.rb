@@ -10,6 +10,10 @@ module LatexYearlyPlanner
         @moment = moment
       end
 
+      def id
+        "day-#{moment.strftime('%Y-%m-%d')}"
+      end
+
       def day
         moment.day
       end

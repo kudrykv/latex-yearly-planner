@@ -10,6 +10,12 @@ module LatexYearlyPlanner
         @days = days
       end
 
+      def id
+        day = days.compact.first
+
+        "week-#{day.id}"
+      end
+
       def number
         shift = 0
         shift = 1 if days.compact.none?(&:monday?) && days.last.nil?
