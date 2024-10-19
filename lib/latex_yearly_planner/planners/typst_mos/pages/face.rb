@@ -86,11 +86,11 @@ module LatexYearlyPlanner
                 page_number = annual_page_number(first)
                 items << "link(label(\"annual-#{page_number}\"), [Calendar])"
               else
-                if highlight_calendar?
-                  items << 'table.cell(fill: black, link(label("annual-1"), text(white)[Calendar]))'
-                else
-                  items << 'link(label("annual-1"), [Calendar])'
-                end
+                items << if highlight_calendar?
+                           'table.cell(fill: black, link(label("annual-1"), text(white)[Calendar]))'
+                         else
+                           'link(label("annual-1"), [Calendar])'
+                         end
               end
             end
 
