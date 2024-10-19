@@ -26,6 +26,10 @@ module LatexYearlyPlanner
               )
             TYPST
           end
+
+          def current_quarters(quarter)
+            [quarter]
+          end
         end
       end
     end

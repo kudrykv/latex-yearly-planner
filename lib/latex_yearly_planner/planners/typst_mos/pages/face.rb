@@ -62,7 +62,11 @@ module LatexYearlyPlanner
 
           def side_menu_content(...)
             quarters = params.quarters.map do |q|
-              "link(label(\"Q#{q.year}-#{q.number}\"), [#{i18n.t('calendar.one_letter.quarter')}#{q.number}])"
+              if current_quarters(...).include?(q)
+                "table.cell(fill: black, link(label(\"Q#{q.year}-#{q.number}\"), text(white)[#{i18n.t('calendar.one_letter.quarter')}#{q.number}]))"
+              else
+                "link(label(\"Q#{q.year}-#{q.number}\"), [#{i18n.t('calendar.one_letter.quarter')}#{q.number}])"
+              end
             end
             months = params.months.map { |m| "[#{i18n.t("calendar.short.month.#{m.name.downcase}")}]" }
 
@@ -103,6 +107,10 @@ module LatexYearlyPlanner
                   #{items.join(', ')}
                 )
             TYPST
+          end
+
+          def current_quarters(...)
+            []
           end
 
           def current_months(...)
