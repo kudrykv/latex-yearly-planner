@@ -29,6 +29,10 @@ module LatexYearlyPlanner
             TYPST
           end
 
+          def current_months(week)
+            week.months.select { |month| params.months.include? month }
+          end
+
           private
 
           def format_day(moment)

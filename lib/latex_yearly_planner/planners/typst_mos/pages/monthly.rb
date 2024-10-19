@@ -19,6 +19,10 @@ module LatexYearlyPlanner
               )
             TYPST
           end
+
+          def current_months(month)
+            [month]
+          end
         end
       end
     end

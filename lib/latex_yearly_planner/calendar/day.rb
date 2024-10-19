@@ -18,6 +18,10 @@ module LatexYearlyPlanner
         moment.monday?
       end
 
+      def month
+        Month.new(weekday_start:, year: moment.year, month: moment.month)
+      end
+
       def cweek
         moment.cweek
       end

@@ -17,6 +17,10 @@ module LatexYearlyPlanner
         days.compact.map(&:cweek).max + shift
       end
 
+      def months
+        [days.first.month, days.last.month].uniq
+      end
+
       def ==(other)
         return false unless other.is_a?(Week)
 

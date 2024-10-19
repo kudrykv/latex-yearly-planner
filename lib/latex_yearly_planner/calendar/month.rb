@@ -3,6 +3,8 @@
 module LatexYearlyPlanner
   module Calendar
     class Month
+      include Comparable
+
       attr_reader :weekday_start, :moment
 
       def initialize(weekday_start:, year:, month:)
@@ -46,6 +48,18 @@ module LatexYearlyPlanner
       def ==(other)
         other.is_a?(Month) && other.moment == moment && other.weekday_start == weekday_start
       end
+
+      def <=>(other)
+        return nil unless other.is_a?(Month)
+
+        [moment, weekday_start] <=> [other.moment, other.weekday_start]
+      end
+
+      def hash
+        [moment, weekday_start].hash
+      end
+
+      alias eql? ==
 
       private
 
