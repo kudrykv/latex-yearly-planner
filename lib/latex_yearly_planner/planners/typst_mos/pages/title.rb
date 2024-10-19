@@ -5,7 +5,7 @@ module LatexYearlyPlanner
     module TypstMos
       module Pages
         class Title < Page
-          def generate(title, _page_number)
+          def generate(title)
             <<~TYPST
               #block(
                 width: 100%,

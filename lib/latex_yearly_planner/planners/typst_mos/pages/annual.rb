@@ -5,7 +5,7 @@ module LatexYearlyPlanner
     module TypstMos
       module Pages
         class Annual < Face
-          def title(month_rows, _page_number)
+          def title(month_rows)
             first = month_rows.first.first
             last = month_rows.last.last
 
@@ -19,7 +19,7 @@ module LatexYearlyPlanner
             TYPST
           end
 
-          def content(month_rows, _page_number)
+          def content(month_rows)
             <<~TYPST
               vert_stack_bottom_outset(#{month_rows.map { |row| row_stack(row) }.append('[]').join(', ')})
             TYPST

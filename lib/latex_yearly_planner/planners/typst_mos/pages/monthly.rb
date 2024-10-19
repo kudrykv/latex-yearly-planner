@@ -5,11 +5,11 @@ module LatexYearlyPlanner
     module TypstMos
       module Pages
         class Monthly < Face
-          def title(month, _page_number)
+          def title(month)
             "[#{month.name}]"
           end
 
-          def content(month, _page_number)
+          def content(month)
             <<~TYPST
               stack(
                 dir: ttb,

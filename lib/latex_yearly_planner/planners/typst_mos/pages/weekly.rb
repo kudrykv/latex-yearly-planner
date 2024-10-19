@@ -5,11 +5,11 @@ module LatexYearlyPlanner
     module TypstMos
       module Pages
         class Weekly < Face
-          def title(week, _page_number)
+          def title(week)
             "[#{i18n.t('calendar.weekdays.full.week')} #{week.number}]"
           end
 
-          def content(week, _page_number)
+          def content(week)
             first_name_height = params.get(:first_row_height)
             name_height = params.get(:rest_row_height)
 

@@ -27,7 +27,7 @@ module LatexYearlyPlanner
       private
 
       def content
-        pages.each.with_index(1).map(&method(:generate_page)).join(pages_glue)
+        pages.map(&method(:generate_page)).join(pages_glue)
       end
 
       def generate_page(...)

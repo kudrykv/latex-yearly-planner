@@ -5,13 +5,13 @@ module LatexYearlyPlanner
     module TypstMos
       module Pages
         class Quarterly < Face
-          def title(quarter, _page_number)
+          def title(quarter)
             <<~TYPST
               [Q#{quarter.number}]
             TYPST
           end
 
-          def content(quarter, _page_number)
+          def content(quarter)
             months = quarter.months.map do |month|
               Xtypst::LittleCalendar.new(month, **params.object(:little_calendar)).to_typst
             end.join(', ')
