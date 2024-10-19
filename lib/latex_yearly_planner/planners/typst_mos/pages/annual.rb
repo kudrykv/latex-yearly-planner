@@ -10,11 +10,11 @@ module LatexYearlyPlanner
             last = month_rows.last.last
 
             <<~TYPST
-              [#{i18n.t("calendar.short.month.#{first.name.downcase}")}
+              text(#{params.get(:heading_size)})[#{i18n.t("calendar.short.month.#{first.name.downcase}")}
                #{first.year}
                ---
                #{i18n.t("calendar.short.month.#{last.name.downcase}")}
-               #{last.year} #label("annual-#{page_number(first)}")
+               #{last.year} <annual-#{page_number(first)}>
               ]
             TYPST
           end

@@ -26,6 +26,7 @@ planner:
     end_date: 2024, December
     weekday_start: Monday
 
+    heading_size: 16pt
     pattern: dotted
 
   objects:

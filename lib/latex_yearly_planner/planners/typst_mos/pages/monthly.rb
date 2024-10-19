@@ -6,7 +6,7 @@ module LatexYearlyPlanner
       module Pages
         class Monthly < Face
           def title(month)
-            "[#{month.name}#label(\"#{month.id}\")]"
+            "text(#{params.get(:heading_size)})[#{month.name}#label(\"#{month.id}\")]"
           end
 
           def content(month)

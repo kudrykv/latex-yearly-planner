@@ -6,7 +6,7 @@ module LatexYearlyPlanner
       module Pages
         class Weekly < Face
           def title(week)
-            "[#{i18n.t('calendar.weekdays.full.week')} #{week.number} #{labels(week)}]"
+            "text(#{params.get(:heading_size)})[#{i18n.t('calendar.weekdays.full.week')} #{week.number} #{labels(week)}]"
           end
 
           def labels(week)

@@ -7,7 +7,7 @@ module LatexYearlyPlanner
         class Quarterly < Face
           def title(quarter)
             <<~TYPST
-              [Q#{quarter.number}#label("Q#{quarter.year}-#{quarter.number}")]
+              text(#{params.get(:heading_size)})[Q#{quarter.number}#label("Q#{quarter.year}-#{quarter.number}")]
             TYPST
           end
 
