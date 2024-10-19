@@ -6,7 +6,7 @@ module LatexYearlyPlanner
       module Pages
         class Monthly < Face
           def title(month)
-            "[#{month.name}]"
+            "[#{month.name}#label(\"#{month.id}\")]"
           end
 
           def content(month)
@@ -22,6 +22,10 @@ module LatexYearlyPlanner
 
           def top_menu_month(month)
             month
+          end
+
+          def side_menu_months(month)
+            [month]
           end
         end
       end

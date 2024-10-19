@@ -27,7 +27,7 @@ module LatexYearlyPlanner
             TYPST
           end
 
-          def current_quarters(quarter)
+          def side_menu_quarters(quarter)
             [quarter]
           end
 

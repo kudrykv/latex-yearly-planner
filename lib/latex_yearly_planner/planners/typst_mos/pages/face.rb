@@ -62,13 +62,21 @@ module LatexYearlyPlanner
 
           def side_menu_content(...)
             quarters = params.quarters.map do |q|
-              if current_quarters(...).include?(q)
+              if side_menu_quarters(...).include?(q)
                 "table.cell(fill: black, link(label(\"Q#{q.year}-#{q.number}\"), text(white)[#{i18n.t('calendar.one_letter.quarter')}#{q.number}]))"
               else
                 "link(label(\"Q#{q.year}-#{q.number}\"), [#{i18n.t('calendar.one_letter.quarter')}#{q.number}])"
               end
             end
-            months = params.months.map { |m| "[#{i18n.t("calendar.short.month.#{m.name.downcase}")}]" }
+
+            months = params.months.map do |m|
+              if side_menu_months(...).include?(m)
+                "table.cell(fill: black, link(label(\"#{m.id}\"), text(white)[#{i18n.t("calendar.short.month.#{m.name.downcase}")}]))"
+              else
+                "link(label(\"#{m.id}\"), [#{i18n.t("calendar.short.month.#{m.name.downcase}")}])"
+              end
+              # "[#{i18n.t("calendar.short.month.#{m.name.downcase}")}]"
+            end
 
             if mosnav[:reverse_array_internals]
               quarters.reverse!
@@ -109,7 +117,11 @@ module LatexYearlyPlanner
             TYPST
           end
 
-          def current_quarters(...)
+          def side_menu_quarters(...)
+            []
+          end
+
+          def side_menu_months(...)
             []
           end
 

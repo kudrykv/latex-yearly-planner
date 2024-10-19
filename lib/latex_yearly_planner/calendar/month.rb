@@ -21,6 +21,10 @@ module LatexYearlyPlanner
               .map { |days| Week.new(days: make_days(days), weekday_start:) }
       end
 
+      def id
+        moment.strftime('%Y-%m')
+      end
+
       def name
         moment.strftime('%B')
       end
