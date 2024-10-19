@@ -7,7 +7,7 @@ module LatexYearlyPlanner
         class Quarterly < Face
           def title(quarter)
             <<~TYPST
-              [Q#{quarter.number}]
+              [Q#{quarter.number}#label("Q#{quarter.year}-#{quarter.number}")]
             TYPST
           end
 
@@ -25,10 +25,6 @@ module LatexYearlyPlanner
                 rect_pattern(#{params.get(:pattern)})
               )
             TYPST
-          end
-
-          def current_months(quarter)
-            quarter.months
           end
         end
       end

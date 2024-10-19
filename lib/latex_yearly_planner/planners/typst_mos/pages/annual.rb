@@ -38,6 +38,10 @@ module LatexYearlyPlanner
           def page_number(first_month)
             (params.months.find_index(first_month) / params.get(:months_per_page)) + 1
           end
+
+          def highlight_calendar?
+            true
+          end
         end
       end
     end

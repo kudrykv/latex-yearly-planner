@@ -54,14 +54,16 @@ module LatexYearlyPlanner
                   columns: (#{(['1fr'] * 4).join(', ')}, auto, #{(['1fr'] * 12).join(', ')}),
                   rows: 1fr,
                   align: horizon + center,
-                  #{side_menu_content}
+                  #{side_menu_content(...)}
                   )]
                 )
             TYPST
           end
 
-          def side_menu_content
-            quarters = params.quarters.map { |q| "[#{i18n.t('calendar.one_letter.quarter')}#{q.number}]" }
+          def side_menu_content(...)
+            quarters = params.quarters.map do |q|
+              "link(label(\"Q#{q.year}-#{q.number}\"), [#{i18n.t('calendar.one_letter.quarter')}#{q.number}])"
+            end
             months = params.months.map { |m| "[#{i18n.t("calendar.short.month.#{m.name.downcase}")}]" }
 
             if mosnav[:reverse_array_internals]
@@ -84,7 +86,11 @@ module LatexYearlyPlanner
                 page_number = annual_page_number(first)
                 items << "link(label(\"annual-#{page_number}\"), [Calendar])"
               else
-                items << 'table.cell(fill: black, link(label("annual-1"), text(white)[Calendar]))'
+                if highlight_calendar?
+                  items << 'table.cell(fill: black, link(label("annual-1"), text(white)[Calendar]))'
+                else
+                  items << 'link(label("annual-1"), [Calendar])'
+                end
               end
             end
 
@@ -101,6 +107,10 @@ module LatexYearlyPlanner
 
           def current_months(...)
             []
+          end
+
+          def highlight_calendar?
+            false
           end
 
           def annual_page_number(first_month)
