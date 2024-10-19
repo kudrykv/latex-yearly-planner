@@ -10,7 +10,7 @@ module LatexYearlyPlanner
           end
 
           def labels(week)
-            "~#{week.ids.map { |id| "#label(\"#{id}\")" }.join(' ~')}"
+            "#hide[~#{week.ids.map { |id| "#label(\"#{id}\")" }.join(' ~')}]"
           end
 
           def content(week)
