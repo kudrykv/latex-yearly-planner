@@ -79,19 +79,19 @@ module LatexYearlyPlanner
         row = week.days.map { |day| "[#{day ? day.day : ''}]" }
         return row.join(', ') unless parameters[:with_week_numbers]
 
-        row.unshift(rotate_week(week.number)) if parameters[:week_number_placement] == 'left'
-        row.push(rotate_week(week.number)) if parameters[:week_number_placement] == 'right'
+        row.unshift(rotate_week(week)) if parameters[:week_number_placement] == 'left'
+        row.push(rotate_week(week)) if parameters[:week_number_placement] == 'right'
 
         row.join(', ')
       end
 
-      def rotate_week(number)
+      def rotate_week(week)
         <<~TYPST
           rotate(
             #{parameters[:week_cell_rotate]},
             origin: center + horizon,
             reflow: true,
-            [#h(1fr) #{i18n.t('calendar.weekdays.full.week')} #{number} #h(1fr)]
+            [#h(1fr) #link(label("#{week.id}"), [#{i18n.t('calendar.weekdays.full.week')} #{week.number}]) #h(1fr)]
           )
         TYPST
       end
