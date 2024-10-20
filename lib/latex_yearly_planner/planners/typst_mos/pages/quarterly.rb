@@ -5,7 +5,15 @@ module LatexYearlyPlanner
     module TypstMos
       module Pages
         class Quarterly < Face
-          def title(quarter)
+          attr_reader :quarter
+
+          def set(quarter)
+            @quarter = quarter
+
+            self
+          end
+
+          def title
             <<~TYPST
               text(#{params.get(:heading_size)})[
                 #{i18n.t('calendar.one_letter.quarter')}#{quarter.number}
@@ -14,15 +22,15 @@ module LatexYearlyPlanner
             TYPST
           end
 
-          def content(quarter)
+          def content
             QuarterlyContent.new(quarter:, section_config:, i18n:).to_typst
           end
 
-          def side_menu_quarters(quarter)
+          def side_menu_quarters
             [quarter]
           end
 
-          def top_menu_month(quarter)
+          def top_menu_month
             quarter.months.first
           end
 

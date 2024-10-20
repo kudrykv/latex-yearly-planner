@@ -5,15 +5,23 @@ module LatexYearlyPlanner
     module TypstMos
       module Pages
         class Weekly < Face
-          def title(week)
-            "text(#{params.get(:heading_size)})[#{i18n.t('calendar.weekdays.full.week')} #{week.number} #{labels(week)}]"
+          attr_reader :week
+
+          def set(week)
+            @week = week
+
+            self
           end
 
-          def labels(week)
+          def title
+            "text(#{params.get(:heading_size)})[#{i18n.t('calendar.weekdays.full.week')} #{week.number} #{labels}]"
+          end
+
+          def labels
             "#hide[~#{week.ids.map { |id| "#label(\"#{id}\")" }.join(' ~')}]"
           end
 
-          def content(week)
+          def content
             first_name_height = params.get(:first_row_height)
             name_height = params.get(:rest_row_height)
 
@@ -33,16 +41,16 @@ module LatexYearlyPlanner
             TYPST
           end
 
-          def top_menu_month(week)
-            side_menu_months(week).first
+          def top_menu_month
+            side_menu_months.first
           end
 
-          def side_menu_months(week)
+          def side_menu_months
             week.months.select { |month| params.months.include? month }
           end
 
-          def side_menu_quarters(week)
-            side_menu_months(week).map(&:quarter).uniq
+          def side_menu_quarters
+            side_menu_months.map(&:quarter).uniq
           end
 
           private

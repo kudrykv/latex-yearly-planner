@@ -5,7 +5,15 @@ module LatexYearlyPlanner
     module TypstMos
       module Pages
         class Daily < Face
-          def title(day)
+          attr_reader :day
+
+          def set(day)
+            @day = day
+
+            self
+          end
+
+          def title
             <<~TYPST
               [#grid(
                 columns: 2,
@@ -23,7 +31,7 @@ module LatexYearlyPlanner
             TYPST
           end
 
-          def content(day)
+          def content
             <<~TYPST
               grid(
                 columns: (4.5cm, #{params.get(:gap_width)}, 1fr),

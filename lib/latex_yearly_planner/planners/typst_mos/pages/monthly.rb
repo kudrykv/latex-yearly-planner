@@ -5,11 +5,19 @@ module LatexYearlyPlanner
     module TypstMos
       module Pages
         class Monthly < Face
-          def title(month)
+          attr_reader :month
+
+          def set(month)
+            @month = month
+
+            self
+          end
+
+          def title
             "text(#{params.get(:heading_size)})[#{month.name}#label(\"#{month.id}\")]"
           end
 
-          def content(month)
+          def content
             <<~TYPST
               stack(
                 dir: ttb,
@@ -20,11 +28,11 @@ module LatexYearlyPlanner
             TYPST
           end
 
-          def top_menu_month(month)
+          def top_menu_month
             month
           end
 
-          def side_menu_months(month)
+          def side_menu_months
             [month]
           end
         end

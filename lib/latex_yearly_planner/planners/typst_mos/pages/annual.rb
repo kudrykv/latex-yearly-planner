@@ -5,11 +5,19 @@ module LatexYearlyPlanner
     module TypstMos
       module Pages
         class Annual < Face
-          def title(month_rows)
+          attr_reader :month_rows
+
+          def set(month_rows)
+            @month_rows = month_rows
+
+            self
+          end
+
+          def title
             AnnualTitle.new(month_rows, section_config:, i18n:).to_typst
           end
 
-          def content(month_rows)
+          def content
             "vert_stack_bottom_outset(#{month_rows.map { |row| row_stack(row) }.append('[]').join(', ')})"
           end
 
