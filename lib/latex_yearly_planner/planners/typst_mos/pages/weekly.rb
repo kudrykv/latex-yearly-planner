@@ -21,13 +21,13 @@ module LatexYearlyPlanner
               grid(
                 columns: (1fr, 1fr),
                 rows: (#{first_name_height}, 1fr, #{name_height}, 1fr, #{name_height}, 1fr, #{name_height}, 1fr),
-                align(horizon, [#{format_day(week.days[0])}]), align(horizon, [#{format_day(week.days[1])}]),
+                align(horizon, #{format_day(week.days[0])}), align(horizon, #{format_day(week.days[1])}),
                 grid.cell(colspan: 2, rect_pattern(#{params.get(:pattern)})),
-                align(horizon, [#{format_day(week.days[2])}]), align(horizon, [#{format_day(week.days[3])}]),
+                align(horizon, #{format_day(week.days[2])}), align(horizon, #{format_day(week.days[3])}),
                 grid.cell(colspan: 2, rect_pattern(#{params.get(:pattern)})),
-                align(horizon, [#{format_day(week.days[4])}]), align(horizon, [#{format_day(week.days[5])}]),
+                align(horizon, #{format_day(week.days[4])}), align(horizon, #{format_day(week.days[5])}),
                 grid.cell(colspan: 2, rect_pattern(#{params.get(:pattern)})),
-                align(horizon, [#{format_day(week.days[6])}]), [],
+                align(horizon, #{format_day(week.days[6])}), [],
                 grid.cell(colspan: 2, rect_pattern(#{params.get(:pattern)})),
               )
             TYPST
@@ -47,12 +47,19 @@ module LatexYearlyPlanner
 
           private
 
-          def format_day(moment)
-            dayname = moment.strftime('%A')
-            daynum = moment.strftime('%-d')
+          def format_day(day)
+            dayname = day.strftime('%A')
+            daynum = day.strftime('%-d')
+
+            first_day = params.months.first.moment.beginning_of_month
+            last_day = params.months.last.moment.end_of_month
+
+            if day.moment < first_day || day.moment > last_day
+              return "[#{i18n.t("calendar.weekdays.full.#{dayname.downcase}")}, #{daynum}]"
+            end
 
             <<~TYPST
-              #{i18n.t("calendar.weekdays.full.#{dayname.downcase}")}, #{daynum}
+              link(<#{day.id}>, [#{i18n.t("calendar.weekdays.full.#{dayname.downcase}")}, #{daynum}])
             TYPST
           end
         end

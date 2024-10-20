@@ -3,6 +3,8 @@
 module LatexYearlyPlanner
   module Calendar
     class Day
+      include Comparable
+
       attr_reader :weekday_start, :moment
 
       def initialize(weekday_start:, moment:)

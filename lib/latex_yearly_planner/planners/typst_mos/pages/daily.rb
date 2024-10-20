@@ -24,7 +24,46 @@ module LatexYearlyPlanner
           end
 
           def content(day)
-            "[hello]"
+            <<~TYPST
+              grid(
+                columns: (4.5cm, 2mm, 1fr),
+                stack(
+                  dir: ttb,
+                  spacing: 5mm,
+                  table(
+                    columns: 1fr,
+                    inset: 0mm,
+                    stroke: (_, y) =>
+                      if calc.even(y) { ( bottom: 0.4pt + black ) }
+                      else { ( bottom: 0.4pt + gray ) },
+                    table.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [#{i18n.t('schedule')}]))),
+                    #{schedule},
+                    #{params.get(:schedule_trailing_30min) ? 'box(height: 5mm)' : ''}
+                  ),
+                  #{maybe_little_calendar}
+                ),
+                [],
+                [world]
+              )
+            TYPST
+          end
+
+          private
+
+          def schedule
+            (params.get(:schedule_from_hour)..params.get(:schedule_to_hour)).map do |hour|
+              <<~TYPST
+                box(height: 5mm, align(horizon, [#{hour}])), box(height: 5mm)
+              TYPST
+            end.join(",\n")
+          end
+
+          def maybe_little_calendar
+            return '' unless params.get(:enable_little_calenar)
+
+            <<~TYPST
+              #{Xtypst::LittleCalendar.new(day.month, i18n:, **params.object(:little_calendar)).to_typst},
+            TYPST
           end
         end
       end

@@ -87,3 +87,8 @@ planner:
 
     - daily:
         enabled: true
+        parameters:
+          schedule_from_hour: 8
+          schedule_to_hour: 19
+          schedule_trailing_30min: true
+          enable_little_calendar: false
