@@ -8,11 +8,11 @@ module LatexYearlyPlanner
           def generate
             <<~TYPST
               #grid(
-                columns: (#{mosnav[:width]}, 1fr),
+                columns: (#{heading_columns}),
                 rows: (#{heading[:height]}, 1fr),
                 grid.cell(
                   rowspan: 2,
-                  pad(right: #{mosnav[:inset]}, #{side_menu_layout})
+                  pad(right: #{mosnav[:side_pad]}, #{side_menu_layout})
                 ),
                 pad(bottom: #{heading[:bottom_pad]}, #{headerlike}), #{content}
               )
@@ -139,6 +139,12 @@ module LatexYearlyPlanner
             months_per_page = annual_params.get(:months_per_page)
 
             (annual_params.months.find_index(first_month) / months_per_page) + 1
+          end
+
+          private
+
+          def heading_columns
+            "#{mosnav[:width]}, 1fr"
           end
 
           def mosnav

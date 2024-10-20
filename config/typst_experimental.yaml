@@ -32,7 +32,7 @@ planner:
   objects:
     mos_nav:
       width: 10mm
-      inset: 2mm
+      side_pad: 2mm
       rotate: 90deg
       reverse_array_internals: false
       reverse_arrays: false
