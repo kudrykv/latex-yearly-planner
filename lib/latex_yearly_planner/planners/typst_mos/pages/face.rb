@@ -14,7 +14,7 @@ module LatexYearlyPlanner
                   rowspan: 2,
                   pad(right: #{mosnav[:side_pad]}, #{side_menu_layout})
                 ),
-                pad(bottom: #{heading[:bottom_pad]}, #{header}), #{content}
+                pad(bottom: #{heading[:bottom_pad]}, #{header_layout}), #{content}
               )
             TYPST
           end
@@ -43,18 +43,9 @@ module LatexYearlyPlanner
             false
           end
 
-          def annual_page_number(first_month)
-            annual_params = params.planner_config.sections
-                                  .find { |section| section.name == :annual }
-                                  .params
-            months_per_page = annual_params.get(:months_per_page)
-
-            (annual_params.months.find_index(first_month) / months_per_page) + 1
-          end
-
           private
 
-          def header
+          def header_layout
             <<~TYPST
               table(
                 columns: (auto, 1fr, auto),
@@ -62,11 +53,45 @@ module LatexYearlyPlanner
                 align: horizon + center,
                 inset: 0mm,
                 stroke: 0mm,
-                #{title},
-                [],
-                #{menu_items}
+                #{title}, [], #{menu_items}
               )
             TYPST
+          end
+
+          def menu_items
+            items = []
+
+            if params.planner_config.sections.find { |section| section.name == :annual }.enabled?
+              if top_menu_month
+                page_number = annual_page_number(top_menu_month)
+                items << "link(<annual-#{page_number}>, [#{i18n.t('menu_calendar')}])"
+              else
+                items << if highlight_calendar?
+                  "table.cell(fill: black, link(<annual-1>, text(white)[#{i18n.t('menu_calendar')}]))"
+                else
+                  "link(<annual-1>, [#{i18n.t('menu_calendar')}])"
+                end
+              end
+            end
+
+            <<~TYPST
+              table(
+                  stroke: (x, y) => (left: 0.4pt, right: 0.4pt),
+                  columns: #{items.size},
+                  rows: 1fr,
+                  align: horizon + center,
+                  #{items.join(', ')}
+                )
+            TYPST
+          end
+
+          def annual_page_number(first_month)
+            annual_params = params.planner_config.sections
+                                  .find { |section| section.name == :annual }
+                                  .params
+            months_per_page = annual_params.get(:months_per_page)
+
+            (annual_params.months.find_index(first_month) / months_per_page) + 1
           end
 
           def side_menu_layout
@@ -111,35 +136,6 @@ module LatexYearlyPlanner
             return "#{quarters.join(', ')}, [], #{months.join(', ')}" unless mosnav[:reverse_arrays]
 
             "#{months.join(', ')}, [], #{quarters.join(', ')}"
-          end
-
-          def menu_items
-            items = []
-
-            if params.planner_config.sections.find { |section| section.name == :annual }.enabled?
-              first = top_menu_month
-
-              if first
-                page_number = annual_page_number(first)
-                items << "link(label(\"annual-#{page_number}\"), [#{i18n.t('menu_calendar')}])"
-              else
-                items << if highlight_calendar?
-                  "table.cell(fill: black, link(<annual-1>, text(white)[#{i18n.t('menu_calendar')}]))"
-                else
-                  "link(<annual-1>, [#{i18n.t('menu_calendar')}])"
-                end
-              end
-            end
-
-            <<~TYPST
-              table(
-                  stroke: (x, y) => (left: 0.4pt, right: 0.4pt),
-                  columns: #{items.size},
-                  rows: 1fr,
-                  align: horizon + center,
-                  #{items.join(', ')}
-                )
-            TYPST
           end
 
           def heading_columns
