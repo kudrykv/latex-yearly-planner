@@ -14,7 +14,13 @@ module LatexYearlyPlanner
           end
 
           def title
-            AnnualTitle.new(month_rows, section_config:, i18n:).to_typst
+            <<~TYPST
+              text(#{heading_size})[
+                #{first_month_name} #{first_year} ---
+                #{last_month_name} #{last_year}
+                <annual-#{page_number}>
+              ]
+            TYPST
           end
 
           def content
@@ -35,50 +41,30 @@ module LatexYearlyPlanner
             true
           end
 
-          class AnnualTitle < Base
-            attr_reader :month_rows
+          private
 
-            def initialize(month_rows, section_config:, i18n:)
-              super(section_config:, i18n:)
+          def heading_size
+            params.get(:heading_size)
+          end
 
-              @month_rows = month_rows
-            end
+          def first_month_name
+            i18n.t("calendar.short.month.#{month_rows.first.first.name.downcase}")
+          end
 
-            def to_typst
-              <<~TYPST
-                text(#{heading_size})[
-                  #{first_month_name} #{first_year} ---
-                  #{last_month_name} #{last_year}
-                  <annual-#{page_number}>
-                ]
-              TYPST
-            end
+          def first_year
+            month_rows.first.first.year
+          end
 
-            private
+          def last_month_name
+            i18n.t("calendar.short.month.#{month_rows.last.last.name.downcase}")
+          end
 
-            def heading_size
-              params.get(:heading_size)
-            end
+          def last_year
+            month_rows.last.last.year
+          end
 
-            def first_month_name
-              i18n.t("calendar.short.month.#{month_rows.first.first.name.downcase}")
-            end
-
-            def first_year
-              month_rows.first.first.year
-            end
-
-            def last_month_name
-              i18n.t("calendar.short.month.#{month_rows.last.last.name.downcase}")
-            end
-
-            def last_year
-              month_rows.last.last.year
-            end
-
-            def page_number
-              (params.months.find_index(month_rows.first.first) / params.get(:months_per_page)) + 1
-            end
+          def page_number
+            (params.months.find_index(month_rows.first.first) / params.get(:months_per_page)) + 1
           end
         end
       end
