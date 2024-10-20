@@ -7,7 +7,10 @@ module LatexYearlyPlanner
         class Quarterly < Face
           def title(quarter)
             <<~TYPST
-              text(#{params.get(:heading_size)})[Q#{quarter.number}<#{quarter.id}>]
+              text(#{params.get(:heading_size)})[
+                #{i18n.t('calendar.one_letter.quarter')}#{quarter.number}
+                <#{quarter.id}>
+              ]
             TYPST
           end
 
