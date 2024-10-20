@@ -18,6 +18,10 @@ module LatexYearlyPlanner
         moment.day
       end
 
+      def name
+        moment.strftime('%A')
+      end
+
       def monday?
         moment.monday?
       end

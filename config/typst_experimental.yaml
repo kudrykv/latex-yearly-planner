@@ -38,7 +38,7 @@ planner:
       reverse_arrays: false
 
     heading:
-      height: 9mm
+      height: 10mm
       inset: 3mm
 
     little_calendar:
@@ -84,3 +84,6 @@ planner:
         parameters:
           first_row_height: 8mm
           rest_row_height: 9mm
+
+    - daily:
+        enabled: true
