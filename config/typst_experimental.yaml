@@ -36,6 +36,8 @@ planner:
       rotate: 90deg
       reverse_array_internals: false
       reverse_arrays: false
+      quarter_width: 1.1fr
+      month_width: 1fr
 
     heading:
       height: 10mm
