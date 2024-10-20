@@ -14,7 +14,7 @@ module LatexYearlyPlanner
           end
 
           def title
-            "text(#{params.get(:heading_size)})[#{month.name}#label(\"#{month.id}\")]"
+            "text(#{params.get(:heading_size)})[#{month.name}<#{month.id}>]"
           end
 
           def content
