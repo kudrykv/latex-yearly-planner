@@ -27,7 +27,7 @@ planner:
     weekday_start: Monday
 
     heading_size: 16pt
-    pattern: lined
+    pattern: dotted
 
   objects:
     mos_nav:

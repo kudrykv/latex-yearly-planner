@@ -20,6 +20,14 @@ module LatexYearlyPlanner
         moment.day
       end
 
+      def week
+        days = (0...7)
+               .map { |i| moment.beginning_of_week(weekday_start).next_day(i) }
+               .map { |moment| Day.new(weekday_start:, moment:) }
+
+        Week.new(weekday_start:, days:)
+      end
+
       def name
         moment.strftime('%A')
       end

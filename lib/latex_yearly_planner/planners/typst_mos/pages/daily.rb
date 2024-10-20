@@ -17,8 +17,8 @@ module LatexYearlyPlanner
                   stroke: (right: 0.4pt),
                   text(#{params.get(:heading_size)})[#{day.day}]
                 ),
-                [*#{i18n.t("calendar.weekdays.full.#{day.name.downcase}")}*],
-                [#{i18n.t("calendar.month.#{day.month.name.downcase}")}]
+                [*#{i18n.t("calendar.weekdays.full.#{day.name.downcase}")}*, #{i18n.t("calendar.month.#{day.month.name.downcase}")}],
+                link(<#{day.week.id}>, [#{i18n.t('calendar.weekdays.full.week')} #{day.week.number}]),
               )<#{day.id}>]
             TYPST
           end
