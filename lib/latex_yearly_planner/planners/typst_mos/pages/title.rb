@@ -13,7 +13,7 @@ module LatexYearlyPlanner
                 align(
                   center + horizon,
                   text(
-                    size: 48pt,
+                    size: #{params.get(:font_size)},
                     [#{title}]
                   )
                 )

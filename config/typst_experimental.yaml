@@ -61,6 +61,7 @@ planner:
         enabled: true
         parameters:
           name: 2024
+          font_size: 48pt
 
     - annual:
         enabled: true
