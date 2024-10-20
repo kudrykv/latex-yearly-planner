@@ -12,7 +12,7 @@ module LatexYearlyPlanner
       end
 
       def id
-        "Q#{year}-#{number}"
+        "quarter-#{year}-#{number}"
       end
 
       def months

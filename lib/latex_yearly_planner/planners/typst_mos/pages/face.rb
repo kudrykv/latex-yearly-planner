@@ -63,9 +63,9 @@ module LatexYearlyPlanner
           def side_menu_content(...)
             quarters = params.quarters.map do |q|
               if side_menu_quarters(...).include?(q)
-                "table.cell(fill: black, link(label(\"Q#{q.year}-#{q.number}\"), text(white)[#{i18n.t('calendar.one_letter.quarter')}#{q.number}]))"
+                "table.cell(fill: black, link(<#{q.id}>, text(white)[#{i18n.t('calendar.one_letter.quarter')}#{q.number}]))"
               else
-                "link(label(\"Q#{q.year}-#{q.number}\"), [#{i18n.t('calendar.one_letter.quarter')}#{q.number}])"
+                "link(<#{q.id}>, [#{i18n.t('calendar.one_letter.quarter')}#{q.number}])"
               end
             end
 
@@ -75,7 +75,6 @@ module LatexYearlyPlanner
               else
                 "link(label(\"#{m.id}\"), [#{i18n.t("calendar.short.month.#{m.name.downcase}")}])"
               end
-              # "[#{i18n.t("calendar.short.month.#{m.name.downcase}")}]"
             end
 
             if mosnav[:reverse_array_internals]
