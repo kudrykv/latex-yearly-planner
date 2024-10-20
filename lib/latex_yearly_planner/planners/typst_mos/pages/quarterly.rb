@@ -23,7 +23,16 @@ module LatexYearlyPlanner
           end
 
           def content
-            QuarterlyContent.new(quarter:, section_config:, i18n:).to_typst
+            columns.reverse! if params.get(:reverse_columns)
+            columns_content.reverse! if params.get(:reverse_columns)
+
+            <<~TYPST
+              grid(
+                columns: (#{columns.join(', ')}),
+                rows: 1fr,
+                #{columns_content.join(',')}
+              )
+            TYPST
           end
 
           def highlight_side_menu_quarters
@@ -34,48 +43,22 @@ module LatexYearlyPlanner
             quarter.months.first
           end
 
-          class QuarterlyContent < Base
-            attr_reader :quarter
+          private
 
-            def initialize(quarter:, section_config:, i18n:)
-              super(section_config:, i18n:)
+          def columns
+            @columns ||= [params.get(:months_width), params.get(:gap_width), '1fr']
+          end
 
-              @quarter = quarter
-            end
+          def columns_content
+            @columns_content ||= ["vert_stack_bottom_outset(#{months})", '[]', "rect_pattern(#{params.get(:pattern)})"]
+          end
 
-            def to_typst
-              <<~TYPST
-                grid(
-                  columns: (#{columns}),
-                  rows: 1fr,
-                  #{columns_content}
-                )
-              TYPST
-            end
+          def months
+            quarter.months.map(&method(:create_little_calendar)).join(', ')
+          end
 
-            private
-
-            def columns
-              cols = [params.get(:months_width), params.get(:gap_width), '1fr']
-
-              cols.reverse! if params.get(:reverse_columns)
-
-              cols.join(', ')
-            end
-
-            def columns_content
-              cols = ["vert_stack_bottom_outset(#{months})", '[]', "rect_pattern(#{params.get(:pattern)})"]
-
-              cols.reverse! if params.get(:reverse_columns)
-
-              cols.join(', ')
-            end
-
-            def months
-              quarter.months.map do |month|
-                Xtypst::LittleCalendar.new(month, **params.object(:little_calendar)).to_typst
-              end.join(', ')
-            end
+          def create_little_calendar(month)
+            Xtypst::LittleCalendar.new(month, **params.object(:little_calendar)).to_typst
           end
         end
       end
