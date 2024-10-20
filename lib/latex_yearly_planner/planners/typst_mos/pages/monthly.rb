@@ -32,7 +32,7 @@ module LatexYearlyPlanner
             month
           end
 
-          def side_menu_months
+          def highlight_side_menu_months
             [month]
           end
         end

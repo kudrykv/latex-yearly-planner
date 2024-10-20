@@ -31,7 +31,7 @@ module LatexYearlyPlanner
             []
           end
 
-          def side_menu_months
+          def highlight_side_menu_months
             []
           end
 
@@ -155,7 +155,7 @@ module LatexYearlyPlanner
             params.months.map do |m|
               name = i18n.t("calendar.short.month.#{m.name.downcase}")
 
-              next "link(<#{m.id}>, [#{name}])" unless side_menu_months.include?(m)
+              next "link(<#{m.id}>, [#{name}])" unless highlight_side_menu_months.include?(m)
 
               "table.cell(fill: black, link(<#{m.id}>, text(white)[#{name}]))"
             end

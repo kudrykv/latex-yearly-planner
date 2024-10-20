@@ -42,15 +42,15 @@ module LatexYearlyPlanner
           end
 
           def top_menu_month
-            side_menu_months.first
+            highlight_side_menu_months.first
           end
 
-          def side_menu_months
+          def highlight_side_menu_months
             week.months.select { |month| params.months.include? month }
           end
 
           def highlight_side_menu_quarters
-            side_menu_months.map(&:quarter).uniq
+            highlight_side_menu_months.map(&:quarter).uniq
           end
 
           private
