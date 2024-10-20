@@ -17,10 +17,6 @@ module LatexYearlyPlanner
             "text(#{params.get(:heading_size)})[#{i18n.t('calendar.weekdays.full.week')} #{week.number} #{labels}]"
           end
 
-          def labels
-            "#hide[~#{week.ids.map { |id| "#label(\"#{id}\")" }.join(' ~')}]"
-          end
-
           def content
             first_name_height = params.get(:first_row_height)
             name_height = params.get(:rest_row_height)
@@ -46,7 +42,7 @@ module LatexYearlyPlanner
           end
 
           def highlight_side_menu_months
-            week.months.select { |month| params.months.include? month }
+            @highlight_side_menu_months ||= week.months.select { |month| params.months.include? month }
           end
 
           def highlight_side_menu_quarters
@@ -54,6 +50,10 @@ module LatexYearlyPlanner
           end
 
           private
+
+          def labels
+            "#hide[~#{week.ids.map { |id| "<#{id}>" }.join(' ~')}]"
+          end
 
           def format_day(day)
             dayname = day.strftime('%A')
