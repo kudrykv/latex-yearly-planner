@@ -16,7 +16,7 @@ module LatexYearlyPlanner
       end
 
       def instantiate
-        constant.new(name:, page:, section_config: self)
+        constant.new(name:, page_constant:, section_config: self)
       end
 
       def params
@@ -24,10 +24,6 @@ module LatexYearlyPlanner
       end
 
       private
-
-      def page
-        page_constant.new(section_config: self)
-      end
 
       def constant
         "LatexYearlyPlanner::Planners::#{template}::Sections::#{camelized_name}".constantize

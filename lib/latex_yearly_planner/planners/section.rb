@@ -3,13 +3,13 @@
 module LatexYearlyPlanner
   module Planners
     class Section < Base
-      attr_reader :name, :page
+      attr_reader :name, :page_constant
 
-      def initialize(name:, page:, section_config:, i18n: I18n)
+      def initialize(name:, page_constant:, section_config:, i18n: I18n)
         super(section_config:, i18n:)
 
         @name = name
-        @page = page
+        @page_constant = page_constant
       end
 
       def enabled?
@@ -31,7 +31,7 @@ module LatexYearlyPlanner
       end
 
       def generate_page(...)
-        page.generate(...)
+        page_constant.new(section_config:, i18n:).set(...).generate
       end
 
       def pages_glue

@@ -5,7 +5,15 @@ module LatexYearlyPlanner
     module TypstMos
       module Pages
         class Title < Page
-          def generate(title)
+          attr_reader :title
+
+          def set(title)
+            @title = title
+
+            self
+          end
+
+          def generate
             <<~TYPST
               #block(
                 width: 100%,
