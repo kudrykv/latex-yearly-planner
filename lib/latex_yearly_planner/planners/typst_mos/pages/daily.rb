@@ -55,10 +55,10 @@ module LatexYearlyPlanner
                   ),
 
                   box(height: 5mm, width: 100%, stroke: (bottom: 1pt), align(horizon, [#{i18n.t('daily_notes')}])),
-                  box(height: #{params.get(:notes_height)}, width: 100%, rect_pattern(dotted)),
+                  box(height: #{params.get(:notes_height)}, width: 100%, rect_pattern(#{params.get(:pattern)})),
 
                   box(height: 5mm, width: 100%, stroke: (bottom: 1pt), align(horizon, [#{i18n.t('personal_notes')}])),
-                  box(height: #{params.get(:personal_notes_height)}, width: 100%, rect_pattern(dotted)),
+                  box(height: #{params.get(:personal_notes_height)}, width: 100%, rect_pattern(#{params.get(:pattern)})),
                 )
               )
             TYPST
