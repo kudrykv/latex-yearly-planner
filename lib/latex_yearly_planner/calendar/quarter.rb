@@ -11,6 +11,10 @@ module LatexYearlyPlanner
         @number = number
       end
 
+      def id
+        "Q#{year}-#{number}"
+      end
+
       def months
         @months ||= (0..2).map do |month_number|
           Month.new(weekday_start:, year:, month: ((number - 1) * 3) + month_number + 1)

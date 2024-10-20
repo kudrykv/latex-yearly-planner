@@ -14,7 +14,7 @@ module LatexYearlyPlanner
           end
 
           def row_stack(months)
-            "stack( dir: ltr, spacing: 1fr, #{months_row(months)})"
+            "stack(dir: ltr, spacing: 1fr, #{months_row(months)})"
           end
 
           def months_row(months)
