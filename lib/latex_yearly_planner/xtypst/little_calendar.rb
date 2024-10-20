@@ -68,7 +68,7 @@ module LatexYearlyPlanner
       end
 
       def week_row(week)
-        row = week.days.map { |day| "[#{day ? day.day : ''}]" }
+        row = week.days.map { |day| day ? "link(<#{day.id}>, [#{day.day}])" : '[]' }
         return row.join(', ') unless parameters[:with_week_numbers]
 
         link = "link(<#{week.id}>, [#{week.number}])"

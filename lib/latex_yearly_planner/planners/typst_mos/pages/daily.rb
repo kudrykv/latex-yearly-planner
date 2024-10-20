@@ -7,7 +7,7 @@ module LatexYearlyPlanner
         class Daily < Face
           def title(day)
             <<~TYPST
-              grid(
+              [#grid(
                 columns: 2,
                 rows: (1fr, 1fr),
                 inset: 2mm,
@@ -19,7 +19,7 @@ module LatexYearlyPlanner
                 ),
                 [*#{i18n.t("calendar.weekdays.full.#{day.name.downcase}")}*],
                 [#{i18n.t("calendar.month.#{day.month.name.downcase}")}]
-              )
+              )<#{day.id}>]
             TYPST
           end
 
