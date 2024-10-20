@@ -27,7 +27,7 @@ module LatexYearlyPlanner
             raise NotImplementedError
           end
 
-          def side_menu_quarters
+          def highlight_side_menu_quarters
             []
           end
 
@@ -145,7 +145,7 @@ module LatexYearlyPlanner
             params.quarters.map do |q|
               name = i18n.t('calendar.one_letter.quarter')
 
-              next "link(<#{q.id}>, [#{name}#{q.number}])" unless side_menu_quarters.include?(q)
+              next "link(<#{q.id}>, [#{name}#{q.number}])" unless highlight_side_menu_quarters.include?(q)
 
               "table.cell(fill: black, link(<#{q.id}>, text(white)[#{name}#{q.number}]))"
             end

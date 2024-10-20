@@ -26,7 +26,7 @@ module LatexYearlyPlanner
             QuarterlyContent.new(quarter:, section_config:, i18n:).to_typst
           end
 
-          def side_menu_quarters
+          def highlight_side_menu_quarters
             [quarter]
           end
 

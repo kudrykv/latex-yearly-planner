@@ -49,7 +49,7 @@ module LatexYearlyPlanner
             week.months.select { |month| params.months.include? month }
           end
 
-          def side_menu_quarters
+          def highlight_side_menu_quarters
             side_menu_months.map(&:quarter).uniq
           end
 
