@@ -92,10 +92,11 @@ planner:
     - daily:
         enabled: true
         parameters:
+          schedule_width: 4.5cm
           schedule_from_hour: 8
-          schedule_to_hour: 19
-          schedule_trailing_30min: true
-          enable_little_calendar: false
+          schedule_to_hour: 15
+          schedule_trailing_30min: false
+          enable_little_calendar: true
 
           gap_width: 2mm
           priorities_number: 5

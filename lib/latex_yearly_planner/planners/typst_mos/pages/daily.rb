@@ -18,15 +18,20 @@ module LatexYearlyPlanner
               [#grid(
                 columns: 2,
                 rows: (1fr, 1fr),
-                inset: 2mm,
+                inset: 0mm,
                 align: left,
                 grid.cell(
                   rowspan: 2,
                   stroke: (right: 0.4pt),
-                  text(#{params.get(:heading_size)})[#{day.day}]
+                  pad(right: 2mm, text(#{params.get(:heading_size)})[#{day.day}])
                 ),
-                [*#{i18n.t("calendar.weekdays.full.#{day.name.downcase}")}*, #{i18n.t("calendar.month.#{day.month.name.downcase}")}],
-                link(<#{day.week.id}>, [#{i18n.t('calendar.weekdays.full.week')} #{day.week.number}]),
+                pad(
+                  left: 2mm,
+                  bottom: 1mm,
+                  [*#{i18n.t("calendar.weekdays.full.#{day.name.downcase}")}*,
+                    #{i18n.t("calendar.month.#{day.month.name.downcase}")}]
+                ),
+                pad(left: 2mm, top: 1mm, link(<#{day.week.id}>, [#{i18n.t('calendar.weekdays.full.week')} #{day.week.number}])),
               )<#{day.id}>]
             TYPST
           end
@@ -34,7 +39,7 @@ module LatexYearlyPlanner
           def content
             <<~TYPST
               grid(
-                columns: (4.5cm, #{params.get(:gap_width)}, 1fr),
+                columns: (#{params.get(:schedule_width)}, #{params.get(:gap_width)}, 1fr),
                 stack(
                   dir: ttb,
                   spacing: 5mm,
@@ -83,7 +88,7 @@ module LatexYearlyPlanner
           end
 
           def maybe_little_calendar
-            return '' unless params.get(:enable_little_calenar)
+            return '' unless params.get(:enable_little_calendar)
 
             <<~TYPST
               #{Xtypst::LittleCalendar.new(day.month, i18n:, **params.object(:little_calendar)).to_typst},
