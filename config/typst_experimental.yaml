@@ -39,7 +39,7 @@ planner:
 
     heading:
       height: 10mm
-      inset: 3mm
+      bottom_pad: 3mm
 
     little_calendar:
       with_week_numbers: true

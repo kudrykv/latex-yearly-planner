@@ -14,7 +14,7 @@ module LatexYearlyPlanner
                   rowspan: 2,
                   pad(right: #{mosnav[:inset]}, #{side_menu_layout(...)})
                 ),
-                pad(bottom: #{heading[:inset]}, #{headerlike(...)}), #{content(...)}
+                pad(bottom: #{heading[:bottom_pad]}, #{headerlike(...)}), #{content(...)}
               )
             TYPST
           end
