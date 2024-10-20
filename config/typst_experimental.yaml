@@ -74,6 +74,7 @@ planner:
         parameters:
           months_width: 4.3cm
           gap_width: 5mm
+          reverse_columns: false
 
     - monthly:
         enabled: true

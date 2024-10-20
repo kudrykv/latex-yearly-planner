@@ -15,19 +15,7 @@ module LatexYearlyPlanner
           end
 
           def content(quarter)
-            months = quarter.months.map do |month|
-              Xtypst::LittleCalendar.new(month, **params.object(:little_calendar)).to_typst
-            end.join(', ')
-
-            <<~TYPST
-              grid(
-                columns: (#{params.get(:months_width)}, #{params.get(:gap_width)}, 1fr),
-                rows: 1fr,
-                vert_stack_bottom_outset(#{months}),
-                [],
-                rect_pattern(#{params.get(:pattern)})
-              )
-            TYPST
+            QuarterlyContent.new(quarter:, section_config:, i18n:).to_typst
           end
 
           def side_menu_quarters(quarter)
@@ -36,6 +24,50 @@ module LatexYearlyPlanner
 
           def top_menu_month(quarter)
             quarter.months.first
+          end
+
+          class QuarterlyContent < Base
+            attr_reader :quarter
+
+            def initialize(quarter:, section_config:, i18n:)
+              super(section_config:, i18n:)
+
+              @quarter = quarter
+            end
+
+            def to_typst
+              <<~TYPST
+                grid(
+                  columns: (#{columns}),
+                  rows: 1fr,
+                  #{columns_content}
+                )
+              TYPST
+            end
+
+            private
+
+            def columns
+              cols = [params.get(:months_width), params.get(:gap_width), '1fr']
+
+              cols.reverse! if params.get(:reverse_columns)
+
+              cols.join(', ')
+            end
+
+            def columns_content
+              cols = ["vert_stack_bottom_outset(#{months})", '[]', "rect_pattern(#{params.get(:pattern)})"]
+
+              cols.reverse! if params.get(:reverse_columns)
+
+              cols.join(', ')
+            end
+
+            def months
+              quarter.months.map do |month|
+                Xtypst::LittleCalendar.new(month, **params.object(:little_calendar)).to_typst
+              end.join(', ')
+            end
           end
         end
       end
