@@ -92,3 +92,9 @@ planner:
           schedule_to_hour: 19
           schedule_trailing_30min: true
           enable_little_calendar: false
+
+          gap_width: 2mm
+          priorities_number: 5
+
+          notes_height: 4.1cm
+          personal_notes_height: 100%

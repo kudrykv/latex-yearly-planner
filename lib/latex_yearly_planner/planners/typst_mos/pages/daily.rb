@@ -26,7 +26,7 @@ module LatexYearlyPlanner
           def content(day)
             <<~TYPST
               grid(
-                columns: (4.5cm, 2mm, 1fr),
+                columns: (4.5cm, #{params.get(:gap_width)}, 1fr),
                 stack(
                   dir: ttb,
                   spacing: 5mm,
@@ -43,7 +43,23 @@ module LatexYearlyPlanner
                   #{maybe_little_calendar}
                 ),
                 [],
-                [world]
+                stack(
+                  dir: ttb,
+                  spacing: 5mm,
+                  table(
+                    columns: 1fr,
+                    inset: 0mm,
+                    stroke: (_, _) => (bottom: 0.4pt + black),
+                    table.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [#{i18n.t('top_priorities')}]))),
+                    #{top_priorities}
+                  ),
+
+                  box(height: 5mm, width: 100%, stroke: (bottom: 1pt), align(horizon, [#{i18n.t('daily_notes')}])),
+                  box(height: #{params.get(:notes_height)}, width: 100%, rect_pattern(dotted)),
+
+                  box(height: 5mm, width: 100%, stroke: (bottom: 1pt), align(horizon, [#{i18n.t('personal_notes')}])),
+                  box(height: #{params.get(:personal_notes_height)}, width: 100%, rect_pattern(dotted)),
+                )
               )
             TYPST
           end
@@ -64,6 +80,10 @@ module LatexYearlyPlanner
             <<~TYPST
               #{Xtypst::LittleCalendar.new(day.month, i18n:, **params.object(:little_calendar)).to_typst},
             TYPST
+          end
+
+          def top_priorities
+            (['box(height: 5mm, align(horizon, [$square.stroked$]))'] * params.get(:priorities_number)).join(",\n")
           end
         end
       end
