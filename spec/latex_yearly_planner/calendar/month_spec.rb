@@ -9,6 +9,7 @@ Day = LatexYearlyPlanner::Calendar::Day
 RSpec.describe LatexYearlyPlanner::Calendar::Month do
   let(:month_number) { 9 }
   let(:year) { 2023 }
+  let(:date) { Date.new(year, month_number, 1).next_day(-1) }
   let(:weekday_start) { :monday }
 
   context 'when calling month methods' do
@@ -19,11 +20,11 @@ RSpec.describe LatexYearlyPlanner::Calendar::Month do
 
     let :weeks do
       [
-        Week.new(days: [nil, nil, nil, nil] + (1..3).map { |day| Day.new(year:, month: month_number, day:, weekday_start:) }, weekday_start:),
-        Week.new(days: (4..10).map { |day| Day.new(year:, month: month_number, day:, weekday_start:) }, weekday_start:),
-        Week.new(days: (11..17).map { |day| Day.new(year:, month: month_number, day:, weekday_start:) }, weekday_start:),
-        Week.new(days: (18..24).map { |day| Day.new(year:, month: month_number, day:, weekday_start:) }, weekday_start:),
-        Week.new(days: (25..30).map { |day| Day.new(year:, month: month_number, day:, weekday_start:) } + [nil], weekday_start:)
+        Week.new(days: [nil, nil, nil, nil] + (1..3).map { |day| Day.new(weekday_start:, moment: date.next_day(day)) }, weekday_start:),
+        Week.new(days: (4..10).map { |day| Day.new(weekday_start:, moment: date.next_day(day)) }, weekday_start:),
+        Week.new(days: (11..17).map { |day| Day.new(weekday_start:, moment: date.next_day(day)) }, weekday_start:),
+        Week.new(days: (18..24).map { |day| Day.new(weekday_start:, moment: date.next_day(day)) }, weekday_start:),
+        Week.new(days: (25..30).map { |day| Day.new(weekday_start:, moment: date.next_day(day)) } + [nil], weekday_start:)
       ]
     end
 
