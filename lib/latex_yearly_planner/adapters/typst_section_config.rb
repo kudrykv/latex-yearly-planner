@@ -26,7 +26,7 @@ module LatexYearlyPlanner
       private
 
       def page
-        page_constant.new(name:, section_config: self)
+        page_constant.new(section_config: self)
       end
 
       def constant

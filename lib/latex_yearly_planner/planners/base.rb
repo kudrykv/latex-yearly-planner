@@ -3,8 +3,6 @@
 module LatexYearlyPlanner
   module Planners
     class Base
-      include XTeX::Handy
-
       attr_reader :section_config, :i18n
 
       def initialize(section_config:, i18n: I18n)
@@ -14,10 +12,6 @@ module LatexYearlyPlanner
 
       def params
         section_config.params
-      end
-
-      def config
-        section_config.planner_config.config
       end
     end
   end
