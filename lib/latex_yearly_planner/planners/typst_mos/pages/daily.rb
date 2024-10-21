@@ -87,7 +87,7 @@ module LatexYearlyPlanner
           end
 
           def little_calendar
-            Xtypst::LittleCalendar.new(day.month, i18n:, **params.object(:little_calendar)).to_typst
+            Xtypst::LittleCalendar.new(day.month, highlight_day: day, i18n:, **params.object(:little_calendar)).to_typst
           end
 
           def top_priorities

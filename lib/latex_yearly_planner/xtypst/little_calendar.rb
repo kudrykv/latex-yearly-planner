@@ -8,7 +8,10 @@ module LatexYearlyPlanner
         week_number_placement: 'left',
         inset: '1.5mm',
         underline_weekdays: true,
-        sideline_week_numbers: true
+        sideline_week_numbers: true,
+        highlight_week: false,
+
+        highlight_day: nil
       }.freeze
 
       WEEKDAYS = %i[monday tuesday wednesday thursday friday saturday sunday].freeze
@@ -29,6 +32,7 @@ module LatexYearlyPlanner
             align: center,
             inset: #{parameters[:inset]},
             stroke: 0mm,
+            #{highlight_week}
             table.cell(colspan: #{number_of_columns})[#{i18n.t("calendar.month.#{month.name.downcase}")}],
             #{weekdays_row.join(', ')},
             #{weeks}
@@ -42,6 +46,15 @@ module LatexYearlyPlanner
         return 7 unless parameters[:with_week_numbers]
 
         8
+      end
+
+      def highlight_week
+        return '' unless parameters[:highlight_week]
+        return '' unless parameters[:highlight_day]
+
+        number = parameters[:highlight_day].week.number - month.weeks.first.number + 2
+
+        "fill: (_, y) => if y == #{number} { silver } else { white },"
       end
 
       def weekdays_row
@@ -68,7 +81,7 @@ module LatexYearlyPlanner
       end
 
       def week_row(week)
-        row = week.days.map { |day| day ? "link(<#{day.id}>, [#{day.day}])" : '[]' }
+        row = week.days.map(&method(:map_day))
         return row.join(', ') unless parameters[:with_week_numbers]
 
         link = "link(<#{week.id}>, [#{week.number}])"
@@ -77,6 +90,13 @@ module LatexYearlyPlanner
         row.push(link) if parameters[:week_number_placement] == 'right'
 
         row.join(', ')
+      end
+
+      def map_day(day)
+        return '[]' unless day
+        return "link(<#{day.id}>, [#{day.day}])" if parameters[:highlight_day] != day
+
+        "table.cell(fill: black, link(<#{day.id}>, text(white)[#{day.day}]))"
       end
     end
   end

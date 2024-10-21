@@ -49,6 +49,7 @@ planner:
       inset: 1.5mm
       underline_weekdays: true
       sideline_week_numbers: true
+      highlight_week: true
 
     large_calendar:
       with_week_numbers: true
@@ -94,7 +95,7 @@ planner:
         parameters:
           left_column_width: 4.5cm
 
-          left_column_items: [schedule]
+          left_column_items: [schedule, little_calendar]
           right_column_items: [top_priorities, notes, personal_notes]
 
           schedule_from_hour: 8
