@@ -92,11 +92,14 @@ planner:
     - daily:
         enabled: true
         parameters:
-          schedule_width: 4.5cm
+          left_column_width: 4.5cm
+
+          left_column_items: [schedule]
+          right_column_items: [top_priorities, notes, personal_notes]
+
           schedule_from_hour: 8
           schedule_to_hour: 15
           schedule_trailing_30min: false
-          enable_little_calendar: true
 
           gap_width: 2mm
           priorities_number: 5
