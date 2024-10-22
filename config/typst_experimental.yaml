@@ -95,7 +95,7 @@ planner:
         parameters:
           left_column_width: 4.5cm
 
-          left_column_items: [schedule, little_calendar]
+          left_column_items: [schedule]
           right_column_items: [top_priorities, notes, personal_notes]
 
           schedule_from_hour: 8
@@ -110,3 +110,14 @@ planner:
 
     - daily_notes:
         enabled: true
+
+    - daily_reflect:
+        enabled: true
+        parameters:
+          left_column_width: 1fr
+          gap_width: 2mm
+
+          left_column_items: [my_goals, my_best_thing]
+          right_column_items: [my_grateful]
+
+          with_daily_log: true

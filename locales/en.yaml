@@ -72,3 +72,11 @@ en:
   daily_notes: Notes
   more_daily_notes: More
   personal_notes: Personal
+
+  daily_reflect:
+    name: Reflect
+
+    goals: Goals
+    grateful: Things I'm grateful for
+    best_thing: Best thing that happened today
+    log: Daily log
