@@ -119,9 +119,20 @@ planner:
         enabled: true
         parameters:
           left_column_width: 1fr
-          gap_width: 2mm
+          gap_width: 5mm
 
           left_column_items: [my_goals, my_best_thing]
           right_column_items: [my_grateful]
+          bottom_merged: [my_daily_log]
 
-          with_daily_log: true
+          my_goals:
+            height: 2.5cm
+
+          my_best_thing:
+            height: 2cm
+
+          my_grateful:
+            height: 5.5cm
+
+          my_daily_log:
+            height: 100%

@@ -40,21 +40,68 @@ module LatexYearlyPlanner
             <<~TYPST
               grid(
                 columns: (#{params.get(:left_column_width)}, #{params.get(:gap_width)}, 1fr),
-                #{left_column},
+                rows: (auto, 1fr),
+                #{column(:left_column_items)},
                 [],
-                #{right_column}
+                #{column(:right_column_items)},
+
+                grid.cell(colspan: 3, #{column(:bottom_merged)})
               )
             TYPST
           end
 
           private
 
-          def left_column
-            '[hello]'
+          def column(column_items)
+            "stack(dir: ttb, #{run_methods_of(column_items)})"
           end
 
-          def right_column
-            '[world]'
+          def run_methods_of(column_items)
+            params.get(column_items).map(&method(:send)).join(",\n")
+          end
+
+          def my_goals
+            <<~TYPST
+              stack(
+                dir: ttb,
+                spacing: 5mm,
+                box(height: 5mm, width: 100%, stroke: (bottom: 1pt), align(horizon, [#{i18n.t('daily_reflect.goals')}])),
+                box(height: #{params.get(:my_goals, :height)}, width: 100%, rect_pattern(#{params.get(:pattern)})),
+              )
+            TYPST
+          end
+
+          def my_best_thing
+            <<~TYPST
+              stack(
+                dir: ttb,
+                spacing: 5mm,
+                box(height: 5mm, width: 100%, stroke: (bottom: 1pt), align(horizon, [#{i18n.t('daily_reflect.best_thing')}])),
+                box(height: #{params.get(:my_best_thing, :height)}, width: 100%, rect_pattern(#{params.get(:pattern)})),
+              )
+            TYPST
+          end
+
+          def my_grateful
+            <<~TYPST
+              stack(
+                dir: ttb,
+                spacing: 5mm,
+                box(height: 5mm, width: 100%, stroke: (bottom: 1pt), align(horizon, [#{i18n.t('daily_reflect.grateful')}])),
+                box(height: #{params.get(:my_grateful, :height)}, width: 100%, rect_pattern(#{params.get(:pattern)})),
+              )
+            TYPST
+          end
+
+          def my_daily_log
+            <<~TYPST
+              stack(
+                dir: ttb,
+                spacing: 5mm,
+                box(height: 5mm, width: 100%, stroke: (bottom: 1pt), align(horizon, [#{i18n.t('daily_reflect.log')}])),
+                box(height: #{params.get(:my_daily_log, :height)}, width: 100%, rect_pattern(#{params.get(:pattern)})),
+              )
+            TYPST
           end
         end
       end
