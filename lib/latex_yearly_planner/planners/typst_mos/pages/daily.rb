@@ -111,10 +111,16 @@ module LatexYearlyPlanner
               stack(
                 dir: ttb,
                 spacing: 5mm,
-                box(height: 5mm, width: 100%, stroke: (bottom: 1pt), align(horizon, [#{i18n.t('daily_notes')}])),
+                box(height: 5mm, width: 100%, stroke: (bottom: 1pt), align(horizon, [#{i18n.t('daily_notes')}#{more_daily_notes}])),
                 box(height: #{params.get(:notes_height)}, width: 100%, rect_pattern(#{params.get(:pattern)})),
               )
             TYPST
+          end
+
+          def more_daily_notes
+            return '' unless params.section_enabled?(:daily_notes)
+
+            " #h(1fr) #link(<mdn-#{day.id}>, [#{i18n.t('more_daily_notes')}])"
           end
 
           def personal_notes

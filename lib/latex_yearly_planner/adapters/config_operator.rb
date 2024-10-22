@@ -42,6 +42,10 @@ module LatexYearlyPlanner
         @days ||= start_date.upto(end_date.end_of_month).map { |day| Calendar::Day.new(moment: day, weekday_start:) }
       end
 
+      def section_enabled?(section_name)
+        planner_config.sections.find { |s| s.name == section_name }&.enabled? || false
+      end
+
       private
 
       def start_date
