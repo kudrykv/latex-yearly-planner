@@ -52,6 +52,21 @@
   )
 }
 
+#let jot(pattern, height, name) = {
+  stack(
+    dir: ttb,
+    spacing: 5mm,
+    box(
+      height: 5mm, width: 100%, stroke: (bottom: 1pt),
+      align(horizon, name)
+    ),
+    box(
+      height: height,
+      width: 100%, rect_pattern(pattern)
+    )
+  )
+}
+
 <% text_documents.each do |doc| %>
 <%= doc.content %>
 <% end %>

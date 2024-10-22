@@ -61,47 +61,19 @@ module LatexYearlyPlanner
           end
 
           def my_goals
-            <<~TYPST
-              stack(
-                dir: ttb,
-                spacing: 5mm,
-                box(height: 5mm, width: 100%, stroke: (bottom: 1pt), align(horizon, [#{i18n.t('daily_reflect.goals')}])),
-                box(height: #{params.get(:my_goals, :height)}, width: 100%, rect_pattern(#{params.get(:pattern)})),
-              )
-            TYPST
+            "jot(#{params.get(:pattern)}, #{params.get(:my_goals, :height)}, [#{i18n.t('daily_reflect.goals')}])"
           end
 
           def my_best_thing
-            <<~TYPST
-              stack(
-                dir: ttb,
-                spacing: 5mm,
-                box(height: 5mm, width: 100%, stroke: (bottom: 1pt), align(horizon, [#{i18n.t('daily_reflect.best_thing')}])),
-                box(height: #{params.get(:my_best_thing, :height)}, width: 100%, rect_pattern(#{params.get(:pattern)})),
-              )
-            TYPST
+            "jot(#{params.get(:pattern)}, #{params.get(:my_best_thing, :height)}, [#{i18n.t('daily_reflect.best_thing')}])"
           end
 
           def my_grateful
-            <<~TYPST
-              stack(
-                dir: ttb,
-                spacing: 5mm,
-                box(height: 5mm, width: 100%, stroke: (bottom: 1pt), align(horizon, [#{i18n.t('daily_reflect.grateful')}])),
-                box(height: #{params.get(:my_grateful, :height)}, width: 100%, rect_pattern(#{params.get(:pattern)})),
-              )
-            TYPST
+            "jot(#{params.get(:pattern)}, #{params.get(:my_grateful, :height)}, [#{i18n.t('daily_reflect.grateful')}])"
           end
 
           def my_daily_log
-            <<~TYPST
-              stack(
-                dir: ttb,
-                spacing: 5mm,
-                box(height: 5mm, width: 100%, stroke: (bottom: 1pt), align(horizon, [#{i18n.t('daily_reflect.log')}])),
-                box(height: #{params.get(:my_daily_log, :height)}, width: 100%, rect_pattern(#{params.get(:pattern)})),
-              )
-            TYPST
+            "jot(#{params.get(:pattern)}, #{params.get(:my_daily_log, :height)}, [#{i18n.t('daily_reflect.daily_log')}])"
           end
         end
       end
