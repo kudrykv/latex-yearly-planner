@@ -73,7 +73,7 @@ module LatexYearlyPlanner
           end
 
           def my_daily_log
-            "jot(#{params.get(:pattern)}, #{params.get(:my_daily_log, :height)}, [#{i18n.t('daily_reflect.daily_log')}])"
+            "jot(#{params.get(:pattern)}, #{params.get(:my_daily_log, :height)}, [#{i18n.t('daily_reflect.log')}])"
           end
         end
       end
