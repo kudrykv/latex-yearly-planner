@@ -51,13 +51,13 @@ module LatexYearlyPlanner
 
           def left_column
             <<~TYPST
-              stack(dir: ttb, spacing: 5mm, #{run_methods_of(:left_column_items)})
+              stack(dir: ttb, #{run_methods_of(:left_column_items)})
             TYPST
           end
 
           def right_column
             <<~TYPST
-              stack(dir: ttb, spacing: 5mm, #{run_methods_of(:right_column_items)})
+              stack(dir: ttb, #{run_methods_of(:right_column_items)})
             TYPST
           end
 
@@ -92,13 +92,13 @@ module LatexYearlyPlanner
 
           def top_priorities
             <<~TYPST
-              table(
+              pad(bottom: 5mm, table(
                 columns: 1fr,
                 inset: 0mm,
                 stroke: (_, _) => (bottom: 0.4pt + black),
                 table.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [#{i18n.t('top_priorities')}]))),
                 #{top_priorities_lines}
-              )
+              ))
             TYPST
           end
 
