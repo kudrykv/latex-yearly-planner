@@ -3,6 +3,10 @@ version: '0.1'
 template: typst_mos
 locale: en
 
+compiler:
+  ghostscript:
+    enable: false
+
 document:
   layout:
     dimensions:
