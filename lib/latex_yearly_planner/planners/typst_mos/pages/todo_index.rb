@@ -31,7 +31,20 @@ module LatexYearlyPlanner
             TYPST
           end
 
+          def extra_menu_items
+            (1..pages).map do |page|
+              next "[#{i18n.t('todo.menu_index')}]" if pages == 1
+              next "black_table_cell(text(white)[#{i18n.t('todo.menu_index')} #{page}])" if page == page_number
+
+              "link(<ti-#{page}>, [#{i18n.t('todo.menu_index')} #{page}])"
+            end
+          end
+
           private
+
+          def pages
+            params.get(:pages)
+          end
 
           def columns
             @columns ||= params.get(:columns)

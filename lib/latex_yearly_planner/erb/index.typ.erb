@@ -67,6 +67,8 @@
   )
 }
 
+#let black_table_cell(text) = table.cell( fill: black, text)
+
 <% text_documents.each do |doc| %>
 <%= doc.content %>
 <% end %>
