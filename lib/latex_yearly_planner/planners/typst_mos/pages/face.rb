@@ -63,6 +63,8 @@ module LatexYearlyPlanner
           end
 
           def menu_items_layout
+            return '[]' if menu_items_content.empty?
+
             <<~TYPST
               table(
                   stroke: (x, y) => (left: 0.4pt, right: 0.4pt),
@@ -77,7 +79,7 @@ module LatexYearlyPlanner
           def menu_items_content
             @menu_items_content ||= begin
               if heading[:put_extra_items] == 'left'
-                extra_menu_items.concat([annual_menu_item]).compact
+                extra_menu_items.push(annual_menu_item).compact
               else
                 [annual_menu_item].concat(extra_menu_items).compact
               end

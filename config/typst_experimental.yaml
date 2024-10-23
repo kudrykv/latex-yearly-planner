@@ -72,7 +72,7 @@ planner:
           font_size: 48pt
 
     - annual:
-        enabled: true
+        enabled: false
         parameters:
           months_per_page: 6
           months_per_row: 2
