@@ -50,9 +50,20 @@ module LatexYearlyPlanner
           end
 
           def table_rows
-            ((offset + 1)..(items_on_page + offset)).each_slice(rows).to_a.transpose.map do |row|
-              row.map { |item| "box(height: #{params.get(:cell_height)}, width: 100%, stroke: (bottom: 0.4pt + gray), align(horizon, [#{item}.]))" }.join(', [], ')
-            end.join(",\n")
+            ((offset + 1)..(items_on_page + offset)).each_slice(rows).to_a.transpose.map(&method(:table_row)).join(",\n")
+          end
+
+          def table_row(row)
+            row.map do |item|
+              <<~TYPST
+                box(
+                  height: #{params.get(:cell_height)},
+                  width: 100%,
+                  stroke: (bottom: 0.4pt + gray),
+                  align(horizon, [#{item}.])
+                )
+              TYPST
+            end.join(', [], ')
           end
 
           def gap_width
