@@ -5,7 +5,7 @@ locale: en
 
 compiler:
   ghostscript:
-    enable: true
+    enable: false
 
 document:
   layout:
@@ -55,7 +55,7 @@ planner:
       underline_weekdays: true
       sideline_week_numbers: true
       highlight_week: true
-      link_to_week: true
+      link_to_week: false
 
     large_calendar:
       with_week_numbers: true
@@ -64,17 +64,17 @@ planner:
       heading_height: 6mm
       week_row_height: 20mm
       week_cell_rotate: 90deg
-      link_to_week: true
+      link_to_week: false
 
   sections:
     - title:
-        enabled: true
+        enabled: false
         parameters:
           name: 2024
           font_size: 48pt
 
     - annual:
-        enabled: true
+        enabled: false
         parameters:
           months_per_page: 6
           months_per_row: 2
@@ -92,7 +92,7 @@ planner:
           gap_width: 5mm
 
     - weekly:
-        enabled: true
+        enabled: false
         parameters:
           first_row_height: 8mm
           rest_row_height: 9mm
@@ -102,7 +102,7 @@ planner:
         parameters:
           left_column_width: 4.5cm
 
-          left_column_items: [schedule, little_calendar]
+          left_column_items: [schedule]
           right_column_items: [top_priorities, notes, personal_notes]
 
           schedule_from_hour: 8
@@ -116,10 +116,10 @@ planner:
           personal_notes_height: 100%
 
     - daily_notes:
-        enabled: true
+        enabled: false
 
     - daily_reflect:
-        enabled: true
+        enabled: false
         parameters:
           left_column_width: 1fr
           gap_width: 5mm
@@ -139,3 +139,12 @@ planner:
 
           my_daily_log:
             height: 100%
+
+    - todo_index:
+        enabled: true
+        parameters:
+          pages: 2
+          columns: 2
+          rows: 19
+          gap_width: 2mm
+          cell_height: 7mm

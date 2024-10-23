@@ -80,3 +80,6 @@ en:
     grateful: Things I'm grateful for
     best_thing: Best thing that happened today
     log: Daily log
+
+  todo:
+    index: Todo index
