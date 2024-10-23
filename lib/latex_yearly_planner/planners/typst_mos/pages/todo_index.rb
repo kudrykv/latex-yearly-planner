@@ -40,6 +40,10 @@ module LatexYearlyPlanner
             end
           end
 
+          def hide_todo?
+            true
+          end
+
           private
 
           def pages

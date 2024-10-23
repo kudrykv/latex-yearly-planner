@@ -47,6 +47,10 @@ module LatexYearlyPlanner
             false
           end
 
+          def hide_todo?
+            false
+          end
+
           private
 
           def header_layout
@@ -79,15 +83,15 @@ module LatexYearlyPlanner
           def menu_items_content
             @menu_items_content ||= begin
               if heading[:put_extra_items] == 'left'
-                extra_menu_items.push(annual_menu_item).compact
+                extra_menu_items.push(annual_menu_item, todo_menu_item).compact
               else
-                [annual_menu_item].concat(extra_menu_items).compact
+                [annual_menu_item, todo_menu_item].concat(extra_menu_items).compact
               end
             end
           end
 
           def annual_menu_item
-            return nil if !annual_section || !annual_section.enabled?
+            return nil unless params.section_enabled?(:annual)
 
             name = i18n.t('menu_calendar')
 
@@ -97,8 +101,13 @@ module LatexYearlyPlanner
             "link(<annual-1>, [#{name}])"
           end
 
-          def annual_section
-            @annual_section ||= params.planner_config.sections.find { |section| section.name == :annual }
+          def todo_menu_item
+            return nil unless params.section_enabled?(:todo_index)
+            return nil if hide_todo?
+
+            name = i18n.t('todo.menu_index')
+
+            "link(<ti-1>, [#{name}])"
           end
 
           def annual_page_number(first_month)
