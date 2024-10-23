@@ -9,7 +9,8 @@ module LatexYearlyPlanner
         weekday_names: 'full',
         heading_height: '6mm',
         week_row_height: '1cm',
-        week_cell_rotate: '90deg'
+        week_cell_rotate: '90deg',
+        link_to_week: true
       }.freeze
 
       WEEKDAYS = %i[monday tuesday wednesday thursday friday saturday sunday].freeze
@@ -86,12 +87,15 @@ module LatexYearlyPlanner
       end
 
       def rotate_week(week)
+        label = "[#{i18n.t('calendar.weekdays.full.week')} #{week.number}]"
+        label = "#link(<#{week.id}>, #{label})" if parameters[:link_to_week]
+
         <<~TYPST
           rotate(
             #{parameters[:week_cell_rotate]},
             origin: center + horizon,
             reflow: true,
-            [#h(1fr) #link(label("#{week.id}"), [#{i18n.t('calendar.weekdays.full.week')} #{week.number}]) #h(1fr)]
+            [#h(1fr) #{label} #h(1fr)]
           )
         TYPST
       end

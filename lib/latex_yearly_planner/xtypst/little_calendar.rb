@@ -10,6 +10,7 @@ module LatexYearlyPlanner
         underline_weekdays: true,
         sideline_week_numbers: true,
         highlight_week: false,
+        link_to_week: true,
 
         highlight_day: nil
       }.freeze
@@ -83,6 +84,7 @@ module LatexYearlyPlanner
       def week_row(week)
         row = week.days.map(&method(:map_day))
         return row.join(', ') unless parameters[:with_week_numbers]
+        return "[#{week.number}]" unless parameters[:link_to_week]
 
         link = "link(<#{week.id}>, [#{week.number}])"
 

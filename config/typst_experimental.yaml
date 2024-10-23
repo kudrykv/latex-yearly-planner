@@ -55,6 +55,7 @@ planner:
       underline_weekdays: true
       sideline_week_numbers: true
       highlight_week: true
+      link_to_week: false
 
     large_calendar:
       with_week_numbers: true
@@ -63,6 +64,7 @@ planner:
       heading_height: 6mm
       week_row_height: 20mm
       week_cell_rotate: 90deg
+      link_to_week: false
 
   sections:
     - title:
@@ -72,7 +74,7 @@ planner:
           font_size: 48pt
 
     - annual:
-        enabled: false
+        enabled: true
         parameters:
           months_per_page: 6
           months_per_row: 2
@@ -90,7 +92,7 @@ planner:
           gap_width: 5mm
 
     - weekly:
-        enabled: true
+        enabled: false
         parameters:
           first_row_height: 8mm
           rest_row_height: 9mm

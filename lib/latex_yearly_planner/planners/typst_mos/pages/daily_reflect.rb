@@ -50,6 +50,8 @@ module LatexYearlyPlanner
           end
 
           def extra_menu_items
+            return [] unless params.section_enabled?(:weekly)
+
             ["link(<#{day.week.id}>, [#{i18n.t('calendar.weekdays.full.week')} #{day.week.number}])"]
           end
 
