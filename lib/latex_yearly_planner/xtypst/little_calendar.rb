@@ -84,12 +84,12 @@ module LatexYearlyPlanner
       def week_row(week)
         row = week.days.map(&method(:map_day))
         return row.join(', ') unless parameters[:with_week_numbers]
-        return "[#{week.number}]" unless parameters[:link_to_week]
 
-        link = "link(<#{week.id}>, [#{week.number}])"
+        week_label = "[#{week.number}]"
+        week_label = "link(<#{week.id}>, #{week_label})" if parameters[:link_to_week]
 
-        row.unshift(link) if parameters[:week_number_placement] == 'left'
-        row.push(link) if parameters[:week_number_placement] == 'right'
+        row.unshift(week_label) if parameters[:week_number_placement] == 'left'
+        row.push(week_label) if parameters[:week_number_placement] == 'right'
 
         row.join(', ')
       end
