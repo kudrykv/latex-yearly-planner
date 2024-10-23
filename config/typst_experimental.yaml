@@ -5,7 +5,7 @@ locale: en
 
 compiler:
   ghostscript:
-    enable: false
+    enable: true
 
 document:
   layout:
@@ -55,7 +55,7 @@ planner:
       underline_weekdays: true
       sideline_week_numbers: true
       highlight_week: true
-      link_to_week: false
+      link_to_week: true
 
     large_calendar:
       with_week_numbers: true
@@ -64,7 +64,7 @@ planner:
       heading_height: 6mm
       week_row_height: 20mm
       week_cell_rotate: 90deg
-      link_to_week: false
+      link_to_week: true
 
   sections:
     - title:
@@ -92,7 +92,7 @@ planner:
           gap_width: 5mm
 
     - weekly:
-        enabled: false
+        enabled: true
         parameters:
           first_row_height: 8mm
           rest_row_height: 9mm
@@ -102,7 +102,7 @@ planner:
         parameters:
           left_column_width: 4.5cm
 
-          left_column_items: [schedule]
+          left_column_items: [schedule, little_calendar]
           right_column_items: [top_priorities, notes, personal_notes]
 
           schedule_from_hour: 8
@@ -116,7 +116,7 @@ planner:
           personal_notes_height: 100%
 
     - daily_notes:
-        enabled: false
+        enabled: true
 
     - daily_reflect:
         enabled: true

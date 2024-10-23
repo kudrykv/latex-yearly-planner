@@ -87,8 +87,8 @@ module LatexYearlyPlanner
       end
 
       def rotate_week(week)
-        label = "[#{i18n.t('calendar.weekdays.full.week')} #{week.number}]"
-        label = "#link(<#{week.id}>, #{label})" if parameters[:link_to_week]
+        label = "#{i18n.t('calendar.weekdays.full.week')} #{week.number}"
+        label = "#link(<#{week.id}>, [#{label}])" if parameters[:link_to_week]
 
         <<~TYPST
           rotate(
