@@ -28,10 +28,9 @@ module LatexYearlyPlanner
                 pad(
                   left: 2mm,
                   bottom: 1mm,
-                  [*#{i18n.t("calendar.weekdays.full.#{day.name.downcase}")}*,
-                    #{i18n.t("calendar.month.#{day.month.name.downcase}")}]
+                  [*#{i18n.t("calendar.weekdays.full.#{day.name.downcase}")}*]
                 ),
-                pad(left: 2mm, top: 1mm, link(<#{day.week.id}>, [#{i18n.t('calendar.weekdays.full.week')} #{day.week.number}])),
+                pad(left: 2mm, top: 1mm, [#{i18n.t("calendar.month.#{day.month.name.downcase}")}]),
               )<#{day.id}>]
             TYPST
           end
@@ -45,6 +44,10 @@ module LatexYearlyPlanner
                 #{right_column}
               )
             TYPST
+          end
+
+          def extra_menu_items
+            ["link(<#{day.week.id}>, [#{i18n.t('calendar.weekdays.full.week')} #{day.week.number}])"]
           end
 
           private

@@ -39,6 +39,10 @@ module LatexYearlyPlanner
             nil
           end
 
+          def extra_menu_items
+            []
+          end
+
           def highlight_calendar?
             false
           end
@@ -71,7 +75,13 @@ module LatexYearlyPlanner
           end
 
           def menu_items_content
-            @menu_items_content ||= [annual_menu_item].compact
+            @menu_items_content ||= begin
+              if heading[:put_extra_items] == 'left'
+                extra_menu_items.concat([annual_menu_item]).compact
+              else
+                [annual_menu_item].concat(extra_menu_items).compact
+              end
+            end
           end
 
           def annual_menu_item

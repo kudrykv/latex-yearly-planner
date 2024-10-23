@@ -46,6 +46,7 @@ planner:
     heading:
       height: 10mm
       bottom_pad: 3mm
+      put_extra_items: left
 
     little_calendar:
       with_week_numbers: true
@@ -109,11 +110,11 @@ planner:
           gap_width: 2mm
           priorities_number: 5
 
-          notes_height: 4.1cm
+          notes_height: 4cm
           personal_notes_height: 100%
 
     - daily_notes:
-        enabled: true
+        enabled: false
 
     - daily_reflect:
         enabled: true
