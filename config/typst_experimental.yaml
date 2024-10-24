@@ -158,3 +158,15 @@ planner:
 
             items_in_group: 6
             todo_height: 7mm
+
+    - notes_index:
+        enabled: true
+        parameters:
+          pages: 2
+          columns: 2
+          rows: 19
+          gap_width: 2mm
+          cell_height: 7mm
+
+    - notes_pages:
+        enabled: true

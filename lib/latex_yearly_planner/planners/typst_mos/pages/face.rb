@@ -51,6 +51,10 @@ module LatexYearlyPlanner
             false
           end
 
+          def hide_notes?
+            false
+          end
+
           private
 
           def header_layout
@@ -83,9 +87,9 @@ module LatexYearlyPlanner
           def menu_items_content
             @menu_items_content ||= begin
               if heading[:put_extra_items] == 'left'
-                extra_menu_items.push(annual_menu_item, todo_menu_item).compact
+                extra_menu_items.push(annual_menu_item, todo_menu_item, note_menu_item).compact
               else
-                [annual_menu_item, todo_menu_item].concat(extra_menu_items).compact
+                [annual_menu_item, todo_menu_item, note_menu_item].concat(extra_menu_items).compact
               end
             end
           end
@@ -108,6 +112,15 @@ module LatexYearlyPlanner
             name = i18n.t('todo.menu_index')
 
             "link(<ti-1>, [#{name}])"
+          end
+
+          def note_menu_item
+            return nil unless params.section_enabled?(:notes_index)
+            return nil if hide_notes?
+
+            name = i18n.t('notes.menu_index')
+
+            "link(<ni-1>, [#{name}])"
           end
 
           def annual_page_number(first_month)

@@ -85,3 +85,8 @@ en:
     index: Todo index
     menu_index: Todo
     single_page: Todo
+
+  notes:
+    index: Notes index
+    menu_index: Notes
+    single_page: Notes
