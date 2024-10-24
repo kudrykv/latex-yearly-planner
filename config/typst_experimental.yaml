@@ -148,3 +148,13 @@ planner:
           rows: 19
           gap_width: 2mm
           cell_height: 7mm
+
+    - todo_pages:
+        enabled: true
+        parameters:
+            columns: 2
+            rows: 3
+            gap_width: 2mm
+
+            items_in_group: 6
+            todo_height: 7mm

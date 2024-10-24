@@ -77,7 +77,7 @@ module LatexYearlyPlanner
                   height: #{params.get(:cell_height)},
                   width: 100%,
                   stroke: (bottom: 0.4pt + gray),
-                  align(horizon, [#{item}.])
+                  align(horizon, link(<tp-#{item}>, [#{item}.]))
                 )
               TYPST
             end.join(', [], ')

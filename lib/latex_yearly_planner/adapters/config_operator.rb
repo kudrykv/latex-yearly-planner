@@ -46,6 +46,14 @@ module LatexYearlyPlanner
         planner_config.sections.find { |s| s.name == section_name }&.enabled? || false
       end
 
+      def section!(section_name)
+        @section ||= planner_config.sections.find { |s| s.name == section_name }
+
+        raise DevelopmentError, "Section #{section_name} not found" if @section == nil
+
+        @section
+      end
+
       private
 
       def start_date
