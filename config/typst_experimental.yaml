@@ -49,7 +49,6 @@ planner:
       month_width: 1fr
 
     heading:
-      height: 10mm
       bottom_pad: 3mm
       put_extra_items: left
 
@@ -107,7 +106,7 @@ planner:
         parameters:
           left_column_width: 4.5cm
 
-          left_column_items: [ schedule, little_calendar ]
+          left_column_items: [ schedule ]
           right_column_items: [ top_priorities, notes, personal_notes ]
 
           schedule_from_hour: 8
@@ -121,10 +120,10 @@ planner:
           personal_notes_height: 100%
 
     - daily_notes:
-        enabled: true
+        enabled: false
 
     - daily_reflect:
-        enabled: true
+        enabled: false
         parameters:
           left_column_width: 1fr
           gap_width: 5mm

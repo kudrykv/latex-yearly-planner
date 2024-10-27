@@ -9,6 +9,13 @@ module LatexYearlyPlanner
             side_menu_object.highlight_side_menu_quarters = highlight_side_menu_quarters
             side_menu_object.highlight_side_menu_months = highlight_side_menu_months
 
+            top_menu_object.title = title
+            top_menu_object.top_menu_month = top_menu_month
+            top_menu_object.extra_menu_items = extra_menu_items
+            top_menu_object.highlight_calendar = highlight_calendar?
+            top_menu_object.hide_todo = hide_todo?
+            top_menu_object.hide_notes = hide_notes?
+
             <<~TYPST
               #grid(
                 columns: (#{heading_columns}),
@@ -163,10 +170,7 @@ module LatexYearlyPlanner
           end
 
           def heading_content
-            row = [
-              "grid.cell(rowspan: 2, #{side_menu_object.to_typst})",
-              "pad(bottom: #{heading[:bottom_pad]}, #{header_layout})"
-            ]
+            row = ["grid.cell(rowspan: 2, #{side_menu_object.to_typst})", top_menu_object.to_typst]
             row.reverse! if mos_layout[:side_menu] == 'right'
 
             row.join(', ')
@@ -182,6 +186,10 @@ module LatexYearlyPlanner
 
           def side_menu_object
             @side_menu_object ||= SideMenu.new(section_config:, i18n:)
+          end
+
+          def top_menu_object
+            @top_menu_object ||= TopMenu.new(section_config:, i18n:)
           end
 
           class SideMenu < Page
@@ -262,6 +270,110 @@ module LatexYearlyPlanner
 
             def mosnav
               params.object(:mos_nav)
+            end
+          end
+
+          class TopMenu < Page
+            attr_accessor :title, :extra_menu_items,
+                          :top_menu_month,
+                          :highlight_calendar, :hide_todo, :hide_notes
+
+            alias highlight_calendar? highlight_calendar
+            alias hide_todo? hide_todo
+            alias hide_notes? hide_notes
+
+            def initialize(section_config:, i18n: I18n)
+              super
+
+              @extra_menu_items = []
+            end
+
+            def to_typst
+              "pad(bottom: #{heading[:bottom_pad]}, #{header_layout})"
+            end
+
+            private
+
+            def header_layout
+              <<~TYPST
+                table(
+                  columns: (auto, 1fr, auto),
+                  rows: 1fr,
+                  align: horizon + center,
+                  inset: 0mm,
+                  stroke: 0mm,
+                  #{title}, [], #{menu_items_layout}
+                )
+              TYPST
+            end
+
+            def menu_items_layout
+              return '[]' if menu_items_content.empty?
+
+              <<~TYPST
+                table(
+                  stroke: (x, y) => (left: 0.4pt, right: 0.4pt),
+                  columns: #{menu_items_content.size},
+                  rows: 1fr,
+                  align: horizon + center,
+                  #{menu_items_content.join(', ')}
+                )
+              TYPST
+            end
+
+            def menu_items_content
+              @menu_items_content ||= if heading[:put_extra_items] == 'left'
+                extra_menu_items
+                  .push(annual_menu_item, todo_menu_item, note_menu_item)
+                  .compact
+              else
+                [annual_menu_item, todo_menu_item, note_menu_item]
+                  .concat(extra_menu_items)
+                  .compact
+              end
+            end
+
+            def annual_menu_item
+              return nil unless params.section_enabled?(:annual)
+
+              name = i18n.t('menu_calendar')
+
+              return "link(<annual-#{annual_page_number(top_menu_month)}>, [#{name}])" if top_menu_month
+              return "table.cell(fill: black, link(<annual-1>, text(white)[#{name}]))" if highlight_calendar?
+
+              "link(<annual-1>, [#{name}])"
+            end
+
+            def annual_page_number(first_month)
+              annual_params = params.planner_config.sections
+                                    .find { |section| section.name == :annual }
+                                    .params
+              months_per_page = annual_params.get(:months_per_page)
+
+              (annual_params.months.find_index(first_month) / months_per_page) + 1
+            end
+
+
+            def todo_menu_item
+              return nil unless params.section_enabled?(:todo_index)
+              return nil if hide_todo?
+
+              name = i18n.t('todo.menu_index')
+
+              "link(<ti-1>, [#{name}])"
+            end
+
+            def note_menu_item
+              return nil unless params.section_enabled?(:notes_index)
+              return nil if hide_notes?
+
+              name = i18n.t('notes.menu_index')
+
+              "link(<ni-1>, [#{name}])"
+            end
+
+            def heading
+              params.object(:heading)
             end
           end
         end
