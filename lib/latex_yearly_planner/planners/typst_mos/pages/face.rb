@@ -12,7 +12,7 @@ module LatexYearlyPlanner
             <<~TYPST
               #grid(
                 columns: (#{heading_columns}),
-                rows: (#{heading[:height]}, 1fr),
+                rows: (#{mos_layout[:heading_height]}, 1fr),
                 #{heading_content},
                 #{content}
               )

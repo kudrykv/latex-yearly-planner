@@ -36,10 +36,12 @@ planner:
   objects:
     mos_layout:
       side_menu: left
+      mos_nav_width: 10mm
+      heading_height: 10mm
 
     mos_nav:
-      width: 10mm
-      side_pad: 2mm
+      left_pad: 0mm
+      right_pad: 2mm
       rotate: 90deg
       reverse_array_internals: false
       reverse_arrays: false
