@@ -35,7 +35,6 @@ Check out existing configs in `config` directory.
 2. Typst compiles the file to PDF.
 3. (Optional) Ghostscript is used to compress the PDF.
 
----
 
 [1]: https://www.ruby-lang.org/
 [2]: https://typst.app/
