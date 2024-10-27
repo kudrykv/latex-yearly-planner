@@ -1,0 +1,176 @@
+version: '0.1'
+
+template: typst_mos
+locale: en
+
+compiler:
+  ghostscript:
+    enable: true
+
+document:
+  layout:
+    dimensions:
+      width: 119mm
+      height: 158mm
+
+    margin:
+      top: 10mm
+      bottom: 0mm
+      left: 5mm
+      right: 0mm
+
+  text:
+    size: 10pt
+
+planner:
+  parameters:
+    time_format: 24
+
+    start_date: 2024, January
+    end_date: 2024, December
+    weekday_start: Monday
+
+    heading_size: 16pt
+    pattern: dotted
+
+  objects:
+    mos_layout:
+      side_menu: right
+      mos_nav_width: 10mm
+      heading_height: 10mm
+
+    mos_nav:
+      left_pad: 2mm
+      right_pad: 0mm
+      rotate: 90deg
+      reverse_array_internals: false
+      reverse_arrays: false
+      quarter_width: 1.1fr
+      month_width: 1fr
+
+    heading:
+      bottom_pad: 3mm
+      put_extra_items: left
+
+    little_calendar:
+      with_week_numbers: true
+      week_number_placement: left
+      inset: 1.5mm
+      underline_weekdays: true
+      sideline_week_numbers: true
+      highlight_week: true
+      link_to_week: true
+
+    large_calendar:
+      with_week_numbers: true
+      week_number_placement: right
+      weekday_names: short
+      heading_height: 6mm
+      week_row_height: 20mm
+      week_cell_rotate: 90deg
+      link_to_week: true
+
+  sections:
+    - title:
+        enabled: true
+        parameters:
+          name: 2024
+          font_size: 48pt
+
+    - annual:
+        enabled: true
+        parameters:
+          months_per_page: 6
+          months_per_row: 2
+
+    - quarterly:
+        enabled: true
+        parameters:
+          months_width: 4.3cm
+          gap_width: 5mm
+          reverse_columns: true
+
+    - monthly:
+        enabled: true
+        parameters:
+          gap_width: 5mm
+
+    - weekly:
+        enabled: true
+        parameters:
+          first_row_height: 8mm
+          rest_row_height: 9mm
+
+    - daily:
+        enabled: true
+        parameters:
+          left_column_width: 6cm
+
+          left_column_items: [ top_priorities, notes, personal_notes ]
+          right_column_items: [ schedule ]
+
+          schedule_from_hour: 8
+          schedule_to_hour: 20
+          schedule_trailing_30min: false
+
+          gap_width: 2mm
+          priorities_number: 5
+
+          notes_height: 4cm
+          personal_notes_height: 100%
+
+    - daily_notes:
+        enabled: true
+
+    - daily_reflect:
+        enabled: true
+        parameters:
+          left_column_width: 1fr
+          gap_width: 5mm
+
+          left_column_items: [ my_goals, my_best_thing ]
+          right_column_items: [ my_grateful ]
+          bottom_merged: [ my_daily_log ]
+
+          my_goals:
+            height: 2.5cm
+
+          my_best_thing:
+            height: 2cm
+
+          my_grateful:
+            height: 5.5cm
+
+          my_daily_log:
+            height: 100%
+
+    - todo_index:
+        enabled: true
+        parameters:
+          pages: 2
+          columns: 2
+          rows: 19
+          gap_width: 2mm
+          cell_height: 7mm
+
+    - todo_pages:
+        enabled: true
+        parameters:
+          columns: 2
+          rows: 3
+          gap_width: 2mm
+
+          items_in_group: 6
+          todo_height: 7mm
+
+    - notes_index:
+        enabled: true
+        parameters:
+          pages: 2
+          columns: 2
+          rows: 19
+          gap_width: 2mm
+          cell_height: 7mm
+
+    - notes_pages:
+        enabled: true
