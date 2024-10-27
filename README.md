@@ -6,8 +6,6 @@ The planner is generated in Typst (haha) and compiled to PDF.
 
 Go to [discussions][3] to find and download the planner.
 
-Proceed
-
 # Installation
 ## Dependencies
 
