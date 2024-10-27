@@ -163,18 +163,13 @@ module LatexYearlyPlanner
           end
 
           def heading_content
-            row = [vertical_menu, top_menu]
+            row = [
+              "grid.cell(rowspan: 2, #{side_menu_object.to_typst})",
+              "pad(bottom: #{heading[:bottom_pad]}, #{header_layout})"
+            ]
             row.reverse! if mos_layout[:side_menu] == 'right'
 
             row.join(', ')
-          end
-
-          def vertical_menu
-            "grid.cell(rowspan: 2, #{side_menu_object.to_typst})"
-          end
-
-          def top_menu
-            "pad(bottom: #{heading[:bottom_pad]}, #{header_layout})"
           end
 
           def heading
