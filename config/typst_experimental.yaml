@@ -5,7 +5,7 @@ locale: en
 
 compiler:
   ghostscript:
-    enable: true
+    enable: false
 
 document:
   layout:
@@ -34,6 +34,9 @@ planner:
     pattern: dotted
 
   objects:
+    mos_layout:
+      side_menu: left
+
     mos_nav:
       width: 10mm
       side_pad: 2mm

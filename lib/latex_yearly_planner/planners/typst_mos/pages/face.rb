@@ -10,11 +10,8 @@ module LatexYearlyPlanner
               #grid(
                 columns: (#{heading_columns}),
                 rows: (#{heading[:height]}, 1fr),
-                grid.cell(
-                  rowspan: 2,
-                  pad(right: #{mosnav[:side_pad]}, #{side_menu_layout})
-                ),
-                pad(bottom: #{heading[:bottom_pad]}, #{header_layout}), #{content}
+                #{heading_content},
+                #{content}
               )
             TYPST
           end
@@ -151,8 +148,8 @@ module LatexYearlyPlanner
 
           def side_menu_columns
             cols = ([mosnav[:quarter_width]] * params.quarters.size)
-                   .append('auto')
-                   .append([mosnav[:month_width]] * params.months.size)
+              .append('auto')
+              .append([mosnav[:month_width]] * params.months.size)
 
             cols.reverse! if mosnav[:reverse_arrays]
 
@@ -196,7 +193,26 @@ module LatexYearlyPlanner
           end
 
           def heading_columns
-            "#{mosnav[:width]}, 1fr"
+            columns = [mosnav[:width], '1fr']
+
+            columns.reverse! if mos_layout[:side_menu] == 'right'
+
+            columns.join(', ')
+          end
+
+          def heading_content
+            row = [vertical_menu, top_menu]
+            row.reverse! if mos_layout[:side_menu] == 'right'
+
+            row.join(', ')
+          end
+
+          def vertical_menu
+            "grid.cell(rowspan: 2, pad(right: #{mosnav[:side_pad]}, #{side_menu_layout}))"
+          end
+
+          def top_menu
+            "pad(bottom: #{heading[:bottom_pad]}, #{header_layout})"
           end
 
           def mosnav
@@ -205,6 +221,10 @@ module LatexYearlyPlanner
 
           def heading
             params.object(:heading)
+          end
+
+          def mos_layout
+            params.object(:mos_layout)
           end
         end
       end
