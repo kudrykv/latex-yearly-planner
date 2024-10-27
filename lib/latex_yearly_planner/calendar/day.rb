@@ -37,7 +37,11 @@ module LatexYearlyPlanner
       end
 
       def month
-        Month.new(weekday_start:, year: moment.year, month: moment.month)
+        @month ||= Month.new(weekday_start:, year: moment.year, month: moment.month)
+      end
+
+      def quarter
+        @quarter ||= Quarter.new(weekday_start:, year: moment.year, number: moment.quarter)
       end
 
       def cweek

@@ -52,18 +52,26 @@ module LatexYearlyPlanner
             ["link(<#{day.week.id}>, [#{i18n.t('calendar.weekdays.full.week')} #{day.week.number}])"]
           end
 
+          def highlight_side_menu_months
+            [day.month]
+          end
+
+          def highlight_side_menu_quarters
+            [day.quarter]
+          end
+
+          def top_menu_month
+            day.month
+          end
+
           private
 
           def left_column
-            <<~TYPST
-              stack(dir: ttb, #{run_methods_of(:left_column_items)})
-            TYPST
+            "stack(dir: ttb, #{run_methods_of(:left_column_items)})"
           end
 
           def right_column
-            <<~TYPST
-              stack(dir: ttb, #{run_methods_of(:right_column_items)})
-            TYPST
+            "stack(dir: ttb, #{run_methods_of(:right_column_items)})"
           end
 
           def run_methods_of(column)

@@ -6,6 +6,9 @@ module LatexYearlyPlanner
       module Pages
         class Face < Page
           def generate
+            side_menu_object.highlight_side_menu_quarters = highlight_side_menu_quarters
+            side_menu_object.highlight_side_menu_months = highlight_side_menu_months
+
             <<~TYPST
               #grid(
                 columns: (#{heading_columns}),
@@ -82,12 +85,11 @@ module LatexYearlyPlanner
           end
 
           def menu_items_content
-            @menu_items_content ||= begin
-              if heading[:put_extra_items] == 'left'
-                extra_menu_items.push(annual_menu_item, todo_menu_item, note_menu_item).compact
-              else
-                [annual_menu_item, todo_menu_item, note_menu_item].concat(extra_menu_items).compact
-              end
+            @menu_items_content ||= if heading[:put_extra_items] == 'left'
+              extra_menu_items.push(annual_menu_item, todo_menu_item, note_menu_item).compact
+            else
+              [annual_menu_item, todo_menu_item,
+               note_menu_item].concat(extra_menu_items).compact
             end
           end
 
@@ -130,46 +132,7 @@ module LatexYearlyPlanner
           end
 
           def side_menu_layout
-            <<~TYPST
-              rotate(
-                #{mosnav[:rotate]},
-                origin: center + horizon,
-                reflow: true,
-                table(
-                  stroke: (x, y) => (left: 0.4pt, right: 0.4pt),
-                  columns: (#{side_menu_columns}),
-                  rows: 1fr,
-                  align: horizon + center,
-                  #{side_menu_content}
-                )
-              )
-            TYPST
-          end
-
-          def side_menu_columns
-            cols = ([mosnav[:quarter_width]] * params.quarters.size)
-              .append('auto')
-              .append([mosnav[:month_width]] * params.months.size)
-
-            cols.reverse! if mosnav[:reverse_arrays]
-
-            cols.join(', ')
-          end
-
-          def side_menu_content
-            quarters = make_side_menu_quarters
-            months = make_side_menu_months
-
-            if mosnav[:reverse_array_internals]
-              quarters.reverse!
-              months.reverse!
-            end
-
-            side_menu = [quarters.join(', '), '[]', months.join(', ')]
-
-            side_menu.reverse! if mosnav[:reverse_arrays]
-
-            side_menu.join(', ')
+            side_menu_object.to_typst
           end
 
           def make_side_menu_quarters
@@ -194,7 +157,6 @@ module LatexYearlyPlanner
 
           def heading_columns
             columns = [mosnav[:width], '1fr']
-
             columns.reverse! if mos_layout[:side_menu] == 'right'
 
             columns.join(', ')
@@ -208,7 +170,7 @@ module LatexYearlyPlanner
           end
 
           def vertical_menu
-            "grid.cell(rowspan: 2, pad(right: #{mosnav[:side_pad]}, #{side_menu_layout}))"
+            "grid.cell(rowspan: 2, #{side_menu_object.to_typst})"
           end
 
           def top_menu
@@ -225,6 +187,90 @@ module LatexYearlyPlanner
 
           def mos_layout
             params.object(:mos_layout)
+          end
+
+          def side_menu_object
+            @side_menu_object ||= SideMenu.new(section_config:, i18n:)
+          end
+
+          class SideMenu < Page
+            attr_accessor :highlight_side_menu_quarters, :highlight_side_menu_months
+
+            def initialize(section_config:, i18n: I18n)
+              super
+            end
+
+            def to_typst
+              <<~TYPST
+                pad(
+                  right: #{mosnav[:side_pad]},
+                  rotate(
+                    #{mosnav[:rotate]},
+                    origin: center + horizon,
+                    reflow: true,
+                    table(
+                      stroke: (x, y) => (left: 0.4pt, right: 0.4pt),
+                      columns: (#{side_menu_columns}),
+                      rows: 1fr,
+                      align: horizon + center,
+                      #{side_menu_content}
+                    )
+                  )
+                )
+              TYPST
+            end
+
+            private
+
+            def side_menu_columns
+              cols = ([mosnav[:quarter_width]] * params.quarters.size)
+                .append('auto')
+                .append([mosnav[:month_width]] * params.months.size)
+
+              cols.reverse! if mosnav[:reverse_arrays]
+
+              cols.join(', ')
+            end
+
+            def side_menu_content
+              quarters = make_side_menu_quarters
+              months = make_side_menu_months
+
+              if mosnav[:reverse_array_internals]
+                quarters.reverse!
+                months.reverse!
+              end
+
+              side_menu = [quarters.join(', '), '[]', months.join(', ')]
+
+              side_menu.reverse! if mosnav[:reverse_arrays]
+
+              side_menu.join(', ')
+            end
+
+            def make_side_menu_quarters
+              params.quarters.map do |q|
+                name = i18n.t('calendar.one_letter.quarter')
+
+                next "link(<#{q.id}>, [#{name}#{q.number}])" unless highlight_side_menu_quarters.include?(q)
+
+                "table.cell(fill: black, link(<#{q.id}>, text(white)[#{name}#{q.number}]))"
+              end
+            end
+
+            def make_side_menu_months
+              params.months.map do |m|
+                name = i18n.t("calendar.short.month.#{m.name.downcase}")
+
+                next "link(<#{m.id}>, [#{name}])" unless highlight_side_menu_months.include?(m)
+
+                "table.cell(fill: black, link(<#{m.id}>, text(white)[#{name}]))"
+              end
+            end
+
+            def mosnav
+              params.object(:mos_nav)
+            end
           end
         end
       end
