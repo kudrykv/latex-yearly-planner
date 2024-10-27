@@ -156,7 +156,7 @@ module LatexYearlyPlanner
           end
 
           def heading_columns
-            columns = [mosnav[:width], '1fr']
+            columns = [mos_layout[:mos_nav_width], '1fr']
             columns.reverse! if mos_layout[:side_menu] == 'right'
 
             columns.join(', ')
@@ -175,10 +175,6 @@ module LatexYearlyPlanner
 
           def top_menu
             "pad(bottom: #{heading[:bottom_pad]}, #{header_layout})"
-          end
-
-          def mosnav
-            params.object(:mos_nav)
           end
 
           def heading
