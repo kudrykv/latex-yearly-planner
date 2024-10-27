@@ -16,9 +16,14 @@ module LatexYearlyPlanner
       end
 
       def compile(text_document)
-        `typst compile #{workdir}/#{text_document.name} #{workdir}/#{OUTPUT_FILE}`
+        puts "Compiling generated document with Typst..."
+        typst_compile_time = Benchmark.measure do
+          `typst compile #{workdir}/#{text_document.name} #{workdir}/#{OUTPUT_FILE}`
+        end
 
         raise "Failed to compile #{text_document.name}" unless $CHILD_STATUS.success?
+
+        puts "Typst compilation time: #{typst_compile_time.real.round(2)}s"
 
         run_ghostscript
       end
@@ -28,7 +33,9 @@ module LatexYearlyPlanner
       def run_ghostscript
         return unless planner_config.config.dig(:compiler, :ghostscript, :enable)
 
-        `gs \
+        puts 'Running Ghostscript...'
+        time = Benchmark.measure do
+          `gs \
           -sDEVICE=pdfwrite \
           -dCompatibilityLevel=1.5 \
           -dNOPAUSE \
@@ -37,8 +44,11 @@ module LatexYearlyPlanner
           -dAutoRotatePages=/None \
           -sOutputFile=#{workdir}/#{TEMP_FILE} \
           #{workdir}/#{OUTPUT_FILE}`
+        end
 
         raise 'Failed to slim PDF' unless $CHILD_STATUS.success?
+
+        puts "Ghostscript time: #{time.real.round(2)}s"
 
         `mv #{workdir}/#{TEMP_FILE} #{workdir}/#{OUTPUT_FILE}`
       end
