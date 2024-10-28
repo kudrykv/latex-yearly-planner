@@ -51,6 +51,7 @@ planner:
     heading:
       bottom_pad: 3mm
       put_extra_items: left
+      title_position: right
 
     little_calendar:
       with_week_numbers: true

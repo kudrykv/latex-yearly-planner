@@ -200,9 +200,16 @@ module LatexYearlyPlanner
                   align: horizon + center,
                   inset: 0mm,
                   stroke: 0mm,
-                  #{title}, [], #{menu_items_layout}
+                  #{header_table_items}
                 )
               TYPST
+            end
+
+            def header_table_items
+              items = [title, '[]', menu_items_layout]
+              items.reverse! if heading[:title_position] == 'right'
+
+              items.join(', ')
             end
 
             def menu_items_layout

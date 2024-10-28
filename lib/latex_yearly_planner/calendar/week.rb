@@ -26,7 +26,7 @@ module LatexYearlyPlanner
         shift = 0
         shift = 1 if days.compact.none?(&:monday?) && days.last.nil?
 
-        days.compact.map(&:cweek).max + shift
+        days.compact.map(&:cweek).last + shift
       end
 
       def months
