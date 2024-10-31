@@ -107,8 +107,8 @@ planner:
         parameters:
           left_column_width: 6cm
 
-          left_column_items: [ top_priorities, notes, personal_notes ]
-          right_column_items: [ schedule ]
+          left_column_items: [ my_top_priorities, my_notes, my_personal_notes ]
+          right_column_items: [ my_schedule ]
 
           schedule_from_hour: 8
           schedule_to_hour: 20

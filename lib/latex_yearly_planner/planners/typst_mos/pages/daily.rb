@@ -78,7 +78,7 @@ module LatexYearlyPlanner
             params.get(column).map(&method(:send)).join(",\n")
           end
 
-          def schedule
+          def my_schedule
             <<~TYPST
               table(
                 columns: 1fr,
@@ -99,11 +99,11 @@ module LatexYearlyPlanner
             end.join(",\n")
           end
 
-          def little_calendar
+          def my_little_calendar
             Xtypst::LittleCalendar.new(day.month, highlight_day: day, i18n:, **params.object(:little_calendar)).to_typst
           end
 
-          def top_priorities
+          def my_top_priorities
             <<~TYPST
               pad(bottom: 5mm, table(
                 columns: 1fr,
@@ -119,7 +119,7 @@ module LatexYearlyPlanner
             (['box(height: 5mm, align(horizon, [$square.stroked$]))'] * params.get(:priorities_number)).join(",\n")
           end
 
-          def notes
+          def my_notes
             <<~TYPST
               stack(
                 dir: ttb,
@@ -145,7 +145,7 @@ module LatexYearlyPlanner
             "#h(1fr) #link(<dr-#{day.id}>, [#{i18n.t('daily_reflect.name')}])"
           end
 
-          def personal_notes
+          def my_personal_notes
             <<~TYPST
               stack(
                 dir: ttb,
