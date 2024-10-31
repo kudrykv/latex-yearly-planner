@@ -95,8 +95,12 @@ module LatexYearlyPlanner
 
           def schedule_lines
             (params.get(:schedule_from_hour)..params.get(:schedule_to_hour)).map do |hour|
-              "box(height: 5mm, align(horizon, [#{hour}])), box(height: 5mm)"
+              "box(height: 5mm, align(horizon, [#{pretty_hour(hour)}])), box(height: 5mm)"
             end.join(",\n")
+          end
+
+          def pretty_hour(hour)
+            DateTime.parse("#{hour}:00").strftime(params.get(:schedule_strftime))
           end
 
           def my_little_calendar

@@ -24,8 +24,6 @@ document:
 
 planner:
   parameters:
-    time_format: 24
-
     start_date: 2024, January
     end_date: 2024, December
     weekday_start: Monday
@@ -110,6 +108,7 @@ planner:
           left_column_items: [ my_top_priorities, my_notes, my_personal_notes ]
           right_column_items: [ my_schedule ]
 
+          schedule_strftime: '%k'
           schedule_from_hour: 8
           schedule_to_hour: 20
           schedule_trailing_30min: false
