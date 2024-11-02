@@ -1,5 +1,4 @@
 uk:
-  babel: ukrainian
   calendar:
     one_letter:
       monday: П
@@ -15,19 +14,19 @@ uk:
       quarter: "К"
 
     short:
-        month:
-          january: Січ
-          february: Лют
-          march: Бер
-          april: Кві
-          may: Тра
-          june: Чер
-          july: Лип
-          august: Сер
-          september: Вер
-          october: Жов
-          november: Лис
-          december: Гру
+      month:
+        january: Січ
+        february: Лют
+        march: Бер
+        april: Кві
+        may: Тра
+        june: Чер
+        july: Лип
+        august: Сер
+        september: Вер
+        october: Жов
+        november: Лис
+        december: Гру
 
     month:
       january: Січень
@@ -42,3 +41,49 @@ uk:
       october: Жовтень
       november: Листопад
       december: Грудень
+
+    weekdays:
+      full:
+        monday: Понеділок
+        tuesday: Вівторок
+        wednesday: Середа
+        thursday: Четвер
+        friday: П'ятниця
+        saturday: Субота
+        sunday: Неділя
+
+        week: Тиждень
+
+      short:
+        monday: Пн
+        tuesday: Вт
+        wednesday: Ср
+        thursday: Чт
+        friday: Пт
+        saturday: Сб
+        sunday: Нд
+
+  menu_calendar: Календар
+  schedule: Розклад
+  top_priorities: Головні завдання
+  daily_notes: Нотатки
+  more_daily_notes: Більше
+  personal_notes: Особисті нотатки
+
+  daily_reflect:
+    name: Рефлексія
+
+    goals: Цілі
+    grateful: За що я вдячна
+    best_thing: Найкраще, що сталося сьогодні
+    log: Щоденний лог
+
+  todo:
+    index: Індекс завдань
+    menu_index: Завдання
+    single_page: Завдання
+
+  notes:
+    index: Індекс нотаток
+    menu_index: Нотатки
+    single_page: Нотатки

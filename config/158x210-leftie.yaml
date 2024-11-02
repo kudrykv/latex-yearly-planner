@@ -48,7 +48,7 @@ planner:
 
     heading:
       bottom_pad: 3mm
-      put_extra_items: left
+      put_extra_items: right
       title_position: right
 
     little_calendar:
@@ -115,7 +115,7 @@ planner:
           schedule_strftime: '%k'
           schedule_from_hour: 8
           schedule_to_hour: 20
-          schedule_trailing_30min: false
+          schedule_trailing_30min: true
 
           gap_width: 2mm
           priorities_number: 5
