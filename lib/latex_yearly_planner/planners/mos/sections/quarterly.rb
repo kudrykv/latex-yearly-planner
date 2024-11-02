@@ -2,7 +2,7 @@
 
 module LatexYearlyPlanner
   module Planners
-    module TypstMos
+    module Mos
       module Sections
         class Quarterly < Section
           def pages

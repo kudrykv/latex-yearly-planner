@@ -2,11 +2,11 @@
 
 module LatexYearlyPlanner
   module Planners
-    module TypstMos
+    module Mos
       module Sections
-        class Monthly < Section
+        class NotesIndex < Section
           def pages
-            params.months
+            (1..params.get(:pages))
           end
         end
       end

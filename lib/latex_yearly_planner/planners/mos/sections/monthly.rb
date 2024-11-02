@@ -2,17 +2,11 @@
 
 module LatexYearlyPlanner
   module Planners
-    module TypstMos
+    module Mos
       module Sections
-        class Title < Section
+        class Monthly < Section
           def pages
-            [title]
-          end
-
-          private
-
-          def title
-            params.get(:name)
+            params.months
           end
         end
       end

@@ -1,6 +1,6 @@
 version: '0.1'
 
-template: typst_mos
+template: mos
 locale: uk
 
 compiler:

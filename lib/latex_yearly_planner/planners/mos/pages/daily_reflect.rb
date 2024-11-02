@@ -2,7 +2,7 @@
 
 module LatexYearlyPlanner
   module Planners
-    module TypstMos
+    module Mos
       module Pages
         class DailyReflect < Face
           attr_reader :day

@@ -2,9 +2,9 @@
 
 module LatexYearlyPlanner
   module Planners
-    module TypstMos
+    module Mos
       module Sections
-        class Daily < Section
+        class DailyNotes < Section
           def pages
             params.days
           end

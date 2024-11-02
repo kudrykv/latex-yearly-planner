@@ -2,7 +2,7 @@
 
 module LatexYearlyPlanner
   module Planners
-    module TypstMos
+    module Mos
       module Pages
         class Annual < Face
           attr_reader :month_rows

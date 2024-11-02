@@ -2,11 +2,11 @@
 
 module LatexYearlyPlanner
   module Planners
-    module TypstMos
+    module Mos
       module Sections
-        class DailyNotes < Section
+        class TodoIndex < Section
           def pages
-            params.days
+            (1..params.get(:pages))
           end
         end
       end

@@ -2,11 +2,17 @@
 
 module LatexYearlyPlanner
   module Planners
-    module TypstMos
+    module Mos
       module Sections
-        class NotesIndex < Section
+        class Title < Section
           def pages
-            (1..params.get(:pages))
+            [title]
+          end
+
+          private
+
+          def title
+            params.get(:name)
           end
         end
       end
