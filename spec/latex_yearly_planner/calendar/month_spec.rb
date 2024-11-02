@@ -60,5 +60,6 @@ RSpec.describe LatexYearlyPlanner::Calendar::Month do
     let(:other) { described_class.new(month: month_number, year:, weekday_start:) }
 
     it { expect(month <=> other).to eq(0) }
+    it { expect(month <=> 'not a month').to be_nil }
   end
 end
