@@ -1,7 +1,7 @@
 version: '0.1'
 
 template: typst_mos
-locale: en
+locale: uk
 
 compiler:
   ghostscript:
@@ -132,18 +132,18 @@ planner:
           left_column_width: 1fr
           gap_width: 5mm
 
-          left_column_items: [ my_goals, my_best_thing ]
-          right_column_items: [ my_grateful ]
+          left_column_items: [ my_best_thing ]
+          right_column_items: [ my_goals, my_grateful ]
           bottom_merged: [ my_daily_log ]
 
           my_goals:
             height: 2.5cm
 
           my_best_thing:
-            height: 2cm
+            height: 6.5cm
 
           my_grateful:
-            height: 5.5cm
+            height: 3cm
 
           my_daily_log:
             height: 100%
@@ -153,7 +153,7 @@ planner:
         parameters:
           pages: 2
           columns: 2
-          rows: 19
+          rows: 25
           gap_width: 2mm
           cell_height: 7mm
 
@@ -164,7 +164,7 @@ planner:
           rows: 3
           gap_width: 2mm
 
-          items_in_group: 6
+          items_in_group: 8
           todo_height: 7mm
 
     - notes_index:
@@ -172,7 +172,7 @@ planner:
         parameters:
           pages: 2
           columns: 2
-          rows: 19
+          rows: 25
           gap_width: 2mm
           cell_height: 7mm
 
