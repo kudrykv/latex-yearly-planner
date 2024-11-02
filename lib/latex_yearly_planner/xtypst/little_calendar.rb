@@ -35,7 +35,7 @@ module LatexYearlyPlanner
             inset: #{parameters[:inset]},
             stroke: 0mm,
             #{highlight_week}
-            table.cell(colspan: #{number_of_columns})[#{i18n.t("calendar.month.#{month.name.downcase}")}],
+            table.cell(colspan: #{number_of_columns})[#{month_name}],
             #{weekdays_row.join(', ')},
             #{weeks}
           )
@@ -58,11 +58,17 @@ module LatexYearlyPlanner
 
       def highlight_week
         return '' unless parameters[:highlight_week]
-        return '' unless parameters[:highlight_day]
+        return '' unless highlighted_day
 
-        number = parameters[:highlight_day].week.number - month.weeks.first.number + 2
+        "fill: (_, y) => if y == #{highlighted_week_number_in_this_month} { silver } else { white },"
+      end
 
-        "fill: (_, y) => if y == #{number} { silver } else { white },"
+      def highlighted_week_number_in_this_month
+        highlighted_day.week.number - month.weeks.first.number + 2
+      end
+
+      def month_name
+        i18n.t("calendar.month.#{month.name.downcase}")
       end
 
       def weekdays_row
@@ -103,9 +109,13 @@ module LatexYearlyPlanner
 
       def map_day(day)
         return '[]' unless day
-        return "link(<#{day.id}>, [#{day.day}])" if parameters[:highlight_day] != day
+        return "link(<#{day.id}>, [#{day.day}])" if highlighted_day != day
 
         "table.cell(fill: black, link(<#{day.id}>, text(white)[#{day.day}]))"
+      end
+
+      def highlighted_day
+        parameters[:highlight_day]
       end
     end
   end
