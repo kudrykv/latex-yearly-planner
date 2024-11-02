@@ -81,9 +81,11 @@ uk:
   todo:
     index: Індекс завдань
     menu_index: Завдання
+    menu_index_short: Звд
     single_page: Завдання
 
   notes:
     index: Індекс нотаток
     menu_index: Нотатки
+    menu_index_short: Нот
     single_page: Нотатки

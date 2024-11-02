@@ -34,9 +34,9 @@ module LatexYearlyPlanner
           def extra_menu_items
             (1..pages).map do |page|
               next "[#{i18n.t('notes.menu_index')}]" if pages == 1
-              next "black_table_cell(text(white)[#{i18n.t('notes.menu_index')} #{page}])" if page == page_number
+              next "black_table_cell(text(white)[#{i18n.t('notes.menu_index_short')} #{page}])" if page == page_number
 
-              "link(<ni-#{page}>, [#{i18n.t('notes.menu_index')} #{page}])"
+              "link(<ni-#{page}>, [#{i18n.t('notes.menu_index_short')} #{page}])"
             end
           end
 
