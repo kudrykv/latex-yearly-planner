@@ -30,7 +30,8 @@ module LatexYearlyPlanner
       end
 
       def months
-        [days.first.month, days.last.month].uniq
+        compact = days.compact
+        [compact.first.month, compact.last.month].uniq
       end
 
       def ==(other)
