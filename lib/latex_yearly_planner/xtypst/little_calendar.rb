@@ -72,18 +72,44 @@ module LatexYearlyPlanner
       end
 
       def weekdays_row
-        row = rotated_weekdays.map { |day| "[#{i18n.t("calendar.one_letter.#{day}")}]" }
-        return row unless parameters[:with_week_numbers]
+        return weekdays_row_internal unless parameters[:with_week_numbers]
 
-        row.unshift("[#{i18n.t('calendar.one_letter.week')}]") if parameters[:week_number_placement] == 'left'
-        row.append("[#{i18n.t('calendar.one_letter.week')}]") if parameters[:week_number_placement] == 'right'
+        apply_week_number_placement!
+        apply_sideline_week_numbers!
+        apply_underline_weekdays!
+
+        weekdays_row_internal
+      end
+
+      def weekdays_row_internal
+        @base_weekdays_row ||= rotated_weekdays.map(&method(:one_letter_day))
+      end
+
+      def apply_week_number_placement!
+        return weekdays_row_internal.unshift(one_letter_week) if parameters[:week_number_placement] == 'left'
+
+        weekdays_row_internal.append(one_letter_week)
+      end
+
+      def apply_sideline_week_numbers!
+        return unless parameters[:sideline_week_numbers]
 
         x = parameters[:week_number_placement] == 'left' ? 1 : 7
+        weekdays_row_internal.unshift("table.vline(x: #{x}, stroke: 0.4pt)")
+      end
 
-        row.unshift("table.vline(x: #{x}, stroke: 0.4pt)") if parameters[:sideline_week_numbers]
-        row.unshift('table.hline(y: 2, stroke: 0.4pt)') if parameters[:underline_weekdays]
+      def apply_underline_weekdays!
+        return unless parameters[:underline_weekdays]
 
-        row
+        weekdays_row_internal.unshift('table.hline(y: 2, stroke: 0.4pt)')
+      end
+
+      def one_letter_day(day)
+        "[#{i18n.t("calendar.one_letter.#{day}")}]"
+      end
+
+      def one_letter_week
+        "[#{i18n.t('calendar.one_letter.week')}]"
       end
 
       def rotated_weekdays
