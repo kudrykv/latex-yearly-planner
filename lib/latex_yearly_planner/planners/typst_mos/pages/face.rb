@@ -122,8 +122,8 @@ module LatexYearlyPlanner
 
             def side_menu_columns
               cols = ([mosnav[:quarter_width]] * params.quarters.size)
-                .append('auto')
-                .append([mosnav[:month_width]] * params.months.size)
+                     .append('auto')
+                     .append([mosnav[:month_width]] * params.months.size)
 
               cols.reverse! if mosnav[:reverse_arrays]
 
@@ -228,14 +228,14 @@ module LatexYearlyPlanner
 
             def menu_items_content
               @menu_items_content ||= if heading[:put_extra_items] == 'left'
-                extra_menu_items
-                  .push(annual_menu_item, todo_menu_item, note_menu_item)
-                  .compact
-              else
-                [annual_menu_item, todo_menu_item, note_menu_item]
-                  .concat(extra_menu_items)
-                  .compact
-              end
+                                        extra_menu_items
+                                          .push(annual_menu_item, todo_menu_item, note_menu_item)
+                                          .compact
+                                      else
+                                        [annual_menu_item, todo_menu_item, note_menu_item]
+                                          .concat(extra_menu_items)
+                                          .compact
+                                      end
             end
 
             def annual_menu_item
@@ -257,7 +257,6 @@ module LatexYearlyPlanner
 
               (annual_params.months.find_index(first_month) / months_per_page) + 1
             end
-
 
             def todo_menu_item
               return nil unless params.section_enabled?(:todo_index)

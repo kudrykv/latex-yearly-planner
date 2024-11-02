@@ -13,7 +13,7 @@ module LatexYearlyPlanner
       end
 
       # `binding` uses the current scope to get the variables
-      #noinspection RubyUnusedLocalVariable
+      # noinspection RubyUnusedLocalVariable
       def index(text_documents)
         content = template.result(binding)
         [Entities::TextDocument.new(name: 'index.typ', content:)]

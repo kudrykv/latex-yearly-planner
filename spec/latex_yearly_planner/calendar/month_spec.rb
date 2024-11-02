@@ -17,11 +17,15 @@ RSpec.describe LatexYearlyPlanner::Calendar::Month do
   describe '#weeks' do
     let :weeks do
       [
-        Week.new(days: [nil, nil, nil, nil] + (1..3).map { |day| Day.new(weekday_start:, moment: date.next_day(day)) }, weekday_start:),
+        Week.new(days: [nil, nil, nil, nil] + (1..3).map do |day|
+                                                Day.new(weekday_start:, moment: date.next_day(day))
+                                              end, weekday_start:),
         Week.new(days: (4..10).map { |day| Day.new(weekday_start:, moment: date.next_day(day)) }, weekday_start:),
         Week.new(days: (11..17).map { |day| Day.new(weekday_start:, moment: date.next_day(day)) }, weekday_start:),
         Week.new(days: (18..24).map { |day| Day.new(weekday_start:, moment: date.next_day(day)) }, weekday_start:),
-        Week.new(days: (25..30).map { |day| Day.new(weekday_start:, moment: date.next_day(day)) } + [nil], weekday_start:)
+        Week.new(days: (25..30).map { |day|
+                         Day.new(weekday_start:, moment: date.next_day(day))
+                       } + [nil], weekday_start:)
       ]
     end
 

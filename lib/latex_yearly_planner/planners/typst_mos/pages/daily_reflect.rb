@@ -70,7 +70,8 @@ module LatexYearlyPlanner
           end
 
           def my_best_thing
-            "jot(#{params.get(:pattern)}, #{params.get(:my_best_thing, :height)}, [#{i18n.t('daily_reflect.best_thing')}])"
+            "jot(#{params.get(:pattern)}, #{params.get(:my_best_thing,
+                                                       :height)}, [#{i18n.t('daily_reflect.best_thing')}])"
           end
 
           def my_grateful

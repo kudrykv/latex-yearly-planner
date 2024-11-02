@@ -16,7 +16,7 @@ module LatexYearlyPlanner
       end
 
       def compile(text_document)
-        puts "Compiling generated document with Typst..."
+        puts 'Compiling generated document with Typst...'
         typst_compile_time = Benchmark.measure do
           `typst compile #{workdir}/#{text_document.name} #{workdir}/#{OUTPUT_FILE}`
         end

@@ -31,11 +31,11 @@ module LatexYearlyPlanner
       end
 
       def weeks
-        @all_weeks ||= start_date.beginning_of_week(weekday_start)
-                                 .upto(end_date.end_of_month.end_of_week(weekday_start))
-                                 .each_slice(7)
-                                 .map { |days| days.map { |day| Calendar::Day.new(moment: day, weekday_start:) } }
-                                 .map { |days| Calendar::Week.new(days:, weekday_start:) }
+        @weeks ||= start_date.beginning_of_week(weekday_start)
+                             .upto(end_date.end_of_month.end_of_week(weekday_start))
+                             .each_slice(7)
+                             .map { |days| days.map { |day| Calendar::Day.new(moment: day, weekday_start:) } }
+                             .map { |days| Calendar::Week.new(days:, weekday_start:) }
       end
 
       def days
@@ -49,7 +49,7 @@ module LatexYearlyPlanner
       def section!(section_name)
         @section ||= planner_config.sections.find { |s| s.name == section_name }
 
-        raise DevelopmentError, "Section #{section_name} not found" if @section == nil
+        raise DevelopmentError, "Section #{section_name} not found" if @section.nil?
 
         @section
       end
