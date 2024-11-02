@@ -56,4 +56,9 @@ RSpec.describe LatexYearlyPlanner::Calendar::Month do
     it { expect(month).to eq(other) }
   end
 
+  describe '#<=>' do
+    let(:other) { described_class.new(month: month_number, year:, weekday_start:) }
+
+    it { expect(month <=> other).to eq(0) }
+  end
 end
