@@ -2,7 +2,6 @@
 
 require 'rspec'
 
-Day = LatexYearlyPlanner::Calendar::Day
 Month = LatexYearlyPlanner::Calendar::Month
 
 RSpec.describe LatexYearlyPlanner::Calendar::Week do
