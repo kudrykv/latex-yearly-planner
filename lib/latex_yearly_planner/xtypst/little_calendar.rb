@@ -11,6 +11,7 @@ module LatexYearlyPlanner
         sideline_week_numbers: true,
         highlight_week: false,
         link_to_week: true,
+        take_full_width: true,
 
         highlight_day: nil
       }.freeze
@@ -29,7 +30,7 @@ module LatexYearlyPlanner
       def to_typst
         <<~TYPST
           table(
-            columns: #{number_of_columns},
+            columns: #{columns},
             align: center,
             inset: #{parameters[:inset]},
             stroke: 0mm,
@@ -42,6 +43,12 @@ module LatexYearlyPlanner
       end
 
       private
+
+      def columns
+        return number_of_columns unless parameters[:take_full_width]
+
+        "(#{(['1fr'] * number_of_columns).join(', ')})"
+      end
 
       def number_of_columns
         return 7 unless parameters[:with_week_numbers]

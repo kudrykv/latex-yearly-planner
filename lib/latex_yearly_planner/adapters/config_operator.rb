@@ -16,8 +16,8 @@ module LatexYearlyPlanner
       end
 
       def object(key)
-        section_config.section_config.dig(:objects, key) ||
-          planner_config.config.dig(:planner, :objects, key)
+        (planner_config.config.dig(:planner, :objects, key) || {})
+          .merge(section_config.section_config.dig(:objects, key) || {})
       end
 
       def months

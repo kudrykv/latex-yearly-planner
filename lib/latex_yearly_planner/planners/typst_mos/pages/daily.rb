@@ -78,6 +78,10 @@ module LatexYearlyPlanner
             params.get(column).map(&method(:send)).join(",\n")
           end
 
+          def my_gap
+            'box(height: 5mm)'
+          end
+
           def my_schedule
             <<~TYPST
               table(
