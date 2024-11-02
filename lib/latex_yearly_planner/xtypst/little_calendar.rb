@@ -76,7 +76,7 @@ module LatexYearlyPlanner
       end
 
       def weeks
-        month.weeks.map { |week| week_row(week) }.join(",\n")
+        month.weeks.map(&method(:week_row)).join(",\n")
       end
 
       def week_row(week)

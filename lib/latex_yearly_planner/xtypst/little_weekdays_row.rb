@@ -8,7 +8,7 @@ module LatexYearlyPlanner
         with_week_numbers: true,
         underline_weekdays: true,
         sideline_week_numbers: true,
-        week_number_placement: 'right',
+        week_number_placement: 'right'
       }.freeze
 
       attr_reader :weekday_start, :i18n, :parameters
@@ -54,7 +54,6 @@ module LatexYearlyPlanner
         x = parameters[:week_number_placement] == 'left' ? 1 : 7
         weekdays_row_internal.unshift("table.vline(x: #{x}, stroke: 0.4pt)")
       end
-
 
       def weekdays_row_internal
         @weekdays_row_internal ||= rotated_weekdays.map(&method(:one_letter_day))
