@@ -2,19 +2,12 @@
 
 module LatexYearlyPlanner
   module HighLevel
-    class InitializeSectioner
-      include Interactor
+    class InitializeSectioner < Actor
+      input :planner_config, allow_nil: false
+      output :sectioner
 
       def call
-        context.sectioner = Adapters::Sectioner.new(planner_config:)
-      end
-
-      private
-
-      def planner_config
-        raise DevelopmentError, '`planner_config` is not defined' unless context.planner_config
-
-        context.planner_config
+        self.sectioner = Adapters::Sectioner.new(planner_config:)
       end
     end
   end

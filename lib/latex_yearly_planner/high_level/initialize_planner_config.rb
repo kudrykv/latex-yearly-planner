@@ -2,23 +2,18 @@
 
 module LatexYearlyPlanner
   module HighLevel
-    class InitializePlannerConfig
-      include Interactor
+    class InitializePlannerConfig < Actor
+      input :path_to_yaml_file, allow_nil: false
+      output :planner_config
 
       def call
-        context.planner_config = Adapters::PlannerConfig.new(hash)
+        self.planner_config = Adapters::PlannerConfig.new(hash)
       end
 
       private
 
       def hash
         YAML.load_file(path_to_yaml_file, symbolize_names: true)
-      end
-
-      def path_to_yaml_file
-        raise DevelopmentError, '`path_to_yaml_file` is not defined' unless context.path_to_yaml_file
-
-        context.path_to_yaml_file
       end
     end
   end

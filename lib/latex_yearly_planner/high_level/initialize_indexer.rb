@@ -2,19 +2,12 @@
 
 module LatexYearlyPlanner
   module HighLevel
-    class InitializeIndexer
-      include Interactor
+    class InitializeIndexer < Actor
+      input :planner_config, allow_nil: false
+      output :indexer
 
       def call
-        context.indexer = Adapters::TypstIndexer.new(planner_config:)
-      end
-
-      private
-
-      def planner_config
-        raise DevelopmentError, '`planner_config` is not defined' unless context.planner_config
-
-        context.planner_config
+        self.indexer = Adapters::TypstIndexer.new(planner_config:)
       end
     end
   end

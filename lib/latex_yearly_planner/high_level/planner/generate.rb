@@ -3,18 +3,17 @@
 module LatexYearlyPlanner
   module HighLevel
     module Planner
-      class Generate
-        include Interactor::Organizer
+      class Generate < Actor
 
-        organize InitializePlannerConfig,
-                 InitializeI18n,
-                 InitializeSectioner,
-                 InitializeIndexer,
-                 InitializeGenerator,
-                 InitializeTextDocumentsWriter,
-                 InitializeCompiler,
-                 InitializePlanner,
-                 CreatePlanner
+        play InitializePlannerConfig,
+             InitializeI18n,
+             InitializeSectioner,
+             InitializeIndexer,
+             InitializeGenerator,
+             InitializeTextDocumentsWriter,
+             InitializeCompiler,
+             InitializePlanner,
+             CreatePlanner
       end
     end
   end

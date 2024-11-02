@@ -2,11 +2,11 @@
 
 module LatexYearlyPlanner
   module HighLevel
-    class CreatePlanner
-      include Interactor
+    class CreatePlanner < Actor
+      input :planner, allow_nil: false
 
       def call
-        context.planner.create
+        planner.create
       end
     end
   end

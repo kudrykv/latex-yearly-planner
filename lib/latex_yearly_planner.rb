@@ -7,7 +7,7 @@ require 'active_support/all'
 require 'English'
 require 'ruby-measurement'
 require 'thor'
-require 'interactor'
+require 'service_actor'
 require 'i18n'
 require 'erb'
 

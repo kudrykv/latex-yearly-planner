@@ -2,19 +2,12 @@
 
 module LatexYearlyPlanner
   module HighLevel
-    class InitializeTextDocumentsWriter
-      include Interactor
+    class InitializeTextDocumentsWriter < Actor
+      input :workdir, allow_nil: false
+      output :text_documents_writer
 
       def call
-        context.text_documents_writer = Adapters::TextDocumentsWriter.new(workdir:)
-      end
-
-      private
-
-      def workdir
-        raise DevelopmentError, 'workdir is not defined' unless context.workdir
-
-        context.workdir
+        self.text_documents_writer = Adapters::TextDocumentsWriter.new(workdir:)
       end
     end
   end

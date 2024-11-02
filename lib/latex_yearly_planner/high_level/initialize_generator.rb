@@ -2,25 +2,13 @@
 
 module LatexYearlyPlanner
   module HighLevel
-    class InitializeGenerator
-      include Interactor
+    class InitializeGenerator < Actor
+      input :indexer, allow_nil: false
+      input :sectioner, allow_nil: false
+      output :generator
 
       def call
-        context.generator = Core::Generator.new(indexer:, sectioner:)
-      end
-
-      private
-
-      def indexer
-        raise DevelopmentError, '`indexer` is not defined' unless context.indexer
-
-        context.indexer
-      end
-
-      def sectioner
-        raise DevelopmentError, '`sectioner` is not defined' unless context.sectioner
-
-        context.sectioner
+        self.generator = Core::Generator.new(indexer:, sectioner:)
       end
     end
   end
