@@ -5,10 +5,10 @@ module LatexYearlyPlanner
     class PlannerConfig
       attr_reader :section_config_const, :config
 
-      def initialize(hash, sectionConfig: TypstSectionConfig)
+      def initialize(hash, section_config_const: TypstSectionConfig)
         @config = hash
 
-        @section_config_const = sectionConfig
+        @section_config_const = section_config_const
       end
 
       def locale

@@ -4,7 +4,6 @@ module LatexYearlyPlanner
   module HighLevel
     module Planner
       class Generate < Actor
-
         play InitializePlannerConfig,
              InitializeI18n,
              InitializeSectioner,
