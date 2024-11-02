@@ -72,11 +72,11 @@ module LatexYearlyPlanner
       end
 
       def weekdays_row
+        apply_underline_weekdays!
         return weekdays_row_internal unless parameters[:with_week_numbers]
 
         apply_week_number_placement!
         apply_sideline_week_numbers!
-        apply_underline_weekdays!
 
         weekdays_row_internal
       end
