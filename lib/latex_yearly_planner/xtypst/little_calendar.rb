@@ -76,27 +76,9 @@ module LatexYearlyPlanner
       end
 
       def weeks
-        month.weeks.map(&method(:week_row)).join(",\n")
-      end
-
-      def week_row(week)
-        row = week.days.map(&method(:map_day))
-        return row.join(', ') unless parameters[:with_week_numbers]
-
-        week_label = "[#{week.number}]"
-        week_label = "link(<#{week.id}>, #{week_label})" if parameters[:link_to_week]
-
-        row.unshift(week_label) if parameters[:week_number_placement] == 'left'
-        row.push(week_label) if parameters[:week_number_placement] == 'right'
-
-        row.join(', ')
-      end
-
-      def map_day(day)
-        return '[]' unless day
-        return "link(<#{day.id}>, [#{day.day}])" if highlighted_day != day
-
-        "table.cell(fill: black, link(<#{day.id}>, text(white)[#{day.day}]))"
+        month.weeks
+             .map { |week| LittleCalendarRow.new(week, **parameters).to_typst }
+             .join(",\n")
       end
 
       def highlighted_day
