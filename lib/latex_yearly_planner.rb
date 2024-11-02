@@ -2,10 +2,8 @@
 
 require 'zeitwerk'
 require 'yaml'
-require 'recursive-open-struct'
 require 'active_support/all'
 require 'English'
-require 'ruby-measurement'
 require 'thor'
 require 'service_actor'
 require 'i18n'
