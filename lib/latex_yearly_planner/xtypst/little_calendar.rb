@@ -36,7 +36,7 @@ module LatexYearlyPlanner
             stroke: 0mm,
             #{highlight_week}
             table.cell(colspan: #{number_of_columns})[#{month_name}],
-            #{weekdays_row.join(', ')},
+            #{LittleWeekdaysRow.new(weekday_start: month.weekday_start, i18n:, **parameters).to_typst},
             #{weeks}
           )
         TYPST
