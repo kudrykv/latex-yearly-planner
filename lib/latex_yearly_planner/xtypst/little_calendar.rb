@@ -82,7 +82,7 @@ module LatexYearlyPlanner
       end
 
       def weekdays_row_internal
-        @base_weekdays_row ||= rotated_weekdays.map(&method(:one_letter_day))
+        @weekdays_row_internal ||= rotated_weekdays.map(&method(:one_letter_day))
       end
 
       def apply_week_number_placement!
