@@ -67,7 +67,11 @@ module LatexYearlyPlanner
           end
 
           def table_rows
-            ((offset + 1)..(items_on_page + offset)).each_slice(rows).to_a.transpose.map(&method(:table_row)).join(",\n")
+            ((offset + 1)..(items_on_page + offset))
+              .each_slice(rows)
+              .to_a
+              .transpose.map(&method(:table_row))
+              .join(",\n")
           end
 
           def table_row(row)

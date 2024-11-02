@@ -65,7 +65,10 @@ module LatexYearlyPlanner
           end
 
           def todos_lines
-            (["box(height: #{params.get(:todo_height)}, align(horizon, [$square.stroked$]))"] * params.get(:items_in_group)).join(",\n")
+            (
+              ["box(height: #{params.get(:todo_height)}, align(horizon, [$square.stroked$]))"] *
+                params.get(:items_in_group)
+            ).join(",\n")
           end
         end
       end

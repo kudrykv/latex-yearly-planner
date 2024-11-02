@@ -34,8 +34,16 @@ module LatexYearlyPlanner
         return unless planner_config.config.dig(:compiler, :ghostscript, :enable)
 
         puts 'Running Ghostscript...'
-        time = Benchmark.measure do
-          `gs \
+        time = Benchmark.measure { ghostscript_cmd }
+        raise 'Failed to slim PDF' unless $CHILD_STATUS.success?
+
+        puts "Ghostscript time: #{time.real.round(2)}s"
+
+        `mv #{workdir}/#{TEMP_FILE} #{workdir}/#{OUTPUT_FILE}`
+      end
+
+      def ghostscript_cmd
+        `gs \
           -sDEVICE=pdfwrite \
           -dCompatibilityLevel=1.5 \
           -dNOPAUSE \
@@ -44,13 +52,6 @@ module LatexYearlyPlanner
           -dAutoRotatePages=/None \
           -sOutputFile=#{workdir}/#{TEMP_FILE} \
           #{workdir}/#{OUTPUT_FILE}`
-        end
-
-        raise 'Failed to slim PDF' unless $CHILD_STATUS.success?
-
-        puts "Ghostscript time: #{time.real.round(2)}s"
-
-        `mv #{workdir}/#{TEMP_FILE} #{workdir}/#{OUTPUT_FILE}`
       end
     end
   end
