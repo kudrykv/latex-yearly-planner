@@ -17,8 +17,8 @@ module LatexYearlyPlanner
               .upto(moment.end_of_month + 7.days)
               .each_slice(7)
               .map(&method(:nil_not_our_month))
-              .reject { |days| days.all?(&:nil?) }
-              .map { |days| Week.new(days: make_days(days), weekday_start:) }
+              .reject(&method(:nil_week?))
+              .map(&method(:make_week))
       end
 
       def id
@@ -59,12 +59,16 @@ module LatexYearlyPlanner
 
       private
 
-      def nil_not_our_month(week)
-        week.map { |day| day.month == moment.month ? day : nil }
+      def nil_week?(days)
+        days.all?(&:nil?)
       end
 
-      def make_days(days)
-        days.map(&method(:make_day))
+      def make_week(days)
+        Week.new(days: days.map(&method(:make_day)), weekday_start:)
+      end
+
+      def nil_not_our_month(week)
+        week.map { |day| day.month == moment.month ? day : nil }
       end
 
       def make_day(day)
