@@ -40,8 +40,8 @@ module LatexYearlyPlanner
             end
           end
 
-          def hide_notes?
-            true
+          def add_flags
+            [:hide_notes]
           end
 
           private

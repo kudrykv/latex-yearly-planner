@@ -27,8 +27,8 @@ module LatexYearlyPlanner
             "vert_stack_bottom_outset(#{month_rows.map { |row| row_stack(row) }.append('[]').join(', ')})"
           end
 
-          def highlight_calendar?
-            true
+          def add_flags
+            [:highlight_calendar]
           end
 
           private

@@ -40,8 +40,8 @@ module LatexYearlyPlanner
             end
           end
 
-          def hide_todo?
-            true
+          def add_flags
+            [:hide_todo]
           end
 
           private
