@@ -11,7 +11,7 @@ Go to [discussions][3] to find and download the planner.
 
 1. [Ruby][1] >= 3.1.3
 2. [Typst][2]
-3. Ghostscript (optional; gs binary)
+3. [Ghostscript][4] (optional; gs binary)
 
 ## Installation
 
@@ -37,3 +37,4 @@ Check out existing configs in `config` directory.
 [1]: https://www.ruby-lang.org/
 [2]: https://typst.app/
 [3]: https://github.com/kudrykv/latex-yearly-planner/discussions
+[4]: https://ghostscript.com/

@@ -65,7 +65,7 @@ planner:
       with_week_numbers: true
       week_number_placement: right
       link_to_week: true
-      weekday_names: short
+      weekday_names: full
       heading_height: 6mm
       week_row_height: 25mm
       week_cell_rotate: 90deg

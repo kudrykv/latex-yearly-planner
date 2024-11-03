@@ -54,22 +54,21 @@ module LatexYearlyPlanner
       end
 
       def weekdays_row
-        row = rotated_weekdays.map { |day| "[#{i18n.t("calendar.weekdays.#{parameters[:weekday_names]}.#{day}")}]" }
-        return row unless parameters[:with_week_numbers]
+        return rotated_weekdays unless parameters[:with_week_numbers]
 
-        row.unshift("[#{i18n.t('calendar.one_letter.week')}]") if parameters[:week_number_placement] == 'left'
-        row.append("[#{i18n.t('calendar.one_letter.week')}]") if parameters[:week_number_placement] == 'right'
+        one_letter_week = "[#{i18n.t('calendar.one_letter.week')}]"
+        rotated_weekdays.unshift(one_letter_week) if parameters[:week_number_placement] == 'left'
+        rotated_weekdays.append(one_letter_week) if parameters[:week_number_placement] == 'right'
 
-        x = parameters[:week_number_placement] == 'left' ? 1 : 7
-
-        row.unshift("table.vline(x: #{x}, stroke: 0.4pt)") if parameters[:sideline_week_numbers]
-        row.unshift('table.hline(y: 2, stroke: 0.4pt)') if parameters[:underline_weekdays]
-
-        row.map { |i| "align(center + horizon, #{i})" }
+        rotated_weekdays.map { |i| "align(center + horizon, #{i})" }
       end
 
       def rotated_weekdays
-        WEEKDAYS.rotate(WEEKDAYS.index(month.weekday_start))
+        @rotated_weekdays ||= WEEKDAYS
+                              .rotate(WEEKDAYS.index(month.weekday_start))
+                              .map do |day|
+                                "[#{i18n.t("calendar.weekdays.#{parameters[:weekday_names]}.#{day}")}]"
+                              end
       end
 
       def weeks
