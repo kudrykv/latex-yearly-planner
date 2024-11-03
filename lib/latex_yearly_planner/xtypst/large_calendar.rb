@@ -72,17 +72,23 @@ module LatexYearlyPlanner
       end
 
       def weeks
-        month.weeks.map { |week| week_row(week) }.join(",\n")
+        month.weeks.map(&method(:week_row)).join(",\n")
       end
 
       def week_row(week)
-        row = week.days.map { |day| day ? "link(<#{day.id}>, [#{day.day}])" : '[]' }
+        row = week.days.map(&method(:linkify_day))
         return row.join(', ') unless parameters[:with_week_numbers]
 
         row.unshift(rotate_week(week)) if parameters[:week_number_placement] == 'left'
         row.push(rotate_week(week)) if parameters[:week_number_placement] == 'right'
 
         row.join(', ')
+      end
+
+      def linkify_day(day)
+        return '[]' unless day
+
+        "link(<#{day.id}>, [#{day.day}])"
       end
 
       def rotate_week(week)
