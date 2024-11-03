@@ -6,14 +6,6 @@ module LatexYearlyPlanner
       module Pages
         class Face < Page
           def generate
-            side_menu_object.highlight_side_menu_quarters = highlight_side_menu_quarters
-            side_menu_object.highlight_side_menu_months = highlight_side_menu_months
-
-            top_menu_object.title = title
-            top_menu_object.top_menu_month = top_menu_month
-            top_menu_object.extra_menu_items = extra_menu_items
-            top_menu_object.flags.concat(add_flags)
-
             <<~TYPST
               #grid(
                 columns: (#{heading_columns}),
@@ -73,11 +65,23 @@ module LatexYearlyPlanner
           end
 
           def side_menu_object
-            @side_menu_object ||= SideMenu.new(section_config:, i18n:)
+            side_menu = SideMenu.new(section_config:, i18n:)
+
+            side_menu.highlight_side_menu_quarters = highlight_side_menu_quarters
+            side_menu.highlight_side_menu_months = highlight_side_menu_months
+
+            side_menu
           end
 
           def top_menu_object
-            @top_menu_object ||= TopMenu.new(section_config:, i18n:)
+            top_menu = TopMenu.new(section_config:, i18n:)
+
+            top_menu.title = title
+            top_menu.top_menu_month = top_menu_month
+            top_menu.extra_menu_items = extra_menu_items
+            top_menu.flags.concat(add_flags)
+
+            top_menu
           end
 
           class SideMenu < Page
@@ -231,7 +235,9 @@ module LatexYearlyPlanner
               name = i18n.t('menu_calendar')
 
               return "link(<annual-#{annual_page_number(top_menu_month)}>, [#{name}])" if top_menu_month
-              return "table.cell(fill: black, link(<annual-1>, text(white)[#{name}]))" if flags.include? :highlight_calendar
+              if flags.include? :highlight_calendar
+                return "table.cell(fill: black, link(<annual-1>, text(white)[#{name}]))"
+              end
 
               "link(<annual-1>, [#{name}])"
             end
