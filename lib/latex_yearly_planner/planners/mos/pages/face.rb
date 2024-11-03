@@ -115,13 +115,17 @@ module LatexYearlyPlanner
             private
 
             def side_menu_columns
-              cols = ([mosnav[:quarter_width]] * params.quarters.size)
-                     .append('auto')
-                     .append([mosnav[:month_width]] * params.months.size)
+              cols = make_columns
 
               cols.reverse! if mosnav[:reverse_arrays]
 
               cols.join(', ')
+            end
+
+            def make_columns
+              ([mosnav[:quarter_width]] * params.quarters.size)
+                .append('auto')
+                .append([mosnav[:month_width]] * params.months.size)
             end
 
             def side_menu_content
