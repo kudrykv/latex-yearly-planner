@@ -23,14 +23,14 @@ module LatexYearlyPlanner
                 grid.cell(
                   rowspan: 2,
                   stroke: (right: 0.4pt),
-                  pad(right: 2mm, link(<#{day.id}>, text(#{params.get(:heading_size)})[#{day.day}]))
+                  pad(right: 2mm, link(<#{day.id}>, text(#{heading_size})[#{day.day}]))
                 ),
                 pad(
                   left: 2mm,
                   bottom: 1mm,
-                  [*#{i18n.t("calendar.weekdays.full.#{day.name.downcase}")}*]
+                  [*#{day_name}*]
                 ),
-                pad(left: 2mm, top: 1mm, [#{i18n.t("calendar.month.#{day.month.name.downcase}")}])
+                pad(left: 2mm, top: 1mm, [#{month_name}])
               )<dr-#{day.id}>]
             TYPST
           end
@@ -80,6 +80,18 @@ module LatexYearlyPlanner
 
           def my_daily_log
             "jot(#{params.get(:pattern)}, #{params.get(:my_daily_log, :height)}, [#{i18n.t('daily_reflect.log')}])"
+          end
+
+          def heading_size
+            params.get(:heading_size)
+          end
+
+          def day_name
+            i18n.t("calendar.weekdays.full.#{day.name.downcase}")
+          end
+
+          def month_name
+            i18n.t("calendar.month.#{day.month.name.downcase}")
           end
         end
       end
