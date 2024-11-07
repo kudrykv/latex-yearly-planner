@@ -25,14 +25,7 @@ module LatexYearlyPlanner
               grid(
                 columns: (1fr, 1fr),
                 rows: (#{first_name_height}, 1fr, #{name_height}, 1fr, #{name_height}, 1fr, #{name_height}, 1fr),
-                align(horizon, #{format_day(week.days[0])}), align(horizon, #{format_day(week.days[1])}),
-                grid.cell(colspan: 2, rect_pattern(#{params.get(:pattern)})),
-                align(horizon, #{format_day(week.days[2])}), align(horizon, #{format_day(week.days[3])}),
-                grid.cell(colspan: 2, rect_pattern(#{params.get(:pattern)})),
-                align(horizon, #{format_day(week.days[4])}), align(horizon, #{format_day(week.days[5])}),
-                grid.cell(colspan: 2, rect_pattern(#{params.get(:pattern)})),
-                align(horizon, #{format_day(week.days[6])}), [],
-                grid.cell(colspan: 2, rect_pattern(#{params.get(:pattern)})),
+                #{weekly_grid}
               )
             TYPST
           end
@@ -55,6 +48,16 @@ module LatexYearlyPlanner
             "#hide[~#{week.ids.map { |id| "<#{id}>" }.join(' ~')}]"
           end
 
+          def weekly_grid
+            week.days.map(&method(:format_day)).map(&method(:align_day)).push('[]')
+                .each_slice(2).map { |slice| slice.join(', ') }
+                .join(",\n#{jotting_space},\n") + ",\n#{jotting_space}"
+          end
+
+          def jotting_space
+            @jotting_space ||= "grid.cell(colspan: 2, rect_pattern(#{params.get(:pattern)}))"
+          end
+
           def format_day(day)
             dayname = day.strftime('%A')
             daynum = day.strftime('%-d')
@@ -66,9 +69,11 @@ module LatexYearlyPlanner
               return "[#{i18n.t("calendar.weekdays.full.#{dayname.downcase}")}, #{daynum}]"
             end
 
-            <<~TYPST
-              link(<#{day.id}>, [#{i18n.t("calendar.weekdays.full.#{dayname.downcase}")}, #{daynum}])
-            TYPST
+            "link(<#{day.id}>, [#{i18n.t("calendar.weekdays.full.#{dayname.downcase}")}, #{daynum}])"
+          end
+
+          def align_day(day)
+            "align(horizon, #{day})"
           end
         end
       end
