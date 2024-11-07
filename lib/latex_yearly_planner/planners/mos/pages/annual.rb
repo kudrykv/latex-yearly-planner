@@ -24,7 +24,7 @@ module LatexYearlyPlanner
           end
 
           def content
-            "vert_stack_bottom_outset(#{month_rows.map { |row| row_stack(row) }.append('[]').join(', ')})"
+            "vert_stack_bottom_outset(#{month_rows.map(&method(:row_stack)).join(', ')})"
           end
 
           def add_flags

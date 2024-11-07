@@ -44,11 +44,11 @@
 )
 
 
-#let vert_stack_bottom_outset(..content) = {
+#let vert_stack_bottom_outset(..content, last_content) = {
   stack(
     dir: ttb,
     spacing: 1fr,
-    ..content, []
+    ..content, stack(dir: ttb, spacing: 5mm, last_content, [])
   )
 }
 

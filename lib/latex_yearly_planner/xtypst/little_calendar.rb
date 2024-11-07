@@ -31,7 +31,7 @@ module LatexYearlyPlanner
         <<~TYPST
           table(
             columns: #{columns},
-            align: center,
+            align: center + horizon,
             inset: #{parameters[:inset]},
             stroke: 0mm,
             #{highlight_week}
