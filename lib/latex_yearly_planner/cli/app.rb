@@ -20,7 +20,7 @@ module LatexYearlyPlanner
              default: './out'
 
       def generate(path_to_yaml_file)
-        HighLevel::Planner::Generate.call(path_to_yaml_file:, **options)
+        HighLevel::Generate.call(path_to_yaml_file:, **options)
 
         puts 'Generated'
       end
