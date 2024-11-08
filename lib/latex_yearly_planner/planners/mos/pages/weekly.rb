@@ -59,17 +59,19 @@ module LatexYearlyPlanner
           end
 
           def format_day(day)
-            dayname = day.strftime('%A')
-            daynum = day.strftime('%-d')
-
             first_day = params.months.first.first_day
             last_day = params.months.last.last_day
 
-            if day < first_day || day > last_day
-              return "[#{i18n.t("calendar.weekdays.full.#{dayname.downcase}")}, #{daynum}]"
-            end
+            return day_label(day) if day < first_day || day > last_day
 
-            "link(<#{day.id}>, [#{i18n.t("calendar.weekdays.full.#{dayname.downcase}")}, #{daynum}])"
+            "link(<#{day.id}>, #{day_label(day)})"
+          end
+
+          def day_label(day)
+            dayname = day.strftime('%A')
+            daynum = day.strftime('%-d')
+
+            "[#{i18n.t("calendar.weekdays.full.#{dayname.downcase}")}, #{daynum}]"
           end
 
           def align_day(day)
