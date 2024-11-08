@@ -62,10 +62,10 @@ module LatexYearlyPlanner
             dayname = day.strftime('%A')
             daynum = day.strftime('%-d')
 
-            first_day = params.months.first.moment.beginning_of_month
-            last_day = params.months.last.moment.end_of_month
+            first_day = params.months.first.first_day
+            last_day = params.months.last.last_day
 
-            if day.moment < first_day || day.moment > last_day
+            if day < first_day || day > last_day
               return "[#{i18n.t("calendar.weekdays.full.#{dayname.downcase}")}, #{daynum}]"
             end
 

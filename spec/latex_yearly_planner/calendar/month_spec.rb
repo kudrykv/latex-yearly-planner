@@ -44,10 +44,6 @@ RSpec.describe LatexYearlyPlanner::Calendar::Month do
     it { expect(month.year).to eq(year) }
   end
 
-  describe '#mon' do
-    it { expect(month.mon).to eq(month_number) }
-  end
-
   describe '#quarter' do
     let(:quarter) { Quarter.new(weekday_start:, year:, number: 3) }
 

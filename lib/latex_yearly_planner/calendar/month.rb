@@ -33,10 +33,6 @@ module LatexYearlyPlanner
         moment.year
       end
 
-      def mon
-        moment.mon
-      end
-
       def quarter
         Quarter.new(weekday_start:, year: moment.year, number: ((moment.month - 1) / 3) + 1)
       end
@@ -53,6 +49,14 @@ module LatexYearlyPlanner
 
       def hash
         [moment, weekday_start].hash
+      end
+
+      def first_day
+        Day.new(weekday_start:, moment: moment.beginning_of_month)
+      end
+
+      def last_day
+        Day.new(weekday_start:, moment: moment.end_of_month)
       end
 
       alias eql? ==

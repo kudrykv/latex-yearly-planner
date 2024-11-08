@@ -55,6 +55,13 @@ module LatexYearlyPlanner
       def ==(other)
         other.is_a?(Day) && moment == other.moment && weekday_start == other.weekday_start
       end
+
+      def <=>(other)
+        return 0 if moment == other.moment
+        return -1 if moment < other.moment
+
+        1
+      end
     end
   end
 end
