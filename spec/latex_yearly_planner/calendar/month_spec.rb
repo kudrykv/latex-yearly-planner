@@ -50,6 +50,18 @@ RSpec.describe LatexYearlyPlanner::Calendar::Month do
     it { expect(month.quarter).to eq(quarter) }
   end
 
+  describe '#first_day' do
+    let(:first_day) { Day.new(weekday_start:, moment: Date.new(year, month_number, 1)) }
+
+    it { expect(month.first_day).to eq(first_day) }
+  end
+
+  describe '#last_day' do
+    let(:last_day) { Day.new(weekday_start:, moment: Date.new(year, month_number, 30)) }
+
+    it { expect(month.last_day).to eq(last_day) }
+  end
+
   describe '#==' do
     let(:other) { described_class.new(month: month_number, year:, weekday_start:) }
 
