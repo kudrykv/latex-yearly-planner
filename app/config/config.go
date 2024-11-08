@@ -20,6 +20,7 @@ type Config struct {
 	ClearTopRightCorner bool
 	AMPMTime            bool
 	AddLastHalfHour     bool
+	MonthLarge          bool
 
 	Pages Pages
 
