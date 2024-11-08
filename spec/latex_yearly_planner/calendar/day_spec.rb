@@ -60,4 +60,14 @@ RSpec.describe LatexYearlyPlanner::Calendar::Day do
 
     it { expect(day).to eq(other) }
   end
+
+  describe '#<=>' do
+    let(:future) { described_class.new(weekday_start:, moment: Date.new(2024, 11, 8)) }
+    let(:past) { described_class.new(weekday_start:, moment: Date.new(2024, 11, 6)) }
+    let(:same) { described_class.new(weekday_start:, moment: Date.new(2024, 11, 7)) }
+
+    it { expect(day <=> future).to eq(-1) }
+    it { expect(day <=> past).to eq(1) }
+    it { expect(day <=> same).to eq(0) }
+  end
 end
