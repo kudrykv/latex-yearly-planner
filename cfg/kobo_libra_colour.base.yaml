@@ -22,7 +22,7 @@ layout:
   numbers:
     arraystretch: 1
     quarterlylines: 42
-    weeklylines: 12
+    weeklylines: 6
     dailytodos: 8
     dailynotes: 17
     dailypersonal: 6
@@ -49,8 +49,8 @@ layout:
     fivecolsep: 1pt
     monthlycellheight: 40pt
     notesindexcellheight: 4cm
-    headerresizebox: 2mm
-    headersidequarterswidth: 2.5cm
+    headerresizebox: 4mm
+    headersidequarterswidth: 3.0cm
     headersidemonthswidth: 10cm
     quarterlyspring: \myDummyQ
     monthlyspring: \vskip.5mm
