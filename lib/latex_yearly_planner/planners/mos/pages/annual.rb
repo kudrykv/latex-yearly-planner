@@ -14,7 +14,7 @@ module LatexYearlyPlanner
           end
 
           def title
-            <<~TYPST
+            <<~TYPST.squish
               text(#{heading_size})[
                 #{first_month_name} #{first_year} ---
                 #{last_month_name} #{last_year}
