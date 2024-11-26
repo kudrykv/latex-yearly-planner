@@ -7,9 +7,9 @@ import (
 )
 
 var Daily = DailyStuff("", "")
-var DailyReflect = DailyStuff("Reflect", "Reflect")
+var DailyReflect = DailyStuff("Reflect", "Reflect 1")
 var DailyNotes = DailyStuff("More", "Notes")
-var DailyReflectExtended = DailyStuffExtended("Reflect Extended", "Extended Log")
+var DailyReflectExtended = DailyStuffExtended("Reflect Extended", "Reflect")
 
 func DailyStuff(prefix, leaf string) func(cfg config.Config, tpls []string) (page.Modules, error) {
 	return func(cfg config.Config, tpls []string) (page.Modules, error) {
@@ -74,11 +74,11 @@ func DailyStuffExtended(prefix, leaf string) func(cfg config.Config, tpls []stri
 									"Week":         week,
 									"Day":          day,
 									"PageNum":      i + 1,
-									"Breadcrumb":   day.BreadcrumbExtended(prefix, leaf, i+1, cfg.ClearTopRightCorner && len(leaf) > 0),
+									"Breadcrumb":   day.BreadcrumbExtended(prefix, leaf, i+2, cfg.ClearTopRightCorner && len(leaf) > 0),
 									"HeadingMOS":   day.HeadingMOS(prefix, leaf),
 									"SideQuarters": year.SideQuarters(day.Quarter()),
 									"SideMonths":   year.SideMonths(day.Month()),
-									"Extra":        day.PrevNextExtended(prefix, i+1, cfg.Layout.Numbers.DailyReflectExtra).WithTopRightCorner(cfg.ClearTopRightCorner),
+									"Extra":        day.PrevNextExtended(prefix, i, cfg.Layout.Numbers.DailyReflectExtra).WithTopRightCorner(cfg.ClearTopRightCorner),
 									"Extra2":       extra2(cfg.ClearTopRightCorner, false, false, week, 0),
 								},
 							})

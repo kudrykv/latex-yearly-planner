@@ -24,12 +24,14 @@ layout:
     dailynotes: 27
     dailydiarygrateful: 4
     dailydiarybest: 4
-    dailydiarylog: 26
+    dailydiarylog: 22
     notesindexpages: 3
     notesonpage: 38
     dotheightfull: 38
     dotwidthtwothirds: 19
     dotwidthfull: 29
+    dailyreflectextra: 2  # Number of additional reflect pages per day
+
 
   lengths:
     tabcolsep: 3.5pt

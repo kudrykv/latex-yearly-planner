@@ -23,6 +23,8 @@
 \newcommand{\myNumDailyPersonal}{ {{- $numbers.DailyPersonal -}} }
 \newcommand{\myNumTodoLinesInTodoPage}{ {{- $numbers.TodoLinesInTodoPage -}} }
 
+\newcommand{\myNumDailyReflectExtra}{ {{- $numbers.DailyReflectExtra -}} }
+
 \newlength{\myLenTabColSep}
 \newlength{\myLenLineThicknessDefault}
 \newlength{\myLenLineThicknessThick}

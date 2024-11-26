@@ -216,22 +216,66 @@ func (d Day) BreadcrumbExtended(prefix string, leaf string, pageNum int, shorten
 		header.NewMonthItem(d.Time.Month()).Shorten(shorten),
 		header.NewTextItem("Week " + strconv.Itoa(wn)).RefPrefix(wpref),
 		dayItem,
-		header.NewTextItem(fmt.Sprintf("%s %d", leaf, pageNum+1)).RefText(prefix + d.ref()).Ref(true),
+		// Add hypertarget for extended pages
+		header.NewTextItem(fmt.Sprintf("%s %d", leaf, pageNum)).
+			RefText(fmt.Sprintf("%s%d%s", prefix, pageNum, d.ref())).
+			Ref(true),
 	}
 
 	return items.Table(true)
 }
-
 func (d Day) PrevNextExtended(prefix string, pageNum int, maxPages int) header.Items {
+	// Adjust pageNum to match BreadcrumbExtended's numbering
+	pageNum++ // Now pageNum starts at 1 for first extended page
+
 	items := header.Items{}
 
-	if pageNum > 1 {
-		items = append(items, header.NewTextItem("Prev"))
+	// For Prev button
+	if pageNum > 0 {
+		if pageNum == 1 {
+			// Link to main Reflect page (when on first extended page)
+			items = append(items, header.NewTextItem("Prev").
+				RefText(fmt.Sprintf("Reflect%s", d.ref())))
+		} else {
+			// Link to previous Extended page
+			items = append(items, header.NewTextItem("Prev").
+				RefText(fmt.Sprintf("%s%d%s", prefix, pageNum, d.ref())))
+		}
 	}
 
+	// For Next button
 	if pageNum < maxPages {
-		items = append(items, header.NewTextItem("Next"))
+		items = append(items, header.NewTextItem("Next").
+			RefText(fmt.Sprintf("%s%d%s", prefix, pageNum+2, d.ref())))
 	}
 
 	return items
 }
+
+// func (d Day) PrevNextExtended(prefix string, pageNum int, maxPages int) header.Items {
+// 	items := header.Items{}
+
+// 	if pageNum > 0 {
+// 		items = append(items, header.NewTextItem("Prev").RefText(fmt.Sprintf("%s%s", prefix, d.ref())))
+// 	}
+
+// 	if pageNum < maxPages-1 {
+// 		items = append(items, header.NewTextItem("Next").RefText(fmt.Sprintf("%s%s", prefix, d.Add(1).ref())))
+// 	}
+
+// 	return items
+// }
+
+// func (d Day) PrevNextExtended(prefix string, pageNum int, maxPages int) header.Items {
+// 	items := header.Items{}
+
+// 	if pageNum > 0 { // Changed from pageNum > 1
+// 		items = append(items, header.NewTextItem("Prev").RefText(fmt.Sprintf("%s%sPage%d", prefix, d.ref(), pageNum-1)))
+// 	}
+
+// 	if pageNum < maxPages-1 { // Changed from pageNum < maxPages
+// 		items = append(items, header.NewTextItem("Next").RefText(fmt.Sprintf("%s%sPage%d", prefix, d.ref(), pageNum+1)))
+// 	}
+
+// 	return items
+// }

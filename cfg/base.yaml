@@ -1,6 +1,6 @@
 weekstart: 1
 ampmtime: false
-dotted: true
+dotted: false
 calafterschedule: false
 addlasthalfhour: true
 
@@ -38,7 +38,7 @@ layout:
     dotheightfull: 36
     dotwidthfull: 30
     dotwidthtwothirds: 20
-    dailyreflectextra: 3  # Number of additional reflect pages per day
+    dailyreflectextra: 6  # Number of additional reflect pages per day
 
 
   lengths:

@@ -1,0 +1,13 @@
+calafterschedule: true
+addlasthalfhour: false
+ampmtime: true
+
+layout:
+  numbers:
+    dailybottomhour: 8
+    dailytophour: 21
+    dailytodos: 10
+    dailynotes: 24
+  lengths:
+    linethicknessdefault: .4pt
+    linethicknessthick: .8pt

@@ -6,5 +6,5 @@
 \myMash{\myNumDailyDiaryBest}{\myNumDotWidthFull}
 \medskip
 
-\myUnderline{Daily log}
+\myUnderline{Daily Log @\hfill{\myLineHeightButLine$\square$ \textit{uploaded}}}
 \myMash{\myNumDailyDiaryLog}{\myNumDotWidthFull}
