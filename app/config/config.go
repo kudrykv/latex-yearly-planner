@@ -82,6 +82,7 @@ type Numbers struct {
 	DailyDiaryGrateful  int
 	DailyDiaryBest      int
 	DailyDiaryLog       int
+	DailyReflectExtra   int
 	TodoLinesInTodoPage int
 	IndexMeetingNotes   int
 	NotesIndexPages     int

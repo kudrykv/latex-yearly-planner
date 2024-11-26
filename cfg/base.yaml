@@ -38,6 +38,8 @@ layout:
     dotheightfull: 36
     dotwidthfull: 30
     dotwidthtwothirds: 20
+    dailyreflectextra: 3  # Number of additional reflect pages per day
+
 
   lengths:
     tabcolsep: 3.5pt

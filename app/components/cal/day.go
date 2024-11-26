@@ -1,6 +1,7 @@
 package cal
 
 import (
+	"fmt"
 	"math"
 	"strconv"
 	"strings"
@@ -112,12 +113,26 @@ func (d Day) Prev() Day {
 	return d.Add(-1)
 }
 
+// func (d Day) NextExists() bool {
+// 	return d.Time.Month() < time.December || d.Time.Day() < 31
+// }
+
 func (d Day) NextExists() bool {
-	return d.Time.Month() < time.December || d.Time.Day() < 31
+	currentYear := d.Time.Year()
+	currentMonth := d.Time.Month()
+	lastDay := time.Date(currentYear, currentMonth+1, 0, 0, 0, 0, 0, time.UTC).Day()
+
+	return d.Time.Month() < time.December ||
+		(d.Time.Month() == time.December && d.Time.Day() < lastDay)
 }
 
+// func (d Day) PrevExists() bool {
+// 	return d.Time.Month() > time.January || d.Time.Day() > 1
+// }
+
 func (d Day) PrevExists() bool {
-	return d.Time.Month() > time.January || d.Time.Day() > 1
+	return d.Time.Month() > time.January ||
+		(d.Time.Month() == time.January && d.Time.Day() > 1)
 }
 
 func (d Day) Hours(bottom, top int) Days {
@@ -180,4 +195,43 @@ func (d Day) HeadingMOS(prefix, leaf string) string {
 
 	contents := strings.Join(r1, ` & `) + `\\` + "\n" + strings.Join(r2, ` & `)
 	return tex.Hypertarget(prefix+d.ref(), "") + tex.Tabular("@{}"+ll+"l|l"+rl, contents)
+}
+
+func (d Day) BreadcrumbExtended(prefix string, leaf string, pageNum int, shorten bool) string {
+	wpref := ""
+	_, wn := d.Time.ISOWeek()
+	if wn > 50 && d.Time.Month() == time.January {
+		wpref = "fw"
+	}
+
+	dayLayout := "Monday, 2"
+	if shorten {
+		dayLayout = "Mon, 2"
+	}
+
+	dayItem := header.NewTextItem(d.Time.Format(dayLayout)).RefText(d.Time.Format(time.RFC3339))
+	items := header.Items{
+		header.NewIntItem(d.Time.Year()),
+		header.NewTextItem("Q" + strconv.Itoa(int(math.Ceil(float64(d.Time.Month())/3.)))),
+		header.NewMonthItem(d.Time.Month()).Shorten(shorten),
+		header.NewTextItem("Week " + strconv.Itoa(wn)).RefPrefix(wpref),
+		dayItem,
+		header.NewTextItem(fmt.Sprintf("%s %d", leaf, pageNum+1)).RefText(prefix + d.ref()).Ref(true),
+	}
+
+	return items.Table(true)
+}
+
+func (d Day) PrevNextExtended(prefix string, pageNum int, maxPages int) header.Items {
+	items := header.Items{}
+
+	if pageNum > 1 {
+		items = append(items, header.NewTextItem("Prev"))
+	}
+
+	if pageNum < maxPages {
+		items = append(items, header.NewTextItem("Next"))
+	}
+
+	return items
 }
