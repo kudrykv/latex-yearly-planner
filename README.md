@@ -27,15 +27,16 @@ See the `compiled` directory, and also [discussions](https://github.com/kudrykv/
 3. Check the `out` directory for the generated planner PDF. To move it to your device, follow the manufacturer's instructions on how to load a PDF on your device.
 
 ## Preview examples
-...Coming soon
+![01_annual](https://github.com/user-attachments/assets/a3cbc19a-b38c-473e-8a9d-b958e387497e)
+![01_annual_key](https://github.com/user-attachments/assets/bdbf3b33-30ea-4704-b9fe-69c82c274456)
+![02_quarterly](https://github.com/user-attachments/assets/044ef1b4-a9aa-4e2b-9d53-f6511d7d605b)
+![03_monthly](https://github.com/user-attachments/assets/437c9c47-ea99-4047-a3c4-a73204e81e8b)
+![04_weekly](https://github.com/user-attachments/assets/e9e0ef82-e66a-432a-81ec-89ff590b5c7b)
+![05_daily](https://github.com/user-attachments/assets/1218b4c6-92bc-4123-baa0-580b96a1283c)
+![06_daily_reflect](https://github.com/user-attachments/assets/08dbb57e-d141-43bb-a04b-f5ac3886401b)
+![06_daily_reflect_extended](https://github.com/user-attachments/assets/34c4f5cc-001d-44d9-8db1-3d08285de3f6)
+![07_daily_notes](https://github.com/user-attachments/assets/5c8abd17-4f49-4484-9244-b43e6963ae59)
+![08_notes_index](https://github.com/user-attachments/assets/ac1a6563-bc11-4a59-be15-db33d4284fae)
+![09_notes](https://github.com/user-attachments/assets/c7f63cea-2b3c-401d-8d5a-c43bc05397d3)
 
-...Regular year page
-...Key year page
-...Quarterly page
-...Monthly page
-...Weekly page
-...Daily page
-...Daily Reflect 1, 2, etc pages
-...Notes Index page
-...Notes page
 
