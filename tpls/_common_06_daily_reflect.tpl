@@ -7,8 +7,8 @@
 \medskip
 
 {{ if $.Cfg.DailyReflectShowLocationUploaded -}}
-    \myUnderline{Daily log\hfill\textit{location:}\hfill\hfill\hfill{\myLineHeightButLine$\square$ \textit{uploaded}}}
+    \myUnderline{Journal\hfill\textit{location:}\hfill\hfill\hfill{\myLineHeightButLine$\square$ \textit{uploaded}} \vskip -2pt}
 {{ else -}}
-    \myUnderline{Daily log}
+    \myUnderline{Journal \vspace{2pt}}
 {{ end }}
 \myMash{\myNumDailyDiaryLog}{\myNumDotWidthFull}

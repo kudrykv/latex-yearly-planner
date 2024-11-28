@@ -1,4 +1,4 @@
-\myUnderline{Daily log}
+\myUnderline{Journal \vspace{2pt}}
 {{ if $.Cfg.Dotted -}} 
 \vskip-.5\myLenLineHeightButLine\myMash{\myNumDotHeightFull}{\myNumDotWidthFull} 
 {{- else -}}
