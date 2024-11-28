@@ -247,6 +247,9 @@ func (d Day) PrevNextExtended(prefix string, pageNum int, maxPages int) header.I
 	if pageNum < maxPages {
 		items = append(items, header.NewTextItem("Next").
 			RefText(fmt.Sprintf("%s%d%s", prefix, pageNum+2, d.ref())))
+	} else if pageNum >= maxPages {
+		items = append(items, header.NewTextItem("Reflect 1").
+			RefText(fmt.Sprintf("Reflect%s", d.ref())))
 	}
 
 	return items

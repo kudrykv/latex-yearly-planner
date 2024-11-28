@@ -23,7 +23,8 @@ func Annual(cfg config.Config, tpls []string) (page.Modules, error) {
 			"SideMonths":   year.SideMonths(0),
 			"Extra": header.Items{header.NewTextItem("Notes").RefText("Notes Index")}.
 				WithTopRightCorner(cfg.ClearTopRightCorner),
-			"Extra2": extra2(cfg.ClearTopRightCorner, true, false, nil, 0),
+			"Extra2":            extra2(cfg.ClearTopRightCorner, true, false, nil, 0),
+			"ShowKeyOnYearPage": cfg.ShowKeyOnYearPage,
 		},
 	}}, nil
 }

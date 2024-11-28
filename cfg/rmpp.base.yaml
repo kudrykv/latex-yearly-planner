@@ -1,0 +1,49 @@
+cleartoprightcorner: true
+
+layout:
+  paper:
+    # RMPP is 18.01cm x 23.96cm, but this makes objects too small, so we'll use the RM2 size
+    # width: 18.01cm
+    # height: 23.96cm
+
+    width: 15.6cm
+    height: 20.9cm
+
+    reversemargins: true
+    marginparwidth: 1cm
+    marginparsep: 4.5mm
+
+    margin:
+      top: 0.2cm
+      bottom: 0.2cm
+      left: 1.2cm
+      right: 0.2cm
+
+  numbers:
+    quarterlylines: 38
+    weeklylines: 11
+    dailybottomhour: 6
+    dailytophour: 23
+    dailytodos: 8
+    dailynotes: 27
+    dailydiarygrateful: 4
+    dailydiarybest: 4
+    dailydiarylog: 26
+    notesindexpages: 3
+    notesonpage: 38
+    dotheightfull: 38
+    dotwidthtwothirds: 19
+    dotwidthfull: 29
+    dailyreflectextra: 4  # Number of additional reflect pages per day
+
+
+  lengths:
+    tabcolsep: 3.5pt
+    linethicknessdefault: 0.4pt
+    linethicknessthick: 0.8pt
+    lineheightbutline: \dimexpr5mm-.4pt
+    twocolsep: 5pt
+    tricolsep: 5pt
+    monthlycellheight: 55pt
+    notesindexcellheight: 1.45cm
+    quarterlyspring: \textcolor{white}{..}

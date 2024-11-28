@@ -13,7 +13,6 @@ _configurations=(
 
   1 "cfg/base.yaml,cfg/rm2.base.yaml,cfg/template_breadcrumb.yaml,cfg/rm2.breadcrumb.default.yaml"                                          "rm2.breadcrumb.default"
   1 "cfg/base.yaml,cfg/rm2.base.yaml,cfg/template_breadcrumb.yaml,cfg/rm2.breadcrumb.default.yaml,cfg/rm2.breadcrumb.default.dailycal.yaml" "rm2.breadcrumb.default.dailycal"
-  1 "cfg/base.yaml,cfg/rm2.base.yaml,cfg/template_breadcrumb.yaml,cfg/rm2.breadcrumb.default.yaml,cfg/rm2.breadcrumb.default.dailycal.yaml,cfg/rm2.breadcrumb.lined.default.ampm.dailycal.reflectextra.yaml" "rm2.breadcrumb.lined.default.ampm.dailycal.reflectextra"
   2 "cfg/base.yaml,cfg/rm2.base.yaml,cfg/template_months_on_side.yaml,cfg/rm2.mos.default.yaml"                                             "rm2.mos.default"
   2 "cfg/base.yaml,cfg/rm2.base.yaml,cfg/template_months_on_side.yaml,cfg/rm2.mos.default.yaml,cfg/rm2.mos.default.dailycal.yaml"           "rm2.mos.default.dailycal"
 
@@ -29,6 +28,9 @@ _configurations=(
 
   1 "cfg/base.yaml,cfg/template_breadcrumb.yaml,cfg/kscribe.breadcrumb.default.yaml,cfg/kscribe.breadcrumb.default.yaml" "kscribe.breadcrumb.default"
   1 "cfg/base.yaml,cfg/template_breadcrumb.yaml,cfg/kscribe.breadcrumb.default.yaml,cfg/kscribe.breadcrumb.default.dailycal.yaml" "kscribe.breadcrumb.default.dailycal"
+
+  2 "cfg/base.yaml,cfg/rmpp.base.yaml,cfg/template_breadcrumb.yaml,cfg/rm2.breadcrumb.default.yaml,cfg/rm2.breadcrumb.default.dailycal.yaml,cfg/rm2.breadcrumb.lined.default.ampm.dailycal.reflectextra.yaml" "rmpp.breadcrumb.lined.default.ampm.dailycal.reflectextra"
+
 )
 
 _configurations_len=${#_configurations[@]}

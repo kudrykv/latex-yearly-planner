@@ -13,13 +13,17 @@ import (
 type Config struct {
 	Debug Debug
 
-	Year                int `env:"PLANNER_YEAR"`
-	WeekStart           time.Weekday
-	Dotted              bool
-	CalAfterSchedule    bool
-	ClearTopRightCorner bool
-	AMPMTime            bool
-	AddLastHalfHour     bool
+	Year                             int `env:"PLANNER_YEAR"`
+	Title                            string
+	WeekStart                        time.Weekday
+	Dotted                           bool
+	CalAfterSchedule                 bool
+	CalAfterScheduleHideMonth        bool
+	ShowKeyOnYearPage                bool
+	DailyReflectShowLocationUploaded bool
+	ClearTopRightCorner              bool
+	AMPMTime                         bool
+	AddLastHalfHour                  bool
 
 	Pages Pages
 

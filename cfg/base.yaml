@@ -1,7 +1,11 @@
+title: "" # Title at top of first page
 weekstart: 1
 ampmtime: false
 dotted: false
 calafterschedule: false
+calafterschedulehidemonth: false  # When true, hides month heading in daily page mini calendar
+showkeyonyearpage: false
+dailyreflectshowlocationuploaded: false
 addlasthalfhour: true
 
 layout:
@@ -57,5 +61,5 @@ layout:
     dailyspring: \textcolor{white}{.}
 
   colors:
-    gray: gray
-    lightgray: gray!50
+    gray: gray!90
+    lightgray: gray!60
