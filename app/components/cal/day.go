@@ -1,6 +1,7 @@
 package cal
 
 import (
+	"fmt"
 	"math"
 	"strconv"
 	"strings"
@@ -112,12 +113,26 @@ func (d Day) Prev() Day {
 	return d.Add(-1)
 }
 
+// func (d Day) NextExists() bool {
+// 	return d.Time.Month() < time.December || d.Time.Day() < 31
+// }
+
 func (d Day) NextExists() bool {
-	return d.Time.Month() < time.December || d.Time.Day() < 31
+	currentYear := d.Time.Year()
+	currentMonth := d.Time.Month()
+	lastDay := time.Date(currentYear, currentMonth+1, 0, 0, 0, 0, 0, time.UTC).Day()
+
+	return d.Time.Month() < time.December ||
+		(d.Time.Month() == time.December && d.Time.Day() < lastDay)
 }
 
+// func (d Day) PrevExists() bool {
+// 	return d.Time.Month() > time.January || d.Time.Day() > 1
+// }
+
 func (d Day) PrevExists() bool {
-	return d.Time.Month() > time.January || d.Time.Day() > 1
+	return d.Time.Month() > time.January ||
+		(d.Time.Month() == time.January && d.Time.Day() > 1)
 }
 
 func (d Day) Hours(bottom, top int) Days {
@@ -181,3 +196,89 @@ func (d Day) HeadingMOS(prefix, leaf string) string {
 	contents := strings.Join(r1, ` & `) + `\\` + "\n" + strings.Join(r2, ` & `)
 	return tex.Hypertarget(prefix+d.ref(), "") + tex.Tabular("@{}"+ll+"l|l"+rl, contents)
 }
+
+func (d Day) BreadcrumbExtended(prefix string, leaf string, pageNum int, shorten bool) string {
+	wpref := ""
+	_, wn := d.Time.ISOWeek()
+	if wn > 50 && d.Time.Month() == time.January {
+		wpref = "fw"
+	}
+
+	dayLayout := "Monday, 2"
+	if shorten {
+		dayLayout = "Mon, 2"
+	}
+
+	dayItem := header.NewTextItem(d.Time.Format(dayLayout)).RefText(d.Time.Format(time.RFC3339))
+	items := header.Items{
+		header.NewIntItem(d.Time.Year()),
+		header.NewTextItem("Q" + strconv.Itoa(int(math.Ceil(float64(d.Time.Month())/3.)))),
+		header.NewMonthItem(d.Time.Month()).Shorten(shorten),
+		header.NewTextItem("Week " + strconv.Itoa(wn)).RefPrefix(wpref),
+		dayItem,
+		// Add hypertarget for extended pages
+		header.NewTextItem(fmt.Sprintf("%s %d", leaf, pageNum)).
+			RefText(fmt.Sprintf("%s%d%s", prefix, pageNum, d.ref())).
+			Ref(true),
+	}
+
+	return items.Table(true)
+}
+func (d Day) PrevNextExtended(prefix string, pageNum int, maxPages int) header.Items {
+	// Adjust pageNum to match BreadcrumbExtended's numbering
+	pageNum++ // Now pageNum starts at 1 for first extended page
+
+	items := header.Items{}
+
+	// For Prev button
+	if pageNum > 0 {
+		if pageNum == 1 {
+			// Link to main Reflect page (when on first extended page)
+			items = append(items, header.NewTextItem("Prev").
+				RefText(fmt.Sprintf("Reflect%s", d.ref())))
+		} else {
+			// Link to previous Extended page
+			items = append(items, header.NewTextItem("Prev").
+				RefText(fmt.Sprintf("%s%d%s", prefix, pageNum, d.ref())))
+		}
+	}
+
+	// For Next button
+	if pageNum < maxPages {
+		items = append(items, header.NewTextItem("Next").
+			RefText(fmt.Sprintf("%s%d%s", prefix, pageNum+2, d.ref())))
+	} else if pageNum >= maxPages {
+		items = append(items, header.NewTextItem("Reflect 1").
+			RefText(fmt.Sprintf("Reflect%s", d.ref())))
+	}
+
+	return items
+}
+
+// func (d Day) PrevNextExtended(prefix string, pageNum int, maxPages int) header.Items {
+// 	items := header.Items{}
+
+// 	if pageNum > 0 {
+// 		items = append(items, header.NewTextItem("Prev").RefText(fmt.Sprintf("%s%s", prefix, d.ref())))
+// 	}
+
+// 	if pageNum < maxPages-1 {
+// 		items = append(items, header.NewTextItem("Next").RefText(fmt.Sprintf("%s%s", prefix, d.Add(1).ref())))
+// 	}
+
+// 	return items
+// }
+
+// func (d Day) PrevNextExtended(prefix string, pageNum int, maxPages int) header.Items {
+// 	items := header.Items{}
+
+// 	if pageNum > 0 { // Changed from pageNum > 1
+// 		items = append(items, header.NewTextItem("Prev").RefText(fmt.Sprintf("%s%sPage%d", prefix, d.ref(), pageNum-1)))
+// 	}
+
+// 	if pageNum < maxPages-1 { // Changed from pageNum < maxPages
+// 		items = append(items, header.NewTextItem("Next").RefText(fmt.Sprintf("%s%sPage%d", prefix, d.ref(), pageNum+1)))
+// 	}
+
+// 	return items
+// }

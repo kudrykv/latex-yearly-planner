@@ -1,7 +1,11 @@
+title: "" # Title at top of first page
 weekstart: 1
 ampmtime: false
-dotted: true
+dotted: false
 calafterschedule: false
+calafterschedulehidemonth: false  # When true, hides month heading in daily page mini calendar
+showkeyonyearpage: false
+dailyreflectshowlocationuploaded: false
 addlasthalfhour: true
 
 layout:
@@ -38,6 +42,8 @@ layout:
     dotheightfull: 36
     dotwidthfull: 30
     dotwidthtwothirds: 20
+    dailyreflectextra: 6  # Number of additional reflect pages per day
+
 
   lengths:
     tabcolsep: 3.5pt
@@ -55,5 +61,5 @@ layout:
     dailyspring: \textcolor{white}{.}
 
   colors:
-    gray: gray
-    lightgray: gray!50
+    gray: gray!90
+    lightgray: gray!60
