@@ -9,7 +9,7 @@ The "mos" version might not work correctly currently.
 2. Option to customize Reflect page contents (spots for Journal location and uploaded status)
 3. Option to hide the name of the month above the mini calendar on Daily pages to allow room for more hours on the schedule
 4. Option to add a title to the first/Cover page
-5. Option to add a key/legend to the Year page (used to indicate which days have a certain property, such as days with journal entries)
+5. Option to add a key/legend to the Year page (used to indicate which days have a certain property, such as days with journal entries, by using the highlighter feature on the tablet)
 6. Added margin and formatting YAML file specific for Remarkable Paper Pro tablet
 
 ## Quick Start Guide
