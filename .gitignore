@@ -1,3 +1,5 @@
 *.pdf
+!compiled/*.pdf
 .vscode
 result
+out/

@@ -3,3 +3,5 @@
 {{- else -}}
   {{ template "_common_04_weekly_lined.tpl" dict "Cfg" .Cfg "Body" .Body }}
 {{- end }}
+
+\vspace{0.4cm}

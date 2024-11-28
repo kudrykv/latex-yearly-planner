@@ -26,6 +26,7 @@
 
 \hypersetup{
     {{- if not .Cfg.Debug.ShowLinks}}hidelinks=true{{end -}}
+    pdfborder={10 10 0}
 }
 
 

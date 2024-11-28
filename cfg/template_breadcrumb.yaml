@@ -40,6 +40,9 @@ pages:
       - funcname: daily_reflect
         tpls:
           - breadcrumb_06_daily_reflect.tpl
+      - funcname: daily_reflect_extended
+        tpls:
+          - breadcrumb_06_daily_reflect_extended.tpl
 
   - name: daily_notes
     renderblocks:
