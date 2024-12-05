@@ -41,4 +41,17 @@ RSpec.describe LatexYearlyPlanner::Planners::Mos::Pages::Annual do
       TYPST
     end
   end
+
+  describe '#content' do
+    let(:little_calendar_params) { {} }
+
+    before do
+      allow(section_config).to receive(:params).and_return(config_operator)
+      allow(config_operator).to receive(:object).with(:little_calendar).and_return(little_calendar_params)
+    end
+
+    it 'checks content' do
+      expect(page.set(month_rows).content).to eq File.read('./spec/fixtures/pages/annual/annual.txt')
+    end
+  end
 end
