@@ -70,15 +70,15 @@ en:
   top_priorities: Top priorities
   daily_notes: Notes
   more_daily_notes: More
-  personal_notes: Personal
+  personal_notes: Goals
 
   daily_reflect:
     name: Reflect
 
-    goals: Goals
-    grateful: Things I'm grateful for
+    goals: Something I can do better tomorrow
+    grateful: Something I'm grateful for
     best_thing: Best thing that happened today
-    log: Daily log
+    log: Something I did well today
 
   todo:
     index: Todo index

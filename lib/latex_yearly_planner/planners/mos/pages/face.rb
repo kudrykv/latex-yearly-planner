@@ -94,6 +94,7 @@ module LatexYearlyPlanner
             def to_typst
               <<~TYPST
                 pad(
+                  top: 7mm,
                   left: #{mosnav[:left_pad]},
                   right: #{mosnav[:right_pad]},
                   rotate(

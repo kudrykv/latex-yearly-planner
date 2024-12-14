@@ -71,6 +71,7 @@ module LatexYearlyPlanner
       def month_name
         name = i18n.t("calendar.month.#{month.name.downcase}")
         return name unless parameters[:link_to_month]
+
         "link(<#{month.id}>, [#{name}])"
       end
 
