@@ -10,11 +10,11 @@ compiler:
 document:
   layout:
     dimensions:
-      width: 156mm
-      height: 209mm
+      width: 119mm
+      height: 158mm
 
     margin:
-      top: 2mm
+      top: 10mm
       bottom: 0mm
       left: 0mm
       right: 5mm
@@ -29,7 +29,7 @@ planner:
     weekday_start: Monday
 
     heading_size: 16pt
-    pattern: lined
+    pattern: dotted
 
   objects:
     mos_layout:
@@ -62,7 +62,7 @@ planner:
 
     large_calendar:
       with_week_numbers: true
-      week_number_placement: left
+      week_number_placement: right
       weekday_names: short
       heading_height: 6mm
       week_row_height: 20mm
@@ -79,11 +79,10 @@ planner:
     - annual:
         enabled: true
         parameters:
-          months_per_page: 12
-          months_per_row: 3
+          months_per_page: 6
+          months_per_row: 2
         objects:
           little_calendar:
-            inset: 1.1mm
             take_full_width: false
 
     - quarterly:
@@ -109,18 +108,19 @@ planner:
         parameters:
           left_column_width: 4.5cm
 
-          left_column_items: [ schedule, little_calendar ]
-          right_column_items: [ top_priorities, notes ]
+          left_column_items: [ schedule ]
+          right_column_items: [ top_priorities, notes, personal_notes ]
 
           schedule_strftime: '%k'
-          schedule_from_hour: 7
-          schedule_to_hour: 21
+          schedule_from_hour: 8
+          schedule_to_hour: 20
           schedule_trailing_30min: false
 
           gap_width: 2mm
-          priorities_number: 10
+          priorities_number: 5
 
-          notes_height: 100%
+          notes_height: 4cm
+          personal_notes_height: 100%
 
     - daily_notes:
         enabled: true
@@ -131,21 +131,21 @@ planner:
           left_column_width: 1fr
           gap_width: 5mm
 
-          left_column_items: [  ]
-          right_column_items: [  ]
-          bottom_merged: [ my_grateful, my_daily_log, my_goals ]
+          left_column_items: [ my_goals, my_best_thing ]
+          right_column_items: [ my_grateful ]
+          bottom_merged: [ my_daily_log ]
 
           my_goals:
-            height: 6cm
+            height: 2.5cm
 
           my_best_thing:
-            height: 5cm
+            height: 2cm
 
           my_grateful:
-            height: 3cm
+            height: 5.5cm
 
           my_daily_log:
-            height: 6cm
+            height: 100%
 
     - todo_index:
         enabled: true
