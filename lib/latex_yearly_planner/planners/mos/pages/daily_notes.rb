@@ -24,7 +24,7 @@ module LatexYearlyPlanner
                 grid.cell(
                   rowspan: 2,
                   stroke: (right: 0.4pt),
-                  pad(right: 2mm, link(<#{day.id}-#{page_number}>, text(#{heading_size})[#{day.day}]))
+                  pad(right: 2mm, link(<#{day.id}>, text(#{heading_size})[#{day.day}]))
                 ),
                 pad(
                   left: 2mm,
@@ -32,7 +32,7 @@ module LatexYearlyPlanner
                   [*#{day_name}*]
                 ),
                 pad(left: 2mm, top: 1mm, [#{month_name}]),
-              )<mdn-#{day.id}>]
+              )<mdn-#{day.id}-#{page_number}>]
             TYPST
           end
 
