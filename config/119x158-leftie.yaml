@@ -124,6 +124,8 @@ planner:
 
     - daily_notes:
         enabled: true
+        parameters:
+          pages_per_day: 3
 
     - daily_reflect:
         enabled: true
