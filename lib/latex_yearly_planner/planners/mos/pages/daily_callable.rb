@@ -84,7 +84,7 @@ module LatexYearlyPlanner
           def more_daily_notes
             return '' unless params.section_enabled?(:daily_notes)
 
-            " | #link(<mdn-#{day.id}>, [#{i18n.t('more_daily_notes')}])"
+            " | #link(<mdn-#{day.id}-1>, [#{i18n.t('more_daily_notes')}])"
           end
 
           def daily_reflect

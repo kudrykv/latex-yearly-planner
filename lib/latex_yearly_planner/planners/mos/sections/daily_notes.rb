@@ -6,7 +6,15 @@ module LatexYearlyPlanner
       module Sections
         class DailyNotes < Section
           def pages
-            params.days
+            params.days.map do |day|
+              pages_per_day.times.map { |index| [day, index + 1] }
+            end.flatten(1)
+          end
+
+          private
+
+          def pages_per_day
+            params.get(:pages_per_day) || 1
           end
         end
       end

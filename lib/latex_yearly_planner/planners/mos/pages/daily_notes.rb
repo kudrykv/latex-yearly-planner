@@ -5,10 +5,11 @@ module LatexYearlyPlanner
     module Mos
       module Pages
         class DailyNotes < Face
-          attr_reader :day
+          attr_reader :day, :page_number
 
-          def set(day)
-            @day = day
+          def set(row)
+            @day = row[0]
+            @page_number = row[1]
 
             self
           end
@@ -23,7 +24,7 @@ module LatexYearlyPlanner
                 grid.cell(
                   rowspan: 2,
                   stroke: (right: 0.4pt),
-                  pad(right: 2mm, link(<#{day.id}>, text(#{heading_size})[#{day.day}]))
+                  pad(right: 2mm, link(<#{day.id}-#{page_number}>, text(#{heading_size})[#{day.day}]))
                 ),
                 pad(
                   left: 2mm,
