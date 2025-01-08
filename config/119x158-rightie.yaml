@@ -121,6 +121,8 @@ planner:
           notes_height: 4cm
           personal_notes_height: 100%
 
+          daily_notes_explicit_links: "true"
+
     - daily_notes:
         enabled: true
         parameters:
