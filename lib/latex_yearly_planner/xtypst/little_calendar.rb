@@ -36,7 +36,7 @@ module LatexYearlyPlanner
             inset: #{parameters[:inset]},
             stroke: 0mm,
             #{highlight_week}
-            table.cell(colspan: #{number_of_columns},#{month_name}),
+            table.cell(colspan: #{number_of_columns}, #{month_name}),
             #{weekdays_row},
             #{weeks}
           )
