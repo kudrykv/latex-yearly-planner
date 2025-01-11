@@ -84,10 +84,16 @@ module LatexYearlyPlanner
           def more_daily_notes
             return '' unless params.section_enabled?(:daily_notes)
 
-            if daily_pages_per_day == 1 || !want_explicit_links?
-              return " | #link(<mdn-#{day.id}-1>, [#{i18n.t('more_daily_notes')}])"
-            end
+            return single_link_to_daily_notes if daily_pages_per_day == 1 || !want_explicit_links?
 
+            explicit_links_to_daily_notes
+          end
+
+          def single_link_to_daily_notes
+            " | #link(<mdn-#{day.id}-1>, [#{i18n.t('more_daily_notes')}])"
+          end
+
+          def explicit_links_to_daily_notes
             links = daily_pages_per_day.times.drop(1).map do |index|
               "#link(<mdn-#{day.id}-#{index + 1}>, [#{index + 1}])"
             end

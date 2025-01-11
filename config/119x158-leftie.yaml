@@ -112,6 +112,8 @@ planner:
           left_column_items: [ top_priorities, notes, personal_notes ]
           right_column_items: [ schedule ]
 
+          daily_notes_explicit_links: "false"
+
           schedule_strftime: '%k'
           schedule_from_hour: 8
           schedule_to_hour: 20
