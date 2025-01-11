@@ -3,13 +3,12 @@
 module LatexYearlyPlanner
   module Adapters
     class Indexer
-      attr_reader :planner_config, :template, :i18n, :register_commands
+      attr_reader :planner_config, :template, :i18n
 
-      def initialize(planner_config:, i18n: I18n, register_commands: [])
+      def initialize(planner_config:, i18n: I18n)
         @planner_config = planner_config
         @template = ERB.new(File.read('./lib/latex_yearly_planner/erb/document.tex.erb'))
         @i18n = i18n
-        @register_commands = register_commands
       end
 
       def index(text_documents)
