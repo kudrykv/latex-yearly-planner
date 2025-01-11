@@ -24,8 +24,8 @@ document:
 
 planner:
   parameters:
-    start_date: 2024, January
-    end_date: 2024, December
+    start_date: 2025, January
+    end_date: 2025, December
     weekday_start: Monday
 
     heading_size: 16pt
@@ -75,7 +75,7 @@ planner:
     - title:
         enabled: true
         parameters:
-          name: 2024
+          name: "2025\n\nPlanner"
           font_size: 48pt
 
     - annual:
@@ -111,7 +111,7 @@ planner:
           left_column_width: 9cm
 
           left_column_items: [ top_priorities, notes, personal_notes ]
-          right_column_items: [  schedule ]
+          right_column_items: [ little_calendar, gap, schedule ]
 
           schedule_strftime: '%k'
           schedule_from_hour: 8
@@ -124,8 +124,12 @@ planner:
           notes_height: 4cm
           personal_notes_height: 100%
 
+          daily_notes_explicit_links: "false"
+
     - daily_notes:
         enabled: true
+        parameters:
+          pages_per_day: 1
 
     - daily_reflect:
         enabled: true
