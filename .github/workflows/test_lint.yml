@@ -18,4 +18,4 @@ jobs:
         run: bundle exec rspec
 
       - name: Run linter
-        run: echo Later
+        run: bundle exec rubocop
