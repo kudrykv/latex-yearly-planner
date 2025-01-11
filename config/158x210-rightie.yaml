@@ -1,0 +1,185 @@
+version: '0.1'
+
+template: mos
+locale: en
+
+compiler:
+  ghostscript:
+    enable: true
+
+document:
+  layout:
+    dimensions:
+      width: 158mm
+      height: 210mm
+
+    margin:
+      top: 10mm
+      bottom: 0mm
+      left: 0mm
+      right: 5mm
+
+  text:
+    size: 10pt
+
+planner:
+  parameters:
+    start_date: 2025, January
+    end_date: 2025, December
+    weekday_start: Monday
+
+    heading_size: 16pt
+    pattern: dotted
+
+  objects:
+    mos_layout:
+      side_menu: left
+      mos_nav_width: 10mm
+      heading_height: 10mm
+
+    mos_nav:
+      left_pad: 0mm
+      right_pad: 2mm
+      rotate: 90deg
+      reverse_array_internals: false
+      reverse_arrays: false
+      quarter_width: 1.1fr
+      month_width: 1fr
+
+    heading:
+      bottom_pad: 3mm
+      put_extra_items: left
+      title_position: left
+
+    little_calendar:
+      with_week_numbers: true
+      week_number_placement: right
+      inset: "(x: 1.2mm, y: 1.5mm)"
+      underline_weekdays: true
+      sideline_week_numbers: true
+      highlight_week: true
+      link_to_month: true
+      link_to_week: true
+      take_full_width: true
+
+    large_calendar:
+      with_week_numbers: true
+      week_number_placement: left
+      link_to_week: true
+      weekday_names: full
+      heading_height: 6mm
+      week_row_height: 25mm
+      week_cell_rotate: 90deg
+
+  sections:
+    - title:
+        enabled: true
+        parameters:
+          name: "2025\n\nPlanner"
+          font_size: 48pt
+
+    - annual:
+        enabled: true
+        parameters:
+          months_per_page: 12
+          months_per_row: 3
+        objects:
+          little_calendar:
+            take_full_width: false
+
+    - quarterly:
+        enabled: true
+        parameters:
+          months_width: 4.5cm
+          gap_width: 5mm
+          reverse_columns: false
+
+    - monthly:
+        enabled: true
+        parameters:
+          gap_width: 5mm
+
+    - weekly:
+        enabled: true
+        parameters:
+          first_row_height: 8mm
+          rest_row_height: 9mm
+
+    - daily:
+        enabled: true
+        parameters:
+          left_column_width: 5.5cm
+
+          left_column_items: [ little_calendar, gap, schedule ]
+          right_column_items: [ top_priorities, notes, personal_notes ]
+
+          schedule_strftime: '%k'
+          schedule_from_hour: 8
+          schedule_to_hour: 20
+          schedule_trailing_30min: true
+
+          gap_width: 2mm
+          priorities_number: 5
+
+          notes_height: 4cm
+          personal_notes_height: 100%
+
+          daily_notes_explicit_links: "false"
+
+    - daily_notes:
+        enabled: true
+        parameters:
+          pages_per_day: 1
+
+    - daily_reflect:
+        enabled: true
+        parameters:
+          left_column_width: 1fr
+          gap_width: 5mm
+
+          left_column_items: [ my_best_thing ]
+          right_column_items: [ my_goals, my_grateful ]
+          bottom_merged: [ my_daily_log ]
+
+          my_goals:
+            height: 2.5cm
+
+          my_best_thing:
+            height: 6.5cm
+
+          my_grateful:
+            height: 3cm
+
+          my_daily_log:
+            height: 100%
+
+    - todo_index:
+        enabled: true
+        parameters:
+          pages: 2
+          columns: 2
+          rows: 25
+          gap_width: 2mm
+          cell_height: 7mm
+
+    - todo_pages:
+        enabled: true
+        parameters:
+          columns: 2
+          rows: 3
+          gap_width: 2mm
+
+          items_in_group: 8
+          todo_height: 7mm
+
+    - notes_index:
+        enabled: true
+        parameters:
+          pages: 2
+          columns: 2
+          rows: 25
+          gap_width: 2mm
+          cell_height: 7mm
+
+    - notes_pages:
+        enabled: true
