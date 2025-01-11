@@ -57,6 +57,7 @@ planner:
       underline_weekdays: true
       sideline_week_numbers: true
       highlight_week: true
+      link_to_month: true
       link_to_week: true
 
     large_calendar:

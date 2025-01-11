@@ -11,6 +11,7 @@ module LatexYearlyPlanner
         sideline_week_numbers: true,
         highlight_week: false,
         link_to_week: true,
+        link_to_month: true,
         take_full_width: true,
 
         highlight_day: nil
@@ -35,7 +36,7 @@ module LatexYearlyPlanner
             inset: #{parameters[:inset]},
             stroke: 0mm,
             #{highlight_week}
-            table.cell(colspan: #{number_of_columns})[#{month_name}],
+            table.cell(colspan: #{number_of_columns},#{month_name}),
             #{weekdays_row},
             #{weeks}
           )
@@ -68,7 +69,10 @@ module LatexYearlyPlanner
       end
 
       def month_name
-        i18n.t("calendar.month.#{month.name.downcase}")
+        name = i18n.t("calendar.month.#{month.name.downcase}")
+        return name unless parameters[:link_to_month]
+
+        "link(<#{month.id}>, [#{name}])"
       end
 
       def weekdays_row
