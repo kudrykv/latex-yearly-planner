@@ -9,6 +9,11 @@ I am planning to write more documentation on how to use it and build it on your 
 Spoiler alert: it won't be easy.
 Anyhow, more info on this will come.
 
+### Tackling
+
+I suggest looking at [rubify2](https://github.com/kudrykv/latex-yearly-planner/tree/rubify2) branch.
+It is an ongoing refactor, and it can generate MOS template.
+
 ## Quick Start Guide
 Here are the steps to quickly get the project up and running.
 
