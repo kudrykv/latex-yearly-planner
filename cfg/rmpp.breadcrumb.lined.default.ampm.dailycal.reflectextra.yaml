@@ -1,0 +1,18 @@
+title: "Planner & Journal" # Leave this is a blank string to have no title
+calafterschedule: true
+addlasthalfhour: true
+ampmtime: true
+calafterschedulehidemonth: true  # When true, hides month heading in daily page mini calendar
+showkeyonyearpage: true
+dailyreflectshowlocationuploaded: true
+
+layout:
+  numbers:
+    dailybottomhour: 7
+    dailytophour: 20
+    dailytodos: 10
+    dailynotes: 25
+    dailyreflectextra: 3
+  lengths:
+    linethicknessdefault: .6pt
+    linethicknessthick: 1.0pt

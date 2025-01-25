@@ -1,6 +1,9 @@
 package tex
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 const nl = "\n"
 
@@ -34,4 +37,24 @@ func Multirow(rows int, text string) string {
 
 func Bold(text string) string {
 	return fmt.Sprintf(`\textbf{%s}`, text)
+}
+
+func escapeLatex(s string) string {
+	replacements := map[string]string{
+		"&":  "\\&",
+		"%":  "\\%",
+		"$":  "\\$",
+		"#":  "\\#",
+		"_":  "\\_",
+		"{":  "\\{",
+		"}":  "\\}",
+		"~":  "\\textasciitilde",
+		"^":  "\\textasciicircum",
+		"\\": "\\textbackslash",
+	}
+
+	for old, new := range replacements {
+		s = strings.ReplaceAll(s, old, new)
+	}
+	return s
 }
