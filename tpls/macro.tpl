@@ -61,6 +61,7 @@
 \newcommand{\myDailySpring}{ {{- $lengths.DailySpring -}} }
 \newcommand{\myColorGray}{ {{- .Cfg.Layout.Colors.Gray -}} }
 \newcommand{\myColorLightGray}{ {{- .Cfg.Layout.Colors.LightGray -}} }
+\newcommand{\myColorVeryLightGray}{ {{- .Cfg.Layout.Colors.VeryLightGray -}} }
 
 \newcommand{\myLinePlain}{\hrule width \linewidth height \myLenLineThicknessDefault}
 \newcommand{\myLineThick}{\hrule width \linewidth height \myLenLineThicknessThick}
@@ -69,6 +70,7 @@
 \newcommand{\myUnderline}[1]{#1\vskip1mm\myLineThick\par}
 \newcommand{\myLineColor}[1]{\textcolor{#1}{\myLinePlain}}
 \newcommand{\myLineGray}{\myLineColor{\myColorGray}}
+\newcommand{\myLineVeryLightGray}{\myLineColor{\myColorVeryLightGray}}
 \newcommand{\myLineLightGray}{\myLineColor{\myColorLightGray}}
 \newcommand{\myLineGrayVskipBottom}{\myLineGray\vskip\myLenLineHeightButLine}
 \newcommand{\myLineGrayVskipTop}{\vskip\myLenLineHeightButLine\myLineGray}
@@ -76,12 +78,37 @@
 \newcommand{\myTodo}{\myLineHeightButLine$\square$\myLinePlain}
 \newcommand{\myTodoLineGray}{\myLineHeightButLine$\square$\myLineGray}
 
-\newcommand{\myDotGrid}[2]{\leavevmode\multido{\dC=0mm+5mm}{#1}{\multido{\dR=0mm+5mm}{#2}{\put(\dR,\dC){\circle*{0.1}}}}}
-
-\newcommand{\myMash}[3][]{
-  {{- if $.Cfg.Dotted -}} \vskip\myLenLineHeightButLine#1\myDotGrid{#2}{#3} {{- else -}} \Repeat{#2}{\myLineGrayVskipTop} {{- end -}}
+\newcommand{\myDotGrid}[2]{%
+  \leavevmode
+  \multido{\dC=0mm+5mm}{#1}{%
+    \multido{\dR=0mm+5mm}{#2}{%
+      \put(\dR,\dC){\circle*{0.1}}%
+    }%
+  }%
+}
+\newcommand{\myGridPattern}[2]{%
+  \leavevmode
+  \setlength{\fboxrule}{0.0005pt}%           % Set line thickness for the squares
+  \multido{\dC=0mm+5mm}{#1}{%        % Vertical spacing (increased to 7mm)
+    \multido{\dR=0mm+5mm}{#2}{%      % Horizontal spacing (increased to 7mm)
+      \put(\dR,\dC){\textcolor{\myColorVeryLightGray}{%
+        \makebox(0,0){\framebox(5mm,5mm){}}%  % Hollow square, centered at intersection
+      }}%
+    }%
+  }%
 }
 
+\newcommand{\myMash}[3][]{
+  {{- if $.Cfg.Dotted -}} 
+    \vskip\myLenLineHeightButLine#1\myDotGrid{#2}{#3}  
+  {{- else if $.Cfg.Blank -}}
+    \vskip#2\myLenLineHeightButLine  
+  {{- else if $.Cfg.Grid -}}  
+    \vskip\myLenLineHeightButLine#1\myGridPattern{#2}{#3}
+  {{- else -}} 
+    \Repeat{#2}{\myLineGrayVskipTop} 
+  {{- end -}}
+}
 \newcommand{\remainingHeight}{%
   \ifdim\pagegoal=\maxdimen
   \dimexpr\textheight-9.4pt\relax

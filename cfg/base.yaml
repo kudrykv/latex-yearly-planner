@@ -1,8 +1,13 @@
 weekstart: 1
 ampmtime: false
-dotted: true
+dotted: false
+blank: false
+grid: true
 calafterschedule: false
 addlasthalfhour: true
+
+font:
+  family: "Helvetica"
 
 layout:
   paper:
@@ -57,3 +62,4 @@ layout:
   colors:
     gray: gray
     lightgray: gray!50
+    verylightgray: gray!20
