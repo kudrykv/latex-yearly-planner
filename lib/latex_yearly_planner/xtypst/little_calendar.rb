@@ -12,7 +12,9 @@ module LatexYearlyPlanner
         highlight_week: false,
         link_to_week: true,
         link_to_month: true,
+        with_month_name: true,
         take_full_width: true,
+        padding_bottom: '0mm',
 
         highlight_day: nil
       }.freeze
@@ -30,16 +32,16 @@ module LatexYearlyPlanner
 
       def to_typst
         <<~TYPST
-          table(
+          pad(bottom: #{parameters[:padding_bottom]}, table(
             columns: #{columns},
             align: center + horizon,
             inset: #{parameters[:inset]},
             stroke: 0mm,
             #{highlight_week}
-            table.cell(colspan: #{number_of_columns}, #{month_name}),
+            #{month_row}
             #{weekdays_row},
             #{weeks}
-          )
+          ))
         TYPST
       end
 
@@ -65,7 +67,14 @@ module LatexYearlyPlanner
       end
 
       def highlighted_week_number_in_this_month
-        highlighted_day.week.number - month.weeks.first.number + 2
+        offset = parameters[:with_month_name] == false ? 1 : 2
+        highlighted_day.week.number - month.weeks.first.number + offset
+      end
+
+      def month_row
+        return '' unless parameters[:with_month_name]
+
+        "table.cell(colspan: #{number_of_columns}, #{month_name}),"
       end
 
       def month_name
