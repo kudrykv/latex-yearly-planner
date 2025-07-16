@@ -29,8 +29,10 @@ module LatexYearlyPlanner
           end
 
           def my_top_priorities
+            padding_bottom = params.get(:top_priorities, :padding_bottom) || '5mm'
+
             <<~TYPST
-              pad(bottom: 5mm, table(
+              pad(bottom: #{padding_bottom}, table(
                 columns: 1fr,
                 inset: 0mm,
                 stroke: (_, _) => (bottom: 0.4pt + luma(130)),
