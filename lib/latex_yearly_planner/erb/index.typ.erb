@@ -11,6 +11,7 @@
 )
 
 #set text(
+  font: "<%= planner_config.config.dig(:document, :text, :font) || 'Libertinus Serif' %>",
   size: <%= planner_config.config[:document][:text][:size] %>,
 )
 
