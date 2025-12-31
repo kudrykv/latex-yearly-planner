@@ -7,23 +7,29 @@
 {{- $day6 := index $days 5 -}}
 {{- $day7 := index $days 6 -}}
 
-\parbox{\myLenTriCol}{\myUnderline{ {{- $day1.WeekLink -}} }}%
-\hspace{\myLenTriColSep}%
-\parbox{\myLenTriCol}{\myUnderline{ {{- $day2.WeekLink -}} }}%
-\hspace{\myLenTriColSep}%
-\parbox{\myLenTriCol}{\myUnderline{ {{- $day3.WeekLink -}} }}
-\myMash{\myNumWeeklyLines}{\myNumDotWidthFull}
-\vfill
+\hspace{5mm}\parbox{\dimexpr\textwidth-5mm}{\myUnderline{ {{- $day1.WeekLink -}} }}
+\hspace{5mm}\myMash[\myDummyQ]{3}{\myNumDotWidthFull}
+\vskip 2mm
 
-\parbox{\myLenTriCol}{\myUnderline{ {{- $day4.WeekLink -}} }}%
-\hspace{\myLenTriColSep}%
-\parbox{\myLenTriCol}{\myUnderline{ {{- $day5.WeekLink -}} }}%
-\hspace{\myLenTriColSep}%
-\parbox{\myLenTriCol}{\myUnderline{ {{- $day6.WeekLink -}} }}
-\myMash{\myNumWeeklyLines}{\myNumDotWidthFull}
-\vfill
+\hspace{5mm}\parbox{\dimexpr\textwidth-5mm}{\myUnderline{ {{- $day2.WeekLink -}} }}
+\hspace{5mm}\myMash[\myDummyQ]{3}{\myNumDotWidthFull}
+\vskip 2mm
 
-\parbox{\myLenTriCol}{ \myUnderline{ {{- $day7.WeekLink -}} }}%
-\hspace{\myLenTriColSep}%
-\parbox{\dimexpr2\myLenTriCol+\myLenTriColSep}{\myUnderline{Notes\myDummyQ}}
-\myMash{\myNumWeeklyLines}{\myNumDotWidthFull}
+\hspace{5mm}\parbox{\dimexpr\textwidth-5mm}{\myUnderline{ {{- $day3.WeekLink -}} }}
+\hspace{5mm}\myMash[\myDummyQ]{3}{\myNumDotWidthFull}
+\vskip 2mm
+
+\hspace{5mm}\parbox{\dimexpr\textwidth-5mm}{\myUnderline{ {{- $day4.WeekLink -}} }}
+\hspace{5mm}\myMash[\myDummyQ]{3}{\myNumDotWidthFull}
+\vskip 2mm
+
+\hspace{5mm}\parbox{\dimexpr\textwidth-5mm}{\myUnderline{ {{- $day5.WeekLink -}} }}
+\hspace{5mm}\myMash[\myDummyQ]{3}{\myNumDotWidthFull}
+\vskip 2mm
+
+\hspace{5mm}\parbox{\dimexpr\textwidth-5mm}{\myUnderline{ {{- $day6.WeekLink -}} }}
+\hspace{5mm}\myMash[\myDummyQ]{3}{\myNumDotWidthFull}
+\vskip 2mm
+
+\hspace{5mm}\parbox{\dimexpr\textwidth-5mm}{\myUnderline{ {{- $day7.WeekLink -}} }}
+\hspace{5mm}\myMash[\myDummyQ]{3}{\myNumDotWidthFull}

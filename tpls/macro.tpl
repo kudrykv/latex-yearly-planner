@@ -76,7 +76,16 @@
 \newcommand{\myTodo}{\myLineHeightButLine$\square$\myLinePlain}
 \newcommand{\myTodoLineGray}{\myLineHeightButLine$\square$\myLineGray}
 
-\newcommand{\myDotGrid}[2]{\leavevmode\multido{\dC=0mm+5mm}{#1}{\multido{\dR=0mm+5mm}{#2}{\put(\dR,\dC){\circle*{0.1}}}}}
+\newcommand{\myDotGrid}[2]{%
+  \leavevmode%
+  \begin{tikzpicture}[overlay, remember picture]%
+  \foreach \dC in {0,...,\the\numexpr#1-1\relax}{%
+    \foreach \dR in {0,...,\the\numexpr#2-1\relax}{%
+      \fill (\dR*5mm,\dC*5mm) circle (0.5pt);%
+    }%
+  }%
+  \end{tikzpicture}%
+}
 
 \newcommand{\myMash}[3][]{
   {{- if $.Cfg.Dotted -}} \vskip\myLenLineHeightButLine#1\myDotGrid{#2}{#3} {{- else -}} \Repeat{#2}{\myLineGrayVskipTop} {{- end -}}

@@ -7,34 +7,36 @@
 {{- $day6 := index $days 5 -}}
 {{- $day7 := index $days 6 -}}
 
-\parbox{\myLenTriCol}{%
-  \myUnderline{ {{- $day1.WeekLink -}} }\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
-}%
-\hspace{\myLenTriColSep}%
-\parbox{\myLenTriCol}{%
-  \myUnderline{ {{- $day2.WeekLink -}} }\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
-}%
-\hspace{\myLenTriColSep}%
-\parbox{\myLenTriCol}{%
-  \myUnderline{ {{- $day3.WeekLink -}} }\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
+\hspace{5mm}\parbox{\dimexpr\textwidth-5mm}{%
+  \myUnderline{ {{- $day1.WeekLink -}} }\Repeat{3}{\myLineGrayVskipTop}%
 }
-\vfill
-\parbox{\myLenTriCol}{%
-  \myUnderline{ {{- $day4.WeekLink -}} }\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
-}%
-\hspace{\myLenTriColSep}%
-\parbox{\myLenTriCol}{%
-  \myUnderline{ {{- $day5.WeekLink -}} }\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
-}%
-\hspace{\myLenTriColSep}%
-\parbox{\myLenTriCol}{%
-  \myUnderline{ {{- $day6.WeekLink -}} }\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
+\vskip 2mm
+
+\hspace{5mm}\parbox{\dimexpr\textwidth-5mm}{%
+  \myUnderline{ {{- $day2.WeekLink -}} }\Repeat{3}{\myLineGrayVskipTop}%
 }
-\vfill
-\parbox{\myLenTriCol}{%
-  \myUnderline{ {{- $day7.WeekLink -}} }\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
-}%
-\hspace{\myLenTriColSep}%
-\parbox{\dimexpr2\myLenTriCol+\myLenTriColSep}{%
-  \myUnderline{Notes\textcolor{white}{g}}\Repeat{\myNumWeeklyLines}{\myLineGrayVskipTop}%
+\vskip 2mm
+
+\hspace{5mm}\parbox{\dimexpr\textwidth-5mm}{%
+  \myUnderline{ {{- $day3.WeekLink -}} }\Repeat{3}{\myLineGrayVskipTop}%
+}
+\vskip 2mm
+
+\hspace{5mm}\parbox{\dimexpr\textwidth-5mm}{%
+  \myUnderline{ {{- $day4.WeekLink -}} }\Repeat{3}{\myLineGrayVskipTop}%
+}
+\vskip 2mm
+
+\hspace{5mm}\parbox{\dimexpr\textwidth-5mm}{%
+  \myUnderline{ {{- $day5.WeekLink -}} }\Repeat{3}{\myLineGrayVskipTop}%
+}
+\vskip 2mm
+
+\hspace{5mm}\parbox{\dimexpr\textwidth-5mm}{%
+  \myUnderline{ {{- $day6.WeekLink -}} }\Repeat{3}{\myLineGrayVskipTop}%
+}
+\vskip 2mm
+
+\hspace{5mm}\parbox{\dimexpr\textwidth-5mm}{%
+  \myUnderline{ {{- $day7.WeekLink -}} }\Repeat{3}{\myLineGrayVskipTop}%
 }

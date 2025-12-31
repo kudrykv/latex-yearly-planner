@@ -1,0 +1,13 @@
+pages:
+  - name: title
+    renderblocks:
+      - funcname: title
+        tpls:
+          - title.tpl
+
+  - name: weekly
+    renderblocks:
+      - funcname: weekly
+        tpls:
+          - mos_04_weekly.tpl
+
