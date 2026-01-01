@@ -29,7 +29,13 @@ func Annual(cfg config.Config, tpls []string) (page.Modules, error) {
 }
 
 func extra2(ctrc, sel1, sel2 bool, week *cal.Week, idxPage int) header.Items {
-	items := make(header.Items, 0, 3)
+	items := make(header.Items, 0, 7)
+
+	// Add quarter links Q1, Q2, Q3, Q4
+	items = append(items, header.NewCellItem("Q1"))
+	items = append(items, header.NewCellItem("Q2"))
+	items = append(items, header.NewCellItem("Q3"))
+	items = append(items, header.NewCellItem("Q4"))
 
 	if week != nil {
 		items = append(items, header.NewCellItem(week.Name()))
