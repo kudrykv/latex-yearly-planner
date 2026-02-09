@@ -4,7 +4,7 @@ require_relative "lib/lyp/version"
 
 Gem::Specification.new do |spec|
   spec.name = "lyp"
-  spec.version = Lyp::VERSION
+  spec.version = LYP::VERSION
   spec.authors = ["Vitaliy Kudryk"]
   spec.email = ["vitaliy@bgnfu7re.me"]
 
