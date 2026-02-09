@@ -9,14 +9,14 @@ module LatexYearlyPlanner
         @planner_config = planner_config
         @i18n = i18n
 
-        @template = ERB.new(File.read('./lib/latex_yearly_planner/erb/index.typ.erb'))
+        @template = ERB.new(File.read("./lib/latex_yearly_planner/erb/index.typ.erb"))
       end
 
       # `binding` uses the current scope to get the variables
       # noinspection RubyUnusedLocalVariable
       def index(text_documents)
         content = template.result(binding)
-        [Entities::TextDocument.new(name: 'index.typ', content:)]
+        [Entities::TextDocument.new(name: "index.typ", content:)]
       end
     end
   end

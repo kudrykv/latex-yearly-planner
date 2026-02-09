@@ -5,8 +5,8 @@ module LatexYearlyPlanner
     class LittleCalendar
       DEFAULT_PARAMETERS = {
         with_week_numbers: true,
-        week_number_placement: 'left',
-        inset: '1.5mm',
+        week_number_placement: "left",
+        inset: "1.5mm",
         underline_weekdays: true,
         sideline_week_numbers: true,
         highlight_week: false,
@@ -48,7 +48,7 @@ module LatexYearlyPlanner
       def columns
         return number_of_columns unless parameters[:take_full_width]
 
-        "(#{(['1fr'] * number_of_columns).join(', ')})"
+        "(#{(["1fr"] * number_of_columns).join(", ")})"
       end
 
       def number_of_columns
@@ -58,8 +58,8 @@ module LatexYearlyPlanner
       end
 
       def highlight_week
-        return '' unless parameters[:highlight_week]
-        return '' unless highlighted_day
+        return "" unless parameters[:highlight_week]
+        return "" unless highlighted_day
 
         "fill: (_, y) => if y == #{highlighted_week_number_in_this_month} { silver } else { white },"
       end

@@ -47,17 +47,17 @@ module LatexYearlyPlanner
           private
 
           def heading_columns
-            columns = [mos_layout[:mos_nav_width], '1fr']
-            columns.reverse! if mos_layout[:side_menu] == 'right'
+            columns = [mos_layout[:mos_nav_width], "1fr"]
+            columns.reverse! if mos_layout[:side_menu] == "right"
 
-            columns.join(', ')
+            columns.join(", ")
           end
 
           def heading_content
             row = ["grid.cell(rowspan: 2, #{side_menu_object.to_typst})", top_menu_object.to_typst]
-            row.reverse! if mos_layout[:side_menu] == 'right'
+            row.reverse! if mos_layout[:side_menu] == "right"
 
-            row.join(', ')
+            row.join(", ")
           end
 
           def mos_layout
@@ -119,12 +119,12 @@ module LatexYearlyPlanner
 
               cols.reverse! if mosnav[:reverse_arrays]
 
-              cols.join(', ')
+              cols.join(", ")
             end
 
             def make_columns
               ([mosnav[:quarter_width]] * params.quarters.size)
-                .append('auto')
+                .append("auto")
                 .append([mosnav[:month_width]] * params.months.size)
             end
 
@@ -137,16 +137,16 @@ module LatexYearlyPlanner
                 months.reverse!
               end
 
-              side_menu = [quarters.join(', '), '[]', months.join(', ')]
+              side_menu = [quarters.join(", "), "[]", months.join(", ")]
 
               side_menu.reverse! if mosnav[:reverse_arrays]
 
-              side_menu.join(', ')
+              side_menu.join(", ")
             end
 
             def make_side_menu_quarters
               params.quarters.map do |q|
-                name = i18n.t('calendar.one_letter.quarter')
+                name = i18n.t("calendar.one_letter.quarter")
 
                 next "link(<#{q.id}>, [#{name}#{q.number}])" unless highlight_side_menu_quarters.include?(q)
 
@@ -201,14 +201,14 @@ module LatexYearlyPlanner
             end
 
             def header_table_items
-              items = [title, '[]', menu_items_layout]
-              items.reverse! if heading[:title_position] == 'right'
+              items = [title, "[]", menu_items_layout]
+              items.reverse! if heading[:title_position] == "right"
 
-              items.join(', ')
+              items.join(", ")
             end
 
             def menu_items_layout
-              return '[]' if menu_items_content.empty?
+              return "[]" if menu_items_content.empty?
 
               <<~TYPST
                 table(
@@ -216,13 +216,13 @@ module LatexYearlyPlanner
                   columns: #{menu_items_content.size},
                   rows: 1fr,
                   align: horizon + center,
-                  #{menu_items_content.join(', ')}
+                  #{menu_items_content.join(", ")}
                 )
               TYPST
             end
 
             def menu_items_content
-              @menu_items_content ||= if heading[:put_extra_items] == 'left'
+              @menu_items_content ||= if heading[:put_extra_items] == "left"
                                         extra_menu_items
                                           .push(annual_menu_item, todo_menu_item, note_menu_item)
                                           .compact
@@ -236,7 +236,7 @@ module LatexYearlyPlanner
             def annual_menu_item
               return nil unless params.section_enabled?(:annual)
 
-              name = i18n.t('menu_calendar')
+              name = i18n.t("menu_calendar")
 
               return "link(<annual-#{annual_page_number(top_menu_month)}>, [#{name}])" if top_menu_month
               if flags.include? :highlight_calendar
@@ -259,7 +259,7 @@ module LatexYearlyPlanner
               return nil unless params.section_enabled?(:todo_index)
               return nil if flags.include? :hide_todo
 
-              name = i18n.t('todo.menu_index')
+              name = i18n.t("todo.menu_index")
 
               "link(<ti-1>, [#{name}])"
             end
@@ -268,7 +268,7 @@ module LatexYearlyPlanner
               return nil unless params.section_enabled?(:notes_index)
               return nil if flags.include? :hide_notes
 
-              name = i18n.t('notes.menu_index')
+              name = i18n.t("notes.menu_index")
 
               "link(<ni-1>, [#{name}])"
             end

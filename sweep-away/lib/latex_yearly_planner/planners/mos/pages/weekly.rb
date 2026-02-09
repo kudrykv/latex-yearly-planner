@@ -14,7 +14,7 @@ module LatexYearlyPlanner
           end
 
           def title
-            "text(#{params.get(:heading_size)})[#{i18n.t('calendar.weekdays.full.week')} #{week.number} #{labels}]"
+            "text(#{params.get(:heading_size)})[#{i18n.t("calendar.weekdays.full.week")} #{week.number} #{labels}]"
           end
 
           def content
@@ -45,12 +45,12 @@ module LatexYearlyPlanner
           private
 
           def labels
-            "#hide[~#{week.ids.map { |id| "<#{id}>" }.join(' ~')}]"
+            "#hide[~#{week.ids.map { |id| "<#{id}>" }.join(" ~")}]"
           end
 
           def weekly_grid
-            week.days.map(&method(:format_day)).map(&method(:align_day)).push('[]')
-                .each_slice(2).map { |slice| slice.join(', ') }
+            week.days.map(&method(:format_day)).map(&method(:align_day)).push("[]")
+                .each_slice(2).map { |slice| slice.join(", ") }
                 .join(",\n#{jotting_space},\n") + ",\n#{jotting_space}"
           end
 
@@ -68,8 +68,8 @@ module LatexYearlyPlanner
           end
 
           def day_label(day)
-            dayname = day.strftime('%A')
-            daynum = day.strftime('%-d')
+            dayname = day.strftime("%A")
+            daynum = day.strftime("%-d")
 
             "[#{i18n.t("calendar.weekdays.full.#{dayname.downcase}")}, #{daynum}]"
           end

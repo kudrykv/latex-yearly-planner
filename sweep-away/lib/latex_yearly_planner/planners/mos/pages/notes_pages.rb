@@ -15,7 +15,7 @@ module LatexYearlyPlanner
 
           def title
             <<~TYPST
-              text(#{params.get(:heading_size)})[#{i18n.t('notes.single_page')} #{note_number} <np-#{note_number}>]
+              text(#{params.get(:heading_size)})[#{i18n.t("notes.single_page")} #{note_number} <np-#{note_number}>]
             TYPST
           end
 

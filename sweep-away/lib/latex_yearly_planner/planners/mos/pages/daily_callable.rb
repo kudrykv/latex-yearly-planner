@@ -6,7 +6,7 @@ module LatexYearlyPlanner
       module Pages
         module DailyCallable
           def my_gap
-            'box(height: 5mm)'
+            "box(height: 5mm)"
           end
 
           def my_schedule
@@ -17,9 +17,9 @@ module LatexYearlyPlanner
                 stroke: (_, y) =>
                   if calc.even(y) { ( bottom: 0.4pt + black ) }
                   else { ( bottom: 0.4pt + gray ) },
-                table.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [#{i18n.t('schedule')}]))),
+                table.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [#{i18n.t("schedule")}]))),
                 #{schedule_lines},
-                #{params.get(:schedule_trailing_30min) ? 'box(height: 5mm)' : ''}
+                #{"box(height: 5mm)" if params.get(:schedule_trailing_30min)}
               )
             TYPST
           end
@@ -34,7 +34,7 @@ module LatexYearlyPlanner
                 columns: 1fr,
                 inset: 0mm,
                 stroke: (_, _) => (bottom: 0.4pt + luma(130)),
-                table.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [#{i18n.t('top_priorities')}]))),
+                table.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [#{i18n.t("top_priorities")}]))),
                 #{top_priorities_lines}
               ))
             TYPST
@@ -47,7 +47,7 @@ module LatexYearlyPlanner
                 spacing: 5mm,
                 box(
                   height: 5mm, width: 100%, stroke: (bottom: 1pt),
-                  align(horizon, [#{i18n.t('daily_notes')}#{more_daily_notes}#{daily_reflect}])
+                  align(horizon, [#{i18n.t("daily_notes")}#{more_daily_notes}#{daily_reflect}])
                 ),
                 box(height: #{params.get(:notes_height)}, width: 100%, rect_pattern(#{params.get(:pattern)})),
               )
@@ -59,7 +59,7 @@ module LatexYearlyPlanner
               stack(
                 dir: ttb,
                 spacing: 5mm,
-                box(height: 5mm, width: 100%, stroke: (bottom: 1pt), align(horizon, [#{i18n.t('personal_notes')}])),
+                box(height: 5mm, width: 100%, stroke: (bottom: 1pt), align(horizon, [#{i18n.t("personal_notes")}])),
                 box(height: #{params.get(:personal_notes_height)}, width: 100%, rect_pattern(#{params.get(:pattern)})),
               )
             TYPST
@@ -78,11 +78,11 @@ module LatexYearlyPlanner
           end
 
           def top_priorities_lines
-            (['box(height: 5mm, align(horizon, [$square.stroked$]))'] * params.get(:priorities_number)).join(",\n")
+            (["box(height: 5mm, align(horizon, [$square.stroked$]))"] * params.get(:priorities_number)).join(",\n")
           end
 
           def more_daily_notes
-            return '' unless params.section_enabled?(:daily_notes)
+            return "" unless params.section_enabled?(:daily_notes)
 
             return single_link_to_daily_notes if daily_pages_per_day == 1 || !want_explicit_links?
 
@@ -90,7 +90,7 @@ module LatexYearlyPlanner
           end
 
           def single_link_to_daily_notes
-            " | #link(<mdn-#{day.id}-1>, [#{i18n.t('more_daily_notes')}])"
+            " | #link(<mdn-#{day.id}-1>, [#{i18n.t("more_daily_notes")}])"
           end
 
           def explicit_links_to_daily_notes
@@ -98,9 +98,9 @@ module LatexYearlyPlanner
               "#link(<mdn-#{day.id}-#{index + 1}>, [#{index + 1}])"
             end
 
-            links.unshift("#link(<mdn-#{day.id}-1>, [#{i18n.t('more_daily_notes')}])")
+            links.unshift("#link(<mdn-#{day.id}-1>, [#{i18n.t("more_daily_notes")}])")
 
-            " | #{links.join(' ')}"
+            " | #{links.join(" ")}"
           end
 
           def daily_pages_per_day
@@ -112,9 +112,9 @@ module LatexYearlyPlanner
           end
 
           def daily_reflect
-            return '' unless params.section_enabled?(:daily_reflect)
+            return "" unless params.section_enabled?(:daily_reflect)
 
-            "#h(1fr) #link(<dr-#{day.id}>, [#{i18n.t('daily_reflect.name')}])"
+            "#h(1fr) #link(<dr-#{day.id}>, [#{i18n.t("daily_reflect.name")}])"
           end
         end
       end

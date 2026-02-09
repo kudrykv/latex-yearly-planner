@@ -6,7 +6,7 @@ module LatexYearlyPlanner
       DEFAULT_PARAMETERS = {
         week_with_numbers: true,
         link_to_week: true,
-        week_number_placement: 'left',
+        week_number_placement: "left",
         highlight_day: nil
       }.freeze
 
@@ -18,7 +18,7 @@ module LatexYearlyPlanner
       end
 
       def to_typst
-        row.join(', ')
+        row.join(", ")
       end
 
       private
@@ -32,7 +32,7 @@ module LatexYearlyPlanner
       end
 
       def add_week!
-        return row_internal.unshift(week_label) if parameters[:week_number_placement] == 'left'
+        return row_internal.unshift(week_label) if parameters[:week_number_placement] == "left"
 
         row_internal.push(week_label)
       end
@@ -48,7 +48,7 @@ module LatexYearlyPlanner
       end
 
       def map_day(day)
-        return '[]' unless day
+        return "[]" unless day
         return "link(<#{day.id}>, [#{day.day}])" if parameters[:highlight_day] != day
 
         "table.cell(fill: black, link(<#{day.id}>, text(white)[#{day.day}]))"

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'rspec'
+require "rspec"
 
 Week = LatexYearlyPlanner::Calendar::Week
 Quarter = LatexYearlyPlanner::Calendar::Quarter
@@ -14,7 +14,7 @@ RSpec.describe LatexYearlyPlanner::Calendar::Month do
   let(:date) { Date.new(year, month_number, 1).next_day(-1) }
   let(:weekday_start) { :monday }
 
-  describe '#weeks' do
+  describe "#weeks" do
     let :weeks do
       [
         Week.new(days: [nil, nil, nil, nil] + (1..3).map do |day|
@@ -23,55 +23,55 @@ RSpec.describe LatexYearlyPlanner::Calendar::Month do
         Week.new(days: (4..10).map { |day| Day.new(weekday_start:, moment: date.next_day(day)) }, weekday_start:),
         Week.new(days: (11..17).map { |day| Day.new(weekday_start:, moment: date.next_day(day)) }, weekday_start:),
         Week.new(days: (18..24).map { |day| Day.new(weekday_start:, moment: date.next_day(day)) }, weekday_start:),
-        Week.new(days: (25..30).map { |day|
+        Week.new(days: (25..30).map do |day|
                          Day.new(weekday_start:, moment: date.next_day(day))
-                       } + [nil], weekday_start:)
+                       end + [nil], weekday_start:)
       ]
     end
 
     it { expect(month.weeks).to eq(weeks) }
   end
 
-  describe '#id' do
-    it { expect(month.id).to eq('2023-09') }
+  describe "#id" do
+    it { expect(month.id).to eq("2023-09") }
   end
 
-  describe '#name' do
-    it { expect(month.name).to eq('September') }
+  describe "#name" do
+    it { expect(month.name).to eq("September") }
   end
 
-  describe '#year' do
+  describe "#year" do
     it { expect(month.year).to eq(year) }
   end
 
-  describe '#quarter' do
+  describe "#quarter" do
     let(:quarter) { Quarter.new(weekday_start:, year:, number: 3) }
 
     it { expect(month.quarter).to eq(quarter) }
   end
 
-  describe '#first_day' do
+  describe "#first_day" do
     let(:first_day) { Day.new(weekday_start:, moment: Date.new(year, month_number, 1)) }
 
     it { expect(month.first_day).to eq(first_day) }
   end
 
-  describe '#last_day' do
+  describe "#last_day" do
     let(:last_day) { Day.new(weekday_start:, moment: Date.new(year, month_number, 30)) }
 
     it { expect(month.last_day).to eq(last_day) }
   end
 
-  describe '#==' do
+  describe "#==" do
     let(:other) { described_class.new(month: month_number, year:, weekday_start:) }
 
     it { expect(month).to eq(other) }
   end
 
-  describe '#<=>' do
+  describe "#<=>" do
     let(:other) { described_class.new(month: month_number, year:, weekday_start:) }
 
     it { expect(month <=> other).to eq(0) }
-    it { expect(month <=> 'not a month').to be_nil }
+    it { expect(month <=> "not a month").to be_nil }
   end
 end

@@ -15,15 +15,15 @@ module LatexYearlyPlanner
 
           def title
             <<~TYPST
-              text(#{params.get(:heading_size)})[#{i18n.t('todo.single_page')} #{todo_number} <tp-#{todo_number}>]
+              text(#{params.get(:heading_size)})[#{i18n.t("todo.single_page")} #{todo_number} <tp-#{todo_number}>]
             TYPST
           end
 
           def content
             <<~TYPST
               table(
-                 columns: (#{(['1fr'] * columns).join(", #{gap_width},")}),
-                 rows: (#{(['1fr'] * rows).join(', ')}),
+                 columns: (#{(["1fr"] * columns).join(", #{gap_width},")}),
+                 rows: (#{(["1fr"] * rows).join(", ")}),
                  inset: 0mm,
                  stroke: 0mm,
                  #{table_rows.join(",\n")}
@@ -49,7 +49,7 @@ module LatexYearlyPlanner
             rows.times.map do
               columns.times.map do
                 todos_block
-              end.join(', [], ')
+              end.join(", [], ")
             end
           end
 

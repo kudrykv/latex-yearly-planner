@@ -22,11 +22,11 @@ module LatexYearlyPlanner
       end
 
       def id
-        moment.strftime('%Y-%m')
+        moment.strftime("%Y-%m")
       end
 
       def name
-        moment.strftime('%B')
+        moment.strftime("%B")
       end
 
       def year

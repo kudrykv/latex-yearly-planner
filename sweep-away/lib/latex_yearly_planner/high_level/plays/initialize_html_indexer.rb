@@ -13,7 +13,7 @@ module LatexYearlyPlanner
         private
 
         def planner_config
-          raise DevelopmentError, '`planner_config` is not defined' unless context.planner_config
+          raise DevelopmentError, "`planner_config` is not defined" unless context.planner_config
 
           context.planner_config
         end

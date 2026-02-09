@@ -7,7 +7,7 @@ module LatexYearlyPlanner
 
       def initialize(planner_config:, i18n: I18n)
         @planner_config = planner_config
-        @template = ERB.new(File.read('./lib/latex_yearly_planner/erb/document.tex.erb'))
+        @template = ERB.new(File.read("./lib/latex_yearly_planner/erb/document.tex.erb"))
         @i18n = i18n
       end
 
@@ -33,11 +33,11 @@ module LatexYearlyPlanner
       # noinspection RubyUnusedLocalVariable
       def index_text_file(text_documents)
         content = template.result(binding)
-        Entities::TextDocument.new(name: 'index.tex', content:)
+        Entities::TextDocument.new(name: "index.tex", content:)
       end
 
       def babel_language
-        i18n.t('babel')
+        i18n.t("babel")
       end
 
       def roman_font

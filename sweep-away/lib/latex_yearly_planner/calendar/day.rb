@@ -13,7 +13,7 @@ module LatexYearlyPlanner
       end
 
       def id
-        "day-#{moment.strftime('%Y-%m-%d')}"
+        "day-#{moment.strftime("%Y-%m-%d")}"
       end
 
       def day
@@ -29,7 +29,7 @@ module LatexYearlyPlanner
       end
 
       def name
-        moment.strftime('%A')
+        moment.strftime("%A")
       end
 
       def monday?

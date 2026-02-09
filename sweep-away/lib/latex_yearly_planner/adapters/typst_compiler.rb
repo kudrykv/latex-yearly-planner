@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require 'English'
+require "English"
 
 module LatexYearlyPlanner
   module Adapters
     class TypstCompiler
       attr_reader :workdir, :planner_config
 
-      OUTPUT_FILE = 'index.pdf'
-      TEMP_FILE = 'temp.pdf'
+      OUTPUT_FILE = "index.pdf"
+      TEMP_FILE = "temp.pdf"
 
       def initialize(workdir:, planner_config:)
         @workdir = workdir
@@ -16,7 +16,7 @@ module LatexYearlyPlanner
       end
 
       def compile(text_document)
-        puts 'Compiling generated document with Typst...'
+        puts "Compiling generated document with Typst..."
         typst_compile_time = Benchmark.measure do
           `typst compile #{workdir}/#{text_document.name} #{workdir}/#{OUTPUT_FILE}`
         end
@@ -33,9 +33,9 @@ module LatexYearlyPlanner
       def run_ghostscript
         return unless planner_config.config.dig(:compiler, :ghostscript, :enable)
 
-        puts 'Running Ghostscript...'
+        puts "Running Ghostscript..."
         time = Benchmark.measure { ghostscript_cmd }
-        raise 'Failed to slim PDF' unless $CHILD_STATUS.success?
+        raise "Failed to slim PDF" unless $CHILD_STATUS.success?
 
         puts "Ghostscript time: #{time.real.round(2)}s"
 

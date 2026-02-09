@@ -1,5 +1,8 @@
 AllCops:
   TargetRubyVersion: 3.2
+  NewCops: enable
+  Exclude:
+    - 'sweep-away/**/*'
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes

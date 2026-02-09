@@ -52,7 +52,7 @@ module LatexYearlyPlanner
           def extra_menu_items
             return [] unless params.section_enabled?(:weekly)
 
-            ["link(<#{day.week.id}>, [#{i18n.t('calendar.weekdays.full.week')} #{day.week.number}])"]
+            ["link(<#{day.week.id}>, [#{i18n.t("calendar.weekdays.full.week")} #{day.week.number}])"]
           end
 
           private
@@ -66,20 +66,20 @@ module LatexYearlyPlanner
           end
 
           def my_goals
-            "jot(#{params.get(:pattern)}, #{params.get(:my_goals, :height)}, [#{i18n.t('daily_reflect.goals')}])"
+            "jot(#{params.get(:pattern)}, #{params.get(:my_goals, :height)}, [#{i18n.t("daily_reflect.goals")}])"
           end
 
           def my_best_thing
             "jot(#{params.get(:pattern)}, #{params.get(:my_best_thing,
-                                                       :height)}, [#{i18n.t('daily_reflect.best_thing')}])"
+                                                       :height)}, [#{i18n.t("daily_reflect.best_thing")}])"
           end
 
           def my_grateful
-            "jot(#{params.get(:pattern)}, #{params.get(:my_grateful, :height)}, [#{i18n.t('daily_reflect.grateful')}])"
+            "jot(#{params.get(:pattern)}, #{params.get(:my_grateful, :height)}, [#{i18n.t("daily_reflect.grateful")}])"
           end
 
           def my_daily_log
-            "jot(#{params.get(:pattern)}, #{params.get(:my_daily_log, :height)}, [#{i18n.t('daily_reflect.log')}])"
+            "jot(#{params.get(:pattern)}, #{params.get(:my_daily_log, :height)}, [#{i18n.t("daily_reflect.log")}])"
           end
 
           def heading_size

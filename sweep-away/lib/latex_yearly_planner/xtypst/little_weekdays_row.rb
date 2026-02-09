@@ -8,7 +8,7 @@ module LatexYearlyPlanner
         with_week_numbers: true,
         underline_weekdays: true,
         sideline_week_numbers: true,
-        week_number_placement: 'right'
+        week_number_placement: "right"
       }.freeze
 
       attr_reader :weekday_start, :i18n, :parameters
@@ -21,7 +21,7 @@ module LatexYearlyPlanner
       end
 
       def to_typst
-        weekdays_row.join(', ')
+        weekdays_row.join(", ")
       end
 
       private
@@ -39,11 +39,11 @@ module LatexYearlyPlanner
       def apply_underline_weekdays!
         return unless parameters[:underline_weekdays]
 
-        weekdays_row_internal.unshift('table.hline(y: 2, stroke: 0.4pt)')
+        weekdays_row_internal.unshift("table.hline(y: 2, stroke: 0.4pt)")
       end
 
       def apply_week_number_placement!
-        return weekdays_row_internal.unshift(one_letter_week) if parameters[:week_number_placement] == 'left'
+        return weekdays_row_internal.unshift(one_letter_week) if parameters[:week_number_placement] == "left"
 
         weekdays_row_internal.append(one_letter_week)
       end
@@ -51,7 +51,7 @@ module LatexYearlyPlanner
       def apply_sideline_week_numbers!
         return unless parameters[:sideline_week_numbers]
 
-        x = parameters[:week_number_placement] == 'left' ? 1 : 7
+        x = parameters[:week_number_placement] == "left" ? 1 : 7
         weekdays_row_internal.unshift("table.vline(x: #{x}, stroke: 0.4pt)")
       end
 
@@ -68,7 +68,7 @@ module LatexYearlyPlanner
       end
 
       def one_letter_week
-        "[#{i18n.t('calendar.one_letter.week')}]"
+        "[#{i18n.t("calendar.one_letter.week")}]"
       end
     end
   end

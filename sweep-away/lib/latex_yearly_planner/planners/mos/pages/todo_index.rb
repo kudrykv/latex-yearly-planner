@@ -14,7 +14,7 @@ module LatexYearlyPlanner
           end
 
           def title
-            label = i18n.t('todo.index')
+            label = i18n.t("todo.index")
             label += " #{page_number}" if params.get(:pages) > 1
 
             "text(#{params.get(:heading_size)})[#{label}<ti-#{page_number}>]"
@@ -23,7 +23,7 @@ module LatexYearlyPlanner
           def content
             <<~TYPST
               table(
-                columns: (#{(['1fr'] * columns).join(", #{gap_width},")}),
+                columns: (#{(["1fr"] * columns).join(", #{gap_width},")}),
                 inset: 0mm,
                 stroke: 0mm,
                 #{table_rows}
@@ -33,10 +33,10 @@ module LatexYearlyPlanner
 
           def extra_menu_items
             (1..pages).map do |page|
-              next "[#{i18n.t('todo.menu_index')}]" if pages == 1
-              next "black_table_cell(text(white)[#{i18n.t('todo.menu_index_short')} #{page}])" if page == page_number
+              next "[#{i18n.t("todo.menu_index")}]" if pages == 1
+              next "black_table_cell(text(white)[#{i18n.t("todo.menu_index_short")} #{page}])" if page == page_number
 
-              "link(<ti-#{page}>, [#{i18n.t('todo.menu_index_short')} #{page}])"
+              "link(<ti-#{page}>, [#{i18n.t("todo.menu_index_short")} #{page}])"
             end
           end
 
@@ -84,7 +84,7 @@ module LatexYearlyPlanner
                   align(horizon, link(<tp-#{item}>, [#{item}.]))
                 )
               TYPST
-            end.join(', [], ')
+            end.join(", [], ")
           end
 
           def gap_width

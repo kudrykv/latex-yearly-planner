@@ -24,7 +24,7 @@ module LatexYearlyPlanner
           end
 
           def content
-            "vert_stack_bottom_outset(#{month_rows.map(&method(:row_stack)).join(', ')})"
+            "vert_stack_bottom_outset(#{month_rows.map(&method(:row_stack)).join(", ")})"
           end
 
           def add_flags
@@ -64,7 +64,7 @@ module LatexYearlyPlanner
           def months_row(months)
             months
               .map { |month| Xtypst::LittleCalendar.new(month, **params.object(:little_calendar)).to_typst }
-              .join(', ')
+              .join(", ")
           end
         end
       end

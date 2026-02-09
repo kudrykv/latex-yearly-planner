@@ -19,7 +19,7 @@ module LatexYearlyPlanner
         first = compact.first
         last = compact.last
 
-        %W[week-#{number}-#{first.strftime('%Y-%m')} week-#{number}-#{last.strftime('%Y-%m')}].uniq
+        %W[week-#{number}-#{first.strftime("%Y-%m")} week-#{number}-#{last.strftime("%Y-%m")}].uniq
       end
 
       def number

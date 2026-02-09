@@ -16,7 +16,7 @@ module LatexYearlyPlanner
           def title
             <<~TYPST
               text(#{params.get(:heading_size)})[
-                #{i18n.t('calendar.one_letter.quarter')}#{quarter.number}
+                #{i18n.t("calendar.one_letter.quarter")}#{quarter.number}
                 <#{quarter.id}>
               ]
             TYPST
@@ -28,9 +28,9 @@ module LatexYearlyPlanner
 
             <<~TYPST
               grid(
-                columns: (#{columns.join(', ')}),
+                columns: (#{columns.join(", ")}),
                 rows: 1fr,
-                #{columns_content.join(',')}
+                #{columns_content.join(",")}
               )
             TYPST
           end
@@ -46,15 +46,15 @@ module LatexYearlyPlanner
           private
 
           def columns
-            @columns ||= [params.get(:months_width), params.get(:gap_width), '1fr']
+            @columns ||= [params.get(:months_width), params.get(:gap_width), "1fr"]
           end
 
           def columns_content
-            @columns_content ||= ["vert_stack_bottom_outset(#{months})", '[]', "rect_pattern(#{params.get(:pattern)})"]
+            @columns_content ||= ["vert_stack_bottom_outset(#{months})", "[]", "rect_pattern(#{params.get(:pattern)})"]
           end
 
           def months
-            quarter.months.map(&method(:create_little_calendar)).join(', ')
+            quarter.months.map(&method(:create_little_calendar)).join(", ")
           end
 
           def create_little_calendar(month)

@@ -13,13 +13,13 @@ module LatexYearlyPlanner
         private
 
         def workdir
-          raise DevelopmentError, 'workdir is not defined' unless context.workdir
+          raise DevelopmentError, "workdir is not defined" unless context.workdir
 
           context.workdir
         end
 
         def planner_config
-          raise DevelopmentError, 'planner_config is not defined' unless context.planner_config
+          raise DevelopmentError, "planner_config is not defined" unless context.planner_config
 
           context.planner_config
         end
