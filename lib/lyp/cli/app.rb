@@ -2,22 +2,32 @@
 
 require "thor"
 
+require "./lib/lyp/handlers/generate"
+
 module LYP
   module CLI
     class App < Thor
+      attr_accessor :generate_handler
+
+      def initialize(...)
+        super
+
+        self.generate_handler = LYP::Handlers::Generate.new
+      end
+
       desc "generate <yaml-config>", "Generate planner using config"
       option :locales_file_pattern,
              type: :string,
-             aliases: '-l',
-             desc: 'Locales file pattern',
-             default: 'locales/*.yaml'
+             aliases: "-l",
+             desc: "Locales file pattern",
+             default: "locales/*.yaml"
       option :workdir,
              type: :string,
-             aliases: '-w',
-             desc: 'Working directory, where generation and compilation will be done',
-             default: './out'
+             aliases: "-w",
+             desc: "Working directory, where generation and compilation will be done",
+             default: "./out"
 
-      def generate(path_to_yaml)
+      def generate(_path_to_yaml)
         puts "later"
       end
     end
