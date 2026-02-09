@@ -8,7 +8,9 @@ module LYP
       def initialize(...)
         super
 
-        self.generate_handler = LYP::Handlers::Generate.new
+        generate_service = LYP::Services::Generate.new
+
+        self.generate_handler = LYP::Handlers::Generate.new(generate_service:)
       end
 
       desc "generate <yaml-config>", "Generate planner using config"
