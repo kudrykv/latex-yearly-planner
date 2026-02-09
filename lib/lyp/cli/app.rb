@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-require "thor"
-
-require "./lib/lyp/handlers/generate"
-
 module LYP
   module CLI
     class App < Thor
@@ -27,8 +23,8 @@ module LYP
              desc: "Working directory, where generation and compilation will be done",
              default: "./out"
 
-      def generate(_path_to_yaml)
-        puts "later"
+      def generate(path_to_yaml)
+        generate_handler.generate(path_to_yaml)
       end
     end
   end

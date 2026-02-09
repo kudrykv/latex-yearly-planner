@@ -1,0 +1,12 @@
+version: '0.1'
+
+template: mos
+locale: en
+
+compiler:
+  ghostscript:
+    enable: true
+
+document:
+
+planner:
