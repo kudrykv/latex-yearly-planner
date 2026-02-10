@@ -12,6 +12,7 @@ module LYP
               self.overseer = overseer
             end
 
+            # rubocop:disable Metrics/MethodLength
             def generate
               definition = <<~TYPST.strip
                 #set page(
@@ -62,6 +63,7 @@ module LYP
 
               "#{definition}\n\n"
             end
+            # rubocop:enable Metrics/MethodLength
           end
         end
       end
