@@ -4,31 +4,20 @@ module LYP
   module Services
     class Generate
       def generate(dto)
-        planner = select_planner(dto[:template])
+        planner = select_planner(dto)
 
-        sections(dto).map do |section|
-          next unless section[:enabled]
-
-          planner.generate(dto, section)
-        end
+        planner.generate
       end
 
       private
 
-      def select_planner(template)
-        case template
+      def select_planner(dto)
+        case dto[:template]
         when "mos"
-          Planners::MOS::Planner.new
+          Planners::MOS::Planner.new(dto)
         else
           raise ConfigError, "Bad template: #{template}"
         end
-      end
-
-      def sections(dto)
-        sections = dto.dig(:planner, :sections)
-        raise ConfigError, "planner.sections is blank" if sections.nil? || sections.empty?
-
-        sections
       end
     end
   end

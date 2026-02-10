@@ -5,7 +5,13 @@ module LYP
     module Planners
       module MOS
         class Planner
-          def generate(_whole_dto, dto)
+          attr_accessor :config
+
+          def initialize(dto)
+            self.config = Config.new(dto)
+          end
+
+          def generate
             section(dto).generate
           end
 
