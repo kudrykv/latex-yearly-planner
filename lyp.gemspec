@@ -33,6 +33,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "activesupport", "~> 8.1"
+  spec.add_dependency "benchmark", "~> 0.5.0"
   spec.add_dependency "thor", "~> 1.5"
 
   # For more information and examples about making a new gem, check out our
