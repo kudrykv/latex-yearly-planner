@@ -21,13 +21,15 @@ module LYP
           end
 
           def start_date
-            Date.parse(dto.dig(:planner, :params, :start_date))
+            day = Date.parse(dto.dig(:planner, :params, :start_date))
+            Entities::Calendar::Day.new(weekday_start:, day:)
           rescue StandardError => e
             raise ConfigError, "planner.params.start_date: invalid: #{e.message}"
           end
 
           def end_date
-            Date.parse(dto.dig(:planner, :params, :end_date))
+            day = Date.parse(dto.dig(:planner, :params, :end_date))
+            Entities::Calendar::Day.new(weekday_start:, day:)
           rescue StandardError => e
             raise ConfigError, "planner.params.end_date: invalid: #{e.message}"
           end

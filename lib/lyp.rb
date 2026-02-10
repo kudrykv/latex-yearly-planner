@@ -12,6 +12,8 @@ require_relative "lyp/services/generate"
 require_relative "lyp/services/planners/mos/planner"
 require_relative "lyp/services/planners/mos/overseer"
 require_relative "lyp/services/planners/mos/sections/weekly"
+require_relative "lyp/entities/calendar/day"
+require_relative "lyp/entities/calendar/week"
 
 module LYP
   class Error < StandardError; end
