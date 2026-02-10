@@ -4,8 +4,7 @@ module LYP
   module Services
     class Generate
       def generate(dto)
-        contents = select_planner(dto).generate
-        p contents
+        select_planner(dto).generate
       end
 
       private

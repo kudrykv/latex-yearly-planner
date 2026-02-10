@@ -13,20 +13,22 @@ module LYP
             end
 
             def generate
-              weeks.map do |week|
-                week
-              end
+              weeks.map { |week| Pages::Weekly.new(overseer:, week:).generate }.join(glue)
             end
 
             private
 
             def weeks
-              first_week_day.upto(last_week_day).each_slice(7).map(&:first)
+              first_week_day.upto(last_week_day).each_slice(7).map(&:first).map do |day|
+                Entities::Calendar::Week.new(weekday_start: overseer.weekday_start, day:)
+              end
             end
 
             def first_week_day = overseer.start_date.beginning_of_month.beginning_of_week(overseer.weekday_start)
 
             def last_week_day = overseer.end_date.end_of_month.end_of_week(overseer.weekday_start)
+
+            def glue = "#pagebreak()\n"
           end
         end
       end

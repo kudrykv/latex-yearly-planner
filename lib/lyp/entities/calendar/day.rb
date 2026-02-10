@@ -24,9 +24,15 @@ module LYP
         end
 
         def upto(other_day)
-          raise InternalError unless other_day.is_a? Day
-
           day.upto(other_day.day).map { |day| Day.new(weekday_start:, day: ) }
+        end
+
+        def year = day.year
+
+        def strftime(...) = day.strftime(...)
+
+        def +(other)
+          Day.new(weekday_start:, day: day + other.day)
         end
 
         def to_s = "#{day} (wd: #{weekday_start})"
