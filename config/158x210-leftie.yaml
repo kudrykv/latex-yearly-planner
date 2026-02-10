@@ -24,3 +24,5 @@ planner:
 
     - name: weekly
       enabled: true
+      params:
+        hello: world

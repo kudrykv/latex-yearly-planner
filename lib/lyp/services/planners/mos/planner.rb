@@ -6,7 +6,7 @@ module LYP
       module MOS
         class Planner
           def generate(_whole_dto, dto)
-            section(dto)
+            section(dto).generate
           end
 
           private
@@ -14,7 +14,7 @@ module LYP
           def section(dto)
             case dto[:name]
             when "weekly"
-              puts "weekly!"
+              Sections::Weekly.new(**dto[:params])
             else
               raise ConfigError, "unknown section: #{section_dto[:name]}"
             end
