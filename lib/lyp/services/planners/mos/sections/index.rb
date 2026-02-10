@@ -25,6 +25,39 @@ module LYP
                     left: #{overseer.dig(:document, :layout, :margin, :left)},
                   )
                 )
+
+                #set text(
+                  size: #{overseer.dig(:document, :text, :size)}
+                )
+
+                #let dotted = tiling(
+                  size: (5mm, 5mm),
+                  place(
+                    dx: 0.5pt,
+                    dy: 0.5pt,
+                    circle(
+                      radius: 0.4pt,
+                      fill: black
+                    )
+                  ),
+                )
+
+                #let lined = tiling(
+                  size: (5mm, 5mm),
+                  place(
+                    line(
+                      start: (0%, 6%),
+                      end: (100%, 6%),
+                      stroke: 0.4pt + luma(130)
+                    ),
+                  )
+                )
+
+                #let rect_pattern(pattern) = rect(
+                  width: 100%,
+                  height: 100%,
+                  fill: pattern
+                )
               TYPST
 
               "#{definition}\n\n"

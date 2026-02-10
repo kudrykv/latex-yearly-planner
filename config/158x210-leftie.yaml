@@ -19,6 +19,9 @@ document:
       left: 5mm
       right: 0mm
 
+  text:
+    size: 10pt
+
 planner:
   params:
     start_date: "2026-01-01"
