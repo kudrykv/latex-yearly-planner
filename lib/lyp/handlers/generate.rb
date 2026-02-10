@@ -15,7 +15,7 @@ module LYP
 
         contents = generate_service.generate(yaml)
 
-        FileUtils.mkdir_p(workdir) unless Dir.exist?(workdir)
+        FileUtils.mkdir_p(workdir)
 
         File.write(File.join(workdir, "index.typst"), contents)
 

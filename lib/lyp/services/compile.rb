@@ -3,8 +3,8 @@
 module LYP
   module Services
     class Compile
-      OUTPUT_FILE = 'index.pdf'
-      TEMP_FILE = 'temp.pdf'
+      OUTPUT_FILE = "index.pdf"
+      TEMP_FILE = "temp.pdf"
 
       def compile(workdir:, file:, enable_ghostscript: false)
         typst_compile_time = Benchmark.measure do
@@ -19,9 +19,9 @@ module LYP
       private
 
       def run_ghostscript
-        puts 'Running Ghostscript...'
+        puts "Running Ghostscript..."
         time = Benchmark.measure { ghostscript_cmd }
-        raise 'Failed to slim PDF' unless $CHILD_STATUS.success?
+        raise "Failed to slim PDF" unless $CHILD_STATUS.success?
 
         puts "Ghostscript time: #{time.real.round(2)}s"
 
