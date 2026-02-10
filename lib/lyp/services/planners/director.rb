@@ -3,7 +3,7 @@
 module LYP
   module Services
     module Planners
-      class Builder
+      class Director
       end
     end
   end

@@ -8,9 +8,9 @@ module LYP
       def initialize(...)
         super
 
-        planner_builder = Services::Planners::Builder.new
+        planner_director = Services::Planners::Director.new
 
-        generate_service = LYP::Services::Generate.new(planner_builder:)
+        generate_service = LYP::Services::Generate.new(planner_director:)
 
         self.generate_handler = LYP::Handlers::Generate.new(generate_service:)
       end

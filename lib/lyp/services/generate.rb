@@ -3,10 +3,10 @@
 module LYP
   module Services
     class Generate
-      attr_accessor :planner_builder
+      attr_accessor :planner_director
 
-      def initialize(planner_builder:)
-        self.planner_builder = planner_builder
+      def initialize(planner_director:)
+        self.planner_director = planner_director
       end
 
       def generate(dto)
