@@ -15,16 +15,16 @@ module LYP
 
         def end_of_month = Day.new(weekday_start:, day: day.end_of_month)
 
-        def beginning_of_week(weekday_start = weekday_start)
-          Day.new(weekday_start:, day: day.beginning_of_week(weekday_start))
+        def beginning_of_week(wds = weekday_start)
+          Day.new(weekday_start: wds, day: day.beginning_of_week(wds))
         end
 
-        def end_of_week(weekday_start = weekday_start)
-          Day.new(weekday_start:, day: day.end_of_week(weekday_start))
+        def end_of_week(wds = weekday_start)
+          Day.new(weekday_start: wds, day: day.end_of_week(wds))
         end
 
         def upto(other_day)
-          day.upto(other_day.day).map { |day| Day.new(weekday_start:, day: ) }
+          day.upto(other_day.day).map { |day| Day.new(weekday_start:, day:) }
         end
 
         def year = day.year
