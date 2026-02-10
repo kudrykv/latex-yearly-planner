@@ -18,5 +18,7 @@ require_relative "lyp/entities/calendar/week"
 module LYP
   class Error < StandardError; end
 
+  class InternalError < StandardError; end
+
   class ConfigError < Error; end
 end

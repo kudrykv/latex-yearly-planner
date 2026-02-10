@@ -22,6 +22,14 @@ module LYP
         def end_of_week(weekday_start = weekday_start)
           Day.new(weekday_start:, day: day.end_of_week(weekday_start))
         end
+
+        def upto(other_day)
+          raise InternalError unless other_day.is_a? Day
+
+          day.upto(other_day.day).map { |day| Day.new(weekday_start:, day: ) }
+        end
+
+        def to_s = "#{day} (wd: #{weekday_start})"
       end
     end
   end

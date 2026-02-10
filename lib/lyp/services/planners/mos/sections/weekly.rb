@@ -21,14 +21,12 @@ module LYP
             private
 
             def weeks
-              first_week..last_week
-
-              []
+              first_week_day.upto(last_week_day).each_slice(7).map(&:first)
             end
 
-            def first_week = overseer.start_date.beginning_of_month.beginning_of_week(overseer.weekday_start)
+            def first_week_day = overseer.start_date.beginning_of_month.beginning_of_week(overseer.weekday_start)
 
-            def last_week = overseer.end_date.end_of_month.end_of_week(overseer.weekday_start)
+            def last_week_day = overseer.end_date.end_of_month.end_of_week(overseer.weekday_start)
           end
         end
       end
