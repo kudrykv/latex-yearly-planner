@@ -9,8 +9,9 @@ module LYP
         super
 
         generate_service = Services::Generate.new
+        compile_service = Services::Compile.new
 
-        self.generate_handler = Handlers::Generate.new(generate_service:)
+        self.generate_handler = Handlers::Generate.new(generate_service:, compile_service:)
       end
 
       desc "generate <yaml-config>", "Generate planner using config"

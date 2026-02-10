@@ -3,20 +3,23 @@
 module LYP
   module Handlers
     class Generate
-      attr_accessor :generate_service
+      attr_accessor :generate_service, :compile_service
 
-      def initialize(generate_service:)
+      def initialize(generate_service:, compile_service:)
         self.generate_service = generate_service
+        self.compile_service = compile_service
       end
 
-      def generate(path_to_yaml, dir)
+      def generate(path_to_yaml, workdir)
         yaml = YAML.load_file(path_to_yaml, symbolize_names: true)
 
         contents = generate_service.generate(yaml)
 
-        FileUtils.mkdir_p(dir) unless Dir.exist?(dir)
+        FileUtils.mkdir_p(workdir) unless Dir.exist?(workdir)
 
-        File.write(File.join(dir, "index.typst"), contents)
+        File.write(File.join(workdir, "index.typst"), contents)
+
+        compile_service.compile(workdir:, file: "index.typst")
       end
     end
   end
