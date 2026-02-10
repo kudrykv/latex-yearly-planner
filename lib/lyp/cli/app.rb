@@ -26,7 +26,7 @@ module LYP
              default: "./out"
 
       def generate(path_to_yaml)
-        generate_handler.generate(path_to_yaml)
+        generate_handler.generate(path_to_yaml, options[:workdir])
       end
     end
   end

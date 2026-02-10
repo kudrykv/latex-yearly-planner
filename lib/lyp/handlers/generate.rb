@@ -9,10 +9,14 @@ module LYP
         self.generate_service = generate_service
       end
 
-      def generate(path_to_yaml)
+      def generate(path_to_yaml, dir)
         yaml = YAML.load_file(path_to_yaml, symbolize_names: true)
 
-        generate_service.generate(yaml)
+        contents = generate_service.generate(yaml)
+
+        FileUtils.mkdir_p(dir) unless Dir.exist?(dir)
+
+        File.write(File.join(dir, "index.typst"), contents)
       end
     end
   end
