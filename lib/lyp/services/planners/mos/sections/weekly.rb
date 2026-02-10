@@ -13,7 +13,7 @@ module LYP
             end
 
             def generate
-              puts "hello world"
+              "text"
             end
           end
         end
