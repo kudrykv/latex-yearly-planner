@@ -12,6 +12,3 @@ Style/StringLiteralsInInterpolation:
 
 Style/Documentation:
   Enabled: false
-
-Style/ClassAndModuleChildren:
-  EnforcedStyle: compact
