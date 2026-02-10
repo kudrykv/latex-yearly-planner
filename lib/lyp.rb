@@ -8,7 +8,7 @@ require_relative "lyp/cli/app"
 
 require_relative "lyp/handlers/generate"
 require_relative "lyp/services/generate"
-require_relative "lyp/services/planners/director"
+require_relative "lyp/services/planners/mos/planner"
 
 module LYP
   class Error < StandardError; end

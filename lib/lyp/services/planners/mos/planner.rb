@@ -3,7 +3,10 @@
 module LYP
   module Services
     module Planners
-      class Director
+      module MOS
+        class Planner
+
+        end
       end
     end
   end

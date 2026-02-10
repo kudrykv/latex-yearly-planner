@@ -3,13 +3,13 @@
 module LYP
   module Services
     class Generate
-      attr_accessor :planner_director
+      def initialize
 
-      def initialize(planner_director:)
-        self.planner_director = planner_director
       end
 
       def generate(dto)
+        planner = select_planner(dto.dig(:template))
+
         sections(dto).map do |section|
           puts section
         end
@@ -17,9 +17,18 @@ module LYP
 
       private
 
+      def select_planner(template)
+        case template
+        when "mos"
+          Planners::MOS::Planner.new
+        else
+          raise ConfigError, "Bad template: #{template}"
+        end
+      end
+
       def sections(dto)
         sections = dto.dig(:planner, :sections)
-        raise ConfigError, "planner.sections is nil" if sections.nil? || sections.empty?
+        raise ConfigError, "planner.sections is blank" if sections.nil? || sections.empty?
 
         sections
       end
