@@ -8,6 +8,16 @@ compiler:
     enable: true
 
 document:
+  layout:
+    dimensions:
+      width: 158mm
+      height: 210mm
+
+    margin:
+      top: 10mm
+      bottom: 0mm
+      left: 5mm
+      right: 0mm
 
 planner:
   params:

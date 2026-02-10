@@ -12,7 +12,10 @@ module LYP
           end
 
           def generate
-            overseer.enabled_sections.map { |dto| section(overseer, dto).generate }.join(glue)
+            index = Sections::Index.new(overseer:).generate
+            rest = overseer.enabled_sections.map { |dto| section(overseer, dto).generate }.join(glue)
+
+            [index, rest].join
           end
 
           private

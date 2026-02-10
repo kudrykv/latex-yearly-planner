@@ -46,6 +46,13 @@ module LYP
 
             start
           end
+
+          def dig(*path)
+            value = dto.dig(*path)
+            raise ConfigError, "#{path} not found" if value.nil?
+
+            value
+          end
         end
       end
     end
