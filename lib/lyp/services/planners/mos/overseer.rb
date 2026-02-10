@@ -7,7 +7,7 @@ module LYP
         class Overseer
           attr_accessor :dto
 
-          ALLOWED_WEEKDAYS = [:monday, :tuesday, :wednesday, :thursday, :friday, :saturday, :sunday].freeze
+          ALLOWED_WEEKDAYS = %i[monday tuesday wednesday thursday friday saturday sunday].freeze
 
           def initialize(dto)
             self.dto = dto
