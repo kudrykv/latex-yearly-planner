@@ -3,15 +3,13 @@
 module LYP
   module Services
     class Generate
-      def initialize
-
-      end
-
       def generate(dto)
-        planner = select_planner(dto.dig(:template))
+        planner = select_planner(dto[:template])
 
         sections(dto).map do |section|
-          puts section
+          next unless section[:enabled]
+
+          planner.generate(dto, section)
         end
       end
 

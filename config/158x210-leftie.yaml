@@ -17,7 +17,7 @@ planner:
 
   sections:
     - name: title
-      enabled: true
+      enabled: false
       params:
         name: "2026\n\nPlanner"
         font_size: 48pt
