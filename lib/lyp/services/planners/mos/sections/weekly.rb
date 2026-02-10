@@ -13,8 +13,22 @@ module LYP
             end
 
             def generate
-              "text"
+              weeks.map do |week|
+                week
+              end
             end
+
+            private
+
+            def weeks
+              first_week..last_week
+
+              []
+            end
+
+            def first_week = overseer.start_date.beginning_of_month.beginning_of_week(overseer.weekday_start)
+
+            def last_week = overseer.end_date.end_of_month.end_of_week(overseer.weekday_start)
           end
         end
       end

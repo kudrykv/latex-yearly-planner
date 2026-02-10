@@ -2,6 +2,7 @@
 
 require "yaml"
 require "thor"
+require "active_support/all"
 
 require_relative "lyp/version"
 require_relative "lyp/cli/app"
