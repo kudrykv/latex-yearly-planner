@@ -13,6 +13,8 @@ module LYP
           self.day = day
         end
 
+        def id = to_s
+
         def to_s = day.strftime("%GW%V")
       end
     end
