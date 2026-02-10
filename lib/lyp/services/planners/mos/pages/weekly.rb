@@ -18,8 +18,9 @@ module LYP
                 #grid(
                   columns: (5mm, 1fr),
                   rows: (auto, auto),
-                grid.cell(rowspan: 2, ""), text[Week #{week}<#{week.id}>],
-                text[do the layout]
+
+                  grid.cell(rowspan: 2, ""), text[Week #{week}<#{week.id}>],
+                  text[do the layout]
                 )
               TYPST
             end
