@@ -6,7 +6,11 @@ module LYP
       module MOS
         module Sections
           class Weekly
-            def initialize(**_kwargs); end
+            attr_accessor :overseer
+
+            def initialize(overseer:, **_rest)
+              self.overseer = overseer
+            end
 
             def generate
               puts "hello world"

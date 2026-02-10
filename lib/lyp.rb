@@ -9,7 +9,7 @@ require_relative "lyp/cli/app"
 require_relative "lyp/handlers/generate"
 require_relative "lyp/services/generate"
 require_relative "lyp/services/planners/mos/planner"
-require_relative "lyp/services/planners/mos/config"
+require_relative "lyp/services/planners/mos/overseer"
 require_relative "lyp/services/planners/mos/sections/weekly"
 
 module LYP
