@@ -8,8 +8,10 @@ require_relative "lyp/cli/app"
 
 require_relative "lyp/handlers/generate"
 require_relative "lyp/services/generate"
+require_relative "lyp/services/planners/builder"
 
 module LYP
   class Error < StandardError; end
-  # Your code goes here...
+
+  class ConfigError < Error; end
 end

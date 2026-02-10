@@ -10,3 +10,17 @@ compiler:
 document:
 
 planner:
+  general:
+    start_date: 2025, January
+    end_date: 2025, December
+    weekday_start: Monday
+
+  sections:
+    - name: title
+      enabled: true
+      params:
+        name: "2026\n\nPlanner"
+        font_size: 48pt
+
+    - name: weekly
+      enabled: true

@@ -3,8 +3,25 @@
 module LYP
   module Services
     class Generate
+      attr_accessor :planner_builder
+
+      def initialize(planner_builder:)
+        self.planner_builder = planner_builder
+      end
+
       def generate(dto)
-        puts dto
+        sections(dto).map do |section|
+          puts section
+        end
+      end
+
+      private
+
+      def sections(dto)
+        sections = dto.dig(:planner, :sections)
+        raise ConfigError, "planner.sections is nil" if sections.nil? || sections.empty?
+
+        sections
       end
     end
   end
