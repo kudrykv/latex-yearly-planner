@@ -34,6 +34,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "activesupport", "~> 8.1"
   spec.add_dependency "benchmark", "~> 0.5.0"
+  spec.add_dependency "i18n", "~> 1.14"
   spec.add_dependency "thor", "~> 1.5"
 
   # For more information and examples about making a new gem, check out our
