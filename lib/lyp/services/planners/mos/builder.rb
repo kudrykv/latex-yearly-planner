@@ -12,10 +12,15 @@ module LYP
           end
 
           def generate
-            index = Sections::Index.new(overseer:).generate
-            rest = overseer.enabled_sections.map { |dto| section(overseer, dto).generate }.join(glue)
+            manifest = Manifest.new
+            planner = Planner.new
 
-            [index, rest].join
+            overseer.enabled_sections
+                    .map { |dto| section(overseer, dto) }
+                    .each { |s| s.register(manifest) }
+                    .each { |s| s.generate(planner, manifest) }
+
+            planner.generate
           end
 
           private
@@ -28,8 +33,6 @@ module LYP
               raise ConfigError, "unknown section: #{dto[:name]}"
             end
           end
-
-          def glue = "#pagebreak()\n"
         end
       end
     end

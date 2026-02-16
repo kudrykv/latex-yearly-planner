@@ -12,8 +12,12 @@ module LYP
               self.overseer = overseer
             end
 
-            def generate
-              weeks.map { |week| Pages::Weekly.new(overseer:, week:).generate }.join(glue)
+            def register(manifest)
+
+            end
+
+            def generate(planner, manifest)
+              # weeks.map { |week| Pages::Weekly.new(overseer:, week:).generate }.join(glue)
             end
 
             private
