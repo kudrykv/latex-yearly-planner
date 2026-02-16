@@ -5,15 +5,29 @@ module LYP
     module Planners
       module MOS
         class Planner
-          attr_accessor :overseer
+          attr_accessor :overseer, :pages
 
           def initialize(overseer:)
             self.overseer = overseer
+            self.pages = []
           end
 
           def generate
-            definition(overseer)
+            "#{definition(overseer)}\n#{pages.join(glue)}"
           end
+
+          def add_page(title:, content:, **_rest)
+            pages << <<~TYPST
+              #grid(
+                columns: (1fr, 1fr),
+                rows: (1fr, 1fr),
+                "", text[#{title}],
+                "", text[#{content}]
+              )
+            TYPST
+          end
+
+          def glue = "#pagebreak()\n"
         end
       end
     end

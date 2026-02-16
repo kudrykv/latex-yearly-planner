@@ -6,23 +6,20 @@ module LYP
       module MOS
         module Pages
           class Weekly
-            attr_accessor :overseer, :week
+            attr_accessor :overseer, :manifest, :week
 
-            def initialize(overseer:, week:)
+            def initialize(overseer:, manifest:, week:)
               self.overseer = overseer
+              self.manifest = manifest
               self.week = week
             end
 
-            def generate
-              <<~TYPST
-                #grid(
-                  columns: (5mm, 1fr),
-                  rows: (auto, auto),
+            def title
+              week.id
+            end
 
-                  grid.cell(rowspan: 2, ""), text[Week #{week}<#{week.id}>],
-                  text[do the layout]
-                )
-              TYPST
+            def content
+              "weekly content"
             end
           end
         end

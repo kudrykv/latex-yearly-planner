@@ -13,11 +13,17 @@ module LYP
             end
 
             def register(manifest)
-
+              weeks.each do |week|
+                manifest.register_source(week.id)
+              end
             end
 
             def generate(planner, manifest)
-              # weeks.map { |week| Pages::Weekly.new(overseer:, week:).generate }.join(glue)
+              weeks.each do |week|
+                weekly = Pages::Weekly.new(overseer:, manifest:, week:)
+
+                planner.add_page(title: weekly.title, content: weekly.content)
+              end
             end
 
             private
@@ -31,8 +37,6 @@ module LYP
             def first_week_day = overseer.start_date.beginning_of_month.beginning_of_week(overseer.weekday_start)
 
             def last_week_day = overseer.end_date.end_of_month.end_of_week(overseer.weekday_start)
-
-            def glue = "#pagebreak()\n"
           end
         end
       end
