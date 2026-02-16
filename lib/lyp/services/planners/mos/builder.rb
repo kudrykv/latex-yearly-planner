@@ -4,7 +4,7 @@ module LYP
   module Services
     module Planners
       module MOS
-        class Planner
+        class Builder
           attr_accessor :overseer
 
           def initialize(dto)
