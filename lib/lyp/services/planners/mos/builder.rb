@@ -13,7 +13,7 @@ module LYP
 
           def generate
             manifest = Manifest.new
-            planner = Planner.new
+            planner = Planner.new(overseer:)
 
             overseer.enabled_sections
                     .map { |dto| section(overseer, dto) }
