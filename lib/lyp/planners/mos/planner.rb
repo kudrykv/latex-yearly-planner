@@ -5,8 +5,8 @@ module LYP
     module Planners
       module MOS
         class Planner
-          attr_accessor :overseer, :manifest, :pages
-          attr_accessor :side_menu_position,
+          attr_accessor :overseer, :manifest, :pages,
+                        :side_menu_position,
                         :side_menu_width,
                         :heading_height,
                         :heading_align,
@@ -42,9 +42,9 @@ module LYP
           end
 
           def heading_columns
-            columns = [side_menu_width, '1fr']
-            columns.reverse! if side_menu_position == 'right'
-            columns.join(', ')
+            columns = [side_menu_width, "1fr"]
+            columns.reverse! if side_menu_position == "right"
+            columns.join(", ")
           end
 
           def heading_content(title)
@@ -52,14 +52,14 @@ module LYP
               "grid.cell(rowspan: 2, text[side menu will be here])",
               "grid.cell(align: #{heading_align}, #{heading_stack(title)})"
             ]
-            row.reverse! if side_menu_position == 'right'
+            row.reverse! if side_menu_position == "right"
 
-            row.join(', ')
+            row.join(", ")
           end
 
           def heading_stack(title)
             direction = "rtl"
-            direction = "ltr" if side_menu_position == 'right'
+            direction = "ltr" if side_menu_position == "right"
 
             stack = [
               "text(size: #{title_font_size})[#{title}]",
