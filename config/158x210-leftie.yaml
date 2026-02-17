@@ -28,10 +28,13 @@ planner:
     weekday_start: Monday
 
   objects:
+    heading:
+      height: 10mm
+      title_font_size: 10mm
+
     mos_layout:
       side_menu_position: right
       side_menu_width: 10mm
-      heading_height: 10mm
 
   sections:
     - name: title
