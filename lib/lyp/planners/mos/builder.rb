@@ -15,7 +15,7 @@ module LYP
           # rubocop:disable Metrics/AbcSize
           def generate
             manifest = Manifest.new
-            planner = Planner.new(overseer:)
+            planner = Planner.new(overseer:, manifest:)
 
             overseer.enabled_sections
                     .map { |dto| section(overseer, dto) }

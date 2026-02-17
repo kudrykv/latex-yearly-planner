@@ -5,15 +5,16 @@ module LYP
     module Planners
       module MOS
         class Planner
-          attr_accessor :overseer, :pages
+          attr_accessor :overseer, :manifest, :pages
           attr_accessor :side_menu_position,
                         :side_menu_width,
                         :heading_height,
                         :heading_align,
                         :title_font_size
 
-          def initialize(overseer:)
+          def initialize(overseer:, manifest:)
             self.overseer = overseer
+            self.manifest = manifest
             self.pages = []
 
             self.side_menu_position = overseer.dig!(:planner, :params, :mos_layout, :side_menu_position)
