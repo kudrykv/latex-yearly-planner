@@ -9,6 +9,7 @@ module LYP
           attr_accessor :side_menu_position,
                         :side_menu_width,
                         :heading_height,
+                        :heading_align,
                         :title_font_size
 
           def initialize(overseer:)
@@ -18,6 +19,7 @@ module LYP
             self.side_menu_position = overseer.dig!(:planner, :objects, :mos_layout, :side_menu_position)
             self.side_menu_width = overseer.dig!(:planner, :objects, :mos_layout, :side_menu_width)
             self.heading_height = overseer.dig!(:planner, :objects, :heading, :height)
+            self.heading_align = overseer.dig!(:planner, :objects, :heading, :align)
             self.title_font_size = overseer.dig!(:planner, :objects, :heading, :title_font_size)
           end
 
@@ -45,10 +47,31 @@ module LYP
           end
 
           def heading_content(title)
-            row = ["grid.cell(rowspan: 2, text[side menu will be here])", "text(size: #{title_font_size})[#{title}]"]
+            row = [
+              "grid.cell(rowspan: 2, text[side menu will be here])",
+              "grid.cell(align: #{heading_align}, #{heading_stack(title)})"
+            ]
             row.reverse! if side_menu_position == 'right'
 
             row.join(', ')
+          end
+
+          def heading_stack(title)
+            direction = "rtl"
+            direction = "ltr" if side_menu_position == 'right'
+
+            stack = [
+              "text(size: #{title_font_size})[#{title}]",
+              "text[maybe menu]"
+            ]
+
+            <<~TYPST
+              stack(
+                dir: #{direction},
+                spacing: 1fr,
+                #{stack.join(",\n")}
+              )
+            TYPST
           end
 
           def glue = "#pagebreak()\n"
@@ -107,4 +130,5 @@ def definition(overseer)
     )
   TYPST
 end
+
 # rubocop:enable Metrics/MethodLength
