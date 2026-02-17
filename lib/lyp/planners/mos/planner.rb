@@ -6,12 +6,15 @@ module LYP
       module MOS
         class Planner
           attr_accessor :overseer, :pages
-          attr_accessor :mos_layout
+          attr_accessor :side_menu_position, :side_menu_width, :heading_height
 
           def initialize(overseer:)
             self.overseer = overseer
             self.pages = []
-            self.mos_layout = overseer.dig!(:planner, :objects, :mos_layout)
+
+            self.side_menu_position = overseer.dig!(:planner, :objects, :mos_layout, :side_menu_position)
+            self.side_menu_width = overseer.dig!(:planner, :objects, :mos_layout, :side_menu_width)
+            self.heading_height = overseer.dig!(:planner, :objects, :mos_layout, :heading_height)
           end
 
           def generate
@@ -22,7 +25,7 @@ module LYP
             pages << <<~TYPST
               #grid(
                 columns: (#{heading_columns}),
-                rows: (#{mos_layout[:heading_height]}, 1fr),
+                rows: (#{heading_height}, 1fr),
                 stroke: 0.4pt,
 
                 #{heading_content(title)},
@@ -32,14 +35,14 @@ module LYP
           end
 
           def heading_columns
-            columns = [mos_layout[:mos_nav_width], '1fr']
-            columns.reverse! if mos_layout[:side_menu] == 'right'
+            columns = [side_menu_width, '1fr']
+            columns.reverse! if side_menu_position == 'right'
             columns.join(', ')
           end
 
           def heading_content(title)
             row = ["grid.cell(rowspan: 2, text[side menu will be here])", "text[#{title}]"]
-            row.reverse! if mos_layout[:side_menu] == 'right'
+            row.reverse! if side_menu_position == 'right'
 
             row.join(', ')
           end
