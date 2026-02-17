@@ -6,16 +6,17 @@ module LYP
       module MOS
         module Pages
           class Weekly
-            attr_accessor :overseer, :manifest, :week
+            attr_accessor :i18n, :overseer, :manifest, :week
 
-            def initialize(overseer:, manifest:, week:)
+            def initialize(i18n:, overseer:, manifest:, week:)
+              self.i18n = i18n
               self.overseer = overseer
               self.manifest = manifest
               self.week = week
             end
 
             def title
-              week.id
+              "#{i18n.t("week_name_full")} #{week.number}"
             end
 
             def content

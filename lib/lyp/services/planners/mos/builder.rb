@@ -5,9 +5,10 @@ module LYP
     module Planners
       module MOS
         class Builder
-          attr_accessor :overseer
+          attr_accessor :i18n, :overseer
 
-          def initialize(dto)
+          def initialize(dto, i18n:)
+            self.i18n = i18n
             self.overseer = Overseer.new(dto)
           end
 
@@ -28,7 +29,7 @@ module LYP
           def section(overseer, dto)
             case dto[:name]
             when "weekly"
-              Sections::Weekly.new(overseer:, **dto[:params])
+              Sections::Weekly.new(i18n:, overseer:, **dto[:params])
             else
               raise ConfigError, "unknown section: #{dto[:name]}"
             end

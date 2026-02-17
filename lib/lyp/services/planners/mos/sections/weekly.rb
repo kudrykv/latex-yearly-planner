@@ -6,9 +6,10 @@ module LYP
       module MOS
         module Sections
           class Weekly
-            attr_accessor :overseer
+            attr_accessor :i18n, :overseer
 
-            def initialize(overseer:, **_rest)
+            def initialize(i18n:, overseer:, **_rest)
+              self.i18n = i18n
               self.overseer = overseer
             end
 
@@ -20,7 +21,7 @@ module LYP
 
             def generate(planner, manifest)
               weeks.each do |week|
-                weekly = Pages::Weekly.new(overseer:, manifest:, week:)
+                weekly = Pages::Weekly.new(i18n:, overseer:, manifest:, week:)
 
                 planner.add_page(title: weekly.title, content: weekly.content)
               end

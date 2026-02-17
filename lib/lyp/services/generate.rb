@@ -3,6 +3,12 @@
 module LYP
   module Services
     class Generate
+      attr_accessor :i18n
+
+      def initialize(i18n:)
+        self.i18n = i18n
+      end
+
       def generate(dto)
         select_planner(dto).generate
       end
@@ -12,7 +18,7 @@ module LYP
       def select_planner(dto)
         case dto[:template]
         when "mos"
-          Planners::MOS::Builder.new(dto)
+          Planners::MOS::Builder.new(dto, i18n:)
         else
           raise ConfigError, "Bad template: #{template}"
         end
