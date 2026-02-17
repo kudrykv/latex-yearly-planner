@@ -20,7 +20,7 @@ module LYP
             end
 
             def content
-              "weekly content"
+              "text[weekly content]"
             end
           end
         end

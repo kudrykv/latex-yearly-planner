@@ -36,7 +36,7 @@ module LYP
                 stroke: 0.4pt,
 
                 #{heading_content(title)},
-                text[#{content}]
+                #{content}
               )
             TYPST
           end
