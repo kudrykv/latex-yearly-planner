@@ -5,18 +5,17 @@ module LYP
     module Planners
       module MOS
         class Builder
-          attr_accessor :i18n, :overseer
+          attr_accessor :i18n, :overseer, :manifest, :planner
 
           def initialize(dto, i18n:)
             self.i18n = i18n
             self.overseer = Overseer.new(dto)
+            self.manifest = Manifest.new
+            self.planner = Planner.new(overseer:, manifest:)
           end
 
           # rubocop:disable Metrics/AbcSize
           def generate
-            manifest = Manifest.new
-            planner = Planner.new(overseer:, manifest:)
-
             overseer.enabled_sections
                     .map { |dto| section(overseer, dto) }
                     .each { |s| manifest.register_section(s.name) }
