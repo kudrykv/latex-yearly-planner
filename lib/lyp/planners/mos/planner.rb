@@ -6,10 +6,12 @@ module LYP
       module MOS
         class Planner
           attr_accessor :overseer, :pages
+          attr_accessor :mos_layout
 
           def initialize(overseer:)
             self.overseer = overseer
             self.pages = []
+            self.mos_layout = overseer.dig!(:planner, :objects, :mos_layout)
           end
 
           def generate
@@ -19,12 +21,27 @@ module LYP
           def add_page(title:, content:, **_rest)
             pages << <<~TYPST
               #grid(
-                columns: (1fr, 1fr),
-                rows: (1fr, 1fr),
-                "", text[#{title}],
-                "", text[#{content}]
+                columns: (#{heading_columns}),
+                rows: (#{mos_layout[:heading_height]}, 1fr),
+                stroke: 0.4pt,
+
+                #{heading_content(title)},
+                text[#{content}]
               )
             TYPST
+          end
+
+          def heading_columns
+            columns = [mos_layout[:mos_nav_width], '1fr']
+            columns.reverse! if mos_layout[:side_menu] == 'right'
+            columns.join(', ')
+          end
+
+          def heading_content(title)
+            row = ["grid.cell(rowspan: 2, text[side menu will be here])", "text[#{title}]"]
+            row.reverse! if mos_layout[:side_menu] == 'right'
+
+            row.join(', ')
           end
 
           def glue = "#pagebreak()\n"
@@ -38,19 +55,19 @@ end
 def definition(overseer)
   <<~TYPST.strip
     #set page(
-      width: #{overseer.dig(:document, :layout, :dimensions, :width)},
-      height: #{overseer.dig(:document, :layout, :dimensions, :height)},
+      width: #{overseer.dig!(:document, :layout, :dimensions, :width)},
+      height: #{overseer.dig!(:document, :layout, :dimensions, :height)},
 
       margin: (
-        top: #{overseer.dig(:document, :layout, :margin, :top)},
-        right: #{overseer.dig(:document, :layout, :margin, :right)},
-        bottom: #{overseer.dig(:document, :layout, :margin, :bottom)},
-        left: #{overseer.dig(:document, :layout, :margin, :left)},
+        top: #{overseer.dig!(:document, :layout, :margin, :top)},
+        right: #{overseer.dig!(:document, :layout, :margin, :right)},
+        bottom: #{overseer.dig!(:document, :layout, :margin, :bottom)},
+        left: #{overseer.dig!(:document, :layout, :margin, :left)},
       )
     )
 
     #set text(
-      size: #{overseer.dig(:document, :text, :size)}
+      size: #{overseer.dig!(:document, :text, :size)}
     )
 
     #let dotted = tiling(

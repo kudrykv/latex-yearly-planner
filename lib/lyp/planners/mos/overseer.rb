@@ -47,7 +47,7 @@ module LYP
             start
           end
 
-          def dig(*path)
+          def dig!(*path)
             value = dto.dig(*path)
             raise ConfigError, "#{path.map(&:to_s).join(".")} not found" if value.nil?
 
