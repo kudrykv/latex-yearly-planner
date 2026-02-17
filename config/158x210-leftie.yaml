@@ -27,7 +27,6 @@ planner:
     end_date: "2026-12-31"
     weekday_start: Monday
 
-  objects:
     heading:
       height: 10mm
       title_font_size: 10mm

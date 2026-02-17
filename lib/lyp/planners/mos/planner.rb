@@ -16,11 +16,11 @@ module LYP
             self.overseer = overseer
             self.pages = []
 
-            self.side_menu_position = overseer.dig!(:planner, :objects, :mos_layout, :side_menu_position)
-            self.side_menu_width = overseer.dig!(:planner, :objects, :mos_layout, :side_menu_width)
-            self.heading_height = overseer.dig!(:planner, :objects, :heading, :height)
-            self.heading_align = overseer.dig!(:planner, :objects, :heading, :align)
-            self.title_font_size = overseer.dig!(:planner, :objects, :heading, :title_font_size)
+            self.side_menu_position = overseer.dig!(:planner, :params, :mos_layout, :side_menu_position)
+            self.side_menu_width = overseer.dig!(:planner, :params, :mos_layout, :side_menu_width)
+            self.heading_height = overseer.dig!(:planner, :params, :heading, :height)
+            self.heading_align = overseer.dig!(:planner, :params, :heading, :align)
+            self.title_font_size = overseer.dig!(:planner, :params, :heading, :title_font_size)
           end
 
           def generate
