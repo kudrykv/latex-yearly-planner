@@ -21,7 +21,7 @@ module LYP
 
             def generate(planner, manifest)
               weeks.each do |week|
-                weekly = Pages::Weekly.new(i18n:, overseer:, manifest:, week:)
+                weekly = Pages::Weekly.new(i18n:, manifest:, week:)
 
                 planner.add_page(title: weekly.title, content: weekly.content)
               end
