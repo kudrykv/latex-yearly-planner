@@ -34,6 +34,7 @@ module LYP
   end
 end
 
+# rubocop:disable Metrics/MethodLength
 def definition(overseer)
   <<~TYPST.strip
     #set page(
@@ -82,4 +83,4 @@ def definition(overseer)
     )
   TYPST
 end
-
+# rubocop:enable Metrics/MethodLength

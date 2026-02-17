@@ -12,6 +12,7 @@ module LYP
             self.overseer = Overseer.new(dto)
           end
 
+          # rubocop:disable Metrics/AbcSize
           def generate
             manifest = Manifest.new
             planner = Planner.new(overseer:)
@@ -24,6 +25,7 @@ module LYP
 
             planner.generate
           end
+          # rubocop:enable Metrics/AbcSize
 
           private
 

@@ -15,7 +15,7 @@ module LYP
 
         def id = to_s
 
-        def number = day.strftime('%V').to_i
+        def number = day.strftime("%V").to_i
 
         def to_s = day.strftime("%GW%V")
       end
