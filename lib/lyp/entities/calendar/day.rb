@@ -11,6 +11,8 @@ module LYP
           self.day = day
         end
 
+        def id = day.strftime("%Y-%m-%d")
+
         def beginning_of_month = Day.new(weekday_start:, day: day.beginning_of_month)
 
         def end_of_month = Day.new(weekday_start:, day: day.end_of_month)

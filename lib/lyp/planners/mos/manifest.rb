@@ -14,6 +14,8 @@ module LYP
 
           def register_source(id) = sources.add(id)
 
+          def has_source?(id) = sources.member?(id)
+
           def register_section(name) = sections.add(name)
         end
       end

@@ -13,11 +13,13 @@ module LYP
           self.day = day
         end
 
-        def id = to_s
+        def id = @id ||= to_s
 
-        def number = day.strftime("%V").to_i
+        def number = @number ||= day.strftime("%V").to_i
 
-        def to_s = day.strftime("%GW%V")
+        def to_s = @to_s ||= day.strftime("%GW%V")
+
+        def days = @days ||= (0..6).map { |i| day + i }
       end
     end
   end
