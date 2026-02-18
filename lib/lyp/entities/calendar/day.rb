@@ -23,6 +23,8 @@ module LYP
 
         def next_month = Day.new(weekday_start:, day: day.next_month)
 
+        def month = Month.new(weekday_start:, day: self)
+
         def beginning_of_week(wds = weekday_start)
           Day.new(weekday_start: wds, day: day.beginning_of_week(wds))
         end
@@ -43,6 +45,14 @@ module LYP
         end
 
         def to_s = "#{day} (wd: #{weekday_start})"
+
+        def hash = [weekday_start, day].hash
+
+        def eql?(other)
+          return false unless other.is_a? Day
+
+          weekday_start.eql?(other.weekday_start) && day.eql?(other.day)
+        end
       end
     end
   end

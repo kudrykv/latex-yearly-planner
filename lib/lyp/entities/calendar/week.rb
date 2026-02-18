@@ -20,6 +20,13 @@ module LYP
         def to_s = @to_s ||= day.strftime("%GW%V")
 
         def days = @days ||= (0..6).map { |i| day + i }
+
+        def in_months
+          first = days.first
+          last = days.last
+
+          [first.month, last.month].uniq
+        end
       end
     end
   end

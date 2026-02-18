@@ -28,14 +28,14 @@ module LYP
           "#{definition(overseer)}\n#{pages.join(glue)}"
         end
 
-        def add_page(title:, content:, highlighted_months: [], **_rest)
+        def add_page(title:, content:, highlight_months: [], **_rest)
           pages << <<~TYPST
             #grid(
               columns: (#{heading_columns}),
               rows: (#{heading_height}, 1fr),
               stroke: 0.4pt,
 
-              #{heading_content(title:, highlighted_months:)},
+              #{heading_content(title:, highlight_months:)},
               #{content}
             )
           TYPST
@@ -47,11 +47,12 @@ module LYP
           columns.join(", ")
         end
 
-        def heading_content(title:, highlighted_months:)
+        def heading_content(title:, highlight_months:)
           from_month = Entities::Calendar::Month.new(weekday_start: overseer.weekday_start, day: overseer.start_date)
           to_month = Entities::Calendar::Month.new(weekday_start: overseer.weekday_start, day: overseer.end_date)
 
           mm = Components::MonthsMenu.new(i18n:, range: from_month..to_month)
+          mm.highlight(highlight_months)
 
           row = [
             "grid.cell(rowspan: 2, #{mm.generate})",

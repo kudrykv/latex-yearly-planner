@@ -22,7 +22,11 @@ module LYP
             weeks.each do |week|
               weekly = Pages::Weekly.new(i18n:, manifest:, week:)
 
-              planner.add_page(title: weekly.title, content: weekly.content)
+              planner.add_page(
+                title: weekly.title,
+                content: weekly.content,
+                highlight_months: week.in_months
+              )
             end
           end
 

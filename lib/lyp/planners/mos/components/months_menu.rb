@@ -5,12 +5,14 @@ module LYP
     module MOS
       module Components
         class MonthsMenu
-          attr_accessor :i18n, :range
+          attr_accessor :i18n, :range, :highlighted
 
           def initialize(i18n:, range:)
             self.i18n = i18n
             self.range = range
           end
+
+          def highlight(list = []) = self.highlighted = list
 
           def generate
             <<~TYPST
@@ -34,6 +36,10 @@ module LYP
           def months = range.map(&method(:format)).join(",\n")
 
           def format(month)
+            if highlighted.include? month
+              return "table.cell(fill: black, text(white)[#{i18n.t("months.short.#{month.name}")}])"
+            end
+
             "table.cell([#{i18n.t("months.short.#{month.name}")}])"
           end
         end

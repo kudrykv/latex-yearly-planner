@@ -26,6 +26,16 @@ module LYP
           day <=> other.day
         end
 
+        def eql?(other)
+          return false unless other.is_a? Month
+
+          weekday_start.eql?(other.weekday_start) && day.eql?(other.day)
+        end
+
+        def hash
+          [weekday_start, day].hash
+        end
+
         def name = @name ||= day.strftime("%B").downcase
 
         def to_s = "#{day.strftime("%Y, %B")} (wd: #{weekday_start})"
