@@ -67,6 +67,7 @@ module LYP
           Components::MonthsMenu.new(i18n:, range: from_month..to_month)
         end
 
+        # rubocop:disable Metrics/MethodLength
         def heading_stack(title)
           direction = "rtl"
           direction = "ltr" if side_menu_position == "right"
@@ -84,6 +85,7 @@ module LYP
             )
           TYPST
         end
+        # rubocop:enable Metrics/MethodLength
 
         def glue = "#pagebreak()\n"
       end

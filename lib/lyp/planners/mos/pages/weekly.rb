@@ -37,7 +37,7 @@ module LYP
 
           def format_day(day)
             format = day.strftime("%A, %e")
-            return "[#{format}]" unless manifest.has_source?(day.id)
+            return "[#{format}]" unless manifest.source?(day.id)
 
             "link(<#{day.id}>, [#{format}])"
           end
