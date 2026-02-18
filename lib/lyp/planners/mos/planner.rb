@@ -47,6 +47,9 @@ module LYP
         end
 
         def heading_content(title:, highlighted_months:)
+          from_month = Entities::Calendar::Month.new(weekday_start: overseer.weekday_start, day: overseer.start_date)
+          to_month = Entities::Calendar::Month.new(weekday_start: overseer.weekday_start, day: overseer.end_date)
+
           mm = Components::MonthsMenu.new
 
           row = [

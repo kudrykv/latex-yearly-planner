@@ -4,6 +4,8 @@ module LYP
   module Entities
     module Calendar
       class Month
+        include Comparable
+
         attr_accessor :weekday_start, :day
 
         def initialize(weekday_start:, day:)
@@ -12,8 +14,18 @@ module LYP
           self.weekday_start = weekday_start
           self.day = day.beginning_of_month
         end
-      end
 
+        def succ = @succ ||= Month.new(weekday_start:, day: day.next_month)
+
+        def <=>(other)
+          raise ArgumentError, "must be Month" unless other.is_a? Month
+          raise ArgumentError, "weekday start must match" unless weekday_start == other.weekday_start
+
+          day <=> other.day
+        end
+
+        def to_s = "#{day.strftime("%Y, %B")} (wd: #{weekday_start})"
+      end
     end
   end
 end
