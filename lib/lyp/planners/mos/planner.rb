@@ -28,14 +28,14 @@ module LYP
             "#{definition(overseer)}\n#{pages.join(glue)}"
           end
 
-          def add_page(title:, content:, **_rest)
+          def add_page(title:, content:, highlighted_months: [], **_rest)
             pages << <<~TYPST
               #grid(
                 columns: (#{heading_columns}),
                 rows: (#{heading_height}, 1fr),
                 stroke: 0.4pt,
 
-                #{heading_content(title)},
+                #{heading_content(title:, highlighted_months:)},
                 #{content}
               )
             TYPST
@@ -47,9 +47,11 @@ module LYP
             columns.join(", ")
           end
 
-          def heading_content(title)
+          def heading_content(title:, highlighted_months:)
+            mm = Components::MonthsMenu.new
+
             row = [
-              "grid.cell(rowspan: 2, text[side menu will be here])",
+              "grid.cell(rowspan: 2, #{mm.generate})",
               "grid.cell(align: #{heading_align}, #{heading_stack(title)})"
             ]
             row.reverse! if side_menu_position == "right"

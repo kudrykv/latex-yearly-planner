@@ -18,8 +18,10 @@ require_relative "lyp/planners/mos/planner"
 require_relative "lyp/planners/mos/overseer"
 require_relative "lyp/planners/mos/sections/weekly"
 require_relative "lyp/planners/mos/pages/weekly"
+require_relative "lyp/planners/mos/components/months_menu"
 require_relative "lyp/entities/calendar/day"
 require_relative "lyp/entities/calendar/week"
+require_relative "lyp/entities/calendar/month"
 
 module LYP
   class Error < StandardError; end
