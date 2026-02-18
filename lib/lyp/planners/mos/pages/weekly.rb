@@ -22,7 +22,7 @@ module LYP
               <<~TYPST
                 grid(
                   columns: (1fr, 1fr, 1fr),
-                  rows: (6mm, 1fr, 6mm, 1fr, 6mm, 1fr),
+                  rows: (4mm, 1fr, 4mm, 1fr, 4mm, 1fr),
 
                   #{week.days[0...3].map(&method(:format_day)).join(", ")},
                   grid.cell(colspan: 3, rect_pattern(dotted)),
