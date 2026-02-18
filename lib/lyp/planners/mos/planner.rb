@@ -1,84 +1,82 @@
 # frozen_string_literal: true
 
 module LYP
-  module Services
-    module Planners
-      module MOS
-        class Planner
-          attr_accessor :overseer, :manifest, :pages,
-                        :side_menu_position,
-                        :side_menu_width,
-                        :heading_height,
-                        :heading_align,
-                        :title_font_size
+  module Planners
+    module MOS
+      class Planner
+        attr_accessor :overseer, :manifest, :pages,
+                      :side_menu_position,
+                      :side_menu_width,
+                      :heading_height,
+                      :heading_align,
+                      :title_font_size
 
-          def initialize(overseer:, manifest:)
-            self.overseer = overseer
-            self.manifest = manifest
-            self.pages = []
+        def initialize(overseer:, manifest:)
+          self.overseer = overseer
+          self.manifest = manifest
+          self.pages = []
 
-            self.side_menu_position = overseer.dig!(:planner, :params, :mos_layout, :side_menu_position)
-            self.side_menu_width = overseer.dig!(:planner, :params, :mos_layout, :side_menu_width)
-            self.heading_height = overseer.dig!(:planner, :params, :heading, :height)
-            self.heading_align = overseer.dig!(:planner, :params, :heading, :align)
-            self.title_font_size = overseer.dig!(:planner, :params, :heading, :title_font_size)
-          end
-
-          def generate
-            "#{definition(overseer)}\n#{pages.join(glue)}"
-          end
-
-          def add_page(title:, content:, highlighted_months: [], **_rest)
-            pages << <<~TYPST
-              #grid(
-                columns: (#{heading_columns}),
-                rows: (#{heading_height}, 1fr),
-                stroke: 0.4pt,
-
-                #{heading_content(title:, highlighted_months:)},
-                #{content}
-              )
-            TYPST
-          end
-
-          def heading_columns
-            columns = [side_menu_width, "1fr"]
-            columns.reverse! if side_menu_position == "right"
-            columns.join(", ")
-          end
-
-          def heading_content(title:, highlighted_months:)
-            mm = Components::MonthsMenu.new
-
-            row = [
-              "grid.cell(rowspan: 2, #{mm.generate})",
-              "grid.cell(align: #{heading_align}, #{heading_stack(title)})"
-            ]
-            row.reverse! if side_menu_position == "right"
-
-            row.join(", ")
-          end
-
-          def heading_stack(title)
-            direction = "rtl"
-            direction = "ltr" if side_menu_position == "right"
-
-            stack = [
-              "text(size: #{title_font_size})[#{title}]",
-              "text[maybe menu]"
-            ]
-
-            <<~TYPST
-              stack(
-                dir: #{direction},
-                spacing: 1fr,
-                #{stack.join(",\n")}
-              )
-            TYPST
-          end
-
-          def glue = "#pagebreak()\n"
+          self.side_menu_position = overseer.dig!(:planner, :params, :mos_layout, :side_menu_position)
+          self.side_menu_width = overseer.dig!(:planner, :params, :mos_layout, :side_menu_width)
+          self.heading_height = overseer.dig!(:planner, :params, :heading, :height)
+          self.heading_align = overseer.dig!(:planner, :params, :heading, :align)
+          self.title_font_size = overseer.dig!(:planner, :params, :heading, :title_font_size)
         end
+
+        def generate
+          "#{definition(overseer)}\n#{pages.join(glue)}"
+        end
+
+        def add_page(title:, content:, highlighted_months: [], **_rest)
+          pages << <<~TYPST
+            #grid(
+              columns: (#{heading_columns}),
+              rows: (#{heading_height}, 1fr),
+              stroke: 0.4pt,
+
+              #{heading_content(title:, highlighted_months:)},
+              #{content}
+            )
+          TYPST
+        end
+
+        def heading_columns
+          columns = [side_menu_width, "1fr"]
+          columns.reverse! if side_menu_position == "right"
+          columns.join(", ")
+        end
+
+        def heading_content(title:, highlighted_months:)
+          mm = Components::MonthsMenu.new
+
+          row = [
+            "grid.cell(rowspan: 2, #{mm.generate})",
+            "grid.cell(align: #{heading_align}, #{heading_stack(title)})"
+          ]
+          row.reverse! if side_menu_position == "right"
+
+          row.join(", ")
+        end
+
+        def heading_stack(title)
+          direction = "rtl"
+          direction = "ltr" if side_menu_position == "right"
+
+          stack = [
+            "text(size: #{title_font_size})[#{title}]",
+            "text[maybe menu]"
+          ]
+
+          <<~TYPST
+            stack(
+              dir: #{direction},
+              spacing: 1fr,
+              #{stack.join(",\n")}
+            )
+          TYPST
+        end
+
+        def glue = "#pagebreak()\n"
       end
     end
   end
