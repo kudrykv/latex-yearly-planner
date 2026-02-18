@@ -4,14 +4,15 @@ module LYP
   module Planners
     module MOS
       class Planner
-        attr_accessor :overseer, :manifest, :pages,
+        attr_accessor :i18n, :overseer, :manifest, :pages,
                       :side_menu_position,
                       :side_menu_width,
                       :heading_height,
                       :heading_align,
                       :title_font_size
 
-        def initialize(overseer:, manifest:)
+        def initialize(i18n:, overseer:, manifest:)
+          self.i18n = i18n
           self.overseer = overseer
           self.manifest = manifest
           self.pages = []
@@ -50,7 +51,7 @@ module LYP
           from_month = Entities::Calendar::Month.new(weekday_start: overseer.weekday_start, day: overseer.start_date)
           to_month = Entities::Calendar::Month.new(weekday_start: overseer.weekday_start, day: overseer.end_date)
 
-          mm = Components::MonthsMenu.new
+          mm = Components::MonthsMenu.new(i18n:, range: from_month..to_month)
 
           row = [
             "grid.cell(rowspan: 2, #{mm.generate})",

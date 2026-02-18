@@ -5,14 +5,36 @@ module LYP
     module MOS
       module Components
         class MonthsMenu
-          def initialize
+          attr_accessor :i18n, :range
 
+          def initialize(i18n:, range:)
+            self.i18n = i18n
+            self.range = range
           end
 
           def generate
             <<~TYPST
-              [months menu]
+              rotate(
+                90deg,
+                origin: center + horizon,
+                reflow: true,
+
+                table(
+                  stroke: (x, y) => (left: 0.4pt, right: 0.4pt),
+                  columns: (#{(["1fr"] * range.count).join(", ")}),
+                  rows: 1fr,
+                  align: horizon + center,
+
+                  #{months}
+                )
+              )
             TYPST
+          end
+
+          def months = range.map(&method(:format)).join(",\n")
+
+          def format(month)
+            "table.cell([#{i18n.t("months.short.#{month.name}")}])"
           end
         end
       end

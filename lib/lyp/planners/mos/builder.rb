@@ -10,7 +10,7 @@ module LYP
           self.i18n = i18n
           self.overseer = Overseer.new(dto)
           self.manifest = Manifest.new
-          self.planner = Planner.new(overseer:, manifest:)
+          self.planner = Planner.new(i18n:, overseer:, manifest:)
         end
 
         # rubocop:disable Metrics/AbcSize

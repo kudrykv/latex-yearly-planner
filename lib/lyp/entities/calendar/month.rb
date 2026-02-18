@@ -15,6 +15,8 @@ module LYP
           self.day = day.beginning_of_month
         end
 
+        def id = @id ||= "month-#{day.id}"
+
         def succ = @succ ||= Month.new(weekday_start:, day: day.next_month)
 
         def <=>(other)
@@ -23,6 +25,8 @@ module LYP
 
           day <=> other.day
         end
+
+        def name = @name ||= day.strftime("%B").downcase
 
         def to_s = "#{day.strftime("%Y, %B")} (wd: #{weekday_start})"
       end
