@@ -48,10 +48,7 @@ module LYP
         end
 
         def heading_content(title:, highlight_months:)
-          from_month = Entities::Calendar::Month.new(weekday_start: overseer.weekday_start, day: overseer.start_date)
-          to_month = Entities::Calendar::Month.new(weekday_start: overseer.weekday_start, day: overseer.end_date)
-
-          mm = Components::MonthsMenu.new(i18n:, range: from_month..to_month)
+          mm = months_menu
           mm.highlight(highlight_months)
 
           row = [
@@ -61,6 +58,13 @@ module LYP
           row.reverse! if side_menu_position == "right"
 
           row.join(", ")
+        end
+
+        def months_menu
+          from_month = Entities::Calendar::Month.new(weekday_start: overseer.weekday_start, day: overseer.start_date)
+          to_month = Entities::Calendar::Month.new(weekday_start: overseer.weekday_start, day: overseer.end_date)
+
+          Components::MonthsMenu.new(i18n:, range: from_month..to_month)
         end
 
         def heading_stack(title)
