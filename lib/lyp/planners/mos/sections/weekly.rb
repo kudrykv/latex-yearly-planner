@@ -29,7 +29,7 @@ module LYP
           private
 
           def weeks
-            first_week_day.upto(last_week_day).each_slice(7).map(&:first).map do |day|
+            (first_week_day..last_week_day).each_slice(7).map(&:first).map do |day|
               Entities::Calendar::Week.new(weekday_start: overseer.weekday_start, day:)
             end
           end

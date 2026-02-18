@@ -6,6 +6,10 @@ module LYP
       class Day
         attr_accessor :weekday_start, :day
 
+        extend Forwardable
+
+        def_delegators :@day, :year, :strftime
+
         def initialize(weekday_start:, day:)
           self.weekday_start = weekday_start
           self.day = day
@@ -27,17 +31,9 @@ module LYP
           Day.new(weekday_start: wds, day: day.end_of_week(wds))
         end
 
-        def upto(other_day)
-          day.upto(other_day.day).map { |day| Day.new(weekday_start:, day:) }
-        end
-
-        def year = day.year
-
-        def strftime(...) = day.strftime(...)
-
         def +(other) = Day.new(weekday_start:, day: day + other.day)
 
-        def succ = Day.new(weekday_start:, day: day.succ)
+        def succ = @succ ||= Day.new(weekday_start:, day: day.succ)
 
         def <=>(other)
           raise ArgumentError, "must be Day" unless other.is_a? Day

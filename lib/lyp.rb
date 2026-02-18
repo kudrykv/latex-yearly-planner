@@ -5,6 +5,7 @@ require "thor"
 require "active_support/all"
 require "benchmark"
 require "i18n"
+require "forwardable"
 
 require_relative "lyp/version"
 require_relative "lyp/cli/app"
