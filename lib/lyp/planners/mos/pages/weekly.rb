@@ -28,7 +28,7 @@ module LYP
                   grid.cell(colspan: 3, rect_pattern(dotted)),
                   #{week.days[3...6].map(&method(:format_day)).join(", ")},
                   grid.cell(colspan: 3, rect_pattern(dotted)),
-                  grid.cell(colspan: 3, [#{format_day(week.days[6])}]),
+                  grid.cell(colspan: 3, #{format_day(week.days[6])}),
                   grid.cell(colspan: 3, rect_pattern(dotted))
                 )
               TYPST
@@ -37,7 +37,7 @@ module LYP
             private
 
             def format_day(day)
-              format = day.strftime("%A %e")
+              format = day.strftime("%A, %e")
               return "[#{format}]" unless manifest.has_source?(day.id)
 
               "link(<#{day.id}>, [#{format}])"
