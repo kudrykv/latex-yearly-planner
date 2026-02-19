@@ -32,7 +32,15 @@ module LYP
 
         def quarter_number = day.quarter
 
-        def beginning_of_quarter = Day.new(weekday_start:, day: day.beginning_of_month.next_quarter.prev_quarter)
+        def beginning_of_quarter
+          curr = day.beginning_of_month
+
+          until curr.quarter != (curr-1).quarter
+            curr = (curr - 1).beginning_of_month
+          end
+
+          Day.new(weekday_start:, day: curr)
+        end
 
         def next_quarter = Day.new(weekday_start:, day: day.next_quarter)
 
