@@ -32,6 +32,8 @@ module LYP
           weekday_start.eql?(other.weekday_start) && day.eql?(other.day)
         end
 
+        alias == eql?
+
         def hash = [weekday_start, day].hash
       end
     end

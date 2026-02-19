@@ -28,7 +28,8 @@ module LYP
               planner.add_page(
                 title: weekly.title,
                 content: weekly.content,
-                highlight_months: week.in_months
+                highlight_months: week.in_months,
+                highlight_quarters: week.in_quarters
               )
             end
           end

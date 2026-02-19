@@ -27,6 +27,13 @@ module LYP
 
           [first.month, last.month].uniq
         end
+
+        def in_quarters
+          first = days.first
+          last = days.last
+
+          [first.quarter, last.quarter].uniq
+        end
       end
     end
   end
