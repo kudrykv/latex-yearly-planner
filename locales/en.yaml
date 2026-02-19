@@ -1,5 +1,9 @@
 en:
   week_name_full: Week
+
+  quarters:
+    short: Q
+
   months:
     short:
       january: Jan

@@ -35,14 +35,14 @@ module LYP
           "#{definition(overseer)}\n#{pages.join(glue)}"
         end
 
-        def add_page(title:, content:, highlight_months: [], **_rest)
+        def add_page(title:, content:, highlight_months: [], highlight_quarters: [], **_rest)
           pages << <<~TYPST
             #grid(
               columns: (#{heading_columns}),
               rows: (#{heading_height}, 1fr),
               stroke: 0.4pt,
 
-              #{heading_content(title:, highlight_months:)},
+              #{heading_content(title:, highlight_months:, highlight_quarters:)},
               #{content}
             )
           TYPST
@@ -54,7 +54,7 @@ module LYP
           columns.join(", ")
         end
 
-        def heading_content(title:, highlight_months:)
+        def heading_content(title:, highlight_months:, highlight_quarters:)
           mm = months_menu
           mm.highlight(highlight_months)
 

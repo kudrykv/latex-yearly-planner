@@ -4,7 +4,7 @@ module LYP
   module Planners
     module MOS
       module Components
-        class MonthsMenu
+        class QuartersMenu
           attr_accessor :i18n, :range, :highlighted
 
           def initialize(i18n:, range:)
@@ -27,20 +27,20 @@ module LYP
                   rows: 1fr,
                   align: horizon + center,
 
-                  #{months}
+                  #{quarters}
                 )
               )
             TYPST
           end
 
-          def months = range.map(&method(:format)).join(",\n")
+          def quarters = range.map(&method(:format)).join(",\n")
 
-          def format(month)
-            if highlighted.include?(month)
-              return "table.cell(fill: black, text(white)[#{i18n.t("months.short.#{month.name}")}])"
+          def format(quarter)
+            if highlighted.include?(quarter)
+              return "table.cell(fill: black, text(white)[#{i18n.t("quarters.short")}])"
             end
 
-            "table.cell([#{i18n.t("months.short.#{month.name}")}])"
+            "table.cell([#{i18n.t("quarters.short")}])"
           end
         end
       end
