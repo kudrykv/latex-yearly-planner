@@ -5,11 +5,14 @@ module LYP
     module MOS
       module Sections
         class Weekly
-          attr_accessor :i18n, :overseer
+          attr_accessor :i18n, :overseer, :weekday_start, :first_week_day, :last_week_day
 
           def initialize(i18n:, overseer:, **_rest)
             self.i18n = i18n
             self.overseer = overseer
+            self.weekday_start = overseer.weekday_start
+            self.first_week_day = overseer.start_date.beginning_of_month.beginning_of_week(weekday_start)
+            self.last_week_day = overseer.start_date.end_of_month.end_of_week(weekday_start)
           end
 
           def register(manifest)
@@ -34,13 +37,9 @@ module LYP
 
           def weeks
             (first_week_day..last_week_day).each_slice(7).map(&:first).map do |day|
-              Entities::Calendar::Week.new(weekday_start: overseer.weekday_start, day:)
+              Entities::Calendar::Week.new(weekday_start:, day:)
             end
           end
-
-          def first_week_day = overseer.start_date.beginning_of_month.beginning_of_week(overseer.weekday_start)
-
-          def last_week_day = overseer.end_date.end_of_month.end_of_week(overseer.weekday_start)
         end
       end
     end
