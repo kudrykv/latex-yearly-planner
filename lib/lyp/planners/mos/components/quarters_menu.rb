@@ -23,7 +23,7 @@ module LYP
 
                 table(
                   stroke: (x, y) => (left: 0.4pt, right: 0.4pt),
-                  columns: (#{(["1fr"] * range.count).join(", ")}),
+                  columns: (#{(["auto"] * range.count).join(", ")}),
                   rows: 1fr,
                   align: horizon + center,
 
@@ -37,10 +37,10 @@ module LYP
 
           def format(quarter)
             if highlighted.include?(quarter)
-              return "table.cell(fill: black, text(white)[#{i18n.t("quarters.short")}])"
+              return "table.cell(fill: black, text(white)[#{i18n.t("quarters.short")}#{quarter.number}])"
             end
 
-            "table.cell([#{i18n.t("quarters.short")}])"
+            "table.cell([#{i18n.t("quarters.short")}#{quarter.number}])"
           end
         end
       end

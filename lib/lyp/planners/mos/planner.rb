@@ -58,8 +58,11 @@ module LYP
           mm = months_menu
           mm.highlight(highlight_months)
 
+          qm = quarters_menu
+          qm.highlight(highlight_quarters)
+
           row = [
-            "grid.cell(rowspan: 2, #{mm.generate})",
+            "grid.cell(rowspan: 2, stack(dir: btt, spacing: 1fr, #{mm.generate}, #{qm.generate}))",
             "grid.cell(align: #{heading_align}, #{heading_stack(title)})"
           ]
           row.reverse! if side_menu_position == "right"
@@ -69,6 +72,10 @@ module LYP
 
         def months_menu
           Components::MonthsMenu.new(i18n:, range: start_date.month..end_date.month)
+        end
+
+        def quarters_menu
+          Components::QuartersMenu.new(i18n:, range: start_date.quarter..end_date.quarter)
         end
 
         # rubocop:disable Metrics/MethodLength

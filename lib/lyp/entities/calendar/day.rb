@@ -12,6 +12,8 @@ module LYP
         def_delegators :@day, :year, :strftime
 
         def initialize(weekday_start:, day:)
+          raise ArgumentError unless day.is_a?(Date)
+
           self.weekday_start = weekday_start
           self.day = day
         end
@@ -28,14 +30,11 @@ module LYP
 
         def quarter = Quarter.new(weekday_start:, day: self)
 
-        def beginning_of_quarter
-          b = day.beginning_of_month
-          until day.quarter != (b.beginning_of_month - 1).quarter
-            b = (b.beginning_of_month - 1).beginning_of_month
-          end
+        def quarter_number = day.quarter
 
-          b
-        end
+        def beginning_of_quarter = Day.new(weekday_start:, day: day.next_quarter.prev_quarter)
+
+        def next_quarter = Day.new(weekday_start:, day: day.next_quarter)
 
         def beginning_of_week = Day.new(weekday_start:, day: day.beginning_of_week(weekday_start))
 
