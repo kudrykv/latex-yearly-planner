@@ -9,7 +9,10 @@ module LYP
                       :side_menu_width,
                       :heading_height,
                       :heading_align,
-                      :title_font_size
+                      :title_font_size,
+                      :weekday_start,
+                      :start_date,
+                      :end_date
 
         def initialize(i18n:, overseer:, manifest:)
           self.i18n = i18n
@@ -22,6 +25,10 @@ module LYP
           self.heading_height = overseer.dig!(:planner, :params, :heading, :height)
           self.heading_align = overseer.dig!(:planner, :params, :heading, :align)
           self.title_font_size = overseer.dig!(:planner, :params, :heading, :title_font_size)
+
+          self.weekday_start = overseer.weekday_start
+          self.start_date = overseer.start_date
+          self.end_date = overseer.end_date
         end
 
         def generate
@@ -61,8 +68,8 @@ module LYP
         end
 
         def months_menu
-          from_month = Entities::Calendar::Month.new(weekday_start: overseer.weekday_start, day: overseer.start_date)
-          to_month = Entities::Calendar::Month.new(weekday_start: overseer.weekday_start, day: overseer.end_date)
+          from_month = Entities::Calendar::Month.new(weekday_start:, day: start_date)
+          to_month = Entities::Calendar::Month.new(weekday_start:, day: end_date)
 
           Components::MonthsMenu.new(i18n:, range: from_month..to_month)
         end
