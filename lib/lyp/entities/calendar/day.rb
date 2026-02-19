@@ -4,9 +4,10 @@ module LYP
   module Entities
     module Calendar
       class Day
-        attr_accessor :weekday_start, :day
-
+        include Comparable
         extend Forwardable
+
+        attr_accessor :weekday_start, :day
 
         def_delegators :@day, :year, :strftime
 
@@ -25,13 +26,20 @@ module LYP
 
         def month = Month.new(weekday_start:, day: self)
 
-        def beginning_of_week(wds = weekday_start)
-          Day.new(weekday_start: wds, day: day.beginning_of_week(wds))
+        def quarter = Quarter.new(weekday_start:, day: self)
+
+        def beginning_of_quarter
+          b = day.beginning_of_month
+          until day.quarter != (b.beginning_of_month - 1).quarter
+            b = (b.beginning_of_month - 1).beginning_of_month
+          end
+
+          b
         end
 
-        def end_of_week(wds = weekday_start)
-          Day.new(weekday_start: wds, day: day.end_of_week(wds))
-        end
+        def beginning_of_week = Day.new(weekday_start:, day: day.beginning_of_week(weekday_start))
+
+        def end_of_week = Day.new(weekday_start:, day: day.end_of_week(weekday_start))
 
         def +(other) = Day.new(weekday_start:, day: day + other.day)
 

@@ -11,8 +11,8 @@ module LYP
             self.i18n = i18n
             self.overseer = overseer
             self.weekday_start = overseer.weekday_start
-            self.first_week_day = overseer.start_date.beginning_of_month.beginning_of_week(weekday_start)
-            self.last_week_day = overseer.end_date.end_of_month.end_of_week(weekday_start)
+            self.first_week_day = overseer.start_date.beginning_of_month.beginning_of_week
+            self.last_week_day = overseer.end_date.end_of_month.end_of_week
           end
 
           def register(manifest)

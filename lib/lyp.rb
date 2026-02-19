@@ -23,6 +23,7 @@ require_relative "lyp/planners/mos/components/months_menu"
 require_relative "lyp/entities/calendar/day"
 require_relative "lyp/entities/calendar/week"
 require_relative "lyp/entities/calendar/month"
+require_relative "lyp/entities/calendar/quarter"
 
 module LYP
   class Error < StandardError; end
