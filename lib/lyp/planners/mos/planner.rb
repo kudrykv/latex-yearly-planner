@@ -68,10 +68,7 @@ module LYP
         end
 
         def months_menu
-          from_month = Entities::Calendar::Month.new(weekday_start:, day: start_date)
-          to_month = Entities::Calendar::Month.new(weekday_start:, day: end_date)
-
-          Components::MonthsMenu.new(i18n:, range: from_month..to_month)
+          Components::MonthsMenu.new(i18n:, range: start_date.month..end_date.month)
         end
 
         # rubocop:disable Metrics/MethodLength
