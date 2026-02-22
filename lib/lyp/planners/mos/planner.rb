@@ -32,11 +32,14 @@ module LYP
         end
 
         def generate
-          "#{definition(overseer)}\n#{pages.join(glue)}"
+          <<~TYPST.strip
+            #{definition(overseer)}
+            #{pages.join("\n#pagebreak()\n")}
+          TYPST
         end
 
         def add_page(title:, content:, highlight_months: [], highlight_quarters: [], **_rest)
-          pages << <<~TYPST
+          pages << <<~TYPST.strip
             #grid(
               columns: (#{heading_columns}),
               rows: (#{heading_height}, 1fr),
@@ -55,7 +58,17 @@ module LYP
         end
 
         def heading_content(title:, highlight_months:, highlight_quarters:)
-          cell = <<~TYPST
+          row = [
+            side_menu_cell(highlight_months:, highlight_quarters:),
+            "grid.cell(align: #{heading_align}, #{heading_stack(title)})",
+          ]
+          row.reverse! if side_menu_position == "right"
+
+          row.join(", ")
+        end
+
+        def side_menu_cell(highlight_months:, highlight_quarters:)
+          <<~TYPST.strip
             grid.cell(
               rowspan: 2,
 
@@ -77,11 +90,6 @@ module LYP
               )
             )
           TYPST
-
-          row = [cell, "grid.cell(align: #{heading_align}, #{heading_stack(title)})"]
-          row.reverse! if side_menu_position == "right"
-
-          row.join(", ")
         end
 
         def months_menu(highlight_months:)
@@ -115,8 +123,6 @@ module LYP
           TYPST
         end
         # rubocop:enable Metrics/MethodLength
-
-        def glue = "#pagebreak()\n"
       end
     end
   end
