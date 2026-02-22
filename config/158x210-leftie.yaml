@@ -64,7 +64,7 @@ planner:
             params:
               from: 8
               to: 20
-              strftime: '%k'
+              time_format: '%k'
               trailing_30_minutes: true
 
         right_column:

@@ -5,14 +5,14 @@ module LYP
     module MOS
       module Components
         class DailySchedule
-          attr_accessor :i18n, :from, :to, :trailing_30_minutes, :strftime
+          attr_accessor :i18n, :from, :to, :trailing_30_minutes, :time_format
 
-          def initialize(i18n:, from:, to:, trailing_30_minutes:, strftime:)
+          def initialize(i18n:, from:, to:, trailing_30_minutes:, time_format:)
             self.i18n = i18n
             self.from = from
             self.to = to
             self.trailing_30_minutes = trailing_30_minutes
-            self.strftime = strftime
+            self.time_format = time_format
           end
 
           def generate
@@ -24,7 +24,7 @@ module LYP
                   if calc.even(y) { ( bottom: 0.4pt + black ) }
                   else { ( bottom: 0.4pt + gray ) },
                 grid.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [#{i18n.t("schedule")}]))),
-                #{schedule_lines(from:, to:, strftime:)},
+                #{schedule_lines},
 
                 #{"box(height: 5mm)" if trailing_30_minutes}
               )
@@ -33,14 +33,14 @@ module LYP
 
           private
 
-          def schedule_lines(from:, to:, strftime:)
+          def schedule_lines
             (from..to).map do |hour|
-              "box(height: 5mm, align(horizon, [#{pretty_hour(hour:, strftime:)}])), box(height: 5mm)"
+              "box(height: 5mm, align(horizon, [#{pretty_hour(hour:)}])), box(height: 5mm)"
             end.join(",\n")
           end
 
-          def pretty_hour(hour:, strftime:)
-            DateTime.parse("#{hour}:00").strftime(strftime)
+          def pretty_hour(hour:)
+            Time.new(Date.today.year, 1, 1, hour, 0, 0).strftime(time_format)
           end
         end
       end

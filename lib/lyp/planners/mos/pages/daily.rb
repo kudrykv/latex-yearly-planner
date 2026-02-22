@@ -63,7 +63,7 @@ module LYP
           end
 
           def column(comps)
-            comps.map do |comp|
+            comps.filter_map do |comp|
               next unless comp[:enabled]
 
               case comp[:class]
