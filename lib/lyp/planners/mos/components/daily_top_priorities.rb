@@ -18,7 +18,7 @@ module LYP
                 columns: 1fr,
                 inset: 0mm,
                 stroke: (_, _) => (bottom: 0.4pt),
-                table.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [#{i18n.t('top_priorities')}]))),
+                table.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [#{i18n.t("top_priorities")}]))),
                 #{top_priorities_lines}
               ))
             TYPST
@@ -27,7 +27,7 @@ module LYP
           private
 
           def top_priorities_lines
-            (['box(height: 5mm, align(horizon, [$square.stroked$]))'] * number).join(",\n")
+            (["box(height: 5mm, align(horizon, [$square.stroked$]))"] * number).join(",\n")
           end
         end
       end
