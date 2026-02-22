@@ -50,5 +50,3 @@ planner:
     - name: weekly
       class: weekly
       enabled: true
-      params:
-        hello: world
