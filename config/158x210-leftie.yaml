@@ -50,3 +50,7 @@ planner:
     - name: weekly
       class: weekly
       enabled: true
+
+    - name: daily
+      class: daily
+      enabled: true

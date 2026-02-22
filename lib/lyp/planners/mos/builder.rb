@@ -34,6 +34,8 @@ module LYP
             sec = Sections::CoverPlain.new(i18n:, overseer:, **dto[:params])
           when "weekly"
             sec = Sections::Weekly.new(i18n:, overseer:, **dto[:params])
+          when "daily"
+            sec = Sections::Daily.new(i18n:, overseer:, **dto[:params])
           else
             raise ConfigError, "unknown section: #{dto[:name]}"
           end
