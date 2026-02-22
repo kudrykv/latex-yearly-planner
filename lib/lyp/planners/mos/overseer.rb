@@ -12,6 +12,8 @@ module LYP
           self.dto = dto
         end
 
+        def debug? = dto[:debug] || false
+
         def enabled_sections
           sections = dto.dig(:planner, :sections)
           raise ConfigError, "No `planner.sections` found" if sections.nil? || sections.empty?

@@ -17,7 +17,7 @@ module LYP
           def generate
             <<~TYPST
               table(
-                stroke: (x, y) => (left: 0.4pt, right: 0.4pt),
+                stroke: (x, y) => (left: 0.4pt, right: 0.4pt, bottom: 0.4pt),
                 columns: (#{(["1fr"] * range.count).join(", ")}),
                 rows: 1fr,
                 align: horizon + center,
