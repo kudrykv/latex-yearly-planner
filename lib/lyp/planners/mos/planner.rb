@@ -21,7 +21,7 @@ module LYP
           self.manifest = manifest
           self.pages = []
 
-          self.content_and_side_menu_gutter = overseer.dig!(:planner, :params, :layout, :content_and_side_menu_gutter)
+          self.content_and_side_menu_gutter = overseer.dig!(:planner, :params, :mos_layout, :content_and_side_menu_gutter)
           self.side_menu_position = overseer.dig!(:planner, :params, :mos_layout, :side_menu_position)
           self.side_menu_width = overseer.dig!(:planner, :params, :mos_layout, :side_menu_width)
           self.heading_height = overseer.dig!(:planner, :params, :heading, :height)

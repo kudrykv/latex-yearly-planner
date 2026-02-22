@@ -27,17 +27,15 @@ planner:
     end_date: "2026-12-31"
     weekday_start: Monday
 
-    layout:
+    mos_layout:
+      side_menu_position: right
+      side_menu_width: 10mm
       content_and_side_menu_gutter: 2mm
 
     heading:
       height: 10mm
       title_font_size: 10mm
       align: horizon
-
-    mos_layout:
-      side_menu_position: right
-      side_menu_width: 10mm
 
   sections:
     - name: cover
