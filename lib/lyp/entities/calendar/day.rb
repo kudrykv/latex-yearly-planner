@@ -46,6 +46,10 @@ module LYP
 
         def end_of_week = Day.new(weekday_start:, day: day.end_of_week(weekday_start))
 
+        def month_day = day.mday
+
+        def weekday_name = day.strftime("%A").downcase
+
         def +(other) = Day.new(weekday_start:, day: day + other.day)
 
         def succ = @succ ||= Day.new(weekday_start:, day: day.succ)

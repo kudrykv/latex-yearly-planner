@@ -36,7 +36,6 @@ planner:
 
     heading:
       height: 10mm
-      title_font_size: 10mm
       align: horizon
 
   sections:

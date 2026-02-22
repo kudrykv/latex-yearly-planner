@@ -14,7 +14,7 @@ module LYP
           end
 
           def title
-            "#{i18n.t("week_name_full")} #{week.number} <#{week.id}>"
+            "[#{i18n.t("week_name_full")} #{week.number} <#{week.id}>]"
           end
 
           def content

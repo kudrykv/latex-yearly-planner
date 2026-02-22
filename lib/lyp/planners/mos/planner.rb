@@ -9,7 +9,6 @@ module LYP
                       :side_menu_width,
                       :heading_height,
                       :heading_align,
-                      :title_font_size,
                       :weekday_start,
                       :start_date,
                       :end_date,
@@ -28,7 +27,6 @@ module LYP
           self.side_menu_width = overseer.dig!(:planner, :params, :mos_layout, :side_menu_width)
           self.heading_height = overseer.dig!(:planner, :params, :heading, :height)
           self.heading_align = overseer.dig!(:planner, :params, :heading, :align)
-          self.title_font_size = overseer.dig!(:planner, :params, :heading, :title_font_size)
 
           self.weekday_start = overseer.weekday_start
           self.start_date = overseer.start_date
@@ -120,7 +118,7 @@ module LYP
           direction = "ltr" if side_menu_position == "right"
 
           stack = [
-            "text(size: #{title_font_size})[#{title}]",
+            title,
             "text[maybe menu]"
           ]
 
