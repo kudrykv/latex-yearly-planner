@@ -54,6 +54,8 @@ planner:
       class: daily
       enabled: true
       params:
+        column_gutter: 2mm
+
         left_column:
           - name: schedule
             class: schedule
@@ -63,3 +65,10 @@ planner:
               to: 20
               strftime: '%k'
               trailing_30_minutes: true
+
+        right_column:
+          - name: top priorities
+            class: top_priorities
+            enabled: true
+            params:
+              number: 5

@@ -17,7 +17,7 @@ module LYP
 
           def generate
             <<~TYPST
-              #grid(
+              grid(
                 columns: 1fr,
                 inset: 0mm,
                 stroke: (_, y) =>

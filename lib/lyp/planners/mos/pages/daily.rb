@@ -5,14 +5,15 @@ module LYP
     module MOS
       module Pages
         class Daily
-          attr_accessor :i18n, :manifest, :day, :debug, :params
+          attr_accessor :i18n, :manifest, :day, :column_gutter, :params, :debug
 
-          def initialize(i18n:, manifest:, day:, debug: false, **params)
+          def initialize(i18n:, manifest:, day:, column_gutter:, debug: false, **params)
             self.i18n = i18n
             self.manifest = manifest
             self.day = day
-            self.debug = debug
+            self.column_gutter = column_gutter
             self.params = params
+            self.debug = debug
           end
 
           def title
@@ -39,11 +40,13 @@ module LYP
           end
 
           def content
-            <<~TYPST
+            <<~TYPST.strip
               grid(
                 columns: (auto, auto),
                 rows: 1fr,
-                [#{left_column}]
+                column-gutter: #{column_gutter},
+                [#{left_column}],
+                [#{right_column}]
               )
             TYPST
           end
@@ -51,12 +54,22 @@ module LYP
           private
 
           def left_column
-            params[:left_column].map do |comp|
+            column(params[:left_column])
+          end
+
+          def right_column
+            column(params[:right_column])
+          end
+
+          def column(comps)
+            comps.map do |comp|
               next unless comp[:enabled]
 
               case comp[:class]
               when "schedule"
-                Components::DailySchedule.new(i18n:, **comp[:params]).generate
+                "##{Components::DailySchedule.new(i18n:, **comp[:params]).generate}"
+              when "top_priorities"
+                "##{Components::DailyTopPriorities.new(i18n:, **comp[:params]).generate}"
               end
             end.join
           end
