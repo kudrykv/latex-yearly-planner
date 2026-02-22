@@ -13,40 +13,23 @@ module LYP
           end
 
           def register(manifest)
-            (overseer.start_date..overseer.end_date).each do |date|
+            range.each do |date|
               manifest.register_source(date.id)
             end
           end
 
-          def generate(planner, _manifest)
-            (overseer.start_date..overseer.end_date).each do |date|
-              planner.add_page(title: title(date), content: '')
+          def generate(planner, manifest)
+            range.each do |day|
+              planner.add_page(title: title(manifest, day), content: '')
             end
           end
 
           private
 
-          def title(date)
-            <<~TYPST
-              grid(
-                columns: (auto, auto),
-                rows: (3fr, 2fr),
-                column-gutter: 4pt,
-                #{"stroke: 0.4pt," if overseer.debug?}
+          def range = overseer.start_date..overseer.end_date
 
-                grid.cell(
-                  rowspan: 2,
-                  align: center + horizon,
-                  rect(
-                    stroke: (right: 0.4pt),
-
-                    text(size: 24pt)[#{date.month_day} <#{date.id}>]
-                  )
-                ),
-                [*#{i18n.t("weekday.full.#{date.weekday_name}")}*],
-                [#{i18n.t("months.full.#{date.month.name}")}]
-              )
-            TYPST
+          def title(manifest, day)
+            Pages::Daily.new(i18n:, manifest:, day:, debug: overseer.debug?).title
           end
         end
       end
