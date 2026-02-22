@@ -35,9 +35,7 @@ module LYP
         def beginning_of_quarter
           curr = day.beginning_of_month
 
-          until curr.quarter != (curr-1).quarter
-            curr = (curr - 1).beginning_of_month
-          end
+          curr = (curr - 1).beginning_of_month until curr.quarter != (curr - 1).quarter
 
           Day.new(weekday_start:, day: curr)
         end

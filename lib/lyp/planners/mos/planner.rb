@@ -51,7 +51,9 @@ module LYP
           TYPST
         end
 
-        def add_blank_page(typst) = pages << typst
+        def add_blank_page(typst)
+          pages << typst
+        end
 
         def heading_columns
           columns = [side_menu_width, "1fr"]
@@ -62,7 +64,7 @@ module LYP
         def heading_content(title:, highlight_months:, highlight_quarters:)
           row = [
             side_menu_cell(highlight_months:, highlight_quarters:),
-            "grid.cell(align: #{heading_align}, #{heading_stack(title)})",
+            "grid.cell(align: #{heading_align}, #{heading_stack(title)})"
           ]
           row.reverse! if side_menu_position == "right"
 
