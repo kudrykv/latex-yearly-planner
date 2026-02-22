@@ -34,10 +34,6 @@ module LYP
           private
 
           def range = overseer.start_date..overseer.end_date
-
-          def page(manifest, day)
-            Pages::Daily.new(i18n:, manifest:, day:, debug: overseer.debug?, **params)
-          end
         end
       end
     end

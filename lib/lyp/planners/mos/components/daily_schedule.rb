@@ -40,7 +40,7 @@ module LYP
           end
 
           def pretty_hour(hour:)
-            Time.new(Date.today.year, 1, 1, hour, 0, 0).strftime(time_format)
+            Time.new(1, 1, 1, hour, 0, 0).strftime(time_format)
           end
         end
       end
