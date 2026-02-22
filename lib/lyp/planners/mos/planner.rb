@@ -55,27 +55,45 @@ module LYP
         end
 
         def heading_content(title:, highlight_months:, highlight_quarters:)
-          mm = months_menu
-          mm.highlight(highlight_months)
+          cell = <<~TYPST
+            grid.cell(
+              rowspan: 2,
 
-          qm = quarters_menu
-          qm.highlight(highlight_quarters)
+              rotate(
+                90deg,
+                origin: center + horizon,
+                reflow: true,
 
-          row = [
-            "grid.cell(rowspan: 2, stack(dir: btt, spacing: 1fr, #{mm.generate}, #{qm.generate}))",
-            "grid.cell(align: #{heading_align}, #{heading_stack(title)})"
-          ]
+                table(
+                  columns: (1fr, 3fr),
+                  rows: 1fr,
+                  inset: 0pt,
+                  column-gutter: 5mm,
+                  stroke: 0pt,
+
+                  #{quarters_menu(highlight_quarters:)},
+                  #{months_menu(highlight_months:)},
+                )
+              )
+            )
+          TYPST
+
+          row = [cell, "grid.cell(align: #{heading_align}, #{heading_stack(title)})"]
           row.reverse! if side_menu_position == "right"
 
           row.join(", ")
         end
 
-        def months_menu
-          Components::MonthsMenu.new(i18n:, range: start_date.month..end_date.month)
+        def months_menu(highlight_months:)
+          menu = Components::MonthsMenu.new(i18n:, range: start_date.month..end_date.month)
+          menu.highlight(highlight_months)
+          menu.generate
         end
 
-        def quarters_menu
-          Components::QuartersMenu.new(i18n:, range: start_date.quarter..end_date.quarter)
+        def quarters_menu(highlight_quarters:)
+          menu = Components::QuartersMenu.new(i18n:, range: start_date.quarter..end_date.quarter)
+          menu.highlight(highlight_quarters)
+          menu.generate
         end
 
         # rubocop:disable Metrics/MethodLength
