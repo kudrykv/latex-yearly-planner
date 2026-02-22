@@ -5,12 +5,13 @@ module LYP
     module MOS
       module Pages
         class Daily
-          attr_accessor :i18n, :manifest, :day, :column_gutter, :params, :debug
+          attr_accessor :i18n, :manifest, :day, :columns_width, :column_gutter, :params, :debug
 
-          def initialize(i18n:, manifest:, day:, column_gutter:, debug: false, **params)
+          def initialize(i18n:, manifest:, day:, columns_width:, column_gutter:, debug: false, **params)
             self.i18n = i18n
             self.manifest = manifest
             self.day = day
+            self.columns_width = columns_width
             self.column_gutter = column_gutter
             self.params = params
             self.debug = debug
@@ -42,7 +43,7 @@ module LYP
           def content
             <<~TYPST.strip
               grid(
-                columns: (auto, auto),
+                columns: #{columns_width},
                 rows: 1fr,
                 column-gutter: #{column_gutter},
                 [#{left_column}],

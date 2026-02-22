@@ -54,6 +54,7 @@ planner:
       class: daily
       enabled: true
       params:
+        columns_width: (3fr, 5fr)
         column_gutter: 2mm
 
         left_column:
