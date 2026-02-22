@@ -71,7 +71,8 @@ module LYP
                   else { ( bottom: 0.4pt + gray ) },
                 grid.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [#{i18n.t('schedule')}]))),
                 #{schedule_lines(from:, to:, strftime:)},
-                #{trailing_30_minutes ? 'box(height: 5mm)' : ''}
+
+                #{"box(height: 5mm)" if trailing_30_minutes}
               )
             TYPST
           end
