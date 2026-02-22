@@ -51,6 +51,8 @@ module LYP
           TYPST
         end
 
+        def add_blank_page(typst) = pages << typst
+
         def heading_columns
           columns = [side_menu_width, "1fr"]
           columns.reverse! if side_menu_position == "right"

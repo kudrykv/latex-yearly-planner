@@ -37,13 +37,15 @@ planner:
       side_menu_width: 10mm
 
   sections:
-    - name: title
-      enabled: false
+    - name: cover
+      class: cover_plain
+      enabled: true
       params:
         name: "2026\n\nPlanner"
         font_size: 48pt
 
     - name: weekly
+      class: weekly
       enabled: true
       params:
         hello: world
