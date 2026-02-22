@@ -66,13 +66,18 @@ module LYP
             comps.filter_map do |comp|
               next unless comp[:enabled]
 
-              case comp[:class]
-              when "schedule"
-                "##{Components::DailySchedule.new(i18n:, **comp[:params]).generate}"
-              when "top_priorities"
-                "##{Components::DailyTopPriorities.new(i18n:, **comp[:params]).generate}"
-              end
+              klass = components[comp[:class]]
+              raise ConfigError, "unknown component: #{comp[:class]}" if klass.nil?
+
+              "##{klass.new(i18n:, **comp[:params]).generate}"
             end.join
+          end
+
+          def components
+            @components ||= {
+              "schedule" => Components::DailySchedule,
+              "top_priorities" => Components::DailyTopPriorities
+            }.freeze
           end
         end
       end
