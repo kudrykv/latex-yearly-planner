@@ -36,6 +36,10 @@ module LYP
               )
             TYPST
           end
+
+          def content
+            "[haha]"
+          end
         end
       end
     end

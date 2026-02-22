@@ -20,7 +20,7 @@ module LYP
 
           def generate(planner, manifest)
             range.each do |day|
-              planner.add_page(title: title(manifest, day), content: '')
+              planner.add_page(title: title(manifest, day), content: content(manifest, day))
             end
           end
 
@@ -29,7 +29,15 @@ module LYP
           def range = overseer.start_date..overseer.end_date
 
           def title(manifest, day)
-            Pages::Daily.new(i18n:, manifest:, day:, debug: overseer.debug?).title
+            page(manifest, day).title
+          end
+
+          def content(manifest, day)
+            page(manifest, day).content
+          end
+
+          def page(manifest, day)
+            Pages::Daily.new(i18n:, manifest:, day:, debug: overseer.debug?)
           end
         end
       end
