@@ -54,5 +54,12 @@ planner:
       class: daily
       enabled: true
       params:
-        schedule:
-          
+        left_column:
+          - name: schedule
+            class: schedule
+            enabled: true
+            params:
+              from: 8
+              to: 20
+              strftime: '%k'
+              trailing_30_minutes: true
