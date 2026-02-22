@@ -159,9 +159,9 @@ def definition(overseer)
       size: (5mm, 5mm),
       place(
         dx: 0.5pt,
-        dy: 0.5pt,
+        dy: 4.7mm,
         circle(
-          radius: 0.4pt,
+          radius: 0.141mm,
           fill: black
         )
       ),

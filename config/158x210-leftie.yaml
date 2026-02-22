@@ -53,3 +53,6 @@ planner:
     - name: daily
       class: daily
       enabled: true
+      params:
+        schedule:
+          
