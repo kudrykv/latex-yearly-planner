@@ -13,7 +13,8 @@ module LYP
                       :weekday_start,
                       :start_date,
                       :end_date,
-                      :content_and_side_menu_gutter
+                      :column_gutter,
+                      :row_gutter
 
         def initialize(i18n:, overseer:, manifest:)
           self.i18n = i18n
@@ -21,7 +22,8 @@ module LYP
           self.manifest = manifest
           self.pages = []
 
-          self.content_and_side_menu_gutter = overseer.dig!(:planner, :params, :mos_layout, :content_and_side_menu_gutter)
+          self.column_gutter = overseer.dig!(:planner, :params, :mos_layout, :column_gutter)
+          self.row_gutter = overseer.dig!(:planner, :params, :mos_layout, :row_gutter)
           self.side_menu_position = overseer.dig!(:planner, :params, :mos_layout, :side_menu_position)
           self.side_menu_width = overseer.dig!(:planner, :params, :mos_layout, :side_menu_width)
           self.heading_height = overseer.dig!(:planner, :params, :heading, :height)
@@ -45,7 +47,8 @@ module LYP
             #grid(
               columns: (#{heading_columns}),
               rows: (#{heading_height}, 1fr),
-              column-gutter: #{content_and_side_menu_gutter},
+              column-gutter: #{column_gutter},
+              row-gutter: #{row_gutter},
 
               #{heading_content(title:, highlight_months:, highlight_quarters:)},
               #{content}
