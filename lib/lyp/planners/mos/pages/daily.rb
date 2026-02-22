@@ -56,35 +56,9 @@ module LYP
 
               case comp[:class]
               when "schedule"
-                my_schedule(**comp[:params])
+                Components::DailySchedule.new(i18n:, **comp[:params]).generate
               end
             end.join
-          end
-
-          def my_schedule(from:, to:, strftime:, trailing_30_minutes:)
-            <<~TYPST
-              #grid(
-                columns: 1fr,
-                inset: 0mm,
-                stroke: (_, y) =>
-                  if calc.even(y) { ( bottom: 0.4pt + black ) }
-                  else { ( bottom: 0.4pt + gray ) },
-                grid.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [#{i18n.t('schedule')}]))),
-                #{schedule_lines(from:, to:, strftime:)},
-
-                #{"box(height: 5mm)" if trailing_30_minutes}
-              )
-            TYPST
-          end
-
-          def schedule_lines(from:, to:, strftime:)
-            (from..to).map do |hour|
-              "box(height: 5mm, align(horizon, [#{pretty_hour(hour:, strftime:)}])), box(height: 5mm)"
-            end.join(",\n")
-          end
-
-          def pretty_hour(hour:, strftime:)
-            DateTime.parse("#{hour}:00").strftime(strftime)
           end
         end
       end
