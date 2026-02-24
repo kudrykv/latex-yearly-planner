@@ -56,6 +56,7 @@ planner:
       params:
         columns_width: (3fr, 5fr)
         column_gutter: 2mm
+        items_spacing: 5mm
 
         left_column:
           - name: schedule
@@ -73,3 +74,7 @@ planner:
             enabled: true
             params:
               number: 5
+          - name: notes
+            class: notes
+            enabled: true
+

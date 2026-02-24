@@ -5,14 +5,15 @@ module LYP
     module MOS
       module Pages
         class Daily
-          attr_accessor :i18n, :manifest, :day, :columns_width, :column_gutter, :params, :debug
+          attr_accessor :i18n, :manifest, :day, :columns_width, :column_gutter, :items_spacing, :params, :debug
 
-          def initialize(i18n:, manifest:, day:, columns_width:, column_gutter:, debug: false, **params)
+          def initialize(i18n:, manifest:, day:, columns_width:, column_gutter:, items_spacing:, debug: false, **params)
             self.i18n = i18n
             self.manifest = manifest
             self.day = day
             self.columns_width = columns_width
             self.column_gutter = column_gutter
+            self.items_spacing = items_spacing
             self.params = params
             self.debug = debug
           end
@@ -46,8 +47,8 @@ module LYP
                 columns: #{columns_width},
                 rows: 1fr,
                 column-gutter: #{column_gutter},
-                [#{left_column}],
-                [#{right_column}]
+                #{left_column},
+                #{right_column}
               )
             TYPST
           end
@@ -63,20 +64,29 @@ module LYP
           end
 
           def column(comps)
-            comps.filter_map do |comp|
+            list = comps.filter_map do |comp|
               next unless comp[:enabled]
 
               klass = components[comp[:class]]
               raise ConfigError, "unknown component: #{comp[:class]}" if klass.nil?
 
-              "##{klass.new(i18n:, **comp[:params]).generate}"
-            end.join
+              klass.new(i18n:, **comp[:params]).generate
+            end
+
+            <<~TYPST.strip
+              stack(
+                dir: ttb,
+                spacing: #{items_spacing},
+                #{list.join(",\n")}
+              )
+            TYPST
           end
 
           def components
             @components ||= {
               "schedule" => Components::DailySchedule,
-              "top_priorities" => Components::DailyTopPriorities
+              "top_priorities" => Components::DailyTopPriorities,
+              "notes" => Components::DailyNotes
             }.freeze
           end
         end
