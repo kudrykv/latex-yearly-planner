@@ -74,7 +74,12 @@ planner:
             enabled: true
             params:
               number: 5
+
           - name: notes
             class: notes
             enabled: true
+            params:
+              title_height: 5mm
+              notes_height: 1fr
+              pattern: dotted
 

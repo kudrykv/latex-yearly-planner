@@ -5,19 +5,22 @@ module LYP
     module MOS
       module Components
         class DailyNotes
-          attr_accessor :i18n
+          attr_accessor :i18n, :title_height, :notes_height, :pattern
 
-          def initialize(i18n:, **_rest)
+          def initialize(i18n:, title_height:, notes_height:, pattern:, **_rest)
             self.i18n = i18n
+            self.title_height = title_height
+            self.notes_height = notes_height
+            self.pattern = pattern
           end
 
           def generate
             <<~TYPST.strip
               grid(
                 columns: 1fr,
-                rows: (5.15mm, 1fr),
-                grid.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [#{i18n.t("top_priorities")}]))),
-                rect_pattern(dotted)
+                rows: (#{title_height}, #{notes_height}),
+                grid.cell(align:horizon, stroke: (bottom: 1pt), [#{i18n.t("daily_notes")}]),
+                rect_pattern(#{pattern})
               )
             TYPST
           end
