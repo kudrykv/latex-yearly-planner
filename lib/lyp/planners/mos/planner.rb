@@ -171,8 +171,8 @@ def definition(overseer)
       size: (5mm, 5mm),
       place(
         line(
-          start: (0%, 6%),
-          end: (100%, 6%),
+          start: (0%, 4.85mm),
+          end: (100%, 4.85mm),
           stroke: 0.4pt + luma(130)
         ),
       )

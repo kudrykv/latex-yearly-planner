@@ -13,7 +13,12 @@ module LYP
 
           def generate
             <<~TYPST.strip
-              text[hello world]
+              grid(
+                columns: 1fr,
+                rows: (5.15mm, 1fr),
+                grid.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [#{i18n.t("top_priorities")}]))),
+                rect_pattern(dotted)
+              )
             TYPST
           end
         end
