@@ -19,6 +19,9 @@ module LYP
           end
 
           def title
+            week = "#{i18n.t("week_name_full")} #{day.week.number}"
+            week = "link(<#{day.week.id}>)[#{week}]" if manifest.source?(day.week.id)
+
             <<~TYPST
               grid(
                 columns: (auto, auto),
@@ -36,7 +39,7 @@ module LYP
                   )
                 ),
                 [*#{i18n.t("weekday.full.#{day.weekday_name}")}*],
-                [#{i18n.t("months.full.#{day.month.name}")}]
+                #{week}
               )
             TYPST
           end

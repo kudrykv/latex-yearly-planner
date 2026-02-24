@@ -30,6 +30,8 @@ module LYP
 
         def quarter = Quarter.new(weekday_start:, day: self)
 
+        def week = Week.new(weekday_start:, day: self.beginning_of_week)
+
         def quarter_number = day.quarter
 
         def beginning_of_quarter
