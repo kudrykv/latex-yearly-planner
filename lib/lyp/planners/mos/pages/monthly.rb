@@ -51,12 +51,12 @@ module LYP
           end
 
           def rows
-            (["auto"] + ([month_params[:daily_cell_height]] * month_in_weeks.count)).join(", ")
+            ([month_params[:heading_height]] + ([month_params[:daily_cell_height]] * month_in_weeks.count)).join(", ")
           end
 
           def heading
             h = month_in_weeks.second.map do |day|
-              "align(center)[#{i18n.t("weekday.full.#{day.weekday_name}")}]"
+              "align(center + horizon)[#{i18n.t("weekday.full.#{day.weekday_name}")}]"
             end
 
             h.prepend("[]") if week_placement == "left"

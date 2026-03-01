@@ -54,6 +54,7 @@ planner:
 
         month_params:
           week_placement: left
+          heading_height: 5mm
           week_label_rotation: 90deg
           week_label_width: 5mm
           daily_cell_height: 2.5cm
