@@ -63,7 +63,7 @@ module LYP
           day <=> other.day
         end
 
-        def to_s = "#{day} (wd: #{weekday_start})"
+        def to_s = "#{day} (wd: #{weekday_start}, #{weekday_name})"
 
         def hash = [weekday_start, day].hash
 

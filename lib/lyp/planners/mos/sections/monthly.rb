@@ -5,12 +5,13 @@ module LYP
     module MOS
       module Sections
         class Monthly
-          attr_accessor :i18n, :overseer, :title_size, :params
+          attr_accessor :i18n, :overseer, :title_size, :month, :month_params
 
-          def initialize(i18n:, overseer:, title_size:, **_rest)
+          def initialize(i18n:, overseer:, title_size:, month_params:, **_rest)
             self.i18n = i18n
             self.overseer = overseer
             self.title_size = title_size
+            self.month_params = month_params
           end
 
           def register(manifest)
@@ -21,9 +22,11 @@ module LYP
 
           def generate(planner, manifest)
             range.each do |month|
+              page = Pages::Monthly.new(i18n:, manifest:, month:, title_size:, month_params:)
+
               planner.add_page(
-                title: "text(size: #{title_size})[#{i18n.t("months.full.#{month.name}")}<#{month.id}>]",
-                content: "[later]",
+                title: page.title,
+                content: page.content,
                 highlight_months: [month],
                 highlight_quarters: [month.quarter]
               )

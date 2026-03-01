@@ -52,6 +52,10 @@ planner:
       params:
         title_size: 18pt
 
+        month_params:
+          week_placement: right
+          daily_cell_height: 1cm
+
     - name: weekly
       class: weekly
       enabled: true
