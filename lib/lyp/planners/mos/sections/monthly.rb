@@ -21,7 +21,7 @@ module LYP
           def generate(planner, manifest)
             range.each do |month|
               planner.add_page(
-                title: "text(size: 18pt)[#{i18n.t("months.full.#{month.name}")}]",
+                title: "text(size: 18pt)[#{i18n.t("months.full.#{month.name}")}<#{month.id}>]",
                 content: "[later]",
                 highlight_months: [month],
                 highlight_quarters: [month.quarter]

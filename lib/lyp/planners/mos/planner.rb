@@ -101,7 +101,7 @@ module LYP
         end
 
         def months_menu(highlight_months:)
-          menu = Components::MonthsMenu.new(i18n:, range: start_date.month..end_date.month)
+          menu = Components::MonthsMenu.new(i18n:, manifest:, range: start_date.month..end_date.month)
           menu.highlight(highlight_months)
           menu.generate
         end
