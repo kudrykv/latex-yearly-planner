@@ -49,6 +49,8 @@ planner:
     - name: monthly
       class: monthly
       enabled: true
+      params:
+        title_size: 18pt
 
     - name: weekly
       class: weekly
