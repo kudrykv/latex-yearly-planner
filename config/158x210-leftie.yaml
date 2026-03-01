@@ -53,8 +53,10 @@ planner:
         title_size: 18pt
 
         month_params:
-          week_placement: right
-          daily_cell_height: 1cm
+          week_placement: left
+          week_label_rotation: 90deg
+          week_label_width: 5mm
+          daily_cell_height: 2.5cm
 
     - name: weekly
       class: weekly

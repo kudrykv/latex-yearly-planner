@@ -34,9 +34,7 @@ module LYP
             text = i18n.t("months.short.#{month.name}")
             text = "#link(<#{month.id}>)[#{text}]" if manifest.source?(month.id)
 
-            if highlighted.include?(month)
-              return "table.cell(fill: black, text(white)[#{text}])"
-            end
+            return "table.cell(fill: black, text(white)[#{text}])" if highlighted.include?(month)
 
             "table.cell([#{text}])"
           end

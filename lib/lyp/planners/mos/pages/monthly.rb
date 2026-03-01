@@ -24,12 +24,18 @@ module LYP
 
           def content
             <<~TYPST.strip
-              grid(
-                stroke: 0.4pt,
-                columns: (#{columns}),
+              stack(
+                dir: ttb,
+                spacing: 0mm,
 
-                #{heading},
-                #{day_cells}
+                grid(
+                  stroke: 0.4pt,
+                  columns: (#{columns}),
+                  rows: (#{rows}),
+
+                  #{heading},
+                  #{day_cells}
+                )
               )
             TYPST
           end
@@ -38,10 +44,14 @@ module LYP
 
           def columns
             cols = ["1fr"] * 7
-            cols.prepend("auto") if week_placement == "left"
-            cols.append("auto") if week_placement == "right"
+            cols.prepend(month_params[:week_label_width]) if week_placement == "left"
+            cols.append(month_params[:week_label_width]) if week_placement == "right"
 
             cols.join(", ")
+          end
+
+          def rows
+            (["auto"] + ([month_params[:daily_cell_height]] * month_in_weeks.count)).join(", ")
           end
 
           def heading
@@ -60,28 +70,35 @@ module LYP
               row = week.map do |day|
                 next "[]" unless day
 
-                "[#{day.day}]"
+                "box(stroke: 0.4pt, inset: 3pt)[#{day.month_day}]"
               end
 
-              week_number = (week.first || week.last).week.number
-              row.prepend("[#{week_number}]") if week_placement == "left"
-              row.append("[#{week_number}]") if week_placement == "right"
+              current_week = (week.first || week.last).week
+              week_label = "align(center + horizon, rotate(#{month_params[:week_label_rotation]}, reflow: true)[#{i18n.t("week_name_full")} #{current_week.number}])"
+              week_label = "link(<#{current_week.id}>)[##{week_label}]" if manifest.source? current_week.id
+
+              row.prepend(week_label) if week_placement == "left"
+              row.append(week_label) if week_placement == "right"
 
               row.join(", ")
             end.join(",\n")
           end
 
           def month_in_weeks
-            weeks = [month.day.beginning_of_week..month.day.end_of_week]
-            weeks << ((weeks.last.last + 1)..(weeks.last.last + 7)) while weeks.last.last.month == month
+            @month_in_weeks ||= begin
+              weeks = [month.day.beginning_of_week..month.day.end_of_week]
+              weeks << ((weeks.last.last + 1)..(weeks.last.last + 7)) while weeks.last.last.month == month
 
-            weeks.map do |week|
-              week.map do |day|
-                next nil if day.month != month
+              weeks = weeks.map do |week|
+                week.map do |day|
+                  next nil if day.month != month
 
-                day
+                  day
+                end
               end
-            end.reject { |week| week.all?(&:nil?) }
+
+              weeks.reject { |week| week.all?(&:nil?) }
+            end
           end
         end
       end
