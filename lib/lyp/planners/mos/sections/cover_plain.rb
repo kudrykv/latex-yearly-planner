@@ -22,7 +22,7 @@ module LYP
 
           def cover
             <<~TYPST.strip
-              #table(
+              #grid(
                 columns: 1fr,
                 rows: 1fr,
                 align: center + horizon,
