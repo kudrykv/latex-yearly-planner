@@ -19,6 +19,8 @@ module LYP
 
         def succ = @succ ||= Month.new(weekday_start:, day: day.next_month)
 
+        def quarter = @quarter ||= day.quarter
+
         def <=>(other)
           raise ArgumentError, "must be Month" unless other.is_a? Month
           raise ArgumentError, "weekday start must match" unless weekday_start == other.weekday_start
@@ -32,9 +34,7 @@ module LYP
           weekday_start.eql?(other.weekday_start) && day.eql?(other.day)
         end
 
-        def hash
-          [weekday_start, day].hash
-        end
+        def hash = [weekday_start, day].hash
 
         def name = @name ||= day.strftime("%B").downcase
 
