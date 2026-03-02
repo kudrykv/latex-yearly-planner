@@ -5,6 +5,8 @@ module LYP
     module MOS
       module Pages
         class Monthly
+          WEEK_PLACEMENTS = %i[left right none].freeze
+
           attr_accessor :i18n, :manifest, :month, :title_size, :week_placement, :month_params
 
           def initialize(i18n:, manifest:, month:, title_size:, month_params:)
@@ -12,15 +14,17 @@ module LYP
             self.manifest = manifest
             self.month = month
             self.title_size = title_size
-            self.week_placement = month_params[:week_placement]
             self.month_params = month_params
+            self.week_placement = month_params[:week_placement].to_sym
 
-            return if %w[left right none].include? month_params[:week_placement]
+            return if WEEK_PLACEMENTS.include?(week_placement)
 
-            raise ConfigError, "week_placement: allowed 'left', 'right', or 'none'"
+            raise ConfigError, "week_placement: allowed: #{WEEK_PLACEMENTS}"
           end
 
-          def title = "text(size: #{title_size})[#{i18n.t("months.full.#{month.name}")}<#{month.id}>]"
+          def title
+            "text(size: #{title_size})[#{i18n.t("months.full.#{month.name}")}<#{month.id}>]"
+          end
 
           def content
             <<~TYPST.strip
@@ -44,14 +48,15 @@ module LYP
 
           def columns
             cols = ["1fr"] * 7
-            cols.prepend(month_params[:week_label_width]) if week_placement == "left"
-            cols.append(month_params[:week_label_width]) if week_placement == "right"
 
-            cols.join(", ")
+            with_week_column(cols, month_params[:week_label_width]).join(", ")
           end
 
           def rows
-            ([month_params[:heading_height]] + ([month_params[:daily_cell_height]] * month_in_weeks.count)).join(", ")
+            head = [month_params[:heading_height]]
+            body = [month_params[:daily_cell_height]] * month_in_weeks.count
+
+            (head + body).join(", ")
           end
 
           def heading
@@ -59,50 +64,69 @@ module LYP
               "align(center + horizon)[#{i18n.t("weekday.full.#{day.weekday_name}")}]"
             end
 
-            h.prepend("[]") if week_placement == "left"
-            h.append("[]") if week_placement == "right"
-
-            h.join(", ")
+            with_week_column(h, "[]").join(", ")
           end
 
           def day_cells
             month_in_weeks.map do |week|
-              row = week.map do |day|
-                next "[]" unless day
+              row = week.map { |day| day_cell(day) }
 
-                text = day.month_day.to_s
-                text = "padded_link(<#{day.id}>)[#{text}]" if manifest.source? day.id
-
-                "box(stroke: 0.4pt, inset: 3pt)[##{text}]"
-              end
-
-              current_week = (week.first || week.last).week
-              label = "#{i18n.t("week_name_full")} #{current_week.number}"
-              label = "padded_link(<#{current_week.id}>)[#{label}]" if manifest.source? current_week.id
-
-              week_label = "align(center + horizon, rotate(#{month_params[:week_label_rotation]}, reflow: true)[##{label}])"
-
-              row.prepend(week_label) if week_placement == "left"
-              row.append(week_label) if week_placement == "right"
-
-              row.join(", ")
+              with_week_column(row, week_label_cell(week)).join(", ")
             end.join(",\n")
+          end
+
+          def day_cell(day)
+            return "[]" unless day
+
+            text = day.month_day.to_s
+            text = "padded_link(<#{day.id}>)[#{text}]" if manifest.source? day.id
+
+            "box(stroke: 0.4pt, inset: 3pt)[##{text}]"
+          end
+
+          def week_label_cell(week)
+            current_week = first_present_day(week).week
+            label = "#{i18n.t("week_name_full")} #{current_week.number}"
+            label = "padded_link(<#{current_week.id}>)[#{label}]" if manifest.source? current_week.id
+
+            "align(center + horizon, rotate(#{month_params[:week_label_rotation]}, reflow: true)[##{label}])"
+          end
+
+          def first_present_day(week)
+            week.compact.first
+          end
+
+          def with_week_column(cells, value)
+            cells.prepend(value) if week_placement == :left
+            cells.append(value) if week_placement == :right
+
+            cells
           end
 
           def month_in_weeks
             @month_in_weeks ||= begin
-              weeks = [month.day.beginning_of_week..month.day.end_of_week]
-              weeks << ((weeks.last.last + 1)..(weeks.last.last + 7)) while weeks.last.last.month == month
-
-              weeks = weeks.map do |week|
-                week.map do |day|
-                  next nil if day.month != month
-
-                  day
-                end
-              end
+              ranges = expand_week_ranges
+              weeks = mask_outside_days(ranges)
 
               weeks.reject { |week| week.all?(&:nil?) }
+            end
+          end
+
+          def expand_week_ranges
+            first_week = month.day.beginning_of_week..month.day.end_of_week
+            ranges = [first_week]
+
+            while ranges.last.last.month == month
+              prev_end = ranges.last.last
+              ranges << ((prev_end + 1)..(prev_end + 7))
+            end
+
+            ranges
+          end
+
+          def mask_outside_days(ranges)
+            ranges.map do |week|
+              week.map { |day| day.month == month ? day : nil }
             end
           end
         end
