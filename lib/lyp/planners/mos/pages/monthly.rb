@@ -70,12 +70,17 @@ module LYP
               row = week.map do |day|
                 next "[]" unless day
 
-                "box(stroke: 0.4pt, inset: 3pt)[#{day.month_day}]"
+                text = day.month_day.to_s
+                text = "padded_link(<#{day.id}>)[#{text}]" if manifest.source? day.id
+
+                "box(stroke: 0.4pt, inset: 3pt)[##{text}]"
               end
 
               current_week = (week.first || week.last).week
-              week_label = "align(center + horizon, rotate(#{month_params[:week_label_rotation]}, reflow: true)[#{i18n.t("week_name_full")} #{current_week.number}])"
-              week_label = "link(<#{current_week.id}>)[##{week_label}]" if manifest.source? current_week.id
+              label = "#{i18n.t("week_name_full")} #{current_week.number}"
+              label = "padded_link(<#{current_week.id}>)[#{label}]" if manifest.source? current_week.id
+
+              week_label = "align(center + horizon, rotate(#{month_params[:week_label_rotation]}, reflow: true)[##{label}])"
 
               row.prepend(week_label) if week_placement == "left"
               row.append(week_label) if week_placement == "right"

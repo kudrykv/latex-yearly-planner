@@ -183,6 +183,11 @@ def definition(overseer)
       height: 100%,
       fill: pattern
     )
+
+    #let padded_link(padding: 8pt, target, content) = box(
+      inset: -padding,
+      link(target)[#box(inset: padding, content)]
+    )
   TYPST
 end
 
