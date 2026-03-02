@@ -28,9 +28,9 @@ module LYP
 
           def content
             <<~TYPST.strip
-              stack(
-                dir: ttb,
-                spacing: 0mm,
+              grid(
+                columns: 1fr,
+                rows: (auto, 1fr),
 
                 grid(
                   stroke: 0.4pt,
@@ -39,6 +39,15 @@ module LYP
 
                   #{heading},
                   #{day_cells}
+                ),
+
+                grid(
+                  columns: (1fr),
+                  rows: (2mm, auto, 1fr),
+
+                  [],
+                  grid.cell(stroke: (bottom: 0.8pt), box(height: 5mm, align(horizon, [#{i18n.t("monthly_notes")}]))),
+                  rect_pattern(dotted)
                 )
               )
             TYPST
