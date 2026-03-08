@@ -72,10 +72,10 @@ module LYP
 
           def week_label_cell(week)
             current_week = first_present_day(week).week
-            label = "#{i18n.t("week_name_full")} #{current_week.number}"
+            label = current_week.number
             label = "padded_link(<#{current_week.id}>)[#{label}]" if manifest.source? current_week.id
 
-            "[#{current_week.number}]"
+            label
           end
 
           def first_present_day(week)
