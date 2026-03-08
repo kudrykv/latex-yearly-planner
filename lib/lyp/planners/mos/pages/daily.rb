@@ -90,7 +90,7 @@ module LYP
               "schedule" => Components::DailySchedule,
               "top_priorities" => Components::DailyTopPriorities,
               "notes" => Components::DailyNotes,
-              "little_calendar" => Components::LittleCalendar,
+              "little_calendar" => Components::LittleCalendar
             }.freeze
           end
         end

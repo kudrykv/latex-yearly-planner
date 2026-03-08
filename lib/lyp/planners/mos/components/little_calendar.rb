@@ -91,11 +91,11 @@ module LYP
 
           def month_in_weeks
             @month_in_weeks ||= begin
-                                  ranges = expand_week_ranges
-                                  weeks = mask_outside_days(ranges)
+              ranges = expand_week_ranges
+              weeks = mask_outside_days(ranges)
 
-                                  weeks.reject { |week| week.all?(&:nil?) }
-                                end
+              weeks.reject { |week| week.all?(&:nil?) }
+            end
           end
 
           def expand_week_ranges
