@@ -7,7 +7,7 @@ module LYP
         class DailySchedule
           attr_accessor :i18n, :from, :to, :trailing_30_minutes, :time_format
 
-          def initialize(i18n:, from:, to:, trailing_30_minutes:, time_format:)
+          def initialize(i18n:, from:, to:, trailing_30_minutes:, time_format:, **_rest)
             self.i18n = i18n
             self.from = from
             self.to = to

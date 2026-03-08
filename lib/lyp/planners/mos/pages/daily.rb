@@ -73,7 +73,7 @@ module LYP
               klass = components[comp[:class]]
               raise ConfigError, "unknown component: #{comp[:class]}" if klass.nil?
 
-              klass.new(i18n:, **comp[:params]).generate
+              klass.new(i18n:, manifest:, day:, **comp[:params]).generate
             end
 
             <<~TYPST.strip
@@ -89,7 +89,8 @@ module LYP
             @components ||= {
               "schedule" => Components::DailySchedule,
               "top_priorities" => Components::DailyTopPriorities,
-              "notes" => Components::DailyNotes
+              "notes" => Components::DailyNotes,
+              "little_calendar" => Components::LittleCalendar,
             }.freeze
           end
         end

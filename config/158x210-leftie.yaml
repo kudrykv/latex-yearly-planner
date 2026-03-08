@@ -81,6 +81,12 @@ planner:
               time_format: '%k'
               trailing_30_minutes: true
 
+          - name: little calendar
+            class: little_calendar
+            enabled: true
+            params:
+              week_placement: left
+
         right_column:
           - name: top priorities
             class: top_priorities

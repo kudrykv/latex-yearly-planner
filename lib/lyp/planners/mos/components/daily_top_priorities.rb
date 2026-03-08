@@ -7,7 +7,7 @@ module LYP
         class DailyTopPriorities
           attr_accessor :i18n, :number
 
-          def initialize(i18n:, number:)
+          def initialize(i18n:, number:, **_rest)
             self.i18n = i18n
             self.number = number
           end

@@ -38,6 +38,17 @@ en:
       december: December
 
   weekday:
+    one_letter:
+      week: W
+
+      monday: M
+      tuesday: T
+      wednesday: W
+      thursday: T
+      friday: F
+      saturday: S
+      sunday: S
+
     full:
       monday: Monday
       tuesday: Tuesday
