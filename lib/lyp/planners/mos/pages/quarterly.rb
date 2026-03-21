@@ -18,7 +18,32 @@ module LYP
           end
 
           def content
-            "[here be content (later)]"
+            <<~TYPST.strip
+              grid(
+                columns: (2fr, 3fr),
+
+                #{months_stack}, rect_pattern(dotted)
+              )
+            TYPST
+          end
+
+          private
+
+          def months_stack
+            <<~TYPST.strip
+              stack(
+                dir: ttb,
+                spacing: 1fr,
+
+                #{months.join(", ")}
+              )
+            TYPST
+          end
+
+          def months
+            quarter.months.map do |month|
+              Components::LittleCalendar.new(i18n:, manifest:, week_placement: :left, month:).generate
+            end
           end
         end
       end

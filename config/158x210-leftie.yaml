@@ -50,6 +50,7 @@ planner:
       class: quarterly
       enabled: true
       params:
+        months_column: left
 
     - name: monthly
       class: monthly
