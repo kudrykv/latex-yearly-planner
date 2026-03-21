@@ -5,13 +5,14 @@ module LYP
     module MOS
       module Pages
         class Quarterly
-          attr_accessor :i18n, :manifest, :quarter, :months_column
+          attr_accessor :i18n, :manifest, :quarter, :months_column, :little_calendar
 
-          def initialize(i18n:, manifest:, quarter:, months_column:)
+          def initialize(i18n:, manifest:, quarter:, months_column:, little_calendar:)
             self.i18n = i18n
             self.manifest = manifest
             self.quarter = quarter
             self.months_column = months_column
+            self.little_calendar = little_calendar
           end
 
           def title
@@ -49,7 +50,7 @@ module LYP
 
           def months
             quarter.months.map do |month|
-              Components::LittleCalendar.new(i18n:, manifest:, week_placement: :left, month:).generate
+              Components::LittleCalendar.new(i18n:, manifest:, month:, **little_calendar).generate
             end
           end
         end

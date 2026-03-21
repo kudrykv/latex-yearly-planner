@@ -51,6 +51,8 @@ planner:
       enabled: true
       params:
         months_column: right
+        little_calendar:
+          week_placement: left
 
     - name: monthly
       class: monthly
