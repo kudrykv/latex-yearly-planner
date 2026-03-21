@@ -46,6 +46,11 @@ planner:
         name: "2026\n\nPlanner"
         font_size: 48pt
 
+    - name: quarterly
+      class: quarterly
+      enabled: true
+      params:
+
     - name: monthly
       class: monthly
       enabled: true

@@ -13,6 +13,8 @@ module LYP
           self.day = day.beginning_of_quarter
         end
 
+        def id = "quarter-#{number}"
+
         def number = day.quarter_number
 
         def to_s = "Q#{number} (wd: #{weekday_start})"
