@@ -46,6 +46,13 @@ planner:
         name: "2026\n\nPlanner"
         font_size: 48pt
 
+    - name: annual
+      class: annual
+      enabled: true
+      params:
+        little_calendar:
+          week_placement: left
+
     - name: quarterly
       class: quarterly
       enabled: true

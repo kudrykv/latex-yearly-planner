@@ -32,6 +32,8 @@ module LYP
           sec = case dto[:class]
                 when "cover_plain"
                   Sections::CoverPlain.new(i18n:, overseer:, **dto[:params])
+                when "annual"
+                  Sections::Annual.new(i18n:, overseer:, **dto[:params])
                 when "quarterly"
                   Sections::Quarterly.new(i18n:, overseer:, **dto[:params])
                 when "monthly"
