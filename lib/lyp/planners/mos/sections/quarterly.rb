@@ -20,7 +20,13 @@ module LYP
 
           def generate(planner, manifest)
             range.each do |quarter|
-              planner.add_blank_page("[#{quarter.id}]")
+              page = Pages::Quarterly.new(i18n:, manifest:, quarter:)
+
+              planner.add_page(
+                title: page.title,
+                content: page.content,
+                highlight_quarters: [quarter]
+              )
             end
           end
 

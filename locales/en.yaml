@@ -7,6 +7,7 @@ en:
 
   quarters:
     short: Q
+    long: Quarter
 
   months:
     short:

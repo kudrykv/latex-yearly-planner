@@ -17,6 +17,14 @@ module LYP
 
         def number = day.quarter_number
 
+        def months
+          [
+            Month.new(weekday_start:, day:),
+            Month.new(weekday_start:, day: day.next_month),
+            Month.new(weekday_start:, day: day.next_month.next_month),
+          ]
+        end
+
         def to_s = "Q#{number} (wd: #{weekday_start})"
 
         def succ = @succ ||= Quarter.new(weekday_start:, day: day.next_quarter)
