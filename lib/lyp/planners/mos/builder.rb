@@ -16,7 +16,7 @@ module LYP
         # rubocop:disable Metrics/AbcSize
         def generate
           overseer.enabled_sections
-                  .map { |dto| section(overseer, dto) }
+                  .map { |dto| section(dto) }
                   .each { |s| manifest.register_section(s.registered_section_name) }
                   .each { |s| s.register(manifest) }
                   .each { |s| s.generate(planner, manifest) }
@@ -28,7 +28,7 @@ module LYP
 
         private
 
-        def section(overseer, dto)
+        def section(dto)
           name = dto[:name]
           case dto[:class]
           when "cover_plain"
