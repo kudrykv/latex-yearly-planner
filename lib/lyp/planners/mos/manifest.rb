@@ -4,8 +4,6 @@ module LYP
   module Planners
     module MOS
       class Manifest
-        attr_accessor :sections, :sources
-
         def initialize
           self.sources = Set.new
           self.sections = Set.new
@@ -16,6 +14,10 @@ module LYP
         def source?(id) = sources.member?(id)
 
         def register_section(name) = sections.add(name)
+
+        private
+
+        attr_accessor :sections, :sources
       end
     end
   end

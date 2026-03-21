@@ -4,17 +4,6 @@ module LYP
   module Planners
     module MOS
       class Planner
-        attr_accessor :i18n, :overseer, :manifest, :pages,
-                      :side_menu_position,
-                      :side_menu_width,
-                      :heading_height,
-                      :heading_align,
-                      :weekday_start,
-                      :start_date,
-                      :end_date,
-                      :column_gutter,
-                      :row_gutter
-
         def initialize(i18n:, overseer:, manifest:)
           self.i18n = i18n
           self.overseer = overseer
@@ -58,6 +47,19 @@ module LYP
         def add_blank_page(typst)
           pages << typst
         end
+
+        private
+
+        attr_accessor :i18n, :overseer, :manifest, :pages,
+                      :side_menu_position,
+                      :side_menu_width,
+                      :heading_height,
+                      :heading_align,
+                      :weekday_start,
+                      :start_date,
+                      :end_date,
+                      :column_gutter,
+                      :row_gutter
 
         def heading_columns
           columns = [side_menu_width, "1fr"]
@@ -130,65 +132,66 @@ module LYP
             )
           TYPST
         end
+
+        # rubocop:enable Metrics/MethodLength
+
+        # rubocop:disable Metrics/MethodLength
+        def definition(overseer)
+          <<~TYPST.strip
+            #set page(
+              width: #{overseer.dig!(:document, :layout, :dimensions, :width)},
+              height: #{overseer.dig!(:document, :layout, :dimensions, :height)},
+
+              margin: (
+                top: #{overseer.dig!(:document, :layout, :margin, :top)},
+                right: #{overseer.dig!(:document, :layout, :margin, :right)},
+                bottom: #{overseer.dig!(:document, :layout, :margin, :bottom)},
+                left: #{overseer.dig!(:document, :layout, :margin, :left)},
+              )
+            )
+
+            #set text(
+              size: #{overseer.dig!(:document, :text, :size)}
+            )
+
+            #let dotted = tiling(
+              size: (5mm, 5mm),
+              place(
+                dx: 0.5pt,
+                dy: 4.7mm,
+                circle(
+                  radius: 0.141mm,
+                  fill: black
+                )
+              ),
+            )
+
+            #let lined = tiling(
+              size: (5mm, 5mm),
+              place(
+                line(
+                  start: (0%, 4.85mm),
+                  end: (100%, 4.85mm),
+                  stroke: 0.4pt + luma(130)
+                ),
+              )
+            )
+
+            #let rect_pattern(pattern) = rect(
+              width: 100%,
+              height: 100%,
+              fill: pattern
+            )
+
+            #let padded_link(padding: 8pt, target, content) = box(
+              inset: -padding,
+              link(target)[#box(inset: padding, content)]
+            )
+          TYPST
+        end
+
         # rubocop:enable Metrics/MethodLength
       end
     end
   end
 end
-
-# rubocop:disable Metrics/MethodLength
-def definition(overseer)
-  <<~TYPST.strip
-    #set page(
-      width: #{overseer.dig!(:document, :layout, :dimensions, :width)},
-      height: #{overseer.dig!(:document, :layout, :dimensions, :height)},
-
-      margin: (
-        top: #{overseer.dig!(:document, :layout, :margin, :top)},
-        right: #{overseer.dig!(:document, :layout, :margin, :right)},
-        bottom: #{overseer.dig!(:document, :layout, :margin, :bottom)},
-        left: #{overseer.dig!(:document, :layout, :margin, :left)},
-      )
-    )
-
-    #set text(
-      size: #{overseer.dig!(:document, :text, :size)}
-    )
-
-    #let dotted = tiling(
-      size: (5mm, 5mm),
-      place(
-        dx: 0.5pt,
-        dy: 4.7mm,
-        circle(
-          radius: 0.141mm,
-          fill: black
-        )
-      ),
-    )
-
-    #let lined = tiling(
-      size: (5mm, 5mm),
-      place(
-        line(
-          start: (0%, 4.85mm),
-          end: (100%, 4.85mm),
-          stroke: 0.4pt + luma(130)
-        ),
-      )
-    )
-
-    #let rect_pattern(pattern) = rect(
-      width: 100%,
-      height: 100%,
-      fill: pattern
-    )
-
-    #let padded_link(padding: 8pt, target, content) = box(
-      inset: -padding,
-      link(target)[#box(inset: padding, content)]
-    )
-  TYPST
-end
-
-# rubocop:enable Metrics/MethodLength
