@@ -73,7 +73,7 @@ module LYP
               klass = components[comp[:class]]
               raise ConfigError, "unknown component: #{comp[:class]}" if klass.nil?
 
-              klass.new(i18n:, manifest:, day:, **comp[:params]).generate
+              klass.new(i18n:, manifest:, month: day.month, day:, **comp[:params]).generate
             end
 
             <<~TYPST.strip

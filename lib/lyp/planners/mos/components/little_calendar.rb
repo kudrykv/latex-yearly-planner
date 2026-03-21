@@ -7,11 +7,11 @@ module LYP
         class LittleCalendar
           attr_reader :i18n, :manifest, :week_placement, :month
 
-          def initialize(i18n:, manifest:, week_placement:, day:, **_rest)
+          def initialize(i18n:, manifest:, week_placement:, month:, day: nil, **_rest)
             @i18n = i18n
             @manifest = manifest
             @week_placement = week_placement.to_sym
-            @month = day.month
+            @month = month
           end
 
           def generate
