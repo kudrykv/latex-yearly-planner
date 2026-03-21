@@ -19,11 +19,17 @@ module LYP
           end
 
           def content
+            cols = %w[2fr 3fr]
+            columns = [months_stack, "rect_pattern(dotted)"]
+
+            cols.reverse! if months_column == :right
+            columns.reverse! if months_column == :right
+
             <<~TYPST.strip
               grid(
-                columns: (#{months_column == :left ? "2fr, 3fr" : "3fr, 2fr"}),
+                columns: (#{cols.join(",")}),
 
-                #{months_column == :left ? "#{months_stack}, rect_pattern(dotted)" : "rect_pattern(dotted), #{months_stack}"}
+                #{columns.join(", ")}
               )
             TYPST
           end
