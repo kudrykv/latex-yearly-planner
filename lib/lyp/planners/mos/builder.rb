@@ -4,8 +4,6 @@ module LYP
   module Planners
     module MOS
       class Builder
-        attr_accessor :i18n, :overseer, :manifest, :planner
-
         def initialize(dto, i18n:)
           self.i18n = i18n
           self.overseer = Overseer.new(dto)
@@ -27,6 +25,8 @@ module LYP
         # rubocop:enable Metrics/AbcSize
 
         private
+
+        attr_accessor :i18n, :overseer, :manifest, :planner
 
         def section(dto)
           name = dto[:name]
