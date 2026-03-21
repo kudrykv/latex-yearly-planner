@@ -17,11 +17,28 @@ module LYP
             manifest.register_source("calendar")
           end
 
-          def generate(planner, _manifest)
+          def generate(planner, manifest)
             planner.add_page(
               title: "[Calendar]",
-              content: "[later]"
+              content: content(manifest:)
             )
+          end
+
+          private
+
+          def content(manifest:)
+            items = (overseer.start_date.month..overseer.end_date.month)
+                    .map { |month| Components::LittleCalendar.new(i18n:, manifest:, month:, **little_calendar).generate }
+
+            <<~TYPST.strip
+              grid(
+                columns: (1fr, 1fr, 1fr),
+                rows: 1fr,
+                inset: 5pt,
+
+                #{items.join(",\n")}
+              )
+            TYPST
           end
         end
       end
