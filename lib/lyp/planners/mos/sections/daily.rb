@@ -5,13 +5,16 @@ module LYP
     module MOS
       module Sections
         class Daily
-          attr_accessor :i18n, :overseer, :params
+          attr_accessor :name, :i18n, :overseer, :params
 
-          def initialize(i18n:, overseer:, **params)
+          def initialize(name:, i18n:, overseer:, **params)
+            self.name = name
             self.i18n = i18n
             self.overseer = overseer
             self.params = params
           end
+
+          def registered_section_name = name
 
           def register(manifest)
             range.each do |date|

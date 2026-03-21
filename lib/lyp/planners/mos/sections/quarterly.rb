@@ -5,14 +5,17 @@ module LYP
     module MOS
       module Sections
         class Quarterly
-          attr_accessor :i18n, :overseer, :months_column, :little_calendar
+          attr_accessor :name, :i18n, :overseer, :months_column, :little_calendar
 
-          def initialize(i18n:, overseer:, months_column:, little_calendar:, **_rest)
+          def initialize(name:, i18n:, overseer:, months_column:, little_calendar:, **_rest)
+            self.name = name
             self.i18n = i18n
             self.overseer = overseer
             self.months_column = months_column.to_sym
             self.little_calendar = little_calendar
           end
+
+          def registered_section_name = name
 
           def register(manifest)
             range.each do |quarter|

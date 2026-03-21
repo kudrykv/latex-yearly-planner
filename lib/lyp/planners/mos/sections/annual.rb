@@ -5,13 +5,16 @@ module LYP
     module MOS
       module Sections
         class Annual
-          attr_accessor :i18n, :overseer, :little_calendar
+          attr_accessor :name, :i18n, :overseer, :little_calendar
 
-          def initialize(i18n:, overseer:, little_calendar:, **_rest)
+          def initialize(name:, i18n:, overseer:, little_calendar:, **_rest)
+            self.name = name
             self.i18n = i18n
             self.overseer = overseer
             self.little_calendar = little_calendar
           end
+
+          def registered_section_name = name
 
           def register(manifest)
             manifest.register_source("calendar")

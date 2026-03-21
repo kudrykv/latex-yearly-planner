@@ -5,15 +5,18 @@ module LYP
     module MOS
       module Sections
         class Weekly
-          attr_accessor :i18n, :overseer, :weekday_start, :first_week_day, :last_week_day
+          attr_accessor :name, :i18n, :overseer, :weekday_start, :first_week_day, :last_week_day
 
-          def initialize(i18n:, overseer:, **_rest)
+          def initialize(name:, i18n:, overseer:, **_rest)
+            self.name = name
             self.i18n = i18n
             self.overseer = overseer
             self.weekday_start = overseer.weekday_start
             self.first_week_day = overseer.start_date.beginning_of_month.beginning_of_week
             self.last_week_day = overseer.end_date.end_of_month.end_of_week
           end
+
+          def registered_section_name = name
 
           def register(manifest)
             weeks.each do |week|

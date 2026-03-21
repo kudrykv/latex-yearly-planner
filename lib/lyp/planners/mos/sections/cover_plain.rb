@@ -14,6 +14,8 @@ module LYP
 
           def register(_manifest); end
 
+          def registered_section_name = name
+
           def generate(planner, _manifest)
             planner.add_blank_page(cover)
           end

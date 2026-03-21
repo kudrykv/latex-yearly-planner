@@ -29,26 +29,23 @@ module LYP
         private
 
         def section(overseer, dto)
-          sec = case dto[:class]
-                when "cover_plain"
-                  Sections::CoverPlain.new(i18n:, overseer:, **dto[:params])
-                when "annual"
-                  Sections::Annual.new(i18n:, overseer:, **dto[:params])
-                when "quarterly"
-                  Sections::Quarterly.new(i18n:, overseer:, **dto[:params])
-                when "monthly"
-                  Sections::Monthly.new(i18n:, overseer:, **dto[:params])
-                when "weekly"
-                  Sections::Weekly.new(i18n:, overseer:, **dto[:params])
-                when "daily"
-                  Sections::Daily.new(i18n:, overseer:, **dto[:params])
-                else
-                  raise ConfigError, "unknown section: #{dto[:name]}"
-                end
-
-          sec.define_singleton_method(:registered_section_name) { dto[:name] }
-
-          sec
+          name = dto[:name]
+          case dto[:class]
+          when "cover_plain"
+            Sections::CoverPlain.new(name:, i18n:, overseer:, **dto[:params])
+          when "annual"
+            Sections::Annual.new(name:, i18n:, overseer:, **dto[:params])
+          when "quarterly"
+            Sections::Quarterly.new(name:, i18n:, overseer:, **dto[:params])
+          when "monthly"
+            Sections::Monthly.new(name:, i18n:, overseer:, **dto[:params])
+          when "weekly"
+            Sections::Weekly.new(name:, i18n:, overseer:, **dto[:params])
+          when "daily"
+            Sections::Daily.new(name:, i18n:, overseer:, **dto[:params])
+          else
+            raise ConfigError, "unknown section: #{dto[:name]}"
+          end
         end
       end
     end
