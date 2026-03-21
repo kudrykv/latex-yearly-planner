@@ -5,12 +5,13 @@ module LYP
     module MOS
       module Pages
         class Quarterly
-          attr_accessor :i18n, :manifest, :quarter
+          attr_accessor :i18n, :manifest, :quarter, :months_column
 
-          def initialize(i18n:, manifest:, quarter:)
+          def initialize(i18n:, manifest:, quarter:, months_column:)
             self.i18n = i18n
             self.manifest = manifest
             self.quarter = quarter
+            self.months_column = months_column
           end
 
           def title
@@ -20,9 +21,9 @@ module LYP
           def content
             <<~TYPST.strip
               grid(
-                columns: (2fr, 3fr),
+                columns: (#{months_column == :left ? "2fr, 3fr" : "3fr, 2fr"}),
 
-                #{months_stack}, rect_pattern(dotted)
+                #{months_column == :left ? "#{months_stack}, rect_pattern(dotted)" : "rect_pattern(dotted), #{months_stack}"}
               )
             TYPST
           end

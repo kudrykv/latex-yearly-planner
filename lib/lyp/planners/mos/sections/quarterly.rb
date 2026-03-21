@@ -5,11 +5,12 @@ module LYP
     module MOS
       module Sections
         class Quarterly
-          attr_accessor :i18n, :overseer
+          attr_accessor :i18n, :overseer, :months_column
 
-          def initialize(i18n:, overseer:, **_rest)
+          def initialize(i18n:, overseer:, months_column:, **_rest)
             self.i18n = i18n
             self.overseer = overseer
+            self.months_column = months_column.to_sym
           end
 
           def register(manifest)
@@ -20,7 +21,7 @@ module LYP
 
           def generate(planner, manifest)
             range.each do |quarter|
-              page = Pages::Quarterly.new(i18n:, manifest:, quarter:)
+              page = Pages::Quarterly.new(i18n:, manifest:, quarter:, months_column:)
 
               planner.add_page(
                 title: page.title,
