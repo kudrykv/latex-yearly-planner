@@ -16,7 +16,7 @@ module LYP
           end
 
           def title
-            "[#{i18n.t("quarters.long")} #{quarter.number}]"
+            "[#{i18n.t("quarters.long")} #{quarter.number} <#{quarter.id}>]"
           end
 
           def content

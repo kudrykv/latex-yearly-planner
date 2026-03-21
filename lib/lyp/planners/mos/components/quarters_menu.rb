@@ -5,10 +5,11 @@ module LYP
     module MOS
       module Components
         class QuartersMenu
-          attr_accessor :i18n, :range, :highlighted
+          attr_accessor :i18n, :manifest, :range, :highlighted
 
-          def initialize(i18n:, range:)
+          def initialize(i18n:, manifest:, range:)
             self.i18n = i18n
+            self.manifest = manifest
             self.range = range
           end
 
@@ -30,11 +31,14 @@ module LYP
           def quarters = range.map(&method(:format)).join(",\n")
 
           def format(quarter)
+            text = "#{i18n.t("quarters.short")}#{quarter.number}"
+            text = "#padded_link(<#{quarter.id}>)[#{text}]" if manifest.source? quarter.id
+
             if highlighted.include?(quarter)
-              return "table.cell(fill: black, text(white)[#{i18n.t("quarters.short")}#{quarter.number}])"
+              return "table.cell(fill: black, text(white)[#{text}])"
             end
 
-            "table.cell([#{i18n.t("quarters.short")}#{quarter.number}])"
+            "table.cell([#{text}])"
           end
         end
       end

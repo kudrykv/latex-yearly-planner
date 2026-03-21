@@ -107,7 +107,7 @@ module LYP
         end
 
         def quarters_menu(highlight_quarters:)
-          menu = Components::QuartersMenu.new(i18n:, range: start_date.quarter..end_date.quarter)
+          menu = Components::QuartersMenu.new(i18n:, manifest:, range: start_date.quarter..end_date.quarter)
           menu.highlight(highlight_quarters)
           menu.generate
         end
