@@ -8,7 +8,7 @@ module LYP
           self.i18n = i18n
           self.overseer = Overseer.new(dto)
           self.manifest = Manifest.new
-          self.planner = Builder.new(i18n:, overseer:, manifest:)
+          self.builder = Builder.new(i18n:, overseer:, manifest:)
         end
 
         # rubocop:disable Metrics/AbcSize
@@ -17,16 +17,16 @@ module LYP
                   .map { |dto| section(dto) }
                   .each { |s| manifest.register_section(s.registered_section_name) }
                   .each { |s| s.register(manifest) }
-                  .each { |s| s.generate(planner, manifest) }
+                  .each { |s| s.generate(builder, manifest) }
 
-          planner.generate
+          builder.generate
         end
 
         # rubocop:enable Metrics/AbcSize
 
         private
 
-        attr_accessor :i18n, :overseer, :manifest, :planner
+        attr_accessor :i18n, :overseer, :manifest, :builder
 
         def section(dto)
           name = dto[:name]
