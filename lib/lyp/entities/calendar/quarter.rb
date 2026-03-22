@@ -21,7 +21,7 @@ module LYP
           [
             Month.new(weekday_start:, day:),
             Month.new(weekday_start:, day: day.next_month),
-            Month.new(weekday_start:, day: day.next_month.next_month),
+            Month.new(weekday_start:, day: day.next_month.next_month)
           ]
         end
 

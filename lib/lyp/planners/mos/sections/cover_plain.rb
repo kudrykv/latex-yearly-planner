@@ -16,8 +16,8 @@ module LYP
 
           def registered_section_name = name
 
-          def generate(planner, _manifest)
-            planner.add_blank_page(cover)
+          def pages(_manifest)
+            [PageData.new(raw_typst: true, content: cover)]
           end
 
           private

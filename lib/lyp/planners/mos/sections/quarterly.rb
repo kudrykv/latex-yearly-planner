@@ -23,11 +23,11 @@ module LYP
             end
           end
 
-          def generate(planner, manifest)
-            range.each do |quarter|
+          def pages(manifest)
+            range.map do |quarter|
               page = Pages::Quarterly.new(i18n:, manifest:, quarter:, months_column:, little_calendar:)
 
-              planner.add_page(
+              PageData.new(
                 title: page.title,
                 content: page.content,
                 highlight_quarters: [quarter]

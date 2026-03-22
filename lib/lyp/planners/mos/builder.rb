@@ -29,23 +29,8 @@ module LYP
           TYPST
         end
 
-        def add_page(title:, content:, highlight_months: [], highlight_quarters: [], **_rest)
-          pages << <<~TYPST.strip
-            #grid(
-              columns: (#{heading_columns}),
-              rows: (#{heading_height}, 1fr),
-              column-gutter: #{column_gutter},
-              row-gutter: #{row_gutter},
-              #{"stroke: 0.4pt," if overseer.debug?}
-
-              #{heading_content(title:, highlight_months:, highlight_quarters:)},
-              #{content}
-            )
-          TYPST
-        end
-
-        def add_blank_page(typst)
-          pages << typst
+        def add(page_spec)
+          pages << (page_spec.raw_typst? ? page_spec.content : layout_page(page_spec))
         end
 
         private
@@ -60,6 +45,25 @@ module LYP
                       :end_date,
                       :column_gutter,
                       :row_gutter
+
+        def layout_page(page_spec)
+          <<~TYPST.strip
+            #grid(
+              columns: (#{heading_columns}),
+              rows: (#{heading_height}, 1fr),
+              column-gutter: #{column_gutter},
+              row-gutter: #{row_gutter},
+              #{"stroke: 0.4pt," if overseer.debug?}
+
+              #{heading_content(
+                title: page_spec.title,
+                highlight_months: page_spec.highlight_months,
+                highlight_quarters: page_spec.highlight_quarters
+              )},
+              #{page_spec.content}
+            )
+          TYPST
+        end
 
         def heading_columns
           columns = [side_menu_width, "1fr"]

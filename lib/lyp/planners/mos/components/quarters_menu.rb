@@ -34,9 +34,7 @@ module LYP
             text = "#{i18n.t("quarters.short")}#{quarter.number}"
             text = "#padded_link(<#{quarter.id}>)[#{text}]" if manifest.source? quarter.id
 
-            if highlighted.include?(quarter)
-              return "table.cell(fill: black, text(white)[#{text}])"
-            end
+            return "table.cell(fill: black, text(white)[#{text}])" if highlighted.include?(quarter)
 
             "table.cell([#{text}])"
           end

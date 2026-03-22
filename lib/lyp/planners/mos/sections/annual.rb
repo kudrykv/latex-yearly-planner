@@ -20,11 +20,11 @@ module LYP
             manifest.register_source("calendar")
           end
 
-          def generate(planner, manifest)
-            planner.add_page(
-              title: "[Calendar]",
+          def pages(manifest)
+            [PageData.new(
+              title: "[Calendar<calendar>]",
               content: content(manifest:)
-            )
+            )]
           end
 
           private

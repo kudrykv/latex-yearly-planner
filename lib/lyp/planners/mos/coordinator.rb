@@ -8,16 +8,17 @@ module LYP
           self.i18n = i18n
           self.overseer = Overseer.new(dto)
           self.manifest = Manifest.new
-          self.builder = Builder.new(i18n:, overseer:, manifest:)
         end
 
         # rubocop:disable Metrics/AbcSize
         def generate
-          overseer.enabled_sections
-                  .map { |dto| section(dto) }
+          builder = Builder.new(i18n:, overseer:, manifest:)
+
+          overseer.enabled_sections.map { |dto| section(dto) }
                   .each { |s| manifest.register_section(s.registered_section_name) }
                   .each { |s| s.register(manifest) }
-                  .each { |s| s.generate(builder, manifest) }
+                  .flat_map { |s| s.pages(manifest) }
+                  .each { |page| builder.add(page) }
 
           builder.generate
         end
@@ -26,7 +27,7 @@ module LYP
 
         private
 
-        attr_accessor :i18n, :overseer, :manifest, :builder
+        attr_accessor :i18n, :overseer, :manifest
 
         def section(dto)
           name = dto[:name]

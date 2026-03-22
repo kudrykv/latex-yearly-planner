@@ -3,7 +3,7 @@
 module LYP
   module Planners
     module MOS
-      PageSpec = Data.define(:raw_typst?, :title, :content, :highlight_months, :highlight_quarters) do
+      PageData = Data.define(:raw_typst, :title, :content, :highlight_months, :highlight_quarters) do
         def initialize(content:, raw_typst: false, title: nil, highlight_months: [], highlight_quarters: [])
           super
         end

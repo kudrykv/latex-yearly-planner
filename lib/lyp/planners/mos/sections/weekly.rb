@@ -24,11 +24,11 @@ module LYP
             end
           end
 
-          def generate(planner, manifest)
-            weeks.each do |week|
+          def pages(manifest)
+            weeks.map do |week|
               weekly = Pages::Weekly.new(i18n:, manifest:, week:)
 
-              planner.add_page(
+              PageData.new(
                 title: weekly.title,
                 content: weekly.content,
                 highlight_months: week.in_months,
