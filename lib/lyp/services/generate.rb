@@ -18,7 +18,7 @@ module LYP
       def select_planner(dto)
         case dto[:template]
         when "mos"
-          Planners::MOS::Builder.new(dto, i18n:)
+          Planners::MOS::Coordinator.new(dto, i18n:)
         else
           raise ConfigError, "Bad template: #{dto[:template]}"
         end
