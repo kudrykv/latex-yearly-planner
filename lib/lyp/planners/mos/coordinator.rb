@@ -6,7 +6,7 @@ module LYP
       class Coordinator
         def initialize(dto, i18n:)
           self.i18n = i18n
-          self.overseer = Overseer.new(dto)
+          self.overseer = Configurator.new(dto)
           self.manifest = Manifest.new
         end
 

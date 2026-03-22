@@ -3,7 +3,7 @@
 module LYP
   module Planners
     module MOS
-      class Overseer
+      class Configurator
         attr_accessor :dto
 
         ALLOWED_WEEKDAYS = %i[monday tuesday wednesday thursday friday saturday sunday].freeze
