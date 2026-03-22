@@ -18,6 +18,7 @@ module LYP
             self.debug = debug
           end
 
+          # rubocop:disable Metrics/AbcSize
           def title
             week = "#{i18n.t("week_name_full")} #{day.week.number}"
             week = "link(<#{day.week.id}>)[#{week}]" if manifest.source?(day.week.id)
@@ -43,6 +44,7 @@ module LYP
               )
             TYPST
           end
+          # rubocop:enable Metrics/AbcSize
 
           def content
             <<~TYPST.strip
@@ -66,6 +68,7 @@ module LYP
             column(params[:right_column])
           end
 
+          # rubocop:disable Metrics/AbcSize
           def column(comps)
             list = comps.filter_map do |comp|
               next unless comp[:enabled]
@@ -84,6 +87,7 @@ module LYP
               )
             TYPST
           end
+          # rubocop:enable Metrics/AbcSize
 
           def components
             @components ||= {
