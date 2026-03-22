@@ -3,7 +3,7 @@
 module LYP
   module Planners
     module MOS
-      class Planner
+      class Builder
         def initialize(i18n:, overseer:, manifest:)
           self.i18n = i18n
           self.overseer = overseer
