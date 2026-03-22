@@ -4,6 +4,7 @@ module LYP
   module Planners
     module MOS
       class Builder
+        # rubocop:disable Metrics/AbcSize
         def initialize(i18n:, overseer:, manifest:)
           self.i18n = i18n
           self.overseer = overseer
@@ -21,6 +22,7 @@ module LYP
           self.start_date = overseer.start_date
           self.end_date = overseer.end_date
         end
+        # rubocop:enable Metrics/AbcSize
 
         def generate
           <<~TYPST.strip
