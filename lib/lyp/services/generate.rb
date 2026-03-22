@@ -20,7 +20,7 @@ module LYP
         when "mos"
           Planners::MOS::Builder.new(dto, i18n:)
         else
-          raise ConfigError, "Bad template: #{template}"
+          raise ConfigError, "Bad template: #{dto[:template]}"
         end
       end
     end
