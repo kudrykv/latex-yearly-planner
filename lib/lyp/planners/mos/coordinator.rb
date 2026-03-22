@@ -30,23 +30,21 @@ module LYP
         attr_accessor :i18n, :overseer, :manifest
 
         def section(dto)
-          name = dto[:name]
-          case dto[:class]
-          when "cover_plain"
-            Sections::CoverPlain.new(name:, i18n:, overseer:, **dto[:params])
-          when "annual"
-            Sections::Annual.new(name:, i18n:, overseer:, **dto[:params])
-          when "quarterly"
-            Sections::Quarterly.new(name:, i18n:, overseer:, **dto[:params])
-          when "monthly"
-            Sections::Monthly.new(name:, i18n:, overseer:, **dto[:params])
-          when "weekly"
-            Sections::Weekly.new(name:, i18n:, overseer:, **dto[:params])
-          when "daily"
-            Sections::Daily.new(name:, i18n:, overseer:, **dto[:params])
-          else
-            raise ConfigError, "unknown section: #{dto[:name]}"
-          end
+          klass = components[dto[:class]]
+          raise ConfigError, "unknown component: #{dto[:class]}" if klass.nil?
+
+          klass.new(name: dto[:name], i18n:, manifest:, overseer:, **dto[:params])
+        end
+
+        def components
+          @components ||= {
+            "cover_plain" => Sections::CoverPlain,
+            "annual" => Sections::Annual,
+            "quarterly" => Sections::Quarterly,
+            "monthly" => Sections::Monthly,
+            "weekly" => Sections::Weekly,
+            "daily" => Sections::Daily,
+          }.freeze
         end
       end
     end

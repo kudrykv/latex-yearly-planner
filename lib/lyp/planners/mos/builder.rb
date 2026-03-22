@@ -118,7 +118,6 @@ module LYP
           menu.generate
         end
 
-        # rubocop:disable Metrics/MethodLength
         def heading_stack(title)
           direction = "rtl"
           direction = "ltr" if side_menu_position == "right"
@@ -136,8 +135,6 @@ module LYP
             )
           TYPST
         end
-
-        # rubocop:enable Metrics/MethodLength
 
         # rubocop:disable Metrics/MethodLength
         def definition(overseer)
