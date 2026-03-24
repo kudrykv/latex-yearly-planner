@@ -10,7 +10,7 @@ module LYP
           raise InternalError unless day.is_a? Day
 
           self.weekday_start = weekday_start
-          self.day = day
+          self.day = day.beginning_of_week
         end
 
         def id = @id ||= to_s
