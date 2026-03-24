@@ -1,3 +1,6 @@
+plugins:
+  - rubocop-rspec
+
 AllCops:
   TargetRubyVersion: 3.4
   NewCops: enable
@@ -20,4 +23,7 @@ Metrics/MethodLength:
   Max: 30
 
 Metrics/ParameterLists:
+  Enabled: false
+
+RSpec/MultipleExpectations:
   Enabled: false

@@ -34,6 +34,14 @@ module LYP
 
           [first.quarter, last.quarter].uniq
         end
+
+        def eql?(other)
+          return false unless other.is_a? self.class
+
+          weekday_start.eql?(other.weekday_start) && day.eql?(other.day)
+        end
+
+        alias == eql?
       end
     end
   end

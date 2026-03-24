@@ -52,7 +52,11 @@ module LYP
 
         def weekday_name = day.strftime("%A").downcase
 
-        def +(other) = Day.new(weekday_start:, day: day + other.day)
+        def +(other)
+          raise ArgumentError unless other.is_a?(Integer) # activesupport does the magic here
+
+          Day.new(weekday_start:, day: day + other.day)
+        end
 
         def succ = @succ ||= Day.new(weekday_start:, day: day.succ)
 
