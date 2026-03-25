@@ -34,14 +34,6 @@ module LYP
 
         def quarter_number = day.quarter
 
-        def beginning_of_quarter
-          curr = day.beginning_of_month
-
-          curr = (curr - 1).beginning_of_month until curr.quarter != (curr - 1).quarter
-
-          Day.new(weekday_start:, day: curr)
-        end
-
         def next_quarter = Day.new(weekday_start:, day: day.next_quarter)
 
         def beginning_of_week = Day.new(weekday_start:, day: day.beginning_of_week(weekday_start))
@@ -52,13 +44,23 @@ module LYP
 
         def weekday_name = day.strftime("%A").downcase
 
+        def succ = @succ ||= Day.new(weekday_start:, day: day.succ)
+
+        def to_s = "#{day} (wd: #{weekday_start}, #{weekday_name})"
+
+        def beginning_of_quarter
+          curr = day.beginning_of_month
+
+          curr = (curr - 1).beginning_of_month until curr.quarter != (curr - 1).quarter
+
+          Day.new(weekday_start:, day: curr)
+        end
+
         def +(other)
           raise ArgumentError unless other.is_a?(Integer) # activesupport does the magic here
 
           Day.new(weekday_start:, day: day + other.day)
         end
-
-        def succ = @succ ||= Day.new(weekday_start:, day: day.succ)
 
         def <=>(other)
           raise ArgumentError, "must be Day" unless other.is_a? Day
@@ -66,8 +68,6 @@ module LYP
 
           day <=> other.day
         end
-
-        def to_s = "#{day} (wd: #{weekday_start}, #{weekday_name})"
 
         def hash = [weekday_start, day].hash
 
