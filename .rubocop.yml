@@ -28,3 +28,6 @@ Metrics/ParameterLists:
 
 RSpec/MultipleExpectations:
   Enabled: false
+
+RSpec/ExampleLength:
+  Max: 10

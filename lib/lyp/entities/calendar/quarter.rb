@@ -13,7 +13,7 @@ module LYP
           self.day = day.beginning_of_quarter
         end
 
-        def id = "quarter-#{number}"
+        def id = @id ||= "quarter-#{day.year}-#{number}"
 
         def number = day.quarter_number
 
