@@ -30,4 +30,22 @@ RSpec.describe LYP::Entities::Calendar::Month do
       expect(make_month("2026-12").quarter).to eq(make_quarter("2026-10-01"))
     end
   end
+
+  describe "#<=>" do
+    it "compares months by their day" do
+      expect(make_month("2026-03") <=> make_month("2026-04")).to eq(-1)
+      expect(make_month("2026-03") <=> make_month("2026-03", weekday_start: :monday)).to eq(0)
+      expect(make_month("2026-04") <=> make_month("2026-03")).to eq(1)
+    end
+
+    it "raises when other is not a Month" do
+      expect { make_month("2026-03") <=> make_day("2026-03-01") }
+        .to raise_error(ArgumentError, "must be Month")
+    end
+
+    it "raises when weekday_start differs" do
+      expect { make_month("2026-03") <=> make_month("2026-03", weekday_start: :sunday) }
+        .to raise_error(ArgumentError, "weekday start must match")
+    end
+  end
 end

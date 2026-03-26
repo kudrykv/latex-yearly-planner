@@ -38,4 +38,22 @@ RSpec.describe LYP::Entities::Calendar::Quarter do
       )
     end
   end
+
+  describe "#<=>" do
+    it "compares quarters by their day" do
+      expect(make_quarter("2026-01-01") <=> make_quarter("2026-04-01")).to eq(-1)
+      expect(make_quarter("2026-01-01") <=> make_quarter("2026-01-01", weekday_start: :monday)).to eq(0)
+      expect(make_quarter("2026-04-01") <=> make_quarter("2026-01-01")).to eq(1)
+    end
+
+    it "raises when other is not a Quarter" do
+      expect { make_quarter("2026-01-01") <=> make_day("2026-01-01") }
+        .to raise_error(ArgumentError, "must be Quarter")
+    end
+
+    it "raises when weekday_start differs" do
+      expect { make_quarter("2026-01-01") <=> make_quarter("2026-01-01", weekday_start: :sunday) }
+        .to raise_error(ArgumentError, "weekday start must match")
+    end
+  end
 end
