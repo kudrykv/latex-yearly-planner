@@ -30,8 +30,10 @@ RSpec.describe LYP::Planners::MOS::Components::DailyNotes do
 
     it "accepts and ignores extra keyword arguments" do
       expect do
-        described_class.new(i18n: i18n, title_height: "5mm", notes_height: "1fr",
-                            pattern: "dotted", manifest: nil, month: nil, day: nil)
+        described_class.new(
+          i18n:, title_height: "5mm", notes_height: "1fr", pattern: "dotted",
+          manifest: nil, month: nil, day: nil
+        )
       end.not_to raise_error
     end
   end

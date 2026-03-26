@@ -16,7 +16,7 @@ module LYP
           end
 
           def generate
-            <<~TYPST
+            <<~TYPST.strip
               grid(
                 columns: 1fr,
                 inset: 0mm,
