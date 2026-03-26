@@ -17,6 +17,8 @@ module LYP
 
         def id = @id ||= "month-#{day.id}"
 
+        def name = @name ||= day.strftime("%B").downcase
+
         def succ = @succ ||= Month.new(weekday_start:, day: day.next_month)
 
         def quarter = @quarter ||= day.quarter
@@ -37,8 +39,6 @@ module LYP
         alias == eql?
 
         def hash = [weekday_start, day].hash
-
-        def name = @name ||= day.strftime("%B").downcase
 
         def to_s = "#{day.strftime("%Y, %B")} (wd: #{weekday_start})"
       end

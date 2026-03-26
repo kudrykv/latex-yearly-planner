@@ -2,7 +2,7 @@
 
 RSpec.describe LYP::Entities::Calendar::Week do
   describe "#initialize" do
-    context "week starts on Monday" do
+    describe "when week starts on Monday" do
       let(:weekday_start) { :monday }
 
       it "creates a week object" do
@@ -12,7 +12,7 @@ RSpec.describe LYP::Entities::Calendar::Week do
       end
     end
 
-    context "#weekday starts on sunday" do
+    describe "when week starts on sunday" do
       let(:weekday_start) { :sunday }
 
       it "creates a week object" do
