@@ -11,12 +11,13 @@ module LYP
             self.i18n = i18n
             self.manifest = manifest
             self.range = range
+            self.highlighted = []
           end
 
           def highlight(list = []) = self.highlighted = list
 
           def generate
-            <<~TYPST
+            <<~TYPST.strip
               table(
                 stroke: (x, y) => (left: 0.4pt, right: 0.4pt, bottom: 0.4pt),
                 columns: (#{(["1fr"] * range.count).join(", ")}),
