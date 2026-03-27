@@ -25,8 +25,8 @@ RSpec.describe LYP::Planners::MOS::Components::MonthsMenu do
 
           table.cell([Jan]),
         table.cell(fill: black, text(white)[Feb]),
-        table.cell([#link(<#{make_month("2026-03").id}>)[Mar]]),
-        table.cell(fill: black, text(white)[#link(<#{make_month("2026-04").id}>)[Apr]])
+        table.cell([#padded_link(<#{make_month("2026-03").id}>)[Mar]]),
+        table.cell(fill: black, text(white)[#padded_link(<#{make_month("2026-04").id}>)[Apr]])
         )
       TYPST
     end

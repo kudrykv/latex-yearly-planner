@@ -33,7 +33,7 @@ module LYP
 
           def format(month)
             text = i18n.t("months.short.#{month.name}")
-            text = "#link(<#{month.id}>)[#{text}]" if manifest.source?(month.id)
+            text = "#padded_link(<#{month.id}>)[#{text}]" if manifest.source?(month.id)
 
             return "table.cell(fill: black, text(white)[#{text}])" if highlighted.include?(month)
 
