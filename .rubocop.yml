@@ -29,5 +29,8 @@ Metrics/ParameterLists:
 RSpec/MultipleExpectations:
   Enabled: false
 
+RSpec/NestedGroups:
+  Max: 4
+
 RSpec/ExampleLength:
   Max: 10
