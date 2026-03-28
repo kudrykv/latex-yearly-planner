@@ -18,14 +18,14 @@ module LYP
           end
 
           def content
-            <<~TYPST
+            <<~TYPST.strip
               grid(
                 columns: (1fr, 1fr, 1fr),
                 rows: (4mm, 1fr, 4mm, 1fr, 4mm, 1fr),
 
-                #{week.days[0...3].map(&method(:format_day)).join(", ")},
+                #{format_days(week.days[0...3])},
                 grid.cell(colspan: 3, rect_pattern(dotted)),
-                #{week.days[3...6].map(&method(:format_day)).join(", ")},
+                #{format_days(week.days[3...6])},
                 grid.cell(colspan: 3, rect_pattern(dotted)),
                 #{format_day(week.days[6])}, [], [],
                 grid.cell(colspan: 3, rect_pattern(dotted))
@@ -34,6 +34,10 @@ module LYP
           end
 
           private
+
+          def format_days(days)
+            days.map(&method(:format_day)).join(", ")
+          end
 
           def format_day(day)
             return box_day(day) unless manifest.source?(day.id)
