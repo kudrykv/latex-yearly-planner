@@ -23,7 +23,7 @@ module LYP
             week = "#{i18n.t("week_name_full")} #{day.week.number}"
             week = "link(<#{day.week.id}>)[#{week}]" if manifest.source?(day.week.id)
 
-            <<~TYPST
+            <<~TYPST.strip
               grid(
                 columns: (auto, auto),
                 rows: (3fr, 2fr),
