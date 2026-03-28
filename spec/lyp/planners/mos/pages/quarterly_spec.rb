@@ -35,8 +35,8 @@ RSpec.describe LYP::Planners::MOS::Pages::Quarterly do
         )
       end
 
-      it "renders calendars on the left and dotted pattern on the right" do
-        expect(page.content).to eq(<<~TYPST.strip)
+      let(:expected) do
+        <<~TYPST.strip
           grid(
             columns: (2fr,3fr),
 
@@ -49,6 +49,10 @@ RSpec.describe LYP::Planners::MOS::Pages::Quarterly do
           )
         TYPST
       end
+
+      it "renders calendars on the left and dotted pattern on the right" do
+        expect(page.content).to eq(expected)
+      end
     end
 
     context "with months_column: :right" do
@@ -59,8 +63,8 @@ RSpec.describe LYP::Planners::MOS::Pages::Quarterly do
         )
       end
 
-      it "renders dotted pattern on the left and calendars on the right" do
-        expect(page.content).to eq(<<~TYPST.strip)
+      let(:expected) do
+        <<~TYPST.strip
           grid(
             columns: (3fr,2fr),
 
@@ -72,6 +76,10 @@ RSpec.describe LYP::Planners::MOS::Pages::Quarterly do
           )
           )
         TYPST
+      end
+
+      it "renders dotted pattern on the left and calendars on the right" do
+        expect(page.content).to eq(expected)
       end
     end
   end
