@@ -9,8 +9,12 @@ RSpec.describe LYP::Planners::MOS::Pages::Quarterly do
   before do
     allow(i18n).to receive(:t).with("quarters.long").and_return("Quarter")
 
-    calendar = instance_double(LYP::Planners::MOS::Components::LittleCalendar, generate: "[calendar]")
-    allow(LYP::Planners::MOS::Components::LittleCalendar).to receive(:new).and_return(calendar)
+    quarter.months.each do |month|
+      calendar = instance_double(LYP::Planners::MOS::Components::LittleCalendar, generate: "[calendar]")
+      allow(LYP::Planners::MOS::Components::LittleCalendar).to receive(:new).with(
+        i18n:, manifest:, month:, **little_calendar
+      ).and_return(calendar)
+    end
   end
 
   describe "#title" do
