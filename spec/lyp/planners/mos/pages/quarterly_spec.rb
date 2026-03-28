@@ -7,19 +7,10 @@ RSpec.describe LYP::Planners::MOS::Pages::Quarterly do
   let(:little_calendar) { { week_placement: :none } }
 
   before do
-    translations = {
-      "quarters.long" => "Quarter",
-      "weekday.one_letter.monday" => "M",
-      "weekday.one_letter.tuesday" => "T",
-      "weekday.one_letter.wednesday" => "W",
-      "weekday.one_letter.thursday" => "T",
-      "weekday.one_letter.friday" => "F",
-      "weekday.one_letter.saturday" => "S",
-      "weekday.one_letter.sunday" => "S",
-      "weekday.one_letter.week" => "W"
-    }
+    allow(i18n).to receive(:t).with("quarters.long").and_return("Quarter")
 
-    allow(i18n).to receive(:t) { |key| translations.fetch(key) }
+    calendar = instance_double(LYP::Planners::MOS::Components::LittleCalendar, generate: "[calendar]")
+    allow(LYP::Planners::MOS::Components::LittleCalendar).to receive(:new).and_return(calendar)
   end
 
   describe "#title" do
@@ -44,8 +35,8 @@ RSpec.describe LYP::Planners::MOS::Pages::Quarterly do
         )
       end
 
-      let(:expected) do
-        <<~TYPST.strip
+      it "renders calendars on the left and dotted pattern on the right" do
+        expect(page.content).to eq(<<~TYPST.strip)
           grid(
             columns: (2fr,3fr),
 
@@ -53,49 +44,10 @@ RSpec.describe LYP::Planners::MOS::Pages::Quarterly do
             dir: ttb,
             spacing: 1fr,
 
-            grid(
-            align: center + horizon,
-            inset: 5pt,
-            stroke: none,
-            columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
-
-            [M], [T], [W], [T], [F], [S], [S],
-            [], [], [], [], 1, 2, 3,
-          4, 5, 6, 7, 8, 9, 10,
-          11, 12, 13, 14, 15, 16, 17,
-          18, 19, 20, 21, 22, 23, 24,
-          25, 26, 27, 28, 29, 30, 31
-          ), grid(
-            align: center + horizon,
-            inset: 5pt,
-            stroke: none,
-            columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
-
-            [M], [T], [W], [T], [F], [S], [S],
-            1, 2, 3, 4, 5, 6, 7,
-          8, 9, 10, 11, 12, 13, 14,
-          15, 16, 17, 18, 19, 20, 21,
-          22, 23, 24, 25, 26, 27, 28
-          ), grid(
-            align: center + horizon,
-            inset: 5pt,
-            stroke: none,
-            columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
-
-            [M], [T], [W], [T], [F], [S], [S],
-            1, 2, 3, 4, 5, 6, 7,
-          8, 9, 10, 11, 12, 13, 14,
-          15, 16, 17, 18, 19, 20, 21,
-          22, 23, 24, 25, 26, 27, 28,
-          29, 30, 31, [], [], [], []
-          )
+            [calendar], [calendar], [calendar]
           ), rect_pattern(dotted)
           )
         TYPST
-      end
-
-      it "renders calendars on the left and dotted pattern on the right" do
-        expect(page.content).to eq(expected)
       end
     end
 
@@ -107,8 +59,8 @@ RSpec.describe LYP::Planners::MOS::Pages::Quarterly do
         )
       end
 
-      let(:expected) do
-        <<~TYPST.strip
+      it "renders dotted pattern on the left and calendars on the right" do
+        expect(page.content).to eq(<<~TYPST.strip)
           grid(
             columns: (3fr,2fr),
 
@@ -116,49 +68,10 @@ RSpec.describe LYP::Planners::MOS::Pages::Quarterly do
             dir: ttb,
             spacing: 1fr,
 
-            grid(
-            align: center + horizon,
-            inset: 5pt,
-            stroke: none,
-            columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
-
-            [M], [T], [W], [T], [F], [S], [S],
-            [], [], [], [], 1, 2, 3,
-          4, 5, 6, 7, 8, 9, 10,
-          11, 12, 13, 14, 15, 16, 17,
-          18, 19, 20, 21, 22, 23, 24,
-          25, 26, 27, 28, 29, 30, 31
-          ), grid(
-            align: center + horizon,
-            inset: 5pt,
-            stroke: none,
-            columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
-
-            [M], [T], [W], [T], [F], [S], [S],
-            1, 2, 3, 4, 5, 6, 7,
-          8, 9, 10, 11, 12, 13, 14,
-          15, 16, 17, 18, 19, 20, 21,
-          22, 23, 24, 25, 26, 27, 28
-          ), grid(
-            align: center + horizon,
-            inset: 5pt,
-            stroke: none,
-            columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
-
-            [M], [T], [W], [T], [F], [S], [S],
-            1, 2, 3, 4, 5, 6, 7,
-          8, 9, 10, 11, 12, 13, 14,
-          15, 16, 17, 18, 19, 20, 21,
-          22, 23, 24, 25, 26, 27, 28,
-          29, 30, 31, [], [], [], []
-          )
+            [calendar], [calendar], [calendar]
           )
           )
         TYPST
-      end
-
-      it "renders dotted pattern on the left and calendars on the right" do
-        expect(page.content).to eq(expected)
       end
     end
   end
