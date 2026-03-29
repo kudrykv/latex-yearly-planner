@@ -36,6 +36,7 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
               stroke: (x, _) => if x == 1 {( left: regular_stroke )},
               columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
 
+            #{" " * 2}
               [W], [M], [T], [W], [T], [F], [S], [S], grid.hline(stroke: regular_stroke),
               5, 1, 2, 3, 4, 5, 6, 7,
             6, 8, 9, 10, 11, 12, 13, 14,
@@ -62,6 +63,7 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
               stroke: (x, _) => if x == 1 {( left: regular_stroke )},
               columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
 
+            #{" " * 2}
               [W], [M], [T], [W], [T], [F], [S], [S], grid.hline(stroke: regular_stroke),
               1, [], [], [], 1, 2, 3, 4,
             2, 5, 6, 7, 8, 9, 10, 11,
@@ -95,6 +97,7 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
               stroke: (x, _) => if x == 1 {( left: regular_stroke )},
               columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
 
+            #{" " * 2}
               [W], [M], [T], [W], [T], [F], [S], [S], grid.hline(stroke: regular_stroke),
               padded_link(<2021W05>)[5], padded_link(<2021-02-01>, padding: 6pt)[1], 2, 3, 4, 5, 6, 7,
             6, 8, 9, 10, 11, 12, 13, 14,
@@ -126,6 +129,7 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
             stroke: (x, _) => if x == 7 {( left: regular_stroke )},
             columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
 
+          #{" " * 2}
             [M], [T], [W], [T], [F], [S], [S], [W], grid.hline(stroke: regular_stroke),
             1, 2, 3, 4, 5, 6, 7, 5,
           8, 9, 10, 11, 12, 13, 14, 6,
@@ -156,6 +160,7 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
             stroke: none,
             columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
 
+          #{" " * 2}
             [M], [T], [W], [T], [F], [S], [S], grid.hline(stroke: regular_stroke),
             1, 2, 3, 4, 5, 6, 7,
           8, 9, 10, 11, 12, 13, 14,

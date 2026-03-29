@@ -8,7 +8,7 @@ module LYP
           attr_reader :i18n, :manifest, :week_placement, :month, :show_month_name
 
           # rubocop:disable Lint/UnusedMethodArgument
-          def initialize(i18n:, manifest:, week_placement:, month:, day: nil, show_month_name: true, **_rest)
+          def initialize(i18n:, manifest:, week_placement:, month:, day: nil, show_month_name: false, **_rest)
             @i18n = i18n
             @manifest = manifest
             @week_placement = week_placement.to_sym
