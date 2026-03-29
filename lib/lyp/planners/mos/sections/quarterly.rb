@@ -5,8 +5,6 @@ module LYP
     module MOS
       module Sections
         class Quarterly
-          attr_accessor :name, :i18n, :overseer, :months_column, :little_calendar
-
           def initialize(name:, i18n:, overseer:, months_column:, little_calendar:, **_rest)
             self.name = name
             self.i18n = i18n
@@ -36,6 +34,8 @@ module LYP
           end
 
           private
+
+          attr_accessor :name, :i18n, :overseer, :months_column, :little_calendar
 
           def range = overseer.start_date.quarter..overseer.end_date.quarter
         end
