@@ -55,7 +55,7 @@ module LYP
               rows: (#{heading_height}, 1fr),
               column-gutter: #{column_gutter},
               row-gutter: #{row_gutter},
-              #{"stroke: 0.4pt," if configurator.debug?}
+              #{"stroke: regular_stroke," if configurator.debug?}
 
               #{heading_content(
                 title: page_spec.title,
