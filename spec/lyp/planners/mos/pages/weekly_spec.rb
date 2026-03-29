@@ -36,41 +36,41 @@ RSpec.describe LYP::Planners::MOS::Pages::Weekly do
           rows: (4mm, 1fr, 4mm, 1fr, 4mm, 1fr),
 
           link(<2021-02-15>, box(
-          stroke: (bottom: 0.8pt),
+          stroke: (bottom: thick_stroke),
           width: 95%,
           inset: (bottom: 4pt),
           outset: 0pt
         )[Monday, 15]), box(
-          stroke: (bottom: 0.8pt),
+          stroke: (bottom: thick_stroke),
           width: 95%,
           inset: (bottom: 4pt),
           outset: 0pt
         )[Tuesday, 16], box(
-          stroke: (bottom: 0.8pt),
+          stroke: (bottom: thick_stroke),
           width: 95%,
           inset: (bottom: 4pt),
           outset: 0pt
         )[Wednesday, 17],
           grid.cell(colspan: 3, rect_pattern(dotted)),
           link(<2021-02-18>, box(
-          stroke: (bottom: 0.8pt),
+          stroke: (bottom: thick_stroke),
           width: 95%,
           inset: (bottom: 4pt),
           outset: 0pt
         )[Thursday, 18]), box(
-          stroke: (bottom: 0.8pt),
+          stroke: (bottom: thick_stroke),
           width: 95%,
           inset: (bottom: 4pt),
           outset: 0pt
         )[Friday, 19], box(
-          stroke: (bottom: 0.8pt),
+          stroke: (bottom: thick_stroke),
           width: 95%,
           inset: (bottom: 4pt),
           outset: 0pt
         )[Saturday, 20],
           grid.cell(colspan: 3, rect_pattern(dotted)),
           box(
-          stroke: (bottom: 0.8pt),
+          stroke: (bottom: thick_stroke),
           width: 95%,
           inset: (bottom: 4pt),
           outset: 0pt

@@ -82,7 +82,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
               rows: (2mm, auto, 1fr),
 
               [],
-              grid.cell(stroke: (bottom: 0.8pt), box(height: 5mm, align(horizon, [Notes]))),
+              grid.cell(stroke: (bottom: thick_stroke), box(height: 5mm, align(horizon, [Notes]))),
               rect_pattern(dotted)
             )
           )
@@ -124,7 +124,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
               rows: (2mm, auto, 1fr),
 
               [],
-              grid.cell(stroke: (bottom: 0.8pt), box(height: 5mm, align(horizon, [Notes]))),
+              grid.cell(stroke: (bottom: thick_stroke), box(height: 5mm, align(horizon, [Notes]))),
               rect_pattern(dotted)
             )
           )
@@ -166,7 +166,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
               rows: (2mm, auto, 1fr),
 
               [],
-              grid.cell(stroke: (bottom: 0.8pt), box(height: 5mm, align(horizon, [Notes]))),
+              grid.cell(stroke: (bottom: thick_stroke), box(height: 5mm, align(horizon, [Notes]))),
               rect_pattern(dotted)
             )
           )

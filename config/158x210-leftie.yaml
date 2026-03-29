@@ -21,6 +21,7 @@ document:
 planner:
   params:
     regular_stroke: 0.4pt
+    thick_stroke: 0.8pt
 
     start_date: "2026-01-01"
     end_date: "2026-12-31"

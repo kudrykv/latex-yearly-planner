@@ -48,7 +48,7 @@ module LYP
           def box_day(day)
             <<~TYPST.strip
               box(
-                stroke: (bottom: 0.8pt),
+                stroke: (bottom: thick_stroke),
                 width: 95%,
                 inset: (bottom: 4pt),
                 outset: 0pt
