@@ -36,7 +36,7 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
               stroke: (x, _) => if x == 1 {( left: 0.4pt )},
               columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
 
-              [W], [M], [T], [W], [T], [F], [S], [S],
+              [W], [M], [T], [W], [T], [F], [S], [S], grid.hline(stroke: regular_stroke),
               5, 1, 2, 3, 4, 5, 6, 7,
             6, 8, 9, 10, 11, 12, 13, 14,
             7, 15, 16, 17, 18, 19, 20, 21,
@@ -62,7 +62,7 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
               stroke: (x, _) => if x == 1 {( left: 0.4pt )},
               columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
 
-              [W], [M], [T], [W], [T], [F], [S], [S],
+              [W], [M], [T], [W], [T], [F], [S], [S], grid.hline(stroke: regular_stroke),
               1, [], [], [], 1, 2, 3, 4,
             2, 5, 6, 7, 8, 9, 10, 11,
             3, 12, 13, 14, 15, 16, 17, 18,
@@ -95,7 +95,7 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
               stroke: (x, _) => if x == 1 {( left: 0.4pt )},
               columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
 
-              [W], [M], [T], [W], [T], [F], [S], [S],
+              [W], [M], [T], [W], [T], [F], [S], [S], grid.hline(stroke: regular_stroke),
               padded_link(<2021W05>)[5], padded_link(<2021-02-01>, padding: 6pt)[1], 2, 3, 4, 5, 6, 7,
             6, 8, 9, 10, 11, 12, 13, 14,
             7, 15, 16, 17, 18, 19, 20, 21,
@@ -126,7 +126,7 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
             stroke: (x, _) => if x == 7 {( left: 0.4pt )},
             columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
 
-            [M], [T], [W], [T], [F], [S], [S], [W],
+            [M], [T], [W], [T], [F], [S], [S], [W], grid.hline(stroke: regular_stroke),
             1, 2, 3, 4, 5, 6, 7, 5,
           8, 9, 10, 11, 12, 13, 14, 6,
           15, 16, 17, 18, 19, 20, 21, 7,
@@ -156,7 +156,7 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
             stroke: none,
             columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
 
-            [M], [T], [W], [T], [F], [S], [S],
+            [M], [T], [W], [T], [F], [S], [S], grid.hline(stroke: regular_stroke),
             1, 2, 3, 4, 5, 6, 7,
           8, 9, 10, 11, 12, 13, 14,
           15, 16, 17, 18, 19, 20, 21,

@@ -24,7 +24,7 @@ module LYP
                 stroke: #{stroke},
                 columns: (#{columns}),
 
-                #{heading},
+                #{heading}, grid.hline(stroke: regular_stroke),
                 #{day_cells}
               )
             TYPST
