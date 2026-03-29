@@ -5,8 +5,6 @@ module LYP
     module MOS
       module Sections
         class Weekly
-          attr_accessor :name, :i18n, :overseer, :weekday_start, :first_week_day, :last_week_day
-
           def initialize(name:, i18n:, overseer:, **_rest)
             self.name = name
             self.i18n = i18n
@@ -38,6 +36,8 @@ module LYP
           end
 
           private
+
+          attr_accessor :name, :i18n, :overseer, :weekday_start, :first_week_day, :last_week_day
 
           def weeks
             (first_week_day..last_week_day).each_slice(7).map(&:first).map do |day|
