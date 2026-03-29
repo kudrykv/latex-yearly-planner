@@ -5,8 +5,6 @@ module LYP
     module MOS
       module Sections
         class CoverPlain
-          attr_accessor :name, :font_size
-
           def initialize(name:, font_size:, **_rest)
             self.name = name
             self.font_size = font_size
@@ -21,6 +19,8 @@ module LYP
           end
 
           private
+
+          attr_accessor :name, :font_size
 
           def cover
             <<~TYPST.strip
