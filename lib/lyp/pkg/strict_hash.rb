@@ -3,9 +3,11 @@
 module LYP
   module Pkg
     class StrictHash
+      extend Forwardable
+
       def initialize(hash, path: [])
         self.hash = hash
-        self.path = path.freeze
+        @path = path.freeze
       end
 
       def dig!(*keys)
@@ -23,12 +25,11 @@ module LYP
         wrap(hash[key], path + [key])
       end
 
-      def filter(&)
-        hash.filter(&)
+      def to_hash
+        hash
       end
 
-      def nil? = hash.nil?
-      def empty? = hash.empty?
+      def_delegators :@hash, :filter, :nil?, :empty?, :delete
 
       private
 

@@ -9,8 +9,8 @@ module LYP
         self.i18n = i18n
       end
 
-      def generate(dto)
-        select_planner(dto).generate
+      def generate(hash)
+        select_planner(Pkg::StrictHash.new(hash)).generate
       end
 
       private

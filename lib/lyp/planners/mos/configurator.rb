@@ -15,28 +15,28 @@ module LYP
         def debug? = dto[:debug] || false
 
         def enabled_sections
-          sections = dto.dig(:planner, :sections)
+          sections = dto.dig!(:planner, :sections)
           raise ConfigError, "No `planner.sections` found" if sections.nil? || sections.empty?
 
           sections.filter { |s| s[:enabled] }
         end
 
         def start_date
-          day = Date.parse(dto.dig(:planner, :params, :start_date))
+          day = Date.parse(dto.dig!(:planner, :params, :start_date))
           Entities::Calendar::Day.new(weekday_start:, day:)
         rescue StandardError => e
           raise ConfigError, "planner.params.start_date: invalid: #{e.message}"
         end
 
         def end_date
-          day = Date.parse(dto.dig(:planner, :params, :end_date))
+          day = Date.parse(dto.dig!(:planner, :params, :end_date))
           Entities::Calendar::Day.new(weekday_start:, day:)
         rescue StandardError => e
           raise ConfigError, "planner.params.end_date: invalid: #{e.message}"
         end
 
         def weekday_start
-          start = dto.dig(:planner, :params, :weekday_start)
+          start = dto.dig!(:planner, :params, :weekday_start)
           raise ConfigError, "No `planner.params.weekday_start` found" if start.nil? || start.empty?
 
           start = start.downcase.to_sym
@@ -48,12 +48,7 @@ module LYP
           start
         end
 
-        def dig!(*path)
-          value = dto.dig(*path)
-          raise ConfigError, "#{path.map(&:to_s).join(".")} not found" if value.nil?
-
-          value
-        end
+        def dig!(*path) = dto.dig!(*path)
       end
     end
   end
