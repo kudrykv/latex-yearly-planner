@@ -5,8 +5,6 @@ module LYP
     module MOS
       module Sections
         class Daily
-          attr_accessor :name, :i18n, :overseer, :params
-
           def initialize(name:, i18n:, overseer:, **params)
             self.name = name
             self.i18n = i18n
@@ -36,6 +34,8 @@ module LYP
           end
 
           private
+
+          attr_accessor :name, :i18n, :overseer, :params
 
           def range = overseer.start_date..overseer.end_date
         end
