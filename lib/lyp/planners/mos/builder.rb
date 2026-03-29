@@ -157,7 +157,7 @@ module LYP
               size: #{configurator.dig!(:document, :text, :size)}
             )
 
-            #let regular_stroke = 0.4pt
+            #let regular_stroke = #{configurator.dig!(:planner, :params, :regular_stroke)}
 
             #let dotted = tiling(
               size: (5mm, 5mm),
