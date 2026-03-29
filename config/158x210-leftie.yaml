@@ -51,6 +51,7 @@ planner:
       params:
         little_calendar:
           week_placement: left
+          show_month_name: true
 
     - name: quarterly
       class: quarterly

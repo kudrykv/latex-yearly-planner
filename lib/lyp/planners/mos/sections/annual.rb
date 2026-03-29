@@ -39,7 +39,8 @@ module LYP
               grid(
                 columns: (1fr, 1fr, 1fr),
                 rows: 1fr,
-                inset: 5pt,
+                column-gutter: 10pt,
+                row-gutter: 5pt,
 
                 #{items.join(",\n")}
               )

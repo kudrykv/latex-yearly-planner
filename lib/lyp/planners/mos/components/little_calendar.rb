@@ -5,14 +5,15 @@ module LYP
     module MOS
       module Components
         class LittleCalendar
-          attr_reader :i18n, :manifest, :week_placement, :month
+          attr_reader :i18n, :manifest, :week_placement, :month, :show_month_name
 
           # rubocop:disable Lint/UnusedMethodArgument
-          def initialize(i18n:, manifest:, week_placement:, month:, day: nil, **_rest)
+          def initialize(i18n:, manifest:, week_placement:, month:, day: nil, show_month_name: true, **_rest)
             @i18n = i18n
             @manifest = manifest
             @week_placement = week_placement.to_sym
             @month = month
+            @show_month_name = show_month_name
           end
           # rubocop:enable Lint/UnusedMethodArgument
 
@@ -24,6 +25,7 @@ module LYP
                 stroke: #{stroke},
                 columns: (#{columns}),
 
+                #{optional_month_name}
                 #{heading}, grid.hline(stroke: regular_stroke),
                 #{day_cells}
               )
@@ -45,6 +47,18 @@ module LYP
             cols = ["1fr"] * 7
 
             with_week_column(cols, "1fr").join(", ")
+          end
+
+          def optional_month_name
+            return "" unless show_month_name
+
+            <<~TYPST.strip
+              grid.cell(
+                colspan: #{with_week_column([""]*7, "").size},
+                [#{i18n.t("months.full.#{month.name}")}]
+              ),
+              grid.hline(stroke: regular_stroke),
+            TYPST
           end
 
           def heading
