@@ -3,10 +3,10 @@
 RSpec.describe LYP::Planners::MOS::Sections::Daily do
   describe "#registered_section_name" do
     let(:i18n) { class_double(I18n, "i18n") }
-    let(:overseer) { instance_double(LYP::Planners::MOS::Configurator) }
+    let(:configurator) { instance_double(LYP::Planners::MOS::Configurator) }
 
     let(:section) do
-      described_class.new(name: "daily", i18n:, overseer:, columns_width: "(3fr, 2fr)")
+      described_class.new(name: "daily", i18n:, configurator:, columns_width: "(3fr, 2fr)")
     end
 
     it "returns the name" do
@@ -18,7 +18,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Daily do
     let(:i18n) { class_double(I18n, "i18n") }
     let(:manifest) { LYP::Planners::MOS::Manifest.new }
 
-    let(:overseer) do
+    let(:configurator) do
       instance_double(
         LYP::Planners::MOS::Configurator,
         start_date: make_day("2024-03-11"),
@@ -28,7 +28,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Daily do
     end
 
     let(:section) do
-      described_class.new(name: "daily", i18n:, overseer:, columns_width: "(3fr, 2fr)")
+      described_class.new(name: "daily", i18n:, configurator:, columns_width: "(3fr, 2fr)")
     end
 
     it "registers each day's ID with the manifest" do
@@ -48,7 +48,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Daily do
     let(:march) { make_month("2024-03") }
     let(:q1) { make_quarter("2024-01-01") }
 
-    let(:overseer) do
+    let(:configurator) do
       instance_double(
         LYP::Planners::MOS::Configurator,
         start_date: make_day("2024-03-11"),
@@ -59,7 +59,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Daily do
 
     let(:section) do
       described_class.new(
-        name: "daily", i18n:, overseer:,
+        name: "daily", i18n:, configurator:,
         columns_width: "(3fr, 2fr)", column_gutter: "4mm"
       )
     end
@@ -93,7 +93,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Daily do
   describe "constructor" do
     let(:i18n) { class_double(I18n, "i18n") }
 
-    let(:overseer) do
+    let(:configurator) do
       instance_double(
         LYP::Planners::MOS::Configurator,
         start_date: make_day("2024-03-11"),
@@ -105,7 +105,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Daily do
     it "accepts extra keyword arguments without raising" do
       expect do
         described_class.new(
-          name: "daily", i18n:, overseer:,
+          name: "daily", i18n:, configurator:,
           columns_width: "(3fr, 2fr)", extra_param: "captured"
         )
       end.not_to raise_error

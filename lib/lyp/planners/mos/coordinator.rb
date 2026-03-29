@@ -6,15 +6,15 @@ module LYP
       class Coordinator
         def initialize(dto, i18n:)
           self.i18n = i18n
-          self.overseer = Configurator.new(dto)
+          self.configurator = Configurator.new(dto)
           self.manifest = Manifest.new
         end
 
         # rubocop:disable Metrics/AbcSize
         def generate
-          builder = Builder.new(i18n:, overseer:, manifest:)
+          builder = Builder.new(i18n:, configurator:, manifest:)
 
-          overseer.enabled_sections.map { |dto| section(dto) }
+          configurator.enabled_sections.map { |dto| section(dto) }
                   .each { |s| manifest.register_section(s.registered_section_name) }
                   .each { |s| s.register(manifest) }
                   .flat_map { |s| s.pages(manifest) }
@@ -27,13 +27,13 @@ module LYP
 
         private
 
-        attr_accessor :i18n, :overseer, :manifest
+        attr_accessor :i18n, :configurator, :manifest
 
         def section(dto)
           klass = components[dto[:class]]
           raise ConfigError, "unknown component: #{dto[:class]}" if klass.nil?
 
-          klass.new(name: dto[:name], i18n:, manifest:, overseer:, **dto[:params])
+          klass.new(name: dto[:name], i18n:, manifest:, configurator:, **dto[:params])
         end
 
         def components

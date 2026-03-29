@@ -5,10 +5,10 @@ module LYP
     module MOS
       module Sections
         class Daily
-          def initialize(name:, i18n:, overseer:, **params)
+          def initialize(name:, i18n:, configurator:, **params)
             self.name = name
             self.i18n = i18n
-            self.overseer = overseer
+            self.configurator = configurator
             self.params = params
           end
 
@@ -22,7 +22,7 @@ module LYP
 
           def pages(manifest)
             range.map do |day|
-              page = Pages::Daily.new(i18n:, manifest:, day:, debug: overseer.debug?, **params)
+              page = Pages::Daily.new(i18n:, manifest:, day:, debug: configurator.debug?, **params)
 
               PageData.new(
                 title: page.title,
@@ -35,9 +35,9 @@ module LYP
 
           private
 
-          attr_accessor :name, :i18n, :overseer, :params
+          attr_accessor :name, :i18n, :configurator, :params
 
-          def range = overseer.start_date..overseer.end_date
+          def range = configurator.start_date..configurator.end_date
         end
       end
     end

@@ -2,9 +2,9 @@
 
 RSpec.describe LYP::Planners::MOS::Sections::Annual do
   describe "#registered_section_name" do
-    let(:overseer) { instance_double(LYP::Planners::MOS::Configurator) }
+    let(:configurator) { instance_double(LYP::Planners::MOS::Configurator) }
     let(:i18n) { class_double(I18n, "i18n") }
-    let(:section) { described_class.new(name: "annual", i18n:, overseer:, little_calendar: { week_placement: :none }) }
+    let(:section) { described_class.new(name: "annual", i18n:, configurator: , little_calendar: { week_placement: :none }) }
 
     it "returns the name" do
       expect(section.registered_section_name).to eq("annual")
@@ -12,10 +12,10 @@ RSpec.describe LYP::Planners::MOS::Sections::Annual do
   end
 
   describe "#register" do
-    let(:overseer) { instance_double(LYP::Planners::MOS::Configurator) }
+    let(:configurator) { instance_double(LYP::Planners::MOS::Configurator) }
     let(:i18n) { class_double(I18n, "i18n") }
     let(:manifest) { LYP::Planners::MOS::Manifest.new }
-    let(:section) { described_class.new(name: "annual", i18n:, overseer:, little_calendar: { week_placement: :none }) }
+    let(:section) { described_class.new(name: "annual", i18n:, configurator: , little_calendar: { week_placement: :none }) }
 
     it "registers 'calendar' as a source" do
       section.register(manifest)
@@ -28,7 +28,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Annual do
     let(:i18n) { class_double(I18n, "i18n") }
     let(:manifest) { LYP::Planners::MOS::Manifest.new }
 
-    let(:overseer) do
+    let(:configurator) do
       instance_double(
         LYP::Planners::MOS::Configurator,
         start_date: make_day("2026-01-01"),
@@ -36,7 +36,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Annual do
       )
     end
 
-    let(:section) { described_class.new(name: "annual", i18n:, overseer:, little_calendar: { week_placement: :none }) }
+    let(:section) { described_class.new(name: "annual", i18n:, configurator: , little_calendar: { week_placement: :none }) }
 
     let(:expected) do
       LYP::Planners::MOS::PageData.new(
@@ -69,7 +69,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Annual do
     end
 
     before do
-      (overseer.start_date.month..overseer.end_date.month).each_with_index do |month, i|
+      (configurator.start_date.month..configurator.end_date.month).each_with_index do |month, i|
         calendar = instance_double(
           LYP::Planners::MOS::Components::LittleCalendar,
           generate: "[cal-#{i + 1}]"
@@ -90,7 +90,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Annual do
       described_class.new(
         name: "annual",
         i18n: class_double(I18n, "i18n"),
-        overseer: instance_double(LYP::Planners::MOS::Configurator),
+        configurator: instance_double(LYP::Planners::MOS::Configurator),
         little_calendar: { week_placement: :none },
         manifest: LYP::Planners::MOS::Manifest.new,
         extra_param: "ignored"

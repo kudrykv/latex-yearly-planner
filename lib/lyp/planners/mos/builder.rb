@@ -5,28 +5,28 @@ module LYP
     module MOS
       class Builder
         # rubocop:disable Metrics/AbcSize
-        def initialize(i18n:, overseer:, manifest:)
+        def initialize(i18n:, configurator:, manifest:)
           self.i18n = i18n
-          self.overseer = overseer
+          self.configurator = configurator
           self.manifest = manifest
           self.pages = []
 
-          self.column_gutter = overseer.dig!(:planner, :params, :mos_layout, :column_gutter)
-          self.row_gutter = overseer.dig!(:planner, :params, :mos_layout, :row_gutter)
-          self.side_menu_position = overseer.dig!(:planner, :params, :mos_layout, :side_menu_position)
-          self.side_menu_width = overseer.dig!(:planner, :params, :mos_layout, :side_menu_width)
-          self.heading_height = overseer.dig!(:planner, :params, :heading, :height)
-          self.heading_align = overseer.dig!(:planner, :params, :heading, :align)
+          self.column_gutter = configurator.dig!(:planner, :params, :mos_layout, :column_gutter)
+          self.row_gutter = configurator.dig!(:planner, :params, :mos_layout, :row_gutter)
+          self.side_menu_position = configurator.dig!(:planner, :params, :mos_layout, :side_menu_position)
+          self.side_menu_width = configurator.dig!(:planner, :params, :mos_layout, :side_menu_width)
+          self.heading_height = configurator.dig!(:planner, :params, :heading, :height)
+          self.heading_align = configurator.dig!(:planner, :params, :heading, :align)
 
-          self.weekday_start = overseer.weekday_start
-          self.start_date = overseer.start_date
-          self.end_date = overseer.end_date
+          self.weekday_start = configurator.weekday_start
+          self.start_date = configurator.start_date
+          self.end_date = configurator.end_date
         end
         # rubocop:enable Metrics/AbcSize
 
         def generate
           <<~TYPST.strip
-            #{definition(overseer)}
+            #{definition(configurator)}
             #{pages.join("\n#pagebreak()\n")}
           TYPST
         end
@@ -37,7 +37,7 @@ module LYP
 
         private
 
-        attr_accessor :i18n, :overseer, :manifest, :pages,
+        attr_accessor :i18n, :configurator, :manifest, :pages,
                       :side_menu_position,
                       :side_menu_width,
                       :heading_height,
@@ -55,7 +55,7 @@ module LYP
               rows: (#{heading_height}, 1fr),
               column-gutter: #{column_gutter},
               row-gutter: #{row_gutter},
-              #{"stroke: 0.4pt," if overseer.debug?}
+              #{"stroke: 0.4pt," if configurator.debug?}
 
               #{heading_content(
                 title: page_spec.title,
@@ -139,22 +139,22 @@ module LYP
         end
 
         # rubocop:disable Metrics/MethodLength
-        def definition(overseer)
+        def definition(configurator)
           <<~TYPST.strip
             #set page(
-              width: #{overseer.dig!(:document, :layout, :dimensions, :width)},
-              height: #{overseer.dig!(:document, :layout, :dimensions, :height)},
+              width: #{configurator.dig!(:document, :layout, :dimensions, :width)},
+              height: #{configurator.dig!(:document, :layout, :dimensions, :height)},
 
               margin: (
-                top: #{overseer.dig!(:document, :layout, :margin, :top)},
-                right: #{overseer.dig!(:document, :layout, :margin, :right)},
-                bottom: #{overseer.dig!(:document, :layout, :margin, :bottom)},
-                left: #{overseer.dig!(:document, :layout, :margin, :left)},
+                top: #{configurator.dig!(:document, :layout, :margin, :top)},
+                right: #{configurator.dig!(:document, :layout, :margin, :right)},
+                bottom: #{configurator.dig!(:document, :layout, :margin, :bottom)},
+                left: #{configurator.dig!(:document, :layout, :margin, :left)},
               )
             )
 
             #set text(
-              size: #{overseer.dig!(:document, :text, :size)}
+              size: #{configurator.dig!(:document, :text, :size)}
             )
 
             #let dotted = tiling(

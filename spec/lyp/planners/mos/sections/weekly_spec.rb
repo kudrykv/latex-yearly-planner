@@ -4,7 +4,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Weekly do
   describe "#registered_section_name" do
     let(:i18n) { class_double(I18n, "i18n") }
 
-    let(:overseer) do
+    let(:configurator) do
       instance_double(
         LYP::Planners::MOS::Configurator,
         weekday_start: :monday,
@@ -13,7 +13,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Weekly do
       )
     end
 
-    let(:section) { described_class.new(name: "weekly", i18n:, overseer:) }
+    let(:section) { described_class.new(name: "weekly", i18n:, configurator:) }
 
     it "returns the name" do
       expect(section.registered_section_name).to eq("weekly")
@@ -24,7 +24,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Weekly do
     let(:i18n) { class_double(I18n, "i18n") }
     let(:manifest) { LYP::Planners::MOS::Manifest.new }
 
-    let(:overseer) do
+    let(:configurator) do
       instance_double(
         LYP::Planners::MOS::Configurator,
         weekday_start: :monday,
@@ -33,7 +33,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Weekly do
       )
     end
 
-    let(:section) { described_class.new(name: "weekly", i18n:, overseer:) }
+    let(:section) { described_class.new(name: "weekly", i18n:, configurator:) }
 
     it "registers each week's ID with the manifest" do
       section.register(manifest)
@@ -52,7 +52,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Weekly do
     let(:feb) { make_month("2021-02") }
     let(:q1) { make_quarter("2021-01-01") }
 
-    let(:overseer) do
+    let(:configurator) do
       instance_double(
         LYP::Planners::MOS::Configurator,
         weekday_start: :monday,
@@ -61,7 +61,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Weekly do
       )
     end
 
-    let(:section) { described_class.new(name: "weekly", i18n:, overseer:) }
+    let(:section) { described_class.new(name: "weekly", i18n:, configurator:) }
 
     let(:expected) do
       week_ids.map do |id|
@@ -93,7 +93,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Weekly do
   describe "constructor" do
     let(:i18n) { class_double(I18n, "i18n") }
 
-    let(:overseer) do
+    let(:configurator) do
       instance_double(
         LYP::Planners::MOS::Configurator,
         weekday_start: :monday,
@@ -105,7 +105,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Weekly do
     it "accepts and ignores extra keyword arguments" do
       expect do
         described_class.new(
-          name: "weekly", i18n:, overseer:,
+          name: "weekly", i18n:, configurator:,
           manifest: LYP::Planners::MOS::Manifest.new, extra_param: "ignored"
         )
       end.not_to raise_error

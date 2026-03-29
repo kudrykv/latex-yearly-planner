@@ -2,12 +2,12 @@
 
 RSpec.describe LYP::Planners::MOS::Sections::Monthly do
   describe "#registered_section_name" do
-    let(:overseer) { instance_double(LYP::Planners::MOS::Configurator) }
+    let(:configurator) { instance_double(LYP::Planners::MOS::Configurator) }
     let(:i18n) { class_double(I18n, "i18n") }
 
     let(:section) do
       described_class.new(
-        name: "monthly", i18n:, overseer:,
+        name: "monthly", i18n:, configurator:,
         title_size: "14pt", month_params: { week_placement: :left }
       )
     end
@@ -21,7 +21,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Monthly do
     let(:i18n) { class_double(I18n, "i18n") }
     let(:manifest) { LYP::Planners::MOS::Manifest.new }
 
-    let(:overseer) do
+    let(:configurator) do
       instance_double(
         LYP::Planners::MOS::Configurator,
         start_date: make_day("2025-01-01"),
@@ -31,7 +31,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Monthly do
 
     let(:section) do
       described_class.new(
-        name: "monthly", i18n:, overseer:,
+        name: "monthly", i18n:, configurator:,
         title_size: "14pt", month_params: { week_placement: :left }
       )
     end
@@ -51,7 +51,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Monthly do
     let(:month_params) { { week_placement: :left } }
     let(:month_dates) { %w[2025-01 2025-02 2025-03] }
 
-    let(:overseer) do
+    let(:configurator) do
       instance_double(
         LYP::Planners::MOS::Configurator,
         start_date: make_day("2025-01-01"),
@@ -60,7 +60,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Monthly do
     end
 
     let(:section) do
-      described_class.new(name: "monthly", i18n:, overseer:, title_size: "14pt", month_params:)
+      described_class.new(name: "monthly", i18n:, configurator:, title_size: "14pt", month_params:)
     end
 
     let(:expected) do
@@ -96,12 +96,12 @@ RSpec.describe LYP::Planners::MOS::Sections::Monthly do
 
   describe "constructor" do
     let(:i18n) { class_double(I18n, "i18n") }
-    let(:overseer) { instance_double(LYP::Planners::MOS::Configurator) }
+    let(:configurator) { instance_double(LYP::Planners::MOS::Configurator) }
 
     it "accepts and ignores extra keyword arguments" do
       expect do
         described_class.new(
-          name: "monthly", i18n:, overseer:,
+          name: "monthly", i18n:, configurator:,
           title_size: "14pt", month_params: { week_placement: :left },
           manifest: LYP::Planners::MOS::Manifest.new, extra_key: "ignored"
         )
