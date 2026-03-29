@@ -15,7 +15,7 @@ RSpec.describe LYP::Planners::MOS::Components::DailyTopPriorities do
         grid(
           columns: 1fr,
           inset: 0mm,
-          stroke: (_, _) => (bottom: 0.4pt),
+          stroke: (_, _) => (bottom: regular_stroke),
 
           grid.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [Top priorities]))),
           box(height: 5mm, align(horizon, [$square.stroked$])),
