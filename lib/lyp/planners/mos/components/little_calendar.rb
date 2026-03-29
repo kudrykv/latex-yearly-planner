@@ -54,7 +54,7 @@ module LYP
 
             <<~TYPST.strip
               grid.cell(
-                colspan: #{with_week_column([""]*7, "").size},
+                colspan: #{with_week_column([""] * 7, "").size},
                 [#{i18n.t("months.full.#{month.name}")}]
               ),
               grid.hline(stroke: regular_stroke),
