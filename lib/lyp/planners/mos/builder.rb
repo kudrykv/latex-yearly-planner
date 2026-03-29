@@ -177,7 +177,7 @@ module LYP
                 line(
                   start: (0%, 4.85mm),
                   end: (100%, 4.85mm),
-                  stroke: 0.4pt + luma(130)
+                  stroke: regular_stroke + luma(130)
                 ),
               )
             )
