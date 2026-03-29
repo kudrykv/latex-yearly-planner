@@ -5,8 +5,6 @@ module LYP
     module MOS
       module Sections
         class Annual
-          attr_accessor :name, :i18n, :overseer, :little_calendar
-
           def initialize(name:, i18n:, overseer:, little_calendar:, **_rest)
             self.name = name
             self.i18n = i18n
@@ -28,6 +26,8 @@ module LYP
           end
 
           private
+
+          attr_accessor :name, :i18n, :overseer, :little_calendar
 
           def content(manifest:)
             items = (overseer.start_date.month..overseer.end_date.month)
