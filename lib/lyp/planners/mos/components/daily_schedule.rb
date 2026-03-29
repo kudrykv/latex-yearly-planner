@@ -21,8 +21,8 @@ module LYP
                 columns: 1fr,
                 inset: 0mm,
                 stroke: (_, y) =>
-                  if calc.even(y) { ( bottom: 0.4pt + black ) }
-                  else { ( bottom: 0.4pt + gray ) },
+                  if calc.even(y) { ( bottom: regular_stroke + black ) }
+                  else { ( bottom: regular_stroke + gray ) },
                 grid.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [#{i18n.t("schedule")}]))),
                 #{schedule_lines},
 
