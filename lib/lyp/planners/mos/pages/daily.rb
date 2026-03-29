@@ -28,13 +28,13 @@ module LYP
                 columns: (auto, auto),
                 rows: (3fr, 2fr),
                 column-gutter: 4pt,
-                #{"stroke: 0.4pt," if debug}
+                #{"stroke: regular_stroke," if debug}
 
                 grid.cell(
                   rowspan: 2,
                   align: center + horizon,
                   rect(
-                    stroke: (right: 0.4pt),
+                    stroke: (right: regular_stroke),
 
                     text(size: 24pt)[#{day.month_day} <#{day.id}>]
                   )

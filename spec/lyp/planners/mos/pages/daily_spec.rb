@@ -41,7 +41,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Daily do
               rowspan: 2,
               align: center + horizon,
               rect(
-                stroke: (right: 0.4pt),
+                stroke: (right: regular_stroke),
 
                 text(size: 24pt)[15 <#{day.id}>]
               )
@@ -75,7 +75,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Daily do
               rowspan: 2,
               align: center + horizon,
               rect(
-                stroke: (right: 0.4pt),
+                stroke: (right: regular_stroke),
 
                 text(size: 24pt)[15 <#{day.id}>]
               )
@@ -99,13 +99,13 @@ RSpec.describe LYP::Planners::MOS::Pages::Daily do
             columns: (auto, auto),
             rows: (3fr, 2fr),
             column-gutter: 4pt,
-            stroke: 0.4pt,
+            stroke: regular_stroke,
 
             grid.cell(
               rowspan: 2,
               align: center + horizon,
               rect(
-                stroke: (right: 0.4pt),
+                stroke: (right: regular_stroke),
 
                 text(size: 24pt)[15 <#{day.id}>]
               )
