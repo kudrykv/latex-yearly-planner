@@ -33,7 +33,7 @@ module LYP
                 rows: (auto, 1fr),
 
                 grid(
-                  stroke: 0.4pt,
+                  stroke: regular_stroke,
                   columns: (#{columns}),
                   rows: (#{rows}),
 
@@ -90,7 +90,7 @@ module LYP
             text = day.month_day.to_s
             text = "padded_link(<#{day.id}>)[#{text}]" if manifest.source? day.id
 
-            "box(stroke: 0.4pt, inset: 3pt)[##{text}]"
+            "box(stroke: regular_stroke, inset: 3pt)[##{text}]"
           end
 
           def week_label_cell(week)

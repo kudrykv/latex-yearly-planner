@@ -65,16 +65,16 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
             rows: (auto, 1fr),
 
             grid(
-              stroke: 0.4pt,
+              stroke: regular_stroke,
               columns: (10mm, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
               rows: (2mm, 1fr, 1fr, 1fr, 1fr, 1fr),
 
               [], align(center + horizon)[Monday], align(center + horizon)[Tuesday], align(center + horizon)[Wednesday], align(center + horizon)[Thursday], align(center + horizon)[Friday], align(center + horizon)[Saturday], align(center + horizon)[Sunday],
-              align(center + horizon, rotate(-90deg, reflow: true)[#Week 13]), [], [], [], box(stroke: 0.4pt, inset: 3pt)[#1], box(stroke: 0.4pt, inset: 3pt)[#2], box(stroke: 0.4pt, inset: 3pt)[#3], box(stroke: 0.4pt, inset: 3pt)[#4],
-          align(center + horizon, rotate(-90deg, reflow: true)[#padded_link(<2021W14>)[Week 14]]), box(stroke: 0.4pt, inset: 3pt)[#padded_link(<2021-04-05>)[5]], box(stroke: 0.4pt, inset: 3pt)[#6], box(stroke: 0.4pt, inset: 3pt)[#7], box(stroke: 0.4pt, inset: 3pt)[#8], box(stroke: 0.4pt, inset: 3pt)[#9], box(stroke: 0.4pt, inset: 3pt)[#10], box(stroke: 0.4pt, inset: 3pt)[#11],
-          align(center + horizon, rotate(-90deg, reflow: true)[#Week 15]), box(stroke: 0.4pt, inset: 3pt)[#12], box(stroke: 0.4pt, inset: 3pt)[#13], box(stroke: 0.4pt, inset: 3pt)[#14], box(stroke: 0.4pt, inset: 3pt)[#15], box(stroke: 0.4pt, inset: 3pt)[#16], box(stroke: 0.4pt, inset: 3pt)[#17], box(stroke: 0.4pt, inset: 3pt)[#18],
-          align(center + horizon, rotate(-90deg, reflow: true)[#Week 16]), box(stroke: 0.4pt, inset: 3pt)[#19], box(stroke: 0.4pt, inset: 3pt)[#20], box(stroke: 0.4pt, inset: 3pt)[#21], box(stroke: 0.4pt, inset: 3pt)[#22], box(stroke: 0.4pt, inset: 3pt)[#23], box(stroke: 0.4pt, inset: 3pt)[#24], box(stroke: 0.4pt, inset: 3pt)[#25],
-          align(center + horizon, rotate(-90deg, reflow: true)[#Week 17]), box(stroke: 0.4pt, inset: 3pt)[#26], box(stroke: 0.4pt, inset: 3pt)[#27], box(stroke: 0.4pt, inset: 3pt)[#28], box(stroke: 0.4pt, inset: 3pt)[#29], box(stroke: 0.4pt, inset: 3pt)[#30], [], []
+              align(center + horizon, rotate(-90deg, reflow: true)[#Week 13]), [], [], [], box(stroke: regular_stroke, inset: 3pt)[#1], box(stroke: regular_stroke, inset: 3pt)[#2], box(stroke: regular_stroke, inset: 3pt)[#3], box(stroke: regular_stroke, inset: 3pt)[#4],
+          align(center + horizon, rotate(-90deg, reflow: true)[#padded_link(<2021W14>)[Week 14]]), box(stroke: regular_stroke, inset: 3pt)[#padded_link(<2021-04-05>)[5]], box(stroke: regular_stroke, inset: 3pt)[#6], box(stroke: regular_stroke, inset: 3pt)[#7], box(stroke: regular_stroke, inset: 3pt)[#8], box(stroke: regular_stroke, inset: 3pt)[#9], box(stroke: regular_stroke, inset: 3pt)[#10], box(stroke: regular_stroke, inset: 3pt)[#11],
+          align(center + horizon, rotate(-90deg, reflow: true)[#Week 15]), box(stroke: regular_stroke, inset: 3pt)[#12], box(stroke: regular_stroke, inset: 3pt)[#13], box(stroke: regular_stroke, inset: 3pt)[#14], box(stroke: regular_stroke, inset: 3pt)[#15], box(stroke: regular_stroke, inset: 3pt)[#16], box(stroke: regular_stroke, inset: 3pt)[#17], box(stroke: regular_stroke, inset: 3pt)[#18],
+          align(center + horizon, rotate(-90deg, reflow: true)[#Week 16]), box(stroke: regular_stroke, inset: 3pt)[#19], box(stroke: regular_stroke, inset: 3pt)[#20], box(stroke: regular_stroke, inset: 3pt)[#21], box(stroke: regular_stroke, inset: 3pt)[#22], box(stroke: regular_stroke, inset: 3pt)[#23], box(stroke: regular_stroke, inset: 3pt)[#24], box(stroke: regular_stroke, inset: 3pt)[#25],
+          align(center + horizon, rotate(-90deg, reflow: true)[#Week 17]), box(stroke: regular_stroke, inset: 3pt)[#26], box(stroke: regular_stroke, inset: 3pt)[#27], box(stroke: regular_stroke, inset: 3pt)[#28], box(stroke: regular_stroke, inset: 3pt)[#29], box(stroke: regular_stroke, inset: 3pt)[#30], [], []
             ),
 
             grid(
@@ -107,16 +107,16 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
             rows: (auto, 1fr),
 
             grid(
-              stroke: 0.4pt,
+              stroke: regular_stroke,
               columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 10mm),
               rows: (2mm, 1fr, 1fr, 1fr, 1fr, 1fr),
 
               align(center + horizon)[Monday], align(center + horizon)[Tuesday], align(center + horizon)[Wednesday], align(center + horizon)[Thursday], align(center + horizon)[Friday], align(center + horizon)[Saturday], align(center + horizon)[Sunday], [],
-              [], [], [], box(stroke: 0.4pt, inset: 3pt)[#1], box(stroke: 0.4pt, inset: 3pt)[#2], box(stroke: 0.4pt, inset: 3pt)[#3], box(stroke: 0.4pt, inset: 3pt)[#4], align(center + horizon, rotate(-90deg, reflow: true)[#Week 13]),
-          box(stroke: 0.4pt, inset: 3pt)[#padded_link(<2021-04-05>)[5]], box(stroke: 0.4pt, inset: 3pt)[#6], box(stroke: 0.4pt, inset: 3pt)[#7], box(stroke: 0.4pt, inset: 3pt)[#8], box(stroke: 0.4pt, inset: 3pt)[#9], box(stroke: 0.4pt, inset: 3pt)[#10], box(stroke: 0.4pt, inset: 3pt)[#11], align(center + horizon, rotate(-90deg, reflow: true)[#padded_link(<2021W14>)[Week 14]]),
-          box(stroke: 0.4pt, inset: 3pt)[#12], box(stroke: 0.4pt, inset: 3pt)[#13], box(stroke: 0.4pt, inset: 3pt)[#14], box(stroke: 0.4pt, inset: 3pt)[#15], box(stroke: 0.4pt, inset: 3pt)[#16], box(stroke: 0.4pt, inset: 3pt)[#17], box(stroke: 0.4pt, inset: 3pt)[#18], align(center + horizon, rotate(-90deg, reflow: true)[#Week 15]),
-          box(stroke: 0.4pt, inset: 3pt)[#19], box(stroke: 0.4pt, inset: 3pt)[#20], box(stroke: 0.4pt, inset: 3pt)[#21], box(stroke: 0.4pt, inset: 3pt)[#22], box(stroke: 0.4pt, inset: 3pt)[#23], box(stroke: 0.4pt, inset: 3pt)[#24], box(stroke: 0.4pt, inset: 3pt)[#25], align(center + horizon, rotate(-90deg, reflow: true)[#Week 16]),
-          box(stroke: 0.4pt, inset: 3pt)[#26], box(stroke: 0.4pt, inset: 3pt)[#27], box(stroke: 0.4pt, inset: 3pt)[#28], box(stroke: 0.4pt, inset: 3pt)[#29], box(stroke: 0.4pt, inset: 3pt)[#30], [], [], align(center + horizon, rotate(-90deg, reflow: true)[#Week 17])
+              [], [], [], box(stroke: regular_stroke, inset: 3pt)[#1], box(stroke: regular_stroke, inset: 3pt)[#2], box(stroke: regular_stroke, inset: 3pt)[#3], box(stroke: regular_stroke, inset: 3pt)[#4], align(center + horizon, rotate(-90deg, reflow: true)[#Week 13]),
+          box(stroke: regular_stroke, inset: 3pt)[#padded_link(<2021-04-05>)[5]], box(stroke: regular_stroke, inset: 3pt)[#6], box(stroke: regular_stroke, inset: 3pt)[#7], box(stroke: regular_stroke, inset: 3pt)[#8], box(stroke: regular_stroke, inset: 3pt)[#9], box(stroke: regular_stroke, inset: 3pt)[#10], box(stroke: regular_stroke, inset: 3pt)[#11], align(center + horizon, rotate(-90deg, reflow: true)[#padded_link(<2021W14>)[Week 14]]),
+          box(stroke: regular_stroke, inset: 3pt)[#12], box(stroke: regular_stroke, inset: 3pt)[#13], box(stroke: regular_stroke, inset: 3pt)[#14], box(stroke: regular_stroke, inset: 3pt)[#15], box(stroke: regular_stroke, inset: 3pt)[#16], box(stroke: regular_stroke, inset: 3pt)[#17], box(stroke: regular_stroke, inset: 3pt)[#18], align(center + horizon, rotate(-90deg, reflow: true)[#Week 15]),
+          box(stroke: regular_stroke, inset: 3pt)[#19], box(stroke: regular_stroke, inset: 3pt)[#20], box(stroke: regular_stroke, inset: 3pt)[#21], box(stroke: regular_stroke, inset: 3pt)[#22], box(stroke: regular_stroke, inset: 3pt)[#23], box(stroke: regular_stroke, inset: 3pt)[#24], box(stroke: regular_stroke, inset: 3pt)[#25], align(center + horizon, rotate(-90deg, reflow: true)[#Week 16]),
+          box(stroke: regular_stroke, inset: 3pt)[#26], box(stroke: regular_stroke, inset: 3pt)[#27], box(stroke: regular_stroke, inset: 3pt)[#28], box(stroke: regular_stroke, inset: 3pt)[#29], box(stroke: regular_stroke, inset: 3pt)[#30], [], [], align(center + horizon, rotate(-90deg, reflow: true)[#Week 17])
             ),
 
             grid(
@@ -149,16 +149,16 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
             rows: (auto, 1fr),
 
             grid(
-              stroke: 0.4pt,
+              stroke: regular_stroke,
               columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
               rows: (2mm, 1fr, 1fr, 1fr, 1fr, 1fr),
 
               align(center + horizon)[Monday], align(center + horizon)[Tuesday], align(center + horizon)[Wednesday], align(center + horizon)[Thursday], align(center + horizon)[Friday], align(center + horizon)[Saturday], align(center + horizon)[Sunday],
-              [], [], [], box(stroke: 0.4pt, inset: 3pt)[#1], box(stroke: 0.4pt, inset: 3pt)[#2], box(stroke: 0.4pt, inset: 3pt)[#3], box(stroke: 0.4pt, inset: 3pt)[#4],
-          box(stroke: 0.4pt, inset: 3pt)[#padded_link(<2021-04-05>)[5]], box(stroke: 0.4pt, inset: 3pt)[#6], box(stroke: 0.4pt, inset: 3pt)[#7], box(stroke: 0.4pt, inset: 3pt)[#8], box(stroke: 0.4pt, inset: 3pt)[#9], box(stroke: 0.4pt, inset: 3pt)[#10], box(stroke: 0.4pt, inset: 3pt)[#11],
-          box(stroke: 0.4pt, inset: 3pt)[#12], box(stroke: 0.4pt, inset: 3pt)[#13], box(stroke: 0.4pt, inset: 3pt)[#14], box(stroke: 0.4pt, inset: 3pt)[#15], box(stroke: 0.4pt, inset: 3pt)[#16], box(stroke: 0.4pt, inset: 3pt)[#17], box(stroke: 0.4pt, inset: 3pt)[#18],
-          box(stroke: 0.4pt, inset: 3pt)[#19], box(stroke: 0.4pt, inset: 3pt)[#20], box(stroke: 0.4pt, inset: 3pt)[#21], box(stroke: 0.4pt, inset: 3pt)[#22], box(stroke: 0.4pt, inset: 3pt)[#23], box(stroke: 0.4pt, inset: 3pt)[#24], box(stroke: 0.4pt, inset: 3pt)[#25],
-          box(stroke: 0.4pt, inset: 3pt)[#26], box(stroke: 0.4pt, inset: 3pt)[#27], box(stroke: 0.4pt, inset: 3pt)[#28], box(stroke: 0.4pt, inset: 3pt)[#29], box(stroke: 0.4pt, inset: 3pt)[#30], [], []
+              [], [], [], box(stroke: regular_stroke, inset: 3pt)[#1], box(stroke: regular_stroke, inset: 3pt)[#2], box(stroke: regular_stroke, inset: 3pt)[#3], box(stroke: regular_stroke, inset: 3pt)[#4],
+          box(stroke: regular_stroke, inset: 3pt)[#padded_link(<2021-04-05>)[5]], box(stroke: regular_stroke, inset: 3pt)[#6], box(stroke: regular_stroke, inset: 3pt)[#7], box(stroke: regular_stroke, inset: 3pt)[#8], box(stroke: regular_stroke, inset: 3pt)[#9], box(stroke: regular_stroke, inset: 3pt)[#10], box(stroke: regular_stroke, inset: 3pt)[#11],
+          box(stroke: regular_stroke, inset: 3pt)[#12], box(stroke: regular_stroke, inset: 3pt)[#13], box(stroke: regular_stroke, inset: 3pt)[#14], box(stroke: regular_stroke, inset: 3pt)[#15], box(stroke: regular_stroke, inset: 3pt)[#16], box(stroke: regular_stroke, inset: 3pt)[#17], box(stroke: regular_stroke, inset: 3pt)[#18],
+          box(stroke: regular_stroke, inset: 3pt)[#19], box(stroke: regular_stroke, inset: 3pt)[#20], box(stroke: regular_stroke, inset: 3pt)[#21], box(stroke: regular_stroke, inset: 3pt)[#22], box(stroke: regular_stroke, inset: 3pt)[#23], box(stroke: regular_stroke, inset: 3pt)[#24], box(stroke: regular_stroke, inset: 3pt)[#25],
+          box(stroke: regular_stroke, inset: 3pt)[#26], box(stroke: regular_stroke, inset: 3pt)[#27], box(stroke: regular_stroke, inset: 3pt)[#28], box(stroke: regular_stroke, inset: 3pt)[#29], box(stroke: regular_stroke, inset: 3pt)[#30], [], []
             ),
 
             grid(
