@@ -5,8 +5,6 @@ module LYP
     module MOS
       module Sections
         class Monthly
-          attr_accessor :name, :i18n, :overseer, :title_size, :month, :month_params
-
           def initialize(name:, i18n:, overseer:, title_size:, month_params:, **_rest)
             self.name = name
             self.i18n = i18n
@@ -37,6 +35,8 @@ module LYP
           end
 
           private
+
+          attr_accessor :name, :i18n, :overseer, :title_size, :month, :month_params
 
           def range = overseer.start_date.month..overseer.end_date.month
         end
