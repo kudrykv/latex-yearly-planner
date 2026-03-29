@@ -38,7 +38,7 @@ module LYP
             x = "1"
             x = "7" if week_placement == :right
 
-            "(x, _) => if x == #{x} {( left: 0.4pt )}"
+            "(x, _) => if x == #{x} {( left: regular_stroke )}"
           end
 
           def columns

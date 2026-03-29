@@ -33,7 +33,7 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
             grid(
               align: center + horizon,
               inset: 5pt,
-              stroke: (x, _) => if x == 1 {( left: 0.4pt )},
+              stroke: (x, _) => if x == 1 {( left: regular_stroke )},
               columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
 
               [W], [M], [T], [W], [T], [F], [S], [S], grid.hline(stroke: regular_stroke),
@@ -59,7 +59,7 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
             grid(
               align: center + horizon,
               inset: 5pt,
-              stroke: (x, _) => if x == 1 {( left: 0.4pt )},
+              stroke: (x, _) => if x == 1 {( left: regular_stroke )},
               columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
 
               [W], [M], [T], [W], [T], [F], [S], [S], grid.hline(stroke: regular_stroke),
@@ -92,7 +92,7 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
             grid(
               align: center + horizon,
               inset: 5pt,
-              stroke: (x, _) => if x == 1 {( left: 0.4pt )},
+              stroke: (x, _) => if x == 1 {( left: regular_stroke )},
               columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
 
               [W], [M], [T], [W], [T], [F], [S], [S], grid.hline(stroke: regular_stroke),
@@ -123,7 +123,7 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
           grid(
             align: center + horizon,
             inset: 5pt,
-            stroke: (x, _) => if x == 7 {( left: 0.4pt )},
+            stroke: (x, _) => if x == 7 {( left: regular_stroke )},
             columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
 
             [M], [T], [W], [T], [F], [S], [S], [W], grid.hline(stroke: regular_stroke),
