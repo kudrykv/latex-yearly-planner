@@ -10,6 +10,7 @@ require "forwardable"
 require_relative "lyp/version"
 require_relative "lyp/cli/app"
 
+require_relative "lyp/pkg/strict_hash"
 require_relative "lyp/handlers/generate"
 require_relative "lyp/services/generate"
 require_relative "lyp/services/compile"
