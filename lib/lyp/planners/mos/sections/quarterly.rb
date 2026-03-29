@@ -5,15 +5,15 @@ module LYP
     module MOS
       module Sections
         class Quarterly
-          def initialize(name:, i18n:, configurator:, months_column:, little_calendar:, **_rest)
-            self.name = name
+          attr_reader :section_name
+
+          def initialize(section_name:, i18n:, configurator:, months_column:, little_calendar:, **_rest)
+            self.section_name = section_name
             self.i18n = i18n
             self.configurator = configurator
             self.months_column = months_column.to_sym
             self.little_calendar = little_calendar
           end
-
-          def registered_section_name = name
 
           def register(manifest)
             range.each do |quarter|
@@ -35,7 +35,8 @@ module LYP
 
           private
 
-          attr_accessor :name, :i18n, :configurator, :months_column, :little_calendar
+          attr_writer :section_name
+          attr_accessor :i18n, :configurator, :months_column, :little_calendar
 
           def range = configurator.start_date.quarter..configurator.end_date.quarter
         end

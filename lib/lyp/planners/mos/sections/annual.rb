@@ -5,14 +5,14 @@ module LYP
     module MOS
       module Sections
         class Annual
-          def initialize(name:, i18n:, configurator:, little_calendar:, **_rest)
-            self.name = name
+          attr_reader :section_name
+
+          def initialize(section_name:, i18n:, configurator:, little_calendar:, **_rest)
+            self.section_name = section_name
             self.i18n = i18n
             self.configurator = configurator
             self.little_calendar = little_calendar
           end
-
-          def registered_section_name = name
 
           def register(manifest)
             manifest.register_source("calendar")
@@ -27,7 +27,8 @@ module LYP
 
           private
 
-          attr_accessor :name, :i18n, :configurator, :little_calendar
+          attr_writer :section_name
+          attr_accessor :i18n, :configurator, :little_calendar
 
           def content(manifest:)
             items = (configurator.start_date.month..configurator.end_date.month)

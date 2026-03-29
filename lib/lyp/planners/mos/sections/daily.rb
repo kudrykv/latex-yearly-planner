@@ -5,14 +5,14 @@ module LYP
     module MOS
       module Sections
         class Daily
-          def initialize(name:, i18n:, configurator:, **params)
-            self.name = name
+          attr_reader :section_name
+
+          def initialize(section_name:, i18n:, configurator:, **params)
+            self.section_name = section_name
             self.i18n = i18n
             self.configurator = configurator
             self.params = params
           end
-
-          def registered_section_name = name
 
           def register(manifest)
             range.each do |date|
@@ -35,7 +35,8 @@ module LYP
 
           private
 
-          attr_accessor :name, :i18n, :configurator, :params
+          attr_writer :section_name
+          attr_accessor :i18n, :configurator, :params
 
           def range = configurator.start_date..configurator.end_date
         end

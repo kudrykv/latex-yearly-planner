@@ -5,14 +5,15 @@ module LYP
     module MOS
       module Sections
         class CoverPlain
-          def initialize(name:, font_size:, **_rest)
+          attr_reader :section_name
+
+          def initialize(section_name:, name:, font_size:, **_rest)
+            self.section_name = section_name
             self.name = name
             self.font_size = font_size
           end
 
           def register(_manifest); end
-
-          def registered_section_name = name
 
           def pages(_manifest)
             [PageData.new(raw_typst: true, content: cover)]
@@ -20,6 +21,7 @@ module LYP
 
           private
 
+          attr_writer :section_name
           attr_accessor :name, :font_size
 
           def cover

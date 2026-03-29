@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 RSpec.describe LYP::Planners::MOS::Sections::Daily do
-  describe "#registered_section_name" do
+  describe "#section_name" do
     let(:i18n) { class_double(I18n, "i18n") }
     let(:configurator) { instance_double(LYP::Planners::MOS::Configurator) }
 
     let(:section) do
-      described_class.new(name: "daily", i18n:, configurator:, columns_width: "(3fr, 2fr)")
+      described_class.new(section_name: "daily", i18n:, configurator:, columns_width: "(3fr, 2fr)")
     end
 
     it "returns the name" do
-      expect(section.registered_section_name).to eq("daily")
+      expect(section.section_name).to eq("daily")
     end
   end
 
@@ -28,7 +28,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Daily do
     end
 
     let(:section) do
-      described_class.new(name: "daily", i18n:, configurator:, columns_width: "(3fr, 2fr)")
+      described_class.new(section_name: "daily", i18n:, configurator:, columns_width: "(3fr, 2fr)")
     end
 
     it "registers each day's ID with the manifest" do
@@ -59,7 +59,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Daily do
 
     let(:section) do
       described_class.new(
-        name: "daily", i18n:, configurator:,
+        section_name: "daily", i18n:, configurator:,
         columns_width: "(3fr, 2fr)", column_gutter: "4mm"
       )
     end
@@ -105,7 +105,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Daily do
     it "accepts extra keyword arguments without raising" do
       expect do
         described_class.new(
-          name: "daily", i18n:, configurator:,
+          section_name: "daily", i18n:, configurator:,
           columns_width: "(3fr, 2fr)", extra_param: "captured"
         )
       end.not_to raise_error

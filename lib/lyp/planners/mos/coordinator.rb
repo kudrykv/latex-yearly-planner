@@ -15,10 +15,10 @@ module LYP
           builder = Builder.new(i18n:, configurator:, manifest:)
 
           configurator.enabled_sections.map { |dto| section(dto) }
-                  .each { |s| manifest.register_section(s.registered_section_name) }
-                  .each { |s| s.register(manifest) }
-                  .flat_map { |s| s.pages(manifest) }
-                  .each { |page| builder.add(page) }
+                      .each { |s| manifest.register_section(s.section_name) }
+                      .each { |s| s.register(manifest) }
+                      .flat_map { |s| s.pages(manifest) }
+                      .each { |page| builder.add(page) }
 
           builder.generate
         end
@@ -33,7 +33,8 @@ module LYP
           klass = components[dto[:class]]
           raise ConfigError, "unknown component: #{dto[:class]}" if klass.nil?
 
-          klass.new(name: dto[:name], i18n:, manifest:, configurator:, **dto[:params])
+          section_name = dto.delete :name
+          klass.new(section_name:, i18n:, manifest:, configurator:, **dto[:params])
         end
 
         def components

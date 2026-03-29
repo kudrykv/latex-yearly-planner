@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe LYP::Planners::MOS::Sections::Weekly do
-  describe "#registered_section_name" do
+  describe "#section_name" do
     let(:i18n) { class_double(I18n, "i18n") }
 
     let(:configurator) do
@@ -13,10 +13,10 @@ RSpec.describe LYP::Planners::MOS::Sections::Weekly do
       )
     end
 
-    let(:section) { described_class.new(name: "weekly", i18n:, configurator:) }
+    let(:section) { described_class.new(section_name: "weekly", i18n:, configurator:) }
 
     it "returns the name" do
-      expect(section.registered_section_name).to eq("weekly")
+      expect(section.section_name).to eq("weekly")
     end
   end
 
@@ -33,7 +33,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Weekly do
       )
     end
 
-    let(:section) { described_class.new(name: "weekly", i18n:, configurator:) }
+    let(:section) { described_class.new(section_name: "weekly", i18n:, configurator:) }
 
     it "registers each week's ID with the manifest" do
       section.register(manifest)
@@ -61,7 +61,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Weekly do
       )
     end
 
-    let(:section) { described_class.new(name: "weekly", i18n:, configurator:) }
+    let(:section) { described_class.new(section_name: "weekly", i18n:, configurator:) }
 
     let(:expected) do
       week_ids.map do |id|
@@ -105,7 +105,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Weekly do
     it "accepts and ignores extra keyword arguments" do
       expect do
         described_class.new(
-          name: "weekly", i18n:, configurator:,
+          section_name: "weekly", i18n:, configurator:,
           manifest: LYP::Planners::MOS::Manifest.new, extra_param: "ignored"
         )
       end.not_to raise_error

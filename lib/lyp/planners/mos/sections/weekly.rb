@@ -5,16 +5,16 @@ module LYP
     module MOS
       module Sections
         class Weekly
-          def initialize(name:, i18n:, configurator:, **_rest)
-            self.name = name
+          attr_reader :section_name
+
+          def initialize(section_name:, i18n:, configurator:, **_rest)
+            self.section_name = section_name
             self.i18n = i18n
             self.configurator = configurator
             self.weekday_start = configurator.weekday_start
             self.first_week_day = configurator.start_date.beginning_of_month.beginning_of_week
             self.last_week_day = configurator.end_date.end_of_month.end_of_week
           end
-
-          def registered_section_name = name
 
           def register(manifest)
             weeks.each do |week|
@@ -37,7 +37,8 @@ module LYP
 
           private
 
-          attr_accessor :name, :i18n, :configurator, :weekday_start, :first_week_day, :last_week_day
+          attr_writer :section_name
+          attr_accessor :i18n, :configurator, :weekday_start, :first_week_day, :last_week_day
 
           def weeks
             (first_week_day..last_week_day).each_slice(7).map(&:first).map do |day|

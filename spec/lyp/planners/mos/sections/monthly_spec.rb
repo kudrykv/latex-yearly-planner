@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
 RSpec.describe LYP::Planners::MOS::Sections::Monthly do
-  describe "#registered_section_name" do
+  describe "#section_name" do
     let(:configurator) { instance_double(LYP::Planners::MOS::Configurator) }
     let(:i18n) { class_double(I18n, "i18n") }
 
     let(:section) do
       described_class.new(
-        name: "monthly", i18n:, configurator:,
+        section_name: "monthly", i18n:, configurator:,
         title_size: "14pt", month_params: { week_placement: :left }
       )
     end
 
     it "returns the name" do
-      expect(section.registered_section_name).to eq("monthly")
+      expect(section.section_name).to eq("monthly")
     end
   end
 
@@ -31,7 +31,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Monthly do
 
     let(:section) do
       described_class.new(
-        name: "monthly", i18n:, configurator:,
+        section_name: "monthly", i18n:, configurator:,
         title_size: "14pt", month_params: { week_placement: :left }
       )
     end
@@ -60,7 +60,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Monthly do
     end
 
     let(:section) do
-      described_class.new(name: "monthly", i18n:, configurator:, title_size: "14pt", month_params:)
+      described_class.new(section_name: "monthly", i18n:, configurator:, title_size: "14pt", month_params:)
     end
 
     let(:expected) do
@@ -101,7 +101,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Monthly do
     it "accepts and ignores extra keyword arguments" do
       expect do
         described_class.new(
-          name: "monthly", i18n:, configurator:,
+          section_name: "monthly", i18n:, configurator:,
           title_size: "14pt", month_params: { week_placement: :left },
           manifest: LYP::Planners::MOS::Manifest.new, extra_key: "ignored"
         )

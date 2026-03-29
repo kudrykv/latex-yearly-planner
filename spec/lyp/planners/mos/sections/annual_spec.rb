@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 RSpec.describe LYP::Planners::MOS::Sections::Annual do
-  describe "#registered_section_name" do
+  describe "#section_name" do
     let(:configurator) { instance_double(LYP::Planners::MOS::Configurator) }
     let(:i18n) { class_double(I18n, "i18n") }
-    let(:section) { described_class.new(name: "annual", i18n:, configurator: , little_calendar: { week_placement: :none }) }
+    let(:section) do
+      described_class.new(section_name: "annual", i18n:, configurator:, little_calendar: { week_placement: :none })
+    end
 
     it "returns the name" do
-      expect(section.registered_section_name).to eq("annual")
+      expect(section.section_name).to eq("annual")
     end
   end
 
@@ -15,7 +17,9 @@ RSpec.describe LYP::Planners::MOS::Sections::Annual do
     let(:configurator) { instance_double(LYP::Planners::MOS::Configurator) }
     let(:i18n) { class_double(I18n, "i18n") }
     let(:manifest) { LYP::Planners::MOS::Manifest.new }
-    let(:section) { described_class.new(name: "annual", i18n:, configurator: , little_calendar: { week_placement: :none }) }
+    let(:section) do
+      described_class.new(section_name: "annual", i18n:, configurator:, little_calendar: { week_placement: :none })
+    end
 
     it "registers 'calendar' as a source" do
       section.register(manifest)
@@ -36,7 +40,9 @@ RSpec.describe LYP::Planners::MOS::Sections::Annual do
       )
     end
 
-    let(:section) { described_class.new(name: "annual", i18n:, configurator: , little_calendar: { week_placement: :none }) }
+    let(:section) do
+      described_class.new(section_name: "annual", i18n:, configurator:, little_calendar: { week_placement: :none })
+    end
 
     let(:expected) do
       LYP::Planners::MOS::PageData.new(
@@ -88,7 +94,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Annual do
   it "accepts and ignores extra keyword arguments" do
     expect do
       described_class.new(
-        name: "annual",
+        section_name: "annual",
         i18n: class_double(I18n, "i18n"),
         configurator: instance_double(LYP::Planners::MOS::Configurator),
         little_calendar: { week_placement: :none },
