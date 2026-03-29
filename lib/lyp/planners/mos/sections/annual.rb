@@ -31,8 +31,9 @@ module LYP
           attr_accessor :i18n, :configurator, :little_calendar
 
           def content(manifest:)
-            items = (configurator.start_date.month..configurator.end_date.month)
-                    .map { |month| Components::LittleCalendar.new(i18n:, manifest:, month:, **little_calendar).generate }
+            items = range.map do |month|
+              Components::LittleCalendar.new(i18n:, manifest:, month:, **little_calendar).generate
+            end
 
             <<~TYPST.strip
               grid(
@@ -43,6 +44,10 @@ module LYP
                 #{items.join(",\n")}
               )
             TYPST
+          end
+
+          def range
+            configurator.start_date.month..configurator.end_date.month
           end
         end
       end
