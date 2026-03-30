@@ -4,14 +4,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Weekly do
   describe "#section_name" do
     let(:i18n) { class_double(I18n, "i18n") }
 
-    let(:configurator) do
-      instance_double(
-        LYP::Planners::MOS::Configurator,
-        weekday_start: :monday,
-        start_date: make_day("2021-02-01"),
-        end_date: make_day("2021-02-28")
-      )
-    end
+    let(:configurator) { make_configurator(start_date: "2021-02-01", end_date: "2021-02-28") }
 
     let(:section) { described_class.new(section_name: "weekly", i18n:, configurator:) }
 
@@ -24,14 +17,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Weekly do
     let(:i18n) { class_double(I18n, "i18n") }
     let(:manifest) { LYP::Planners::MOS::Manifest.new }
 
-    let(:configurator) do
-      instance_double(
-        LYP::Planners::MOS::Configurator,
-        weekday_start: :monday,
-        start_date: make_day("2021-02-01"),
-        end_date: make_day("2021-02-28")
-      )
-    end
+    let(:configurator) { make_configurator(start_date: "2021-02-01", end_date: "2021-02-28") }
 
     let(:section) { described_class.new(section_name: "weekly", i18n:, configurator:) }
 
@@ -52,14 +38,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Weekly do
     let(:feb) { make_month("2021-02") }
     let(:q1) { make_quarter("2021-01-01") }
 
-    let(:configurator) do
-      instance_double(
-        LYP::Planners::MOS::Configurator,
-        weekday_start: :monday,
-        start_date: make_day("2021-02-01"),
-        end_date: make_day("2021-02-28")
-      )
-    end
+    let(:configurator) { make_configurator(start_date: "2021-02-01", end_date: "2021-02-28") }
 
     let(:section) { described_class.new(section_name: "weekly", i18n:, configurator:) }
 
@@ -93,14 +72,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Weekly do
   describe "constructor" do
     let(:i18n) { class_double(I18n, "i18n") }
 
-    let(:configurator) do
-      instance_double(
-        LYP::Planners::MOS::Configurator,
-        weekday_start: :monday,
-        start_date: make_day("2021-02-01"),
-        end_date: make_day("2021-02-28")
-      )
-    end
+    let(:configurator) { make_configurator(start_date: "2021-02-01", end_date: "2021-02-28") }
 
     it "accepts and ignores extra keyword arguments" do
       expect do

@@ -2,7 +2,7 @@
 
 RSpec.describe LYP::Planners::MOS::Sections::Monthly do
   describe "#section_name" do
-    let(:configurator) { instance_double(LYP::Planners::MOS::Configurator) }
+    let(:configurator) { make_configurator }
     let(:i18n) { class_double(I18n, "i18n") }
 
     let(:section) do
@@ -20,14 +20,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Monthly do
   describe "#register" do
     let(:i18n) { class_double(I18n, "i18n") }
     let(:manifest) { LYP::Planners::MOS::Manifest.new }
-
-    let(:configurator) do
-      instance_double(
-        LYP::Planners::MOS::Configurator,
-        start_date: make_day("2025-01-01"),
-        end_date: make_day("2025-03-31")
-      )
-    end
+    let(:configurator) { make_configurator(start_date: "2025-01-01", end_date: "2025-03-31") }
 
     let(:section) do
       described_class.new(
@@ -51,13 +44,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Monthly do
     let(:month_params) { { week_placement: :left } }
     let(:month_dates) { %w[2025-01 2025-02 2025-03] }
 
-    let(:configurator) do
-      instance_double(
-        LYP::Planners::MOS::Configurator,
-        start_date: make_day("2025-01-01"),
-        end_date: make_day("2025-03-31")
-      )
-    end
+    let(:configurator) { make_configurator(start_date: "2025-01-01", end_date: "2025-03-31") }
 
     let(:section) do
       described_class.new(section_name: "monthly", i18n:, configurator:, title_size: "14pt", month_params:)
@@ -96,7 +83,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Monthly do
 
   describe "constructor" do
     let(:i18n) { class_double(I18n, "i18n") }
-    let(:configurator) { instance_double(LYP::Planners::MOS::Configurator) }
+    let(:configurator) { make_configurator }
 
     it "accepts and ignores extra keyword arguments" do
       expect do

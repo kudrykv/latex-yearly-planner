@@ -2,7 +2,7 @@
 
 RSpec.describe LYP::Planners::MOS::Sections::Annual do
   describe "#section_name" do
-    let(:configurator) { instance_double(LYP::Planners::MOS::Configurator) }
+    let(:configurator) { make_configurator }
     let(:i18n) { class_double(I18n, "i18n") }
     let(:section) do
       described_class.new(section_name: "annual", i18n:, configurator:, little_calendar: { week_placement: :none })
@@ -14,7 +14,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Annual do
   end
 
   describe "#register" do
-    let(:configurator) { instance_double(LYP::Planners::MOS::Configurator) }
+    let(:configurator) { make_configurator }
     let(:i18n) { class_double(I18n, "i18n") }
     let(:manifest) { LYP::Planners::MOS::Manifest.new }
     let(:section) do
@@ -32,13 +32,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Annual do
     let(:i18n) { class_double(I18n, "i18n") }
     let(:manifest) { LYP::Planners::MOS::Manifest.new }
 
-    let(:configurator) do
-      instance_double(
-        LYP::Planners::MOS::Configurator,
-        start_date: make_day("2026-01-01"),
-        end_date: make_day("2026-12-31")
-      )
-    end
+    let(:configurator) { make_configurator(start_date: "2026-01-01", end_date: "2026-12-31") }
 
     let(:section) do
       described_class.new(section_name: "annual", i18n:, configurator:, little_calendar: { week_placement: :none })
@@ -97,7 +91,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Annual do
       described_class.new(
         section_name: "annual",
         i18n: class_double(I18n, "i18n"),
-        configurator: instance_double(LYP::Planners::MOS::Configurator),
+        configurator: make_configurator,
         little_calendar: { week_placement: :none },
         manifest: LYP::Planners::MOS::Manifest.new,
         extra_param: "ignored"

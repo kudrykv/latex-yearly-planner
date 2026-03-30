@@ -3,7 +3,7 @@
 RSpec.describe LYP::Planners::MOS::Sections::Daily do
   describe "#section_name" do
     let(:i18n) { class_double(I18n, "i18n") }
-    let(:configurator) { instance_double(LYP::Planners::MOS::Configurator) }
+    let(:configurator) { make_configurator }
 
     let(:section) do
       described_class.new(section_name: "daily", i18n:, configurator:, columns_width: "(3fr, 2fr)")
@@ -18,14 +18,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Daily do
     let(:i18n) { class_double(I18n, "i18n") }
     let(:manifest) { LYP::Planners::MOS::Manifest.new }
 
-    let(:configurator) do
-      instance_double(
-        LYP::Planners::MOS::Configurator,
-        start_date: make_day("2024-03-11"),
-        end_date: make_day("2024-03-14"),
-        debug?: false
-      )
-    end
+    let(:configurator) { make_configurator(start_date: "2024-03-11", end_date: "2024-03-14") }
 
     let(:section) do
       described_class.new(section_name: "daily", i18n:, configurator:, columns_width: "(3fr, 2fr)")
@@ -48,14 +41,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Daily do
     let(:march) { make_month("2024-03") }
     let(:q1) { make_quarter("2024-01-01") }
 
-    let(:configurator) do
-      instance_double(
-        LYP::Planners::MOS::Configurator,
-        start_date: make_day("2024-03-11"),
-        end_date: make_day("2024-03-14"),
-        debug?: false
-      )
-    end
+    let(:configurator) { make_configurator(start_date: "2024-03-11", end_date: "2024-03-14") }
 
     let(:section) do
       described_class.new(
@@ -93,14 +79,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Daily do
   describe "constructor" do
     let(:i18n) { class_double(I18n, "i18n") }
 
-    let(:configurator) do
-      instance_double(
-        LYP::Planners::MOS::Configurator,
-        start_date: make_day("2024-03-11"),
-        end_date: make_day("2024-03-14"),
-        debug?: false
-      )
-    end
+    let(:configurator) { make_configurator(start_date: "2024-03-11", end_date: "2024-03-14") }
 
     it "accepts extra keyword arguments without raising" do
       expect do
