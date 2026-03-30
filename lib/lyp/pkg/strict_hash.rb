@@ -10,13 +10,15 @@ module LYP
         @path = path.freeze
       end
 
+      def dig(*keys) = hash.dig(*keys)
+
       def dig!(*keys)
         raise ArgumentError, "no keys given" if keys.empty?
 
         value = hash.dig(*keys)
         full_path = path + keys
 
-        raise ConfigError, "#{full_path.map(&:to_s).join(".")} not found" if value.nil?
+        raise ConfigError, "#{full_path.join(".")} not found" if value.nil?
 
         wrap(value, full_path)
       end

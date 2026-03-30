@@ -49,6 +49,8 @@ module LYP
         end
 
         def dig!(*path) = dto.dig!(*path)
+
+        def dig(*path) = dto.dig(*path)
       end
     end
   end
