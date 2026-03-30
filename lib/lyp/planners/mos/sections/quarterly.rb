@@ -7,12 +7,13 @@ module LYP
         class Quarterly
           attr_reader :section_name
 
-          def initialize(section_name:, i18n:, configurator:, months_column:, little_calendar:, **_rest)
+          def initialize(section_name:, i18n:, configurator:, months_column:, **other)
             self.section_name = section_name
             self.i18n = i18n
             self.configurator = configurator
             self.months_column = months_column.to_sym
-            self.little_calendar = little_calendar
+            self.little_calendar = (configurator.dig(:planner, :params, :little_calendar) || {})
+                                   .merge(other[:little_calendar] || {})
           end
 
           def register(manifest)

@@ -7,11 +7,12 @@ module LYP
         class Annual
           attr_reader :section_name
 
-          def initialize(section_name:, i18n:, configurator:, little_calendar:, **_rest)
+          def initialize(section_name:, i18n:, configurator:, **other)
             self.section_name = section_name
             self.i18n = i18n
             self.configurator = configurator
-            self.little_calendar = little_calendar
+            self.little_calendar = (configurator.dig(:planner, :params, :little_calendar) || {})
+                                   .merge(other[:little_calendar] || {})
           end
 
           def register(manifest)

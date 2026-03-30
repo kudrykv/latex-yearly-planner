@@ -27,6 +27,9 @@ planner:
     end_date: "2026-12-31"
     weekday_start: Monday
 
+    little_calendar:
+      week_placement: left
+
     mos_layout:
       side_menu_position: right
       side_menu_width: 10mm
@@ -50,7 +53,6 @@ planner:
       enabled: true
       params:
         little_calendar:
-          week_placement: left
           show_month_name: true
 
     - name: quarterly
@@ -58,8 +60,7 @@ planner:
       enabled: true
       params:
         months_column: right
-        little_calendar:
-          week_placement: left
+        little_calendar: {}
 
     - name: monthly
       class: monthly
