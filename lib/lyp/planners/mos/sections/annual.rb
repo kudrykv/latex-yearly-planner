@@ -7,7 +7,7 @@ module LYP
         class Annual
           attr_reader :section_name
 
-          def initialize(section_name:, i18n:, configurator:, column_gutter: '10pt', row_gutter: '5pt', **other)
+          def initialize(section_name:, i18n:, configurator:, column_gutter: "10pt", row_gutter: "5pt", **other)
             self.section_name = section_name
             self.i18n = i18n
             self.configurator = configurator
