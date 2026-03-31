@@ -54,6 +54,8 @@ planner:
       params:
         little_calendar:
           show_month_name: true
+        column_gutter: 10pt
+        row-gutter: 5pt
 
     - name: quarterly
       class: quarterly
