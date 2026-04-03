@@ -159,6 +159,7 @@ module LYP
 
             #let regular_stroke = #{configurator.dig!(:planner, :params, :regular_stroke)}
             #let thick_stroke = #{configurator.dig!(:planner, :params, :thick_stroke)}
+            #let regular_height = #{configurator.dig!(:planner, :params, :regular_height)}
 
             #let dotted = tiling(
               size: (5mm, 5mm),
