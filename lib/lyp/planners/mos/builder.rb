@@ -162,10 +162,10 @@ module LYP
             #let regular_height = #{configurator.dig!(:planner, :params, :regular_height)}
 
             #let dotted = tiling(
-              size: (5mm, 5mm),
+              size: (regular_height, regular_height),
               place(
                 dx: 0.5pt,
-                dy: 4.7mm,
+                dy: regular_height - 0.3mm,
                 circle(
                   radius: 0.141mm,
                   fill: black
@@ -174,11 +174,11 @@ module LYP
             )
 
             #let lined = tiling(
-              size: (5mm, 5mm),
+              size: (regular_height, regular_height),
               place(
                 line(
-                  start: (0%, 4.85mm),
-                  end: (100%, 4.85mm),
+                  start: (0%, regular_height - 0.15mm),
+                  end: (100%, regular_height - 0.15mm),
                   stroke: regular_stroke + luma(130)
                 ),
               )
