@@ -124,10 +124,8 @@ module LYP
           direction = "rtl"
           direction = "ltr" if side_menu_position == "right"
 
-          stack = [
-            title,
-            "text[maybe menu]"
-          ]
+          stack = [title]
+          stack << "padded_link(<#{Sections::Annual::ID}>, [Calendar])" if manifest.source? Sections::Annual::ID
 
           <<~TYPST
             stack(

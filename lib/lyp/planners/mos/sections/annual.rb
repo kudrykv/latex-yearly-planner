@@ -5,6 +5,8 @@ module LYP
     module MOS
       module Sections
         class Annual
+          ID = "annual"
+
           attr_reader :section_name
 
           def initialize(section_name:, i18n:, configurator:, column_gutter: "10pt", row_gutter: "5pt", **other)
@@ -18,12 +20,12 @@ module LYP
           end
 
           def register(manifest)
-            manifest.register_source("calendar")
+            manifest.register_source(ID)
           end
 
           def pages(manifest)
             [PageData.new(
-              title: "[Calendar<calendar>]",
+              title: "[Calendar<#{ID}>]",
               content: content(manifest:)
             )]
           end
