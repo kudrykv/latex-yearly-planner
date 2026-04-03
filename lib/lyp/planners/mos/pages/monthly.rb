@@ -46,7 +46,10 @@ module LYP
                   rows: (2mm, auto, 1fr),
 
                   [],
-                  grid.cell(stroke: (bottom: thick_stroke), box(height: 5mm, align(horizon, [#{i18n.t("monthly_notes")}]))),
+                  grid.cell(
+                    stroke: (bottom: thick_stroke),
+                    box(height: regular_height, align(horizon, [#{i18n.t("monthly_notes")}]))
+                  ),
                   rect_pattern(dotted)
                 )
               )
