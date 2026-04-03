@@ -17,10 +17,10 @@ RSpec.describe LYP::Planners::MOS::Components::DailyTopPriorities do
           inset: 0mm,
           stroke: (_, _) => (bottom: regular_stroke),
 
-          grid.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [Top priorities]))),
-          box(height: 5mm, align(horizon, [$square.stroked$])),
-        box(height: 5mm, align(horizon, [$square.stroked$])),
-        box(height: 5mm, align(horizon, [$square.stroked$]))
+          grid.cell(stroke: (bottom: 1pt), box(height: regular_height, align(horizon, [Top priorities]))),
+          box(height: regular_height, align(horizon, [$square.stroked$])),
+        box(height: regular_height, align(horizon, [$square.stroked$])),
+        box(height: regular_height, align(horizon, [$square.stroked$]))
         )
       TYPST
     end

@@ -23,10 +23,10 @@ module LYP
                 stroke: (_, y) =>
                   if calc.even(y) { ( bottom: regular_stroke + black ) }
                   else { ( bottom: regular_stroke + gray ) },
-                grid.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [#{i18n.t("schedule")}]))),
+                grid.cell(stroke: (bottom: 1pt), box(height: regular_height, align(horizon, [#{i18n.t("schedule")}]))),
                 #{schedule_lines},
 
-                #{"box(height: 5mm)" if trailing_30_minutes}
+                #{"box(height: regular_height)" if trailing_30_minutes}
               )
             TYPST
           end
@@ -35,7 +35,7 @@ module LYP
 
           def schedule_lines
             (from..to).map do |hour|
-              "box(height: 5mm, align(horizon, [#{pretty_hour(hour:)}])), box(height: 5mm)"
+              "box(height: regular_height, align(horizon, [#{pretty_hour(hour:)}])), box(height: regular_height)"
             end.join(",\n")
           end
 

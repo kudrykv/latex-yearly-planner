@@ -21,11 +21,11 @@ RSpec.describe LYP::Planners::MOS::Components::DailySchedule do
             stroke: (_, y) =>
               if calc.even(y) { ( bottom: regular_stroke + black ) }
               else { ( bottom: regular_stroke + gray ) },
-            grid.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [Schedule]))),
-            box(height: 5mm, align(horizon, [ 8])), box(height: 5mm),
-          box(height: 5mm, align(horizon, [ 9])), box(height: 5mm),
+            grid.cell(stroke: (bottom: 1pt), box(height: regular_height, align(horizon, [Schedule]))),
+            box(height: regular_height, align(horizon, [ 8])), box(height: regular_height),
+          box(height: regular_height, align(horizon, [ 9])), box(height: regular_height),
 
-            box(height: 5mm)
+            box(height: regular_height)
           )
         TYPST
       end
@@ -48,9 +48,9 @@ RSpec.describe LYP::Planners::MOS::Components::DailySchedule do
             stroke: (_, y) =>
               if calc.even(y) { ( bottom: regular_stroke + black ) }
               else { ( bottom: regular_stroke + gray ) },
-            grid.cell(stroke: (bottom: 1pt), box(height: 5mm, align(horizon, [Schedule]))),
-            box(height: 5mm, align(horizon, [ 8])), box(height: 5mm),
-          box(height: 5mm, align(horizon, [ 9])), box(height: 5mm),
+            grid.cell(stroke: (bottom: 1pt), box(height: regular_height, align(horizon, [Schedule]))),
+            box(height: regular_height, align(horizon, [ 8])), box(height: regular_height),
+          box(height: regular_height, align(horizon, [ 9])), box(height: regular_height),
 
           #{" " * 2}
           )
