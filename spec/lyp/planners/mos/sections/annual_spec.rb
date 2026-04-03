@@ -21,10 +21,10 @@ RSpec.describe LYP::Planners::MOS::Sections::Annual do
       described_class.new(section_name: "annual", i18n:, configurator:, little_calendar: { week_placement: :none })
     end
 
-    it "registers 'calendar' as a source" do
+    it "registers Sections::Annual::ID as a source" do
       section.register(manifest)
 
-      expect(manifest.source?("calendar")).to be true
+      expect(manifest.source?(described_class::ID)).to be true
     end
   end
 
@@ -41,7 +41,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Annual do
     let(:expected) do
       LYP::Planners::MOS::PageData.new(
         content: expected_content,
-        title: "[Calendar<calendar>]"
+        title: "[Calendar<#{described_class::ID}>]"
       )
     end
 
