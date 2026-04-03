@@ -63,7 +63,8 @@ planner:
       enabled: true
       params:
         months_column: right
-        little_calendar: {}
+        little_calendar:
+          show_month_name: true
 
     - name: monthly
       class: monthly
