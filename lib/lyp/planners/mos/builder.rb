@@ -121,17 +121,25 @@ module LYP
         end
 
         def heading_stack(title)
-          direction = "rtl"
-          direction = "ltr" if side_menu_position == "right"
-
-          stack = [title]
-          stack << "padded_link(<#{Sections::Annual::ID}>, [Calendar])" if manifest.source? Sections::Annual::ID
-
           <<~TYPST
             stack(
-              dir: #{direction},
+              dir: #{side_menu_position == "right" ? "ltr" : "rtl"},
               spacing: 1fr,
-              #{stack.join(",\n")}
+              #{[title, heading_menu_grid].compact.join(",\n")}
+            )
+          TYPST
+        end
+
+        def heading_menu_grid
+          cal = "padded_link(<#{Sections::Annual::ID}>, [Calendar])" if manifest.source? Sections::Annual::ID
+
+          cols = [cal].compact
+
+          <<~TYPST
+            grid(
+              columns: #{cols.length},
+              stroke: (x, y)  => if x > 0 { ( left: regular_stroke ) },
+              #{cols.join(", ")}
             )
           TYPST
         end
