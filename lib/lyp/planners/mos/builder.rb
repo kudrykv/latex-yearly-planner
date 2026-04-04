@@ -60,7 +60,8 @@ module LYP
               #{heading_content(
                 title: page_spec.title,
                 highlight_months: page_spec.highlight_months,
-                highlight_quarters: page_spec.highlight_quarters
+                highlight_quarters: page_spec.highlight_quarters,
+                page_id: page_spec.page_id
               )},
               #{page_spec.content}
             )
@@ -73,10 +74,10 @@ module LYP
           columns.join(", ")
         end
 
-        def heading_content(title:, highlight_months:, highlight_quarters:)
+        def heading_content(title:, page_id:, highlight_months:, highlight_quarters:)
           row = [
             side_menu_cell(highlight_months:, highlight_quarters:),
-            "grid.cell(align: #{heading_align}, #{heading_stack(title)})"
+            "grid.cell(align: #{heading_align}, #{heading_stack(page_id:, title:)})"
           ]
           row.reverse! if side_menu_position == "right"
 
@@ -120,24 +121,27 @@ module LYP
           menu.generate
         end
 
-        def heading_stack(title)
+        def heading_stack(page_id:, title:)
           <<~TYPST
             stack(
               dir: #{side_menu_position == "right" ? "ltr" : "rtl"},
               spacing: 1fr,
-              #{[title, heading_menu_grid].compact.join(",\n")}
+              #{[title, heading_menu_grid(page_id:)].compact.join(",\n")}
             )
           TYPST
         end
 
-        def heading_menu_grid
+        def heading_menu_grid(page_id:)
           cal = "padded_link(<#{Sections::Annual::ID}>, [Calendar])" if manifest.source? Sections::Annual::ID
+          cal = "grid.cell(fill: black, text(white)[##{cal}])" if cal && page_id == Sections::Annual::ID
 
           cols = [cal].compact
 
           <<~TYPST
             grid(
               columns: #{cols.length},
+              inset: 7pt,
+
               stroke: (x, y)  => if x > 0 { ( left: regular_stroke ) },
               #{cols.join(", ")}
             )
