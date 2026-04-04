@@ -81,7 +81,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Daily do
               )
             ),
             [*Monday*],
-            link(<#{week.id}>)[Week 7]
+            padded_link(<#{week.id}>)[Week 7]
           )
         TYPST
       end

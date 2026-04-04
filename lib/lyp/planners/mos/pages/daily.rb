@@ -21,7 +21,7 @@ module LYP
           # rubocop:disable Metrics/AbcSize
           def title
             week = "#{i18n.t("week_name_full")} #{day.week.number}"
-            week = "link(<#{day.week.id}>)[#{week}]" if manifest.source?(day.week.id)
+            week = "padded_link(<#{day.week.id}>)[#{week}]" if manifest.source?(day.week.id)
 
             <<~TYPST.strip
               grid(

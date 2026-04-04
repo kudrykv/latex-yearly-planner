@@ -42,7 +42,7 @@ module LYP
           def format_day(day)
             return box_day(day) unless manifest.source?(day.id)
 
-            "link(<#{day.id}>, #{box_day(day)})"
+            "padded_link(<#{day.id}>, #{box_day(day)})"
           end
 
           def box_day(day)
