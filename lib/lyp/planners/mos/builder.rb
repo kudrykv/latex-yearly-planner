@@ -159,6 +159,8 @@ module LYP
             #let thick_stroke = #{configurator.dig!(:planner, :params, :thick_stroke)}
             #let regular_height = #{configurator.dig!(:planner, :params, :regular_height)}
 
+            #let h1 = #{configurator.dig!(:document, :text, :h1)}
+
             #let dotted = tiling(
               size: (regular_height, regular_height),
               place(

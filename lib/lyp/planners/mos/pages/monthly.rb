@@ -7,13 +7,12 @@ module LYP
         class Monthly
           WEEK_PLACEMENTS = %i[left right none].freeze
 
-          attr_accessor :i18n, :manifest, :month, :title_size, :week_placement, :month_params
+          attr_accessor :i18n, :manifest, :month, :week_placement, :month_params
 
-          def initialize(i18n:, manifest:, month:, title_size:, month_params:)
+          def initialize(i18n:, manifest:, month:, month_params:)
             self.i18n = i18n
             self.manifest = manifest
             self.month = month
-            self.title_size = title_size
             self.month_params = month_params
             self.week_placement = month_params[:week_placement].to_sym
 
@@ -23,7 +22,7 @@ module LYP
           end
 
           def title
-            "text(size: #{title_size})[#{i18n.t("months.full.#{month.name}")}<#{month.id}>]"
+            "text(size: h1)[#{i18n.t("months.full.#{month.name}")}<#{month.id}>]"
           end
 
           def content

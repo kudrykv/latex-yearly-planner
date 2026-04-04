@@ -7,11 +7,10 @@ module LYP
         class Monthly
           attr_reader :section_name
 
-          def initialize(section_name:, i18n:, configurator:, title_size:, month_params:, **_rest)
+          def initialize(section_name:, i18n:, configurator:, month_params:, **_rest)
             self.section_name = section_name
             self.i18n = i18n
             self.configurator = configurator
-            self.title_size = title_size
             self.month_params = month_params
           end
 
@@ -23,7 +22,7 @@ module LYP
 
           def pages(manifest)
             range.map do |month|
-              page = Pages::Monthly.new(i18n:, manifest:, month:, title_size:, month_params:)
+              page = Pages::Monthly.new(i18n:, manifest:, month:, month_params:)
 
               PageData.new(
                 title: page.title,
@@ -37,7 +36,7 @@ module LYP
           private
 
           attr_writer :section_name
-          attr_accessor :i18n, :configurator, :title_size, :month, :month_params
+          attr_accessor :i18n, :configurator, :month, :month_params
 
           def range = configurator.start_date.month..configurator.end_date.month
         end

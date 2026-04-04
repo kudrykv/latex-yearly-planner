@@ -25,7 +25,7 @@ module LYP
 
           def pages(manifest)
             [PageData.new(
-              title: "[Calendar<#{ID}>]",
+              title: "text(size: h1)[Calendar<#{ID}>]",
               content: content(manifest:)
             )]
           end

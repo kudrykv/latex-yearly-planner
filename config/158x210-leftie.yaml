@@ -17,6 +17,7 @@ document:
 
   text:
     size: 10pt
+    h1: 10mm
 
 planner:
   params:
@@ -70,8 +71,6 @@ planner:
       class: monthly
       enabled: true
       params:
-        title_size: 18pt
-
         month_params:
           week_placement: left
           heading_height: 5mm
