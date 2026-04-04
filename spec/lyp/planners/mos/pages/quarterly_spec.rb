@@ -26,7 +26,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Quarterly do
     end
 
     it "renders the quarter title" do
-      expect(page.title).to eq("[Quarter 1 <#{quarter.id}>]")
+      expect(page.title).to eq("text(size: h1)[Quarter 1 <#{quarter.id}>]")
     end
   end
 

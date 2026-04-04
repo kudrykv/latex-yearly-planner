@@ -30,7 +30,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
   it "raises ConfigError for invalid week_placement" do
     expect do
       described_class.new(
-        i18n:, manifest:, month:, title_size: "14pt",
+        i18n:, manifest:, month:,
         month_params: { week_placement: :invalid, week_label_width: "10mm",
                         heading_height: "2mm", daily_cell_height: "1fr", week_label_rotation: "-90deg" }
       )
@@ -42,15 +42,15 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
       { week_placement: :left, week_label_width: "10mm",
         heading_height: "2mm", daily_cell_height: "1fr", week_label_rotation: "-90deg" }
     end
-    let(:page) { described_class.new(i18n:, manifest:, month:, title_size: "14pt", month_params:) }
+    let(:page) { described_class.new(i18n:, manifest:, month:, month_params:) }
 
     it "renders the month title" do
-      expect(page.title).to eq("text(size: 14pt)[April<#{month.id}>]")
+      expect(page.title).to eq("text(size: h1)[April<#{month.id}>]")
     end
   end
 
   describe "#content" do
-    let(:page) { described_class.new(i18n:, manifest:, month:, title_size: "14pt", month_params:) }
+    let(:page) { described_class.new(i18n:, manifest:, month:, month_params:) }
 
     context "with week_placement: :left" do
       let(:month_params) do

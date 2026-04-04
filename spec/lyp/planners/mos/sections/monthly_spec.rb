@@ -8,7 +8,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Monthly do
     let(:section) do
       described_class.new(
         section_name: "monthly", i18n:, configurator:,
-        title_size: "14pt", month_params: { week_placement: :left }
+        month_params: { week_placement: :left }
       )
     end
 
@@ -25,7 +25,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Monthly do
     let(:section) do
       described_class.new(
         section_name: "monthly", i18n:, configurator:,
-        title_size: "14pt", month_params: { week_placement: :left }
+        month_params: { week_placement: :left }
       )
     end
 
@@ -47,7 +47,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Monthly do
     let(:configurator) { make_configurator(start_date: "2025-01-01", end_date: "2025-03-31") }
 
     let(:section) do
-      described_class.new(section_name: "monthly", i18n:, configurator:, title_size: "14pt", month_params:)
+      described_class.new(section_name: "monthly", i18n:, configurator:, month_params:)
     end
 
     let(:expected) do
@@ -71,7 +71,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Monthly do
           content: "content-m#{i + 1}"
         )
         allow(LYP::Planners::MOS::Pages::Monthly).to receive(:new).with(
-          i18n:, manifest:, month:, title_size: "14pt", month_params:
+          i18n:, manifest:, month:, month_params:
         ).and_return(page_double)
       end
     end
@@ -89,7 +89,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Monthly do
       expect do
         described_class.new(
           section_name: "monthly", i18n:, configurator:,
-          title_size: "14pt", month_params: { week_placement: :left },
+          month_params: { week_placement: :left },
           manifest: LYP::Planners::MOS::Manifest.new, extra_key: "ignored"
         )
       end.not_to raise_error
