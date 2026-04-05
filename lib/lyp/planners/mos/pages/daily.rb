@@ -36,7 +36,7 @@ module LYP
                   rect(
                     stroke: (right: regular_stroke),
 
-                    text(size: 24pt)[#{day.month_day} <#{day.id}>]
+                    text(size: h1)[#{day.month_day} <#{day.id}>]
                   )
                 ),
                 [*#{i18n.t("weekday.full.#{day.weekday_name}")}*],
