@@ -42,7 +42,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Annual do
       LYP::Planners::MOS::PageData.new(
         content: expected_content,
         title: "text(size: h1)[Calendar<#{described_class::ID}>]",
-        page_id: LYP::Planners::MOS::Sections::Annual::ID,
+        page_id: LYP::Planners::MOS::Sections::Annual::ID
       )
     end
 

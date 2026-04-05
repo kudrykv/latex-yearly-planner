@@ -121,3 +121,9 @@ planner:
               notes_height: 1fr
               pattern: dotted
 
+    - name: daily_notes
+      class: daily_notes
+      enabled: true
+      params:
+        pages: 2
+

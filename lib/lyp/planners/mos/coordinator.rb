@@ -44,7 +44,8 @@ module LYP
             "quarterly" => Sections::Quarterly,
             "monthly" => Sections::Monthly,
             "weekly" => Sections::Weekly,
-            "daily" => Sections::Daily
+            "daily" => Sections::Daily,
+            "daily_notes" => Sections::DailyNotes
           }.freeze
         end
       end

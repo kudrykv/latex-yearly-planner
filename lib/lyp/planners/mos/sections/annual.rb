@@ -27,7 +27,7 @@ module LYP
             [PageData.new(
               title: "text(size: h1)[Calendar<#{ID}>]",
               content: content(manifest:),
-              page_id: ID,
+              page_id: ID
             )]
           end
 
