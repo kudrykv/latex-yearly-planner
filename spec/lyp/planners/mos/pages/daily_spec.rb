@@ -43,7 +43,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Daily do
               rect(
                 stroke: (right: regular_stroke),
 
-                text(size: 24pt)[15 <#{day.id}>]
+                text(size: h1)[15 <#{day.id}>]
               )
             ),
             [*Monday*],
@@ -77,7 +77,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Daily do
               rect(
                 stroke: (right: regular_stroke),
 
-                text(size: 24pt)[15 <#{day.id}>]
+                text(size: h1)[15 <#{day.id}>]
               )
             ),
             [*Monday*],
@@ -107,7 +107,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Daily do
               rect(
                 stroke: (right: regular_stroke),
 
-                text(size: 24pt)[15 <#{day.id}>]
+                text(size: h1)[15 <#{day.id}>]
               )
             ),
             [*Monday*],
