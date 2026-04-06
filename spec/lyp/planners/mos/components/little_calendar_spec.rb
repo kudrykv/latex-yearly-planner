@@ -113,7 +113,7 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
         end
       end
 
-      context "day is highlighted" do
+      context "with highlighted day" do
         let(:month) { make_month("2021-02") }
         let(:day) { make_day("2021-02-15") }
 
