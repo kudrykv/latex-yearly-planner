@@ -7,13 +7,14 @@ module LYP
         class Weekly
           attr_reader :section_name
 
-          def initialize(section_name:, i18n:, configurator:, **_rest)
+          def initialize(section_name:, i18n:, configurator:, column_gutter:, **_rest)
             self.section_name = section_name
             self.i18n = i18n
             self.configurator = configurator
             self.weekday_start = configurator.weekday_start
             self.first_week_day = configurator.start_date.beginning_of_month.beginning_of_week
             self.last_week_day = configurator.end_date.end_of_month.end_of_week
+            self.column_gutter = column_gutter
           end
 
           def register(manifest)
@@ -24,7 +25,7 @@ module LYP
 
           def pages(manifest)
             weeks.map do |week|
-              weekly = Pages::Weekly.new(i18n:, manifest:, week:)
+              weekly = Pages::Weekly.new(i18n:, manifest:, week:, column_gutter:)
 
               PageData.new(
                 title: weekly.title,
@@ -38,7 +39,7 @@ module LYP
           private
 
           attr_writer :section_name
-          attr_accessor :i18n, :configurator, :weekday_start, :first_week_day, :last_week_day
+          attr_accessor :i18n, :configurator, :weekday_start, :first_week_day, :last_week_day, :column_gutter
 
           def weeks
             (first_week_day..last_week_day).each_slice(7).map(&:first).map do |day|

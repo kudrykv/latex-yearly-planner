@@ -202,6 +202,8 @@ module LYP
               fill: pattern
             )
 
+            #let scratch_pad = rect_pattern(#{configurator.dig!(:planner, :params, :scratch_pad)})
+
             #let padded_link(padding: 8pt, target, content) = box(
               inset: -padding,
               link(target)[#box(inset: padding, content)]

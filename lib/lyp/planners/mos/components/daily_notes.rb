@@ -5,15 +5,14 @@ module LYP
     module MOS
       module Components
         class DailyNotes
-          attr_accessor :i18n, :manifest, :day, :title_height, :notes_height, :pattern
+          attr_accessor :i18n, :manifest, :day, :title_height, :notes_height
 
-          def initialize(i18n:, manifest:, day:, title_height:, notes_height:, pattern:, **_rest)
+          def initialize(i18n:, manifest:, day:, title_height:, notes_height:, **_rest)
             self.i18n = i18n
             self.manifest = manifest
             self.day = day
             self.title_height = title_height
             self.notes_height = notes_height
-            self.pattern = pattern
           end
 
           def generate
@@ -27,7 +26,7 @@ module LYP
                 columns: 1fr,
                 rows: (#{title_height}, #{notes_height}),
                 grid.cell(align:horizon, stroke: (bottom: 1pt), [#{i18n.t("daily_notes")}#{more}]),
-                rect_pattern(#{pattern})
+                scratch_pad
               )
             TYPST
           end

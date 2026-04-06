@@ -1,4 +1,4 @@
-version: '0.2'
+version: "0.2"
 
 template: mos
 debug: false
@@ -24,6 +24,7 @@ planner:
     regular_stroke: 0.4pt
     thick_stroke: 0.8pt
     regular_height: 5mm
+    scratch_pad: lined
 
     start_date: "2026-01-01"
     end_date: "2026-12-31"
@@ -81,6 +82,8 @@ planner:
     - name: weekly
       class: weekly
       enabled: true
+      params:
+        column_gutter: 5pt
 
     - name: daily
       class: daily
@@ -97,7 +100,7 @@ planner:
             params:
               from: 8
               to: 20
-              time_format: '%k'
+              time_format: "%k"
               trailing_30_minutes: true
 
           - name: little calendar
@@ -126,4 +129,3 @@ planner:
       enabled: true
       params:
         pages: 2
-

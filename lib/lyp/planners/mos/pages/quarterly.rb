@@ -21,7 +21,7 @@ module LYP
 
           def content
             cols = %w[2fr 3fr]
-            columns = [months_stack, "rect_pattern(dotted)"]
+            columns = [months_stack, "scratch_pad"]
 
             cols.reverse! if months_column == :right
             columns.reverse! if months_column == :right

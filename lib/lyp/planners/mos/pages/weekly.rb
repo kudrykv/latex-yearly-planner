@@ -5,12 +5,13 @@ module LYP
     module MOS
       module Pages
         class Weekly
-          attr_accessor :i18n, :manifest, :week
+          attr_accessor :i18n, :manifest, :week, :column_gutter
 
-          def initialize(i18n:, manifest:, week:)
+          def initialize(i18n:, manifest:, week:, column_gutter:)
             self.i18n = i18n
             self.manifest = manifest
             self.week = week
+            self.column_gutter = column_gutter
           end
 
           def title
@@ -22,13 +23,14 @@ module LYP
               grid(
                 columns: (1fr, 1fr, 1fr),
                 rows: (4mm, 1fr, 4mm, 1fr, 4mm, 1fr),
+                column-gutter: #{column_gutter},
 
                 #{format_days(week.days[0...3])},
-                grid.cell(colspan: 3, rect_pattern(dotted)),
+                grid.cell(colspan: 3, scratch_pad),
                 #{format_days(week.days[3...6])},
-                grid.cell(colspan: 3, rect_pattern(dotted)),
-                #{format_day(week.days[6])}, [], [],
-                grid.cell(colspan: 3, rect_pattern(dotted))
+                grid.cell(colspan: 3, scratch_pad),
+                #{format_day(week.days[6])}, grid.cell(colspan: 2, stroke: (bottom: thick_stroke), [#{i18n.t("notes")}]),
+                grid.cell(colspan: 3, scratch_pad)
               )
             TYPST
           end
@@ -49,7 +51,7 @@ module LYP
             <<~TYPST.strip
               box(
                 stroke: (bottom: thick_stroke),
-                width: 95%,
+                width: 100%,
                 inset: (bottom: 4pt),
                 outset: 0pt
               )[#{day.strftime("%A, %e")}]

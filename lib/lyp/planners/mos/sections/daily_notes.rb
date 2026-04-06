@@ -24,7 +24,7 @@ module LYP
             range.map do |daily_note|
               PageData.new(
                 title: title(manifest:, daily_note:),
-                content: "rect_pattern(dotted)",
+                content: "scratch_pad",
                 highlight_months: [daily_note.day.month],
                 highlight_quarters: [daily_note.day.quarter]
               )

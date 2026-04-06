@@ -49,7 +49,7 @@ module LYP
                     stroke: (bottom: thick_stroke),
                     box(height: regular_height, align(horizon, [#{i18n.t("monthly_notes")}]))
                   ),
-                  rect_pattern(dotted)
+                  scratch_pad
                 )
               )
             TYPST
