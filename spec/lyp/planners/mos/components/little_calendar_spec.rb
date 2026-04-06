@@ -20,8 +20,9 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
 
   describe "#generate" do
     context "with week_placement: :left" do
+      let(:day) { nil }
       let(:component) do
-        described_class.new(i18n:, manifest:, week_placement: :left, month:)
+        described_class.new(i18n:, manifest:, week_placement: :left, month:, day:)
       end
 
       context "with a month starting on Monday (no nil padding)" do
@@ -102,6 +103,40 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
               padded_link(<2021W05>)[5], padded_link(<2021-02-01>, padding: 6pt)[1], 2, 3, 4, 5, 6, 7,
             6, 8, 9, 10, 11, 12, 13, 14,
             7, 15, 16, 17, 18, 19, 20, 21,
+            8, 22, 23, 24, 25, 26, 27, 28
+            )
+          TYPST
+        end
+
+        it "wraps linked days and weeks in padded_link" do
+          expect(component.generate).to eq(expected)
+        end
+      end
+
+      context "day is highlighted" do
+        let(:month) { make_month("2021-02") }
+        let(:day) { make_day("2021-02-15") }
+
+        let(:manifest) do
+          m = LYP::Planners::MOS::Manifest.new
+          m.register_source("2021-02-01")
+          m.register_source("2021W05")
+          m
+        end
+
+        let(:expected) do
+          <<~TYPST.strip
+            grid(
+              align: center + horizon,
+              inset: 5pt,
+              stroke: (x, _) => if x == 1 {( left: regular_stroke )},
+              columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
+
+            #{" " * 2}
+              [W], [M], [T], [W], [T], [F], [S], [S], grid.hline(stroke: regular_stroke),
+              padded_link(<2021W05>)[5], padded_link(<2021-02-01>, padding: 6pt)[1], 2, 3, 4, 5, 6, 7,
+            6, 8, 9, 10, 11, 12, 13, 14,
+            7, grid.cell(fill: black, text(white, 15)), 16, 17, 18, 19, 20, 21,
             8, 22, 23, 24, 25, 26, 27, 28
             )
           TYPST
