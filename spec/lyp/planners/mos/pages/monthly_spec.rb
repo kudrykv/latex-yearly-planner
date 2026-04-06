@@ -86,7 +86,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
                 stroke: (bottom: thick_stroke),
                 box(height: regular_height, align(horizon, [Notes]))
               ),
-              rect_pattern(dotted)
+              scratch_pad
             )
           )
         TYPST
@@ -131,7 +131,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
                 stroke: (bottom: thick_stroke),
                 box(height: regular_height, align(horizon, [Notes]))
               ),
-              rect_pattern(dotted)
+              scratch_pad
             )
           )
         TYPST
@@ -176,7 +176,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
                 stroke: (bottom: thick_stroke),
                 box(height: regular_height, align(horizon, [Notes]))
               ),
-              rect_pattern(dotted)
+              scratch_pad
             )
           )
         TYPST

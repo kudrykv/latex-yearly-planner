@@ -51,7 +51,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Weekly do
           inset: (bottom: 4pt),
           outset: 0pt
         )[Wednesday, 17],
-          grid.cell(colspan: 3, rect_pattern(dotted)),
+          grid.cell(colspan: 3, scratch_pad),
           padded_link(<2021-02-18>, box(
           stroke: (bottom: thick_stroke),
           width: 95%,
@@ -68,14 +68,14 @@ RSpec.describe LYP::Planners::MOS::Pages::Weekly do
           inset: (bottom: 4pt),
           outset: 0pt
         )[Saturday, 20],
-          grid.cell(colspan: 3, rect_pattern(dotted)),
+          grid.cell(colspan: 3, scratch_pad),
           box(
           stroke: (bottom: thick_stroke),
           width: 95%,
           inset: (bottom: 4pt),
           outset: 0pt
         )[Sunday, 21], [], [],
-          grid.cell(colspan: 3, rect_pattern(dotted))
+          grid.cell(colspan: 3, scratch_pad)
         )
       TYPST
     end

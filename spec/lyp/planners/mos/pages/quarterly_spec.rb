@@ -49,7 +49,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Quarterly do
             spacing: 1fr,
 
             [calendar], [calendar], [calendar]
-          ), rect_pattern(dotted)
+          ), scratch_pad
           )
         TYPST
       end
@@ -72,7 +72,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Quarterly do
           grid(
             columns: (3fr,2fr),
 
-            rect_pattern(dotted), stack(
+            scratch_pad, stack(
             dir: ttb,
             spacing: 1fr,
 
