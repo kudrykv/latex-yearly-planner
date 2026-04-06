@@ -26,7 +26,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Weekly do
     let(:page) { described_class.new(i18n:, manifest:, week:, column_gutter:) }
 
     it "renders the week number and label" do
-      expect(page.title).to eq("[Week #{week.number} <#{week.id}>]")
+      expect(page.title).to eq("text(size: h1)[Week #{week.number} <#{week.id}>]")
     end
   end
 
