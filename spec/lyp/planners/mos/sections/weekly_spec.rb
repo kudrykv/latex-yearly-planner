@@ -3,10 +3,11 @@
 RSpec.describe LYP::Planners::MOS::Sections::Weekly do
   describe "#section_name" do
     let(:i18n) { class_double(I18n, "i18n") }
-
     let(:configurator) { make_configurator(start_date: "2021-02-01", end_date: "2021-02-28") }
 
-    let(:section) { described_class.new(section_name: "weekly", i18n:, configurator:) }
+    let(:column_gutter) { "5pt" }
+
+    let(:section) { described_class.new(section_name: "weekly", i18n:, configurator:, column_gutter:) }
 
     it "returns the name" do
       expect(section.section_name).to eq("weekly")
@@ -16,10 +17,11 @@ RSpec.describe LYP::Planners::MOS::Sections::Weekly do
   describe "#register" do
     let(:i18n) { class_double(I18n, "i18n") }
     let(:manifest) { LYP::Planners::MOS::Manifest.new }
+    let(:column_gutter) { "5pt" }
 
     let(:configurator) { make_configurator(start_date: "2021-02-01", end_date: "2021-02-28") }
 
-    let(:section) { described_class.new(section_name: "weekly", i18n:, configurator:) }
+    let(:section) { described_class.new(section_name: "weekly", i18n:, configurator:, column_gutter:) }
 
     it "registers each week's ID with the manifest" do
       section.register(manifest)
@@ -34,13 +36,14 @@ RSpec.describe LYP::Planners::MOS::Sections::Weekly do
   describe "#pages" do
     let(:i18n) { class_double(I18n, "i18n") }
     let(:manifest) { LYP::Planners::MOS::Manifest.new }
+    let(:column_gutter) { "5pt" }
     let(:week_ids) { %w[2021W05 2021W06 2021W07 2021W08] }
     let(:feb) { make_month("2021-02") }
     let(:q1) { make_quarter("2021-01-01") }
 
     let(:configurator) { make_configurator(start_date: "2021-02-01", end_date: "2021-02-28") }
 
-    let(:section) { described_class.new(section_name: "weekly", i18n:, configurator:) }
+    let(:section) { described_class.new(section_name: "weekly", i18n:, configurator:, column_gutter:) }
 
     let(:expected) do
       week_ids.map do |id|
@@ -71,13 +74,14 @@ RSpec.describe LYP::Planners::MOS::Sections::Weekly do
 
   describe "constructor" do
     let(:i18n) { class_double(I18n, "i18n") }
-
     let(:configurator) { make_configurator(start_date: "2021-02-01", end_date: "2021-02-28") }
+
+    let(:column_gutter) { "5pt" }
 
     it "accepts and ignores extra keyword arguments" do
       expect do
         described_class.new(
-          section_name: "weekly", i18n:, configurator:,
+          section_name: "weekly", i18n:, configurator:, column_gutter:,
           manifest: LYP::Planners::MOS::Manifest.new, extra_param: "ignored"
         )
       end.not_to raise_error
