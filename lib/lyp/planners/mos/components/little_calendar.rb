@@ -5,17 +5,16 @@ module LYP
     module MOS
       module Components
         class LittleCalendar
-          attr_reader :i18n, :manifest, :week_placement, :month, :show_month_name
+          attr_reader :i18n, :manifest, :week_placement, :month, :show_month_name, :today
 
-          # rubocop:disable Lint/UnusedMethodArgument
           def initialize(i18n:, manifest:, week_placement:, month:, day: nil, show_month_name: false, **_rest)
             @i18n = i18n
             @manifest = manifest
             @week_placement = week_placement.to_sym
             @month = month
+            @today = day
             @show_month_name = show_month_name
           end
-          # rubocop:enable Lint/UnusedMethodArgument
 
           def generate
             <<~TYPST.strip
@@ -82,6 +81,7 @@ module LYP
 
             text = day.month_day.to_s
             text = "padded_link(<#{day.id}>, padding: 6pt)[#{text}]" if manifest.source? day.id
+            text = "grid.cell(fill: black, text(white, #{text}))" if today == day
 
             text
           end
