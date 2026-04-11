@@ -28,7 +28,6 @@ RSpec.describe LYP::Planners::MOS::Sections::CoverPlain do
           columns: 1fr,
           rows: 1fr,
           align: center + horizon,
-          stroke: 0pt,
 
           text(size: 24pt)[My Planner 2026]
         )

@@ -30,7 +30,6 @@ module LYP
                 columns: 1fr,
                 rows: 1fr,
                 align: center + horizon,
-                stroke: 0pt,
 
                 text(size: #{font_size})[#{name}]
               )
