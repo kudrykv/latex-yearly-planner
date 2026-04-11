@@ -51,7 +51,7 @@ RSpec.describe LYP::Planners::MOS::Sections::Annual do
         grid(
           columns: (1fr, 1fr, 1fr),
           rows: 1fr,
-          column-gutter: 10pt,
+          column-gutter: regular_column_gutter,
           row-gutter: 5pt,
 
           [cal-1],

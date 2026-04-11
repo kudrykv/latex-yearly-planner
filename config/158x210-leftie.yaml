@@ -26,7 +26,7 @@ planner:
     regular_height: 7mm
     scratch_pad: lined
     link_padding: 8pt
-    regular_column_gutter: 4pt
+    regular_column_gutter: 10pt
 
     start_date: "2026-01-01"
     end_date: "2026-12-31"
@@ -60,7 +60,6 @@ planner:
       params:
         little_calendar:
           show_month_name: true
-        column_gutter: 10pt
         row-gutter: 5pt
 
     - name: quarterly
