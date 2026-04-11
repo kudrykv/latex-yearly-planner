@@ -25,6 +25,7 @@ planner:
     thick_stroke: 0.8pt
     regular_height: 5mm
     scratch_pad: lined
+    link_padding: 8pt
 
     start_date: "2026-01-01"
     end_date: "2026-12-31"

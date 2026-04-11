@@ -24,7 +24,7 @@ RSpec.describe LYP::Planners::MOS::Components::DailyNotes do
         grid(
           columns: 1fr,
           rows: (5mm, 1fr),
-          grid.cell(align:horizon, stroke: (bottom: 1pt), [Notes]),
+          grid.cell(align:horizon, stroke: (bottom: thick_stroke), [Notes]),
           scratch_pad
         )
       TYPST
@@ -38,7 +38,7 @@ RSpec.describe LYP::Planners::MOS::Components::DailyNotes do
           grid(
             columns: 1fr,
             rows: (5mm, 1fr),
-            grid.cell(align:horizon, stroke: (bottom: 1pt), [Notes #padded_link(<daily-note-2026-04-05-page-1>)[| More]]),
+            grid.cell(align:horizon, stroke: (bottom: thick_stroke), [Notes #padded_link(<daily-note-2026-04-05-page-1>)[| More]]),
             scratch_pad
           )
         TYPST

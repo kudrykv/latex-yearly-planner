@@ -25,7 +25,7 @@ module LYP
               grid(
                 columns: 1fr,
                 rows: (#{title_height}, #{notes_height}),
-                grid.cell(align:horizon, stroke: (bottom: 1pt), [#{i18n.t("daily_notes")}#{more}]),
+                grid.cell(align:horizon, stroke: (bottom: thick_stroke), [#{i18n.t("daily_notes")}#{more}]),
                 scratch_pad
               )
             TYPST

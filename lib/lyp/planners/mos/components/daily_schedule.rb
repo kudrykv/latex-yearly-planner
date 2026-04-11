@@ -23,7 +23,10 @@ module LYP
                 stroke: (_, y) =>
                   if calc.even(y) { ( bottom: regular_stroke + black ) }
                   else { ( bottom: regular_stroke + gray ) },
-                grid.cell(stroke: (bottom: 1pt), box(height: regular_height, align(horizon, [#{i18n.t("schedule")}]))),
+                grid.cell(
+                  stroke: (bottom: thick_stroke),
+                  box(height: regular_height, align(horizon, [#{i18n.t("schedule")}]))
+                ),
                 #{schedule_lines},
 
                 #{"box(height: regular_height)" if trailing_30_minutes}

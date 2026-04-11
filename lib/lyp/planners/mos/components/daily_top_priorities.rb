@@ -19,7 +19,7 @@ module LYP
                 inset: 0mm,
                 stroke: (_, _) => (bottom: regular_stroke),
 
-                grid.cell(stroke: (bottom: 1pt), box(height: regular_height, align(horizon, [#{i18n.t("top_priorities")}]))),
+                grid.cell(stroke: (bottom: thick_stroke), box(height: regular_height, align(horizon, [#{i18n.t("top_priorities")}]))),
                 #{top_priorities_lines}
               )
             TYPST

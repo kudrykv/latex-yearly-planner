@@ -21,7 +21,10 @@ RSpec.describe LYP::Planners::MOS::Components::DailySchedule do
             stroke: (_, y) =>
               if calc.even(y) { ( bottom: regular_stroke + black ) }
               else { ( bottom: regular_stroke + gray ) },
-            grid.cell(stroke: (bottom: 1pt), box(height: regular_height, align(horizon, [Schedule]))),
+            grid.cell(
+              stroke: (bottom: thick_stroke),
+              box(height: regular_height, align(horizon, [Schedule]))
+            ),
             box(height: regular_height, align(horizon, [ 8])), box(height: regular_height),
           box(height: regular_height, align(horizon, [ 9])), box(height: regular_height),
 
@@ -48,7 +51,10 @@ RSpec.describe LYP::Planners::MOS::Components::DailySchedule do
             stroke: (_, y) =>
               if calc.even(y) { ( bottom: regular_stroke + black ) }
               else { ( bottom: regular_stroke + gray ) },
-            grid.cell(stroke: (bottom: 1pt), box(height: regular_height, align(horizon, [Schedule]))),
+            grid.cell(
+              stroke: (bottom: thick_stroke),
+              box(height: regular_height, align(horizon, [Schedule]))
+            ),
             box(height: regular_height, align(horizon, [ 8])), box(height: regular_height),
           box(height: regular_height, align(horizon, [ 9])), box(height: regular_height),
 
