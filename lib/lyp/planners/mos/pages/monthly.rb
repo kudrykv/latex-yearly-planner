@@ -42,7 +42,7 @@ module LYP
 
                 grid(
                   columns: (1fr),
-                  rows: (2mm, auto, 1fr),
+                  rows: (regular_column_gutter, auto, 1fr),
 
                   [],
                   grid.cell(
@@ -60,11 +60,11 @@ module LYP
           def columns
             cols = ["1fr"] * 7
 
-            with_week_column(cols, month_params[:week_label_width]).join(", ")
+            with_week_column(cols, "regular_height").join(", ")
           end
 
           def rows
-            head = [month_params[:heading_height]]
+            head = ["regular_height"]
             body = [month_params[:daily_cell_height]] * month_in_weeks.count
 
             (head + body).join(", ")

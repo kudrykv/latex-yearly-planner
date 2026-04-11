@@ -54,8 +54,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
 
     context "with week_placement: :left" do
       let(:month_params) do
-        { week_placement: :left, week_label_width: "10mm",
-          heading_height: "2mm", daily_cell_height: "1fr", week_label_rotation: "-90deg" }
+        { week_placement: :left, daily_cell_height: "1fr", week_label_rotation: "-90deg" }
       end
 
       let(:expected) do
@@ -66,8 +65,8 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
 
             grid(
               stroke: regular_stroke,
-              columns: (10mm, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
-              rows: (2mm, 1fr, 1fr, 1fr, 1fr, 1fr),
+              columns: (regular_height, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
+              rows: (regular_height, 1fr, 1fr, 1fr, 1fr, 1fr),
 
               [], align(center + horizon)[Monday], align(center + horizon)[Tuesday], align(center + horizon)[Wednesday], align(center + horizon)[Thursday], align(center + horizon)[Friday], align(center + horizon)[Saturday], align(center + horizon)[Sunday],
               align(center + horizon, rotate(-90deg, reflow: true)[#Week 13]), [], [], [], box(stroke: regular_stroke, inset: 3pt)[#1], box(stroke: regular_stroke, inset: 3pt)[#2], box(stroke: regular_stroke, inset: 3pt)[#3], box(stroke: regular_stroke, inset: 3pt)[#4],
@@ -79,7 +78,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
 
             grid(
               columns: (1fr),
-              rows: (2mm, auto, 1fr),
+              rows: (regular_column_gutter, auto, 1fr),
 
               [],
               grid.cell(
@@ -99,8 +98,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
 
     context "with week_placement: :right" do
       let(:month_params) do
-        { week_placement: :right, week_label_width: "10mm",
-          heading_height: "2mm", daily_cell_height: "1fr", week_label_rotation: "-90deg" }
+        { week_placement: :right, daily_cell_height: "1fr", week_label_rotation: "-90deg" }
       end
 
       let(:expected) do
@@ -111,8 +109,8 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
 
             grid(
               stroke: regular_stroke,
-              columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 10mm),
-              rows: (2mm, 1fr, 1fr, 1fr, 1fr, 1fr),
+              columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr, regular_height),
+              rows: (regular_height, 1fr, 1fr, 1fr, 1fr, 1fr),
 
               align(center + horizon)[Monday], align(center + horizon)[Tuesday], align(center + horizon)[Wednesday], align(center + horizon)[Thursday], align(center + horizon)[Friday], align(center + horizon)[Saturday], align(center + horizon)[Sunday], [],
               [], [], [], box(stroke: regular_stroke, inset: 3pt)[#1], box(stroke: regular_stroke, inset: 3pt)[#2], box(stroke: regular_stroke, inset: 3pt)[#3], box(stroke: regular_stroke, inset: 3pt)[#4], align(center + horizon, rotate(-90deg, reflow: true)[#Week 13]),
@@ -124,7 +122,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
 
             grid(
               columns: (1fr),
-              rows: (2mm, auto, 1fr),
+              rows: (regular_column_gutter, auto, 1fr),
 
               [],
               grid.cell(
@@ -144,8 +142,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
 
     context "with week_placement: :none" do
       let(:month_params) do
-        { week_placement: :none, week_label_width: "10mm",
-          heading_height: "2mm", daily_cell_height: "1fr", week_label_rotation: "-90deg" }
+        { week_placement: :none, daily_cell_height: "1fr", week_label_rotation: "-90deg" }
       end
 
       let(:expected) do
@@ -157,7 +154,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
             grid(
               stroke: regular_stroke,
               columns: (1fr, 1fr, 1fr, 1fr, 1fr, 1fr, 1fr),
-              rows: (2mm, 1fr, 1fr, 1fr, 1fr, 1fr),
+              rows: (regular_height, 1fr, 1fr, 1fr, 1fr, 1fr),
 
               align(center + horizon)[Monday], align(center + horizon)[Tuesday], align(center + horizon)[Wednesday], align(center + horizon)[Thursday], align(center + horizon)[Friday], align(center + horizon)[Saturday], align(center + horizon)[Sunday],
               [], [], [], box(stroke: regular_stroke, inset: 3pt)[#1], box(stroke: regular_stroke, inset: 3pt)[#2], box(stroke: regular_stroke, inset: 3pt)[#3], box(stroke: regular_stroke, inset: 3pt)[#4],
@@ -169,7 +166,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Monthly do
 
             grid(
               columns: (1fr),
-              rows: (2mm, auto, 1fr),
+              rows: (regular_column_gutter, auto, 1fr),
 
               [],
               grid.cell(

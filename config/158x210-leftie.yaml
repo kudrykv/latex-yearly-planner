@@ -23,7 +23,7 @@ planner:
   params:
     regular_stroke: 0.4pt
     thick_stroke: 0.8pt
-    regular_height: 5mm
+    regular_height: 7mm
     scratch_pad: lined
     link_padding: 8pt
     regular_column_gutter: 4pt
@@ -76,9 +76,7 @@ planner:
       params:
         month_params:
           week_placement: left
-          heading_height: 5mm
           week_label_rotation: 90deg
-          week_label_width: 5mm
           daily_cell_height: 2.5cm
 
     - name: weekly
