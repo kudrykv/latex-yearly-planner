@@ -80,7 +80,7 @@ module LYP
             return "[]" unless day
 
             text = day.month_day.to_s
-            text = "padded_link(<#{day.id}>, padding: 6pt)[#{text}]" if manifest.source? day.id
+            text = "padded_link(<#{day.id}>)[#{text}]" if manifest.source? day.id
             text = "grid.cell(fill: black, text(white, #{text}))" if today == day
 
             text

@@ -48,7 +48,7 @@ module LYP
               grid(
                 columns: (auto, auto),
                 rows: (3fr, 2fr),
-                column-gutter: 4pt,
+                column-gutter: regular_column_gutter,
 
                 grid.cell(
                   rowspan: 2,
