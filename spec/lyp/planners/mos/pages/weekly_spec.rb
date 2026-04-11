@@ -40,46 +40,11 @@ RSpec.describe LYP::Planners::MOS::Pages::Weekly do
           rows: (4mm, 1fr, 4mm, 1fr, 4mm, 1fr),
           column-gutter: #{column_gutter},
 
-          padded_link(<2021-02-15>, box(
-          stroke: (bottom: thick_stroke),
-          width: 100%,
-          inset: (bottom: 4pt),
-          outset: 0pt
-        )[Monday, 15]), box(
-          stroke: (bottom: thick_stroke),
-          width: 100%,
-          inset: (bottom: 4pt),
-          outset: 0pt
-        )[Tuesday, 16], box(
-          stroke: (bottom: thick_stroke),
-          width: 100%,
-          inset: (bottom: 4pt),
-          outset: 0pt
-        )[Wednesday, 17],
+          grid.cell(stroke: (bottom: thick_stroke), padded_link(<2021-02-15>, [Monday, 15])), grid.cell(stroke: (bottom: thick_stroke), [Tuesday, 16]), grid.cell(stroke: (bottom: thick_stroke), [Wednesday, 17]),
           grid.cell(colspan: 3, scratch_pad),
-          padded_link(<2021-02-18>, box(
-          stroke: (bottom: thick_stroke),
-          width: 100%,
-          inset: (bottom: 4pt),
-          outset: 0pt
-        )[Thursday, 18]), box(
-          stroke: (bottom: thick_stroke),
-          width: 100%,
-          inset: (bottom: 4pt),
-          outset: 0pt
-        )[Friday, 19], box(
-          stroke: (bottom: thick_stroke),
-          width: 100%,
-          inset: (bottom: 4pt),
-          outset: 0pt
-        )[Saturday, 20],
+          grid.cell(stroke: (bottom: thick_stroke), padded_link(<2021-02-18>, [Thursday, 18])), grid.cell(stroke: (bottom: thick_stroke), [Friday, 19]), grid.cell(stroke: (bottom: thick_stroke), [Saturday, 20]),
           grid.cell(colspan: 3, scratch_pad),
-          box(
-          stroke: (bottom: thick_stroke),
-          width: 100%,
-          inset: (bottom: 4pt),
-          outset: 0pt
-        )[Sunday, 21], grid.cell(colspan: 2, stroke: (bottom: thick_stroke), [Notes]),
+          grid.cell(stroke: (bottom: thick_stroke), [Sunday, 21]), grid.cell(colspan: 2, stroke: (bottom: thick_stroke), [Notes]),
           grid.cell(colspan: 3, scratch_pad)
         )
       TYPST

@@ -42,20 +42,10 @@ module LYP
           end
 
           def format_day(day)
-            return box_day(day) unless manifest.source?(day.id)
+            text = "[#{day.strftime("%A, %e")}]"
+            text = "padded_link(<#{day.id}>, #{text})" if manifest.source?(day.id)
 
-            "padded_link(<#{day.id}>, #{box_day(day)})"
-          end
-
-          def box_day(day)
-            <<~TYPST.strip
-              box(
-                stroke: (bottom: thick_stroke),
-                width: 100%,
-                inset: (bottom: 4pt),
-                outset: 0pt
-              )[#{day.strftime("%A, %e")}]
-            TYPST
+            "grid.cell(stroke: (bottom: thick_stroke), #{text})"
           end
         end
       end
