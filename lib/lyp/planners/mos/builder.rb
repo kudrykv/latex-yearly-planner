@@ -17,6 +17,8 @@ module LYP
           self.side_menu_width = configurator.dig!(:planner, :params, :mos_layout, :side_menu_width)
           self.menu_rotate = configurator.dig!(:planner, :params, :mos_layout, :menu_rotate)
           self.reverse_months_quarters = configurator.dig!(:planner, :params, :mos_layout, :reverse_months_quarters)
+          self.reverse_months_quarters_items = configurator
+                                                 .dig!(:planner, :params, :mos_layout, :reverse_months_quarters_items)
           self.heading_height = configurator.dig!(:planner, :params, :heading, :height)
           self.heading_align = configurator.dig!(:planner, :params, :heading, :align)
 
@@ -50,7 +52,8 @@ module LYP
                       :column_gutter,
                       :row_gutter,
                       :menu_rotate,
-                      :reverse_months_quarters
+                      :reverse_months_quarters,
+                      :reverse_months_quarters_items
 
         def layout_page(page_spec)
           <<~TYPST.strip
@@ -110,7 +113,7 @@ module LYP
                   columns: (#{cols.join(", ")}),
                   rows: 1fr,
                   inset: 0pt,
-                  column-gutter: 5mm,
+                  column-gutter: regular_column_gutter,
                   stroke: 0pt,
 
                   #{items.join(",\n")}
@@ -121,13 +124,19 @@ module LYP
         end
 
         def months_menu(highlight_months:)
-          menu = Components::MonthsMenu.new(i18n:, manifest:, range: start_date.month..end_date.month)
+          range = start_date.month..end_date.month
+          range = range.to_a.reverse if reverse_months_quarters_items
+
+          menu = Components::MonthsMenu.new(i18n:, manifest:, range:)
           menu.highlight(highlight_months)
           menu.generate
         end
 
         def quarters_menu(highlight_quarters:)
-          menu = Components::QuartersMenu.new(i18n:, manifest:, range: start_date.quarter..end_date.quarter)
+          range = start_date.quarter..end_date.quarter
+          range = range.to_a.reverse if reverse_months_quarters_items
+
+          menu = Components::QuartersMenu.new(i18n:, manifest:, range: range)
           menu.highlight(highlight_quarters)
           menu.generate
         end

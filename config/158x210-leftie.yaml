@@ -43,6 +43,7 @@ planner:
       row_gutter: 2mm
       menu_rotate: 270deg
       reverse_months_quarters: true
+      reverse_months_quarters_items: true
 
     heading:
       height: 10mm
@@ -68,7 +69,7 @@ planner:
       class: quarterly
       enabled: true
       params:
-        months_column: right
+        months_column: left
         little_calendar:
           show_month_name: true
 
