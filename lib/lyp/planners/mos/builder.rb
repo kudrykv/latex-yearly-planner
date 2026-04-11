@@ -18,7 +18,7 @@ module LYP
           self.menu_rotate = configurator.dig!(:planner, :params, :mos_layout, :menu_rotate)
           self.reverse_months_quarters = configurator.dig!(:planner, :params, :mos_layout, :reverse_months_quarters)
           self.reverse_months_quarters_items = configurator
-                                                 .dig!(:planner, :params, :mos_layout, :reverse_months_quarters_items)
+                                               .dig!(:planner, :params, :mos_layout, :reverse_months_quarters_items)
           self.heading_height = configurator.dig!(:planner, :params, :heading, :height)
           self.heading_align = configurator.dig!(:planner, :params, :heading, :align)
 
@@ -92,7 +92,7 @@ module LYP
         end
 
         def side_menu_cell(highlight_months:, highlight_quarters:)
-          cols = ["1fr", "3fr"]
+          cols = %w[1fr 3fr]
           items = [quarters_menu(highlight_quarters:), months_menu(highlight_months:)]
 
           if reverse_months_quarters
