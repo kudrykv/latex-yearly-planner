@@ -138,13 +138,14 @@ module LYP
           cols = [cal].compact
 
           <<~TYPST
-            align(top, grid(
+            grid(
+              rows: #{heading_height},
               columns: #{cols.length},
               inset: 7pt,
 
               stroke: (x, y)  => if x > 0 { ( left: regular_stroke ) },
               #{cols.join(", ")}
-            ))
+            )
           TYPST
         end
 
