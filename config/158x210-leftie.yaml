@@ -12,8 +12,8 @@ document:
     margin:
       top: 10mm
       bottom: 0mm
-      left: 5mm
-      right: 0mm
+      left: 0mm
+      right: 5mm
 
   text:
     size: 10pt
@@ -23,8 +23,8 @@ planner:
   params:
     regular_stroke: 0.4pt
     thick_stroke: 0.8pt
-    regular_height: 7mm
-    scratch_pad: lined
+    regular_height: 5mm
+    scratch_pad: dotted
     link_padding: 8pt
     regular_column_gutter: 10pt
 
@@ -37,10 +37,12 @@ planner:
       inset: 5pt
 
     mos_layout:
-      side_menu_position: right
+      side_menu_position: left
       side_menu_width: 10mm
       column_gutter: 2mm
       row_gutter: 2mm
+      menu_rotate: 270deg
+      reverse_months_quarters: true
 
     heading:
       height: 10mm

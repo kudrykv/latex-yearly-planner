@@ -15,6 +15,8 @@ module LYP
           self.row_gutter = configurator.dig!(:planner, :params, :mos_layout, :row_gutter)
           self.side_menu_position = configurator.dig!(:planner, :params, :mos_layout, :side_menu_position)
           self.side_menu_width = configurator.dig!(:planner, :params, :mos_layout, :side_menu_width)
+          self.menu_rotate = configurator.dig!(:planner, :params, :mos_layout, :menu_rotate)
+          self.reverse_months_quarters = configurator.dig!(:planner, :params, :mos_layout, :reverse_months_quarters)
           self.heading_height = configurator.dig!(:planner, :params, :heading, :height)
           self.heading_align = configurator.dig!(:planner, :params, :heading, :align)
 
@@ -46,7 +48,9 @@ module LYP
                       :start_date,
                       :end_date,
                       :column_gutter,
-                      :row_gutter
+                      :row_gutter,
+                      :menu_rotate,
+                      :reverse_months_quarters
 
         def layout_page(page_spec)
           <<~TYPST.strip
@@ -85,24 +89,31 @@ module LYP
         end
 
         def side_menu_cell(highlight_months:, highlight_quarters:)
+          cols = ["1fr", "3fr"]
+          items = [quarters_menu(highlight_quarters:), months_menu(highlight_months:)]
+
+          if reverse_months_quarters
+            cols.reverse!
+            items.reverse!
+          end
+
           <<~TYPST.strip
             grid.cell(
               rowspan: 2,
 
               rotate(
-                90deg,
+                #{menu_rotate},
                 origin: center + horizon,
                 reflow: true,
 
                 table(
-                  columns: (1fr, 3fr),
+                  columns: (#{cols.join(", ")}),
                   rows: 1fr,
                   inset: 0pt,
                   column-gutter: 5mm,
                   stroke: 0pt,
 
-                  #{quarters_menu(highlight_quarters:)},
-                  #{months_menu(highlight_months:)},
+                  #{items.join(",\n")}
                 )
               )
             )
