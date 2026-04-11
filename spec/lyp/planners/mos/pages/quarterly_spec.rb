@@ -43,6 +43,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Quarterly do
         <<~TYPST.strip
           grid(
             columns: (2fr,3fr),
+            column-gutter: regular_column_gutter,
 
             stack(
             dir: ttb,
@@ -71,6 +72,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Quarterly do
         <<~TYPST.strip
           grid(
             columns: (3fr,2fr),
+            column-gutter: regular_column_gutter,
 
             scratch_pad, stack(
             dir: ttb,

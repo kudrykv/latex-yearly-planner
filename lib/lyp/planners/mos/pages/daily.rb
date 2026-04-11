@@ -5,14 +5,13 @@ module LYP
     module MOS
       module Pages
         class Daily
-          attr_accessor :i18n, :manifest, :day, :columns_width, :column_gutter, :items_spacing, :params, :debug
+          attr_accessor :i18n, :manifest, :day, :columns_width, :items_spacing, :params, :debug
 
-          def initialize(i18n:, manifest:, day:, columns_width:, column_gutter:, items_spacing:, debug: false, **params)
+          def initialize(i18n:, manifest:, day:, columns_width:, items_spacing:, debug: false, **params)
             self.i18n = i18n
             self.manifest = manifest
             self.day = day
             self.columns_width = columns_width
-            self.column_gutter = column_gutter
             self.items_spacing = items_spacing
             self.params = params
             self.debug = debug
@@ -27,7 +26,7 @@ module LYP
               grid(
                 columns: (auto, auto),
                 rows: (3fr, 2fr),
-                column-gutter: 4pt,
+                column-gutter: regular_column_gutter,
                 #{"stroke: regular_stroke," if debug}
 
                 grid.cell(
@@ -51,7 +50,8 @@ module LYP
               grid(
                 columns: #{columns_width},
                 rows: 1fr,
-                column-gutter: #{column_gutter},
+                column-gutter: regular_column_gutter,
+
                 #{left_column},
                 #{right_column}
               )

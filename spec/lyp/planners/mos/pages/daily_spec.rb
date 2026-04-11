@@ -34,7 +34,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Daily do
           grid(
             columns: (auto, auto),
             rows: (3fr, 2fr),
-            column-gutter: 4pt,
+            column-gutter: regular_column_gutter,
           #{" " * 2}
 
             grid.cell(
@@ -68,7 +68,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Daily do
           grid(
             columns: (auto, auto),
             rows: (3fr, 2fr),
-            column-gutter: 4pt,
+            column-gutter: regular_column_gutter,
           #{" " * 2}
 
             grid.cell(
@@ -98,7 +98,7 @@ RSpec.describe LYP::Planners::MOS::Pages::Daily do
           grid(
             columns: (auto, auto),
             rows: (3fr, 2fr),
-            column-gutter: 4pt,
+            column-gutter: regular_column_gutter,
             stroke: regular_stroke,
 
             grid.cell(
@@ -158,7 +158,8 @@ RSpec.describe LYP::Planners::MOS::Pages::Daily do
           grid(
             columns: (3fr, 2fr),
             rows: 1fr,
-            column-gutter: 4mm,
+            column-gutter: regular_column_gutter,
+
             stack(
             dir: ttb,
             spacing: 2mm,

@@ -170,6 +170,7 @@ module LYP
             #let regular_stroke = #{configurator.dig!(:planner, :params, :regular_stroke)}
             #let thick_stroke = #{configurator.dig!(:planner, :params, :thick_stroke)}
             #let regular_height = #{configurator.dig!(:planner, :params, :regular_height)}
+            #let regular_column_gutter = #{configurator.dig!(:planner, :params, :regular_column_gutter)}
 
             #let h1 = #{configurator.dig!(:document, :text, :h1)}
 

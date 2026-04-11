@@ -29,6 +29,7 @@ module LYP
             <<~TYPST.strip
               grid(
                 columns: (#{cols.join(",")}),
+                column-gutter: regular_column_gutter,
 
                 #{columns.join(", ")}
               )

@@ -26,6 +26,7 @@ planner:
     regular_height: 5mm
     scratch_pad: lined
     link_padding: 8pt
+    regular_column_gutter: 4pt
 
     start_date: "2026-01-01"
     end_date: "2026-12-31"
@@ -91,7 +92,6 @@ planner:
       enabled: true
       params:
         columns_width: (3fr, 5fr)
-        column_gutter: 2mm
         items_spacing: 5mm
 
         left_column:
