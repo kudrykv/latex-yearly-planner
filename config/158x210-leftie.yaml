@@ -34,6 +34,7 @@ planner:
 
     little_calendar:
       week_placement: left
+      inset: 5pt
 
     mos_layout:
       side_menu_position: right
@@ -107,6 +108,7 @@ planner:
             enabled: true
             params:
               week_placement: left
+              inset: 5pt
 
         right_column:
           - name: top priorities

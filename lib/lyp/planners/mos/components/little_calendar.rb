@@ -5,22 +5,23 @@ module LYP
     module MOS
       module Components
         class LittleCalendar
-          attr_reader :i18n, :manifest, :week_placement, :month, :show_month_name, :today
+          attr_reader :i18n, :manifest, :week_placement, :month, :show_month_name, :today, :inset
 
-          def initialize(i18n:, manifest:, week_placement:, month:, day: nil, show_month_name: false, **_rest)
+          def initialize(i18n:, manifest:, week_placement:, month:, day: nil, show_month_name: false, inset:, **_rest)
             @i18n = i18n
             @manifest = manifest
             @week_placement = week_placement.to_sym
             @month = month
             @today = day
             @show_month_name = show_month_name
+            @inset = inset
           end
 
           def generate
             <<~TYPST.strip
               grid(
                 align: center + horizon,
-                inset: 5pt,
+                inset: #{inset},
                 stroke: #{stroke},
                 columns: (#{columns}),
 

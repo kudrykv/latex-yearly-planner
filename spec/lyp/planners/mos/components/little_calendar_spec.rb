@@ -21,8 +21,9 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
   describe "#generate" do
     context "with week_placement: :left" do
       let(:day) { nil }
+      let(:inset) { "5pt" }
       let(:component) do
-        described_class.new(i18n:, manifest:, week_placement: :left, month:, day:)
+        described_class.new(i18n:, manifest:, week_placement: :left, month:, day:, inset:)
       end
 
       context "with a month starting on Monday (no nil padding)" do
@@ -151,9 +152,10 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
     context "with week_placement: :right" do
       let(:month) { make_month("2021-02") }
       let(:manifest) { LYP::Planners::MOS::Manifest.new }
+      let(:inset) { "5pt" }
 
       let(:component) do
-        described_class.new(i18n:, manifest:, week_placement: :right, month:)
+        described_class.new(i18n:, manifest:, week_placement: :right, month:, inset:)
       end
 
       let(:expected) do
@@ -182,9 +184,10 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
     context "with week_placement: :none" do
       let(:month) { make_month("2021-02") }
       let(:manifest) { LYP::Planners::MOS::Manifest.new }
+      let(:inset) { "5pt" }
 
       let(:component) do
-        described_class.new(i18n:, manifest:, week_placement: :none, month:)
+        described_class.new(i18n:, manifest:, week_placement: :none, month:, inset:)
       end
 
       let(:expected) do
@@ -215,7 +218,8 @@ RSpec.describe LYP::Planners::MOS::Components::LittleCalendar do
         described_class.new(
           i18n:, manifest: LYP::Planners::MOS::Manifest.new,
           week_placement: :left, month: make_month("2021-02"),
-          day: make_day("2021-02-15"), extra_param: "ignored"
+          day: make_day("2021-02-15"), inset: "5pt",
+          extra_param: "ignored"
         )
       end.not_to raise_error
     end
