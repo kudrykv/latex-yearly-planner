@@ -9,10 +9,15 @@ else
   echo "Building using plannergen binary at \"${PLANNERGEN_BINARY}\""
 fi
 
+MONTH_FLAG=""
+if [ -n "$PLANNER_MONTH" ]; then
+  MONTH_FLAG="--month $PLANNER_MONTH"
+fi
+
 if [ -z "$PREVIEW" ]; then
-  eval $GO_CMD --config "${CFG}"
+  eval $GO_CMD --config "${CFG}" $MONTH_FLAG
 else
-  eval $GO_CMD --preview --config "${CFG}"
+  eval $GO_CMD --preview --config "${CFG}" $MONTH_FLAG
 fi
 
 

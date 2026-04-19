@@ -1,0 +1,52 @@
+layout:
+  paper:
+    width: 15.3cm
+    height: 20.3cm
+
+    margin:
+      top: 0.3cm
+      bottom: 0.3cm
+      left: 0.3cm
+      right: 0.3cm
+
+    reversemargins: true
+    marginparwidth: .8cm
+    marginparsep: 3mm
+
+  lengths:
+    quarterlyspring: \textcolor{white}{.}
+
+  numbers:
+    dailytodos: 6
+    dailynotes: 29
+    dailydiarygoals: 10
+    dailydiarygrateful: 2
+    dailydiarybest: 2
+    dailydiarylog: 30
+    notesonpage: 38
+
+pages:
+  - name: title
+    renderblocks:
+      - funcname: title
+        tpls:
+          - title.tpl
+
+  - name: monthly
+    renderblocks:
+      - funcname: monthly
+        tpls:
+          - breadcrumb_03_monthly.tpl
+
+  - name: weekly
+    renderblocks:
+      - funcname: weekly
+        tpls:
+          - breadcrumb_04_weekly.tpl
+
+  - name: notes_indexed
+    renderblocks:
+      - funcname: notes_indexed
+        tpls:
+          - breadcrumb_08_notes_index.tpl
+          - breadcrumb_09_notes.tpl

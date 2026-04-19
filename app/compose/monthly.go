@@ -1,6 +1,8 @@
 package compose
 
 import (
+	"time"
+
 	"github.com/kudrykv/latex-yearly-planner/app/components/cal"
 	"github.com/kudrykv/latex-yearly-planner/app/components/page"
 	"github.com/kudrykv/latex-yearly-planner/app/config"
@@ -12,6 +14,11 @@ func Monthly(cfg config.Config, tpls []string) (page.Modules, error) {
 
 	for _, quarter := range year.Quarters {
 		for _, month := range quarter.Months {
+			// Skip months if month filter is set and doesn't match
+			if cfg.Month > 0 && month.Month != time.Month(cfg.Month) {
+				continue
+			}
+
 			modules = append(modules, page.Module{
 				Cfg: cfg,
 				Tpl: tpls[0],

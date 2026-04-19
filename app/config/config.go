@@ -14,6 +14,7 @@ type Config struct {
 	Debug Debug
 
 	Year                int `env:"PLANNER_YEAR"`
+	Month               int `env:"PLANNER_MONTH"`
 	WeekStart           time.Weekday
 	Dotted              bool
 	CalAfterSchedule    bool

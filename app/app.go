@@ -18,6 +18,7 @@ import (
 const (
 	fConfig = "config"
 	pConfig = "preview"
+	fMonth  = "month"
 )
 
 func New() *cli.App {
@@ -30,6 +31,7 @@ func New() *cli.App {
 		Flags: []cli.Flag{
 			&cli.PathFlag{Name: fConfig, Required: true},
 			&cli.BoolFlag{Name: pConfig, Required: false},
+			&cli.IntFlag{Name: fMonth, Required: false, Value: 0},
 		},
 
 		Action: action,
@@ -45,10 +47,15 @@ func action(c *cli.Context) error {
 	)
 
 	preview := c.Bool(pConfig)
+	month := c.Int(fMonth)
 
 	pathConfigs := strings.Split(c.Path(fConfig), ",")
 	if cfg, err = config.New(pathConfigs...); err != nil {
 		return fmt.Errorf("config new: %w", err)
+	}
+
+	if month > 0 {
+		cfg.Month = month
 	}
 
 	wr := &bytes.Buffer{}
