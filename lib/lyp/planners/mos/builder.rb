@@ -10,6 +10,7 @@ module LYP
           self.configurator = configurator
           self.manifest = manifest
           self.pages = []
+          self.preamble = Preamble.new(configurator)
 
           self.column_gutter = configurator.dig!(:planner, :params, :mos_layout, :column_gutter)
           self.row_gutter = configurator.dig!(:planner, :params, :mos_layout, :row_gutter)
@@ -30,7 +31,7 @@ module LYP
 
         def generate
           <<~TYPST.strip
-            #{definition(configurator)}
+            #{preamble.generate}
             #{pages.join("\n#pagebreak()\n")}
           TYPST
         end
@@ -41,7 +42,7 @@ module LYP
 
         private
 
-        attr_accessor :i18n, :configurator, :manifest, :pages,
+        attr_accessor :i18n, :configurator, :manifest, :pages, :preamble,
                       :side_menu_position,
                       :side_menu_width,
                       :heading_height,
@@ -168,72 +169,6 @@ module LYP
             )
           TYPST
         end
-
-        # rubocop:disable Metrics/MethodLength
-        def definition(configurator)
-          <<~TYPST.strip
-            #set page(
-              width: #{configurator.dig!(:document, :layout, :dimensions, :width)},
-              height: #{configurator.dig!(:document, :layout, :dimensions, :height)},
-
-              margin: (
-                top: #{configurator.dig!(:document, :layout, :margin, :top)},
-                right: #{configurator.dig!(:document, :layout, :margin, :right)},
-                bottom: #{configurator.dig!(:document, :layout, :margin, :bottom)},
-                left: #{configurator.dig!(:document, :layout, :margin, :left)},
-              )
-            )
-
-            #set text(
-              size: #{configurator.dig!(:document, :text, :size)}
-            )
-
-            #let regular_stroke = #{configurator.dig!(:planner, :params, :regular_stroke)}
-            #let thick_stroke = #{configurator.dig!(:planner, :params, :thick_stroke)}
-            #let regular_height = #{configurator.dig!(:planner, :params, :regular_height)}
-            #let regular_column_gutter = #{configurator.dig!(:planner, :params, :regular_column_gutter)}
-
-            #let h1 = #{configurator.dig!(:document, :text, :h1)}
-
-            #let dotted = tiling(
-              size: (regular_height, regular_height),
-              place(
-                dx: 0.5pt,
-                dy: regular_height - 0.3mm,
-                circle(
-                  radius: 0.141mm,
-                  fill: black
-                )
-              ),
-            )
-
-            #let lined = tiling(
-              size: (regular_height, regular_height),
-              place(
-                line(
-                  start: (0%, regular_height - 0.15mm),
-                  end: (100%, regular_height - 0.15mm),
-                  stroke: regular_stroke + luma(130)
-                ),
-              )
-            )
-
-            #let rect_pattern(pattern) = rect(
-              width: 100%,
-              height: 100%,
-              fill: pattern
-            )
-
-            #let scratch_pad = rect_pattern(#{configurator.dig!(:planner, :params, :scratch_pad)})
-
-            #let padded_link(padding: #{configurator.dig!(:planner, :params, :link_padding)}, target, content) = box(
-              inset: -padding,
-              link(target)[#box(inset: padding, content)]
-            )
-          TYPST
-        end
-
-        # rubocop:enable Metrics/MethodLength
       end
     end
   end
