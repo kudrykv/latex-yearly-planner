@@ -19,7 +19,7 @@ module LYP
           def generate
             <<~TYPST.strip
               table(
-                stroke: (x, y) => (left: regular_stroke, right: regular_stroke, bottom: regular_stroke),
+                stroke: regular_stroke,
                 columns: (#{(["1fr"] * range.count).join(", ")}),
                 rows: 1fr,
                 align: horizon + center,
