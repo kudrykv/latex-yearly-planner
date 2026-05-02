@@ -7,37 +7,41 @@ module LYP
       TEMP_FILE = "temp.pdf"
 
       def compile(workdir:, file:, enable_ghostscript: false)
-        typst_compile_time = Benchmark.measure do
-          `typst compile #{File.join(workdir, file)} #{File.join(workdir, OUTPUT_FILE)}`
-        end
-
-        puts "Typst compilation time: #{typst_compile_time.real.round(2)}s"
-
-        run_ghostscript if enable_ghostscript
+        compile_typst(workdir:, file:)
+        run_ghostscript(workdir:) if enable_ghostscript
       end
 
       private
 
-      def run_ghostscript
-        puts "Running Ghostscript..."
-        time = Benchmark.measure { ghostscript_cmd }
-        raise "Failed to slim PDF" unless $CHILD_STATUS.success?
+      def compile_typst(workdir:, file:)
+        puts "Compiling with typst..."
+        time = Benchmark.measure do
+          system("typst", "compile", File.join(workdir, file), File.join(workdir, OUTPUT_FILE), exception: true)
+        end
 
-        puts "Ghostscript time: #{time.real.round(2)}s"
-
-        `mv #{File.join(workdir, TEMP_FILE)} #{File.join(workdir, OUTPUT_FILE)}`
+        puts "Typst compilation time: #{time.real.round(2)}s"
       end
 
-      def ghostscript_cmd
-        `gs \
-          -sDEVICE=pdfwrite \
-          -dCompatibilityLevel=1.5 \
-          -dNOPAUSE \
-          -dQUIET \
-          -dBATCH \
-          -dAutoRotatePages=/None \
-          -sOutputFile=#{File.join(workdir, TEMP_FILE)} \
-          #{File.join(workdir, OUTPUT_FILE)}`
+      def run_ghostscript(workdir:)
+        puts "Running Ghostscript..."
+        time = Benchmark.measure { system(*ghostscript_cmd(workdir:), exception: true) }
+        puts "Ghostscript time: #{time.real.round(2)}s"
+
+        FileUtils.mv(File.join(workdir, TEMP_FILE), File.join(workdir, OUTPUT_FILE))
+      end
+
+      def ghostscript_cmd(workdir:)
+        [
+          "gs",
+          "-sDEVICE=pdfwrite",
+          "-dCompatibilityLevel=1.5",
+          "-dNOPAUSE",
+          "-dQUIET",
+          "-dBATCH",
+          "-dAutoRotatePages=/None",
+          "-sOutputFile=#{File.join(workdir, TEMP_FILE)}",
+          File.join(workdir, OUTPUT_FILE)
+        ]
       end
     end
   end

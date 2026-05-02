@@ -32,12 +32,17 @@ module LYP
              aliases: "-w",
              desc: "Working directory, where generation and compilation will be done",
              default: "./out"
+      option :with_ghostscript,
+             type: :boolean,
+             aliases: "-g",
+             desc: "Run ghostscript after compilation (reduces PDF size)",
+             default: false
 
       def generate(path_to_yaml)
         i18n.load_path = Dir[options[:i18n_path]]
         i18n.locale = options[:i18n_locale]
 
-        generate_handler.generate(path_to_yaml, options[:workdir])
+        generate_handler.generate(path_to_yaml, options[:workdir], with_ghostscript: options[:with_ghostscript])
       end
     end
   end

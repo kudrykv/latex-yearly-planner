@@ -10,7 +10,7 @@ module LYP
         self.compile_service = compile_service
       end
 
-      def generate(path_to_yaml, workdir)
+      def generate(path_to_yaml, workdir, with_ghostscript: false)
         yaml = YAML.load_file(path_to_yaml, symbolize_names: true)
 
         contents = generate_service.generate(yaml)
@@ -19,7 +19,7 @@ module LYP
 
         File.write(File.join(workdir, "index.typst"), contents)
 
-        compile_service.compile(workdir:, file: "index.typst")
+        compile_service.compile(workdir:, file: "index.typst", enable_ghostscript: with_ghostscript)
       end
     end
   end
