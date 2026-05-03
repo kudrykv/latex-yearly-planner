@@ -4,30 +4,14 @@ module LYP
   module Planners
     module MOS
       class Builder
-        # rubocop:disable Metrics/AbcSize
         def initialize(i18n:, configurator:, manifest:)
-          self.i18n = i18n
           self.configurator = configurator
-          self.manifest = manifest
           self.pages = []
           self.preamble = Preamble.new(configurator)
-
-          self.column_gutter = configurator.dig!(:planner, :params, :mos_layout, :column_gutter)
-          self.row_gutter = configurator.dig!(:planner, :params, :mos_layout, :row_gutter)
-          self.side_menu_position = configurator.dig!(:planner, :params, :mos_layout, :side_menu_position)
-          self.side_menu_width = configurator.dig!(:planner, :params, :mos_layout, :side_menu_width)
-          self.menu_rotate = configurator.dig!(:planner, :params, :mos_layout, :menu_rotate)
-          self.reverse_months_quarters = configurator.dig!(:planner, :params, :mos_layout, :reverse_months_quarters)
-          self.reverse_months_quarters_items = configurator
-                                               .dig!(:planner, :params, :mos_layout, :reverse_months_quarters_items)
-          self.heading_height = configurator.dig!(:planner, :params, :heading, :height)
-          self.heading_align = configurator.dig!(:planner, :params, :heading, :align)
-
-          self.weekday_start = configurator.weekday_start
-          self.start_date = configurator.start_date
-          self.end_date = configurator.end_date
+          self.navigation = Navigation.new(i18n:, manifest:, configurator:)
+          self.mos_layout = configurator.dig!(:planner, :params, :mos_layout)
+          self.heading = configurator.dig!(:planner, :params, :heading)
         end
-        # rubocop:enable Metrics/AbcSize
 
         def generate
           <<~TYPST.strip
@@ -42,27 +26,15 @@ module LYP
 
         private
 
-        attr_accessor :i18n, :configurator, :manifest, :pages, :preamble,
-                      :side_menu_position,
-                      :side_menu_width,
-                      :heading_height,
-                      :heading_align,
-                      :weekday_start,
-                      :start_date,
-                      :end_date,
-                      :column_gutter,
-                      :row_gutter,
-                      :menu_rotate,
-                      :reverse_months_quarters,
-                      :reverse_months_quarters_items
+        attr_accessor :configurator, :pages, :preamble, :navigation, :mos_layout, :heading
 
         def layout_page(page_spec)
           <<~TYPST.strip
             #grid(
               columns: (#{heading_columns}),
-              rows: (#{heading_height}, 1fr),
-              column-gutter: #{column_gutter},
-              row-gutter: #{row_gutter},
+              rows: (#{heading.dig!(:height)}, 1fr),
+              column-gutter: #{mos_layout.dig!(:column_gutter)},
+              row-gutter: #{mos_layout.dig!(:row_gutter)},
               #{"stroke: regular_stroke," if configurator.debug?}
 
               #{heading_content(
@@ -77,95 +49,27 @@ module LYP
         end
 
         def heading_columns
-          columns = [side_menu_width, "1fr"]
-          columns.reverse! if side_menu_position == "right"
+          columns = [mos_layout.dig!(:side_menu_width), "1fr"]
+          columns.reverse! if mos_layout.dig!(:side_menu_position) == "right"
           columns.join(", ")
         end
 
         def heading_content(title:, page_id:, highlight_months:, highlight_quarters:)
           row = [
-            side_menu_cell(highlight_months:, highlight_quarters:),
-            "grid.cell(align: #{heading_align}, #{heading_stack(page_id:, title:)})"
+            navigation.side_menu_cell(highlight_months:, highlight_quarters:),
+            "grid.cell(align: #{heading.dig!(:align)}, #{heading_stack(page_id:, title:)})"
           ]
-          row.reverse! if side_menu_position == "right"
+          row.reverse! if mos_layout.dig!(:side_menu_position) == "right"
 
           row.join(", ")
-        end
-
-        def side_menu_cell(highlight_months:, highlight_quarters:)
-          cols = %w[1fr 3fr]
-          items = [quarters_menu(highlight_quarters:), months_menu(highlight_months:)]
-
-          if reverse_months_quarters
-            cols.reverse!
-            items.reverse!
-          end
-
-          <<~TYPST.strip
-            grid.cell(
-              rowspan: 2,
-
-              rotate(
-                #{menu_rotate},
-                origin: center + horizon,
-                reflow: true,
-
-                table(
-                  columns: (#{cols.join(", ")}),
-                  rows: 1fr,
-                  inset: 0pt,
-                  column-gutter: regular_column_gutter,
-                  stroke: 0pt,
-
-                  #{items.join(",\n")}
-                )
-              )
-            )
-          TYPST
-        end
-
-        def months_menu(highlight_months:)
-          range = start_date.month..end_date.month
-          range = range.to_a.reverse if reverse_months_quarters_items
-
-          menu = Components::MonthsMenu.new(i18n:, manifest:, range:)
-          menu.highlight(highlight_months)
-          menu.generate
-        end
-
-        def quarters_menu(highlight_quarters:)
-          range = start_date.quarter..end_date.quarter
-          range = range.to_a.reverse if reverse_months_quarters_items
-
-          menu = Components::QuartersMenu.new(i18n:, manifest:, range: range)
-          menu.highlight(highlight_quarters)
-          menu.generate
         end
 
         def heading_stack(page_id:, title:)
           <<~TYPST
             stack(
-              dir: #{side_menu_position == "right" ? "ltr" : "rtl"},
+              dir: #{mos_layout.dig!(:side_menu_position) == "right" ? "ltr" : "rtl"},
               spacing: 1fr,
-              #{[title, heading_menu_grid(page_id:)].compact.join(",\n")}
-            )
-          TYPST
-        end
-
-        def heading_menu_grid(page_id:)
-          cal = "padded_link(<#{Sections::Annual::ID}>, [Calendar])" if manifest.source? Sections::Annual::ID
-          cal = "grid.cell(fill: black, text(white)[##{cal}])" if cal && page_id == Sections::Annual::ID
-
-          cols = [cal].compact
-
-          <<~TYPST
-            grid(
-              rows: #{heading_height},
-              columns: #{cols.length},
-              inset: 7pt,
-
-              stroke: (x, y)  => if x > 0 { ( left: regular_stroke ) },
-              #{cols.join(", ")}
+              #{[title, navigation.heading_menu_grid(page_id:)].compact.join(",\n")}
             )
           TYPST
         end
