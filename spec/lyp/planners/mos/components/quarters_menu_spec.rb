@@ -16,7 +16,7 @@ RSpec.describe LYP::Planners::MOS::Components::QuartersMenu do
     let(:expected) do
       <<~TYPST.strip
         table(
-          stroke: (x, y) => (left: regular_stroke, right: regular_stroke, bottom: regular_stroke),
+          stroke: regular_stroke,
           columns: (1fr, 1fr, 1fr, 1fr),
           rows: 1fr,
           align: horizon + center,
