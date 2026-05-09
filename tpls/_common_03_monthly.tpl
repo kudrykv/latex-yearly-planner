@@ -1,7 +1,7 @@
 {{- template "monthTabularV2.tpl" dict "Month" .Body.Month "Large" true -}}
 \medskip
 
-{{ if $.Cfg.Dotted -}}
+{{ if or $.Cfg.Dotted $.Cfg.Blank -}}
 \myUnderline{Notes}
 \vbox to 0pt{\myMash[\myMonthlySpring]{20}{\myNumDotWidthFull}}
 {{- else -}}
