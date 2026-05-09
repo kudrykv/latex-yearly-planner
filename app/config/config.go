@@ -16,13 +16,15 @@ type Config struct {
 	Year                int `env:"PLANNER_YEAR"`
 	WeekStart           time.Weekday
 	Dotted              bool
+	Blank               bool
+	Grid                bool
 	CalAfterSchedule    bool
 	ClearTopRightCorner bool
 	AMPMTime            bool
 	AddLastHalfHour     bool
 
 	Pages Pages
-
+	Font  Font
 	Layout Layout
 }
 
@@ -59,6 +61,7 @@ type RenderBlock struct {
 type Colors struct {
 	Gray      string
 	LightGray string
+	VeryLightGray string
 }
 
 type Layout struct {
@@ -107,6 +110,10 @@ type Margin struct {
 	Bottom string `env:"PLANNER_LAYOUT_PAPER_MARGIN_BOTTOM"`
 	Left   string `env:"PLANNER_LAYOUT_PAPER_MARGIN_LEFT"`
 	Right  string `env:"PLANNER_LAYOUT_PAPER_MARGIN_RIGHT"`
+}
+
+type Font struct {
+	Family string
 }
 
 func New(pathConfigs ...string) (Config, error) {

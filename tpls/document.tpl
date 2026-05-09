@@ -1,4 +1,4 @@
-\documentclass[9pt]{extarticle}
+\documentclass[8pt]{extarticle}
 
 \usepackage{geometry}
 \usepackage[table]{xcolor}
@@ -23,6 +23,9 @@
 \usepackage{marginnote}
 \usepackage{adjustbox}
 \usepackage{multido}
+
+\usepackage{fontspec}
+\setmainfont{ {{- .Cfg.Font.Family -}} }
 
 \hypersetup{
     {{- if not .Cfg.Debug.ShowLinks}}hidelinks=true{{end -}}
