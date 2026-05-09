@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"strings"
 	"text/template"
 
 	"github.com/kudrykv/latex-yearly-planner/app/config"
@@ -41,6 +42,26 @@ var tpl = template.Must(template.New("").Funcs(template.FuncMap{
 		}
 
 		return i != nil
+	},
+
+	"escapeLatex": func(s string) string {
+		replacements := map[string]string{
+			"&": "\\&",
+			"%": "\\%",
+			"$": "\\$",
+			"#": "\\#",
+			"_": "\\_",
+			"{": "\\{",
+			"}": "\\}",
+			"~": "\\textasciitilde",
+			"^": "\\textasciicircum",
+		}
+
+		s = strings.ReplaceAll(s, "\\", "\\\\")
+		for old, new := range replacements {
+			s = strings.ReplaceAll(s, old, new)
+		}
+		return s
 	},
 }).ParseGlob(`./tpls/*`))
 
