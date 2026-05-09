@@ -59,6 +59,7 @@ type RenderBlock struct {
 type Colors struct {
 	Gray      string
 	LightGray string
+	Dots      string
 }
 
 type Layout struct {
